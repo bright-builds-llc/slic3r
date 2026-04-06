@@ -32,6 +32,9 @@ build/*
 serial.txt
 .vscode
 
+# Local Bright Builds install backups
+.coding-and-architecture-requirements-backups/
+
 slic3r
 gui_test
 slic3r_test
