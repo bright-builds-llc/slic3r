@@ -77,31 +77,31 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| MONO-01 | — | Pending |
-| MONO-02 | — | Pending |
-| MONO-03 | — | Pending |
-| LEGA-01 | — | Pending |
-| LEGA-02 | — | Pending |
-| LEGA-03 | — | Pending |
-| RUST-01 | — | Pending |
-| RUST-02 | — | Pending |
-| RUST-03 | — | Pending |
-| RUST-04 | — | Pending |
-| PARI-01 | — | Pending |
-| PARI-02 | — | Pending |
-| PARI-03 | — | Pending |
-| PARI-04 | — | Pending |
-| ENTR-01 | — | Pending |
-| ENTR-02 | — | Pending |
-| DOCS-01 | — | Pending |
-| DOCS-02 | — | Pending |
-| DOCS-03 | — | Pending |
+| MONO-01 | Phase 1 | Pending |
+| MONO-02 | Phase 1 | Pending |
+| MONO-03 | Phase 2 | Pending |
+| LEGA-01 | Phase 2 | Pending |
+| LEGA-02 | Phase 2 | Pending |
+| LEGA-03 | Phase 2 | Pending |
+| RUST-01 | Phase 3 | Pending |
+| RUST-02 | Phase 3 | Pending |
+| RUST-03 | Phase 6 | Pending |
+| RUST-04 | Phase 5 | Pending |
+| PARI-01 | Phase 4 | Pending |
+| PARI-02 | Phase 7 | Pending |
+| PARI-03 | Phase 8 | Pending |
+| PARI-04 | Phase 7 | Pending |
+| ENTR-01 | Phase 6 | Pending |
+| ENTR-02 | Phase 5 | Pending |
+| DOCS-01 | Phase 1 | Pending |
+| DOCS-02 | Phase 1 | Pending |
+| DOCS-03 | Phase 4 | Pending |
 
 **Coverage:**
 
 - v1 requirements: 19 total
-- Mapped to phases: 0
-- Unmapped: 19 ⚠️
+- Mapped to phases: 19
+- Unmapped: 0 ✓
 
 ______________________________________________________________________
 
