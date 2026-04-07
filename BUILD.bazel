@@ -25,6 +25,16 @@ alias(
     actual = "//packages/legacy-slic3r:package_placeholder",
 )
 
+alias(
+    name = "legacy_oracle_build",
+    actual = "//packages:legacy_oracle_build",
+)
+
+alias(
+    name = "legacy_oracle_prereqs",
+    actual = "//packages:legacy_oracle_prereqs",
+)
+
 sh_test(
     name = "repo_scaffold_test",
     srcs = ["tools/bazel/phase1_scaffold_smoke_test.sh"],

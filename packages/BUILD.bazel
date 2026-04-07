@@ -11,6 +11,16 @@ alias(
 )
 
 alias(
+    name = "legacy_oracle_build",
+    actual = "//packages/legacy-slic3r:legacy_oracle_build",
+)
+
+alias(
+    name = "legacy_oracle_prereqs",
+    actual = "//packages/legacy-slic3r:legacy_oracle_prereqs",
+)
+
+alias(
     name = "launcher",
     actual = "//packages/launcher:package_placeholder",
 )
