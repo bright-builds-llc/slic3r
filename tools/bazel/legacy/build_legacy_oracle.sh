@@ -8,7 +8,8 @@ if [[ -z "${repo_root}" ]]; then
 fi
 check_script="${script_dir}/check_legacy_prereqs.sh"
 
-eval "$("${check_script}" --emit-shell)"
+prereq_exports="$("${check_script}" --emit-shell)"
+eval "${prereq_exports}"
 
 package_dir="${LEGACY_ORACLE_PACKAGE_DIR}"
 cpanm_path="${LEGACY_ORACLE_CPANM}"

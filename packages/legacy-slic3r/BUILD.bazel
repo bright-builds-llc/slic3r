@@ -18,3 +18,13 @@ alias(
     name = "legacy_oracle_prereqs",
     actual = "//tools/bazel/legacy:check_legacy_prereqs",
 )
+
+alias(
+    name = "legacy_oracle_smoke",
+    actual = "//tools/bazel/legacy:legacy_oracle_smoke",
+)
+
+alias(
+    name = "legacy_oracle_test",
+    actual = "//tools/bazel/legacy:legacy_oracle_test",
+)

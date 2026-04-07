@@ -3,6 +3,8 @@ package(default_visibility = ["//visibility:public"])
 exports_files([
     "build_legacy_oracle.sh",
     "check_legacy_prereqs.sh",
+    "test_legacy_oracle.sh",
+    "test_legacy_smoke.sh",
 ])
 
 sh_binary(
@@ -14,4 +16,22 @@ sh_binary(
 sh_binary(
     name = "check_legacy_prereqs",
     srcs = ["check_legacy_prereqs.sh"],
+)
+
+sh_binary(
+    name = "legacy_oracle_smoke",
+    srcs = ["test_legacy_smoke.sh"],
+    data = [
+        "build_legacy_oracle.sh",
+        "check_legacy_prereqs.sh",
+    ],
+)
+
+sh_binary(
+    name = "legacy_oracle_test",
+    srcs = ["test_legacy_oracle.sh"],
+    data = [
+        "build_legacy_oracle.sh",
+        "check_legacy_prereqs.sh",
+    ],
 )

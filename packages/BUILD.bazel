@@ -21,6 +21,16 @@ alias(
 )
 
 alias(
+    name = "legacy_oracle_smoke",
+    actual = "//packages/legacy-slic3r:legacy_oracle_smoke",
+)
+
+alias(
+    name = "legacy_oracle_test",
+    actual = "//packages/legacy-slic3r:legacy_oracle_test",
+)
+
+alias(
     name = "launcher",
     actual = "//packages/launcher:package_placeholder",
 )
