@@ -77,8 +77,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| MONO-01 | Phase 1 | Pending |
-| MONO-02 | Phase 1 | Pending |
+| MONO-01 | Phase 1 | Complete |
+| MONO-02 | Phase 1 | Complete |
 | MONO-03 | Phase 2 | Pending |
 | LEGA-01 | Phase 2 | Pending |
 | LEGA-02 | Phase 2 | Pending |
@@ -93,8 +93,8 @@
 | PARI-04 | Phase 7 | Pending |
 | ENTR-01 | Phase 6 | Pending |
 | ENTR-02 | Phase 5 | Pending |
-| DOCS-01 | Phase 1 | Pending |
-| DOCS-02 | Phase 1 | Pending |
+| DOCS-01 | Phase 1 | Complete |
+| DOCS-02 | Phase 1 | Complete |
 | DOCS-03 | Phase 4 | Pending |
 
 **Coverage:**

@@ -13,7 +13,7 @@ This roadmap modernizes Slic3r through a phased brownfield migration rather than
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Establish the Bazel monorepo shape, package boundaries, and initial migration docs
+- [x] **Phase 1: Foundation** - Establish the Bazel monorepo shape, package boundaries, and initial migration docs
 - [ ] **Phase 2: Legacy Oracle** - Make the retained legacy package buildable and testable through Bazel on macOS
 - [ ] **Phase 3: Rust Workspace** - Stand up the Bright Builds-compliant Rust workspace and Bazel-driven Rust verification on macOS
 - [ ] **Phase 4: Contract Inventory** - Define the parity contract inventory and migration guidance that drives the port
@@ -181,7 +181,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 3/3 | In progress | - |
+| 1. Foundation | 3/3 | Complete | 2026-04-07 |
 | 2. Legacy Oracle | 0/3 | Not started | - |
 | 3. Rust Workspace | 0/3 | Not started | - |
 | 4. Contract Inventory | 0/2 | Not started | - |
