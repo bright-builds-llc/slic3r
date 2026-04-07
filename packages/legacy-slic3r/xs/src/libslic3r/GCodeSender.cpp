@@ -97,12 +97,16 @@ GCodeSender::connect(std::string devname, unsigned int baud_rate)
     fs.open("serial.txt", std::fstream::out | std::fstream::trunc);
 #endif
     
-    // this gives some work to the io_service before it is started
+    // this gives some work to the io service before it is started
     // (post() runs the supplied function in its thread)
+#if BOOST_VERSION >= 106600
+    asio::post(this->io, boost::bind(&GCodeSender::do_read, this));
+#else
     this->io.post(boost::bind(&GCodeSender::do_read, this));
+#endif
     
     // start reading in the background thread
-    boost::thread t(boost::bind(&asio::io_service::run, &this->io));
+    boost::thread t(boost::bind(&asio_service_type::run, &this->io));
     this->background_thread.swap(t);
     
     // always send a M105 to check for connection because firmware might be silent on connect 
@@ -159,9 +163,17 @@ GCodeSender::disconnect()
     if (!this->open) return;
     this->open = false;
     this->connected = false;
+ #if BOOST_VERSION >= 106600
+    asio::post(this->io, boost::bind(&GCodeSender::do_close, this));
+#else
     this->io.post(boost::bind(&GCodeSender::do_close, this));
+#endif
     this->background_thread.join();
+#if BOOST_VERSION >= 106600
+    this->io.restart();
+#else
     this->io.reset();
+#endif
     /*
     if (this->error_status()) {
         throw(boost::system::system_error(boost::system::error_code(),
@@ -444,7 +456,11 @@ GCodeSender::send(const std::string &line, bool priority)
 void
 GCodeSender::send()
 {
+#if BOOST_VERSION >= 106600
+    asio::post(this->io, boost::bind(&GCodeSender::do_send, this));
+#else
     this->io.post(boost::bind(&GCodeSender::do_send, this));
+#endif
 }
 
 void
@@ -562,4 +578,3 @@ GCodeSender::reset()
 }
 
 }
-

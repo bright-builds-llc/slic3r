@@ -119,6 +119,31 @@ if (defined $ENV{BOOST_INCLUDEDIR}) {
     }
 }
 
+my $boost_version = 0;
+for my $include_dir (@boost_include) {
+    my $version_header = "$include_dir/boost/version.hpp";
+    next if !-f $version_header;
+
+    open my $fh, '<', $version_header or next;
+    while (my $line = <$fh>) {
+        if ($line =~ /^\s*#define\s+BOOST_VERSION\s+(\d+)/) {
+            $boost_version = $1;
+            last;
+        }
+    }
+    close $fh;
+
+    last if $boost_version;
+}
+
+if ($^O eq 'darwin' && $boost_version >= 108100) {
+    @cflags = grep {
+        $_ ne '-DBOOST_THREAD_DONT_USE_CHRONO'
+            && $_ ne '-DBOOST_NO_CXX11_RVALUE_REFERENCES'
+            && $_ ne '-DBOOST_THREAD_USES_MOVE'
+    } @cflags;
+}
+
 my @boost_libs = ();
 if (defined $ENV{BOOST_LIBRARYPATH}) {
     push @boost_libs, $ENV{BOOST_LIBRARYPATH}

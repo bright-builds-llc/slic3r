@@ -46,6 +46,7 @@ resolve_cpanm() {
 
 resolve_boost_dir() {
   local include_dir lib_dir prefix
+  local maybe_mode
 
   include_dir="${BOOST_INCLUDEDIR:-}"
   lib_dir="${BOOST_LIBRARYPATH:-}"
@@ -75,13 +76,18 @@ resolve_boost_dir() {
   [[ -f "${include_dir}/boost/version.hpp" ]] || fail "Boost headers are incomplete at ${include_dir}."
 
   local required_lib
-  for required_lib in system filesystem thread; do
+  for required_lib in filesystem thread; do
     if ! find "${lib_dir}" -maxdepth 1 \( -name "libboost_${required_lib}.a" -o -name "libboost_${required_lib}.dylib" \) | grep -q .; then
-      fail "Boost library boost_${required_lib} was not found under ${lib_dir}. Install a Boost distribution with system/filesystem/thread or point BOOST_LIBRARYPATH at one."
+      fail "Boost library boost_${required_lib} was not found under ${lib_dir}. Install a Boost distribution with filesystem/thread support or point BOOST_LIBRARYPATH at one."
     fi
   done
 
-  printf '%s\n%s\n' "${include_dir}" "${lib_dir}"
+  maybe_mode="library"
+  if ! find "${lib_dir}" -maxdepth 1 \( -name "libboost_system.a" -o -name "libboost_system.dylib" \) | grep -q .; then
+    maybe_mode="header_only"
+  fi
+
+  printf '%s\n%s\n%s\n' "${include_dir}" "${lib_dir}" "${maybe_mode}"
 }
 
 [[ -x /usr/bin/perl ]] || fail "System perl is required at /usr/bin/perl."
@@ -92,6 +98,7 @@ cpanm_path="$(resolve_cpanm)"
 boost_paths="$(resolve_boost_dir)"
 boost_include="$(printf '%s\n' "${boost_paths}" | sed -n '1p')"
 boost_lib="$(printf '%s\n' "${boost_paths}" | sed -n '2p')"
+boost_system_mode="$(printf '%s\n' "${boost_paths}" | sed -n '3p')"
 archname="$(/usr/bin/perl -MConfig -e 'print $Config{archname}')"
 perl_lib="${legacy_dir}/local-lib/lib/perl5"
 perl_arch_lib="${perl_lib}/${archname}"
@@ -102,6 +109,7 @@ export LEGACY_ORACLE_PACKAGE_DIR='${legacy_dir}'
 export LEGACY_ORACLE_CPANM='${cpanm_path}'
 export LEGACY_ORACLE_BOOST_INCLUDEDIR='${boost_include}'
 export LEGACY_ORACLE_BOOST_LIBRARYPATH='${boost_lib}'
+export LEGACY_ORACLE_BOOST_SYSTEM_MODE='${boost_system_mode}'
 export LEGACY_ORACLE_PERL_LIB='${perl_lib}'
 export LEGACY_ORACLE_PERL_ARCH_LIB='${perl_arch_lib}'
 EOF
@@ -112,6 +120,7 @@ Legacy oracle prerequisites satisfied.
   cpanm: ${cpanm_path}
   boost include: ${boost_include}
   boost lib: ${boost_lib}
+  boost system mode: ${boost_system_mode}
   perl lib: ${perl_lib}
   perl arch lib: ${perl_arch_lib}
 EOF

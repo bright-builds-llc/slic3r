@@ -6336,7 +6336,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -6396,7 +6396,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -6459,7 +6459,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -6503,7 +6503,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -7778,7 +7778,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(index_, node_delete_list);
+            expression_node<T>::ndb_t::collect(index_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -11988,7 +11988,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -15279,7 +15279,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -15335,7 +15335,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -15402,7 +15402,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -15469,7 +15469,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const
@@ -16036,7 +16036,7 @@ namespace exprtk
 
          void collect_nodes(typename expression_node<T>::noderef_list_t& node_delete_list)
          {
-            expression_node<T>::ndb_t::template collect(branch_, node_delete_list);
+            expression_node<T>::ndb_t::collect(branch_, node_delete_list);
          }
 
          std::size_t node_depth() const

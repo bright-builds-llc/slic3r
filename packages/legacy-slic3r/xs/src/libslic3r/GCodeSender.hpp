@@ -20,6 +20,12 @@ namespace Slic3r {
 
 namespace asio = boost::asio;
 
+#if BOOST_VERSION >= 106600
+using asio_service_type = boost::asio::io_context;
+#else
+using asio_service_type = boost::asio::io_service;
+#endif
+
 #if BOOST_VERSION >= 107300
 using boost::placeholders::_1;
 using boost::placeholders::_2;
@@ -47,7 +53,7 @@ class GCodeSender : private boost::noncopyable {
     void reset();
     
     private:
-    asio::io_service io;
+    asio_service_type io;
     asio::serial_port serial;
     boost::thread background_thread;
     boost::asio::streambuf read_buffer, write_buffer;
