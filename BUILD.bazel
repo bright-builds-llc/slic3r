@@ -1,0 +1,33 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    ".bazelrc",
+    ".bazelversion",
+    "MODULE.bazel",
+])
+
+filegroup(
+    name = "repo_scaffold",
+    srcs = [
+        ".bazelrc",
+        ".bazelversion",
+        "MODULE.bazel",
+    ],
+)
+
+alias(
+    name = "packages",
+    actual = "//packages:package_skeleton",
+)
+
+sh_test(
+    name = "repo_scaffold_test",
+    srcs = ["tools/bazel/phase1_scaffold_smoke_test.sh"],
+    data = [
+        ".bazelrc",
+        ".bazelversion",
+        "MODULE.bazel",
+        "//packages:BUILD.bazel",
+        "//packages/slic3r-rust:Cargo.toml",
+    ],
+)

@@ -1,0 +1,4 @@
+module(
+    name = "slic3r",
+    version = "0.0.0",
+)
