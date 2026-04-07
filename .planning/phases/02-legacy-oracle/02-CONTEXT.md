@@ -69,7 +69,7 @@ Make the retained legacy package buildable and testable through Bazel on macOS w
 
 </deferred>
 
----
+______________________________________________________________________
 
 *Phase: 02-legacy-oracle*
 *Context gathered: 2026-04-07*
