@@ -1,0 +1,26 @@
+package(default_visibility = ["//visibility:public"])
+
+alias(
+    name = "rust_workspace",
+    actual = "//packages/slic3r-rust:workspace_root",
+)
+
+alias(
+    name = "launcher",
+    actual = "//packages/launcher:package_placeholder",
+)
+
+alias(
+    name = "parity",
+    actual = "//packages/parity:package_placeholder",
+)
+
+alias(
+    name = "parity_fixtures",
+    actual = "//packages/parity-fixtures:package_placeholder",
+)
+
+filegroup(
+    name = "package_skeleton",
+    srcs = [],
+)
