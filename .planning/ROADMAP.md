@@ -39,7 +39,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 
-- [ ] 01-01: Create Bazel root files, repo conventions, and initial package scaffolding
+- [x] 01-01: Create Bazel root files, repo conventions, and initial package scaffolding
 - [ ] 01-02: Move or mirror the current source tree into a retained legacy package without changing legacy behavior
 - [ ] 01-03: Seed `docs/port/` with migration overview, checklist, and review-process docs
 
@@ -181,7 +181,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/3 | Not started | - |
+| 1. Foundation | 1/3 | In progress | - |
 | 2. Legacy Oracle | 0/3 | Not started | - |
 | 3. Rust Workspace | 0/3 | Not started | - |
 | 4. Contract Inventory | 0/2 | Not started | - |
