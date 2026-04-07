@@ -3,6 +3,7 @@
 <!-- coding-and-architecture-requirements-readme-badges:begin -->
 [![GitHub Stars](https://img.shields.io/github/stars/bright-builds-llc/Slic3r)](https://github.com/bright-builds-llc/Slic3r)
 [![License](https://img.shields.io/github/license/bright-builds-llc/Slic3r?s)](./LICENSE)
+[![Bright Builds Requirements](https://raw.githubusercontent.com/bright-builds-llc/coding-and-architecture-requirements/main/public/badges/bright-builds.svg)](https://github.com/bright-builds-llc/coding-and-architecture-requirements)
 <!-- coding-and-architecture-requirements-readme-badges:end -->
 
 ![](var/Slic3r_128px.png)
