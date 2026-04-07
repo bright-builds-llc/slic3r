@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "build_legacy_oracle.sh",
+    "check_legacy_prereqs.sh",
+])
+
+sh_binary(
+    name = "build_legacy_oracle",
+    srcs = ["build_legacy_oracle.sh"],
+    data = ["check_legacy_prereqs.sh"],
+)
+
+sh_binary(
+    name = "check_legacy_prereqs",
+    srcs = ["check_legacy_prereqs.sh"],
+)

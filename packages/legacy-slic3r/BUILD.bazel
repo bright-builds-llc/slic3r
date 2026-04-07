@@ -8,3 +8,13 @@ filegroup(
         "slic3r.pl",
     ],
 )
+
+alias(
+    name = "legacy_oracle_build",
+    actual = "//tools/bazel/legacy:build_legacy_oracle",
+)
+
+alias(
+    name = "legacy_oracle_prereqs",
+    actual = "//tools/bazel/legacy:check_legacy_prereqs",
+)
