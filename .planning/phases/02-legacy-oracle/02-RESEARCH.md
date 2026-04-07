@@ -260,11 +260,13 @@ alias(
 ## Open Questions
 
 1. **Which exact legacy tests should count as the trusted macOS oracle set first?**
+
    - What we know: `Build.PL` runs the Perl test surface and `src/CMakeLists.txt` exposes native Catch2 tests.
    - What's unclear: which subset is both stable enough and valuable enough to be Phase 2’s first-class oracle.
    - Recommendation: start with a documented smoke/core subset that exercises the retained CLI/native path and expand only after Phase 2 is stable.
 
-2. **How much of the `Build.PL` bootstrap can run non-interactively on the target macOS environment?**
+1. **How much of the `Build.PL` bootstrap can run non-interactively on the target macOS environment?**
+
    - What we know: `Build.PL` expects `cpanm`, `local::lib`, and often Boost path resolution; it can auto-install modules and rebuild `./xs`.
    - What's unclear: which of these prerequisites are already satisfied in the intended macOS workflow versus needing explicit manual setup.
    - Recommendation: plan an explicit prerequisite-check target early and document the macOS assumptions before attempting deeper wrapper automation.
@@ -289,5 +291,6 @@ alias(
 
 - None currently.
 
----
+______________________________________________________________________
+
 *Research completed: 2026-04-07*
