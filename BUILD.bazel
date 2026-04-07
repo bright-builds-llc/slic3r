@@ -20,6 +20,11 @@ alias(
     actual = "//packages:package_skeleton",
 )
 
+alias(
+    name = "legacy_reference",
+    actual = "//packages/legacy-slic3r:package_placeholder",
+)
+
 sh_test(
     name = "repo_scaffold_test",
     srcs = ["tools/bazel/phase1_scaffold_smoke_test.sh"],

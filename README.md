@@ -10,6 +10,8 @@
 
 Legacy CI badges from the upstream project were intentionally not carried into this fork. CI badges will return once GitHub Actions is the active source of truth.
 
+The retained legacy implementation now lives under `packages/legacy-slic3r` as the legacy reference package and behavioral oracle for the Rust port. New feature work targets the Rust implementation unless a change is explicitly required to keep the legacy package buildable, testable, and parity-preserving.
+
 We have automated builds for Windows (64-bit) and OSX (>= 10.7). [Get a fresh build now](http://dl.slic3r.org/dev/) and stay up-to-date with the development!
 
 The MacOS X build server is kindly sponsored by: <img width=150 src=https://cloud.githubusercontent.com/assets/31754/22719818/09998c92-ed6d-11e6-9fa0-09de638f3a36.png />

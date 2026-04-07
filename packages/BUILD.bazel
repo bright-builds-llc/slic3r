@@ -6,6 +6,11 @@ alias(
 )
 
 alias(
+    name = "legacy_reference",
+    actual = "//packages/legacy-slic3r:package_placeholder",
+)
+
+alias(
     name = "launcher",
     actual = "//packages/launcher:package_placeholder",
 )
