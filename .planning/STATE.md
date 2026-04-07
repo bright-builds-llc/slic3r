@@ -10,17 +10,17 @@ See: .planning/PROJECT.md (updated 2026-04-06)
 ## Current Position
 
 Phase: 1 of 8 (Foundation)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-04-06 — plan 01-01 completed and Phase 1 execution is underway
+Last activity: 2026-04-06 — plan 01-02 completed and the docs wave is next
 
-Progress: [█░░░░░░░░░] 5%
+Progress: [█░░░░░░░░░] 9%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 0
+- Total plans completed: 2
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -28,11 +28,11 @@ Progress: [█░░░░░░░░░] 5%
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 1 | 1 | 1 min | 1 min |
+| 1 | 2 | 2 min | 1 min |
 
 **Recent Trend:**
 
-- Last 5 plans: 1 min
+- Last 5 plans: 1 min, 1 min
 - Trend: Stable
 
 ## Accumulated Context
@@ -46,6 +46,7 @@ Recent decisions affecting current work:
 - Initialization: Legacy Slic3r remains the parity oracle and retained reference package
 - Initialization: macOS is the first implementation target; GUI and other platforms come later
 - Phase 1: Bazel 8.6.0 is pinned through `.bazelversion` and verified with a scaffold smoke test
+- Phase 1: The legacy implementation now lives in `packages/legacy-slic3r` as the visible reference package
 
 ### Pending Todos
 
@@ -57,6 +58,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-06 20:04
-Stopped at: Plan 01-01 completed; Phase 1 is ready for legacy package relocation
-Resume file: .planning/phases/01-foundation/01-01-SUMMARY.md
+Last session: 2026-04-06 20:08
+Stopped at: Plan 01-02 completed; Phase 1 is ready for docs/control-plane work
+Resume file: .planning/phases/01-foundation/01-02-SUMMARY.md
