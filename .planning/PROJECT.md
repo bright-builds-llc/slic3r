@@ -12,7 +12,16 @@ Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior 
 
 ## Current State
 
-v1.0 shipped the migration foundation milestone:
+v1.1 shipped the CLI parity expansion milestone:
+
+- the preferred Rust-backed macOS CLI path now supports `--help`, `--version`,
+  `--save`, `--load`, and `--datadir`
+- `cli.version`, `cli.help`, and `config.persistence` are all verified through
+  shared fixture comparison commands
+- parity visibility now reports those supported CLI slices as `verified`
+
+<details>
+<summary>v1.0 shipped the migration foundation milestone</summary>
 
 - the repo is now a Bazel-driven monorepo with `packages/legacy-slic3r`,
   `packages/slic3r-rust`, `packages/launcher`, `packages/parity`, and
@@ -25,26 +34,14 @@ v1.0 shipped the migration foundation milestone:
 - parity visibility and the first verified shared fixture comparison exist for
   `cli.version`
 
-## Current Milestone: v1.1 CLI Parity Expansion
-
-**Goal:** Expand Rust-backed macOS CLI parity beyond `--version` by delivering
-help and config persistence slices that stay honest about what remains
-legacy-owned.
-
-**Target features:**
-
-- Rust-backed `--help` and top-level usage output through the preferred launcher
-  path
-- Rust-backed config save/load flows for the scoped CLI path
-- Expanded shared fixtures and parity visibility for supported help/version/config
-  slices
+</details>
 
 ## Next Milestone Goals
 
-- Expand Rust-backed CLI parity beyond `--version`
-- Extend verified parity to config, file-format, and generated-output surfaces
-- Improve launcher and packaging-visible parity coverage
-- Decide the next platform-expansion and GUI strategy milestones
+- Expand Rust-backed CLI parity into export, transform, and additional
+  non-slicing actions
+- Improve packaging-visible launcher parity beyond the current in-progress state
+- Define the follow-up milestones for Linux/Windows and GUI parity
 
 ## Requirements
 
@@ -59,14 +56,20 @@ legacy-owned.
 - ✓ The legacy implementation remains buildable and testable through Bazel on macOS as the parity oracle — v1.0
 - ✓ The Rust implementation now owns a verified shared parity slice for `cli.version` on macOS — v1.0
 - ✓ Migration docs, contract inventory, parity status reporting, and fixture workflow rules are all visible under `docs/port/` and the package boundaries — v1.0
+- ✓ The preferred Rust-backed CLI path now supports verified `--help`,
+  `--version`, and scoped config persistence on macOS — v1.1
+- ✓ Shared fixture comparison commands now verify the supported help, version,
+  and config persistence slices — v1.1
 
 ### Active
 
-- [ ] Deliver Rust-backed `--help` through the preferred launcher path on macOS
-- [ ] Deliver Rust-backed config save/load flows for the scoped CLI path on macOS
-- [ ] Expand shared fixtures and parity visibility for the supported help/version/config slices
-- [ ] Keep broader export, transform, slicing, and packaging-visible CLI behavior explicitly legacy-owned until later milestones
-- [ ] Plan the follow-up milestones for broader CLI, packaging-visible, Linux/Windows, and GUI parity
+- [ ] Expand Rust-backed CLI parity into export, transform, and additional
+  non-slicing actions
+- [ ] Improve packaging-visible parity beyond the current in-progress launcher
+  status
+- [ ] Start Linux and Windows parity work in a dedicated follow-up milestone
+- [ ] Decide the GUI migration strategy once CLI/core parity has broader
+  coverage
 
 ### Out of Scope
 
@@ -118,4 +121,4 @@ The audience for this work is broad:
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-08 after starting v1.1 CLI Parity Expansion*
+*Last updated: 2026-04-08 after v1.1 milestone completion*

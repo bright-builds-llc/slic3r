@@ -1,5 +1,34 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.1 CLI Parity Expansion (Shipped: 2026-04-08)
+
+**Delivered:** Expanded the preferred Rust-backed macOS CLI path from
+`--version` to a verified help/version/config persistence slice with shared
+fixture coverage and parity visibility.
+
+**Phases completed:** 9-11 (8 plans total)
+
+**Key accomplishments:**
+
+- Delivered a Rust-backed `--help` and usage screen through the preferred
+  launcher path
+- Delivered Rust-backed `--save`, `--load`, and `--datadir` support for the
+  scoped CLI slice
+- Added shared fixture comparison commands for help and config persistence
+- Promoted `cli.help` and `config.persistence` to `verified` in the checked-in
+  parity status source
+
+**Stats:**
+
+- 3 phases, 8 plans
+- 3 shipped feature commits for phases 9-11
+- Milestone archive: [v1.1-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.1-ROADMAP.md)
+
+**What's next:** broaden CLI parity into export/transform flows, improve
+packaging-visible parity, and decide the next platform and GUI milestones
+
+______________________________________________________________________
+
 ## v1.0 Rust Port Foundations (Shipped: 2026-04-08)
 
 **Delivered:** Bazel monorepo foundations, retained legacy oracle preservation,

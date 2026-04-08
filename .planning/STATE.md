@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.1 milestone_name: CLI Parity Expansion status: milestone_complete stopped_at: phase 11 complete last_updated: "2026-04-08T22:09:48Z" last_activity: 2026-04-08 progress: total_phases: 3 completed_phases: 3 total_plans: 8 completed_plans: 8 percent: 100
+## gsd_state_version: 1.0 milestone: v1.1 milestone_name: CLI Parity Expansion status: between_milestones stopped_at: v1.1 archived last_updated: "2026-04-08T22:09:48Z" last_activity: 2026-04-08 progress: total_phases: 3 completed_phases: 3 total_plans: 8 completed_plans: 8 percent: 100
 
 # Project State
 
@@ -9,14 +9,14 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Milestone Complete
+**Current focus:** Planning next milestone
 
 ## Current Position
 
 Phase: 11 of 11 (CLI Fixture and Status Expansion)
 Plan: 2 of 2 in current phase
-Status: Complete
-Last activity: 2026-04-08 — Phase 11 verified complete and the current milestone is complete
+Status: v1.1 milestone complete
+Last activity: 2026-04-08 — v1.1 milestone archived and ready for the next milestone definition
 
 Progress: [██████████] 100%
 
@@ -86,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08 16:24
-Stopped at: Phase 9 ready to discuss
+Last session: 2026-04-08 22:09
+Stopped at: Between milestones
 Resume file: None
