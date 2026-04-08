@@ -23,8 +23,10 @@
 - [x] `packages/slic3r-rust` exists as a top-level package
 - [x] The Rust side starts as one package with an internal Cargo workspace root
 - [x] The package skeleton is visible from the repo root
-- [ ] Rust toolchain integration exists in Bazel
-- [ ] Rust format/lint/test targets exist in Bazel
+- [x] Rust toolchain integration exists in Bazel
+- [x] Rust format/lint/test targets exist in Bazel
+- [x] `//packages/slic3r-rust:verify` runs the package-local verification suite
+- [x] The first real crate exists under `packages/slic3r-rust/crates/slic3r_core`
 
 ## Launcher
 

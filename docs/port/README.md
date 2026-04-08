@@ -2,7 +2,7 @@
 
 This directory is the source of truth for the Slic3r Rust port during the migration.
 
-Phase 1 establishes the monorepo scaffold, the retained legacy reference package, and the documentation surfaces reviewers should use to understand current progress. Phase 2 turns the retained legacy package into a Bazel-wrapped oracle surface on macOS, but keeps that package explicitly reference-only. Until automation exists, any Rust-port or parity-surface change is expected to update the relevant docs here in the same change.
+Phase 1 establishes the monorepo scaffold, the retained legacy reference package, and the documentation surfaces reviewers should use to understand current progress. Phase 2 turns the retained legacy package into a Bazel-wrapped oracle surface on macOS, but keeps that package explicitly reference-only. Phase 3 makes `packages/slic3r-rust` a real Bright Builds-compliant Rust workspace with Bazel-native build and verify surfaces. Until automation exists, any Rust-port or parity-surface change is expected to update the relevant docs here in the same change.
 
 ## Documents
 
@@ -28,3 +28,12 @@ When a change touches Rust-port behavior, parity surfaces, or package boundaries
 - `//:legacy_oracle_test` exists, but remains a deferred broader legacy test surface until the retained XS loader issues are fully resolved
 
 This means the retained legacy package is now usable as a buildable oracle on macOS, but the trusted oracle set is intentionally narrower than the full historical test tree.
+
+## Current Rust Workspace State
+
+- `packages/slic3r-rust` now contains a real `slic3r_core` crate
+- `//packages:rust_build` is the root-facing Bazel build entrypoint for the Rust package
+- `//packages/slic3r-rust:verify` is the package-level verification surface
+- Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in `.bazelversion`
+
+Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surfaces remain legacy-only until later phases.
