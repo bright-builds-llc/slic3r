@@ -10,6 +10,28 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
+## Current State
+
+v1.0 shipped the migration foundation milestone:
+
+- the repo is now a Bazel-driven monorepo with `packages/legacy-slic3r`,
+  `packages/slic3r-rust`, `packages/launcher`, `packages/parity`, and
+  `packages/parity-fixtures`
+- the retained legacy implementation remains the macOS parity oracle through
+  Bazel
+- the Rust side has contract, CLI, and core crate boundaries
+- the first supported Rust-backed macOS CLI slice is
+  `bazel run //packages/launcher:slic3r -- --version`
+- parity visibility and the first verified shared fixture comparison exist for
+  `cli.version`
+
+## Next Milestone Goals
+
+- Expand Rust-backed CLI parity beyond `--version`
+- Extend verified parity to config, file-format, and generated-output surfaces
+- Improve launcher and packaging-visible parity coverage
+- Decide the next platform-expansion and GUI strategy milestones
+
 ## Requirements
 
 ### Validated
@@ -19,17 +41,18 @@ Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior 
 - ✓ Slic3r already exposes both command-line and desktop GUI workflows, with the current implementation split across Perl, XS bindings, and C++ — existing
 - ✓ The repository already contains build, test, and packaging flows for macOS, Linux, and Windows, even though much of that infrastructure is legacy and inconsistent — existing
 - ✓ The current codebase can serve as a behavioral reference implementation for the port, supported by existing tests, native entrypoints, packaging scripts, and the new `.planning/codebase/` map — existing
+- ✓ The repository is reorganized into a Bazel-driven monorepo with a retained legacy reference package and a Bright Builds-compliant Rust workspace — v1.0
+- ✓ The legacy implementation remains buildable and testable through Bazel on macOS as the parity oracle — v1.0
+- ✓ The Rust implementation now owns a verified shared parity slice for `cli.version` on macOS — v1.0
+- ✓ Migration docs, contract inventory, parity status reporting, and fixture workflow rules are all visible under `docs/port/` and the package boundaries — v1.0
 
 ### Active
 
-- [ ] Reorganize the repository into a Bazel-driven monorepo with a `packages/` layout while preserving the legacy codebase as a retained reference package
-- [ ] Keep the legacy implementation buildable and testable through top-level Bazel commands so it remains the parity oracle during the migration
-- [ ] Build a new Rust implementation that complies with the Bright Builds Coding and Architecture Requirements and lives alongside the legacy package in the monorepo
-- [ ] Preserve the current exported contracts and API surfaces with full parity goals across CLI behavior, config and file formats, generated outputs, packaging-visible behavior, and other externally observable interfaces
-- [ ] Replace the active Perl launcher path with a clearly documented combination of Rust, Bazel, shell scripts, or thin shims where appropriate, so Perl is no longer the preferred implementation path
-- [ ] Deliver a macOS-first Rust core and CLI path before expanding the new implementation to Linux and Windows
-- [ ] Add a basic parity-check command that reports port progress and, over time, compares legacy and Rust behavior against the same fixtures and scenarios
-- [ ] Create and maintain comprehensive migration docs and progress checklists under `docs/`, with a standing process expectation that Rust-port changes update those docs together with the code
+- [ ] Expand Rust-backed CLI parity beyond `--version`
+- [ ] Extend verified parity to config semantics, supported file formats, and generated outputs
+- [ ] Improve launcher and packaging-visible parity beyond the current scaffold and status-only coverage
+- [ ] Start Linux and Windows parity work in a dedicated follow-up milestone
+- [ ] Decide the GUI migration strategy once CLI/core parity has broader coverage
 
 ### Out of Scope
 
@@ -70,15 +93,15 @@ The audience for this work is broad:
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Adopt a Bazel-driven monorepo with a `packages/` layout | The migration needs one top-level build/test system that can host both legacy and Rust implementations coherently | — Pending |
-| Retain the legacy Slic3r implementation as a reference package instead of rewriting in place | The old code should remain the oracle for parity and reduce migration risk | — Pending |
-| Build the new implementation in Rust under Bright Builds standards | The port exists to improve readability, reliability, contributor experience, and long-term maintainability | — Pending |
-| Target full parity across exported contracts, but defer GUI rewrite from the initial milestone | Core behavior and contract preservation matter first; GUI replacement can follow once the foundations are trustworthy | — Pending |
-| Prioritize macOS first and defer Linux/Windows parity work | Current development happens on macOS, so that is the most practical first validation target | — Pending |
-| Replace the active Perl launcher path with a documented Rust/Bazel/shell strategy | The migration should remove Perl from the preferred path without losing the current user-facing behavior | — Pending |
-| Add a parity-check command that covers both status reporting and behavior comparison over time | The project needs both visible progress tracking and evidence-based parity validation | — Pending |
-| Require migration docs and checklists under `docs/` by process before adding automation | Documentation discipline is important immediately, but hard enforcement can follow once the workflow settles | — Pending |
+| Adopt a Bazel-driven monorepo with a `packages/` layout | The migration needs one top-level build/test system that can host both legacy and Rust implementations coherently | ✓ Shipped in v1.0 |
+| Retain the legacy Slic3r implementation as a reference package instead of rewriting in place | The old code should remain the oracle for parity and reduce migration risk | ✓ Shipped in v1.0 |
+| Build the new implementation in Rust under Bright Builds standards | The port exists to improve readability, reliability, contributor experience, and long-term maintainability | ✓ Shipped in v1.0 |
+| Target full parity across exported contracts, but defer GUI rewrite from the initial milestone | Core behavior and contract preservation matter first; GUI replacement can follow once the foundations are trustworthy | ✓ v1.0 foundation shipped, broader parity still active |
+| Prioritize macOS first and defer Linux/Windows parity work | Current development happens on macOS, so that is the most practical first validation target | ✓ Shipped in v1.0 |
+| Replace the active Perl launcher path with a documented Rust/Bazel/shell strategy | The migration should remove Perl from the preferred path without losing the current user-facing behavior | ✓ First Rust-backed slice shipped in v1.0 |
+| Add a parity-check command that covers both status reporting and behavior comparison over time | The project needs both visible progress tracking and evidence-based parity validation | ✓ Shipped in v1.0 |
+| Require migration docs and checklists under `docs/` by process before adding automation | Documentation discipline is important immediately, but hard enforcement can follow once the workflow settles | ✓ Process shipped in v1.0 |
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-06 after initialization*
+*Last updated: 2026-04-08 after v1.0 milestone completion*
