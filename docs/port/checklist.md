@@ -28,6 +28,16 @@
 - [x] `//packages/slic3r-rust:verify` runs the package-local verification suite
 - [x] The first real crate exists under `packages/slic3r-rust/crates/slic3r_core`
 
+## Contract Inventory
+
+- [x] `docs/port/contract-inventory.md` enumerates CLI behavior, config
+  semantics, supported file formats, generated outputs, launcher path, and
+  packaging-visible behavior
+- [x] Contract rows separate legacy source of truth, the current trusted check,
+  and weaker or deferred evidence
+- [x] `docs/port/parity-matrix.md` routes readers to the contract registry while
+  preserving the shared status vocabulary
+
 ## Launcher
 
 - [x] `packages/launcher` exists as a named package boundary
@@ -38,6 +48,7 @@
 
 - [x] `packages/parity` exists as a named package boundary
 - [x] `packages/parity-fixtures` exists as a named package boundary
+- [x] The parity evidence model and future fixture location are documented
 - [ ] The parity status command exists
 - [ ] The shared fixture corpus is seeded
 - [ ] Differential legacy-vs-Rust comparisons run on the fixture corpus
@@ -46,6 +57,8 @@
 
 - [x] `docs/port/README.md` exists as the control-plane entrypoint
 - [x] `docs/port/checklist.md` is organized by migration surface
+- [x] `docs/port/contract-inventory.md` exists as the evidence-backed contract registry
+- [x] `docs/port/migration-guidance.md` explains launcher replacement, parity strategy, fixture update protocol, and deferred scope
 - [x] `docs/port/parity-matrix.md` uses the shared status vocabulary
 - [x] `docs/port/package-map.md` explains package and root-area roles
 - [x] Process expectation is documented: Rust-port and parity-surface changes update docs in the same change

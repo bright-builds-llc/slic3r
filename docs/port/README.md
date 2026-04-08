@@ -2,13 +2,28 @@
 
 This directory is the source of truth for the Slic3r Rust port during the migration.
 
-Phase 1 establishes the monorepo scaffold, the retained legacy reference package, and the documentation surfaces reviewers should use to understand current progress. Phase 2 turns the retained legacy package into a Bazel-wrapped oracle surface on macOS, but keeps that package explicitly reference-only. Phase 3 makes `packages/slic3r-rust` a real Bright Builds-compliant Rust workspace with Bazel-native build and verify surfaces. Until automation exists, any Rust-port or parity-surface change is expected to update the relevant docs here in the same change.
+Phase 1 establishes the monorepo scaffold, the retained legacy reference
+package, and the documentation surfaces reviewers should use to understand
+current progress. Phase 2 turns the retained legacy package into a Bazel-wrapped
+oracle surface on macOS, but keeps that package explicitly reference-only.
+Phase 3 makes `packages/slic3r-rust` a real Bright Builds-compliant Rust
+workspace with Bazel-native build and verify surfaces. Phase 4 adds the
+contract inventory and migration guidance that later implementation phases must
+follow. Until automation exists, any Rust-port or parity-surface change is
+expected to update the relevant docs here in the same change.
 
 ## Documents
 
-- [`checklist.md`](./checklist.md) - migration-surface checklist for what exists, what is pending, and what Phase 1 is responsible for
-- [`parity-matrix.md`](./parity-matrix.md) - contract-surface status using the shared migration vocabulary
-- [`package-map.md`](./package-map.md) - package roles and root-owned areas in the monorepo
+- [`checklist.md`](./checklist.md) - migration-surface checklist for what
+  exists, what is pending, and which docs or package boundaries already exist
+- [`contract-inventory.md`](./contract-inventory.md) - evidence-backed registry
+  of the externally visible contracts the Rust port must preserve
+- [`migration-guidance.md`](./migration-guidance.md) - launcher replacement,
+  parity evidence, fixture protocol, and scope-now-versus-deferred rules
+- [`parity-matrix.md`](./parity-matrix.md) - contract-surface status using the
+  shared migration vocabulary
+- [`package-map.md`](./package-map.md) - package roles, root-owned areas, and
+  future owner boundaries in the monorepo
 
 ## Status Vocabulary
 
@@ -19,7 +34,10 @@ Phase 1 establishes the monorepo scaffold, the retained legacy reference package
 
 ## Review Expectation
 
-When a change touches Rust-port behavior, parity surfaces, or package boundaries, reviewers should expect the relevant file in `docs/port/` to move with it. If the docs do not change, the review should explicitly explain why.
+When a change touches Rust-port behavior, parity surfaces, launcher boundaries,
+fixture protocol, or package ownership, reviewers should expect the relevant
+file in `docs/port/` to move with it. If the docs do not change, the review
+should explicitly explain why.
 
 ## Current Legacy Oracle State
 
@@ -37,3 +55,13 @@ This means the retained legacy package is now usable as a buildable oracle on ma
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in `.bazelversion`
 
 Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surfaces remain legacy-only until later phases.
+
+## Current Contract Inventory State
+
+- `docs/port/contract-inventory.md` is the detailed Phase 4 registry for CLI
+  behavior, config semantics, supported file formats, generated outputs,
+  launcher path, and packaging-visible behavior
+- `docs/port/migration-guidance.md` explains how later phases should replace the
+  launcher, interpret parity evidence, and evolve the future fixture corpus
+- Phase 4 does not change any parity status by itself. It documents the contract
+  surfaces and defers implementation claims to later phases

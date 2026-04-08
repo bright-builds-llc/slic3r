@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 4: Contract Inventory
+**Current focus:** Phase 5: Entry Surface Architecture
 
 ## Current Position
 
-Phase: 4 of 8 (Contract Inventory)
+Phase: 5 of 8 (Entry Surface Architecture)
 Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-04-08 — Phase 3 verified complete and Phase 4 is now current
+Status: Ready to discuss
+Last activity: 2026-04-08 — Phase 4 verified complete and Phase 5 is now current
 
-Progress: [█████░░░░░] 41%
+Progress: [██████░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 9
+- Total plans completed: 11
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -31,6 +31,7 @@ Progress: [█████░░░░░] 41%
 | 1 | 3 | 3 min | 1 min |
 | 2 | 3 | 3 min | 1 min |
 | 3 | 3 | 3 min | 1 min |
+| 4 | 2 | 2 min | 1 min |
 
 **Recent Trend:**
 
@@ -56,6 +57,8 @@ Recent decisions affecting current work:
 - Phase 3: `rules_rust` and a pinned Rust 1.94.1 toolchain now back the new Rust workspace
 - Phase 3: `//packages/slic3r-rust:verify` is the package-local Bazel verification surface
 - Phase 3: `packages/slic3r-rust/crates/slic3r_core` is the first real Rust crate in the repo
+- Phase 4: `docs/port/contract-inventory.md` is now the detailed registry for all six externally visible parity surface families
+- Phase 4: `docs/port/migration-guidance.md` now defines launcher replacement rules, the parity evidence ladder, and the future fixture protocol
 
 ### Pending Todos
 
@@ -67,6 +70,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08 10:00
-Stopped at: Phase 3 completed and Phase 4 is ready for planning
+Last session: 2026-04-08 10:54
+Stopped at: Phase 4 completed and Phase 5 is ready for discussion
 Resume file: None

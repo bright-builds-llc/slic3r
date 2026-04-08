@@ -1,17 +1,25 @@
 # Parity Matrix
 
-| Surface | Current Source of Truth | Status | Notes |
-|---------|-------------------------|--------|-------|
-| CLI behavior | `packages/legacy-slic3r/slic3r.pl` and legacy native surfaces | legacy-only | `//:legacy_oracle_smoke` is the current trusted macOS oracle check for the retained CLI path |
-| Config semantics | `packages/legacy-slic3r/lib/Slic3r/Config.pm` and related legacy code | legacy-only | Contract inventory not yet extracted into Rust-facing modules |
-| Supported file formats | Legacy Perl/C++/XS pipeline under `packages/legacy-slic3r/` | legacy-only | STL, OBJ, AMF, 3MF, SVG, and related surfaces still live only in legacy |
-| Generated outputs | Legacy slicing and export pipeline under `packages/legacy-slic3r/` | legacy-only | G-code and other export parity remain future work |
-| Launcher path | Legacy launcher retained under `packages/legacy-slic3r/slic3r.pl` | legacy-only | `packages/launcher` exists as a placeholder boundary; the retained launcher is currently exercised through `//:legacy_oracle_smoke` |
-| Packaging-visible behavior | Legacy packaging scripts under `packages/legacy-slic3r/package/` | legacy-only | Packaging remains legacy-only until later phases |
+Use this file as the high-level status dashboard. Use
+[`contract-inventory.md`](./contract-inventory.md) for the detailed contract
+rows and [`migration-guidance.md`](./migration-guidance.md) for launcher,
+parity, and fixture rules.
 
-## Interpretation
+| Surface | Current Source of Truth | Status | Detailed Inventory | Notes |
+| --- | --- | --- | --- | --- |
+| CLI behavior | `packages/legacy-slic3r/slic3r.pl` and related legacy native surfaces | `legacy-only` | [`contract-inventory.md#cli-behavior`](./contract-inventory.md#cli-behavior) | Phase 4 inventories the CLI surface now, but later phases still need to implement and verify Rust-backed behavior |
+| Config semantics | `packages/legacy-slic3r/lib/Slic3r/Config.pm` and related legacy config code | `legacy-only` | [`contract-inventory.md#config-semantics`](./contract-inventory.md#config-semantics) | The source of truth is documented now; contract-oriented Rust modules come in later phases |
+| Supported file formats | Legacy Perl/C++/XS pipeline under `packages/legacy-slic3r/` | `legacy-only` | [`contract-inventory.md#supported-file-formats`](./contract-inventory.md#supported-file-formats) | Input and export format families are inventoried now without claiming any Rust-backed coverage |
+| Generated outputs | Legacy slicing and export pipeline under `packages/legacy-slic3r/` | `legacy-only` | [`contract-inventory.md#generated-outputs`](./contract-inventory.md#generated-outputs) | Output naming and artifact expectations are inventoried now; output parity is deferred to later phases |
+| Launcher path | Legacy launcher path retained under `packages/legacy-slic3r/slic3r.pl` and packaged startup wrappers | `legacy-only` | [`contract-inventory.md#launcher-path`](./contract-inventory.md#launcher-path) | `packages/launcher` is still a future owner boundary rather than an implemented replacement |
+| Packaging-visible behavior | Legacy packaging scripts under `packages/legacy-slic3r/package/` | `legacy-only` | [`contract-inventory.md#packaging-visible-behavior`](./contract-inventory.md#packaging-visible-behavior) | Packaging contracts are tracked now even though macOS, Linux, and Windows packaging work land in later phases |
 
-Phase 1 established the foundation, and Phase 2 established the first Bazel-wrapped macOS legacy oracle surface. The correct status is still mostly `legacy-only` because the Rust implementation and parity harness have not started delivering these surfaces yet, but contributors should now distinguish between:
+## Oracle Interpretation
 
-- the trusted retained oracle check on macOS: `//:legacy_oracle_smoke`
-- broader retained legacy tests that are exposed but still deferred until their XS loader path is stabilized
+- `//:legacy_oracle_smoke` is the current trusted macOS oracle check. It proves
+  the retained CLI entry path is buildable and that `slic3r.pl --help` runs.
+- `//:legacy_oracle_test` exists as broader retained legacy evidence, but it is
+  still weaker or deferred evidence until the retained XS loader path is fully
+  stabilized.
+- Phase 4 inventories all six parity surface families now. Later phases are
+  responsible for moving individual surfaces from `legacy-only` to `in progress`, `rust-backed`, and eventually `verified`.

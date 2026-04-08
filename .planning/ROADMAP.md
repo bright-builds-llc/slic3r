@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Establish the Bazel monorepo shape, package boundaries, and initial migration docs
 - [x] **Phase 2: Legacy Oracle** - Make the retained legacy package buildable and testable through Bazel on macOS
 - [x] **Phase 3: Rust Workspace** - Stand up the Bright Builds-compliant Rust workspace and Bazel-driven Rust verification on macOS
-- [ ] **Phase 4: Contract Inventory** - Define the parity contract inventory and migration guidance that drives the port
+- [x] **Phase 4: Contract Inventory** - Define the parity contract inventory and migration guidance that drives the port
 - [ ] **Phase 5: Entry Surface Architecture** - Carve contract-oriented Rust modules and define the launcher replacement boundaries
 - [ ] **Phase 6: macOS CLI Parity Slice** - Deliver the first preferred Rust-backed CLI workflow on macOS
 - [ ] **Phase 7: Parity Visibility** - Add parity status reporting, fixture update discipline, and migration-progress visibility
@@ -96,8 +96,8 @@ Plans:
 
 Plans:
 
-- [ ] 04-01: Create the parity contract inventory and scope matrix
-- [ ] 04-02: Write migration guidance for launcher strategy, parity boundaries, and fixture discipline
+- [x] 04-01-PLAN.md — Create the evidence-backed contract inventory and parity-matrix dashboard handoff
+- [x] 04-02-PLAN.md — Write migration guidance and route the control-plane docs to it
 
 ### Phase 5: Entry Surface Architecture
 
@@ -184,7 +184,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 1. Foundation | 3/3 | Complete | 2026-04-07 |
 | 2. Legacy Oracle | 3/3 | Complete | 2026-04-07 |
 | 3. Rust Workspace | 3/3 | Complete | 2026-04-08 |
-| 4. Contract Inventory | 0/2 | Not started | - |
+| 4. Contract Inventory | 2/2 | Complete | 2026-04-08 |
 | 5. Entry Surface Architecture | 0/3 | Not started | - |
 | 6. macOS CLI Parity Slice | 0/3 | Not started | - |
 | 7. Parity Visibility | 0/2 | Not started | - |

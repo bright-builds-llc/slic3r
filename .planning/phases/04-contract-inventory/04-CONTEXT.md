@@ -63,7 +63,7 @@ Define the exact parity surfaces and migration guidance so implementation work i
 
 </deferred>
 
----
+______________________________________________________________________
 
 *Phase: 04-contract-inventory*
 *Context gathered: 2026-04-08*
