@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Establish the Bazel monorepo shape, package boundaries, and initial migration docs
 - [x] **Phase 2: Legacy Oracle** - Make the retained legacy package buildable and testable through Bazel on macOS
-- [ ] **Phase 3: Rust Workspace** - Stand up the Bright Builds-compliant Rust workspace and Bazel-driven Rust verification on macOS
+- [x] **Phase 3: Rust Workspace** - Stand up the Bright Builds-compliant Rust workspace and Bazel-driven Rust verification on macOS
 - [ ] **Phase 4: Contract Inventory** - Define the parity contract inventory and migration guidance that drives the port
 - [ ] **Phase 5: Entry Surface Architecture** - Carve contract-oriented Rust modules and define the launcher replacement boundaries
 - [ ] **Phase 6: macOS CLI Parity Slice** - Deliver the first preferred Rust-backed CLI workflow on macOS
@@ -77,9 +77,9 @@ Plans:
 
 Plans:
 
-- [ ] 03-01-PLAN.md — Initialize the Rust workspace and Bazel Rust toolchain integration
-- [ ] 03-02-PLAN.md — Add Rust verification targets for fmt, clippy, and tests
-- [ ] 03-03-PLAN.md — Align the Rust package layout with Bright Builds conventions and repo docs
+- [x] 03-01-PLAN.md — Initialize the Rust workspace and Bazel Rust toolchain integration
+- [x] 03-02-PLAN.md — Add Rust verification targets for fmt, clippy, and tests
+- [x] 03-03-PLAN.md — Align the Rust package layout with Bright Builds conventions and repo docs
 
 ### Phase 4: Contract Inventory
 
@@ -183,7 +183,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-04-07 |
 | 2. Legacy Oracle | 3/3 | Complete | 2026-04-07 |
-| 3. Rust Workspace | 0/3 | Not started | - |
+| 3. Rust Workspace | 3/3 | Complete | 2026-04-08 |
 | 4. Contract Inventory | 0/2 | Not started | - |
 | 5. Entry Surface Architecture | 0/3 | Not started | - |
 | 6. macOS CLI Parity Slice | 0/3 | Not started | - |

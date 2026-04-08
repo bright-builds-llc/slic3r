@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 3: Rust Workspace
+**Current focus:** Phase 4: Contract Inventory
 
 ## Current Position
 
-Phase: 3 of 8 (Rust Workspace)
+Phase: 4 of 8 (Contract Inventory)
 Plan: 0 of 3 in current phase
 Status: Ready to plan
-Last activity: 2026-04-07 — Phase 2 verified complete and Phase 3 is now current
+Last activity: 2026-04-08 — Phase 3 verified complete and Phase 4 is now current
 
-Progress: [███░░░░░░░] 27%
+Progress: [█████░░░░░] 41%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 6
+- Total plans completed: 9
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -30,6 +30,7 @@ Progress: [███░░░░░░░] 27%
 |-------|-------|-------|----------|
 | 1 | 3 | 3 min | 1 min |
 | 2 | 3 | 3 min | 1 min |
+| 3 | 3 | 3 min | 1 min |
 
 **Recent Trend:**
 
@@ -52,6 +53,9 @@ Recent decisions affecting current work:
 - Phase 2: `//:legacy_oracle_build` is the retained legacy build surface through Bazel on macOS
 - Phase 2: `//:legacy_oracle_smoke` is the trusted macOS retained oracle check
 - Phase 2: broader retained legacy tests remain exposed but deferred until the XS loader path is stabilized
+- Phase 3: `rules_rust` and a pinned Rust 1.94.1 toolchain now back the new Rust workspace
+- Phase 3: `//packages/slic3r-rust:verify` is the package-local Bazel verification surface
+- Phase 3: `packages/slic3r-rust/crates/slic3r_core` is the first real Rust crate in the repo
 
 ### Pending Todos
 
@@ -63,6 +67,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-07 18:00
-Stopped at: Phase 2 completed and Phase 3 is ready for planning
+Last session: 2026-04-08 10:00
+Stopped at: Phase 3 completed and Phase 4 is ready for planning
 Resume file: None
