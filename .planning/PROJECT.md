@@ -25,6 +25,20 @@ v1.0 shipped the migration foundation milestone:
 - parity visibility and the first verified shared fixture comparison exist for
   `cli.version`
 
+## Current Milestone: v1.1 CLI Parity Expansion
+
+**Goal:** Expand Rust-backed macOS CLI parity beyond `--version` by delivering
+help and config persistence slices that stay honest about what remains
+legacy-owned.
+
+**Target features:**
+
+- Rust-backed `--help` and top-level usage output through the preferred launcher
+  path
+- Rust-backed config save/load flows for the scoped CLI path
+- Expanded shared fixtures and parity visibility for supported help/version/config
+  slices
+
 ## Next Milestone Goals
 
 - Expand Rust-backed CLI parity beyond `--version`
@@ -48,11 +62,11 @@ v1.0 shipped the migration foundation milestone:
 
 ### Active
 
-- [ ] Expand Rust-backed CLI parity beyond `--version`
-- [ ] Extend verified parity to config semantics, supported file formats, and generated outputs
-- [ ] Improve launcher and packaging-visible parity beyond the current scaffold and status-only coverage
-- [ ] Start Linux and Windows parity work in a dedicated follow-up milestone
-- [ ] Decide the GUI migration strategy once CLI/core parity has broader coverage
+- [ ] Deliver Rust-backed `--help` through the preferred launcher path on macOS
+- [ ] Deliver Rust-backed config save/load flows for the scoped CLI path on macOS
+- [ ] Expand shared fixtures and parity visibility for the supported help/version/config slices
+- [ ] Keep broader export, transform, slicing, and packaging-visible CLI behavior explicitly legacy-owned until later milestones
+- [ ] Plan the follow-up milestones for broader CLI, packaging-visible, Linux/Windows, and GUI parity
 
 ### Out of Scope
 
@@ -104,4 +118,4 @@ The audience for this work is broad:
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-08 after v1.0 milestone completion*
+*Last updated: 2026-04-08 after starting v1.1 CLI Parity Expansion*

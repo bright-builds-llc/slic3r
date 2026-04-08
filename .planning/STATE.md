@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.0 milestone_name: Rust Port Foundations status: between_milestones stopped_at: v1.0 archived last_updated: "2026-04-08T21:25:45.922Z" last_activity: 2026-04-08 progress: total_phases: 8 completed_phases: 8 total_plans: 22 completed_plans: 22 percent: 100
+## gsd_state_version: 1.0 milestone: v1.1 milestone_name: CLI Parity Expansion status: defining_requirements stopped_at: v1.1 requirements definition last_updated: "2026-04-08T21:25:45.922Z" last_activity: 2026-04-08 progress: total_phases: 0 completed_phases: 0 total_plans: 0 completed_plans: 0 percent: 0
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Planning next milestone
+**Current focus:** Milestone v1.1 CLI Parity Expansion
 
 ## Current Position
 
-Phase: None (between milestones)
-Plan: None
-Status: v1.0 archived
-Last activity: 2026-04-08 — v1.0 milestone archived and ready for the next milestone definition
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-04-08 — Milestone v1.1 CLI Parity Expansion started
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
@@ -86,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08 11:30
-Stopped at: Between milestones
+Last session: 2026-04-08 16:24
+Stopped at: Defining requirements for v1.1 CLI Parity Expansion
 Resume file: None
