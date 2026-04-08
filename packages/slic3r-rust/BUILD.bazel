@@ -6,3 +6,8 @@ filegroup(
     name = "workspace_root",
     srcs = ["Cargo.toml"],
 )
+
+alias(
+    name = "slic3r_core",
+    actual = "//packages/slic3r-rust/crates/slic3r_core:slic3r_core",
+)
