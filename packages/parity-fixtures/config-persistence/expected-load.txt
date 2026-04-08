@@ -1,0 +1,4 @@
+# base.ini
+alpha=1
+# extra.ini
+beta=2

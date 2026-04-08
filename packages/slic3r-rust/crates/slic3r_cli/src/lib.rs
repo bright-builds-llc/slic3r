@@ -122,7 +122,7 @@ fn load_config(paths: &[String], maybe_datadir: Option<&str>) -> CliResponse {
             };
         };
 
-        combined.push_str(&format!("# {}\n{}", resolved_path.display(), contents));
+        combined.push_str(&format!("# {}\n{}", path, contents));
         if !contents.ends_with('\n') {
             combined.push('\n');
         }

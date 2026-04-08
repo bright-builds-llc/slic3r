@@ -33,4 +33,6 @@ Unsupported behavior remains legacy-owned until later phases expand the slice.
 - Phase 10 makes the save/load/datadir config slice Rust-backed.
 - Phase 8 verifies the slice through
   `bazel run //packages/parity:cli_version_parity`.
-- Help and config fixture verification land in Phase 11.
+- Phase 11 verifies help through `bazel run //packages/parity:cli_help_parity`.
+- Phase 11 verifies scoped config persistence through
+  `bazel run //packages/parity:cli_config_persistence_parity`.

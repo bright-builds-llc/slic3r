@@ -15,3 +15,5 @@ corpora.
 
 - Phase 7 defines the package and workflow rules.
 - Phase 8 seeds the first shared CLI fixture corpus for `--version`.
+- Phase 11 expands the shared fixture corpus to cover `--help` and scoped
+  config persistence behavior.

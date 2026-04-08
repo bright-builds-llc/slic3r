@@ -79,8 +79,8 @@ and publish their parity state cleanly.
 
 Plans:
 
-- [ ] 11-01: Seed fixtures and comparison commands for help/version/config CLI slices
-- [ ] 11-02: Publish expanded parity visibility and migration docs for the verified CLI slices
+- [x] 11-01-PLAN.md — Seed fixtures and comparison commands for help/version/config CLI slices
+- [x] 11-02-PLAN.md — Publish expanded parity visibility and migration docs for the verified CLI slices
 
 ## Progress
 
@@ -91,4 +91,4 @@ Phases execute in numeric order: 9 → 10 → 11
 |-------|-----------|----------------|--------|-----------|
 | 9. Help and Usage Slice | v1.1 | 3/3 | Complete | 2026-04-08 |
 | 10. Config Persistence Slice | v1.1 | 3/3 | Complete | 2026-04-08 |
-| 11. CLI Fixture and Status Expansion | v1.1 | 0/2 | Not started | - |
+| 11. CLI Fixture and Status Expansion | v1.1 | 2/2 | Complete | 2026-04-08 |

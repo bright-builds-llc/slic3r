@@ -5,6 +5,12 @@ exports_files(["README.md"])
 exports_files([
     "cli-version/args.txt",
     "cli-version/stdout.txt",
+    "cli-help/args.txt",
+    "cli-help/stdout.txt",
+    "config-persistence/expected-save.ini",
+    "config-persistence/load-base.ini",
+    "config-persistence/load-extra.ini",
+    "config-persistence/expected-load.txt",
 ])
 
 alias(
@@ -17,11 +23,47 @@ alias(
     actual = "cli-version/stdout.txt",
 )
 
+alias(
+    name = "cli_help_args",
+    actual = "cli-help/args.txt",
+)
+
+alias(
+    name = "cli_help_expected",
+    actual = "cli-help/stdout.txt",
+)
+
+alias(
+    name = "config_save_expected",
+    actual = "config-persistence/expected-save.ini",
+)
+
+alias(
+    name = "config_load_base",
+    actual = "config-persistence/load-base.ini",
+)
+
+alias(
+    name = "config_load_extra",
+    actual = "config-persistence/load-extra.ini",
+)
+
+alias(
+    name = "config_load_expected",
+    actual = "config-persistence/expected-load.txt",
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
         "README.md",
         "cli-version/args.txt",
         "cli-version/stdout.txt",
+        "cli-help/args.txt",
+        "cli-help/stdout.txt",
+        "config-persistence/expected-save.ini",
+        "config-persistence/load-base.ini",
+        "config-persistence/load-extra.ini",
+        "config-persistence/expected-load.txt",
     ],
 )

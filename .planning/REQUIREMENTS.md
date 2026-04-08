@@ -26,9 +26,9 @@ depend on.
 
 ### CLI Parity Visibility
 
-- [ ] **PCLI-01**: Maintainer can execute shared fixture comparisons for the
+- [x] **PCLI-01**: Maintainer can execute shared fixture comparisons for the
   supported help, version, and config CLI slices.
-- [ ] **PCLI-02**: Maintainer can see those supported CLI slices reflected
+- [x] **PCLI-02**: Maintainer can see those supported CLI slices reflected
   accurately in the parity status command and migration docs.
 
 ## v2 Requirements
@@ -72,8 +72,8 @@ depend on.
 | CFG-01 | Phase 10 | Complete |
 | CFG-02 | Phase 10 | Complete |
 | CFG-03 | Phase 10 | Complete |
-| PCLI-01 | Phase 11 | Pending |
-| PCLI-02 | Phase 11 | Pending |
+| PCLI-01 | Phase 11 | Complete |
+| PCLI-02 | Phase 11 | Complete |
 
 **Coverage:**
 

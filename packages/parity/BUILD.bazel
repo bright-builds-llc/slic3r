@@ -31,6 +31,40 @@ sh_binary(
     ],
 )
 
+sh_binary(
+    name = "cli_help_parity",
+    srcs = ["compare_cli_help.sh"],
+    data = [
+        "//packages/launcher:slic3r",
+        "//packages/parity-fixtures:cli_help_args",
+        "//packages/parity-fixtures:cli_help_expected",
+    ],
+    args = [
+        "$(location //packages/launcher:slic3r)",
+        "$(location //packages/parity-fixtures:cli_help_args)",
+        "$(location //packages/parity-fixtures:cli_help_expected)",
+    ],
+)
+
+sh_binary(
+    name = "cli_config_persistence_parity",
+    srcs = ["compare_cli_config_persistence.sh"],
+    data = [
+        "//packages/launcher:slic3r",
+        "//packages/parity-fixtures:config_save_expected",
+        "//packages/parity-fixtures:config_load_base",
+        "//packages/parity-fixtures:config_load_extra",
+        "//packages/parity-fixtures:config_load_expected",
+    ],
+    args = [
+        "$(location //packages/launcher:slic3r)",
+        "$(location //packages/parity-fixtures:config_save_expected)",
+        "$(location //packages/parity-fixtures:config_load_base)",
+        "$(location //packages/parity-fixtures:config_load_extra)",
+        "$(location //packages/parity-fixtures:config_load_expected)",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
