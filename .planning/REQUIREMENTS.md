@@ -10,15 +10,15 @@ depend on.
 
 ### Export Workflows
 
-- [ ] **EXP-01**: User can export G-code through the preferred Rust-backed
+- [x] **EXP-01**: User can export G-code through the preferred Rust-backed
   launcher path on macOS.
-- [ ] **EXP-02**: User can export mesh and package formats through the preferred
+- [x] **EXP-02**: User can export mesh and package formats through the preferred
   Rust-backed launcher path on macOS for the scoped slice:
   `--export-stl`, `--export-obj`, `--export-amf`, and `--export-3mf`.
-- [ ] **EXP-03**: User can export SVG-oriented outputs through the preferred
+- [x] **EXP-03**: User can export SVG-oriented outputs through the preferred
   Rust-backed launcher path on macOS for the scoped slice:
   `--export-svg`, `--export-sla-svg`, and `--sla`.
-- [ ] **EXP-04**: Supported export slices preserve explicit `--output` behavior
+- [x] **EXP-04**: Supported export slices preserve explicit `--output` behavior
   for the scoped Rust-backed launcher path.
 
 ### Transform and Non-Slicing Actions
@@ -71,10 +71,10 @@ depend on.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| EXP-01 | Phase 12 | Pending |
-| EXP-02 | Phase 12 | Pending |
-| EXP-03 | Phase 12 | Pending |
-| EXP-04 | Phase 12 | Pending |
+| EXP-01 | Phase 12 | Complete |
+| EXP-02 | Phase 12 | Complete |
+| EXP-03 | Phase 12 | Complete |
+| EXP-04 | Phase 12 | Complete |
 | TRN-01 | Phase 13 | Pending |
 | TRN-02 | Phase 13 | Pending |
 | TRN-03 | Phase 13 | Pending |

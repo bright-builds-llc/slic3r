@@ -1,4 +1,4 @@
-use slic3r_contracts::{LauncherCommand, parse_invocation};
+use slic3r_contracts::{ExportKind, LauncherCommand, parse_invocation};
 
 #[test]
 fn parses_help_invocation() {
@@ -23,6 +23,51 @@ fn parses_version_invocation() {
 
     // Assert
     assert_eq!(invocation.command, LauncherCommand::Version);
+    assert_eq!(invocation.raw_args, args);
+}
+
+#[test]
+fn parses_export_gcode_invocation_with_output() {
+    // Arrange
+    let args = vec![
+        "-g".to_owned(),
+        "--output".to_owned(),
+        "output.gcode".to_owned(),
+        "box.stl".to_owned(),
+    ];
+
+    // Act
+    let invocation = parse_invocation(&args);
+
+    // Assert
+    assert_eq!(
+        invocation.command,
+        LauncherCommand::Export {
+            kind: ExportKind::Gcode,
+            input_path: "box.stl".to_owned(),
+            maybe_output: Some("output.gcode".to_owned()),
+        }
+    );
+    assert_eq!(invocation.raw_args, args);
+}
+
+#[test]
+fn parses_export_sla_invocation() {
+    // Arrange
+    let args = vec!["--sla".to_owned(), "box.stl".to_owned()];
+
+    // Act
+    let invocation = parse_invocation(&args);
+
+    // Assert
+    assert_eq!(
+        invocation.command,
+        LauncherCommand::Export {
+            kind: ExportKind::SlaSvg,
+            input_path: "box.stl".to_owned(),
+            maybe_output: None,
+        }
+    );
     assert_eq!(invocation.raw_args, args);
 }
 
@@ -67,6 +112,19 @@ fn parses_load_config_invocation_with_datadir() {
             maybe_datadir: Some("profiles".to_owned()),
         }
     );
+}
+
+#[test]
+fn marks_export_without_input_as_unsupported() {
+    // Arrange
+    let args = vec!["--export-obj".to_owned()];
+
+    // Act
+    let invocation = parse_invocation(&args);
+
+    // Assert
+    assert_eq!(invocation.command, LauncherCommand::Unsupported);
+    assert_eq!(invocation.raw_args, args);
 }
 
 #[test]

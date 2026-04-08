@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: defining_requirements stopped_at: v1.2 requirements definition last_updated: "2026-04-08T22:09:48Z" last_activity: 2026-04-08 progress: total_phases: 0 completed_phases: 0 total_plans: 0 completed_plans: 0 percent: 0
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: phase 12 complete last_updated: "2026-04-08T23:00:53Z" last_activity: 2026-04-08 progress: total_phases: 3 completed_phases: 1 total_plans: 8 completed_plans: 3 percent: 33
 
 # Project State
 
@@ -9,22 +9,22 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Milestone v1.2 Export and Transform Parity
+**Current focus:** Phase 13: Transform and Info Slice
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-04-08 — Milestone v1.2 Export and Transform Parity started
+Phase: 13 of 14 (Transform and Info Slice)
+Plan: 0 of 3 in current phase
+Status: Ready to discuss
+Last activity: 2026-04-08 — Phase 12 Export Workflow Slice completed
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 33%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 22
+- Total plans completed: 25
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -75,6 +75,8 @@ Recent decisions affecting current work:
 - Phase 7: `packages/parity-fixtures/README.md` now defines the package-local fixture workflow rules
 - Phase 8: `bazel run //packages/parity:cli_version_parity` now verifies the shared `cli.version` slice against legacy and fixture output
 - Phase 8: `cli.version` is now marked `verified` in the checked-in parity status source
+- Phase 12: `bazel run //packages/launcher:slic3r` now owns the scoped export workflow slice for G-code, STL, OBJ, AMF, 3MF, layered SVG, and SLA SVG
+- Phase 12: scoped explicit `--output` behavior now works through the preferred Rust-backed launcher path for supported exports
 
 ### Pending Todos
 
@@ -86,6 +88,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08 22:09
-Stopped at: Defining requirements for v1.2 Export and Transform Parity
+Last session: 2026-04-08 23:00
+Stopped at: Phase 12 complete, Phase 13 ready to discuss
 Resume file: None

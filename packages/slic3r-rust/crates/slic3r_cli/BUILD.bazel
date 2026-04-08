@@ -4,7 +4,11 @@ package(default_visibility = ["//visibility:public"])
 
 rust_library(
     name = "slic3r_cli_lib",
-    srcs = ["src/lib.rs"],
+    srcs = [
+        "src/export.rs",
+        "src/lib.rs",
+    ],
+    crate_root = "src/lib.rs",
     crate_name = "slic3r_cli",
     deps = [
         "//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts",

@@ -1,10 +1,14 @@
 #![forbid(unsafe_code)]
 //! Launcher-facing Rust CLI behavior for the first supported migration slice.
 
+mod export;
+
 use std::fs;
 use std::path::{Path, PathBuf};
 
 use slic3r_contracts::{LauncherCommand, parse_invocation};
+
+use crate::export::export_model;
 
 /// Process response for a launcher invocation.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -21,6 +25,15 @@ pub fn execute_args(args: &[String]) -> CliResponse {
 }
 
 fn execute_command(command: LauncherCommand) -> CliResponse {
+    if let LauncherCommand::Export {
+        kind,
+        input_path,
+        maybe_output,
+    } = command
+    {
+        return export_model(kind, &input_path, maybe_output.as_deref());
+    }
+
     if let LauncherCommand::SaveConfig {
         path,
         maybe_datadir,
@@ -55,7 +68,7 @@ fn execute_command(command: LauncherCommand) -> CliResponse {
 
     CliResponse {
         stdout: String::new(),
-        stderr: "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, and `--datadir` only.\n".to_owned(),
+        stderr: "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, and the scoped export flags only.\n".to_owned(),
         exit_code: 2,
     }
 }
@@ -71,8 +84,21 @@ fn help_text() -> &'static str {
         "    --help              Output this usage screen and exit\n",
         "    --version           Output the version of Slic3r and exit\n",
         "\n",
+        "  Rust-backed export slices in this milestone:\n",
+        "    --export-gcode, -g  Export G-code for a supported single input\n",
+        "    --export-stl        Export STL for a supported single input\n",
+        "    --export-obj        Export OBJ for a supported single input\n",
+        "    --export-amf        Export AMF for a supported single input\n",
+        "    --export-3mf        Export 3MF for a supported single input\n",
+        "    --export-svg        Export layered SVG slices for a supported single input\n",
+        "    --export-sla-svg    Export SLA SVG for a supported single input\n",
+        "    --sla               Alias for the scoped SLA SVG export\n",
+        "    --output <file>     Write the scoped export to the specified file path\n",
+        "\n",
         "  Planned next in the Rust-backed path:\n",
-        "    (no additional planned top-level flags in this milestone)\n",
+        "    --info              Output scoped model information and exit\n",
+        "    --repair            Repair supported STL inputs and write a new artifact\n",
+        "    --split             Split supported STL inputs into numbered outputs\n",
         "\n",
         "  Rust-backed config persistence in this milestone:\n",
         "    --save <file>       Save configuration to the specified file\n",
@@ -80,7 +106,7 @@ fn help_text() -> &'static str {
         "    --datadir <path>    Load and store settings at the given directory\n",
         "\n",
         "  Still legacy-owned in this milestone:\n",
-        "    export, transform, slicing, and packaging-visible behavior\n",
+        "    transform, merge/cut/layout, packaged launcher behavior, and output-content parity\n",
     )
 }
 

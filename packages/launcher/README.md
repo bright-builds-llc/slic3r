@@ -19,5 +19,8 @@ entrypoint path.
   supported Rust-backed macOS CLI workflow.
 - Phase 9 adds `bazel run //packages/launcher:slic3r -- --help` as a
   Rust-backed help and usage slice.
-- All other CLI behavior remains legacy-owned until later phases expand the
-  supported slice.
+- Phase 10 adds the scoped config persistence slice.
+- Phase 12 adds the scoped Rust-backed export workflows for G-code, STL, OBJ,
+  AMF, 3MF, layered SVG, and SLA SVG.
+- Transform, merge/cut/layout, output-content parity, and packaging-visible
+  behavior remain legacy-owned until later phases expand the supported slice.

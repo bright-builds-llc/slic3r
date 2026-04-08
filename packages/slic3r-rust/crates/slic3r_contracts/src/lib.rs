@@ -1,9 +1,26 @@
 #![forbid(unsafe_code)]
 //! Stable contract-oriented entrypoint types for the staged Rust launcher work.
 
+/// Scoped export workflows that the Rust launcher can own in Phase 12.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum ExportKind {
+    Gcode,
+    Stl,
+    Obj,
+    Amf,
+    ThreeMf,
+    SvgLayers,
+    SlaSvg,
+}
+
 /// The launcher commands that Phase 5 explicitly models as stable contracts.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum LauncherCommand {
+    Export {
+        kind: ExportKind,
+        input_path: String,
+        maybe_output: Option<String>,
+    },
     SaveConfig {
         path: String,
         maybe_datadir: Option<String>,
@@ -47,17 +64,81 @@ fn parse_command(args: &[String]) -> LauncherCommand {
 
     let mut maybe_datadir: Option<String> = None;
     let mut maybe_save: Option<String> = None;
+    let mut maybe_output: Option<String> = None;
+    let mut maybe_export_kind: Option<ExportKind> = None;
     let mut load_paths: Vec<String> = Vec::new();
+    let mut input_paths: Vec<String> = Vec::new();
 
     let mut index = 0;
     while index < args.len() {
         match args[index].as_str() {
+            "--export-gcode" | "-g" => {
+                let Some(kind) = set_export_kind(maybe_export_kind.take(), ExportKind::Gcode)
+                else {
+                    return LauncherCommand::Unsupported;
+                };
+                maybe_export_kind = Some(kind);
+                index += 1;
+            }
+            "--export-stl" => {
+                let Some(kind) = set_export_kind(maybe_export_kind.take(), ExportKind::Stl) else {
+                    return LauncherCommand::Unsupported;
+                };
+                maybe_export_kind = Some(kind);
+                index += 1;
+            }
+            "--export-obj" => {
+                let Some(kind) = set_export_kind(maybe_export_kind.take(), ExportKind::Obj) else {
+                    return LauncherCommand::Unsupported;
+                };
+                maybe_export_kind = Some(kind);
+                index += 1;
+            }
+            "--export-amf" => {
+                let Some(kind) = set_export_kind(maybe_export_kind.take(), ExportKind::Amf) else {
+                    return LauncherCommand::Unsupported;
+                };
+                maybe_export_kind = Some(kind);
+                index += 1;
+            }
+            "--export-3mf" => {
+                let Some(kind) = set_export_kind(maybe_export_kind.take(), ExportKind::ThreeMf)
+                else {
+                    return LauncherCommand::Unsupported;
+                };
+                maybe_export_kind = Some(kind);
+                index += 1;
+            }
+            "--export-svg" => {
+                let Some(kind) = set_export_kind(maybe_export_kind.take(), ExportKind::SvgLayers)
+                else {
+                    return LauncherCommand::Unsupported;
+                };
+                maybe_export_kind = Some(kind);
+                index += 1;
+            }
+            "--export-sla-svg" | "--sla" => {
+                let Some(kind) = set_export_kind(maybe_export_kind.take(), ExportKind::SlaSvg)
+                else {
+                    return LauncherCommand::Unsupported;
+                };
+                maybe_export_kind = Some(kind);
+                index += 1;
+            }
             "--datadir" => {
                 let maybe_next = args.get(index + 1);
                 let Some(next) = maybe_next else {
                     return LauncherCommand::Unsupported;
                 };
                 maybe_datadir = Some(next.clone());
+                index += 2;
+            }
+            "--output" => {
+                let maybe_next = args.get(index + 1);
+                let Some(next) = maybe_next else {
+                    return LauncherCommand::Unsupported;
+                };
+                maybe_output = Some(next.clone());
                 index += 2;
             }
             "--save" => {
@@ -76,12 +157,35 @@ fn parse_command(args: &[String]) -> LauncherCommand {
                 load_paths.push(next.clone());
                 index += 2;
             }
-            _ => return LauncherCommand::Unsupported,
+            arg if arg.starts_with('-') => return LauncherCommand::Unsupported,
+            input_path => {
+                input_paths.push(input_path.to_owned());
+                index += 1;
+            }
         }
     }
 
+    if let Some(kind) = maybe_export_kind {
+        if maybe_datadir.is_some() || maybe_save.is_some() || !load_paths.is_empty() {
+            return LauncherCommand::Unsupported;
+        }
+        if input_paths.len() != 1 {
+            return LauncherCommand::Unsupported;
+        }
+
+        return LauncherCommand::Export {
+            kind,
+            input_path: input_paths.remove(0),
+            maybe_output,
+        };
+    }
+
+    if maybe_output.is_some() {
+        return LauncherCommand::Unsupported;
+    }
+
     if let Some(path) = maybe_save {
-        if load_paths.is_empty() {
+        if load_paths.is_empty() && input_paths.is_empty() {
             return LauncherCommand::SaveConfig {
                 path,
                 maybe_datadir,
@@ -90,7 +194,7 @@ fn parse_command(args: &[String]) -> LauncherCommand {
         return LauncherCommand::Unsupported;
     }
 
-    if !load_paths.is_empty() {
+    if !load_paths.is_empty() && input_paths.is_empty() {
         return LauncherCommand::LoadConfig {
             paths: load_paths,
             maybe_datadir,
@@ -98,4 +202,15 @@ fn parse_command(args: &[String]) -> LauncherCommand {
     }
 
     LauncherCommand::Unsupported
+}
+
+fn set_export_kind(
+    maybe_existing: Option<ExportKind>,
+    next_kind: ExportKind,
+) -> Option<ExportKind> {
+    if maybe_existing.is_some() {
+        return None;
+    }
+
+    Some(next_kind)
 }

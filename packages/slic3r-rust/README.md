@@ -7,7 +7,7 @@ Phase 5 adds contract-oriented crate boundaries and the first launcher-facing
 Rust CLI scaffold. Phase 6 makes the `--version` path the first supported
 Rust-backed macOS CLI slice. Phase 9 adds the `--help` path. Broader CLI, GUI,
 and output parity remain later work. Phase 10 adds the scoped config
-persistence path.
+persistence path. Phase 12 adds the scoped Rust-backed export workflows.
 
 ## Layout
 
@@ -30,6 +30,14 @@ persistence path.
 - Run the Rust-backed config persistence slice:
   - `bazel run //packages/launcher:slic3r -- --save cfg.ini`
   - `bazel run //packages/launcher:slic3r -- --load cfg.ini`
+- Run the scoped Rust-backed export slice:
+  - `bazel run //packages/launcher:slic3r -- --export-gcode model.stl`
+  - `bazel run //packages/launcher:slic3r -- --export-stl model.stl`
+  - `bazel run //packages/launcher:slic3r -- --export-obj model.stl`
+  - `bazel run //packages/launcher:slic3r -- --export-amf model.stl`
+  - `bazel run //packages/launcher:slic3r -- --export-3mf model.stl`
+  - `bazel run //packages/launcher:slic3r -- --export-svg model.stl`
+  - `bazel run //packages/launcher:slic3r -- --sla model.stl`
 - Run the package verification suite:
   - `//packages/slic3r-rust:verify`
 - Run write-mode formatting with the pinned Rust toolchain:
@@ -38,6 +46,8 @@ persistence path.
 ## Notes
 
 - The current supported Rust-backed CLI workflows are `--version`, `--help`,
-  `--save`, `--load`, and `--datadir`.
+  `--save`, `--load`, `--datadir`, and the scoped export flags.
+- Phase 12 only claims export routing, file creation, and scoped output naming.
+  Output-content parity remains later work.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).
