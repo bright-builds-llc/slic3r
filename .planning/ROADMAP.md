@@ -33,9 +33,9 @@ preferred launcher path on macOS.
 
 Plans:
 
-- [ ] 09-01: Extend launcher contracts and CLI routing for help and top-level usage
-- [ ] 09-02: Implement the Rust-backed help output and top-level usage behavior
-- [ ] 09-03: Document the supported help slice and update parity visibility
+- [x] 09-01-PLAN.md — Extend launcher contracts and CLI routing for help and top-level usage
+- [x] 09-02-PLAN.md — Implement the Rust-backed help output and top-level usage behavior
+- [x] 09-03-PLAN.md — Document the supported help slice and update parity visibility
 
 ### Phase 10: Config Persistence Slice
 
@@ -89,6 +89,6 @@ Phases execute in numeric order: 9 → 10 → 11
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 9. Help and Usage Slice | v1.1 | 0/3 | Not started | - |
+| 9. Help and Usage Slice | v1.1 | 3/3 | Complete | 2026-04-08 |
 | 10. Config Persistence Slice | v1.1 | 0/3 | Not started | - |
 | 11. CLI Fixture and Status Expansion | v1.1 | 0/2 | Not started | - |

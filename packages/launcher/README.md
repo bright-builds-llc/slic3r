@@ -17,5 +17,7 @@ entrypoint path.
   `packages/slic3r-rust`.
 - Phase 6 makes `bazel run //packages/launcher:slic3r -- --version` the first
   supported Rust-backed macOS CLI workflow.
+- Phase 9 adds `bazel run //packages/launcher:slic3r -- --help` as a
+  Rust-backed help and usage slice.
 - All other CLI behavior remains legacy-owned until later phases expand the
   supported slice.

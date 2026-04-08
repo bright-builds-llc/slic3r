@@ -4,6 +4,7 @@
 /// The launcher commands that Phase 5 explicitly models as stable contracts.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum LauncherCommand {
+    Help,
     Version,
     Unsupported,
 }
@@ -20,7 +21,9 @@ pub struct CliInvocation {
 /// Rust-backed CLI workflow.
 pub fn parse_invocation(args: &[String]) -> CliInvocation {
     let maybe_first_arg = args.first();
-    let command = if args.len() == 1 && maybe_first_arg == Some(&"--version".to_owned()) {
+    let command = if args.len() == 1 && maybe_first_arg == Some(&"--help".to_owned()) {
+        LauncherCommand::Help
+    } else if args.len() == 1 && maybe_first_arg == Some(&"--version".to_owned()) {
         LauncherCommand::Version
     } else {
         LauncherCommand::Unsupported

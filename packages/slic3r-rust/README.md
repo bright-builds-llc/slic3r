@@ -5,8 +5,8 @@
 Phase 3 establishes the workspace, toolchain, and verification surface only.
 Phase 5 adds contract-oriented crate boundaries and the first launcher-facing
 Rust CLI scaffold. Phase 6 makes the `--version` path the first supported
-Rust-backed macOS CLI slice. Broader CLI, GUI, and output parity remain later
-work.
+Rust-backed macOS CLI slice. Phase 9 adds the `--help` path. Broader CLI, GUI,
+and output parity remain later work.
 
 ## Layout
 
@@ -24,6 +24,8 @@ work.
   - `//packages:rust_entrypoint_scaffold`
 - Run the first supported Rust-backed CLI slice:
   - `bazel run //packages/launcher:slic3r -- --version`
+- Run the Rust-backed help slice:
+  - `bazel run //packages/launcher:slic3r -- --help`
 - Run the package verification suite:
   - `//packages/slic3r-rust:verify`
 - Run write-mode formatting with the pinned Rust toolchain:
@@ -31,6 +33,6 @@ work.
 
 ## Notes
 
-- The current supported Rust-backed CLI workflow is `--version` only.
+- The current supported Rust-backed CLI workflows are `--version` and `--help`.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).

@@ -10,9 +10,9 @@ depend on.
 
 ### CLI Help and Usage
 
-- [ ] **CLI-01**: User can invoke `--help` through the preferred Rust-backed
+- [x] **CLI-01**: User can invoke `--help` through the preferred Rust-backed
   launcher path on macOS and receive a usage screen.
-- [ ] **CLI-02**: The Rust-backed usage screen clearly distinguishes supported
+- [x] **CLI-02**: The Rust-backed usage screen clearly distinguishes supported
   Rust-backed slices from still-legacy-owned CLI behavior.
 
 ### Config Persistence
@@ -67,8 +67,8 @@ depend on.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CLI-01 | Phase 9 | Pending |
-| CLI-02 | Phase 9 | Pending |
+| CLI-01 | Phase 9 | Complete |
+| CLI-02 | Phase 9 | Complete |
 | CFG-01 | Phase 10 | Pending |
 | CFG-02 | Phase 10 | Pending |
 | CFG-03 | Phase 10 | Pending |
