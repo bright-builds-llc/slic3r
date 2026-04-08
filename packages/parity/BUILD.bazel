@@ -1,6 +1,21 @@
 package(default_visibility = ["//visibility:public"])
 
+exports_files([
+    "README.md",
+    "status.tsv",
+])
+
+sh_binary(
+    name = "status",
+    srcs = ["parity_status.sh"],
+    data = ["status.tsv"],
+    args = ["$(location status.tsv)"],
+)
+
 filegroup(
-    name = "package_placeholder",
-    srcs = [],
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "status.tsv",
+    ],
 )

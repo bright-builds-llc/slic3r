@@ -1,6 +1,8 @@
 package(default_visibility = ["//visibility:public"])
 
+exports_files(["README.md"])
+
 filegroup(
-    name = "package_placeholder",
-    srcs = [],
+    name = "package_boundary",
+    srcs = ["README.md"],
 )

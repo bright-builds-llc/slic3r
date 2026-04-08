@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 7: Parity Visibility
+**Current focus:** Phase 8: Differential Parity Harness
 
 ## Current Position
 
-Phase: 7 of 8 (Parity Visibility)
-Plan: 0 of 2 in current phase
+Phase: 8 of 8 (Differential Parity Harness)
+Plan: 0 of 3 in current phase
 Status: Ready to discuss
-Last activity: 2026-04-08 — Phase 6 verified complete and Phase 7 is now current
+Last activity: 2026-04-08 — Phase 7 verified complete and Phase 8 is now current
 
-Progress: [████████░░] 75%
+Progress: [█████████░] 87%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 17
+- Total plans completed: 19
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -34,6 +34,7 @@ Progress: [████████░░] 75%
 | 4 | 2 | 2 min | 1 min |
 | 5 | 3 | 3 min | 1 min |
 | 6 | 3 | 3 min | 1 min |
+| 7 | 2 | 2 min | 1 min |
 
 **Recent Trend:**
 
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - Phase 5: `packages/launcher` is now a real package boundary that points at the Rust CLI scaffold
 - Phase 6: `bazel run //packages/launcher:slic3r -- --version` is now the preferred Rust-backed macOS CLI invocation for the supported slice
 - Phase 6: broader CLI behavior remains explicitly unsupported in the Rust launcher
+- Phase 7: `bazel run //packages/parity:status` is now the parity visibility command
+- Phase 7: `packages/parity-fixtures/README.md` now defines the package-local fixture workflow rules
 
 ### Pending Todos
 
@@ -76,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08 11:23
-Stopped at: Phase 6 completed and Phase 7 is ready for discussion
+Last session: 2026-04-08 11:26
+Stopped at: Phase 7 completed and Phase 8 is ready for discussion
 Resume file: None

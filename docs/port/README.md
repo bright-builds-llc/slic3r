@@ -81,3 +81,10 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   launcher, interpret parity evidence, and evolve the future fixture corpus
 - Phase 4 does not change any parity status by itself. It documents the contract
   surfaces and defers implementation claims to later phases
+
+## Current Parity Visibility State
+
+- `bazel run //packages/parity:status` is the current parity visibility command
+- `packages/parity/status.tsv` is the checked-in status data source
+- `packages/parity-fixtures/README.md` now defines the package-local fixture
+  update rules ahead of the first seeded corpus

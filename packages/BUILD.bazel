@@ -47,12 +47,12 @@ alias(
 
 alias(
     name = "parity",
-    actual = "//packages/parity:package_placeholder",
+    actual = "//packages/parity:status",
 )
 
 alias(
     name = "parity_fixtures",
-    actual = "//packages/parity-fixtures:package_placeholder",
+    actual = "//packages/parity-fixtures:package_boundary",
 )
 
 filegroup(

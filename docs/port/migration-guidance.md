@@ -46,6 +46,8 @@ boundaries.
   exists, contributors should document intended fixture additions in the Phase 4
   docs and in review descriptions rather than treating ad hoc local files as a
   hidden baseline.
+- `packages/parity-fixtures/README.md` is the package-local fixture workflow
+  reference and should stay aligned with this guide.
 - Every future fixture should record provenance: which legacy command or source
   generated it, which contract item it supports, and any platform or scope
   limits.

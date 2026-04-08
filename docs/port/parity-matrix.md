@@ -21,5 +21,7 @@ parity, and fixture rules.
 - `//:legacy_oracle_test` exists as broader retained legacy evidence, but it is
   still weaker or deferred evidence until the retained XS loader path is fully
   stabilized.
+- `bazel run //packages/parity:status` is the current parity visibility command,
+  and `packages/parity/status.tsv` is its checked-in data source.
 - Phase 4 inventories all six parity surface families now. Later phases are
   responsible for moving individual surfaces from `legacy-only` to `in progress`, `rust-backed`, and eventually `verified`.
