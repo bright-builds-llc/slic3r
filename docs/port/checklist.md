@@ -28,6 +28,15 @@
 - [x] `//packages/slic3r-rust:verify` runs the package-local verification suite
 - [x] The first real crate exists under `packages/slic3r-rust/crates/slic3r_core`
 
+## Entrypoint Architecture
+
+- [x] Contract-oriented Rust modules exist separately from lower-level
+  implementation code
+- [x] `docs/port/entrypoint-architecture.md` explains which responsibilities
+  belong to Bazel, Rust, and future shell shims
+- [x] `packages/launcher` is a real package boundary instead of an empty
+  placeholder
+
 ## Contract Inventory
 
 - [x] `docs/port/contract-inventory.md` enumerates CLI behavior, config
@@ -41,7 +50,7 @@
 ## Launcher
 
 - [x] `packages/launcher` exists as a named package boundary
-- [ ] Launcher responsibilities are implemented beyond a placeholder
+- [x] Launcher responsibilities are implemented beyond a placeholder
 - [ ] The preferred CLI entrypoint is documented and backed by Rust/Bazel instead of Perl
 
 ## Parity Tooling

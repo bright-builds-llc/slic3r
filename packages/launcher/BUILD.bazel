@@ -1,6 +1,13 @@
 package(default_visibility = ["//visibility:public"])
 
+exports_files(["README.md"])
+
+alias(
+    name = "slic3r",
+    actual = "//packages/slic3r-rust:slic3r_cli",
+)
+
 filegroup(
-    name = "package_placeholder",
-    srcs = [],
+    name = "package_boundary",
+    srcs = ["README.md"],
 )

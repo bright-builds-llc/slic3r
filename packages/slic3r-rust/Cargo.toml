@@ -1,5 +1,9 @@
 [workspace]
-members = ["crates/slic3r_core"]
+members = [
+    "crates/slic3r_cli",
+    "crates/slic3r_contracts",
+    "crates/slic3r_core",
+]
 resolver = "3"
 
 [workspace.package]

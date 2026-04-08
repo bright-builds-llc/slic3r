@@ -11,6 +11,11 @@ alias(
 )
 
 alias(
+    name = "rust_entrypoint_scaffold",
+    actual = "//packages/slic3r-rust:slic3r_cli",
+)
+
+alias(
     name = "legacy_reference",
     actual = "//packages/legacy-slic3r:package_placeholder",
 )
@@ -37,7 +42,7 @@ alias(
 
 alias(
     name = "launcher",
-    actual = "//packages/launcher:package_placeholder",
+    actual = "//packages/launcher:slic3r",
 )
 
 alias(

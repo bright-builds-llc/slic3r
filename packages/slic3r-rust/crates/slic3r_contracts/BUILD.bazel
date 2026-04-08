@@ -1,0 +1,33 @@
+load("@rules_rust//rust:defs.bzl", "rust_clippy", "rust_library", "rust_test", "rustfmt_test")
+
+package(default_visibility = ["//visibility:public"])
+
+rust_library(
+    name = "slic3r_contracts",
+    srcs = ["src/lib.rs"],
+    edition = "2024",
+)
+
+rust_test(
+    name = "slic3r_contracts_test",
+    srcs = ["tests/parse.rs"],
+    deps = [":slic3r_contracts"],
+    edition = "2024",
+)
+
+rust_clippy(
+    name = "clippy",
+    testonly = True,
+    deps = [
+        ":slic3r_contracts",
+        ":slic3r_contracts_test",
+    ],
+)
+
+rustfmt_test(
+    name = "rustfmt_check",
+    targets = [
+        ":slic3r_contracts",
+        ":slic3r_contracts_test",
+    ],
+)

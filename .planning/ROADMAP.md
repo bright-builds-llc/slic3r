@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Legacy Oracle** - Make the retained legacy package buildable and testable through Bazel on macOS
 - [x] **Phase 3: Rust Workspace** - Stand up the Bright Builds-compliant Rust workspace and Bazel-driven Rust verification on macOS
 - [x] **Phase 4: Contract Inventory** - Define the parity contract inventory and migration guidance that drives the port
-- [ ] **Phase 5: Entry Surface Architecture** - Carve contract-oriented Rust modules and define the launcher replacement boundaries
+- [x] **Phase 5: Entry Surface Architecture** - Carve contract-oriented Rust modules and define the launcher replacement boundaries
 - [ ] **Phase 6: macOS CLI Parity Slice** - Deliver the first preferred Rust-backed CLI workflow on macOS
 - [ ] **Phase 7: Parity Visibility** - Add parity status reporting, fixture update discipline, and migration-progress visibility
 - [ ] **Phase 8: Differential Parity Harness** - Compare legacy and Rust behavior on a shared fixture corpus for the first scoped workflows
@@ -114,9 +114,9 @@ Plans:
 
 Plans:
 
-- [ ] 05-01: Define Rust crates/modules for stable contracts versus implementation internals
-- [ ] 05-02: Shape the launcher package and shell shim boundaries
-- [ ] 05-03: Document the preferred entrypoint architecture and migration path off Perl
+- [x] 05-01-PLAN.md — Define Rust crate boundaries for stable launcher contracts versus implementation internals
+- [x] 05-02-PLAN.md — Shape the launcher package boundary and Bazel-facing entrypoint ownership
+- [x] 05-03-PLAN.md — Document the preferred entrypoint architecture and migration path off Perl
 
 ### Phase 6: macOS CLI Parity Slice
 
@@ -185,7 +185,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 2. Legacy Oracle | 3/3 | Complete | 2026-04-07 |
 | 3. Rust Workspace | 3/3 | Complete | 2026-04-08 |
 | 4. Contract Inventory | 2/2 | Complete | 2026-04-08 |
-| 5. Entry Surface Architecture | 0/3 | Not started | - |
+| 5. Entry Surface Architecture | 3/3 | Complete | 2026-04-08 |
 | 6. macOS CLI Parity Slice | 0/3 | Not started | - |
 | 7. Parity Visibility | 0/2 | Not started | - |
 | 8. Differential Parity Harness | 0/3 | Not started | - |

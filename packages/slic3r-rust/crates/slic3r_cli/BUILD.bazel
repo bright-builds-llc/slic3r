@@ -1,0 +1,22 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_clippy", "rustfmt_test")
+
+package(default_visibility = ["//visibility:public"])
+
+rust_binary(
+    name = "slic3r_cli",
+    srcs = ["src/main.rs"],
+    crate_root = "src/main.rs",
+    deps = ["//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts"],
+    edition = "2024",
+)
+
+rust_clippy(
+    name = "clippy",
+    testonly = True,
+    deps = [":slic3r_cli"],
+)
+
+rustfmt_test(
+    name = "rustfmt_check",
+    targets = [":slic3r_cli"],
+)

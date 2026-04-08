@@ -18,6 +18,9 @@ expected to update the relevant docs here in the same change.
   exists, what is pending, and which docs or package boundaries already exist
 - [`contract-inventory.md`](./contract-inventory.md) - evidence-backed registry
   of the externally visible contracts the Rust port must preserve
+- [`entrypoint-architecture.md`](./entrypoint-architecture.md) - Rust, Bazel,
+  launcher-package, and future shell-shim responsibilities for the first CLI
+  slice
 - [`migration-guidance.md`](./migration-guidance.md) - launcher replacement,
   parity evidence, fixture protocol, and scope-now-versus-deferred rules
 - [`parity-matrix.md`](./parity-matrix.md) - contract-surface status using the
@@ -55,6 +58,17 @@ This means the retained legacy package is now usable as a buildable oracle on ma
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in `.bazelversion`
 
 Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surfaces remain legacy-only until later phases.
+
+## Current Entrypoint Architecture State
+
+- `packages/slic3r-rust/crates/slic3r_contracts` is the stable contract-oriented
+  launcher crate
+- `packages/slic3r-rust/crates/slic3r_cli` is the launcher-facing Rust CLI
+  scaffold
+- `packages/launcher` is now a real package boundary that points at that Rust
+  entrypoint scaffold
+- Phase 5 does not yet claim a supported Rust-backed user workflow. It defines
+  the boundaries Phase 6 will use
 
 ## Current Contract Inventory State
 

@@ -35,6 +35,9 @@ serial.txt
 # Local Bright Builds install backups
 .coding-and-architecture-requirements-backups/
 
+# Local Rust workspace build artifacts
+packages/slic3r-rust/target/
+
 slic3r
 gui_test
 slic3r_test
