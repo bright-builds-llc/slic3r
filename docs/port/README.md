@@ -2,7 +2,7 @@
 
 This directory is the source of truth for the Slic3r Rust port during the migration.
 
-Phase 1 establishes the monorepo scaffold, the retained legacy reference package, and the documentation surfaces reviewers should use to understand current progress. Until automation exists, any Rust-port or parity-surface change is expected to update the relevant docs here in the same change.
+Phase 1 establishes the monorepo scaffold, the retained legacy reference package, and the documentation surfaces reviewers should use to understand current progress. Phase 2 turns the retained legacy package into a Bazel-wrapped oracle surface on macOS, but keeps that package explicitly reference-only. Until automation exists, any Rust-port or parity-surface change is expected to update the relevant docs here in the same change.
 
 ## Documents
 
@@ -20,3 +20,11 @@ Phase 1 establishes the monorepo scaffold, the retained legacy reference package
 ## Review Expectation
 
 When a change touches Rust-port behavior, parity surfaces, or package boundaries, reviewers should expect the relevant file in `docs/port/` to move with it. If the docs do not change, the review should explicitly explain why.
+
+## Current Legacy Oracle State
+
+- `//:legacy_oracle_build` is the Bazel-wrapped retained legacy build surface on macOS
+- `//:legacy_oracle_smoke` is the current trusted oracle check
+- `//:legacy_oracle_test` exists, but remains a deferred broader legacy test surface until the retained XS loader issues are fully resolved
+
+This means the retained legacy package is now usable as a buildable oracle on macOS, but the trusted oracle set is intentionally narrower than the full historical test tree.

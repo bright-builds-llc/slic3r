@@ -13,8 +13,10 @@
 - [x] The retained legacy source tree lives in `packages/legacy-slic3r`
 - [x] The legacy package is documented as the visible reference package and behavioral oracle
 - [x] The legacy relocation was structural rather than cleanup-driven
-- [ ] Legacy build surfaces are wrapped through Bazel
-- [ ] Legacy test surfaces are wrapped through Bazel
+- [x] Legacy build surfaces are wrapped through Bazel
+- [x] A trusted macOS legacy oracle check is wrapped through Bazel
+- [ ] Broader retained legacy tests are fully trustworthy through Bazel
+- [x] The trusted oracle set vs deferred retained legacy surfaces is documented explicitly
 
 ## Rust Workspace
 

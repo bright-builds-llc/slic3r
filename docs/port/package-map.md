@@ -14,7 +14,7 @@
 
 | Package | Role |
 |---------|------|
-| `packages/legacy-slic3r` | Retained legacy reference package and behavioral oracle |
+| `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
 | `packages/slic3r-rust` | New Rust implementation package with an internal Cargo workspace root |
 | `packages/launcher` | Thin boundary for the future Rust/Bazel/shell entrypoint strategy |
 | `packages/parity` | Future parity status and comparison tooling |
@@ -23,5 +23,6 @@
 ## Notes
 
 - The legacy package is visible by design. Contributors should be able to compare the old and new implementation paths directly.
+- The trusted Phase 2 oracle set is intentionally narrower than the full retained historical test tree. Today the trusted macOS oracle check is the smoke wrapper, while the broader retained legacy test wrapper remains documented but deferred.
 - Root-owned areas stay outside `packages/` so the monorepo does not hide shared orchestration and documentation behind package boundaries.
 - The Rust side starts as one top-level package in Phase 1. Additional internal crates can grow inside that package without exploding the top-level package list immediately.
