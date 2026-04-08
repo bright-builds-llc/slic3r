@@ -1,4 +1,4 @@
-load("@rules_rust//rust:defs.bzl", "rust_library")
+load("@rules_rust//rust:defs.bzl", "rust_clippy", "rust_library", "rust_test", "rustfmt_test")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -6,4 +6,28 @@ rust_library(
     name = "slic3r_core",
     srcs = ["src/lib.rs"],
     edition = "2024",
+)
+
+rust_test(
+    name = "slic3r_core_smoke_test",
+    srcs = ["tests/smoke.rs"],
+    deps = [":slic3r_core"],
+    edition = "2024",
+)
+
+rust_clippy(
+    name = "clippy",
+    testonly = True,
+    deps = [
+        ":slic3r_core",
+        ":slic3r_core_smoke_test",
+    ],
+)
+
+rustfmt_test(
+    name = "rustfmt_check",
+    targets = [
+        ":slic3r_core",
+        ":slic3r_core_smoke_test",
+    ],
 )

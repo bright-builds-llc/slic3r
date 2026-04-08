@@ -11,3 +11,18 @@ alias(
     name = "slic3r_core",
     actual = "//packages/slic3r-rust/crates/slic3r_core:slic3r_core",
 )
+
+sh_test(
+    name = "clippy_check",
+    srcs = ["verify_clippy.sh"],
+    data = ["//packages/slic3r-rust/crates/slic3r_core:clippy"],
+)
+
+test_suite(
+    name = "verify",
+    tests = [
+        ":clippy_check",
+        "//packages/slic3r-rust/crates/slic3r_core:rustfmt_check",
+        "//packages/slic3r-rust/crates/slic3r_core:slic3r_core_smoke_test",
+    ],
+)
