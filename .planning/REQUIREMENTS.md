@@ -17,11 +17,11 @@ depend on.
 
 ### Config Persistence
 
-- [ ] **CFG-01**: User can save configuration to an INI file through the
+- [x] **CFG-01**: User can save configuration to an INI file through the
   preferred Rust-backed CLI path on macOS.
-- [ ] **CFG-02**: User can load one or more configuration files through the
+- [x] **CFG-02**: User can load one or more configuration files through the
   preferred Rust-backed CLI path on macOS.
-- [ ] **CFG-03**: User can scope configuration state with `--datadir` for the
+- [x] **CFG-03**: User can scope configuration state with `--datadir` for the
   supported Rust-backed CLI flows on macOS.
 
 ### CLI Parity Visibility
@@ -69,9 +69,9 @@ depend on.
 |-------------|-------|--------|
 | CLI-01 | Phase 9 | Complete |
 | CLI-02 | Phase 9 | Complete |
-| CFG-01 | Phase 10 | Pending |
-| CFG-02 | Phase 10 | Pending |
-| CFG-03 | Phase 10 | Pending |
+| CFG-01 | Phase 10 | Complete |
+| CFG-02 | Phase 10 | Complete |
+| CFG-03 | Phase 10 | Complete |
 | PCLI-01 | Phase 11 | Pending |
 | PCLI-02 | Phase 11 | Pending |
 

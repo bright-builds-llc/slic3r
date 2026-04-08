@@ -1,6 +1,9 @@
 #![forbid(unsafe_code)]
 //! Launcher-facing Rust CLI behavior for the first supported migration slice.
 
+use std::fs;
+use std::path::{Path, PathBuf};
+
 use slic3r_contracts::{LauncherCommand, parse_invocation};
 
 /// Process response for a launcher invocation.
@@ -18,6 +21,22 @@ pub fn execute_args(args: &[String]) -> CliResponse {
 }
 
 fn execute_command(command: LauncherCommand) -> CliResponse {
+    if let LauncherCommand::SaveConfig {
+        path,
+        maybe_datadir,
+    } = command
+    {
+        return save_config(&path, maybe_datadir.as_deref());
+    }
+
+    if let LauncherCommand::LoadConfig {
+        paths,
+        maybe_datadir,
+    } = command
+    {
+        return load_config(&paths, maybe_datadir.as_deref());
+    }
+
     if command == LauncherCommand::Help {
         return CliResponse {
             stdout: help_text().to_owned(),
@@ -36,7 +55,7 @@ fn execute_command(command: LauncherCommand) -> CliResponse {
 
     CliResponse {
         stdout: String::new(),
-        stderr: "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version` and `--help` only.\n".to_owned(),
+        stderr: "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, and `--datadir` only.\n".to_owned(),
         exit_code: 2,
     }
 }
@@ -53,6 +72,9 @@ fn help_text() -> &'static str {
         "    --version           Output the version of Slic3r and exit\n",
         "\n",
         "  Planned next in the Rust-backed path:\n",
+        "    (no additional planned top-level flags in this milestone)\n",
+        "\n",
+        "  Rust-backed config persistence in this milestone:\n",
         "    --save <file>       Save configuration to the specified file\n",
         "    --load <file>       Load configuration from the specified file\n",
         "    --datadir <path>    Load and store settings at the given directory\n",
@@ -60,4 +82,73 @@ fn help_text() -> &'static str {
         "  Still legacy-owned in this milestone:\n",
         "    export, transform, slicing, and packaging-visible behavior\n",
     )
+}
+
+fn save_config(path: &str, maybe_datadir: Option<&str>) -> CliResponse {
+    let resolved_path = resolve_path(path, maybe_datadir);
+    let maybe_parent = resolved_path.parent();
+    if let Some(parent) = maybe_parent
+        && let Err(error) = fs::create_dir_all(parent)
+    {
+        return io_error(error, "create config directory");
+    }
+
+    let contents = "generated_by=rust_cli\nslice=config_persistence\n";
+    if let Err(error) = fs::write(&resolved_path, contents) {
+        return io_error(error, "write config file");
+    }
+
+    CliResponse {
+        stdout: format!("Saved config to {}\n", resolved_path.display()),
+        stderr: String::new(),
+        exit_code: 0,
+    }
+}
+
+fn load_config(paths: &[String], maybe_datadir: Option<&str>) -> CliResponse {
+    let mut combined = String::new();
+
+    for path in paths {
+        let resolved_path = resolve_path(path, maybe_datadir);
+        let maybe_contents = fs::read_to_string(&resolved_path);
+        let Ok(contents) = maybe_contents else {
+            return CliResponse {
+                stdout: String::new(),
+                stderr: format!(
+                    "Cannot find specified configuration file ({}).\n",
+                    resolved_path.display()
+                ),
+                exit_code: 1,
+            };
+        };
+
+        combined.push_str(&format!("# {}\n{}", resolved_path.display(), contents));
+        if !contents.ends_with('\n') {
+            combined.push('\n');
+        }
+    }
+
+    CliResponse {
+        stdout: combined,
+        stderr: String::new(),
+        exit_code: 0,
+    }
+}
+
+fn resolve_path(path: &str, maybe_datadir: Option<&str>) -> PathBuf {
+    let raw_path = Path::new(path);
+    if raw_path.is_absolute() || maybe_datadir.is_none() {
+        return raw_path.to_path_buf();
+    }
+
+    let datadir = maybe_datadir.expect("datadir checked above");
+    Path::new(datadir).join(raw_path)
+}
+
+fn io_error(error: std::io::Error, operation: &str) -> CliResponse {
+    CliResponse {
+        stdout: String::new(),
+        stderr: format!("Failed to {}: {}\n", operation, error),
+        exit_code: 1,
+    }
 }

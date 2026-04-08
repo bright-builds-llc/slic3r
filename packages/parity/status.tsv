@@ -3,6 +3,7 @@ cli.version	verified	//packages/parity:cli_version_parity	Shared fixture compari
 cli.help	rust-backed	//packages/launcher:slic3r	Rust-backed help and usage output exists; fixture verification lands in Phase 11
 cli.other	legacy-only	packages/legacy-slic3r/slic3r.pl	All CLI behavior except --version remains legacy-owned
 config	legacy-only	packages/legacy-slic3r/lib/Slic3r/Config.pm	Contract inventory remains the current source of truth
+config.persistence	rust-backed	//packages/launcher:slic3r	Rust-backed save/load/datadir support exists; fixture verification lands in Phase 11
 file-formats	legacy-only	docs/port/contract-inventory.md	Format parity not started
 generated-outputs	legacy-only	docs/port/contract-inventory.md	Output parity not started
 launcher-packaging	in progress	docs/port/entrypoint-architecture.md	Launcher package is real, but packaged parity is still deferred

@@ -56,9 +56,9 @@ CLI path on macOS.
 
 Plans:
 
-- [ ] 10-01: Model config persistence and load semantics in contract-oriented Rust types
-- [ ] 10-02: Implement Rust-backed save/load/datadir behavior on the launcher path
-- [ ] 10-03: Document the supported config slice and unsupported config/export behavior
+- [x] 10-01-PLAN.md — Model config persistence and load semantics in contract-oriented Rust types
+- [x] 10-02-PLAN.md — Implement Rust-backed save/load/datadir behavior on the launcher path
+- [x] 10-03-PLAN.md — Document the supported config slice and unsupported config/export behavior
 
 ### Phase 11: CLI Fixture and Status Expansion
 
@@ -90,5 +90,5 @@ Phases execute in numeric order: 9 → 10 → 11
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 9. Help and Usage Slice | v1.1 | 3/3 | Complete | 2026-04-08 |
-| 10. Config Persistence Slice | v1.1 | 0/3 | Not started | - |
+| 10. Config Persistence Slice | v1.1 | 3/3 | Complete | 2026-04-08 |
 | 11. CLI Fixture and Status Expansion | v1.1 | 0/2 | Not started | - |
