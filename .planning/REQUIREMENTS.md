@@ -1,0 +1,93 @@
+# Requirements: Slic3r Rust Port
+
+**Defined:** 2026-04-08
+**Core Value:** Deliver a trustworthy Rust successor to Slic3r that matches the
+legacy behavior and interfaces closely enough that the old implementation can
+eventually be retired without breaking the contracts users and integrators
+depend on.
+
+## v1 Requirements
+
+### Export Workflows
+
+- [ ] **EXP-01**: User can export G-code through the preferred Rust-backed
+  launcher path on macOS.
+- [ ] **EXP-02**: User can export mesh and package formats through the preferred
+  Rust-backed launcher path on macOS for the scoped slice:
+  `--export-stl`, `--export-obj`, `--export-amf`, and `--export-3mf`.
+- [ ] **EXP-03**: User can export SVG-oriented outputs through the preferred
+  Rust-backed launcher path on macOS for the scoped slice:
+  `--export-svg`, `--export-sla-svg`, and `--sla`.
+- [ ] **EXP-04**: Supported export slices preserve explicit `--output` behavior
+  for the scoped Rust-backed launcher path.
+
+### Transform and Non-Slicing Actions
+
+- [ ] **TRN-01**: User can run `--info` through the preferred Rust-backed
+  launcher path on macOS for supported model inputs.
+- [ ] **TRN-02**: User can run `--repair` through the preferred Rust-backed
+  launcher path on macOS for supported STL inputs.
+- [ ] **TRN-03**: User can run `--split` through the preferred Rust-backed
+  launcher path on macOS for supported STL inputs.
+
+### Export and Transform Parity Visibility
+
+- [ ] **PEX-01**: Maintainer can execute shared fixture comparisons for the
+  supported export and non-slicing transform slices.
+- [ ] **PEX-02**: Maintainer can see those supported export and transform slices
+  reflected accurately in the parity status command and migration docs.
+
+## v2 Requirements
+
+### Additional CLI Actions
+
+- **XCLI-03**: User can run `--merge`, `--cut`, and `--cut-grid` through the
+  preferred Rust-backed launcher path.
+- **XCLI-04**: User can run broader layout and positioning actions through the
+  preferred Rust-backed launcher path with accepted parity behavior.
+
+### Packaging and Platforms
+
+- **PACK-01**: Maintainer can verify packaging-visible launcher behavior for
+  macOS through shared parity evidence.
+- **PLAT-01**: User can run validated Rust-backed parity workflows on Linux.
+- **PLAT-02**: User can run validated Rust-backed parity workflows on Windows.
+
+### GUI
+
+- **GUI-01**: Maintainer has a concrete milestone and acceptance strategy for
+  the future GUI migration.
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| Merge, cut, cut-grid, and broader layout/positioning parity in this milestone | Export plus the smallest non-slicing transform/info actions are the most credible next slices after help/config persistence |
+| Packaging-visible parity implementation in this milestone | Launcher/package ownership exists, but packaged behavior still needs a dedicated milestone |
+| Linux and Windows parity in this milestone | v1.2 remains macOS-first so export/transform CLI behavior can deepen before platform expansion |
+| GUI rewrite planning or implementation in this milestone | CLI/core parity still needs broader coverage before GUI work is worth scoping tightly |
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| EXP-01 | Phase 12 | Pending |
+| EXP-02 | Phase 12 | Pending |
+| EXP-03 | Phase 12 | Pending |
+| EXP-04 | Phase 12 | Pending |
+| TRN-01 | Phase 13 | Pending |
+| TRN-02 | Phase 13 | Pending |
+| TRN-03 | Phase 13 | Pending |
+| PEX-01 | Phase 14 | Pending |
+| PEX-02 | Phase 14 | Pending |
+
+**Coverage:**
+
+- v1 requirements: 9 total
+- Mapped to phases: 9
+- Unmapped: 0 ✓
+
+______________________________________________________________________
+
+*Requirements defined: 2026-04-08*
+*Last updated: 2026-04-08 after milestone v1.2 definition*

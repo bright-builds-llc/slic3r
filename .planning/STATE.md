@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.1 milestone_name: CLI Parity Expansion status: between_milestones stopped_at: v1.1 archived last_updated: "2026-04-08T22:09:48Z" last_activity: 2026-04-08 progress: total_phases: 3 completed_phases: 3 total_plans: 8 completed_plans: 8 percent: 100
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: defining_requirements stopped_at: v1.2 requirements definition last_updated: "2026-04-08T22:09:48Z" last_activity: 2026-04-08 progress: total_phases: 0 completed_phases: 0 total_plans: 0 completed_plans: 0 percent: 0
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Planning next milestone
+**Current focus:** Milestone v1.2 Export and Transform Parity
 
 ## Current Position
 
-Phase: 11 of 11 (CLI Fixture and Status Expansion)
-Plan: 2 of 2 in current phase
-Status: v1.1 milestone complete
-Last activity: 2026-04-08 — v1.1 milestone archived and ready for the next milestone definition
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-04-08 — Milestone v1.2 Export and Transform Parity started
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
@@ -87,5 +87,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-08 22:09
-Stopped at: Between milestones
+Stopped at: Defining requirements for v1.2 Export and Transform Parity
 Resume file: None
