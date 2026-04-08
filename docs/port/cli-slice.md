@@ -21,5 +21,5 @@ Unsupported behavior remains legacy-owned until later phases expand the slice.
 ## Verification Status
 
 - Phase 6 makes the `--version` slice Rust-backed.
-- Phase 8 adds shared-fixture comparison so this slice can move from
-  implementation-only to verified parity.
+- Phase 8 verifies the slice through
+  `bazel run //packages/parity:cli_version_parity`.

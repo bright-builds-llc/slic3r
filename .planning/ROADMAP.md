@@ -20,7 +20,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 5: Entry Surface Architecture** - Carve contract-oriented Rust modules and define the launcher replacement boundaries
 - [x] **Phase 6: macOS CLI Parity Slice** - Deliver the first preferred Rust-backed CLI workflow on macOS
 - [x] **Phase 7: Parity Visibility** - Add parity status reporting, fixture update discipline, and migration-progress visibility
-- [ ] **Phase 8: Differential Parity Harness** - Compare legacy and Rust behavior on a shared fixture corpus for the first scoped workflows
+- [x] **Phase 8: Differential Parity Harness** - Compare legacy and Rust behavior on a shared fixture corpus for the first scoped workflows
 
 ## Phase Details
 
@@ -170,9 +170,9 @@ Plans:
 
 Plans:
 
-- [ ] 08-01: Create the initial shared macOS fixture corpus
-- [ ] 08-02: Implement the legacy-vs-Rust comparison harness
-- [ ] 08-03: Report parity results in a way that feeds docs and future roadmap expansion
+- [x] 08-01-PLAN.md — Create the initial shared macOS fixture corpus
+- [x] 08-02-PLAN.md — Implement the legacy-vs-Rust comparison harness
+- [x] 08-03-PLAN.md — Report the verified parity result through status data and docs
 
 ## Progress
 
@@ -188,4 +188,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 5. Entry Surface Architecture | 3/3 | Complete | 2026-04-08 |
 | 6. macOS CLI Parity Slice | 3/3 | Complete | 2026-04-08 |
 | 7. Parity Visibility | 2/2 | Complete | 2026-04-08 |
-| 8. Differential Parity Harness | 0/3 | Not started | - |
+| 8. Differential Parity Harness | 3/3 | Complete | 2026-04-08 |

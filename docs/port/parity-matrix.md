@@ -7,7 +7,7 @@ parity, and fixture rules.
 
 | Surface | Current Source of Truth | Status | Detailed Inventory | Notes |
 | --- | --- | --- | --- | --- |
-| CLI behavior | `packages/legacy-slic3r/slic3r.pl` and related legacy native surfaces | `in progress` | [`contract-inventory.md#cli-behavior`](./contract-inventory.md#cli-behavior) | The `--version` slice is now Rust-backed through `//packages/launcher:slic3r`; broader CLI behavior remains legacy-only and parity verification lands in Phase 8 |
+| CLI behavior | `packages/legacy-slic3r/slic3r.pl` and related legacy native surfaces | `in progress` | [`contract-inventory.md#cli-behavior`](./contract-inventory.md#cli-behavior) | The `--version` slice is now verified through `//packages/parity:cli_version_parity`; broader CLI behavior remains legacy-only |
 | Config semantics | `packages/legacy-slic3r/lib/Slic3r/Config.pm` and related legacy config code | `legacy-only` | [`contract-inventory.md#config-semantics`](./contract-inventory.md#config-semantics) | The source of truth is documented now; contract-oriented Rust modules come in later phases |
 | Supported file formats | Legacy Perl/C++/XS pipeline under `packages/legacy-slic3r/` | `legacy-only` | [`contract-inventory.md#supported-file-formats`](./contract-inventory.md#supported-file-formats) | Input and export format families are inventoried now without claiming any Rust-backed coverage |
 | Generated outputs | Legacy slicing and export pipeline under `packages/legacy-slic3r/` | `legacy-only` | [`contract-inventory.md#generated-outputs`](./contract-inventory.md#generated-outputs) | Output naming and artifact expectations are inventoried now; output parity is deferred to later phases |

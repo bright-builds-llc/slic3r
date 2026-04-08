@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 8: Differential Parity Harness
+**Current focus:** Milestone Complete
 
 ## Current Position
 
 Phase: 8 of 8 (Differential Parity Harness)
-Plan: 0 of 3 in current phase
-Status: Ready to discuss
-Last activity: 2026-04-08 — Phase 7 verified complete and Phase 8 is now current
+Plan: 3 of 3 in current phase
+Status: Complete
+Last activity: 2026-04-08 — Phase 8 verified complete and the current milestone is complete
 
-Progress: [█████████░] 87%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 19
+- Total plans completed: 22
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -35,6 +35,7 @@ Progress: [█████████░] 87%
 | 5 | 3 | 3 min | 1 min |
 | 6 | 3 | 3 min | 1 min |
 | 7 | 2 | 2 min | 1 min |
+| 8 | 3 | 3 min | 1 min |
 
 **Recent Trend:**
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - Phase 6: broader CLI behavior remains explicitly unsupported in the Rust launcher
 - Phase 7: `bazel run //packages/parity:status` is now the parity visibility command
 - Phase 7: `packages/parity-fixtures/README.md` now defines the package-local fixture workflow rules
+- Phase 8: `bazel run //packages/parity:cli_version_parity` now verifies the shared `cli.version` slice against legacy and fixture output
+- Phase 8: `cli.version` is now marked `verified` in the checked-in parity status source
 
 ### Pending Todos
 
@@ -79,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08 11:26
-Stopped at: Phase 7 completed and Phase 8 is ready for discussion
+Last session: 2026-04-08 11:30
+Stopped at: Milestone complete
 Resume file: None

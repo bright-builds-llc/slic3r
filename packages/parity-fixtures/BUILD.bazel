@@ -2,7 +2,26 @@ package(default_visibility = ["//visibility:public"])
 
 exports_files(["README.md"])
 
+exports_files([
+    "cli-version/args.txt",
+    "cli-version/stdout.txt",
+])
+
+alias(
+    name = "cli_version_args",
+    actual = "cli-version/args.txt",
+)
+
+alias(
+    name = "cli_version_expected",
+    actual = "cli-version/stdout.txt",
+)
+
 filegroup(
     name = "package_boundary",
-    srcs = ["README.md"],
+    srcs = [
+        "README.md",
+        "cli-version/args.txt",
+        "cli-version/stdout.txt",
+    ],
 )

@@ -17,8 +17,8 @@
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
 | `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, and CLI crate boundaries plus a Bazel-native verification surface |
 | `packages/launcher` | Entry-point package boundary that currently points at the Rust CLI and reserves future shell-shim responsibility |
-| `packages/parity` | Parity visibility package with the checked-in status data source and the parity status command |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules; the first shared corpus is still not seeded yet |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and the first comparison command |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and the first shared `cli.version` corpus |
 
 ## Notes
 
@@ -30,3 +30,4 @@
 - Phase 5 adds `docs/port/entrypoint-architecture.md` and explicit Rust crate boundaries for launcher contracts and the CLI shell.
 - Phase 6 adds `docs/port/cli-slice.md` and makes `--version` the first supported Rust-backed launcher workflow on macOS.
 - Phase 7 makes `packages/parity` and `packages/parity-fixtures` real package boundaries with a status command and fixture workflow rules.
+- Phase 8 seeds the first shared fixture corpus and comparison command for `cli.version`.

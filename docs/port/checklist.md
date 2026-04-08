@@ -66,8 +66,8 @@
 - [x] The parity evidence model and future fixture location are documented
 - [x] The fixture update workflow is documented in `packages/parity-fixtures/README.md` and `docs/port/migration-guidance.md`
 - [x] The parity status command exists
-- [ ] The shared fixture corpus is seeded
-- [ ] Differential legacy-vs-Rust comparisons run on the fixture corpus
+- [x] The shared fixture corpus is seeded
+- [x] Differential legacy-vs-Rust comparisons run on the fixture corpus
 
 ## Docs
 

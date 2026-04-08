@@ -14,4 +14,4 @@ corpora.
 ## Current State
 
 - Phase 7 defines the package and workflow rules.
-- Phase 8 seeds the first shared CLI fixture corpus.
+- Phase 8 seeds the first shared CLI fixture corpus for `--version`.

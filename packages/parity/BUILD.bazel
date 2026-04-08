@@ -12,6 +12,25 @@ sh_binary(
     args = ["$(location status.tsv)"],
 )
 
+sh_binary(
+    name = "cli_version_parity",
+    srcs = ["compare_cli_version.sh"],
+    data = [
+        "status.tsv",
+        "//packages/legacy-slic3r:slic3r.pl",
+        "//packages/launcher:slic3r",
+        "//packages/parity-fixtures:cli_version_args",
+        "//packages/parity-fixtures:cli_version_expected",
+        "//tools/bazel/legacy:build_legacy_oracle.sh",
+        "//tools/bazel/legacy:check_legacy_prereqs.sh",
+    ],
+    args = [
+        "$(location //packages/launcher:slic3r)",
+        "$(location //packages/parity-fixtures:cli_version_args)",
+        "$(location //packages/parity-fixtures:cli_version_expected)",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [

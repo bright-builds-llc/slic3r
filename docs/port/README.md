@@ -85,6 +85,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
 ## Current Parity Visibility State
 
 - `bazel run //packages/parity:status` is the current parity visibility command
+- `bazel run //packages/parity:cli_version_parity` is the current shared fixture
+  comparison command for the supported `--version` slice
 - `packages/parity/status.tsv` is the checked-in status data source
 - `packages/parity-fixtures/README.md` now defines the package-local fixture
   update rules ahead of the first seeded corpus
