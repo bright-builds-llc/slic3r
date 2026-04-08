@@ -355,25 +355,22 @@ test_suite(
 | A2 | The first real crate should be a single `slic3r_core` library crate under `packages/slic3r-rust/crates/` instead of multiple crates in Phase 3. | Summary; Architecture Patterns | A later phase may need an earlier crate split for contracts or CLI boundaries. |
 | A3 | Phase 3 can leave `Cargo.lock` out unless `crate_universe` or external dependencies are introduced. | Open Questions | If maintainers want Cargo manifests to be the dependency source of truth immediately, the plan will need to add `Cargo.lock` generation sooner. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Should Phase 3 commit `Cargo.lock` immediately, or wait for the first external dependency?**
+1. **Cargo.lock policy**
 
-   - What we know: The repo currently has no `Cargo.lock`, the Rust package has no members yet, and `crate_universe` only becomes useful once dependencies exist. `[VERIFIED: /Users/peterryszkiewicz/Repos/Slic3r/packages/slic3r-rust/Cargo.toml; CITED: https://bazelbuild.github.io/rules_rust/crate_universe_bzlmod.html]`
-   - What's unclear: Whether maintainers want Cargo workspace metadata to become the dependency source of truth in Phase 3 or only in the first dependency-bearing phase. `[ASSUMED]`
-   - Recommendation: Decide this before planning any task that touches dependency resolution or generated crate repos. `[ASSUMED]`
+   - Decision: Do **not** add `Cargo.lock` in Phase 3. Add it in the first phase that introduces an external Rust dependency or any generated dependency-management workflow. `[RESOLVED]`
+   - Why: The current workspace is empty, `crate_universe` is intentionally deferred, and Phase 3 is about toolchain/workspace/verification scaffolding rather than dependency reproducibility. Adding `Cargo.lock` now would create churn without improving the phase goal. `[VERIFIED: /Users/peterryszkiewicz/Repos/Slic3r/packages/slic3r-rust/Cargo.toml; CITED: https://bazelbuild.github.io/rules_rust/crate_universe_bzlmod.html; ASSUMED]`
 
-1. **Should contributor onboarding rely on a documented Bazelisk install, or should the repo add a checked-in launcher wrapper?**
+1. **Contributor Bazel launcher contract**
 
-   - What we know: The current host has no `bazel` or `bazelisk` on `PATH`, and Bazelisk documents both Homebrew installation and checked-in launcher patterns. `[VERIFIED: local command `bazel --version || bazelisk --version`; CITED: https://github.com/bazelbuild/bazelisk]`
-   - What's unclear: Whether this repo wants “install Bazelisk once” or “always use a checked-in launcher” as the contributor contract. `[ASSUMED]`
-   - Recommendation: Pick one onboarding path in the plan and reflect it in `docs/port/checklist.md` and `docs/port/package-map.md`. `[VERIFIED: /Users/peterryszkiewicz/Repos/Slic3r/docs/port/checklist.md; VERIFIED: /Users/peterryszkiewicz/Repos/Slic3r/docs/port/package-map.md; ASSUMED]`
+   - Decision: Phase 3 should rely on a **documented Bazelisk install path**, not a checked-in launcher wrapper. `[RESOLVED]`
+   - Why: The repo already pins Bazel in `.bazelversion`, Bazelisk is the standard launcher for that model, and a checked-in wrapper would add another tool contract before the Rust package is even real. `[VERIFIED: /Users/peterryszkiewicz/Repos/Slic3r/.bazelversion; CITED: https://github.com/bazelbuild/bazelisk]`
 
-1. **Do root-level Rust convenience targets matter in Phase 3, or are package-level targets enough?**
+1. **Root-level Rust convenience targets**
 
-   - What we know: The repo already exposes root aliases for legacy/package surfaces, but Bazel aliases are the wrong tool for runnable test surfaces. `[VERIFIED: /Users/peterryszkiewicz/Repos/Slic3r/BUILD.bazel; CITED: https://bazel.build/reference/be/general]`
-   - What's unclear: Whether maintainers want `bazel test //packages/slic3r-rust:verify` only, or also a root `//:rust_verify` convenience target implemented as a `test_suite`. `[ASSUMED]`
-   - Recommendation: If root conveniences are desired, use direct root `test_suite`/build targets rather than alias chains. `[CITED: https://bazel.build/reference/be/general; ASSUMED]`
+   - Decision: Package-level Rust verification targets are sufficient in Phase 3; root-level Rust convenience targets are deferred. `[RESOLVED]`
+   - Why: The package boundary is already explicit under `packages/slic3r-rust`, and Bazel aliases are the wrong primitive for runnable test surfaces. A package-local `//packages/slic3r-rust:verify` target is enough to satisfy the phase goal without widening the root surface prematurely. `[VERIFIED: /Users/peterryszkiewicz/Repos/Slic3r/packages/BUILD.bazel; CITED: https://bazel.build/reference/be/general]`
 
 ## Environment Availability
 

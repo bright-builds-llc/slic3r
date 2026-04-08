@@ -77,9 +77,9 @@ Plans:
 
 Plans:
 
-- [ ] 03-01: Initialize the Rust workspace and Bazel Rust toolchain integration
-- [ ] 03-02: Add Rust verification targets for fmt, clippy, and tests
-- [ ] 03-03: Align the Rust package layout with Bright Builds conventions and repo docs
+- [ ] 03-01-PLAN.md — Initialize the Rust workspace and Bazel Rust toolchain integration
+- [ ] 03-02-PLAN.md — Add Rust verification targets for fmt, clippy, and tests
+- [ ] 03-03-PLAN.md — Align the Rust package layout with Bright Builds conventions and repo docs
 
 ### Phase 4: Contract Inventory
 
