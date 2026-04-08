@@ -51,7 +51,13 @@
 
 - [x] `packages/launcher` exists as a named package boundary
 - [x] Launcher responsibilities are implemented beyond a placeholder
-- [ ] The preferred CLI entrypoint is documented and backed by Rust/Bazel instead of Perl
+- [x] The preferred CLI entrypoint is documented and backed by Rust/Bazel instead of Perl for the current supported slice
+
+## CLI Slice
+
+- [x] `docs/port/cli-slice.md` documents the currently supported Rust-backed CLI workflow
+- [x] `bazel run //packages/launcher:slic3r -- --version` is the preferred Rust-backed macOS invocation for the supported slice
+- [ ] Broader CLI workflows are supported through the Rust launcher
 
 ## Parity Tooling
 

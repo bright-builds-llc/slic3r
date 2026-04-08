@@ -16,6 +16,8 @@ expected to update the relevant docs here in the same change.
 
 - [`checklist.md`](./checklist.md) - migration-surface checklist for what
   exists, what is pending, and which docs or package boundaries already exist
+- [`cli-slice.md`](./cli-slice.md) - currently supported Rust-backed macOS CLI
+  workflow and explicitly unsupported arguments
 - [`contract-inventory.md`](./contract-inventory.md) - evidence-backed registry
   of the externally visible contracts the Rust port must preserve
 - [`entrypoint-architecture.md`](./entrypoint-architecture.md) - Rust, Bazel,
@@ -67,8 +69,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   scaffold
 - `packages/launcher` is now a real package boundary that points at that Rust
   entrypoint scaffold
-- Phase 5 does not yet claim a supported Rust-backed user workflow. It defines
-  the boundaries Phase 6 will use
+- Phase 6 makes `--version` the first supported Rust-backed macOS CLI workflow
+  through `bazel run //packages/launcher:slic3r -- --version`
 
 ## Current Contract Inventory State
 

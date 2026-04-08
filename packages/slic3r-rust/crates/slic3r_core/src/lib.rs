@@ -7,3 +7,9 @@
 pub fn workspace_marker() -> &'static str {
     "slic3r-core"
 }
+
+/// Returns the legacy version string that the first Rust-backed CLI slice must
+/// preserve.
+pub fn legacy_parity_version() -> &'static str {
+    "1.3.1-dev"
+}

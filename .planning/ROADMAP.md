@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Rust Workspace** - Stand up the Bright Builds-compliant Rust workspace and Bazel-driven Rust verification on macOS
 - [x] **Phase 4: Contract Inventory** - Define the parity contract inventory and migration guidance that drives the port
 - [x] **Phase 5: Entry Surface Architecture** - Carve contract-oriented Rust modules and define the launcher replacement boundaries
-- [ ] **Phase 6: macOS CLI Parity Slice** - Deliver the first preferred Rust-backed CLI workflow on macOS
+- [x] **Phase 6: macOS CLI Parity Slice** - Deliver the first preferred Rust-backed CLI workflow on macOS
 - [ ] **Phase 7: Parity Visibility** - Add parity status reporting, fixture update discipline, and migration-progress visibility
 - [ ] **Phase 8: Differential Parity Harness** - Compare legacy and Rust behavior on a shared fixture corpus for the first scoped workflows
 
@@ -133,9 +133,9 @@ Plans:
 
 Plans:
 
-- [ ] 06-01: Implement the first Rust CLI/core workflow slice on macOS
-- [ ] 06-02: Route the preferred entrypoint to the Rust-backed slice
-- [ ] 06-03: Document supported and unsupported CLI parity surfaces for the slice
+- [x] 06-01-PLAN.md — Implement the `--version` Rust CLI slice on macOS
+- [x] 06-02-PLAN.md — Route the preferred launcher invocation to the Rust-backed `--version` slice
+- [x] 06-03-PLAN.md — Document supported and unsupported CLI parity surfaces for the slice
 
 ### Phase 7: Parity Visibility
 
@@ -186,6 +186,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 3. Rust Workspace | 3/3 | Complete | 2026-04-08 |
 | 4. Contract Inventory | 2/2 | Complete | 2026-04-08 |
 | 5. Entry Surface Architecture | 3/3 | Complete | 2026-04-08 |
-| 6. macOS CLI Parity Slice | 0/3 | Not started | - |
+| 6. macOS CLI Parity Slice | 3/3 | Complete | 2026-04-08 |
 | 7. Parity Visibility | 0/2 | Not started | - |
 | 8. Differential Parity Harness | 0/3 | Not started | - |

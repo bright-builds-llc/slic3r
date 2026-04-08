@@ -5,22 +5,22 @@
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 6: macOS CLI Parity Slice
+**Current focus:** Phase 7: Parity Visibility
 
 ## Current Position
 
-Phase: 6 of 8 (macOS CLI Parity Slice)
-Plan: 0 of 3 in current phase
+Phase: 7 of 8 (Parity Visibility)
+Plan: 0 of 2 in current phase
 Status: Ready to discuss
-Last activity: 2026-04-08 — Phase 5 verified complete and Phase 6 is now current
+Last activity: 2026-04-08 — Phase 6 verified complete and Phase 7 is now current
 
-Progress: [██████░░░░] 62%
+Progress: [████████░░] 75%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 14
+- Total plans completed: 17
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -33,6 +33,7 @@ Progress: [██████░░░░] 62%
 | 3 | 3 | 3 min | 1 min |
 | 4 | 2 | 2 min | 1 min |
 | 5 | 3 | 3 min | 1 min |
+| 6 | 3 | 3 min | 1 min |
 
 **Recent Trend:**
 
@@ -62,6 +63,8 @@ Recent decisions affecting current work:
 - Phase 4: `docs/port/migration-guidance.md` now defines launcher replacement rules, the parity evidence ladder, and the future fixture protocol
 - Phase 5: `packages/slic3r-rust/crates/slic3r_contracts` is now the contract-oriented launcher crate
 - Phase 5: `packages/launcher` is now a real package boundary that points at the Rust CLI scaffold
+- Phase 6: `bazel run //packages/launcher:slic3r -- --version` is now the preferred Rust-backed macOS CLI invocation for the supported slice
+- Phase 6: broader CLI behavior remains explicitly unsupported in the Rust launcher
 
 ### Pending Todos
 
@@ -73,6 +76,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08 11:20
-Stopped at: Phase 5 completed and Phase 6 is ready for discussion
+Last session: 2026-04-08 11:23
+Stopped at: Phase 6 completed and Phase 7 is ready for discussion
 Resume file: None

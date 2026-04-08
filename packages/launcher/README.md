@@ -13,7 +13,9 @@ entrypoint path.
 ## Current State
 
 - Phase 5 replaces the empty placeholder with a real package boundary.
-- The package currently points at the Rust CLI scaffold under
+- The package currently points at the Rust CLI under
   `packages/slic3r-rust`.
-- No user-facing CLI workflow is supported by the Rust launcher yet. That lands
-  in Phase 6.
+- Phase 6 makes `bazel run //packages/launcher:slic3r -- --version` the first
+  supported Rust-backed macOS CLI workflow.
+- All other CLI behavior remains legacy-owned until later phases expand the
+  supported slice.

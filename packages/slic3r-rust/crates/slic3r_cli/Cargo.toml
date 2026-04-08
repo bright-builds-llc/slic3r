@@ -5,12 +5,16 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 
+[lib]
+path = "src/lib.rs"
+
 [[bin]]
 name = "slic3r_cli"
 path = "src/main.rs"
 
 [dependencies]
 slic3r_contracts = { path = "../slic3r_contracts" }
+slic3r_core = { path = "../slic3r_core" }
 
 [lints]
 workspace = true
