@@ -16,8 +16,10 @@ archname="$(/usr/bin/perl -MConfig -e 'print $Config{archname}')"
 cd "${package_dir}"
 
 /usr/bin/prove \
-  -Ilib \
-  -Ilocal-lib/lib/perl5 \
-  -I"local-lib/lib/perl5/${archname}" \
+  -I"${package_dir}/lib" \
+  -I"${package_dir}/local-lib/lib/perl5" \
+  -I"${package_dir}/local-lib/lib/perl5/${archname}" \
+  -I"${package_dir}/xs/blib/lib" \
+  -I"${package_dir}/xs/blib/arch" \
   t/angles.t \
   t/clipper.t

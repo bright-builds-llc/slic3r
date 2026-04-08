@@ -107,4 +107,6 @@ export BOOST_LIBRARYPATH="${resolved_boost_lib}"
   -I"../local-lib/lib/perl5/$(/usr/bin/perl -MConfig -e 'print $Config{archname}')" \
   Build.PL
 
+rm -f buildtmp/XS.c buildtmp/XS.o
+
 ./Build

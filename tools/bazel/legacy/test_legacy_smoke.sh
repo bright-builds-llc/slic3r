@@ -16,7 +16,9 @@ archname="$(/usr/bin/perl -MConfig -e 'print $Config{archname}')"
 cd "${package_dir}"
 
 /usr/bin/perl \
-  -Ilocal-lib/lib/perl5 \
-  -I"local-lib/lib/perl5/${archname}" \
-  -Ilib \
+  -I"${package_dir}/local-lib/lib/perl5" \
+  -I"${package_dir}/local-lib/lib/perl5/${archname}" \
+  -I"${package_dir}/xs/blib/lib" \
+  -I"${package_dir}/xs/blib/arch" \
+  -I"${package_dir}/lib" \
   slic3r.pl --help >/dev/null
