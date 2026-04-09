@@ -91,4 +91,9 @@ sla_stdout="$("${rust_launcher}" --sla --output "${sla_output}" "${temp_root}/mo
 assert_stdout "${sla_stdout}" "Exported SLA SVG to ${sla_output}" "sla-svg"
 compare_file "${sla_output}" "${fixture_root}/expected-sla-svg.txt"
 
+sla_alias_output="${temp_root}/alias.svg"
+sla_alias_stdout="$("${rust_launcher}" --export-sla-svg --output "${sla_alias_output}" "${temp_root}/model.stl")"
+assert_stdout "${sla_alias_stdout}" "Exported SLA SVG to ${sla_alias_output}" "sla-svg-alias"
+compare_file "${sla_alias_output}" "${fixture_root}/expected-sla-svg.txt"
+
 printf 'verified export.workflows fixtures\n'

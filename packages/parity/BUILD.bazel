@@ -87,11 +87,17 @@ sh_binary(
         "//packages/parity-fixtures:transform_workflows_bundle",
         "//packages/parity-fixtures:transform_workflows_model_stl",
         "//packages/parity-fixtures:transform_workflows_model_obj",
+        "//packages/parity-fixtures:transform_workflows_model_amf",
+        "//packages/parity-fixtures:transform_workflows_model_3mf",
+        "//packages/parity-fixtures:transform_workflows_model_xml",
     ],
     args = [
         "$(location //packages/launcher:slic3r)",
         "$(location //packages/parity-fixtures:transform_workflows_model_stl)",
         "$(location //packages/parity-fixtures:transform_workflows_model_obj)",
+        "$(location //packages/parity-fixtures:transform_workflows_model_amf)",
+        "$(location //packages/parity-fixtures:transform_workflows_model_3mf)",
+        "$(location //packages/parity-fixtures:transform_workflows_model_xml)",
     ],
 )
 

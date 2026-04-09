@@ -19,3 +19,4 @@ These fixtures cover the bounded Phase 12 export slice.
 - `--export-3mf`
 - `--export-svg`
 - `--sla`
+- `--export-sla-svg`

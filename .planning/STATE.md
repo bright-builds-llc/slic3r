@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: roadmap updated with gap closure phases last_updated: "2026-04-09T06:59:41Z" last_activity: 2026-04-09 progress: total_phases: 5 completed_phases: 3 total_plans: 12 completed_plans: 8 percent: 60
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: phase 15 complete last_updated: "2026-04-09T07:43:35Z" last_activity: 2026-04-09 progress: total_phases: 5 completed_phases: 4 total_plans: 12 completed_plans: 10 percent: 80
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 15: Fixture Coverage Tightening
+**Current focus:** Phase 16: Audit Metadata Hygiene
 
 ## Current Position
 
-Phase: 15 of 16 (Fixture Coverage Tightening)
+Phase: 16 of 16 (Audit Metadata Hygiene)
 Plan: 0 of 2 in current phase
 Status: Ready to discuss
-Last activity: 2026-04-09 — Added gap closure phases 15-16 from milestone audit
+Last activity: 2026-04-09 — Phase 15 Fixture Coverage Tightening completed
 
-Progress: [██████░░░░] 60%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
@@ -81,7 +81,7 @@ Recent decisions affecting current work:
 - Phase 13: repair and split now preserve legacy-shaped `_fixed.obj` and numbered `*.stl_01.stl` filenames in the bounded Rust-backed path
 - Phase 14: `bazel run //packages/parity:export_workflows_parity` now verifies the scoped export workflow slice
 - Phase 14: `bazel run //packages/parity:transform_workflows_parity` now verifies the scoped transform/info slice
-- Gap planning: Phase 15 will tighten fixture coverage for the advertised verified export and transform slice
+- Phase 15: fixture coverage now includes the explicit `--export-sla-svg` alias and the full documented `--info` input matrix
 - Gap planning: Phase 16 will restore stronger requirement-completion metadata for milestone audits
 
 ### Pending Todos
@@ -94,6 +94,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-09 06:59
-Stopped at: Gap closure phases planned, Phase 15 ready to discuss
+Last session: 2026-04-09 07:43
+Stopped at: Phase 15 complete, Phase 16 ready to discuss
 Resume file: None

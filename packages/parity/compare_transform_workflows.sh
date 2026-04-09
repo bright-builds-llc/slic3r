@@ -9,8 +9,11 @@ fi
 rust_launcher="${1}"
 model_stl="${2}"
 model_obj="${3}"
+model_amf="${4}"
+model_three_mf="${5}"
+model_xml="${6}"
 
-for path_var in model_stl model_obj; do
+for path_var in model_stl model_obj model_amf model_three_mf model_xml; do
 	value="${!path_var}"
 	if [[ "${value}" != /* ]]; then
 		printf -v "${path_var}" '%s/%s' "${repo_root}" "${value}"
@@ -27,6 +30,9 @@ temp_root="$(mktemp -d /tmp/slic3r-transform-workflows.XXXXXX)"
 trap 'rm -rf "${temp_root}"' EXIT
 cp "${model_stl}" "${temp_root}/model.stl"
 cp "${model_obj}" "${temp_root}/model.obj"
+cp "${model_amf}" "${temp_root}/model.amf"
+cp "${model_three_mf}" "${temp_root}/model.3mf"
+cp "${model_xml}" "${temp_root}/model.xml"
 
 compare_file() {
 	local actual_file="${1}"
@@ -56,7 +62,19 @@ assert_stdout() {
 }
 
 info_stdout="$("${rust_launcher}" --info "${temp_root}/model.obj")"
-assert_stdout "${info_stdout}" "$(cat "${fixture_root}/expected-info.txt")" "info"
+assert_stdout "${info_stdout}" "$(cat "${fixture_root}/expected-info-obj.txt")" "info-obj"
+
+info_stl_stdout="$("${rust_launcher}" --info "${temp_root}/model.stl")"
+assert_stdout "${info_stl_stdout}" "$(cat "${fixture_root}/expected-info-stl.txt")" "info-stl"
+
+info_amf_stdout="$("${rust_launcher}" --info "${temp_root}/model.amf")"
+assert_stdout "${info_amf_stdout}" "$(cat "${fixture_root}/expected-info-amf.txt")" "info-amf"
+
+info_three_mf_stdout="$("${rust_launcher}" --info "${temp_root}/model.3mf")"
+assert_stdout "${info_three_mf_stdout}" "$(cat "${fixture_root}/expected-info-3mf.txt")" "info-3mf"
+
+info_xml_stdout="$("${rust_launcher}" --info "${temp_root}/model.xml")"
+assert_stdout "${info_xml_stdout}" "$(cat "${fixture_root}/expected-info-xml.txt")" "info-xml"
 
 repair_stdout="$("${rust_launcher}" --repair "${temp_root}/model.stl")"
 assert_stdout "${repair_stdout}" "" "repair"

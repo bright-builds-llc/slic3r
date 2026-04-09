@@ -12,6 +12,11 @@ These fixtures cover the bounded Phase 13 transform and info slice.
 
 ## Covered Scenarios
 
-- `--info`
+- `--info` for:
+  - `stl`
+  - `obj`
+  - `amf`
+  - `3mf`
+  - `xml`
 - `--repair`
 - `--split`

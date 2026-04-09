@@ -108,8 +108,8 @@ coverage and the broader supported `--info` input matrix.
 
 Plans:
 
-- [ ] 15-01: Expand the export and transform fixture corpora for the remaining supported alias and input cases
-- [ ] 15-02: Update parity docs and status notes so the verified slice matches the fixture corpus exactly
+- [x] 15-01: Expand the export and transform fixture corpora for the remaining supported alias and input cases
+- [x] 15-02: Update parity docs and status notes so the verified slice matches the fixture corpus exactly
 
 ### Phase 16: Audit Metadata Hygiene
 
@@ -145,5 +145,5 @@ Phases execute in numeric order: 12 → 13 → 14 → 15 → 16
 | 12. Export Workflow Slice | v1.2 | 3/3 | Complete | 2026-04-08 |
 | 13. Transform and Info Slice | v1.2 | 3/3 | Complete | 2026-04-09 |
 | 14. Export and Transform Fixture Expansion | v1.2 | 2/2 | Complete | 2026-04-09 |
-| 15. Fixture Coverage Tightening | v1.2 | 0/2 | Not started | - |
+| 15. Fixture Coverage Tightening | v1.2 | 2/2 | Complete | 2026-04-09 |
 | 16. Audit Metadata Hygiene | v1.2 | 0/2 | Not started | - |

@@ -1,0 +1,4 @@
+File: model.xml
+Format: XML
+Size bytes: 57
+Rust slice: transform_info

@@ -27,7 +27,14 @@ exports_files([
     "transform-workflows/README.md",
     "transform-workflows/model.stl",
     "transform-workflows/model.obj",
-    "transform-workflows/expected-info.txt",
+    "transform-workflows/model.amf",
+    "transform-workflows/model.3mf",
+    "transform-workflows/model.xml",
+    "transform-workflows/expected-info-obj.txt",
+    "transform-workflows/expected-info-stl.txt",
+    "transform-workflows/expected-info-amf.txt",
+    "transform-workflows/expected-info-3mf.txt",
+    "transform-workflows/expected-info-xml.txt",
     "transform-workflows/expected-repair.obj",
     "transform-workflows/expected-split-stdout.txt",
     "transform-workflows/expected-split-01.stl",
@@ -108,13 +115,35 @@ alias(
     actual = "transform-workflows/model.obj",
 )
 
+alias(
+    name = "transform_workflows_model_amf",
+    actual = "transform-workflows/model.amf",
+)
+
+alias(
+    name = "transform_workflows_model_3mf",
+    actual = "transform-workflows/model.3mf",
+)
+
+alias(
+    name = "transform_workflows_model_xml",
+    actual = "transform-workflows/model.xml",
+)
+
 filegroup(
     name = "transform_workflows_bundle",
     srcs = [
         "transform-workflows/README.md",
         "transform-workflows/model.stl",
         "transform-workflows/model.obj",
-        "transform-workflows/expected-info.txt",
+        "transform-workflows/model.amf",
+        "transform-workflows/model.3mf",
+        "transform-workflows/model.xml",
+        "transform-workflows/expected-info-obj.txt",
+        "transform-workflows/expected-info-stl.txt",
+        "transform-workflows/expected-info-amf.txt",
+        "transform-workflows/expected-info-3mf.txt",
+        "transform-workflows/expected-info-xml.txt",
         "transform-workflows/expected-repair.obj",
         "transform-workflows/expected-split-stdout.txt",
         "transform-workflows/expected-split-01.stl",
@@ -150,7 +179,14 @@ filegroup(
         "transform-workflows/README.md",
         "transform-workflows/model.stl",
         "transform-workflows/model.obj",
-        "transform-workflows/expected-info.txt",
+        "transform-workflows/model.amf",
+        "transform-workflows/model.3mf",
+        "transform-workflows/model.xml",
+        "transform-workflows/expected-info-obj.txt",
+        "transform-workflows/expected-info-stl.txt",
+        "transform-workflows/expected-info-amf.txt",
+        "transform-workflows/expected-info-3mf.txt",
+        "transform-workflows/expected-info-xml.txt",
         "transform-workflows/expected-repair.obj",
         "transform-workflows/expected-split-stdout.txt",
         "transform-workflows/expected-split-01.stl",

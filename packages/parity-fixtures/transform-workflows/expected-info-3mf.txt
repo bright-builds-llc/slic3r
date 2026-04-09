@@ -1,0 +1,4 @@
+File: model.3mf
+Format: 3MF
+Size bytes: 70
+Rust slice: transform_info

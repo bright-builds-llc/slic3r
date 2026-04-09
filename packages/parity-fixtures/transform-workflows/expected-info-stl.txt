@@ -1,0 +1,4 @@
+File: model.stl
+Format: STL
+Size bytes: 75
+Rust slice: transform_info

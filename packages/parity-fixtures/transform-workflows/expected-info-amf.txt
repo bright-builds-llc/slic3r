@@ -1,0 +1,4 @@
+File: model.amf
+Format: AMF
+Size bytes: 70
+Rust slice: transform_info
