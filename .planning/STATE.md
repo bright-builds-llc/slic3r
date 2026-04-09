@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: milestone_complete stopped_at: phase 16 complete last_updated: "2026-04-09T07:55:03Z" last_activity: 2026-04-09 progress: total_phases: 5 completed_phases: 5 total_plans: 12 completed_plans: 12 percent: 100
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: roadmap updated with gap closure phase 17 last_updated: "2026-04-09T08:18:08Z" last_activity: 2026-04-09 progress: total_phases: 6 completed_phases: 5 total_plans: 14 completed_plans: 12 percent: 86
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Milestone v1.2 audit
+**Current focus:** Phase 17: Control Plane Docs Parity Cleanup
 
 ## Current Position
 
-Phase: 16 of 16 (Audit Metadata Hygiene)
-Plan: 2 of 2 in current phase
-Status: Milestone complete, ready to audit
-Last activity: 2026-04-09 — Phase 16 Audit Metadata Hygiene completed
+Phase: 17 of 17 (Control Plane Docs Parity Cleanup)
+Plan: 0 of 2 in current phase
+Status: Ready to discuss
+Last activity: 2026-04-09 — Added gap closure phase 17 from milestone audit
 
-Progress: [██████████] 100%
+Progress: [█████████░] 86%
 
 ## Performance Metrics
 
@@ -83,6 +83,7 @@ Recent decisions affecting current work:
 - Phase 14: `bazel run //packages/parity:transform_workflows_parity` now verifies the scoped transform/info slice
 - Phase 15: fixture coverage now includes the explicit `--export-sla-svg` alias and the full documented `--info` input matrix
 - Phase 16: current milestone summaries now expose `requirements-completed` metadata and `AGENTS.md` documents the local convention
+- Gap planning: Phase 17 will align the migration overview docs with the verified export and transform parity surface
 
 ### Pending Todos
 
@@ -94,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-09 07:55
-Stopped at: v1.2 gap closure complete, ready to re-audit
+Last session: 2026-04-09 08:18
+Stopped at: Gap closure phase 17 planned, ready to discuss
 Resume file: None
