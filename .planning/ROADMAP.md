@@ -87,13 +87,63 @@ Plans:
 - [x] 14-01: Seed fixtures and comparison commands for supported export and transform slices
 - [x] 14-02: Publish expanded parity visibility and migration docs for the verified export/transform slices
 
+### Phase 15: Fixture Coverage Tightening
+
+**Goal**: Close the regression-proofing gaps between the advertised supported
+slice and the current shared fixture corpus.
+**Depends on**: Phase 14
+**Requirements**: Hardening only
+**Gap Closure**: Closes milestone tech debt around `--export-sla-svg` fixture
+coverage and the broader supported `--info` input matrix.
+**Success Criteria** (what must be TRUE):
+
+1. The shared export fixture corpus verifies both `--sla` and the explicit
+   `--export-sla-svg` alias.
+1. The shared transform fixture corpus verifies every documented supported
+   `--info` input family, or the docs are narrowed to the actual verified set.
+1. The parity fixture package and parity commands describe the full verified
+   export/transform slice without hidden gaps.
+
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 15-01: Expand the export and transform fixture corpora for the remaining supported alias and input cases
+- [ ] 15-02: Update parity docs and status notes so the verified slice matches the fixture corpus exactly
+
+### Phase 16: Audit Metadata Hygiene
+
+**Goal**: Restore a stronger milestone audit trail by carrying machine-readable
+requirement completion metadata alongside phase summaries.
+**Depends on**: Phase 15
+**Requirements**: Hardening only
+**Gap Closure**: Closes milestone tech debt around missing
+`requirements_completed` summary metadata.
+**Success Criteria** (what must be TRUE):
+
+1. The repo has a durable, machine-readable per-phase requirement-completion
+   metadata surface for the current milestone summaries.
+1. The milestone audit process can cross-check requirement completion from more
+   than REQUIREMENTS.md and VERIFICATION.md alone.
+1. The local planning docs explain the metadata convention clearly enough for
+   future phases to keep the audit trail consistent.
+
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 16-01: Define and backfill the local requirement-completion metadata surface for current phase summaries
+- [ ] 16-02: Update the local audit/planning guidance so future phases preserve that metadata
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 12 → 13 → 14
+Phases execute in numeric order: 12 → 13 → 14 → 15 → 16
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 12. Export Workflow Slice | v1.2 | 3/3 | Complete | 2026-04-08 |
 | 13. Transform and Info Slice | v1.2 | 3/3 | Complete | 2026-04-09 |
 | 14. Export and Transform Fixture Expansion | v1.2 | 2/2 | Complete | 2026-04-09 |
+| 15. Fixture Coverage Tightening | v1.2 | 0/2 | Not started | - |
+| 16. Audit Metadata Hygiene | v1.2 | 0/2 | Not started | - |

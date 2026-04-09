@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: milestone_complete stopped_at: phase 14 complete last_updated: "2026-04-09T06:59:41Z" last_activity: 2026-04-09 progress: total_phases: 3 completed_phases: 3 total_plans: 8 completed_plans: 8 percent: 100
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: roadmap updated with gap closure phases last_updated: "2026-04-09T06:59:41Z" last_activity: 2026-04-09 progress: total_phases: 5 completed_phases: 3 total_plans: 12 completed_plans: 8 percent: 60
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Milestone v1.2 audit
+**Current focus:** Phase 15: Fixture Coverage Tightening
 
 ## Current Position
 
-Phase: 14 of 14 (Export and Transform Fixture Expansion)
-Plan: 2 of 2 in current phase
-Status: Milestone complete, ready to audit
-Last activity: 2026-04-09 — Phase 14 Export and Transform Fixture Expansion completed
+Phase: 15 of 16 (Fixture Coverage Tightening)
+Plan: 0 of 2 in current phase
+Status: Ready to discuss
+Last activity: 2026-04-09 — Added gap closure phases 15-16 from milestone audit
 
-Progress: [██████████] 100%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
@@ -81,6 +81,8 @@ Recent decisions affecting current work:
 - Phase 13: repair and split now preserve legacy-shaped `_fixed.obj` and numbered `*.stl_01.stl` filenames in the bounded Rust-backed path
 - Phase 14: `bazel run //packages/parity:export_workflows_parity` now verifies the scoped export workflow slice
 - Phase 14: `bazel run //packages/parity:transform_workflows_parity` now verifies the scoped transform/info slice
+- Gap planning: Phase 15 will tighten fixture coverage for the advertised verified export and transform slice
+- Gap planning: Phase 16 will restore stronger requirement-completion metadata for milestone audits
 
 ### Pending Todos
 
@@ -93,5 +95,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-09 06:59
-Stopped at: v1.2 milestone complete, ready to audit
+Stopped at: Gap closure phases planned, Phase 15 ready to discuss
 Resume file: None
