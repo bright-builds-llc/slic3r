@@ -56,5 +56,7 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
   Phase 13 only claims transform/info routing, deterministic stdout, and
   legacy-shaped repair/split artifact naming. Geometry and output-content parity
   remain later work.
+- Phase 14 verifies the supported export and transform/info slices through the
+  parity package fixture commands.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).

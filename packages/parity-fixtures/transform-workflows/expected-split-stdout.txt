@@ -1,0 +1,2 @@
+Writing to model.stl_01.stl
+Writing to model.stl_02.stl

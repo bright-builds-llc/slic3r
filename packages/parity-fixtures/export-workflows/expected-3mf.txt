@@ -1,0 +1,1 @@
+<model generated_by="rust_cli" input="model.stl"><resources /></model>

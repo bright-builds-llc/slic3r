@@ -65,6 +65,36 @@ sh_binary(
     ],
 )
 
+sh_binary(
+    name = "export_workflows_parity",
+    srcs = ["compare_export_workflows.sh"],
+    data = [
+        "//packages/launcher:slic3r",
+        "//packages/parity-fixtures:export_workflows_bundle",
+        "//packages/parity-fixtures:export_workflows_model",
+    ],
+    args = [
+        "$(location //packages/launcher:slic3r)",
+        "$(location //packages/parity-fixtures:export_workflows_model)",
+    ],
+)
+
+sh_binary(
+    name = "transform_workflows_parity",
+    srcs = ["compare_transform_workflows.sh"],
+    data = [
+        "//packages/launcher:slic3r",
+        "//packages/parity-fixtures:transform_workflows_bundle",
+        "//packages/parity-fixtures:transform_workflows_model_stl",
+        "//packages/parity-fixtures:transform_workflows_model_obj",
+    ],
+    args = [
+        "$(location //packages/launcher:slic3r)",
+        "$(location //packages/parity-fixtures:transform_workflows_model_stl)",
+        "$(location //packages/parity-fixtures:transform_workflows_model_obj)",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [

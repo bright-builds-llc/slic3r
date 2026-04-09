@@ -11,6 +11,10 @@
   comparison for the supported `--help` slice.
 - `bazel run //packages/parity:cli_config_persistence_parity` runs the shared
   fixture comparison for the scoped config persistence slice.
+- `bazel run //packages/parity:export_workflows_parity` runs the shared fixture
+  comparison for the scoped export workflows.
+- `bazel run //packages/parity:transform_workflows_parity` runs the shared
+  fixture comparison for the scoped transform/info workflows.
 - `status.tsv` is the checked-in data source for that command.
 
 ## Scope

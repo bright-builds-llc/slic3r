@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: phase 13 complete last_updated: "2026-04-09T06:45:37Z" last_activity: 2026-04-09 progress: total_phases: 3 completed_phases: 2 total_plans: 8 completed_plans: 6 percent: 66
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: milestone_complete stopped_at: phase 14 complete last_updated: "2026-04-09T06:59:41Z" last_activity: 2026-04-09 progress: total_phases: 3 completed_phases: 3 total_plans: 8 completed_plans: 8 percent: 100
 
 # Project State
 
@@ -9,22 +9,22 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 14: Export and Transform Fixture Expansion
+**Current focus:** Milestone v1.2 audit
 
 ## Current Position
 
 Phase: 14 of 14 (Export and Transform Fixture Expansion)
-Plan: 0 of 2 in current phase
-Status: Ready to discuss
-Last activity: 2026-04-09 — Phase 13 Transform and Info Slice completed
+Plan: 2 of 2 in current phase
+Status: Milestone complete, ready to audit
+Last activity: 2026-04-09 — Phase 14 Export and Transform Fixture Expansion completed
 
-Progress: [███████░░░] 66%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 28
+- Total plans completed: 30
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -79,6 +79,8 @@ Recent decisions affecting current work:
 - Phase 12: scoped explicit `--output` behavior now works through the preferred Rust-backed launcher path for supported exports
 - Phase 13: `bazel run //packages/launcher:slic3r` now owns the scoped `--info`, `--repair`, and `--split` slice
 - Phase 13: repair and split now preserve legacy-shaped `_fixed.obj` and numbered `*.stl_01.stl` filenames in the bounded Rust-backed path
+- Phase 14: `bazel run //packages/parity:export_workflows_parity` now verifies the scoped export workflow slice
+- Phase 14: `bazel run //packages/parity:transform_workflows_parity` now verifies the scoped transform/info slice
 
 ### Pending Todos
 
@@ -90,6 +92,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-09 06:45
-Stopped at: Phase 13 complete, Phase 14 ready to discuss
+Last session: 2026-04-09 06:59
+Stopped at: v1.2 milestone complete, ready to audit
 Resume file: None

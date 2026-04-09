@@ -32,9 +32,9 @@ depend on.
 
 ### Export and Transform Parity Visibility
 
-- [ ] **PEX-01**: Maintainer can execute shared fixture comparisons for the
+- [x] **PEX-01**: Maintainer can execute shared fixture comparisons for the
   supported export and non-slicing transform slices.
-- [ ] **PEX-02**: Maintainer can see those supported export and transform slices
+- [x] **PEX-02**: Maintainer can see those supported export and transform slices
   reflected accurately in the parity status command and migration docs.
 
 ## v2 Requirements
@@ -78,8 +78,8 @@ depend on.
 | TRN-01 | Phase 13 | Complete |
 | TRN-02 | Phase 13 | Complete |
 | TRN-03 | Phase 13 | Complete |
-| PEX-01 | Phase 14 | Pending |
-| PEX-02 | Phase 14 | Pending |
+| PEX-01 | Phase 14 | Complete |
+| PEX-02 | Phase 14 | Complete |
 
 **Coverage:**
 

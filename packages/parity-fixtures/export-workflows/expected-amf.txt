@@ -1,0 +1,1 @@
+<amf generated_by="rust_cli" input="model.stl"><object id="1" /></amf>

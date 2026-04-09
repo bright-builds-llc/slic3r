@@ -7,8 +7,21 @@ Usage: slic3r [ OPTIONS ] [ file.stl ] [ file2.stl ] ...
     --help              Output this usage screen and exit
     --version           Output the version of Slic3r and exit
 
-  Planned next in the Rust-backed path:
-    (no additional planned top-level flags in this milestone)
+  Rust-backed export slices in this milestone:
+    --export-gcode, -g  Export G-code for a supported single input
+    --export-stl        Export STL for a supported single input
+    --export-obj        Export OBJ for a supported single input
+    --export-amf        Export AMF for a supported single input
+    --export-3mf        Export 3MF for a supported single input
+    --export-svg        Export layered SVG slices for a supported single input
+    --export-sla-svg    Export SLA SVG for a supported single input
+    --sla               Alias for the scoped SLA SVG export
+    --output <file>     Write the scoped export to the specified file path
+
+  Rust-backed transform/info slices in this milestone:
+    --info              Output scoped model information and exit
+    --repair            Repair supported STL inputs and write a new OBJ artifact
+    --split             Split supported STL inputs into numbered STL outputs
 
   Rust-backed config persistence in this milestone:
     --save <file>       Save configuration to the specified file
@@ -16,4 +29,4 @@ Usage: slic3r [ OPTIONS ] [ file.stl ] [ file2.stl ] ...
     --datadir <path>    Load and store settings at the given directory
 
   Still legacy-owned in this milestone:
-    export, transform, slicing, and packaging-visible behavior
+    merge/cut/layout, multi-input transforms, packaged launcher behavior, and geometry/content parity

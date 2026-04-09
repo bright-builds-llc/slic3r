@@ -1,0 +1,8 @@
+# generated_by=rust_cli
+# slice=export_workflow
+# input=model.stl
+o rust_cli_export
+v 0 0 0
+v 1 0 0
+v 0 1 0
+f 1 2 3

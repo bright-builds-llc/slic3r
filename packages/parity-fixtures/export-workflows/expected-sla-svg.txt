@@ -1,0 +1,1 @@
+<svg data-generated-by="rust_cli" data-slice="sla-svg" data-input="model.stl"></svg>

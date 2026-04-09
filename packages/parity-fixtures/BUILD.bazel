@@ -11,6 +11,27 @@ exports_files([
     "config-persistence/load-base.ini",
     "config-persistence/load-extra.ini",
     "config-persistence/expected-load.txt",
+    "export-workflows/README.md",
+    "export-workflows/model.stl",
+    "export-workflows/expected-gcode.txt",
+    "export-workflows/expected-stl.txt",
+    "export-workflows/expected-obj.txt",
+    "export-workflows/expected-amf.txt",
+    "export-workflows/expected-3mf.txt",
+    "export-workflows/expected-layer-0.svg",
+    "export-workflows/expected-layer-1.svg",
+    "export-workflows/expected-layer-2.svg",
+    "export-workflows/expected-layer-3.svg",
+    "export-workflows/expected-layer-4.svg",
+    "export-workflows/expected-sla-svg.txt",
+    "transform-workflows/README.md",
+    "transform-workflows/model.stl",
+    "transform-workflows/model.obj",
+    "transform-workflows/expected-info.txt",
+    "transform-workflows/expected-repair.obj",
+    "transform-workflows/expected-split-stdout.txt",
+    "transform-workflows/expected-split-01.stl",
+    "transform-workflows/expected-split-02.stl",
 ])
 
 alias(
@@ -53,6 +74,54 @@ alias(
     actual = "config-persistence/expected-load.txt",
 )
 
+alias(
+    name = "export_workflows_model",
+    actual = "export-workflows/model.stl",
+)
+
+filegroup(
+    name = "export_workflows_bundle",
+    srcs = [
+        "export-workflows/README.md",
+        "export-workflows/model.stl",
+        "export-workflows/expected-gcode.txt",
+        "export-workflows/expected-stl.txt",
+        "export-workflows/expected-obj.txt",
+        "export-workflows/expected-amf.txt",
+        "export-workflows/expected-3mf.txt",
+        "export-workflows/expected-layer-0.svg",
+        "export-workflows/expected-layer-1.svg",
+        "export-workflows/expected-layer-2.svg",
+        "export-workflows/expected-layer-3.svg",
+        "export-workflows/expected-layer-4.svg",
+        "export-workflows/expected-sla-svg.txt",
+    ],
+)
+
+alias(
+    name = "transform_workflows_model_stl",
+    actual = "transform-workflows/model.stl",
+)
+
+alias(
+    name = "transform_workflows_model_obj",
+    actual = "transform-workflows/model.obj",
+)
+
+filegroup(
+    name = "transform_workflows_bundle",
+    srcs = [
+        "transform-workflows/README.md",
+        "transform-workflows/model.stl",
+        "transform-workflows/model.obj",
+        "transform-workflows/expected-info.txt",
+        "transform-workflows/expected-repair.obj",
+        "transform-workflows/expected-split-stdout.txt",
+        "transform-workflows/expected-split-01.stl",
+        "transform-workflows/expected-split-02.stl",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
@@ -65,5 +134,26 @@ filegroup(
         "config-persistence/load-base.ini",
         "config-persistence/load-extra.ini",
         "config-persistence/expected-load.txt",
+        "export-workflows/README.md",
+        "export-workflows/model.stl",
+        "export-workflows/expected-gcode.txt",
+        "export-workflows/expected-stl.txt",
+        "export-workflows/expected-obj.txt",
+        "export-workflows/expected-amf.txt",
+        "export-workflows/expected-3mf.txt",
+        "export-workflows/expected-layer-0.svg",
+        "export-workflows/expected-layer-1.svg",
+        "export-workflows/expected-layer-2.svg",
+        "export-workflows/expected-layer-3.svg",
+        "export-workflows/expected-layer-4.svg",
+        "export-workflows/expected-sla-svg.txt",
+        "transform-workflows/README.md",
+        "transform-workflows/model.stl",
+        "transform-workflows/model.obj",
+        "transform-workflows/expected-info.txt",
+        "transform-workflows/expected-repair.obj",
+        "transform-workflows/expected-split-stdout.txt",
+        "transform-workflows/expected-split-01.stl",
+        "transform-workflows/expected-split-02.stl",
     ],
 )

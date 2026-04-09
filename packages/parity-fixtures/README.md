@@ -17,3 +17,5 @@ corpora.
 - Phase 8 seeds the first shared CLI fixture corpus for `--version`.
 - Phase 11 expands the shared fixture corpus to cover `--help` and scoped
   config persistence behavior.
+- Phase 14 expands the shared fixture corpus to cover the scoped export
+  workflows and the scoped transform/info workflows.

@@ -84,8 +84,8 @@ fixtures and publish their parity state cleanly.
 
 Plans:
 
-- [ ] 14-01: Seed fixtures and comparison commands for supported export and transform slices
-- [ ] 14-02: Publish expanded parity visibility and migration docs for the verified export/transform slices
+- [x] 14-01: Seed fixtures and comparison commands for supported export and transform slices
+- [x] 14-02: Publish expanded parity visibility and migration docs for the verified export/transform slices
 
 ## Progress
 
@@ -96,4 +96,4 @@ Phases execute in numeric order: 12 → 13 → 14
 |-------|-----------|----------------|--------|-----------|
 | 12. Export Workflow Slice | v1.2 | 3/3 | Complete | 2026-04-08 |
 | 13. Transform and Info Slice | v1.2 | 3/3 | Complete | 2026-04-09 |
-| 14. Export and Transform Fixture Expansion | v1.2 | 0/2 | Not started | - |
+| 14. Export and Transform Fixture Expansion | v1.2 | 2/2 | Complete | 2026-04-09 |

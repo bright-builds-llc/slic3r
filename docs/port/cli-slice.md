@@ -100,5 +100,7 @@ Unsupported behavior remains legacy-owned until later phases expand the slice.
 - Phase 11 verifies help through `bazel run //packages/parity:cli_help_parity`.
 - Phase 11 verifies scoped config persistence through
   `bazel run //packages/parity:cli_config_persistence_parity`.
-- Phase 14 is responsible for fixture-verifying the supported export and
-  transform/info slices.
+- Phase 14 verifies exports through
+  `bazel run //packages/parity:export_workflows_parity`.
+- Phase 14 verifies transform/info through
+  `bazel run //packages/parity:transform_workflows_parity`.

@@ -1,0 +1,4 @@
+File: model.obj
+Format: OBJ
+Size bytes: 14
+Rust slice: transform_info

@@ -1,0 +1,6 @@
+; generated_by=rust_cli
+; slice=export_workflow
+; format=gcode
+; input=model.stl
+G21
+M2
