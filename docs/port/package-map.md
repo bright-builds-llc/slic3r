@@ -17,8 +17,8 @@
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
 | `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, and CLI crate boundaries plus a Bazel-native verification surface |
 | `packages/launcher` | Entry-point package boundary that currently points at the Rust CLI and reserves future shell-shim responsibility |
-| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for supported CLI slices |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the supported help/version/config slices |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, export, and transform slices |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, export, and transform slices |
 
 ## Notes
 
@@ -32,3 +32,5 @@
 - Phase 7 makes `packages/parity` and `packages/parity-fixtures` real package boundaries with a status command and fixture workflow rules.
 - Phase 8 seeds the first shared fixture corpus and comparison command for `cli.version`.
 - Phase 11 expands that corpus and comparison surface to the supported help and config persistence slices.
+- Phase 14 adds verified fixture comparison commands and corpora for the scoped export and transform slices.
+- Phase 15 tightens those fixtures so the explicit `--export-sla-svg` alias and the full documented `--info` input matrix are covered.

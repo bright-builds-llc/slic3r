@@ -156,8 +156,8 @@ transform parity surface.
 
 Plans:
 
-- [ ] 17-01: Update the control-plane README parity visibility section for the verified export and transform slices
-- [ ] 17-02: Refresh the package map and overview notes so the parity package descriptions match the current fixture corpus
+- [x] 17-01: Update the control-plane README parity visibility section for the verified export and transform slices
+- [x] 17-02: Refresh the package map and overview notes so the parity package descriptions match the current fixture corpus
 
 ## Progress
 
@@ -171,4 +171,4 @@ Phases execute in numeric order: 12 → 13 → 14 → 15 → 16 → 17
 | 14. Export and Transform Fixture Expansion | v1.2 | 2/2 | Complete | 2026-04-09 |
 | 15. Fixture Coverage Tightening | v1.2 | 2/2 | Complete | 2026-04-09 |
 | 16. Audit Metadata Hygiene | v1.2 | 2/2 | Complete | 2026-04-09 |
-| 17. Control Plane Docs Parity Cleanup | v1.2 | 0/2 | Not started | - |
+| 17. Control Plane Docs Parity Cleanup | v1.2 | 2/2 | Complete | 2026-04-09 |

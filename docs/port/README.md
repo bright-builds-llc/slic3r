@@ -91,6 +91,15 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   comparison command for the supported `--help` slice
 - `bazel run //packages/parity:cli_config_persistence_parity` is the shared
   fixture comparison command for the scoped config persistence slice
+- `bazel run //packages/parity:export_workflows_parity` is the shared fixture
+  comparison command for the verified scoped export workflows
+- `bazel run //packages/parity:transform_workflows_parity` is the shared
+  fixture comparison command for the verified scoped transform/info workflows
 - `packages/parity/status.tsv` is the checked-in status data source
-- `packages/parity-fixtures/README.md` now defines the package-local fixture
-  update rules ahead of the first seeded corpus
+- `packages/parity-fixtures/README.md` defines the package-local fixture update
+  rules, and the fixture package now contains seeded corpora for:
+  - `cli.version`
+  - `cli.help`
+  - `config.persistence`
+  - `export.workflows`
+  - `transform.workflows`
