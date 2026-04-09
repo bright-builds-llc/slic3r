@@ -132,8 +132,8 @@ requirement completion metadata alongside phase summaries.
 
 Plans:
 
-- [ ] 16-01: Define and backfill the local requirement-completion metadata surface for current phase summaries
-- [ ] 16-02: Update the local audit/planning guidance so future phases preserve that metadata
+- [x] 16-01: Define and backfill the local requirement-completion metadata surface for current phase summaries
+- [x] 16-02: Update the local audit/planning guidance so future phases preserve that metadata
 
 ## Progress
 
@@ -146,4 +146,4 @@ Phases execute in numeric order: 12 → 13 → 14 → 15 → 16
 | 13. Transform and Info Slice | v1.2 | 3/3 | Complete | 2026-04-09 |
 | 14. Export and Transform Fixture Expansion | v1.2 | 2/2 | Complete | 2026-04-09 |
 | 15. Fixture Coverage Tightening | v1.2 | 2/2 | Complete | 2026-04-09 |
-| 16. Audit Metadata Hygiene | v1.2 | 0/2 | Not started | - |
+| 16. Audit Metadata Hygiene | v1.2 | 2/2 | Complete | 2026-04-09 |

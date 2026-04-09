@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: phase 15 complete last_updated: "2026-04-09T07:43:35Z" last_activity: 2026-04-09 progress: total_phases: 5 completed_phases: 4 total_plans: 12 completed_plans: 10 percent: 80
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: milestone_complete stopped_at: phase 16 complete last_updated: "2026-04-09T07:55:03Z" last_activity: 2026-04-09 progress: total_phases: 5 completed_phases: 5 total_plans: 12 completed_plans: 12 percent: 100
 
 # Project State
 
@@ -9,22 +9,22 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 16: Audit Metadata Hygiene
+**Current focus:** Milestone v1.2 audit
 
 ## Current Position
 
 Phase: 16 of 16 (Audit Metadata Hygiene)
-Plan: 0 of 2 in current phase
-Status: Ready to discuss
-Last activity: 2026-04-09 — Phase 15 Fixture Coverage Tightening completed
+Plan: 2 of 2 in current phase
+Status: Milestone complete, ready to audit
+Last activity: 2026-04-09 — Phase 16 Audit Metadata Hygiene completed
 
-Progress: [████████░░] 80%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 30
+- Total plans completed: 32
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -82,7 +82,7 @@ Recent decisions affecting current work:
 - Phase 14: `bazel run //packages/parity:export_workflows_parity` now verifies the scoped export workflow slice
 - Phase 14: `bazel run //packages/parity:transform_workflows_parity` now verifies the scoped transform/info slice
 - Phase 15: fixture coverage now includes the explicit `--export-sla-svg` alias and the full documented `--info` input matrix
-- Gap planning: Phase 16 will restore stronger requirement-completion metadata for milestone audits
+- Phase 16: current milestone summaries now expose `requirements-completed` metadata and `AGENTS.md` documents the local convention
 
 ### Pending Todos
 
@@ -94,6 +94,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-09 07:43
-Stopped at: Phase 15 complete, Phase 16 ready to discuss
+Last session: 2026-04-09 07:55
+Stopped at: v1.2 gap closure complete, ready to re-audit
 Resume file: None
