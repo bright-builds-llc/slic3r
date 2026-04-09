@@ -22,5 +22,8 @@ entrypoint path.
 - Phase 10 adds the scoped config persistence slice.
 - Phase 12 adds the scoped Rust-backed export workflows for G-code, STL, OBJ,
   AMF, 3MF, layered SVG, and SLA SVG.
-- Transform, merge/cut/layout, output-content parity, and packaging-visible
-  behavior remain legacy-owned until later phases expand the supported slice.
+- Phase 13 adds the scoped Rust-backed `--info`, `--repair`, and `--split`
+  behaviors.
+- Merge/cut/layout, multi-input transforms, geometry/output-content parity, and
+  packaging-visible behavior remain legacy-owned until later phases expand the
+  supported slice.

@@ -1,4 +1,4 @@
-use slic3r_contracts::{ExportKind, LauncherCommand, parse_invocation};
+use slic3r_contracts::{ExportKind, LauncherCommand, TransformKind, parse_invocation};
 
 #[test]
 fn parses_help_invocation() {
@@ -72,6 +72,44 @@ fn parses_export_sla_invocation() {
 }
 
 #[test]
+fn parses_info_invocation() {
+    // Arrange
+    let args = vec!["--info".to_owned(), "box.obj".to_owned()];
+
+    // Act
+    let invocation = parse_invocation(&args);
+
+    // Assert
+    assert_eq!(
+        invocation.command,
+        LauncherCommand::Transform {
+            kind: TransformKind::Info,
+            input_path: "box.obj".to_owned(),
+        }
+    );
+    assert_eq!(invocation.raw_args, args);
+}
+
+#[test]
+fn parses_repair_invocation() {
+    // Arrange
+    let args = vec!["--repair".to_owned(), "box.stl".to_owned()];
+
+    // Act
+    let invocation = parse_invocation(&args);
+
+    // Assert
+    assert_eq!(
+        invocation.command,
+        LauncherCommand::Transform {
+            kind: TransformKind::Repair,
+            input_path: "box.stl".to_owned(),
+        }
+    );
+    assert_eq!(invocation.raw_args, args);
+}
+
+#[test]
 fn parses_save_config_invocation() {
     // Arrange
     let args = vec!["--save".to_owned(), "cfg.ini".to_owned()];
@@ -112,6 +150,24 @@ fn parses_load_config_invocation_with_datadir() {
             maybe_datadir: Some("profiles".to_owned()),
         }
     );
+}
+
+#[test]
+fn marks_transform_with_output_as_unsupported() {
+    // Arrange
+    let args = vec![
+        "--split".to_owned(),
+        "--output".to_owned(),
+        "out.stl".to_owned(),
+        "box.stl".to_owned(),
+    ];
+
+    // Act
+    let invocation = parse_invocation(&args);
+
+    // Assert
+    assert_eq!(invocation.command, LauncherCommand::Unsupported);
+    assert_eq!(invocation.raw_args, args);
 }
 
 #[test]

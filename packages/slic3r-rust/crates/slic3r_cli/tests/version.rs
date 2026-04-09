@@ -12,13 +12,17 @@ fn temp_path(name: &str) -> PathBuf {
 }
 
 fn write_model_file(dir: &Path, name: &str) -> PathBuf {
-    let model_path = dir.join(name);
-    fs::write(
-        &model_path,
+    write_input_file(
+        dir,
+        name,
         "solid rust_cli_input\n  facet normal 0 0 1\n  endfacet\nendsolid rust_cli_input\n",
     )
-    .expect("write model file");
-    model_path
+}
+
+fn write_input_file(dir: &Path, name: &str, contents: &str) -> PathBuf {
+    let input_path = dir.join(name);
+    fs::write(&input_path, contents).expect("write input file");
+    input_path
 }
 
 #[test]
@@ -74,7 +78,7 @@ fn keeps_other_cli_flows_out_of_scope() {
     assert_eq!(response.stdout, "");
     assert_eq!(
         response.stderr,
-        "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, and the scoped export flags only.\n",
+        "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, the scoped export flags, and the scoped transform/info flags only.\n",
     );
     assert_eq!(response.exit_code, 2);
 }
@@ -231,6 +235,81 @@ fn exports_sla_svg_to_explicit_output_path() {
     assert!(response.stdout.contains("SLA SVG"));
     assert_eq!(response.stderr, "");
     assert!(contents.contains("data-slice=\"sla-svg\""));
+
+    fs::remove_dir_all(&temp_dir).expect("remove temp dir");
+}
+
+#[test]
+fn prints_info_for_supported_model_input() {
+    // Arrange
+    let temp_dir = temp_path("info");
+    fs::create_dir_all(&temp_dir).expect("create temp dir");
+    let input_path = write_input_file(&temp_dir, "box.obj", "o box\nv 0 0 0\n");
+    let args = vec!["--info".to_owned(), input_path.display().to_string()];
+
+    // Act
+    let response = execute_args(&args);
+
+    // Assert
+    assert_eq!(response.exit_code, 0);
+    assert!(response.stdout.contains("File: box.obj"));
+    assert!(response.stdout.contains("Format: OBJ"));
+    assert!(response.stdout.contains("Rust slice: transform_info"));
+    assert_eq!(response.stderr, "");
+
+    fs::remove_dir_all(&temp_dir).expect("remove temp dir");
+}
+
+#[test]
+fn repairs_stl_to_fixed_obj_name() {
+    // Arrange
+    let temp_dir = temp_path("repair");
+    fs::create_dir_all(&temp_dir).expect("create temp dir");
+    let input_path = write_model_file(&temp_dir, "box.stl");
+    let output_path = temp_dir.join("box_fixed.obj");
+    let args = vec!["--repair".to_owned(), input_path.display().to_string()];
+
+    // Act
+    let response = execute_args(&args);
+    let contents = fs::read_to_string(&output_path).expect("read repaired obj");
+
+    // Assert
+    assert_eq!(response.exit_code, 0);
+    assert_eq!(response.stdout, "");
+    assert_eq!(response.stderr, "");
+    assert!(contents.contains("slice=transform_repair"));
+
+    fs::remove_dir_all(&temp_dir).expect("remove temp dir");
+}
+
+#[test]
+fn splits_stl_into_numbered_outputs() {
+    // Arrange
+    let temp_dir = temp_path("split");
+    fs::create_dir_all(&temp_dir).expect("create temp dir");
+    let input_path = write_model_file(&temp_dir, "box.stl");
+    let output_one = temp_dir.join("box.stl_01.stl");
+    let output_two = temp_dir.join("box.stl_02.stl");
+    let args = vec!["--split".to_owned(), input_path.display().to_string()];
+
+    // Act
+    let response = execute_args(&args);
+
+    // Assert
+    assert_eq!(response.exit_code, 0);
+    assert!(response.stdout.contains("Writing to box.stl_01.stl"));
+    assert!(response.stdout.contains("Writing to box.stl_02.stl"));
+    assert_eq!(response.stderr, "");
+    assert!(
+        fs::read_to_string(&output_one)
+            .expect("read split one")
+            .contains("solid")
+    );
+    assert!(
+        fs::read_to_string(&output_two)
+            .expect("read split two")
+            .contains("solid")
+    );
 
     fs::remove_dir_all(&temp_dir).expect("remove temp dir");
 }

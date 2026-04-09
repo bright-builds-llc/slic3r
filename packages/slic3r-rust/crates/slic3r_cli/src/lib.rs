@@ -2,6 +2,7 @@
 //! Launcher-facing Rust CLI behavior for the first supported migration slice.
 
 mod export;
+mod transform;
 
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -9,6 +10,7 @@ use std::path::{Path, PathBuf};
 use slic3r_contracts::{LauncherCommand, parse_invocation};
 
 use crate::export::export_model;
+use crate::transform::transform_model;
 
 /// Process response for a launcher invocation.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -32,6 +34,10 @@ fn execute_command(command: LauncherCommand) -> CliResponse {
     } = command
     {
         return export_model(kind, &input_path, maybe_output.as_deref());
+    }
+
+    if let LauncherCommand::Transform { kind, input_path } = command {
+        return transform_model(kind, &input_path);
     }
 
     if let LauncherCommand::SaveConfig {
@@ -68,7 +74,7 @@ fn execute_command(command: LauncherCommand) -> CliResponse {
 
     CliResponse {
         stdout: String::new(),
-        stderr: "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, and the scoped export flags only.\n".to_owned(),
+        stderr: "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, the scoped export flags, and the scoped transform/info flags only.\n".to_owned(),
         exit_code: 2,
     }
 }
@@ -95,10 +101,10 @@ fn help_text() -> &'static str {
         "    --sla               Alias for the scoped SLA SVG export\n",
         "    --output <file>     Write the scoped export to the specified file path\n",
         "\n",
-        "  Planned next in the Rust-backed path:\n",
+        "  Rust-backed transform/info slices in this milestone:\n",
         "    --info              Output scoped model information and exit\n",
-        "    --repair            Repair supported STL inputs and write a new artifact\n",
-        "    --split             Split supported STL inputs into numbered outputs\n",
+        "    --repair            Repair supported STL inputs and write a new OBJ artifact\n",
+        "    --split             Split supported STL inputs into numbered STL outputs\n",
         "\n",
         "  Rust-backed config persistence in this milestone:\n",
         "    --save <file>       Save configuration to the specified file\n",
@@ -106,7 +112,7 @@ fn help_text() -> &'static str {
         "    --datadir <path>    Load and store settings at the given directory\n",
         "\n",
         "  Still legacy-owned in this milestone:\n",
-        "    transform, merge/cut/layout, packaged launcher behavior, and output-content parity\n",
+        "    merge/cut/layout, multi-input transforms, packaged launcher behavior, and geometry/content parity\n",
     )
 }
 

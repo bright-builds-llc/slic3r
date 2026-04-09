@@ -16,6 +16,9 @@ This document defines the first supported Rust-backed macOS CLI workflow.
   - `bazel run //packages/launcher:slic3r -- --export-3mf model.stl`
   - `bazel run //packages/launcher:slic3r -- --export-svg model.stl`
   - `bazel run //packages/launcher:slic3r -- --sla model.stl`
+  - `bazel run //packages/launcher:slic3r -- --info model.obj`
+  - `bazel run //packages/launcher:slic3r -- --repair model.stl`
+  - `bazel run //packages/launcher:slic3r -- --split model.stl`
 - Supported arguments:
   - `--version`
   - `--help`
@@ -32,6 +35,9 @@ This document defines the first supported Rust-backed macOS CLI workflow.
   - `--export-sla-svg`
   - `--sla`
   - `--output`
+  - `--info`
+  - `--repair`
+  - `--split`
 - Current owner:
   - Rust implementation under `packages/slic3r-rust/crates/slic3r_cli`
 
@@ -51,11 +57,32 @@ This document defines the first supported Rust-backed macOS CLI workflow.
 - Phase 12 only claims Rust-backed export routing, file creation, and output
   naming. Output-content parity remains later work.
 
+## Transform and Info Scope
+
+- The supported transform/info slice is intentionally bounded to a single
+  input model.
+- `--info` currently supports the bounded model-input slice used in the
+  migration control plane:
+  - `stl`
+  - `obj`
+  - `amf`
+  - `3mf`
+  - `xml`
+- `--repair` and `--split` are currently STL-only, matching the retained CLI
+  restriction.
+- Repair and split preserve the current legacy-shaped filename rules:
+  - `box.stl` -> `box_fixed.obj`
+  - `box.stl` -> `box.stl_01.stl`, `box.stl_02.stl`, ...
+- Phase 13 only claims Rust-backed command routing, deterministic stdout, and
+  artifact creation for this bounded slice. Geometry/content parity remains
+  later work.
+
 ## Unsupported In This Slice
 
 - Any argument outside the supported set above
 - Multi-input export orchestration and merge-driven export flows
-- Direct migration of transform, merge/cut/layout, or packaging-visible launcher
+- Multi-input transform/info orchestration
+- Direct migration of merge/cut/cut-grid/layout or packaging-visible launcher
   behavior
 - Output-filename-format semantics and full output-content parity
 
@@ -67,9 +94,11 @@ Unsupported behavior remains legacy-owned until later phases expand the slice.
 - Phase 9 makes the `--help` slice Rust-backed.
 - Phase 10 makes the save/load/datadir config slice Rust-backed.
 - Phase 12 makes the scoped export slice Rust-backed.
+- Phase 13 makes the scoped info/repair/split slice Rust-backed.
 - Phase 8 verifies the slice through
   `bazel run //packages/parity:cli_version_parity`.
 - Phase 11 verifies help through `bazel run //packages/parity:cli_help_parity`.
 - Phase 11 verifies scoped config persistence through
   `bazel run //packages/parity:cli_config_persistence_parity`.
-- Phase 14 is responsible for fixture-verifying the supported export slice.
+- Phase 14 is responsible for fixture-verifying the supported export and
+  transform/info slices.

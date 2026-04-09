@@ -1,10 +1,11 @@
 # surface	status	evidence	notes
 cli.version	verified	//packages/parity:cli_version_parity	Shared fixture comparison proves the Rust-backed --version slice
 cli.help	verified	//packages/parity:cli_help_parity	Shared fixture comparison proves the Rust-backed help slice
-cli.other	legacy-only	packages/legacy-slic3r/slic3r.pl	Transform, merge/cut/layout, and broader packaged CLI behavior remain legacy-owned
+cli.other	legacy-only	packages/legacy-slic3r/slic3r.pl	Merge/cut/layout, multi-input transforms, and broader packaged CLI behavior remain legacy-owned
 export.workflows	rust-backed	packages/slic3r-rust/crates/slic3r_cli/src/lib.rs	Scoped single-input export workflows are Rust-backed for G-code, STL, OBJ, AMF, 3MF, layered SVG, and SLA SVG
+transform.workflows	rust-backed	packages/slic3r-rust/crates/slic3r_cli/src/transform.rs	Scoped single-input info, repair, and split workflows are Rust-backed with legacy-shaped repair and split filenames
 config	legacy-only	packages/legacy-slic3r/lib/Slic3r/Config.pm	Contract inventory remains the current source of truth
 config.persistence	verified	//packages/parity:cli_config_persistence_parity	Shared fixture comparison proves the scoped Rust-backed save/load/datadir slice
 file-formats	in progress	docs/port/cli-slice.md	Scoped export format families are Rust-backed; broader input and format parity remain legacy-owned
-generated-outputs	in progress	docs/port/cli-slice.md	Scoped output naming and artifact creation are Rust-backed; output-content parity is deferred
+generated-outputs	in progress	docs/port/cli-slice.md	Scoped export plus repair/split artifact naming are Rust-backed; geometry and output-content parity are deferred
 launcher-packaging	in progress	docs/port/entrypoint-architecture.md	Launcher package is real, but packaged parity is still deferred

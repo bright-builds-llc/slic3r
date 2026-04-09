@@ -23,11 +23,11 @@ depend on.
 
 ### Transform and Non-Slicing Actions
 
-- [ ] **TRN-01**: User can run `--info` through the preferred Rust-backed
+- [x] **TRN-01**: User can run `--info` through the preferred Rust-backed
   launcher path on macOS for supported model inputs.
-- [ ] **TRN-02**: User can run `--repair` through the preferred Rust-backed
+- [x] **TRN-02**: User can run `--repair` through the preferred Rust-backed
   launcher path on macOS for supported STL inputs.
-- [ ] **TRN-03**: User can run `--split` through the preferred Rust-backed
+- [x] **TRN-03**: User can run `--split` through the preferred Rust-backed
   launcher path on macOS for supported STL inputs.
 
 ### Export and Transform Parity Visibility
@@ -75,9 +75,9 @@ depend on.
 | EXP-02 | Phase 12 | Complete |
 | EXP-03 | Phase 12 | Complete |
 | EXP-04 | Phase 12 | Complete |
-| TRN-01 | Phase 13 | Pending |
-| TRN-02 | Phase 13 | Pending |
-| TRN-03 | Phase 13 | Pending |
+| TRN-01 | Phase 13 | Complete |
+| TRN-02 | Phase 13 | Complete |
+| TRN-03 | Phase 13 | Complete |
 | PEX-01 | Phase 14 | Pending |
 | PEX-02 | Phase 14 | Pending |
 

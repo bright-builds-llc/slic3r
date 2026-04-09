@@ -61,9 +61,9 @@ preferred launcher path on macOS.
 
 Plans:
 
-- [ ] 13-01: Model the scoped transform/info contracts in Rust launcher types
-- [ ] 13-02: Implement the Rust-backed info/repair/split behaviors on macOS
-- [ ] 13-03: Document the supported transform/info slice and the still-deferred merge/cut/layout actions
+- [x] 13-01: Model the scoped transform/info contracts in Rust launcher types
+- [x] 13-02: Implement the Rust-backed info/repair/split behaviors on macOS
+- [x] 13-03: Document the supported transform/info slice and the still-deferred merge/cut/layout actions
 
 ### Phase 14: Export and Transform Fixture Expansion
 
@@ -95,5 +95,5 @@ Phases execute in numeric order: 12 → 13 → 14
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 12. Export Workflow Slice | v1.2 | 3/3 | Complete | 2026-04-08 |
-| 13. Transform and Info Slice | v1.2 | 0/3 | Not started | - |
+| 13. Transform and Info Slice | v1.2 | 3/3 | Complete | 2026-04-09 |
 | 14. Export and Transform Fixture Expansion | v1.2 | 0/2 | Not started | - |

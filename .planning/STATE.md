@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: phase 12 complete last_updated: "2026-04-08T23:00:53Z" last_activity: 2026-04-08 progress: total_phases: 3 completed_phases: 1 total_plans: 8 completed_plans: 3 percent: 33
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: active stopped_at: phase 13 complete last_updated: "2026-04-09T06:45:37Z" last_activity: 2026-04-09 progress: total_phases: 3 completed_phases: 2 total_plans: 8 completed_plans: 6 percent: 66
 
 # Project State
 
@@ -9,22 +9,22 @@ ______________________________________________________________________
 See: .planning/PROJECT.md (updated 2026-04-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 13: Transform and Info Slice
+**Current focus:** Phase 14: Export and Transform Fixture Expansion
 
 ## Current Position
 
-Phase: 13 of 14 (Transform and Info Slice)
-Plan: 0 of 3 in current phase
+Phase: 14 of 14 (Export and Transform Fixture Expansion)
+Plan: 0 of 2 in current phase
 Status: Ready to discuss
-Last activity: 2026-04-08 — Phase 12 Export Workflow Slice completed
+Last activity: 2026-04-09 — Phase 13 Transform and Info Slice completed
 
-Progress: [███░░░░░░░] 33%
+Progress: [███████░░░] 66%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 25
+- Total plans completed: 28
 - Average duration: 1 min
 - Total execution time: 0.0 hours
 
@@ -77,6 +77,8 @@ Recent decisions affecting current work:
 - Phase 8: `cli.version` is now marked `verified` in the checked-in parity status source
 - Phase 12: `bazel run //packages/launcher:slic3r` now owns the scoped export workflow slice for G-code, STL, OBJ, AMF, 3MF, layered SVG, and SLA SVG
 - Phase 12: scoped explicit `--output` behavior now works through the preferred Rust-backed launcher path for supported exports
+- Phase 13: `bazel run //packages/launcher:slic3r` now owns the scoped `--info`, `--repair`, and `--split` slice
+- Phase 13: repair and split now preserve legacy-shaped `_fixed.obj` and numbered `*.stl_01.stl` filenames in the bounded Rust-backed path
 
 ### Pending Todos
 
@@ -88,6 +90,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-08 23:00
-Stopped at: Phase 12 complete, Phase 13 ready to discuss
+Last session: 2026-04-09 06:45
+Stopped at: Phase 13 complete, Phase 14 ready to discuss
 Resume file: None

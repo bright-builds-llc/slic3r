@@ -7,7 +7,8 @@ Phase 5 adds contract-oriented crate boundaries and the first launcher-facing
 Rust CLI scaffold. Phase 6 makes the `--version` path the first supported
 Rust-backed macOS CLI slice. Phase 9 adds the `--help` path. Broader CLI, GUI,
 and output parity remain later work. Phase 10 adds the scoped config
-persistence path. Phase 12 adds the scoped Rust-backed export workflows.
+persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
+13 adds the scoped Rust-backed transform/info workflows.
 
 ## Layout
 
@@ -38,6 +39,9 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows.
   - `bazel run //packages/launcher:slic3r -- --export-3mf model.stl`
   - `bazel run //packages/launcher:slic3r -- --export-svg model.stl`
   - `bazel run //packages/launcher:slic3r -- --sla model.stl`
+  - `bazel run //packages/launcher:slic3r -- --info model.obj`
+  - `bazel run //packages/launcher:slic3r -- --repair model.stl`
+  - `bazel run //packages/launcher:slic3r -- --split model.stl`
 - Run the package verification suite:
   - `//packages/slic3r-rust:verify`
 - Run write-mode formatting with the pinned Rust toolchain:
@@ -46,8 +50,11 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows.
 ## Notes
 
 - The current supported Rust-backed CLI workflows are `--version`, `--help`,
-  `--save`, `--load`, `--datadir`, and the scoped export flags.
+  `--save`, `--load`, `--datadir`, the scoped export flags, and the scoped
+  transform/info flags.
 - Phase 12 only claims export routing, file creation, and scoped output naming.
-  Output-content parity remains later work.
+  Phase 13 only claims transform/info routing, deterministic stdout, and
+  legacy-shaped repair/split artifact naming. Geometry and output-content parity
+  remain later work.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).
