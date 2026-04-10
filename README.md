@@ -1,10 +1,11 @@
 # Slic3r
 
-<!-- coding-and-architecture-requirements-readme-badges:begin -->
+<!-- bright-builds-rules-readme-badges:begin -->
+<!-- Managed upstream by bright-builds-rules. If this badge block needs a fix, open an upstream PR or issue instead of editing the downstream managed block. Keep repo-local README content outside this managed badge block. -->
 [![GitHub Stars](https://img.shields.io/github/stars/bright-builds-llc/Slic3r)](https://github.com/bright-builds-llc/Slic3r)
-[![License](https://img.shields.io/github/license/bright-builds-llc/Slic3r?s)](./LICENSE)
-[![Bright Builds Requirements](https://raw.githubusercontent.com/bright-builds-llc/coding-and-architecture-requirements/main/public/badges/bright-builds.svg)](https://github.com/bright-builds-llc/coding-and-architecture-requirements)
-<!-- coding-and-architecture-requirements-readme-badges:end -->
+[![License](https://img.shields.io/github/license/bright-builds-llc/Slic3r?style=flat-square)](./LICENSE)
+[![Bright Builds: Rules](https://raw.githubusercontent.com/bright-builds-llc/bright-builds-rules/main/public/badges/bright-builds-rules-flat.svg)](https://github.com/bright-builds-llc/bright-builds-rules)
+<!-- bright-builds-rules-readme-badges:end -->
 
 ![](var/Slic3r_128px.png)
 
