@@ -1,5 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
+exports_files(["var/Slic3r.icns"])
+
 filegroup(
     name = "package_placeholder",
     srcs = [

@@ -10,9 +10,9 @@ depend on.
 
 ### macOS Packaging Launcher
 
-- [ ] **PACK-01**: User can launch the preferred packaged macOS startup path
+- [x] **PACK-01**: User can launch the preferred packaged macOS startup path
   for the currently supported Rust-backed CLI slice.
-- [ ] **PACK-02**: Maintainer can inspect or produce the scoped macOS
+- [x] **PACK-02**: Maintainer can inspect or produce the scoped macOS
   packaging-visible launcher layout with the expected startup scripts,
   bundle-local resources, and handoff behavior for the supported slice.
 
@@ -53,8 +53,8 @@ depend on.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PACK-01 | Phase 18 | Pending |
-| PACK-02 | Phase 18 | Pending |
+| PACK-01 | Phase 18 | Complete |
+| PACK-02 | Phase 18 | Complete |
 | PACK-03 | Phase 19 | Pending |
 | PACK-04 | Phase 19 | Pending |
 

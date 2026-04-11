@@ -25,6 +25,8 @@ expected to update the relevant docs here in the same change.
   slice
 - [`migration-guidance.md`](./migration-guidance.md) - launcher replacement,
   parity evidence, fixture protocol, and scope-now-versus-deferred rules
+- [`packaged-launcher-slice.md`](./packaged-launcher-slice.md) - scoped macOS
+  packaged launcher bundle and startup layout expectations
 - [`parity-matrix.md`](./parity-matrix.md) - contract-surface status using the
   shared migration vocabulary
 - [`package-map.md`](./package-map.md) - package roles, root-owned areas, and
@@ -71,6 +73,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   entrypoint scaffold
 - Phase 6 makes `--version` the first supported Rust-backed macOS CLI workflow
   through `bazel run //packages/launcher:slic3r -- --version`
+- Phase 18 adds a scoped macOS packaged launcher bundle through
+  `bazel run //packages/launcher:macos_packaged_launcher_bundle`
 
 ## Current Contract Inventory State
 
@@ -81,6 +85,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   launcher, interpret parity evidence, and evolve the future fixture corpus
 - Phase 4 does not change any parity status by itself. It documents the contract
   surfaces and defers implementation claims to later phases
+- `docs/port/packaged-launcher-slice.md` now documents the scoped macOS package
+  bundle layout and startup expectations for the preferred launcher surface
 
 ## Current Parity Visibility State
 

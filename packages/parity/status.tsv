@@ -8,4 +8,4 @@ config	legacy-only	packages/legacy-slic3r/lib/Slic3r/Config.pm	Contract inventor
 config.persistence	verified	//packages/parity:cli_config_persistence_parity	Shared fixture comparison proves the scoped Rust-backed save/load/datadir slice
 file-formats	in progress	docs/port/cli-slice.md	Scoped export format families are fixture-verified; broader input and format parity remain legacy-owned
 generated-outputs	in progress	docs/port/cli-slice.md	Scoped export plus repair/split artifact naming are fixture-verified; geometry and output-content parity are deferred
-launcher-packaging	in progress	docs/port/entrypoint-architecture.md	Launcher package is real, but packaged parity is still deferred
+launcher-packaging	rust-backed	//packages/launcher:macos_packaged_launcher_bundle	Scoped macOS packaged launcher bundle exists for the verified slice, but packaging-visible parity proof is still deferred

@@ -1,13 +1,61 @@
 package(default_visibility = ["//visibility:public"])
 
-exports_files(["README.md"])
+exports_files([
+    "README.md",
+    "package/osx/build_bundle.sh",
+    "package/osx/packaged_slice.txt",
+    "package/osx/startup_script.sh",
+    "package/osx/test_packaged_launcher.sh",
+])
 
 alias(
     name = "slic3r",
     actual = "//packages/slic3r-rust:slic3r_cli",
 )
 
+sh_binary(
+    name = "macos_packaged_launcher_bundle",
+    srcs = ["package/osx/build_bundle.sh"],
+    data = [
+        ":slic3r",
+        "//packages/legacy-slic3r:var/Slic3r.icns",
+        "package/osx/packaged_slice.txt",
+        "package/osx/startup_script.sh",
+    ],
+    args = [
+        "$(location :slic3r)",
+        "$(location package/osx/startup_script.sh)",
+        "$(location //packages/legacy-slic3r:var/Slic3r.icns)",
+        "$(location package/osx/packaged_slice.txt)",
+    ],
+)
+
+sh_test(
+    name = "macos_packaged_launcher_smoke",
+    srcs = ["package/osx/test_packaged_launcher.sh"],
+    data = [
+        ":slic3r",
+        "//packages/legacy-slic3r:var/Slic3r.icns",
+        "package/osx/build_bundle.sh",
+        "package/osx/packaged_slice.txt",
+        "package/osx/startup_script.sh",
+    ],
+    args = [
+        "$(location package/osx/build_bundle.sh)",
+        "$(location :slic3r)",
+        "$(location package/osx/startup_script.sh)",
+        "$(location //packages/legacy-slic3r:var/Slic3r.icns)",
+        "$(location package/osx/packaged_slice.txt)",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
-    srcs = ["README.md"],
+    srcs = [
+        "README.md",
+        "package/osx/build_bundle.sh",
+        "package/osx/packaged_slice.txt",
+        "package/osx/startup_script.sh",
+        "package/osx/test_packaged_launcher.sh",
+    ],
 )

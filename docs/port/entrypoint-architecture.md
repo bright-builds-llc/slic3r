@@ -11,7 +11,7 @@ slice.
 | Stable launcher contracts | `packages/slic3r-rust/crates/slic3r_contracts` | Parse and model the supported CLI slice in pure Rust types |
 | Launcher-facing CLI shell | `packages/slic3r-rust/crates/slic3r_cli` | Translate process arguments into contract routing and user-visible exit behavior |
 | Lower-level Rust implementation | `packages/slic3r-rust/crates/slic3r_core` | Hold reusable implementation details that are not themselves the stable launcher contract |
-| Future shell shims | `packages/launcher` | Stay thin if introduced later; no Perl business logic moves here |
+| Packaged startup shims | `packages/launcher/package/osx` | Stay thin and limited to packaged handoff into the Rust CLI binary; no Perl business logic moves here |
 | Retained reference behavior | `packages/legacy-slic3r` | Remain the parity oracle for unsupported CLI behavior until later phases migrate it |
 
 ## Phase 5 Scope
@@ -22,3 +22,13 @@ slice.
   boundary that points at the Rust CLI scaffold.
 - No user-facing workflow is supported through the Rust launcher yet. This phase
   only makes the architecture explicit enough for Phase 6 implementation.
+
+## Phase 18 Packaging Slice
+
+- `bazel run //packages/launcher:macos_packaged_launcher_bundle` now
+  materializes a scoped `Slic3r.app`-style bundle under `.planning/.tmp/`.
+- The packaged startup script remains a thin shell shim that execs the bundled
+  Rust CLI binary from `Contents/MacOS/`.
+- This packaged slice is intentionally bounded to the already verified macOS
+  CLI/export/transform surface. DMG/signing/notarization parity remains later
+  work.

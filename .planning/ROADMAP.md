@@ -35,13 +35,12 @@ currently supported Rust-backed CLI slice.
 1. The packaged launcher slice stays explicitly bounded to the currently
    verified macOS CLI/export/transform surface.
 
-**Plans**: 3 plans
+**Plans**: 2 plans
 
 Plans:
 
 - [ ] 18-01: Model the macOS packaging launcher contract and bundle/startup boundaries
-- [ ] 18-02: Implement the packaged launcher/startup surface for the supported Rust-backed slice
-- [ ] 18-03: Document the packaged startup and bundle layout expectations for the scoped macOS slice
+- [ ] 18-02: Implement the packaged launcher/startup surface and document the bundle layout expectations for the scoped macOS slice
 
 ### Phase 19: macOS Packaging Parity Evidence
 
@@ -72,5 +71,5 @@ Phases execute in numeric order: 18 → 19
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 18. macOS Packaged Launcher Slice | v1.3 | 0/3 | Not started | - |
+| 18. macOS Packaged Launcher Slice | v1.3 | 0/2 | Not started | - |
 | 19. macOS Packaging Parity Evidence | v1.3 | 0/2 | Not started | - |

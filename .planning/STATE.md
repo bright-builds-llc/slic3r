@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: planned stopped_at: roadmap created last_updated: "2026-04-11T00:00:00Z" last_activity: 2026-04-11 progress: total_phases: 2 completed_phases: 0 total_plans: 5 completed_plans: 0 percent: 0
+## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: active stopped_at: phase 18 complete last_updated: "2026-04-11T15:10:03Z" last_activity: 2026-04-11 progress: total_phases: 2 completed_phases: 1 total_plans: 4 completed_plans: 2 percent: 50
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.\
-**Current focus:** Phase 18: macOS Packaged Launcher Slice
+**Current focus:** Phase 19: macOS Packaging Parity Evidence
 
 ## Current Position
 
-Phase: 18 of 19 (macOS Packaged Launcher Slice)\
-Plan: 0 of 3 in current phase\
+Phase: 19 of 19 (macOS Packaging Parity Evidence)\
+Plan: 0 of 2 in current phase\
 Status: Ready to discuss\
-Last activity: 2026-04-11 — Milestone v1.3 Packaging-Visible Parity started
+Last activity: 2026-04-11 — Phase 18 macOS Packaged Launcher Slice completed
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█████░░░░░] 50%
 
 ## Accumulated Context
 
@@ -36,6 +36,10 @@ Recent decisions affecting current work:
   the verified CLI/export/transform slice
 - Current phase summaries carry `requirements-completed` metadata for milestone
   audit traceability
+- Phase 18: `bazel run //packages/launcher:macos_packaged_launcher_bundle` now
+  materializes a scoped `Slic3r.app`-style bundle for the verified macOS slice
+- Phase 18: `bazel test //packages/launcher:macos_packaged_launcher_smoke`
+  validates the packaged startup shim and bundle layout
 
 ### Pending Todos
 
@@ -48,5 +52,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-11\
-Stopped at: Milestone `v1.3` initialized, ready for `/gsd-plan-phase 18`\
+Stopped at: Phase 18 complete, Phase 19 ready to discuss\
 Resume file: None
