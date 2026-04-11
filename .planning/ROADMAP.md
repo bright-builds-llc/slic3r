@@ -10,10 +10,89 @@
   Archive: [v1.1-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.1-ROADMAP.md)
 - ✅ **v1.0 Rust Port Foundations** — Phases 1-8 (shipped 2026-04-08)
   Archive: [v1.0-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.0-ROADMAP.md)
+- 🚧 **v1.4 Linux Parity Foundation** — Phases 21-23 (planned)
 
-## Current Status
+## Current Milestone
 
-No active milestone.
+**v1.4 Linux Parity Foundation** establishes a validated Linux runtime path for
+the already verified Rust-backed CLI/export/transform slice, then proves that
+Linux runtime surface through shared parity evidence and visibility docs.
 
-The repository is between milestone cycles now. Use `/gsd-new-milestone` to
-define the next milestone, fresh requirements, and a new phase roadmap.
+## Phase Details
+
+### Phase 21: Linux Launcher Runtime Slice
+
+**Goal**: Deliver the preferred Rust-backed Linux launcher/runtime path for the
+already verified help/version/config/export/transform slice.
+**Depends on**: Phase 20
+**Requirements**: LNX-01, LNX-02, LNX-03
+**Success Criteria** (what must be TRUE):
+
+1. User can run the preferred Rust-backed Linux launcher path for `--help` and
+   `--version`.
+1. User can run the currently verified config persistence, export, and
+   non-slicing transform workflows through the preferred Rust-backed Linux
+   launcher path.
+1. Maintainer can build and invoke the Linux Rust-backed runtime path from
+   Bazel without relying on macOS-specific packaging surfaces.
+
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 21-01: Model the Linux launcher/runtime contract and entrypoint boundaries for the existing verified slice
+- [ ] 21-02: Implement the preferred Linux launcher/runtime path for the supported help/version/config/export/transform workflows
+- [ ] 21-03: Document the supported Linux runtime slice and the remaining platform-specific packaging gaps
+
+### Phase 22: Linux Shared Parity Evidence
+
+**Goal**: Verify the supported Linux Rust-backed runtime slice through shared
+parity evidence.
+**Depends on**: Phase 21
+**Requirements**: LNX-04
+**Success Criteria** (what must be TRUE):
+
+1. Maintainer can execute a shared Linux parity command for the supported
+   runtime slice.
+1. The Linux parity proof covers representative workflows from the currently
+   verified help/version/config/export/transform surface.
+1. The Linux parity proof is reviewable without relying on ad hoc manual setup.
+
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 22-01: Add Linux parity fixtures and comparison commands for the supported runtime slice
+- [ ] 22-02: Verify representative Linux runtime workflows through the shared parity evidence surface
+
+### Phase 23: Linux Parity Visibility
+
+**Goal**: Publish Linux validation state and migration docs cleanly.
+**Depends on**: Phase 22
+**Requirements**: LNX-05
+**Success Criteria** (what must be TRUE):
+
+1. The parity status command reflects Linux validation state accurately for the
+   supported Rust-backed runtime slice.
+1. The migration docs describe the supported Linux runtime slice and its
+   remaining gaps without overclaiming Linux packaging parity.
+1. The Linux parity milestone is reviewable without inspecting raw fixture
+   files first.
+
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 23-01: Publish Linux runtime validation state in parity status and package docs
+- [ ] 23-02: Align migration docs with the verified Linux runtime slice and remaining platform gaps
+
+## Progress
+
+**Execution Order:**\
+Phases execute in numeric order: 21 → 22 → 23
+
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 21. Linux Launcher Runtime Slice | v1.4 | 0/3 | Not started | - |
+| 22. Linux Shared Parity Evidence | v1.4 | 0/2 | Not started | - |
+| 23. Linux Parity Visibility | v1.4 | 0/2 | Not started | - |
