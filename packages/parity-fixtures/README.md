@@ -21,3 +21,5 @@ corpora.
   workflows and the scoped transform/info workflows.
 - Phase 19 expands the shared fixture corpus to cover the scoped macOS packaged
   launcher slice.
+- Phase 20 extends the packaged launcher fixtures to cover representative
+  packaged config persistence through the startup shim.

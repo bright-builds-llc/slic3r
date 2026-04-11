@@ -17,3 +17,5 @@ These fixtures cover the bounded Phase 18 macOS packaged launcher slice.
 - packaged startup handoff through `Contents/MacOS/Slic3r`
 - packaged `--version`
 - packaged `--help`
+- representative packaged config persistence via `--save`, `--load`, and
+  `--datadir`

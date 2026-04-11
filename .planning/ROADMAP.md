@@ -8,7 +8,7 @@
   Archive: [v1.1-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.1-ROADMAP.md)
 - ✅ **v1.0 Rust Port Foundations** — Phases 1-8 (shipped 2026-04-08)
   Archive: [v1.0-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.0-ROADMAP.md)
-- 🚧 **v1.3 Packaging-Visible Parity** — Phases 18-19 (planned)
+- 🚧 **v1.3 Packaging-Visible Parity** — Phases 18-20 (planned)
 
 ## Current Milestone
 
@@ -87,8 +87,8 @@ bundle layout plus packaged `--version`/`--help`.
 
 Plans:
 
-- [ ] 20-01: Extend the macOS packaged launcher parity command and fixtures to cover one representative packaged workflow beyond help/version
-- [ ] 20-02: Align packaging docs and packaged-slice notes with the fully verified packaged launcher evidence scope
+- [x] 20-01: Extend the macOS packaged launcher parity command and fixtures to cover one representative packaged workflow beyond help/version
+- [x] 20-02: Align packaging docs and packaged-slice notes with the fully verified packaged launcher evidence scope
 
 ## Progress
 
@@ -99,4 +99,4 @@ Phases execute in numeric order: 18 → 19 → 20
 |-------|-----------|----------------|--------|-----------|
 | 18. macOS Packaged Launcher Slice | v1.3 | 2/2 | Complete | 2026-04-11 |
 | 19. macOS Packaging Parity Evidence | v1.3 | 2/2 | Complete | 2026-04-11 |
-| 20. Packaged Launcher Flow Coverage | v1.3 | 0/2 | Not started | - |
+| 20. Packaged Launcher Flow Coverage | v1.3 | 2/2 | Complete | 2026-04-11 |

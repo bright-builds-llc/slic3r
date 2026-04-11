@@ -16,6 +16,10 @@ expected_notes="${7}"
 expected_plist="${8}"
 version_expected="${9}"
 help_expected="${10}"
+config_save_expected="${11}"
+config_load_base="${12}"
+config_load_extra="${13}"
+config_load_expected="${14}"
 
 resolve_input() {
 	local path="${1}"
@@ -39,6 +43,10 @@ expected_notes="$(resolve_input "${expected_notes}")"
 expected_plist="$(resolve_input "${expected_plist}")"
 version_expected="$(resolve_input "${version_expected}")"
 help_expected="$(resolve_input "${help_expected}")"
+config_save_expected="$(resolve_input "${config_save_expected}")"
+config_load_base="$(resolve_input "${config_load_base}")"
+config_load_extra="$(resolve_input "${config_load_extra}")"
+config_load_expected="$(resolve_input "${config_load_expected}")"
 
 resolved_rust_launcher="$(resolve_input "${rust_launcher}")"
 if [[ -x "${resolved_rust_launcher}" ]]; then
@@ -96,6 +104,32 @@ help_output="$("${startup_path}" --help)"
 expected_help_output="$(cat "${help_expected}")"
 if [[ "${help_output}" != "${expected_help_output}" ]]; then
 	printf 'packaged help mismatch\nexpected:\n%s\nactual:\n%s\n' "${expected_help_output}" "${help_output}" >&2
+	exit 1
+fi
+
+save_target="${temp_root}/saved.ini"
+packaged_save_output="$("${startup_path}" --save "${save_target}")"
+expected_save_contents="$(cat "${config_save_expected}")"
+save_contents="$(cat "${save_target}")"
+if [[ "${save_contents}" != "${expected_save_contents}" ]]; then
+	printf 'packaged config save mismatch\nexpected:\n%s\nactual:\n%s\n' "${expected_save_contents}" "${save_contents}" >&2
+	exit 1
+fi
+
+expected_save_output="Saved config to ${save_target}"
+if [[ "${packaged_save_output}" != "${expected_save_output}" ]]; then
+	printf 'packaged config save stdout mismatch\nexpected:\n%s\nactual:\n%s\n' "${expected_save_output}" "${packaged_save_output}" >&2
+	exit 1
+fi
+
+datadir="${temp_root}/profiles"
+mkdir -p "${datadir}"
+cp "${config_load_base}" "${datadir}/base.ini"
+cp "${config_load_extra}" "${datadir}/extra.ini"
+packaged_load_output="$("${startup_path}" --datadir "${datadir}" --load base.ini --load extra.ini)"
+expected_load_output="$(cat "${config_load_expected}")"
+if [[ "${packaged_load_output}" != "${expected_load_output}" ]]; then
+	printf 'packaged config load mismatch\nexpected:\n%s\nactual:\n%s\n' "${expected_load_output}" "${packaged_load_output}" >&2
 	exit 1
 fi
 

@@ -43,6 +43,10 @@ exports_files([
     "macos-packaged-launcher/expected-bundle-files.txt",
     "macos-packaged-launcher/expected-packaged-slice.txt",
     "macos-packaged-launcher/expected-plist-values.txt",
+    "macos-packaged-launcher/expected-save.ini",
+    "macos-packaged-launcher/load-base.ini",
+    "macos-packaged-launcher/load-extra.ini",
+    "macos-packaged-launcher/expected-load.txt",
 ])
 
 alias(
@@ -170,6 +174,26 @@ alias(
     actual = "macos-packaged-launcher/expected-plist-values.txt",
 )
 
+alias(
+    name = "macos_packaged_launcher_expected_save",
+    actual = "macos-packaged-launcher/expected-save.ini",
+)
+
+alias(
+    name = "macos_packaged_launcher_load_base",
+    actual = "macos-packaged-launcher/load-base.ini",
+)
+
+alias(
+    name = "macos_packaged_launcher_load_extra",
+    actual = "macos-packaged-launcher/load-extra.ini",
+)
+
+alias(
+    name = "macos_packaged_launcher_expected_load",
+    actual = "macos-packaged-launcher/expected-load.txt",
+)
+
 filegroup(
     name = "macos_packaged_launcher_bundle",
     srcs = [
@@ -177,6 +201,10 @@ filegroup(
         "macos-packaged-launcher/expected-bundle-files.txt",
         "macos-packaged-launcher/expected-packaged-slice.txt",
         "macos-packaged-launcher/expected-plist-values.txt",
+        "macos-packaged-launcher/expected-save.ini",
+        "macos-packaged-launcher/load-base.ini",
+        "macos-packaged-launcher/load-extra.ini",
+        "macos-packaged-launcher/expected-load.txt",
     ],
 )
 
@@ -224,5 +252,9 @@ filegroup(
         "macos-packaged-launcher/expected-bundle-files.txt",
         "macos-packaged-launcher/expected-packaged-slice.txt",
         "macos-packaged-launcher/expected-plist-values.txt",
+        "macos-packaged-launcher/expected-save.ini",
+        "macos-packaged-launcher/load-base.ini",
+        "macos-packaged-launcher/load-extra.ini",
+        "macos-packaged-launcher/expected-load.txt",
     ],
 )

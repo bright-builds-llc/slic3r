@@ -34,6 +34,12 @@ for the Rust port.
 - The packaged launcher slice is intentionally bounded to the already verified
   macOS CLI/export/transform surface.
 - The startup shim is packaging-visible only; it does not own business logic.
+- Shared packaged parity evidence currently proves bundle layout, startup
+  handoff, packaged `--help`, packaged `--version`, and one representative
+  packaged config persistence flow through `--save`, `--load`, and `--datadir`.
+- Scoped export and transform/info behavior remains verified at the bundled CLI
+  layer, but this packaged-evidence surface does not claim separate fixture
+  proof for every packaged subflow yet.
 - Signing, notarization, DMG generation, and broader packaged feature parity
   remain later work.
 
@@ -42,3 +48,5 @@ for the Rust port.
 - Phase 18 makes the scoped macOS packaged launcher bundle available.
 - Phase 19 verifies the bundle layout and packaged startup behavior through
   `bazel run //packages/parity:macos_packaged_launcher_parity`.
+- Phase 20 extends that shared packaging parity command to verify representative
+  packaged config persistence through the startup shim.

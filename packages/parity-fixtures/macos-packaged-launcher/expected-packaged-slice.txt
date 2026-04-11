@@ -1,12 +1,14 @@
 This packaged bundle is the scoped macOS packaging-visible launcher slice for
 the currently verified Rust-backed CLI/export/transform surface.
 
-Supported packaged launcher behavior:
+Shared packaged parity evidence currently proves:
+- bundle layout and startup handoff
 - --help
 - --version
-- --save
-- --load
-- --datadir
+- representative config persistence via --save, --load, and --datadir
+
+Still bounded to the same Rust-backed slice, but not separately fixture-proven
+at the packaged layer here:
 - scoped export workflows
 - scoped transform/info workflows
 

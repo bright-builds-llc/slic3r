@@ -116,6 +116,10 @@ sh_binary(
         "//packages/parity-fixtures:macos_packaged_launcher_expected_plist",
         "//packages/parity-fixtures:cli_version_expected",
         "//packages/parity-fixtures:cli_help_expected",
+        "//packages/parity-fixtures:macos_packaged_launcher_expected_save",
+        "//packages/parity-fixtures:macos_packaged_launcher_load_base",
+        "//packages/parity-fixtures:macos_packaged_launcher_load_extra",
+        "//packages/parity-fixtures:macos_packaged_launcher_expected_load",
     ],
     args = [
         "$(location //packages/launcher:macos_packaged_launcher_bundle)",
@@ -128,6 +132,10 @@ sh_binary(
         "$(location //packages/parity-fixtures:macos_packaged_launcher_expected_plist)",
         "$(location //packages/parity-fixtures:cli_version_expected)",
         "$(location //packages/parity-fixtures:cli_help_expected)",
+        "$(location //packages/parity-fixtures:macos_packaged_launcher_expected_save)",
+        "$(location //packages/parity-fixtures:macos_packaged_launcher_load_base)",
+        "$(location //packages/parity-fixtures:macos_packaged_launcher_load_extra)",
+        "$(location //packages/parity-fixtures:macos_packaged_launcher_expected_load)",
     ],
 )
 

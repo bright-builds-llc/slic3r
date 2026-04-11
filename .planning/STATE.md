@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: executing stopped_at: Phase 20 planned, ready to execute last_updated: "2026-04-11T15:55:56.971Z" last_activity: 2026-04-11 -- Phase 20 planning complete progress: total_phases: 3 completed_phases: 2 total_plans: 6 completed_plans: 4 percent: 67
+## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: active stopped_at: Phase 20 complete, milestone ready for audit last_updated: "2026-04-11T18:40:33Z" last_activity: 2026-04-11 -- Phase 20 complete: packaged launcher parity now proves representative config persistence progress: total_phases: 3 completed_phases: 3 total_plans: 6 completed_plans: 6 percent: 100
 
 # Project State
 
@@ -12,16 +12,16 @@ See: `.planning/PROJECT.md` (updated 2026-04-11)
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.\
-**Current focus:** Phase 20: Packaged Launcher Flow Coverage
+**Current focus:** Milestone audit
 
 ## Current Position
 
 Phase: 20 of 20 (Packaged Launcher Flow Coverage)\
 Plan: 2 of 2 in current phase\
-Status: Ready to execute\
-Last activity: 2026-04-11 -- Phase 20 planning complete
+Status: Milestone complete\
+Last activity: 2026-04-11 -- Phase 20 complete: packaged launcher parity now proves representative config persistence
 
-Progress: [███████░░░] 67%
+Progress: [██████████] 100%
 
 ## Accumulated Context
 
@@ -45,8 +45,10 @@ Recent decisions affecting current work:
   validates the packaged startup shim and bundle layout
 - Phase 19: `bazel run //packages/parity:macos_packaged_launcher_parity` now
   verifies the scoped macOS packaged launcher bundle and startup handoff
-- Gap planning: Phase 20 will extend shared packaging parity evidence beyond
-  packaged `--help`/`--version` into one representative packaged workflow
+- Phase 20: `bazel run //packages/parity:macos_packaged_launcher_parity` now
+  verifies representative packaged config persistence through the packaged
+  startup shim in addition to bundle layout, packaged `--help`, and packaged
+  `--version`
 
 ### Pending Todos
 
@@ -59,5 +61,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-11\
-Stopped at: Phase 20 planned, ready to execute\
+Stopped at: Phase 20 complete, milestone ready for audit\
 Resume file: None

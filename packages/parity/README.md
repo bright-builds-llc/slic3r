@@ -16,7 +16,8 @@
 - `bazel run //packages/parity:transform_workflows_parity` runs the shared
   fixture comparison for the scoped transform/info workflows.
 - `bazel run //packages/parity:macos_packaged_launcher_parity` runs the shared
-  parity evidence for the scoped macOS packaged launcher slice.
+  parity evidence for the scoped macOS packaged launcher slice, including one
+  representative packaged config persistence flow.
 - `status.tsv` is the checked-in data source for that command.
 
 ## Scope
