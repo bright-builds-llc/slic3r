@@ -20,7 +20,7 @@ depend on.
 
 ### Linux Parity Evidence
 
-- [ ] **LNX-04**: Maintainer can execute shared parity evidence for the
+- [x] **LNX-04**: Maintainer can execute shared parity evidence for the
   supported Linux Rust-backed runtime slice.
 - [ ] **LNX-05**: Maintainer can see Linux validation state reflected accurately
   in the parity status command and migration docs.
@@ -59,7 +59,7 @@ depend on.
 | LNX-01 | Phase 21 | Complete |
 | LNX-02 | Phase 21 | Complete |
 | LNX-03 | Phase 21 | Complete |
-| LNX-04 | Phase 22 | Pending |
+| LNX-04 | Phase 22 | Complete |
 | LNX-05 | Phase 23 | Pending |
 
 **Coverage:**
@@ -71,4 +71,4 @@ depend on.
 ______________________________________________________________________
 
 *Requirements defined: 2026-04-11*\
-*Last updated: 2026-04-11 after milestone v1.4 definition*
+*Last updated: 2026-04-11 after Phase 22 Linux shared parity evidence*

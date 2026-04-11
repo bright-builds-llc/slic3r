@@ -62,8 +62,8 @@ parity evidence.
 
 Plans:
 
-- [ ] 22-01: Add Linux parity fixtures and comparison commands for the supported runtime slice
-- [ ] 22-02: Verify representative Linux runtime workflows through the shared parity evidence surface
+- [x] 22-01: Add Linux parity fixtures and comparison commands for the supported runtime slice
+- [x] 22-02: Verify representative Linux runtime workflows through the shared parity evidence surface
 
 ### Phase 23: Linux Parity Visibility
 
@@ -94,5 +94,5 @@ Phases execute in numeric order: 21 → 22 → 23
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 21. Linux Launcher Runtime Slice | v1.4 | 3/3 | Complete | 2026-04-11 |
-| 22. Linux Shared Parity Evidence | v1.4 | 0/2 | Not started | - |
+| 22. Linux Shared Parity Evidence | v1.4 | 2/2 | Complete | 2026-04-11 |
 | 23. Linux Parity Visibility | v1.4 | 0/2 | Not started | - |

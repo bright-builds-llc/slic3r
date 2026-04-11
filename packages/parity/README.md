@@ -18,6 +18,8 @@
 - `bazel run //packages/parity:macos_packaged_launcher_parity` runs the shared
   parity evidence for the scoped macOS packaged launcher slice, including one
   representative packaged config persistence flow.
+- `bazel run //packages/parity:linux_runtime_parity` runs the shared parity
+  evidence for the supported Linux launcher/runtime slice.
 - `status.tsv` is the checked-in data source for that command.
 
 ## Scope
