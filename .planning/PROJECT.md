@@ -24,6 +24,19 @@ v1.3 shipped the packaging-visible parity milestone:
 - the v1.3 phase history, requirements, and audit are archived under
   `.planning/milestones/`
 
+## Current Milestone: v1.4 Linux Parity Foundation
+
+**Goal:** Establish a validated Linux runtime path for the already verified
+Rust-backed CLI/export/transform slice before attempting Linux packaging parity.
+
+**Target features:**
+
+- Preferred Rust-backed Linux launcher/runtime path for the existing verified
+  help/version/config/export/transform slice
+- Shared Linux parity evidence for the supported runtime slice
+- Linux validation state reflected cleanly in the parity status source and
+  migration docs
+
 <details>
 <summary>v1.2 shipped the export and transform parity milestone</summary>
 
@@ -67,12 +80,11 @@ v1.3 shipped the packaging-visible parity milestone:
 
 ## Next Milestone Goals
 
-- Start validated Linux parity work in a dedicated follow-up milestone
-- Start validated Windows parity work in a dedicated follow-up milestone
-- Extend packaging-visible launcher parity beyond macOS only after each
-  platform has a credible Rust-backed runtime slice
-- Decide the GUI migration strategy once packaging-visible parity has broader
-  platform coverage
+- Start validated Windows parity work once Linux runtime parity is credible
+- Extend packaging-visible launcher parity beyond macOS only after Linux and
+  Windows each have a credible Rust-backed runtime slice
+- Define the GUI migration strategy once platform/runtime parity has broader
+  coverage
 
 ## Requirements
 
@@ -108,20 +120,27 @@ v1.3 shipped the packaging-visible parity milestone:
 
 ### Active
 
-- [ ] Run validated Rust-backed parity workflows on Linux
-- [ ] Run validated Rust-backed parity workflows on Windows
-- [ ] Verify packaging-visible launcher behavior for Linux and Windows through
-  shared parity evidence
-- [ ] Define a concrete milestone and acceptance strategy for the future GUI
-  migration
+- [ ] User can run the preferred Rust-backed Linux launcher/runtime path for
+  the already verified help/version/config/export/transform slice
+- [ ] Maintainer can verify the supported Linux runtime slice through shared
+  parity evidence
+- [ ] The parity status source and migration docs reflect Linux validation
+  state accurately
+- [ ] Linux packaging-visible parity remains deferred until the Linux runtime
+  slice is validated
 
 ### Out of Scope
 
-- New GUI parity in the initial milestone — defer until the core, CLI, build, and parity foundations are stable
-- Linux and Windows parity in the initial milestone — macOS is the first implementation and validation target
-- Broad feature redesign or behavior changes that intentionally diverge from legacy Slic3r — this effort is parity-first, not a product reinvention
-- Treating the legacy package as an active feature-development surface — it should remain the reference implementation except for minimal integration work needed to keep it buildable and usable as an oracle
-- CI-enforced documentation gates in the initial milestone — documentation and checklist updates are required by process first, with automation to be considered later
+- Linux packaging-visible parity and distro packaging in this milestone — first
+  establish a validated Linux runtime slice
+- Windows runtime or packaging parity in this milestone — separate follow-up
+  milestone after Linux foundations
+- GUI migration planning or implementation in this milestone — platform/runtime
+  parity still takes precedence
+- Broad feature redesign or new CLI slices beyond the currently verified
+  surface — this milestone stabilizes Linux parity for the existing slice
+- Treating the legacy package as an active feature-development surface — it
+  remains the reference implementation except for minimal oracle upkeep
 
 ## Context
 
@@ -165,4 +184,4 @@ The audience for this work is broad:
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-11 after v1.3 milestone*
+*Last updated: 2026-04-11 after starting v1.4 Linux Parity Foundation*
