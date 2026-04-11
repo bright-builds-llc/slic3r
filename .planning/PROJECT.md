@@ -23,6 +23,20 @@ v1.2 shipped the export and transform parity milestone:
 - milestone summaries now carry `requirements-completed` metadata, and the
   `docs/port/` overview docs now match the verified parity surface
 
+## Current Milestone: v1.3 Packaging-Visible Parity
+
+**Goal:** Extend the preferred Rust-backed macOS path into packaging-visible
+launcher behavior so the packaged startup surface, bundle layout, and parity
+evidence are no longer legacy-only.
+
+**Target features:**
+
+- Preferred packaged macOS launcher/startup path for the currently supported
+  Rust-backed CLI slice
+- MacOS bundle and startup-surface parity for the supported launcher slice
+- Shared parity evidence and status/docs for packaging-visible launcher
+  behavior
+
 <details>
 <summary>v1.1 shipped the CLI parity expansion milestone</summary>
 
@@ -52,9 +66,11 @@ v1.2 shipped the export and transform parity milestone:
 
 ## Next Milestone Goals
 
-- Improve packaging-visible launcher parity beyond the current in-progress state
-- Start Linux and Windows parity work in a dedicated follow-up milestone
-- Decide the GUI migration strategy once CLI/core parity has broader coverage
+- Start Linux and Windows parity work in dedicated follow-up milestones
+- Decide the GUI migration strategy once packaging-visible parity has broader
+  coverage
+- Expand beyond scoped macOS packaging parity only after the packaged launcher
+  surface is verifiable
 
 ## Requirements
 
@@ -84,12 +100,11 @@ v1.2 shipped the export and transform parity milestone:
 
 ### Active
 
-- [ ] Verify packaging-visible launcher behavior on macOS through shared parity
-  evidence
-- [ ] Run validated Rust-backed parity workflows on Linux
-- [ ] Run validated Rust-backed parity workflows on Windows
-- [ ] Define a concrete milestone and acceptance strategy for the future GUI
-  migration
+- [ ] Deliver the preferred packaged macOS launcher/startup path for the
+  currently supported Rust-backed CLI slice
+- [ ] Verify macOS packaging-visible launcher behavior and artifact layout
+  through shared parity evidence
+- [ ] Keep Linux/Windows and GUI parity out of scope for this milestone
 
 ### Out of Scope
 
@@ -141,4 +156,4 @@ The audience for this work is broad:
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-11 after v1.2 milestone*
+*Last updated: 2026-04-11 after starting v1.3 Packaging-Visible Parity*
