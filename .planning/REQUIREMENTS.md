@@ -18,7 +18,7 @@ depend on.
 
 ### macOS Packaging Parity Evidence
 
-- [x] **PACK-03**: Maintainer can verify macOS packaging-visible launcher
+- [ ] **PACK-03**: Maintainer can verify macOS packaging-visible launcher
   behavior and artifact layout through shared parity evidence.
 - [x] **PACK-04**: Maintainer can see the macOS packaging-visible launcher slice
   reflected accurately in the parity status command and migration docs.
@@ -55,7 +55,7 @@ depend on.
 |-------------|-------|--------|
 | PACK-01 | Phase 18 | Complete |
 | PACK-02 | Phase 18 | Complete |
-| PACK-03 | Phase 19 | Complete |
+| PACK-03 | Phase 20 | Pending |
 | PACK-04 | Phase 19 | Complete |
 
 **Coverage:**

@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: milestone_complete stopped_at: phase 19 complete last_updated: "2026-04-11T15:18:40Z" last_activity: 2026-04-11 progress: total_phases: 2 completed_phases: 2 total_plans: 4 completed_plans: 4 percent: 100
+## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: active stopped_at: roadmap updated with gap closure phase 20 last_updated: "2026-04-11T15:34:39Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 2 total_plans: 6 completed_plans: 4 percent: 67
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.\
-**Current focus:** Milestone v1.3 audit
+**Current focus:** Phase 20: Packaged Launcher Flow Coverage
 
 ## Current Position
 
-Phase: 19 of 19 (macOS Packaging Parity Evidence)\
-Plan: 2 of 2 in current phase\
-Status: Milestone complete, ready to audit\
-Last activity: 2026-04-11 — Phase 19 macOS Packaging Parity Evidence completed
+Phase: 20 of 20 (Packaged Launcher Flow Coverage)\
+Plan: 0 of 2 in current phase\
+Status: Ready to discuss\
+Last activity: 2026-04-11 — Added gap closure phase 20 from milestone audit
 
-Progress: [██████████] 100%
+Progress: [███████░░░] 67%
 
 ## Accumulated Context
 
@@ -42,6 +42,8 @@ Recent decisions affecting current work:
   validates the packaged startup shim and bundle layout
 - Phase 19: `bazel run //packages/parity:macos_packaged_launcher_parity` now
   verifies the scoped macOS packaged launcher bundle and startup handoff
+- Gap planning: Phase 20 will extend shared packaging parity evidence beyond
+  packaged `--help`/`--version` into one representative packaged workflow
 
 ### Pending Todos
 
@@ -54,5 +56,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-11\
-Stopped at: Phase 19 complete, milestone ready to audit\
+Stopped at: Gap closure phase 20 planned, ready to discuss\
 Resume file: None

@@ -64,12 +64,39 @@ Plans:
 - [x] 19-01: Seed packaging parity evidence and verification commands for the scoped macOS launcher surface
 - [x] 19-02: Publish macOS packaging-visible parity status and migration docs
 
+### Phase 20: Packaged Launcher Flow Coverage
+
+**Goal**: Extend shared packaging parity evidence so it proves one
+representative packaged config/export/transform subflow in addition to packaged
+startup, help, and version.
+**Depends on**: Phase 19
+**Requirements**: PACK-03
+**Gap Closure**: Closes the audit gap where packaging parity evidence stops at
+bundle layout plus packaged `--version`/`--help`.
+**Success Criteria** (what must be TRUE):
+
+1. The shared packaging parity command proves one representative packaged
+   subflow beyond startup handoff, such as packaged config persistence or a
+   packaged export/transform case.
+1. The packaged launcher slice docs and packaged-slice note file match the
+   exact scope that the shared packaging parity command proves.
+1. The milestone audit can mark `PACK-03` satisfied without relying on manual
+   spot-checks outside the shared evidence command.
+
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 20-01: Extend the macOS packaged launcher parity command and fixtures to cover one representative packaged workflow beyond help/version
+- [ ] 20-02: Align packaging docs and packaged-slice notes with the fully verified packaged launcher evidence scope
+
 ## Progress
 
 **Execution Order:**\
-Phases execute in numeric order: 18 → 19
+Phases execute in numeric order: 18 → 19 → 20
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 18. macOS Packaged Launcher Slice | v1.3 | 2/2 | Complete | 2026-04-11 |
 | 19. macOS Packaging Parity Evidence | v1.3 | 2/2 | Complete | 2026-04-11 |
+| 20. Packaged Launcher Flow Coverage | v1.3 | 0/2 | Not started | - |
