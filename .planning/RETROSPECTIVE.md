@@ -2,6 +2,58 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.4 — Linux Parity Foundation
+
+**Shipped:** 2026-04-11\
+**Phases:** 3 | **Plans:** 7 | **Sessions:** 1 focused milestone run
+
+### What Was Built
+
+- A preferred Linux launcher/runtime shim and Bazel smoke surface for the
+  existing verified Rust-backed slice
+- A shared Linux runtime parity command and Linux runtime fixture bundle
+- Linux validation state published in the checked-in parity status source and
+  the migration docs
+- Archived v1.4 phase history, requirements, and audit artifacts for the next
+  milestone boundary
+
+### What Worked
+
+- Reusing the already verified help/version/config/export/transform fixtures
+  kept Linux parity work narrow and easy to verify.
+- Splitting Linux runtime delivery, shared evidence, and visibility
+  publication across three phases kept each phase independently defensible.
+
+### What Was Inefficient
+
+- The milestone-completion helper still left live planning files in a
+  half-archived state and needed manual cleanup for `PROJECT.md`, `ROADMAP.md`,
+  `STATE.md`, and `MILESTONES.md`.
+- Bazel output-base lock contention is still easy to trigger when several
+  run/test commands are started too aggressively in parallel.
+
+### Patterns Established
+
+- New platform work should follow the same ladder: launcher/runtime path first,
+  shared parity evidence second, visibility publication third.
+- Shared parity evidence can reuse existing slice fixtures when the expected
+  outputs are platform-agnostic.
+
+### Key Lessons
+
+1. Platform expansion is much easier when the parity surface is already shaped
+   around explicit shared evidence commands rather than ad hoc checks.
+1. Publishing validation state deserves its own milestone phase; otherwise the
+   status/docs layer lags behind the real evidence and weakens trust.
+
+### Cost Observations
+
+- Model mix: Codex-led execution with the retained legacy oracle still kept in
+  reserve rather than on the critical path
+- Sessions: 1 focused milestone run with no follow-up gap phase required
+- Notable: Linux runtime parity was materially cheaper than the first packaging
+  milestone because it reused the existing slice boundaries and fixtures
+
 ## Milestone: v1.3 — Packaging-Visible Parity
 
 **Shipped:** 2026-04-11\
@@ -221,6 +273,7 @@ ______________________________________________________________________
 
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
+| v1.4 | 1 | 3 | Expanded verified parity from macOS-only runtime/package surfaces into a verified Linux runtime slice with a dedicated Linux evidence command |
 | v1.3 | 1 | 3 | Extended verified parity into packaging-visible launcher behavior and hardened the packaged evidence surface with a representative config-persistence proof |
 | v1.2 | 1 | 6 | Expanded verified parity from help/config into export and transform slices, then hardened fixture coverage and audit metadata |
 | v1.1 | 1 | 3 | Expanded the verified CLI slice set from `--version` to help/version/config persistence |
@@ -230,6 +283,7 @@ ______________________________________________________________________
 
 | Milestone | Tests | Coverage | Zero-Dep Additions |
 |-----------|-------|----------|-------------------|
+| v1.4 | Verified Linux launcher runtime parity for representative help/version/config/export/transform flows | milestone-scoped | reused the existing slice fixtures instead of cloning a second platform-specific corpus |
 | v1.3 | Verified packaged launcher parity for bundle layout, startup handoff, packaged help/version, and representative config persistence | milestone-scoped | reused the existing bundled Rust CLI slice instead of broadening packaged scope prematurely |
 | v1.2 | Verified fixture parity for export and transform workflows plus summary metadata auditability | milestone-scoped | kept parity command-per-slice-family and added summary requirement metadata |
 | v1.1 | Verified fixture parity for help/version/config persistence | milestone-scoped | kept fixture verification command-per-slice |

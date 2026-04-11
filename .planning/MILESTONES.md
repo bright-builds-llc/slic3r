@@ -1,5 +1,37 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.4 Linux Parity Foundation (Shipped: 2026-04-11)
+
+**Delivered:** Established the preferred Rust-backed Linux runtime path for the
+existing verified slice, proved it through a dedicated shared parity command,
+and published Linux validation state in the checked-in parity and migration
+surfaces.
+
+**Phases completed:** 21-23 (7 plans total)
+
+**Key accomplishments:**
+
+- Delivered a preferred Linux launcher/runtime shim and Bazel smoke surface for
+  the existing verified Rust-backed slice
+- Added shared Linux runtime parity evidence for representative
+  help/version/config/export/transform flows
+- Published `linux.runtime` as `verified` in the checked-in parity status data
+  source and aligned the migration docs to that exact scope
+- Archived the v1.4 phase history, milestone audit, and milestone requirements
+  into the milestone archive set
+
+**Stats:**
+
+- 3 phases, 7 plans
+- 3 shipped phase commits for phases 21-23, plus milestone-init commits
+- Milestone archive: [v1.4-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.4-ROADMAP.md)
+
+**What's next:** start validated Windows runtime parity, extend
+packaging-visible launcher parity cross-platform, and decide the GUI migration
+strategy
+
+______________________________________________________________________
+
 ## v1.3 Packaging-Visible Parity (Shipped: 2026-04-11)
 
 **Delivered:** Extended the preferred Rust-backed macOS path into
@@ -12,19 +44,24 @@ through shared bundle and representative config-persistence evidence.
 
 - Delivered a scoped macOS packaged launcher bundle and startup shim for the
   verified Rust-backed slice
+
 - Added shared packaging parity evidence for bundle layout, startup handoff,
   packaged `--help`, packaged `--version`, and representative config
   persistence
+
 - Promoted `launcher-packaging` to `verified` with an explicit evidence command
   and aligned the packaged launcher docs and notes to that exact scope
+
 - Archived the v1.3 phase history, milestone audit, and milestone requirements
   into the milestone archive set
 
 **Stats:**
 
 - 3 phases, 6 plans
+
 - 3 shipped phase commits for phases 18-20, plus milestone-init and gap-phase
   planning commits
+
 - Milestone archive: [v1.3-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.3-ROADMAP.md)
 
 **What's next:** start validated Linux and Windows parity work, extend
