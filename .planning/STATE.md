@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.4 milestone_name: Linux Parity Foundation status: active stopped_at: phase 22 complete last_updated: "2026-04-11T21:28:35Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 2 total_plans: 7 completed_plans: 5 percent: 67
+## gsd_state_version: 1.0 milestone: v1.4 milestone_name: Linux Parity Foundation status: active stopped_at: phase 23 complete last_updated: "2026-04-11T21:42:40Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 3 total_plans: 7 completed_plans: 7 percent: 100
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 23: Linux Parity Visibility
+**Current focus:** Milestone audit
 
 ## Current Position
 
 Phase: 23 of 23 (Linux Parity Visibility)
-Plan: 0 of 2 in current phase
-Status: Ready to discuss
-Last activity: 2026-04-11 — Phase 22 complete: Linux shared runtime parity command is verified
+Plan: 2 of 2 in current phase
+Status: Milestone complete
+Last activity: 2026-04-11 — Phase 23 complete: Linux validation state is published in parity status and docs
 
-Progress: [███████░░░] 67%
+Progress: [██████████] 100%
 
 ## Accumulated Context
 
@@ -45,6 +45,8 @@ Recent decisions affecting next work:
 - Phase 22 adds `bazel run //packages/parity:linux_runtime_parity` for shared
   Linux runtime evidence across representative help/version/config/export/
   transform workflows
+- Phase 23 publishes Linux validation state in `packages/parity/status.tsv`
+  and the migration docs without claiming Linux packaging parity
 
 ### Pending Todos
 
@@ -57,5 +59,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-11
-Stopped at: Phase `22` complete, ready for `/gsd-discuss-phase 23`
+Stopped at: Phase `23` complete, milestone ready for audit
 Resume file: None

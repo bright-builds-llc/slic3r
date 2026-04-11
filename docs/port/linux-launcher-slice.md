@@ -28,4 +28,7 @@ This document defines the first scoped Linux runtime surface for the Rust port.
 ## Verification Status
 
 - Phase 21 adds the preferred Linux launcher/runtime path and smoke surface.
-- Shared Linux parity evidence is still deferred to Phase 22.
+- Phase 22 adds shared Linux parity evidence through
+  `bazel run //packages/parity:linux_runtime_parity`.
+- Linux packaging-visible parity remains later work; this verified slice covers
+  runtime handoff only.

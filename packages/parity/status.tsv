@@ -4,6 +4,7 @@ cli.help	verified	//packages/parity:cli_help_parity	Shared fixture comparison pr
 cli.other	legacy-only	packages/legacy-slic3r/slic3r.pl	Merge/cut/layout, multi-input transforms, and broader packaged CLI behavior remain legacy-owned
 export.workflows	verified	//packages/parity:export_workflows_parity	Shared fixture comparison proves the scoped export workflows and supported output naming
 transform.workflows	verified	//packages/parity:transform_workflows_parity	Shared fixture comparison proves the scoped info, repair, and split workflows and their bounded filenames
+linux.runtime	verified	//packages/parity:linux_runtime_parity	Shared parity evidence proves the preferred Linux launcher/runtime path for the supported help/version/config/export/transform slice
 config	legacy-only	packages/legacy-slic3r/lib/Slic3r/Config.pm	Contract inventory remains the current source of truth
 config.persistence	verified	//packages/parity:cli_config_persistence_parity	Shared fixture comparison proves the scoped Rust-backed save/load/datadir slice
 file-formats	in progress	docs/port/cli-slice.md	Scoped export format families are fixture-verified; broader input and format parity remain legacy-owned

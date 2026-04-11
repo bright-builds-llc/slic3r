@@ -17,7 +17,7 @@
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
 | `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, and CLI crate boundaries plus a Bazel-native verification surface |
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim plus the scoped macOS packaged launcher/startup surface |
-| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, export, transform, and scoped macOS packaged launcher slices |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, export, transform, and scoped macOS packaged launcher slices |
 | `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, export, transform, and scoped macOS packaged launcher slices |
 
 ## Notes
@@ -37,3 +37,5 @@
 - Phase 18 adds a scoped macOS packaged launcher bundle under `packages/launcher/package/osx` and documents its bundle layout expectations.
 - Phase 19 adds parity evidence and fixture coverage for the scoped macOS packaged launcher slice.
 - Phase 21 adds a preferred Linux runtime shim under `packages/launcher/package/linux` for the existing verified Rust-backed slice.
+- Phase 22 adds a shared Linux runtime parity command that validates the
+  preferred Linux launcher path against the existing verified slice.

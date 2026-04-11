@@ -22,6 +22,9 @@
   evidence for the supported Linux launcher/runtime slice.
 - `status.tsv` is the checked-in data source for that command.
 
+Linux runtime validation now publishes as its own status row. Linux packaging
+and Windows validation remain deferred.
+
 ## Scope
 
 - Keep status reporting conservative.

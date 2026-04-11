@@ -107,12 +107,15 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   fixture comparison command for the verified scoped transform/info workflows
 - `bazel run //packages/parity:macos_packaged_launcher_parity` is the shared
   parity command for the verified scoped macOS packaged launcher slice
+- `bazel run //packages/parity:linux_runtime_parity` is the shared parity
+  command for the verified scoped Linux runtime slice
 - `packages/parity/status.tsv` is the checked-in status data source
 - `packages/parity-fixtures/README.md` defines the package-local fixture update
   rules, and the fixture package now contains seeded corpora for:
   - `cli.version`
   - `cli.help`
   - `config.persistence`
+  - `linux.runtime`
   - `export.workflows`
   - `transform.workflows`
   - `launcher-packaging`

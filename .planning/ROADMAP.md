@@ -83,8 +83,8 @@ Plans:
 
 Plans:
 
-- [ ] 23-01: Publish Linux runtime validation state in parity status and package docs
-- [ ] 23-02: Align migration docs with the verified Linux runtime slice and remaining platform gaps
+- [x] 23-01: Publish Linux runtime validation state in parity status and package docs
+- [x] 23-02: Align migration docs with the verified Linux runtime slice and remaining platform gaps
 
 ## Progress
 
@@ -95,4 +95,4 @@ Phases execute in numeric order: 21 → 22 → 23
 |-------|-----------|----------------|--------|-----------|
 | 21. Linux Launcher Runtime Slice | v1.4 | 3/3 | Complete | 2026-04-11 |
 | 22. Linux Shared Parity Evidence | v1.4 | 2/2 | Complete | 2026-04-11 |
-| 23. Linux Parity Visibility | v1.4 | 0/2 | Not started | - |
+| 23. Linux Parity Visibility | v1.4 | 2/2 | Complete | 2026-04-11 |
