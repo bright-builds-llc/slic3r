@@ -2,6 +2,61 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.3 — Packaging-Visible Parity
+
+**Shipped:** 2026-04-11\
+**Phases:** 3 | **Plans:** 6 | **Sessions:** 1 milestone completion cycle with 1 audit-driven gap-closure phase
+
+### What Was Built
+
+- A scoped macOS packaged launcher bundle and startup shim for the verified
+  Rust-backed slice
+- Shared packaged parity evidence for bundle layout, startup handoff, packaged
+  `--help`, packaged `--version`, and representative config persistence
+- Aligned packaged launcher docs, notes, and parity status for the exact
+  packaged evidence surface
+- Archived v1.3 phase history, requirements, and audit artifacts for the next
+  milestone boundary
+
+### What Worked
+
+- Treating the packaged launcher surface as its own parity slice kept the
+  packaging work verifiable instead of vague.
+- Using one representative packaged config-persistence path was enough to prove
+  the packaged startup shim does real bounded work without overclaiming every
+  packaged subflow.
+
+### What Was Inefficient
+
+- The milestone-completion helper still leaves live planning files in a
+  half-archived state and needs manual cleanup for `PROJECT.md`, `ROADMAP.md`,
+  `STATE.md`, and the milestone summary entry.
+- The strict lifecycle hardening caught Phase 20 correctly, but only after a
+  fallback-planned attempt had already been committed, which created avoidable
+  rework.
+
+### Patterns Established
+
+- Packaged parity should verify one real packaged workflow beyond `--help` and
+  `--version`, not just bundle layout.
+- Packaged-scope notes should describe only what the shared packaged evidence
+  command actually proves; broader slice ownership belongs elsewhere.
+
+### Key Lessons
+
+1. A packaged parity command is only trustworthy when it exercises the packaged
+   startup shim through at least one representative stateful workflow.
+1. Lifecycle provenance is now a real execution gate; fallback planning must be
+   corrected before execution instead of papered over during wrap-up.
+
+### Cost Observations
+
+- Model mix: Codex-led execution with the retained legacy oracle still doing
+  the slowest parity confirmation work
+- Sessions: 1 milestone completion cycle with 1 formal gap-closure phase
+- Notable: the packaging work stayed manageable because the evidence surface
+  was kept narrow and reused the existing CLI parity slice
+
 ## Milestone: v1.2 — Export and Transform Parity
 
 **Shipped:** 2026-04-11\
@@ -166,6 +221,7 @@ ______________________________________________________________________
 
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
+| v1.3 | 1 | 3 | Extended verified parity into packaging-visible launcher behavior and hardened the packaged evidence surface with a representative config-persistence proof |
 | v1.2 | 1 | 6 | Expanded verified parity from help/config into export and transform slices, then hardened fixture coverage and audit metadata |
 | v1.1 | 1 | 3 | Expanded the verified CLI slice set from `--version` to help/version/config persistence |
 | v1.0 | 1 | 8 | Established the full Bazel/Rust/legacy/parity migration control plane |
@@ -174,6 +230,7 @@ ______________________________________________________________________
 
 | Milestone | Tests | Coverage | Zero-Dep Additions |
 |-----------|-------|----------|-------------------|
+| v1.3 | Verified packaged launcher parity for bundle layout, startup handoff, packaged help/version, and representative config persistence | milestone-scoped | reused the existing bundled Rust CLI slice instead of broadening packaged scope prematurely |
 | v1.2 | Verified fixture parity for export and transform workflows plus summary metadata auditability | milestone-scoped | kept parity command-per-slice-family and added summary requirement metadata |
 | v1.1 | Verified fixture parity for help/version/config persistence | milestone-scoped | kept fixture verification command-per-slice |
 | v1.0 | Verified fixture parity for `cli.version` plus package verification surfaces | milestone-scoped | kept new runtime dependencies minimal |

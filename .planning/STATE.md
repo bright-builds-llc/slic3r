@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: active stopped_at: Phase 20 complete, milestone ready for audit last_updated: "2026-04-11T18:40:33Z" last_activity: 2026-04-11 -- Phase 20 complete: packaged launcher parity now proves representative config persistence progress: total_phases: 3 completed_phases: 3 total_plans: 6 completed_plans: 6 percent: 100
+## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: between_milestones stopped_at: v1.3 archived last_updated: "2026-04-11T00:00:00Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 3 total_plans: 6 completed_plans: 6 percent: 100
 
 # Project State
 
@@ -8,18 +8,14 @@ ______________________________________________________________________
 
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
-**Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
-legacy behavior and interfaces closely enough that the old implementation can
-eventually be retired without breaking the contracts users and integrators
-depend on.\
-**Current focus:** Milestone audit
+**Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
+**Current focus:** Planning the next milestone
 
 ## Current Position
 
-Phase: 20 of 20 (Packaged Launcher Flow Coverage)\
-Plan: 2 of 2 in current phase\
-Status: Milestone complete\
-Last activity: 2026-04-11 -- Phase 20 complete: packaged launcher parity now proves representative config persistence
+Milestone state: `v1.3` archived
+Status: Between milestones
+Last activity: 2026-04-11 — Archived v1.3 and prepared the repo for the next milestone
 
 Progress: [██████████] 100%
 
@@ -29,7 +25,7 @@ Progress: [██████████] 100%
 
 Decisions are logged in `PROJECT.md` Key Decisions table.
 
-Recent decisions affecting current work:
+Recent decisions affecting next work:
 
 - Bazel remains the top-level build and test entrypoint for the migration
 - Legacy Slic3r remains the retained parity oracle and reference package
@@ -37,18 +33,9 @@ Recent decisions affecting current work:
   config persistence, export, and non-slicing transform slices
 - Shared parity commands and fixture corpora are now the evidence surface for
   the verified CLI/export/transform slice
-- Current phase summaries carry `requirements-completed` metadata for milestone
-  audit traceability
-- Phase 18: `bazel run //packages/launcher:macos_packaged_launcher_bundle` now
-  materializes a scoped `Slic3r.app`-style bundle for the verified macOS slice
-- Phase 18: `bazel test //packages/launcher:macos_packaged_launcher_smoke`
-  validates the packaged startup shim and bundle layout
-- Phase 19: `bazel run //packages/parity:macos_packaged_launcher_parity` now
-  verifies the scoped macOS packaged launcher bundle and startup handoff
-- Phase 20: `bazel run //packages/parity:macos_packaged_launcher_parity` now
-  verifies representative packaged config persistence through the packaged
-  startup shim in addition to bundle layout, packaged `--help`, and packaged
-  `--version`
+- Packaging-visible launcher behavior on macOS is now verified through a shared
+  packaged evidence command that proves bundle layout, startup handoff, packaged
+  help/version, and representative config persistence
 
 ### Pending Todos
 
@@ -60,6 +47,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-11\
-Stopped at: Phase 20 complete, milestone ready for audit\
+Last session: 2026-04-11
+Stopped at: Milestone `v1.3` archived, ready for `/gsd-new-milestone`
 Resume file: None

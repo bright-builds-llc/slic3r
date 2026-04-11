@@ -12,7 +12,20 @@ Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior 
 
 ## Current State
 
-v1.2 shipped the export and transform parity milestone:
+v1.3 shipped the packaging-visible parity milestone:
+
+- the preferred Rust-backed macOS path now includes a scoped packaged launcher
+  bundle and startup shim for the verified CLI/export/transform slice
+- shared packaged parity evidence now proves bundle layout, startup handoff,
+  packaged `--help`, packaged `--version`, and representative packaged config
+  persistence
+- `launcher-packaging` is now `verified` in the parity status source, and the
+  packaged launcher docs and notes match that exact evidence scope
+- the v1.3 phase history, requirements, and audit are archived under
+  `.planning/milestones/`
+
+<details>
+<summary>v1.2 shipped the export and transform parity milestone</summary>
 
 - the preferred Rust-backed macOS CLI path now supports verified export
   workflows for G-code, STL, OBJ, AMF, 3MF, layered SVG, and explicit SLA SVG
@@ -23,19 +36,7 @@ v1.2 shipped the export and transform parity milestone:
 - milestone summaries now carry `requirements-completed` metadata, and the
   `docs/port/` overview docs now match the verified parity surface
 
-## Current Milestone: v1.3 Packaging-Visible Parity
-
-**Goal:** Extend the preferred Rust-backed macOS path into packaging-visible
-launcher behavior so the packaged startup surface, bundle layout, and parity
-evidence are no longer legacy-only.
-
-**Target features:**
-
-- Preferred packaged macOS launcher/startup path for the currently supported
-  Rust-backed CLI slice
-- MacOS bundle and startup-surface parity for the supported launcher slice
-- Shared parity evidence and status/docs for packaging-visible launcher
-  behavior
+</details>
 
 <details>
 <summary>v1.1 shipped the CLI parity expansion milestone</summary>
@@ -66,11 +67,12 @@ evidence are no longer legacy-only.
 
 ## Next Milestone Goals
 
-- Start Linux and Windows parity work in dedicated follow-up milestones
+- Start validated Linux parity work in a dedicated follow-up milestone
+- Start validated Windows parity work in a dedicated follow-up milestone
+- Extend packaging-visible launcher parity beyond macOS only after each
+  platform has a credible Rust-backed runtime slice
 - Decide the GUI migration strategy once packaging-visible parity has broader
-  coverage
-- Expand beyond scoped macOS packaging parity only after the packaged launcher
-  surface is verifiable
+  platform coverage
 
 ## Requirements
 
@@ -97,14 +99,21 @@ evidence are no longer legacy-only.
   v1.2
 - ✓ Current milestone summaries now expose `requirements-completed` metadata
   for audit traceability — v1.2
+- ✓ The preferred packaged macOS launcher/startup path now exists for the
+  verified Rust-backed slice — v1.3
+- ✓ Shared parity evidence now verifies macOS packaging-visible launcher
+  behavior and artifact layout for the scoped packaged launcher surface — v1.3
+- ✓ Packaging status and migration docs now reflect the scoped packaged macOS
+  launcher slice accurately — v1.3
 
 ### Active
 
-- [ ] Deliver the preferred packaged macOS launcher/startup path for the
-  currently supported Rust-backed CLI slice
-- [ ] Verify macOS packaging-visible launcher behavior and artifact layout
-  through shared parity evidence
-- [ ] Keep Linux/Windows and GUI parity out of scope for this milestone
+- [ ] Run validated Rust-backed parity workflows on Linux
+- [ ] Run validated Rust-backed parity workflows on Windows
+- [ ] Verify packaging-visible launcher behavior for Linux and Windows through
+  shared parity evidence
+- [ ] Define a concrete milestone and acceptance strategy for the future GUI
+  migration
 
 ### Out of Scope
 
@@ -156,4 +165,4 @@ The audience for this work is broad:
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-11 after starting v1.3 Packaging-Visible Parity*
+*Last updated: 2026-04-11 after v1.3 milestone*
