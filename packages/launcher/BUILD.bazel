@@ -2,6 +2,8 @@ package(default_visibility = ["//visibility:public"])
 
 exports_files([
     "README.md",
+    "package/linux/startup_script.sh",
+    "package/linux/test_linux_launcher.sh",
     "package/osx/build_bundle.sh",
     "package/osx/packaged_slice.txt",
     "package/osx/startup_script.sh",
@@ -11,6 +13,30 @@ exports_files([
 alias(
     name = "slic3r",
     actual = "//packages/slic3r-rust:slic3r_cli",
+)
+
+sh_binary(
+    name = "linux_slic3r",
+    srcs = ["package/linux/startup_script.sh"],
+    data = [
+        ":slic3r",
+    ],
+    args = [
+        "$(location :slic3r)",
+    ],
+)
+
+sh_test(
+    name = "linux_launcher_smoke",
+    srcs = ["package/linux/test_linux_launcher.sh"],
+    data = [
+        ":slic3r",
+        "package/linux/startup_script.sh",
+    ],
+    args = [
+        "$(location package/linux/startup_script.sh)",
+        "$(location :slic3r)",
+    ],
 )
 
 sh_binary(
@@ -53,6 +79,8 @@ filegroup(
     name = "package_boundary",
     srcs = [
         "README.md",
+        "package/linux/startup_script.sh",
+        "package/linux/test_linux_launcher.sh",
         "package/osx/build_bundle.sh",
         "package/osx/packaged_slice.txt",
         "package/osx/startup_script.sh",

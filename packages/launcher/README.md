@@ -27,6 +27,8 @@ entrypoint path.
 - Phase 18 adds a scoped macOS packaged launcher surface at
   `bazel run //packages/launcher:macos_packaged_launcher_bundle`, which
   materializes a `Slic3r.app`-style bundle for the already verified CLI slice.
+- Phase 21 adds `bazel run //packages/launcher:linux_slic3r -- ...` as the
+  preferred Linux runtime path for the existing verified Rust-backed slice.
 - Merge/cut/layout, multi-input transforms, geometry/output-content parity, and
   packaging-visible behavior remain legacy-owned until later phases expand the
   supported slice.

@@ -10,12 +10,12 @@ depend on.
 
 ### Linux Launcher Runtime
 
-- [ ] **LNX-01**: User can run the preferred Rust-backed Linux launcher path for
+- [x] **LNX-01**: User can run the preferred Rust-backed Linux launcher path for
   the supported `--help` and `--version` slice.
-- [ ] **LNX-02**: User can run the currently verified config persistence,
+- [x] **LNX-02**: User can run the currently verified config persistence,
   export, and non-slicing transform workflows through the preferred Rust-backed
   Linux launcher path.
-- [ ] **LNX-03**: Maintainer can build and invoke the Linux Rust-backed runtime
+- [x] **LNX-03**: Maintainer can build and invoke the Linux Rust-backed runtime
   path from Bazel without relying on macOS-specific packaging surfaces.
 
 ### Linux Parity Evidence
@@ -56,9 +56,9 @@ depend on.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| LNX-01 | Phase 21 | Pending |
-| LNX-02 | Phase 21 | Pending |
-| LNX-03 | Phase 21 | Pending |
+| LNX-01 | Phase 21 | Complete |
+| LNX-02 | Phase 21 | Complete |
+| LNX-03 | Phase 21 | Complete |
 | LNX-04 | Phase 22 | Pending |
 | LNX-05 | Phase 23 | Pending |
 

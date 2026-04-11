@@ -73,6 +73,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   entrypoint scaffold
 - Phase 6 makes `--version` the first supported Rust-backed macOS CLI workflow
   through `bazel run //packages/launcher:slic3r -- --version`
+- Phase 21 adds the preferred Linux runtime path through
+  `bazel run //packages/launcher:linux_slic3r -- --help`
 - Phase 18 adds a scoped macOS packaged launcher bundle through
   `bazel run //packages/launcher:macos_packaged_launcher_bundle`
 
@@ -87,6 +89,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   surfaces and defers implementation claims to later phases
 - `docs/port/packaged-launcher-slice.md` now documents the scoped macOS package
   bundle layout and startup expectations for the preferred launcher surface
+- `docs/port/linux-launcher-slice.md` now documents the scoped Linux runtime
+  handoff for the preferred launcher surface
 
 ## Current Parity Visibility State
 

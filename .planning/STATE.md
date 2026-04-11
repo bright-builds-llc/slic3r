@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.4 milestone_name: Linux Parity Foundation status: active stopped_at: roadmap created last_updated: "2026-04-11T00:00:00Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 0 total_plans: 7 completed_plans: 0 percent: 0
+## gsd_state_version: 1.0 milestone: v1.4 milestone_name: Linux Parity Foundation status: active stopped_at: phase 21 complete last_updated: "2026-04-11T19:05:00Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 1 total_plans: 7 completed_plans: 3 percent: 33
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 21: Linux Launcher Runtime Slice
+**Current focus:** Phase 22: Linux Shared Parity Evidence
 
 ## Current Position
 
-Phase: 21 of 23 (Linux Launcher Runtime Slice)
-Plan: 0 of 3 in current phase
+Phase: 22 of 23 (Linux Shared Parity Evidence)
+Plan: 0 of 2 in current phase
 Status: Ready to discuss
-Last activity: 2026-04-11 — Created roadmap for milestone v1.4 Linux Parity Foundation
+Last activity: 2026-04-11 — Phase 21 complete: Linux launcher runtime slice is available through Bazel
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 33%
 
 ## Accumulated Context
 
@@ -39,6 +39,9 @@ Recent decisions affecting next work:
   help/version, and representative config persistence
 - v1.4 will focus on validated Linux runtime parity for the existing verified
   slice before Linux packaging-visible parity is attempted
+- Phase 21 adds `bazel run //packages/launcher:linux_slic3r -- ...` and
+  `bazel test //packages/launcher:linux_launcher_smoke` for the preferred Linux
+  runtime path of the existing verified slice
 
 ### Pending Todos
 
@@ -51,5 +54,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-11
-Stopped at: Milestone `v1.4 Linux Parity Foundation` initialized, ready for Phase 21 discuss
+Stopped at: Phase `21` complete, ready for `/gsd-discuss-phase 22`
 Resume file: None

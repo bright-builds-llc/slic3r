@@ -40,9 +40,9 @@ already verified help/version/config/export/transform slice.
 
 Plans:
 
-- [ ] 21-01: Model the Linux launcher/runtime contract and entrypoint boundaries for the existing verified slice
-- [ ] 21-02: Implement the preferred Linux launcher/runtime path for the supported help/version/config/export/transform workflows
-- [ ] 21-03: Document the supported Linux runtime slice and the remaining platform-specific packaging gaps
+- [x] 21-01: Model the Linux launcher/runtime contract and entrypoint boundaries for the existing verified slice
+- [x] 21-02: Implement the preferred Linux launcher/runtime path for the supported help/version/config/export/transform workflows
+- [x] 21-03: Document the supported Linux runtime slice and the remaining platform-specific packaging gaps
 
 ### Phase 22: Linux Shared Parity Evidence
 
@@ -93,6 +93,6 @@ Phases execute in numeric order: 21 → 22 → 23
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 21. Linux Launcher Runtime Slice | v1.4 | 0/3 | Not started | - |
+| 21. Linux Launcher Runtime Slice | v1.4 | 3/3 | Complete | 2026-04-11 |
 | 22. Linux Shared Parity Evidence | v1.4 | 0/2 | Not started | - |
 | 23. Linux Parity Visibility | v1.4 | 0/2 | Not started | - |
