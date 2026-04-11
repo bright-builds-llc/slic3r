@@ -12,7 +12,19 @@ Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior 
 
 ## Current State
 
-v1.1 shipped the CLI parity expansion milestone:
+v1.2 shipped the export and transform parity milestone:
+
+- the preferred Rust-backed macOS CLI path now supports verified export
+  workflows for G-code, STL, OBJ, AMF, 3MF, layered SVG, and explicit SLA SVG
+- the preferred Rust-backed macOS CLI path now supports verified non-slicing
+  `--info`, `--repair`, and `--split` behavior on macOS
+- shared parity commands now verify help, version, config persistence, export
+  workflows, and transform workflows
+- milestone summaries now carry `requirements-completed` metadata, and the
+  `docs/port/` overview docs now match the verified parity surface
+
+<details>
+<summary>v1.1 shipped the CLI parity expansion milestone</summary>
 
 - the preferred Rust-backed macOS CLI path now supports `--help`, `--version`,
   `--save`, `--load`, and `--datadir`
@@ -20,18 +32,7 @@ v1.1 shipped the CLI parity expansion milestone:
   shared fixture comparison commands
 - parity visibility now reports those supported CLI slices as `verified`
 
-## Current Milestone: v1.2 Export and Transform Parity
-
-**Goal:** Expand Rust-backed macOS CLI parity into export workflows and selected
-non-slicing transform actions while keeping the supported slice explicitly
-bounded and verifiable.
-
-**Target features:**
-
-- Rust-backed export workflows for the next supported output slices
-- Rust-backed non-slicing transform and info actions for the next supported CLI
-  surface
-- Shared fixtures and parity visibility for those export/transform slices
+</details>
 
 <details>
 <summary>v1.0 shipped the migration foundation milestone</summary>
@@ -72,17 +73,23 @@ bounded and verifiable.
   `--version`, and scoped config persistence on macOS — v1.1
 - ✓ Shared fixture comparison commands now verify the supported help, version,
   and config persistence slices — v1.1
+- ✓ The preferred Rust-backed CLI path now supports verified export workflows
+  for G-code, STL, OBJ, AMF, 3MF, layered SVG, and explicit SLA SVG — v1.2
+- ✓ The preferred Rust-backed CLI path now supports verified non-slicing
+  `--info`, `--repair`, and `--split` behavior on macOS — v1.2
+- ✓ Shared parity commands now verify the scoped export and transform slices —
+  v1.2
+- ✓ Current milestone summaries now expose `requirements-completed` metadata
+  for audit traceability — v1.2
 
 ### Active
 
-- [ ] Deliver Rust-backed export workflows through the preferred launcher path
-  on macOS
-- [ ] Deliver Rust-backed non-slicing transform and info actions through the
-  preferred launcher path on macOS
-- [ ] Expand shared fixtures and parity visibility for the supported
-  export/transform slices
-- [ ] Keep broader packaging-visible, Linux/Windows, and GUI parity scoped to
-  later milestones
+- [ ] Verify packaging-visible launcher behavior on macOS through shared parity
+  evidence
+- [ ] Run validated Rust-backed parity workflows on Linux
+- [ ] Run validated Rust-backed parity workflows on Windows
+- [ ] Define a concrete milestone and acceptance strategy for the future GUI
+  migration
 
 ### Out of Scope
 
@@ -134,4 +141,4 @@ The audience for this work is broad:
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-08 after starting v1.2 Export and Transform Parity*
+*Last updated: 2026-04-11 after v1.2 milestone*

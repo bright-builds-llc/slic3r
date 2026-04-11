@@ -2,6 +2,62 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.2 — Export and Transform Parity
+
+**Shipped:** 2026-04-11\
+**Phases:** 6 | **Plans:** 14 | **Sessions:** 1 milestone completion cycle with follow-up gap-closure passes
+
+### What Was Built
+
+- Rust-backed export workflows for G-code, STL, OBJ, AMF, 3MF, layered SVG,
+  and explicit `--export-sla-svg`
+- Rust-backed non-slicing `--info`, `--repair`, and `--split` behavior
+- Shared fixture comparison commands for export and transform workflows
+- Full fixture coverage for the explicit SLA SVG alias and the documented
+  `--info` input matrix
+- `requirements-completed` summary metadata and control-plane doc alignment for
+  stronger milestone audits
+
+### What Worked
+
+- Keeping the implementation surface scoped and the verification surface
+  explicit made it possible to expand parity without losing traceability.
+- Phase-specific gap-closure passes worked well for converting audit findings
+  into deterministic cleanup work instead of letting docs/process debt linger.
+
+### What Was Inefficient
+
+- The milestone-completion helper still required substantial manual cleanup for
+  `PROJECT.md`, `ROADMAP.md`, `RETROSPECTIVE.md`, and the new milestone entry.
+- `mdformat` is unsafe for phase `*-SUMMARY.md` files in this repo because it
+  can flatten YAML frontmatter that the audit tooling depends on.
+
+### Patterns Established
+
+- Verify export and transform surfaces with dedicated parity commands backed by
+  fixture corpora that map directly to the supported slice.
+- Carry `requirements-completed` metadata in summary frontmatter so milestone
+  audits can cross-check claims against phase outputs.
+- Treat the `docs/port/` overview files as part of parity completion, not as
+  optional polish after the behavior is already verified.
+
+### Key Lessons
+
+1. A parity row is not truly done until the overview docs and status surfaces
+   say the same thing as the fixture commands.
+1. Audit-trail metadata needs to be treated like product state: if the field is
+   mandatory for tooling, it must be preserved explicitly and not handed to
+   a formatter blindly.
+
+### Cost Observations
+
+- Model mix: Codex-led execution with the retained legacy oracle still doing
+  the slowest work
+- Sessions: 1 milestone completion cycle with 2 follow-up gap-closure passes
+- Notable: the legacy oracle rebuild remains expensive, but the parity commands
+  stay understandable because each verified surface maps to one explicit
+  evidence command
+
 ## Milestone: v1.1 — CLI Parity Expansion
 
 **Shipped:** 2026-04-08\
@@ -110,6 +166,7 @@ ______________________________________________________________________
 
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
+| v1.2 | 1 | 6 | Expanded verified parity from help/config into export and transform slices, then hardened fixture coverage and audit metadata |
 | v1.1 | 1 | 3 | Expanded the verified CLI slice set from `--version` to help/version/config persistence |
 | v1.0 | 1 | 8 | Established the full Bazel/Rust/legacy/parity migration control plane |
 
@@ -117,6 +174,7 @@ ______________________________________________________________________
 
 | Milestone | Tests | Coverage | Zero-Dep Additions |
 |-----------|-------|----------|-------------------|
+| v1.2 | Verified fixture parity for export and transform workflows plus summary metadata auditability | milestone-scoped | kept parity command-per-slice-family and added summary requirement metadata |
 | v1.1 | Verified fixture parity for help/version/config persistence | milestone-scoped | kept fixture verification command-per-slice |
 | v1.0 | Verified fixture parity for `cli.version` plus package verification surfaces | milestone-scoped | kept new runtime dependencies minimal |
 
@@ -124,3 +182,4 @@ ______________________________________________________________________
 
 1. Shared parity fixtures should arrive as soon as a supported Rust-backed slice exists.
 1. Migration docs and executable package boundaries need to move together.
+1. Milestone audit metadata should be treated as a first-class artifact, not post-hoc prose.
