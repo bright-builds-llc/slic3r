@@ -1,0 +1,5 @@
+CFBundleExecutable=Slic3r
+CFBundleIdentifier=org.slic3r.packaged-launcher
+CFBundlePackageType=APPL
+CFBundleIconFile=Slic3r.icns
+LSMinimumSystemVersion=10.13

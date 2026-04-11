@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: active stopped_at: phase 18 complete last_updated: "2026-04-11T15:10:03Z" last_activity: 2026-04-11 progress: total_phases: 2 completed_phases: 1 total_plans: 4 completed_plans: 2 percent: 50
+## gsd_state_version: 1.0 milestone: v1.3 milestone_name: Packaging-Visible Parity status: milestone_complete stopped_at: phase 19 complete last_updated: "2026-04-11T15:18:40Z" last_activity: 2026-04-11 progress: total_phases: 2 completed_phases: 2 total_plans: 4 completed_plans: 4 percent: 100
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.\
-**Current focus:** Phase 19: macOS Packaging Parity Evidence
+**Current focus:** Milestone v1.3 audit
 
 ## Current Position
 
 Phase: 19 of 19 (macOS Packaging Parity Evidence)\
-Plan: 0 of 2 in current phase\
-Status: Ready to discuss\
-Last activity: 2026-04-11 — Phase 18 macOS Packaged Launcher Slice completed
+Plan: 2 of 2 in current phase\
+Status: Milestone complete, ready to audit\
+Last activity: 2026-04-11 — Phase 19 macOS Packaging Parity Evidence completed
 
-Progress: [█████░░░░░] 50%
+Progress: [██████████] 100%
 
 ## Accumulated Context
 
@@ -40,6 +40,8 @@ Recent decisions affecting current work:
   materializes a scoped `Slic3r.app`-style bundle for the verified macOS slice
 - Phase 18: `bazel test //packages/launcher:macos_packaged_launcher_smoke`
   validates the packaged startup shim and bundle layout
+- Phase 19: `bazel run //packages/parity:macos_packaged_launcher_parity` now
+  verifies the scoped macOS packaged launcher bundle and startup handoff
 
 ### Pending Todos
 
@@ -52,5 +54,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-11\
-Stopped at: Phase 18 complete, Phase 19 ready to discuss\
+Stopped at: Phase 19 complete, milestone ready to audit\
 Resume file: None

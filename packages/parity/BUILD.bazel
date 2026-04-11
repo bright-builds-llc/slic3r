@@ -101,6 +101,36 @@ sh_binary(
     ],
 )
 
+sh_binary(
+    name = "macos_packaged_launcher_parity",
+    srcs = ["compare_macos_packaged_launcher.sh"],
+    data = [
+        "//packages/launcher:macos_packaged_launcher_bundle",
+        "//packages/launcher:slic3r",
+        "//packages/launcher:package/osx/startup_script.sh",
+        "//packages/legacy-slic3r:var/Slic3r.icns",
+        "//packages/launcher:package/osx/packaged_slice.txt",
+        "//packages/parity-fixtures:macos_packaged_launcher_bundle",
+        "//packages/parity-fixtures:macos_packaged_launcher_expected_files",
+        "//packages/parity-fixtures:macos_packaged_launcher_expected_notes",
+        "//packages/parity-fixtures:macos_packaged_launcher_expected_plist",
+        "//packages/parity-fixtures:cli_version_expected",
+        "//packages/parity-fixtures:cli_help_expected",
+    ],
+    args = [
+        "$(location //packages/launcher:macos_packaged_launcher_bundle)",
+        "$(location //packages/launcher:slic3r)",
+        "$(location //packages/launcher:package/osx/startup_script.sh)",
+        "$(location //packages/legacy-slic3r:var/Slic3r.icns)",
+        "$(location //packages/launcher:package/osx/packaged_slice.txt)",
+        "$(location //packages/parity-fixtures:macos_packaged_launcher_expected_files)",
+        "$(location //packages/parity-fixtures:macos_packaged_launcher_expected_notes)",
+        "$(location //packages/parity-fixtures:macos_packaged_launcher_expected_plist)",
+        "$(location //packages/parity-fixtures:cli_version_expected)",
+        "$(location //packages/parity-fixtures:cli_help_expected)",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [

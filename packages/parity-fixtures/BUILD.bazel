@@ -39,6 +39,10 @@ exports_files([
     "transform-workflows/expected-split-stdout.txt",
     "transform-workflows/expected-split-01.stl",
     "transform-workflows/expected-split-02.stl",
+    "macos-packaged-launcher/README.md",
+    "macos-packaged-launcher/expected-bundle-files.txt",
+    "macos-packaged-launcher/expected-packaged-slice.txt",
+    "macos-packaged-launcher/expected-plist-values.txt",
 ])
 
 alias(
@@ -151,6 +155,31 @@ filegroup(
     ],
 )
 
+alias(
+    name = "macos_packaged_launcher_expected_files",
+    actual = "macos-packaged-launcher/expected-bundle-files.txt",
+)
+
+alias(
+    name = "macos_packaged_launcher_expected_notes",
+    actual = "macos-packaged-launcher/expected-packaged-slice.txt",
+)
+
+alias(
+    name = "macos_packaged_launcher_expected_plist",
+    actual = "macos-packaged-launcher/expected-plist-values.txt",
+)
+
+filegroup(
+    name = "macos_packaged_launcher_bundle",
+    srcs = [
+        "macos-packaged-launcher/README.md",
+        "macos-packaged-launcher/expected-bundle-files.txt",
+        "macos-packaged-launcher/expected-packaged-slice.txt",
+        "macos-packaged-launcher/expected-plist-values.txt",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
@@ -191,5 +220,9 @@ filegroup(
         "transform-workflows/expected-split-stdout.txt",
         "transform-workflows/expected-split-01.stl",
         "transform-workflows/expected-split-02.stl",
+        "macos-packaged-launcher/README.md",
+        "macos-packaged-launcher/expected-bundle-files.txt",
+        "macos-packaged-launcher/expected-packaged-slice.txt",
+        "macos-packaged-launcher/expected-plist-values.txt",
     ],
 )

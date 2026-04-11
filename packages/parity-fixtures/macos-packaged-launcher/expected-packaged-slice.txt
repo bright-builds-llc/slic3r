@@ -1,0 +1,16 @@
+This packaged bundle is the scoped macOS packaging-visible launcher slice for
+the currently verified Rust-backed CLI/export/transform surface.
+
+Supported packaged launcher behavior:
+- --help
+- --version
+- --save
+- --load
+- --datadir
+- scoped export workflows
+- scoped transform/info workflows
+
+Deferred:
+- full DMG/signing/notarization parity
+- Linux and Windows packaging
+- broader packaged feature parity beyond the currently verified slice

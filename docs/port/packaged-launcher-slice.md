@@ -9,6 +9,8 @@ for the Rust port.
   - `bazel run //packages/launcher:macos_packaged_launcher_bundle`
 - Verify the packaged startup path:
   - `bazel test //packages/launcher:macos_packaged_launcher_smoke`
+- Verify the packaged launcher slice through shared parity evidence:
+  - `bazel run //packages/parity:macos_packaged_launcher_parity`
 - Bundle output:
   - `.planning/.tmp/macos-packaged-launcher/Slic3r.app`
 
@@ -34,3 +36,9 @@ for the Rust port.
 - The startup shim is packaging-visible only; it does not own business logic.
 - Signing, notarization, DMG generation, and broader packaged feature parity
   remain later work.
+
+## Verification Status
+
+- Phase 18 makes the scoped macOS packaged launcher bundle available.
+- Phase 19 verifies the bundle layout and packaged startup behavior through
+  `bazel run //packages/parity:macos_packaged_launcher_parity`.

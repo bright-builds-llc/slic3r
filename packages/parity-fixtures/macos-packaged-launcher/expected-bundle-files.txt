@@ -1,0 +1,6 @@
+./Contents/Info.plist
+./Contents/MacOS/Slic3r
+./Contents/MacOS/slic3r_cli
+./Contents/PkgInfo
+./Contents/Resources/Slic3r.icns
+./Contents/Resources/packaged-slice.txt
