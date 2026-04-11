@@ -1,18 +1,6 @@
----
-gsd_state_version: 1.0
-milestone: v1.2
-milestone_name: Export and Transform Parity
-status: between_milestones
-stopped_at: v1.2 archived
-last_updated: "2026-04-11T00:00:00Z"
-last_activity: 2026-04-11
-progress:
-  total_phases: 6
-  completed_phases: 6
-  total_plans: 14
-  completed_plans: 14
-  percent: 100
----
+______________________________________________________________________
+
+## gsd_state_version: 1.0 milestone: v1.2 milestone_name: Export and Transform Parity status: between_milestones stopped_at: v1.2 archived last_updated: "2026-04-11T00:00:00Z" last_activity: 2026-04-11 progress: total_phases: 6 completed_phases: 6 total_plans: 14 completed_plans: 14 percent: 100
 
 # Project State
 
