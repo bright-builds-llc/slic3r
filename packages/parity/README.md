@@ -20,6 +20,8 @@
   representative packaged config persistence flow.
 - `bazel run //packages/parity:linux_runtime_parity` runs the shared parity
   evidence for the supported Linux launcher/runtime slice.
+- `bazel run //packages/parity:windows_runtime_parity` runs the shared parity
+  evidence for the supported Windows runtime slice.
 - `status.tsv` is the checked-in data source for that command.
 
 Linux runtime validation now publishes as its own status row. Linux packaging

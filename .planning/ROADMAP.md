@@ -65,8 +65,8 @@ parity evidence.
 
 Plans:
 
-- [ ] 25-01: Add Windows parity fixtures and comparison commands for the supported runtime slice
-- [ ] 25-02: Verify representative Windows runtime workflows through the shared parity evidence surface
+- [x] 25-01: Add Windows parity fixtures and comparison commands for the supported runtime slice
+- [x] 25-02: Verify representative Windows runtime workflows through the shared parity evidence surface
 
 ### Phase 26: Windows Parity Visibility
 
@@ -97,5 +97,5 @@ Phases execute in numeric order: 24 → 25 → 26
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 24. Windows Launcher Runtime Slice | v1.6 | 3/3 | Complete | 2026-04-11 |
-| 25. Windows Shared Parity Evidence | v1.6 | 0/2 | Not started | - |
+| 25. Windows Shared Parity Evidence | v1.6 | 2/2 | Complete | 2026-04-11 |
 | 26. Windows Parity Visibility | v1.6 | 0/2 | Not started | - |

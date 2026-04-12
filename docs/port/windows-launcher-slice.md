@@ -45,7 +45,7 @@ port.
 
 - Phase 24 adds the preferred Windows runtime target and the repo-native smoke
   surface for that target.
-- Phase 25 will add shared parity fixtures and a reviewable Windows runtime
-  evidence command.
+- Phase 25 adds shared Windows parity evidence through
+  `bazel run //packages/parity:windows_runtime_parity`.
 - Phase 26 will publish Windows validation state through the parity status and
   migration documentation surfaces.

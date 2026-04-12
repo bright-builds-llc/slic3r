@@ -25,3 +25,6 @@ corpora.
   packaged config persistence through the startup shim.
 - Phase 22 adds a Linux runtime parity bundle that reuses the verified
   help/version/config/export/transform fixtures for the preferred Linux launcher path.
+- Phase 25 adds a Windows runtime parity bundle that reuses the verified
+  help/version/config/export/transform fixtures for the preferred Windows
+  runtime path.

@@ -48,6 +48,7 @@ exports_files([
     "macos-packaged-launcher/load-extra.ini",
     "macos-packaged-launcher/expected-load.txt",
     "linux-runtime/README.md",
+    "windows-runtime/README.md",
 ])
 
 alias(
@@ -260,6 +261,26 @@ filegroup(
 )
 
 filegroup(
+    name = "windows_runtime_bundle",
+    srcs = [
+        "windows-runtime/README.md",
+        "cli-version/stdout.txt",
+        "cli-help/stdout.txt",
+        "config-persistence/expected-save.ini",
+        "config-persistence/load-base.ini",
+        "config-persistence/load-extra.ini",
+        "config-persistence/expected-load.txt",
+        "export-workflows/model.stl",
+        "export-workflows/expected-gcode.txt",
+        "transform-workflows/expected-info-stl.txt",
+        "transform-workflows/expected-repair.obj",
+        "transform-workflows/expected-split-stdout.txt",
+        "transform-workflows/expected-split-01.stl",
+        "transform-workflows/expected-split-02.stl",
+    ],
+)
+
+filegroup(
     name = "package_boundary",
     srcs = [
         "README.md",
@@ -308,5 +329,6 @@ filegroup(
         "macos-packaged-launcher/load-extra.ini",
         "macos-packaged-launcher/expected-load.txt",
         "linux-runtime/README.md",
+        "windows-runtime/README.md",
     ],
 )
