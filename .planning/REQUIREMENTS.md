@@ -1,0 +1,68 @@
+# Requirements: Slic3r Rust Port
+
+**Defined:** 2026-04-11\
+**Core Value:** Deliver a trustworthy Rust successor to Slic3r that matches the
+legacy behavior and interfaces closely enough that the old implementation can
+eventually be retired without breaking the contracts users and integrators
+depend on.
+
+## v1 Requirements
+
+### Windows Launcher Runtime
+
+- [ ] **WIN-01**: User can run the preferred Rust-backed Windows launcher path
+  for the supported `--help` and `--version` slice.
+- [ ] **WIN-02**: User can run the currently verified config persistence,
+  export, and non-slicing transform workflows through the preferred Rust-backed
+  Windows launcher path.
+- [ ] **WIN-03**: Maintainer can build and invoke the Windows Rust-backed
+  runtime path from Bazel without relying on macOS or Linux launcher shims.
+
+### Windows Parity Evidence
+
+- [ ] **WIN-04**: Maintainer can execute shared parity evidence for the
+  supported Windows Rust-backed runtime slice.
+- [ ] **WIN-05**: Maintainer can see Windows validation state reflected
+  accurately in the parity status command and migration docs.
+
+## v2 Requirements
+
+### Broader Packaging
+
+- **PACK-05**: Maintainer can verify packaging-visible launcher behavior for
+  Linux and Windows through shared parity evidence.
+
+### GUI
+
+- **GUI-01**: Maintainer has a concrete milestone and acceptance strategy for
+  the future GUI migration.
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| Windows packaging-visible parity in this milestone | First establish a validated Windows runtime slice before claiming Windows packaging parity |
+| Cross-platform Linux and Windows packaging parity in this milestone | Packaging work should follow after both non-macOS runtime slices are independently verified |
+| GUI migration planning or implementation in this milestone | Platform/runtime parity still matters more than GUI planning |
+| Broad new CLI slices beyond the currently verified help/version/config/export/transform surface | This milestone stabilizes Windows support for the existing verified slice rather than broadening feature scope |
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| WIN-01 | Phase 24 | Pending |
+| WIN-02 | Phase 24 | Pending |
+| WIN-03 | Phase 24 | Pending |
+| WIN-04 | Phase 25 | Pending |
+| WIN-05 | Phase 26 | Pending |
+
+**Coverage:**
+
+- v1 requirements: 5 total
+- Mapped to phases: 5
+- Unmapped: 0 ✓
+
+______________________________________________________________________
+
+*Requirements defined: 2026-04-11*\
+*Last updated: 2026-04-11 after milestone v1.6 definition*
