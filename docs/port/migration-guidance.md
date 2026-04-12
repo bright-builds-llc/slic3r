@@ -69,9 +69,8 @@ boundaries.
   - keep the repo's status language conservative and macOS-first
 - Deferred to later phases:
   - Rust-backed CLI implementation and preferred entrypoint replacement
-  - the parity status command under `packages/parity`
   - the shared fixture corpus under `packages/parity-fixtures`
-  - Linux and Windows implementation parity
+  - Linux and Windows packaging-visible parity
   - GUI replacement work
 - The docs should prefer plain statements of what is deferred over optimistic
   wording. If the repo cannot prove a surface today, keep it `legacy-only` and

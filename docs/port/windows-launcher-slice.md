@@ -29,8 +29,9 @@ port.
 - This phase does not claim parity for packaged `Slic3r.exe`,
   `Slic3r-console.exe`, bundled DLL layout, archive naming, or installer
   behavior.
-- Shared Windows parity evidence and published Windows validation status remain
-  later work in Phases 25 and 26.
+- Shared Windows parity evidence now exists for the bounded runtime slice, and
+  the published Windows validation state now flows through the parity status
+  surface. Windows packaging-visible behavior remains later work.
 
 ## Relationship To Legacy Windows Packaging
 
@@ -47,5 +48,6 @@ port.
   surface for that target.
 - Phase 25 adds shared Windows parity evidence through
   `bazel run //packages/parity:windows_runtime_parity`.
-- Phase 26 will publish Windows validation state through the parity status and
+- Phase 26 publishes Windows validation state through
+  `bazel run //packages/parity:status`, `packages/parity/status.tsv`, and the
   migration documentation surfaces.

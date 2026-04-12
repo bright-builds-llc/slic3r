@@ -17,8 +17,8 @@
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
 | `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, and CLI crate boundaries plus a Bazel-native verification surface |
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the preferred Windows runtime target, and the scoped macOS packaged launcher/startup surface |
-| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, export, transform, and scoped macOS packaged launcher slices |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, export, transform, and scoped macOS packaged launcher slices |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, and scoped macOS packaged launcher slices |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, and scoped macOS packaged launcher slices |
 
 ## Notes
 
@@ -40,3 +40,6 @@
 - Phase 24 adds a preferred Windows runtime target through `//packages/launcher:windows_slic3r` for the existing verified Rust-backed slice.
 - Phase 22 adds a shared Linux runtime parity command that validates the
   preferred Linux launcher path against the existing verified slice.
+- Phase 25 adds a shared Windows runtime parity command under `packages/parity`.
+- Phase 26 publishes the bounded Windows runtime validation state through
+  `packages/parity/status.tsv` and the migration docs.

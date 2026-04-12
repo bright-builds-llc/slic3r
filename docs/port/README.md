@@ -116,6 +116,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   parity command for the verified scoped macOS packaged launcher slice
 - `bazel run //packages/parity:linux_runtime_parity` is the shared parity
   command for the verified scoped Linux runtime slice
+- `bazel run //packages/parity:windows_runtime_parity` is the shared parity
+  command for the verified scoped Windows runtime slice
 - `packages/parity/status.tsv` is the checked-in status data source
 - `packages/parity-fixtures/README.md` defines the package-local fixture update
   rules, and the fixture package now contains seeded corpora for:
@@ -123,6 +125,7 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   - `cli.help`
   - `config.persistence`
   - `linux.runtime`
+  - `windows.runtime`
   - `export.workflows`
   - `transform.workflows`
   - `launcher-packaging`

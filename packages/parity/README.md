@@ -24,8 +24,8 @@
   evidence for the supported Windows runtime slice.
 - `status.tsv` is the checked-in data source for that command.
 
-Linux runtime validation now publishes as its own status row. Linux packaging
-and Windows validation remain deferred.
+Linux and Windows runtime validation now publish as their own status rows.
+Linux and Windows packaging parity remain deferred.
 
 ## Scope
 

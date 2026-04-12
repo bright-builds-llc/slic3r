@@ -22,7 +22,7 @@ depend on.
 
 - [x] **WIN-04**: Maintainer can execute shared parity evidence for the
   supported Windows Rust-backed runtime slice.
-- [ ] **WIN-05**: Maintainer can see Windows validation state reflected
+- [x] **WIN-05**: Maintainer can see Windows validation state reflected
   accurately in the parity status command and migration docs.
 
 ## v2 Requirements
@@ -54,7 +54,7 @@ depend on.
 | WIN-02 | Phase 24 | Complete |
 | WIN-03 | Phase 24 | Complete |
 | WIN-04 | Phase 25 | Complete |
-| WIN-05 | Phase 26 | Pending |
+| WIN-05 | Phase 26 | Complete |
 
 **Coverage:**
 
@@ -65,4 +65,4 @@ depend on.
 ______________________________________________________________________
 
 *Requirements defined: 2026-04-11*\
-*Last updated: 2026-04-11 after Phase 25 Windows shared parity evidence*
+*Last updated: 2026-04-12 after Phase 26 Windows parity visibility*

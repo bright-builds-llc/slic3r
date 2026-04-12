@@ -86,8 +86,8 @@ Plans:
 
 Plans:
 
-- [ ] 26-01: Publish Windows runtime validation state in parity status and package docs
-- [ ] 26-02: Align migration docs with the verified Windows runtime slice and remaining platform gaps
+- [x] 26-01: Publish Windows runtime validation state in parity status and package docs
+- [x] 26-02: Align migration docs with the verified Windows runtime slice and remaining platform gaps
 
 ## Progress
 
@@ -98,4 +98,4 @@ Phases execute in numeric order: 24 → 25 → 26
 |-------|-----------|----------------|--------|-----------|
 | 24. Windows Launcher Runtime Slice | v1.6 | 3/3 | Complete | 2026-04-11 |
 | 25. Windows Shared Parity Evidence | v1.6 | 2/2 | Complete | 2026-04-11 |
-| 26. Windows Parity Visibility | v1.6 | 0/2 | Not started | - |
+| 26. Windows Parity Visibility | v1.6 | 2/2 | Complete | 2026-04-12 |
