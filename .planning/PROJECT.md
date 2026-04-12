@@ -24,6 +24,19 @@ v1.4 shipped the Linux parity foundation milestone:
 - the v1.4 phase history, requirements, and audit are archived under
   `.planning/milestones/`
 
+## Current Milestone: v1.6 Windows Parity Foundation
+
+**Goal:** Establish a validated Windows runtime path for the already verified
+Rust-backed CLI/export/transform slice before attempting Windows packaging parity.
+
+**Target features:**
+
+- Preferred Rust-backed Windows launcher/runtime path for the existing verified
+  help/version/config/export/transform slice
+- Shared Windows parity evidence for the supported runtime slice
+- Windows validation state reflected cleanly in the parity status source and
+  migration docs
+
 <details>
 <summary>v1.3 shipped the packaging-visible parity milestone</summary>
 
@@ -82,12 +95,12 @@ v1.4 shipped the Linux parity foundation milestone:
 
 ## Next Milestone Goals
 
-- Start validated Windows runtime parity work using the Linux runtime pattern
-  as the next platform baseline
 - Extend packaging-visible launcher parity beyond macOS only after Linux and
   Windows each have a credible Rust-backed runtime slice
 - Define the GUI migration strategy once platform/runtime parity has broader
   coverage
+- Revisit cross-platform packaging and release-channel automation only after
+  both non-macOS runtime slices are verified
 
 ## Requirements
 
@@ -129,25 +142,25 @@ v1.4 shipped the Linux parity foundation milestone:
 
 ### Active
 
-- [ ] User can run a validated Rust-backed runtime path on Windows for the
-  existing verified help/version/config/export/transform slice
+- [ ] User can run the preferred Rust-backed Windows launcher/runtime path for
+  the existing verified help/version/config/export/transform slice
 - [ ] Maintainer can verify the supported Windows runtime slice through shared
   parity evidence
-- [ ] Maintainer can verify packaging-visible launcher behavior for Linux and
-  Windows through shared parity evidence
-- [ ] Maintainer has a concrete milestone and acceptance strategy for the
-  future GUI migration
+- [ ] The parity status source and migration docs reflect Windows validation
+  state accurately
+- [ ] Windows packaging-visible parity remains deferred until the Windows runtime
+  slice is validated
 
 ### Out of Scope
 
-- Linux packaging-visible parity and distro packaging in this milestone — v1.4
-  stopped at validated Linux runtime parity by design
-- Windows runtime or packaging parity in this milestone — separate follow-up
-  milestone after Linux foundations
+- Windows packaging-visible parity and installer packaging in this milestone —
+  first establish a validated Windows runtime slice
+- Linux and Windows cross-platform packaging parity in this milestone — each
+  platform still needs its own validated runtime boundary first
 - GUI migration planning or implementation in this milestone — platform/runtime
   parity still takes precedence
 - Broad feature redesign or new CLI slices beyond the currently verified
-  surface — v1.4 stabilized Linux parity for the existing slice instead
+  surface — this milestone stabilizes Windows parity for the existing slice
 - Treating the legacy package as an active feature-development surface — it
   remains the reference implementation except for minimal oracle upkeep
 
@@ -193,4 +206,4 @@ The audience for this work is broad:
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-11 after v1.4 milestone*
+*Last updated: 2026-04-11 after starting v1.6 Windows Parity Foundation*

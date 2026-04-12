@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.4 milestone_name: Linux Parity Foundation status: between_milestones stopped_at: v1.4 archived last_updated: "2026-04-11T00:00:00Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 3 total_plans: 7 completed_plans: 7 percent: 100
+## gsd_state_version: 1.0 milestone: v1.6 milestone_name: Windows Parity Foundation status: active stopped_at: milestone initialized last_updated: "2026-04-11T00:00:00Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 0 total_plans: 7 completed_plans: 0 percent: 0
 
 # Project State
 
@@ -9,15 +9,16 @@ ______________________________________________________________________
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Planning the next milestone
+**Current focus:** Defining requirements for v1.6 Windows Parity Foundation
 
 ## Current Position
 
-Milestone state: `v1.4` archived
-Status: Between milestones
-Last activity: 2026-04-11 — Archived v1.4 and prepared the repo for the next milestone
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-04-11 — Started milestone v1.6 Windows Parity Foundation
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Accumulated Context
 
@@ -35,6 +36,8 @@ Recent decisions affecting next work:
   the verified CLI/export/transform slice
 - v1.4 proved the preferred Linux runtime shim, the shared Linux parity command,
   and the Linux validation state publication surface
+- v1.6 will focus on validated Windows runtime parity for the existing verified
+  slice before Windows packaging-visible parity is attempted
 
 ### Pending Todos
 
@@ -47,5 +50,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-11
-Stopped at: Milestone `v1.4` archived, ready for `/gsd-new-milestone`
+Stopped at: Milestone `v1.6 Windows Parity Foundation` initialized, defining requirements
 Resume file: None
