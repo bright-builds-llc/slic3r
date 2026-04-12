@@ -1,6 +1,6 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.6 milestone_name: Windows Parity Foundation status: active stopped_at: roadmap created last_updated: "2026-04-11T00:00:00Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 0 total_plans: 7 completed_plans: 0 percent: 0
+## gsd_state_version: 1.0 milestone: v1.6 milestone_name: Windows Parity Foundation status: active stopped_at: phase 24 complete last_updated: "2026-04-12T01:27:05Z" last_activity: 2026-04-11 progress: total_phases: 3 completed_phases: 1 total_plans: 7 completed_plans: 3 percent: 33
 
 # Project State
 
@@ -9,16 +9,16 @@ ______________________________________________________________________
 See: `.planning/PROJECT.md` (updated 2026-04-11)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 24: Windows Launcher Runtime Slice
+**Current focus:** Phase 25: Windows Shared Parity Evidence
 
 ## Current Position
 
-Phase: 24 of 26 (Windows Launcher Runtime Slice)
-Plan: 0 of 3 in current phase
+Phase: 25 of 26 (Windows Shared Parity Evidence)
+Plan: 0 of 2 in current phase
 Status: Ready to discuss
-Last activity: 2026-04-11 — Created roadmap for milestone v1.6 Windows Parity Foundation
+Last activity: 2026-04-11 — Completed Phase 24 Windows launcher runtime slice
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 33%
 
 ## Accumulated Context
 
@@ -38,6 +38,8 @@ Recent decisions affecting next work:
   and the Linux validation state publication surface
 - v1.6 will focus on validated Windows runtime parity for the existing verified
   slice before Windows packaging-visible parity is attempted
+- v1.6 now has a preferred Windows runtime target and smoke surface for the
+  existing verified help/version/config/export/transform slice
 
 ### Pending Todos
 
@@ -50,5 +52,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-11
-Stopped at: Milestone `v1.6 Windows Parity Foundation` initialized, ready for Phase 24 discuss
+Stopped at: Phase `24 Windows Launcher Runtime Slice` completed; ready for Phase 25 discuss
 Resume file: None

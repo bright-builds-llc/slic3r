@@ -26,6 +26,14 @@ rust_binary(
     edition = "2024",
 )
 
+rust_binary(
+    name = "slic3r_windows_runtime",
+    srcs = ["src/bin/slic3r_windows_runtime.rs"],
+    crate_root = "src/bin/slic3r_windows_runtime.rs",
+    deps = [":slic3r_cli_lib"],
+    edition = "2024",
+)
+
 rust_test(
     name = "slic3r_cli_test",
     srcs = ["tests/version.rs"],
@@ -38,6 +46,7 @@ rust_clippy(
     testonly = True,
     deps = [
         ":slic3r_cli",
+        ":slic3r_windows_runtime",
         ":slic3r_cli_test",
     ],
 )
@@ -47,6 +56,7 @@ rustfmt_test(
     targets = [
         ":slic3r_cli",
         ":slic3r_cli_lib",
+        ":slic3r_windows_runtime",
         ":slic3r_cli_test",
     ],
 )

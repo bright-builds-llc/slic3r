@@ -12,6 +12,7 @@ slice.
 | Launcher-facing CLI shell | `packages/slic3r-rust/crates/slic3r_cli` | Translate process arguments into contract routing and user-visible exit behavior |
 | Lower-level Rust implementation | `packages/slic3r-rust/crates/slic3r_core` | Hold reusable implementation details that are not themselves the stable launcher contract |
 | Runtime and packaged startup shims | `packages/launcher/package/osx`, `packages/launcher/package/linux` | Stay thin and limited to runtime or packaged handoff into the Rust CLI binary; no Perl business logic moves here |
+| Windows runtime entrypoint | `packages/slic3r-rust/crates/slic3r_cli/src/bin/slic3r_windows_runtime.rs`, `packages/launcher/BUILD.bazel` | Expose the preferred Windows console-style runtime target for the supported slice without adding platform shell shims |
 | Retained reference behavior | `packages/legacy-slic3r` | Remain the parity oracle for unsupported CLI behavior until later phases migrate it |
 
 ## Phase 5 Scope
@@ -42,3 +43,13 @@ slice.
   `LD_LIBRARY_PATH` bootstrap that the legacy package carries.
 - Linux packaging-visible behavior remains deferred; this phase only establishes
   the runtime handoff boundary.
+
+## Phase 24 Windows Runtime Slice
+
+- `bazel run //packages/launcher:windows_slic3r -- ...` now exposes the
+  preferred Windows runtime path for the already verified Rust-backed slice.
+- The Windows runtime path is a direct Rust console entrypoint instead of a
+  PowerShell or shell wrapper, so Bazel can build and invoke it without
+  depending on macOS or Linux launcher shims.
+- Windows packaging-visible behavior remains deferred; this phase only
+  establishes the bounded runtime handoff boundary.

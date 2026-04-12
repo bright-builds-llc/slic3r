@@ -27,6 +27,8 @@ expected to update the relevant docs here in the same change.
   parity evidence, fixture protocol, and scope-now-versus-deferred rules
 - [`packaged-launcher-slice.md`](./packaged-launcher-slice.md) - scoped macOS
   packaged launcher bundle and startup layout expectations
+- [`windows-launcher-slice.md`](./windows-launcher-slice.md) - scoped Windows
+  runtime launcher surface and its deferred packaging boundaries
 - [`parity-matrix.md`](./parity-matrix.md) - contract-surface status using the
   shared migration vocabulary
 - [`package-map.md`](./package-map.md) - package roles, root-owned areas, and
@@ -75,6 +77,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   through `bazel run //packages/launcher:slic3r -- --version`
 - Phase 21 adds the preferred Linux runtime path through
   `bazel run //packages/launcher:linux_slic3r -- --help`
+- Phase 24 adds the preferred Windows runtime path through
+  `bazel run //packages/launcher:windows_slic3r -- --help`
 - Phase 18 adds a scoped macOS packaged launcher bundle through
   `bazel run //packages/launcher:macos_packaged_launcher_bundle`
 
@@ -91,6 +95,9 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   bundle layout and startup expectations for the preferred launcher surface
 - `docs/port/linux-launcher-slice.md` now documents the scoped Linux runtime
   handoff for the preferred launcher surface
+- `docs/port/windows-launcher-slice.md` now documents the scoped Windows
+  runtime handoff for the preferred launcher surface without claiming packaging
+  parity
 
 ## Current Parity Visibility State
 

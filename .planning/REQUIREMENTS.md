@@ -10,12 +10,12 @@ depend on.
 
 ### Windows Launcher Runtime
 
-- [ ] **WIN-01**: User can run the preferred Rust-backed Windows launcher path
+- [x] **WIN-01**: User can run the preferred Rust-backed Windows launcher path
   for the supported `--help` and `--version` slice.
-- [ ] **WIN-02**: User can run the currently verified config persistence,
+- [x] **WIN-02**: User can run the currently verified config persistence,
   export, and non-slicing transform workflows through the preferred Rust-backed
   Windows launcher path.
-- [ ] **WIN-03**: Maintainer can build and invoke the Windows Rust-backed
+- [x] **WIN-03**: Maintainer can build and invoke the Windows Rust-backed
   runtime path from Bazel without relying on macOS or Linux launcher shims.
 
 ### Windows Parity Evidence
@@ -50,9 +50,9 @@ depend on.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| WIN-01 | Phase 24 | Pending |
-| WIN-02 | Phase 24 | Pending |
-| WIN-03 | Phase 24 | Pending |
+| WIN-01 | Phase 24 | Complete |
+| WIN-02 | Phase 24 | Complete |
+| WIN-03 | Phase 24 | Complete |
 | WIN-04 | Phase 25 | Pending |
 | WIN-05 | Phase 26 | Pending |
 
@@ -65,4 +65,4 @@ depend on.
 ______________________________________________________________________
 
 *Requirements defined: 2026-04-11*\
-*Last updated: 2026-04-11 after milestone v1.6 definition*
+*Last updated: 2026-04-11 after Phase 24 Windows launcher runtime slice*

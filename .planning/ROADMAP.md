@@ -42,9 +42,9 @@ the already verified help/version/config/export/transform slice.
 
 Plans:
 
-- [ ] 24-01: Model the Windows launcher/runtime contract and entrypoint boundaries for the existing verified slice
-- [ ] 24-02: Implement the preferred Windows launcher/runtime path for the supported help/version/config/export/transform workflows
-- [ ] 24-03: Document the supported Windows runtime slice and the remaining Windows packaging gaps
+- [x] 24-01: Model the Windows launcher/runtime contract and entrypoint boundaries for the existing verified slice
+- [x] 24-02: Implement the preferred Windows launcher/runtime path for the supported help/version/config/export/transform workflows
+- [x] 24-03: Document the supported Windows runtime slice and the remaining Windows packaging gaps
 
 ### Phase 25: Windows Shared Parity Evidence
 
@@ -96,6 +96,6 @@ Phases execute in numeric order: 24 → 25 → 26
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 24. Windows Launcher Runtime Slice | v1.6 | 0/3 | Not started | - |
+| 24. Windows Launcher Runtime Slice | v1.6 | 3/3 | Complete | 2026-04-11 |
 | 25. Windows Shared Parity Evidence | v1.6 | 0/2 | Not started | - |
 | 26. Windows Parity Visibility | v1.6 | 0/2 | Not started | - |

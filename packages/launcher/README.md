@@ -29,6 +29,9 @@ entrypoint path.
   materializes a `Slic3r.app`-style bundle for the already verified CLI slice.
 - Phase 21 adds `bazel run //packages/launcher:linux_slic3r -- ...` as the
   preferred Linux runtime path for the existing verified Rust-backed slice.
+- Phase 24 adds `bazel run //packages/launcher:windows_slic3r -- ...` as the
+  preferred Windows runtime path for the existing verified Rust-backed slice.
 - Merge/cut/layout, multi-input transforms, geometry/output-content parity, and
   packaging-visible behavior remain legacy-owned until later phases expand the
-  supported slice.
+  supported slice. Windows packaged `Slic3r.exe`-style parity remains deferred
+  even though the runtime entrypoint now exists.

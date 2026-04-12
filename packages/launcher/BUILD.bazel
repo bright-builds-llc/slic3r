@@ -4,6 +4,7 @@ exports_files([
     "README.md",
     "package/linux/startup_script.sh",
     "package/linux/test_linux_launcher.sh",
+    "package/win/test_windows_launcher.sh",
     "package/osx/build_bundle.sh",
     "package/osx/packaged_slice.txt",
     "package/osx/startup_script.sh",
@@ -36,6 +37,22 @@ sh_test(
     args = [
         "$(location package/linux/startup_script.sh)",
         "$(location :slic3r)",
+    ],
+)
+
+alias(
+    name = "windows_slic3r",
+    actual = "//packages/slic3r-rust/crates/slic3r_cli:slic3r_windows_runtime",
+)
+
+sh_test(
+    name = "windows_launcher_smoke",
+    srcs = ["package/win/test_windows_launcher.sh"],
+    data = [
+        ":windows_slic3r",
+    ],
+    args = [
+        "$(location :windows_slic3r)",
     ],
 )
 
@@ -81,6 +98,7 @@ filegroup(
         "README.md",
         "package/linux/startup_script.sh",
         "package/linux/test_linux_launcher.sh",
+        "package/win/test_windows_launcher.sh",
         "package/osx/build_bundle.sh",
         "package/osx/packaged_slice.txt",
         "package/osx/startup_script.sh",
