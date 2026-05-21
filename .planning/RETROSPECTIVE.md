@@ -2,6 +2,64 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.6 — Windows Parity Foundation
+
+**Shipped:** 2026-05-21\
+**Phases:** 3 | **Plans:** 7 | **Sessions:** 1 focused milestone run plus
+closeout UAT and security passes
+
+### What Was Built
+
+- A preferred Windows launcher/runtime target and Bazel smoke surface for the
+  existing verified Rust-backed slice
+- A shared Windows runtime parity command and Windows runtime fixture bundle
+- Windows validation state published in the checked-in parity status source and
+  the migration docs
+- Archived v1.6 phase history and milestone requirements for the next
+  milestone boundary
+
+### What Worked
+
+- Reusing the existing verified help/version/config/export/transform fixtures
+  kept Windows runtime parity narrow and easy to defend.
+- Splitting Windows runtime delivery, shared evidence, and visibility
+  publication across three phases kept each phase independently reviewable.
+
+### What Was Inefficient
+
+- The milestone-completion helper still produced a skeletal milestone entry and
+  left live planning files needing manual cleanup for `PROJECT.md`,
+  `ROADMAP.md`, `STATE.md`, and `MILESTONES.md`.
+- Automated accomplishment extraction for milestone summaries still collapsed
+  to placeholder `Plan XX-YY:` lines instead of the real one-liners from the
+  summary bodies.
+
+### Patterns Established
+
+- New platform work can reuse the Linux-to-Windows ladder directly:
+  launcher/runtime path first, shared parity evidence second, visibility
+  publication third.
+- Publishing validation state deserves a dedicated closeout phase even when the
+  underlying runtime evidence already exists.
+
+### Key Lessons
+
+1. Once the parity surface is bounded and backed by shared evidence, expanding
+   to the next platform is much cheaper than the first platform foundation.
+1. Milestone closeout needs its own verification passes for docs, UAT, and
+   security so archival reflects the real shipped surface rather than just the
+   implementation commits.
+
+### Cost Observations
+
+- Model mix: Codex-led execution with shared parity evidence reusing the
+  retained legacy oracle only where needed
+- Sessions: 1 focused milestone run with later closeout UAT and security gates
+- Notable: Windows runtime parity was cheaper than Linux because the fixture
+  and documentation pattern already existed
+
+______________________________________________________________________
+
 ## Milestone: v1.4 — Linux Parity Foundation
 
 **Shipped:** 2026-04-11\

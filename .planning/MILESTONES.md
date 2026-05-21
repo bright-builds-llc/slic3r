@@ -1,5 +1,38 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.6 Windows Parity Foundation (Shipped: 2026-05-21)
+
+**Delivered:** Established the preferred Rust-backed Windows runtime path for
+the existing verified slice, proved it through a dedicated shared parity
+command, and published Windows validation state in the checked-in parity and
+migration surfaces.
+
+**Phases completed:** 24-26 (7 plans total)
+
+**Key accomplishments:**
+
+- Delivered a preferred Windows runtime target and Bazel smoke surface for the
+  existing verified Rust-backed slice
+- Added shared Windows runtime parity evidence backed by a dedicated fixture
+  bundle that reuses the verified slice fixtures
+- Published `windows.runtime` as `verified` in the checked-in parity status
+  data source and aligned the migration docs to that exact scope
+- Closed the milestone with phase UAT and security verification artifacts for
+  the Windows visibility phase
+
+**Stats:**
+
+- 3 phases, 7 plans
+- 3 shipped phase commits for phases 24-26, plus milestone-init and closeout
+  validation/security commits
+- Milestone archive: [v1.6-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.6-ROADMAP.md)
+
+**What's next:** extend packaging-visible launcher parity cross-platform,
+define the GUI migration strategy, and revisit release-channel automation now
+that both non-macOS runtime slices are verified
+
+______________________________________________________________________
+
 ## v1.4 Linux Parity Foundation (Shipped: 2026-04-11)
 
 **Delivered:** Established the preferred Rust-backed Linux runtime path for the
@@ -13,10 +46,13 @@ surfaces.
 
 - Delivered a preferred Linux launcher/runtime shim and Bazel smoke surface for
   the existing verified Rust-backed slice
+
 - Added shared Linux runtime parity evidence for representative
   help/version/config/export/transform flows
+
 - Published `linux.runtime` as `verified` in the checked-in parity status data
   source and aligned the migration docs to that exact scope
+
 - Archived the v1.4 phase history, milestone audit, and milestone requirements
   into the milestone archive set
 

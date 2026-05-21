@@ -12,7 +12,20 @@ Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior 
 
 ## Current State
 
-v1.4 shipped the Linux parity foundation milestone:
+v1.6 shipped the Windows parity foundation milestone:
+
+- the preferred Rust-backed Windows launcher/runtime path now exists for the
+  verified help/version/config/export/transform slice
+- shared Windows runtime parity evidence now proves representative
+  help/version/config/export/transform flows through the Windows runtime path
+- `windows.runtime` is now `verified` in the parity status source, and the
+  migration docs publish Windows runtime validation without overclaiming
+  Windows packaging parity
+- the v1.6 phase history and milestone requirements are archived under
+  `.planning/milestones/`
+
+<details>
+<summary>v1.4 shipped the Linux parity foundation milestone</summary>
 
 - the preferred Rust-backed Linux launcher/runtime path now exists for the
   verified help/version/config/export/transform slice
@@ -24,18 +37,7 @@ v1.4 shipped the Linux parity foundation milestone:
 - the v1.4 phase history, requirements, and audit are archived under
   `.planning/milestones/`
 
-## Current Milestone: v1.6 Windows Parity Foundation
-
-**Goal:** Establish a validated Windows runtime path for the already verified
-Rust-backed CLI/export/transform slice before attempting Windows packaging parity.
-
-**Target features:**
-
-- Preferred Rust-backed Windows launcher/runtime path for the existing verified
-  help/version/config/export/transform slice
-- Shared Windows parity evidence for the supported runtime slice
-- Windows validation state reflected cleanly in the parity status source and
-  migration docs
+</details>
 
 <details>
 <summary>v1.3 shipped the packaging-visible parity milestone</summary>
@@ -95,12 +97,12 @@ Rust-backed CLI/export/transform slice before attempting Windows packaging parit
 
 ## Next Milestone Goals
 
-- Extend packaging-visible launcher parity beyond macOS only after Linux and
-  Windows each have a credible Rust-backed runtime slice
-- Define the GUI migration strategy once platform/runtime parity has broader
-  coverage
-- Revisit cross-platform packaging and release-channel automation only after
-  both non-macOS runtime slices are verified
+- Extend packaging-visible launcher parity to Linux and Windows now that both
+  non-macOS runtime slices are verified
+- Define the GUI migration strategy once packaging-visible parity has broader
+  cross-platform coverage
+- Revisit cross-platform packaging and release-channel automation after the
+  launcher-packaging evidence surface expands beyond macOS
 
 ## Requirements
 
@@ -139,28 +141,30 @@ Rust-backed CLI/export/transform slice before attempting Windows packaging parit
   through a dedicated Linux parity command — v1.4
 - ✓ Linux validation state is now published in the parity status source and the
   migration docs — v1.4
+- ✓ The preferred Rust-backed Windows launcher/runtime path now exists for the
+  existing verified slice — v1.6
+- ✓ Shared parity evidence now verifies the supported Windows runtime slice
+  through a dedicated Windows parity command — v1.6
+- ✓ Windows validation state is now published in the parity status source and
+  the migration docs — v1.6
 
 ### Active
 
-- [ ] User can run the preferred Rust-backed Windows launcher/runtime path for
-  the existing verified help/version/config/export/transform slice
-- [ ] Maintainer can verify the supported Windows runtime slice through shared
-  parity evidence
-- [ ] The parity status source and migration docs reflect Windows validation
-  state accurately
-- [ ] Windows packaging-visible parity remains deferred until the Windows runtime
-  slice is validated
+- [ ] Maintainer can verify packaging-visible launcher behavior for Linux and
+  Windows through shared parity evidence
+- [ ] Maintainer has a concrete milestone and acceptance strategy for the
+  future GUI migration
+- [ ] Cross-platform packaging and release-channel automation can move onto a
+  shared modern path once non-macOS launcher-packaging evidence exists
 
 ### Out of Scope
 
-- Windows packaging-visible parity and installer packaging in this milestone —
-  first establish a validated Windows runtime slice
-- Linux and Windows cross-platform packaging parity in this milestone — each
-  platform still needs its own validated runtime boundary first
-- GUI migration planning or implementation in this milestone — platform/runtime
-  parity still takes precedence
+- Packaging-visible Linux and Windows parity remain future milestone work even
+  though the runtime slices are now both verified
+- GUI migration planning and implementation remain out of scope until the
+  launcher-packaging story is broader and more stable
 - Broad feature redesign or new CLI slices beyond the currently verified
-  surface — this milestone stabilizes Windows parity for the existing slice
+  surface remain secondary to packaging parity and GUI strategy decisions
 - Treating the legacy package as an active feature-development surface — it
   remains the reference implementation except for minimal oracle upkeep
 
@@ -206,4 +210,4 @@ The audience for this work is broad:
 
 ______________________________________________________________________
 
-*Last updated: 2026-04-11 after starting v1.6 Windows Parity Foundation*
+*Last updated: 2026-05-21 after v1.6 milestone*
