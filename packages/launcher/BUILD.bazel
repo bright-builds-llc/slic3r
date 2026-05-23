@@ -7,6 +7,9 @@ exports_files([
     "package/linux/startup_script.sh",
     "package/linux/test_linux_launcher.sh",
     "package/linux/test_packaged_launcher.sh",
+    "package/win/build_packaged_launcher.sh",
+    "package/win/packaged_slice.txt",
+    "package/win/test_packaged_launcher.sh",
     "package/win/test_windows_launcher.sh",
     "package/osx/build_bundle.sh",
     "package/osx/packaged_slice.txt",
@@ -92,6 +95,34 @@ sh_test(
 )
 
 sh_binary(
+    name = "windows_packaged_launcher_tree",
+    srcs = ["package/win/build_packaged_launcher.sh"],
+    data = [
+        ":windows_slic3r",
+        "package/win/packaged_slice.txt",
+    ],
+    args = [
+        "$(location :windows_slic3r)",
+        "$(location package/win/packaged_slice.txt)",
+    ],
+)
+
+sh_test(
+    name = "windows_packaged_launcher_smoke",
+    srcs = ["package/win/test_packaged_launcher.sh"],
+    data = [
+        ":windows_slic3r",
+        "package/win/build_packaged_launcher.sh",
+        "package/win/packaged_slice.txt",
+    ],
+    args = [
+        "$(location package/win/build_packaged_launcher.sh)",
+        "$(location :windows_slic3r)",
+        "$(location package/win/packaged_slice.txt)",
+    ],
+)
+
+sh_binary(
     name = "macos_packaged_launcher_bundle",
     srcs = ["package/osx/build_bundle.sh"],
     data = [
@@ -136,6 +167,9 @@ filegroup(
         "package/linux/startup_script.sh",
         "package/linux/test_linux_launcher.sh",
         "package/linux/test_packaged_launcher.sh",
+        "package/win/build_packaged_launcher.sh",
+        "package/win/packaged_slice.txt",
+        "package/win/test_packaged_launcher.sh",
         "package/win/test_windows_launcher.sh",
         "package/osx/build_bundle.sh",
         "package/osx/packaged_slice.txt",
