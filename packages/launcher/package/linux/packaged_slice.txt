@@ -1,0 +1,25 @@
+This packaged tree is the scoped Linux packaging-visible launcher slice for the
+currently verified Rust-backed help/version/config/export/transform surface.
+
+The artifact is intentionally a maintainer-inspectable launcher tree, not an
+AppImage, distro package, installer, signed artifact, or release-channel build.
+
+Included:
+- bin/slic3r: thin startup shim that execs the bundled Rust CLI
+- bin/slic3r_cli: Rust CLI binary for the verified slice
+- share/slic3r/packaged-slice.txt: this scope note
+
+Smoke coverage proves:
+- package layout
+- startup handoff
+- --help
+- --version
+- representative config persistence
+- representative export and transform startup flows
+
+Deferred:
+- AppImage, deb, rpm, Flatpak, Snap, and other distro package formats
+- signing, notarization, and release-channel automation
+- GUI packaging behavior
+- new CLI behavior beyond the verified Rust-backed slice
+- shared cross-platform packaged parity evidence

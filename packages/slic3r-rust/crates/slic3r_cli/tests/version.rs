@@ -48,6 +48,9 @@ fn returns_help_text_for_help_slice() {
     assert!(response.stdout.contains("--version"));
     assert!(response.stdout.contains("--export-gcode"));
     assert!(response.stdout.contains("--output <file>"));
+    assert!(response.stdout.contains("Linux packaged launcher tree"));
+    assert!(response.stdout.contains("release-grade packaging"));
+    assert!(!response.stdout.contains("packaged launcher behavior"));
     assert_eq!(response.stderr, "");
     assert_eq!(response.exit_code, 0);
 }

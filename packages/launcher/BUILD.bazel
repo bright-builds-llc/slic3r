@@ -2,8 +2,11 @@ package(default_visibility = ["//visibility:public"])
 
 exports_files([
     "README.md",
+    "package/linux/build_packaged_launcher.sh",
+    "package/linux/packaged_slice.txt",
     "package/linux/startup_script.sh",
     "package/linux/test_linux_launcher.sh",
+    "package/linux/test_packaged_launcher.sh",
     "package/win/test_windows_launcher.sh",
     "package/osx/build_bundle.sh",
     "package/osx/packaged_slice.txt",
@@ -37,6 +40,38 @@ sh_test(
     args = [
         "$(location package/linux/startup_script.sh)",
         "$(location :slic3r)",
+    ],
+)
+
+sh_binary(
+    name = "linux_packaged_launcher_tree",
+    srcs = ["package/linux/build_packaged_launcher.sh"],
+    data = [
+        ":slic3r",
+        "package/linux/packaged_slice.txt",
+        "package/linux/startup_script.sh",
+    ],
+    args = [
+        "$(location :slic3r)",
+        "$(location package/linux/startup_script.sh)",
+        "$(location package/linux/packaged_slice.txt)",
+    ],
+)
+
+sh_test(
+    name = "linux_packaged_launcher_smoke",
+    srcs = ["package/linux/test_packaged_launcher.sh"],
+    data = [
+        ":slic3r",
+        "package/linux/build_packaged_launcher.sh",
+        "package/linux/packaged_slice.txt",
+        "package/linux/startup_script.sh",
+    ],
+    args = [
+        "$(location package/linux/build_packaged_launcher.sh)",
+        "$(location :slic3r)",
+        "$(location package/linux/startup_script.sh)",
+        "$(location package/linux/packaged_slice.txt)",
     ],
 )
 
@@ -96,8 +131,11 @@ filegroup(
     name = "package_boundary",
     srcs = [
         "README.md",
+        "package/linux/build_packaged_launcher.sh",
+        "package/linux/packaged_slice.txt",
         "package/linux/startup_script.sh",
         "package/linux/test_linux_launcher.sh",
+        "package/linux/test_packaged_launcher.sh",
         "package/win/test_windows_launcher.sh",
         "package/osx/build_bundle.sh",
         "package/osx/packaged_slice.txt",

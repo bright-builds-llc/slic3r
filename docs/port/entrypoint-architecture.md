@@ -44,6 +44,16 @@ slice.
 - Linux packaging-visible behavior remains deferred; this phase only establishes
   the runtime handoff boundary.
 
+## Phase 27 Linux Packaged Launcher Slice
+
+- `bazel run //packages/launcher:linux_packaged_launcher_tree` now materializes
+  a scoped Linux package-shaped launcher tree for the already verified
+  Rust-backed slice.
+- The packaged startup command reuses the thin Linux shell handoff and execs the
+  bundled Rust CLI binary; no business behavior moves into packaging shell code.
+- This surface is not AppImage, distro package, installer, signing, GUI, or
+  release-channel support. Shared packaged parity evidence remains later work.
+
 ## Phase 24 Windows Runtime Slice
 
 - `bazel run //packages/launcher:windows_slic3r -- ...` now exposes the

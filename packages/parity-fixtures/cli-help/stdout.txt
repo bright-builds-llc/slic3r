@@ -28,5 +28,9 @@ Usage: slic3r [ OPTIONS ] [ file.stl ] [ file2.stl ] ...
     --load <file>       Load configuration from the specified file
     --datadir <path>    Load and store settings at the given directory
 
+  Rust-backed launcher paths in this milestone:
+    macOS packaged launcher, Linux runtime, Linux packaged launcher tree,
+    and Windows runtime hand off to this Rust CLI slice
+
   Still legacy-owned in this milestone:
-    merge/cut/layout, multi-input transforms, packaged launcher behavior, and geometry/content parity
+    merge/cut/layout, multi-input transforms, release-grade packaging, GUI packaging, and geometry/content parity

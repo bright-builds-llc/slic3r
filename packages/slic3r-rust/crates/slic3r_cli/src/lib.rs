@@ -111,8 +111,12 @@ fn help_text() -> &'static str {
         "    --load <file>       Load configuration from the specified file\n",
         "    --datadir <path>    Load and store settings at the given directory\n",
         "\n",
+        "  Rust-backed launcher paths in this milestone:\n",
+        "    macOS packaged launcher, Linux runtime, Linux packaged launcher tree,\n",
+        "    and Windows runtime hand off to this Rust CLI slice\n",
+        "\n",
         "  Still legacy-owned in this milestone:\n",
-        "    merge/cut/layout, multi-input transforms, packaged launcher behavior, and geometry/content parity\n",
+        "    merge/cut/layout, multi-input transforms, release-grade packaging, GUI packaging, and geometry/content parity\n",
     )
 }
 

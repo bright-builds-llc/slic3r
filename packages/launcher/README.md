@@ -31,7 +31,12 @@ entrypoint path.
   preferred Linux runtime path for the existing verified Rust-backed slice.
 - Phase 24 adds `bazel run //packages/launcher:windows_slic3r -- ...` as the
   preferred Windows runtime path for the existing verified Rust-backed slice.
+- Phase 27 adds `bazel run //packages/launcher:linux_packaged_launcher_tree`
+  as the scoped Linux packaging-visible launcher tree and
+  `bazel test //packages/launcher:linux_packaged_launcher_smoke` as its Bazel
+  smoke surface.
 - Merge/cut/layout, multi-input transforms, geometry/output-content parity, and
   packaging-visible behavior remain legacy-owned until later phases expand the
-  supported slice. Windows packaged `Slic3r.exe`-style parity remains deferred
-  even though the runtime entrypoint now exists.
+  supported slice. Windows packaged `Slic3r.exe`-style parity and release-grade
+  Linux package formats remain deferred even though scoped runtime and Linux
+  packaged launcher entrypoints now exist.
