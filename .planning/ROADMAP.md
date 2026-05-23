@@ -55,7 +55,7 @@ Rust-backed slice.
 
 - [x] **Phase 27: Linux Packaged Launcher Slice** - Maintainer can build and smoke a scoped Linux packaging-visible launcher path. (completed 2026-05-23)
 
-- [ ] **Phase 28: Windows Packaged Launcher Slice** - Maintainer can build and smoke a scoped Windows packaging-visible launcher path.
+- [x] **Phase 28: Windows Packaged Launcher Slice** - Maintainer can build and smoke a scoped Windows packaging-visible launcher path. (completed 2026-05-23)
 
 - [ ] **Phase 29: Cross-Platform Packaging Evidence** - Maintainer can verify Linux and Windows packaged launcher behavior through shared evidence.
 
@@ -93,7 +93,7 @@ Rust-backed slice.
 Plans:
 - [x] 28-01-PLAN.md — Build and smoke the scoped Windows package tree.
 - [x] 28-02-PLAN.md — Align Rust help text and help parity fixtures.
-- [ ] 28-03-PLAN.md — Document package-local Windows launcher discoverability.
+- [x] 28-03-PLAN.md — Document package-local Windows launcher discoverability.
 
 ### Phase 29: Cross-Platform Packaging Evidence
 
@@ -150,6 +150,6 @@ Phases execute in numeric order: 27 -> 28 -> 29 -> 30
 | Phase | Milestone | Plans Complete | Status | Completed |
 | --- | --- | --- | --- | --- |
 | 27. Linux Packaged Launcher Slice | v1.7 | 1/1 | Complete    | 2026-05-23 |
-| 28. Windows Packaged Launcher Slice | v1.7 | 2/3 | In Progress|  |
+| 28. Windows Packaged Launcher Slice | v1.7 | 3/3 | Complete   | 2026-05-23 |
 | 29. Cross-Platform Packaging Evidence | v1.7 | 0/TBD | Not started | - |
 | 30. Packaging Visibility and Docs | v1.7 | 0/TBD | Not started | - |
