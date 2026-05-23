@@ -89,26 +89,26 @@ Which phases cover which requirements. Populated during roadmap creation.
 
 | Requirement | Phase | Status |
 | --- | --- | --- |
-| LPKG-01 | TBD | Pending |
-| LPKG-02 | TBD | Pending |
-| LPKG-03 | TBD | Pending |
-| WPKG-01 | TBD | Pending |
-| WPKG-02 | TBD | Pending |
-| WPKG-03 | TBD | Pending |
-| PKGE-01 | TBD | Pending |
-| PKGE-02 | TBD | Pending |
-| PKGE-03 | TBD | Pending |
-| PVIS-01 | TBD | Pending |
-| PVIS-02 | TBD | Pending |
-| PVIS-03 | TBD | Pending |
+| LPKG-01 | Phase 27 | Pending |
+| LPKG-02 | Phase 27 | Pending |
+| LPKG-03 | Phase 27 | Pending |
+| WPKG-01 | Phase 28 | Pending |
+| WPKG-02 | Phase 28 | Pending |
+| WPKG-03 | Phase 28 | Pending |
+| PKGE-01 | Phase 29 | Pending |
+| PKGE-02 | Phase 29 | Pending |
+| PKGE-03 | Phase 29 | Pending |
+| PVIS-01 | Phase 30 | Pending |
+| PVIS-02 | Phase 30 | Pending |
+| PVIS-03 | Phase 30 | Pending |
 
 **Coverage:**
 
 - v1.7 requirements: 12 total
-- Mapped to phases: 0
-- Unmapped: 12
+- Mapped to phases: 12
+- Unmapped: 0
 
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-22*
-*Last updated: 2026-05-22 after initial v1.7 definition*
+*Last updated: 2026-05-22 after v1.7 roadmap creation*
