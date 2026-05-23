@@ -1,23 +1,24 @@
 ______________________________________________________________________
 
-## gsd_state_version: 1.0 milestone: v1.6 milestone_name: Windows Parity Foundation status: between_milestones stopped_at: v1.6 archived last_updated: "2026-05-21T13:22:39.585Z" last_activity: 2026-05-21 progress: total_phases: 3 completed_phases: 3 total_plans: 7 completed_plans: 7 percent: 100
+## gsd_state_version: 1.0 milestone: v1.7 milestone_name: Cross-Platform Packaging-Visible Parity status: defining_requirements stopped_at: defining requirements last_updated: "2026-05-23T01:29:37.000Z" last_activity: 2026-05-22 progress: total_phases: 0 completed_phases: 0 total_plans: 0 completed_plans: 0 percent: 0
 
 # Project State
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-05-21)
+See: `.planning/PROJECT.md` (updated 2026-05-22)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Planning the next milestone
+**Current focus:** v1.7 Cross-Platform Packaging-Visible Parity
 
 ## Current Position
 
-Milestone state: `v1.6` archived
-Status: Between milestones
-Last activity: 2026-05-21 — Archived v1.6 and prepared the repo for the next milestone
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-05-22 — Milestone v1.7 started
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Accumulated Context
 
@@ -36,6 +37,8 @@ Recent decisions affecting next work:
 - v1.6 proved the preferred Windows runtime target, the shared Windows parity
   command, and the published Windows validation state for the existing verified
   slice
+- v1.7 focuses on extending the scoped packaging-visible launcher evidence from
+  macOS to Linux and Windows before GUI migration planning
 
 ### Pending Todos
 
@@ -47,6 +50,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-21
-Stopped at: Milestone `v1.6` archived, ready for `/gsd-new-milestone`
+Last session: 2026-05-22
+Stopped at: Milestone `v1.7` started, defining requirements and roadmap
 Resume file: None

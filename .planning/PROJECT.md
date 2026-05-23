@@ -10,6 +10,20 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
+## Current Milestone: v1.7 Cross-Platform Packaging-Visible Parity
+
+**Goal:** Extend scoped packaging-visible launcher parity to Linux and Windows
+for the already verified Rust-backed help/version/config/export/transform
+slice.
+
+**Target features:**
+
+- Linux packaged launcher/startup surface with Bazel smoke coverage
+- Windows packaged launcher/startup surface with Bazel smoke coverage
+- Shared packaged parity evidence for Linux and Windows
+- Updated parity status, migration docs, and package docs with explicit scope
+  boundaries
+
 ## Current State
 
 v1.6 shipped the Windows parity foundation milestone:
@@ -150,19 +164,22 @@ v1.6 shipped the Windows parity foundation milestone:
 
 ### Active
 
-- [ ] Maintainer can verify packaging-visible launcher behavior for Linux and
-  Windows through shared parity evidence
-- [ ] Maintainer has a concrete milestone and acceptance strategy for the
-  future GUI migration
-- [ ] Cross-platform packaging and release-channel automation can move onto a
-  shared modern path once non-macOS launcher-packaging evidence exists
+- [ ] Linux has a scoped packaging-visible launcher/startup surface for the
+  already verified Rust-backed help/version/config/export/transform slice
+- [ ] Windows has a scoped packaging-visible launcher/startup surface for the
+  already verified Rust-backed help/version/config/export/transform slice
+- [ ] Maintainer can verify Linux and Windows packaging-visible launcher
+  behavior through shared parity evidence
+- [ ] Parity status, migration docs, and package docs describe the
+  cross-platform packaging-visible launcher scope without overclaiming
+  installer, signing, or release-channel support
 
 ### Out of Scope
 
-- Packaging-visible Linux and Windows parity remain future milestone work even
-  though the runtime slices are now both verified
 - GUI migration planning and implementation remain out of scope until the
   launcher-packaging story is broader and more stable
+- Signing, notarization, AppImage, MSI, DMG, and release-channel automation
+  remain future packaging/release work beyond this scoped launcher milestone
 - Broad feature redesign or new CLI slices beyond the currently verified
   surface remain secondary to packaging parity and GUI strategy decisions
 - Treating the legacy package as an active feature-development surface — it
@@ -208,6 +225,25 @@ The audience for this work is broad:
 | Add a parity-check command that covers both status reporting and behavior comparison over time | The project needs both visible progress tracking and evidence-based parity validation | ✓ Shipped in v1.0 |
 | Require migration docs and checklists under `docs/` by process before adding automation | Documentation discipline is important immediately, but hard enforcement can follow once the workflow settles | ✓ Process shipped in v1.0 |
 
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+
+1. Requirements invalidated? → Move to Out of Scope with reason
+1. Requirements validated? → Move to Validated with phase reference
+1. New requirements emerged? → Add to Active
+1. Decisions to log? → Add to Key Decisions
+1. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+
+1. Full review of all sections
+1. Core Value check — still the right priority?
+1. Audit Out of Scope — reasons still valid?
+1. Update Context with current state
+
 ______________________________________________________________________
 
-*Last updated: 2026-05-21 after v1.6 milestone*
+*Last updated: 2026-05-22 after starting v1.7 milestone*
