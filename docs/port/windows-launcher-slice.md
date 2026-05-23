@@ -32,11 +32,14 @@ surfaces for the Rust port.
   wrapper executable.
 - The scoped packaged launcher tree is
   `.planning/.tmp/windows-packaged-launcher/Slic3r-windows`. Its startup
-  executable is `Slic3r-windows/Slic3r-console.exe`, a direct copy of the Rust
-  console runtime for the verified slice.
+  executable is `Slic3r-windows/Slic3r-console.exe`, a direct copy of the
+  Bazel-built Rust console runtime for the current development host. This
+  proves the Windows-facing package layout and startup naming, not a
+  Windows-native or cross-compiled release binary.
 - This phase does not claim parity for packaged `Slic3r.exe` GUI behavior,
-  MSI, signing, release-channel automation, release archives, broad bundled
-  DLL layout, native Windows installer output, or installer behavior.
+  Windows-native/cross-compiled release output, MSI, signing, release-channel
+  automation, release archives, broad bundled DLL layout, native Windows
+  installer output, or installer behavior.
 - Shared Windows parity evidence now exists for the bounded runtime slice, and
   the published Windows validation state now flows through the parity status
   surface. Shared cross-platform packaged parity evidence remains later work.

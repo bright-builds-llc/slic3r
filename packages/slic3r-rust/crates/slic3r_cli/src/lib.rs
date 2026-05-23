@@ -74,7 +74,7 @@ fn execute_command(command: LauncherCommand) -> CliResponse {
 
     CliResponse {
         stdout: String::new(),
-        stderr: "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, the scoped export flags, and the scoped transform/info flags only.\n".to_owned(),
+        stderr: "Unsupported Rust-backed CLI slice. The current supported Rust-backed workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, the scoped export flags, and the scoped transform/info flags only.\n".to_owned(),
         exit_code: 2,
     }
 }

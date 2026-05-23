@@ -82,7 +82,7 @@ fn keeps_other_cli_flows_out_of_scope() {
     assert_eq!(response.stdout, "");
     assert_eq!(
         response.stderr,
-        "Unsupported Rust-backed CLI slice. The current supported macOS workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, the scoped export flags, and the scoped transform/info flags only.\n",
+        "Unsupported Rust-backed CLI slice. The current supported Rust-backed workflows are `--version`, `--help`, `--save`, `--load`, `--datadir`, the scoped export flags, and the scoped transform/info flags only.\n",
     );
     assert_eq!(response.exit_code, 2);
 }

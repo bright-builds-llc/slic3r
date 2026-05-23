@@ -4,6 +4,8 @@ surface.
 
 The artifact is intentionally a maintainer-inspectable launcher tree, not an
 MSI, zip release archive, signed artifact, installer, or release-channel build.
+It proves the Windows-facing package layout and startup naming for the current
+development host, not a Windows-native or cross-compiled release binary.
 
 Included:
 - Slic3r-console.exe: direct Rust console runtime executable for the verified
@@ -23,6 +25,7 @@ Deferred:
 - zip release archives
 - signing and release-channel automation
 - Slic3r.exe GUI packaging behavior
+- Windows-native or cross-compiled release binaries
 - broad bundled DLL/dependency layout
 - new CLI behavior beyond the verified Rust-backed slice
 - shared cross-platform packaged parity evidence
