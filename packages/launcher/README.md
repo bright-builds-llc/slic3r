@@ -35,8 +35,16 @@ entrypoint path.
   as the scoped Linux packaging-visible launcher tree and
   `bazel test //packages/launcher:linux_packaged_launcher_smoke` as its Bazel
   smoke surface.
+- Phase 28 adds `bazel run //packages/launcher:windows_packaged_launcher_tree`
+  as the scoped Windows packaging-visible launcher tree and
+  `bazel test //packages/launcher:windows_packaged_launcher_smoke` as its
+  Bazel smoke surface. The tree is written to
+  `.planning/.tmp/windows-packaged-launcher/Slic3r-windows`, and its startup
+  executable is `Slic3r-console.exe`.
 - Merge/cut/layout, multi-input transforms, geometry/output-content parity, and
-  packaging-visible behavior remain legacy-owned until later phases expand the
-  supported slice. Windows packaged `Slic3r.exe`-style parity and release-grade
-  Linux package formats remain deferred even though scoped runtime and Linux
-  packaged launcher entrypoints now exist.
+  release-grade packaging remain legacy-owned until later phases expand the
+  supported slice. Windows `Slic3r.exe` GUI packaging, MSI, signing,
+  release-channel automation, release-grade archives, broad bundled
+  DLL/dependency layout, and release-grade Linux package formats remain
+  deferred even though scoped runtime and Linux/Windows packaged launcher
+  entrypoints now exist.
