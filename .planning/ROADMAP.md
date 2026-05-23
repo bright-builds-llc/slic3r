@@ -150,6 +150,6 @@ Phases execute in numeric order: 27 -> 28 -> 29 -> 30
 | Phase | Milestone | Plans Complete | Status | Completed |
 | --- | --- | --- | --- | --- |
 | 27. Linux Packaged Launcher Slice | v1.7 | 1/1 | Complete    | 2026-05-23 |
-| 28. Windows Packaged Launcher Slice | v1.7 | 3/3 | Complete   | 2026-05-23 |
+| 28. Windows Packaged Launcher Slice | v1.7 | 3/3 | Complete    | 2026-05-23 |
 | 29. Cross-Platform Packaging Evidence | v1.7 | 0/TBD | Not started | - |
 | 30. Packaging Visibility and Docs | v1.7 | 0/TBD | Not started | - |
