@@ -165,7 +165,7 @@ docs/port/
 └── README.md
 ```
 
-This structure keeps Windows packaged launcher ownership under `packages/launcher/package/win`, which matches the existing Windows runtime smoke location and the Linux packaged tree pattern. [VERIFIED: packages/launcher/package/win/test_windows_launcher.sh; packages/launcher/package/linux/build_packaged_launcher.sh] Include `docs/port/README.md` if implementation makes its current "without claiming packaging parity" Windows sentence stale. [VERIFIED: docs/port/README.md]
+This structure keeps Windows packaged launcher ownership under `packages/launcher/package/win`, which matches the existing Windows runtime smoke location and the Linux packaged tree pattern. [VERIFIED: packages/launcher/package/win/test_windows_launcher.sh; packages/launcher/package/linux/build_packaged_launcher.sh] Defer `docs/port/README.md` unless Phase 28 implementation directly makes a current sentence stale; do not plan it as broad control-plane documentation. [VERIFIED: docs/port/README.md; .planning/phases/28-windows-packaged-launcher-slice/28-CONTEXT.md]
 
 ### Pattern 1: Bazel-Facing Builder Script
 
@@ -431,9 +431,9 @@ This mirrors the Linux scope-note pattern while using Windows-specific naming an
 |---|-------|---------|---------------|
 | None | All material claims in this research were verified against local repo files, local tool probes, official Bazel docs, the Bazel Central Registry, or pinned Bright Builds standards. | All | No assumption confirmation required. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-None blocking. The planner should include `docs/port/README.md` in the docs task if implementation changes make its current Windows packaging sentence stale. [VERIFIED: docs/port/README.md]
+None blocking. Decision: `docs/port/README.md` is deferred unless Phase 28 implementation directly makes a current sentence stale; Phase 28 must not plan it as broad control-plane docs because cross-platform validation status and broader packaging docs belong in Phase 30. [VERIFIED: docs/port/README.md; .planning/phases/28-windows-packaged-launcher-slice/28-CONTEXT.md]
 
 ## Environment Availability
 

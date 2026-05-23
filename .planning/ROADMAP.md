@@ -88,13 +88,12 @@ Rust-backed slice.
 1. Maintainer can inspect the Windows packaged launcher startup path and find only thin bootstrap handoff logic.
 1. Maintainer can distinguish the Windows launcher artifact from installer, signing, or release-channel support.
 
-**Plans**: 4 plans
+**Plans**: 3 plans
 
 Plans:
 - [ ] 28-01-PLAN.md — Build and smoke the scoped Windows package tree.
 - [ ] 28-02-PLAN.md — Align Rust help text and help parity fixtures.
 - [ ] 28-03-PLAN.md — Document package-local Windows launcher discoverability.
-- [ ] 28-04-PLAN.md — Update broader port control-plane traceability.
 
 ### Phase 29: Cross-Platform Packaging Evidence
 
