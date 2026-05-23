@@ -47,6 +47,12 @@ exports_files([
     "macos-packaged-launcher/load-base.ini",
     "macos-packaged-launcher/load-extra.ini",
     "macos-packaged-launcher/expected-load.txt",
+    "linux-packaged-launcher/README.md",
+    "linux-packaged-launcher/expected-files.txt",
+    "linux-packaged-launcher/expected-packaged-slice.txt",
+    "windows-packaged-launcher/README.md",
+    "windows-packaged-launcher/expected-files.txt",
+    "windows-packaged-launcher/expected-packaged-slice.txt",
     "linux-runtime/README.md",
     "windows-runtime/README.md",
 ])
@@ -260,6 +266,25 @@ filegroup(
     ],
 )
 
+alias(
+    name = "linux_packaged_launcher_expected_files",
+    actual = "linux-packaged-launcher/expected-files.txt",
+)
+
+alias(
+    name = "linux_packaged_launcher_expected_notes",
+    actual = "linux-packaged-launcher/expected-packaged-slice.txt",
+)
+
+filegroup(
+    name = "linux_packaged_launcher_bundle",
+    srcs = [
+        "linux-packaged-launcher/README.md",
+        "linux-packaged-launcher/expected-files.txt",
+        "linux-packaged-launcher/expected-packaged-slice.txt",
+    ],
+)
+
 filegroup(
     name = "windows_runtime_bundle",
     srcs = [
@@ -277,6 +302,25 @@ filegroup(
         "transform-workflows/expected-split-stdout.txt",
         "transform-workflows/expected-split-01.stl",
         "transform-workflows/expected-split-02.stl",
+    ],
+)
+
+alias(
+    name = "windows_packaged_launcher_expected_files",
+    actual = "windows-packaged-launcher/expected-files.txt",
+)
+
+alias(
+    name = "windows_packaged_launcher_expected_notes",
+    actual = "windows-packaged-launcher/expected-packaged-slice.txt",
+)
+
+filegroup(
+    name = "windows_packaged_launcher_bundle",
+    srcs = [
+        "windows-packaged-launcher/README.md",
+        "windows-packaged-launcher/expected-files.txt",
+        "windows-packaged-launcher/expected-packaged-slice.txt",
     ],
 )
 
@@ -328,6 +372,12 @@ filegroup(
         "macos-packaged-launcher/load-base.ini",
         "macos-packaged-launcher/load-extra.ini",
         "macos-packaged-launcher/expected-load.txt",
+        "linux-packaged-launcher/README.md",
+        "linux-packaged-launcher/expected-files.txt",
+        "linux-packaged-launcher/expected-packaged-slice.txt",
+        "windows-packaged-launcher/README.md",
+        "windows-packaged-launcher/expected-files.txt",
+        "windows-packaged-launcher/expected-packaged-slice.txt",
         "linux-runtime/README.md",
         "windows-runtime/README.md",
     ],

@@ -1,0 +1,3 @@
+./bin/slic3r
+./bin/slic3r_cli
+./share/slic3r/packaged-slice.txt

@@ -57,7 +57,7 @@ Rust-backed slice.
 
 - [x] **Phase 28: Windows Packaged Launcher Slice** - Maintainer can build and smoke a scoped Windows packaging-visible launcher path. (completed 2026-05-23)
 
-- [ ] **Phase 29: Cross-Platform Packaging Evidence** - Maintainer can verify Linux and Windows packaged launcher behavior through shared evidence.
+- [x] **Phase 29: Cross-Platform Packaging Evidence** - Maintainer can verify Linux and Windows packaged launcher behavior through shared evidence. (completed 2026-05-23)
 
 - [ ] **Phase 30: Packaging Visibility and Docs** - Maintainer can see accurate packaging validation state and docs scope for v1.7.
 
@@ -151,5 +151,5 @@ Phases execute in numeric order: 27 -> 28 -> 29 -> 30
 | --- | --- | --- | --- | --- |
 | 27. Linux Packaged Launcher Slice | v1.7 | 1/1 | Complete    | 2026-05-23 |
 | 28. Windows Packaged Launcher Slice | v1.7 | 3/3 | Complete    | 2026-05-23 |
-| 29. Cross-Platform Packaging Evidence | v1.7 | 0/TBD | Not started | - |
+| 29. Cross-Platform Packaging Evidence | v1.7 | 1/1 | Complete | 2026-05-23 |
 | 30. Packaging Visibility and Docs | v1.7 | 0/TBD | Not started | - |

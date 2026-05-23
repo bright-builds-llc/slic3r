@@ -34,13 +34,13 @@ Requirements for the current milestone. Each maps to exactly one roadmap phase.
 
 ### Shared Evidence
 
-- [ ] **PKGE-01**: Maintainer can execute shared Linux packaged launcher parity
+- [x] **PKGE-01**: Maintainer can execute shared Linux packaged launcher parity
   evidence that proves artifact layout, startup handoff, help/version, and
   representative config behavior.
-- [ ] **PKGE-02**: Maintainer can execute shared Windows packaged launcher
+- [x] **PKGE-02**: Maintainer can execute shared Windows packaged launcher
   parity evidence that proves artifact layout, startup handoff, help/version,
   and representative config behavior.
-- [ ] **PKGE-03**: The shared packaged evidence is reviewable through
+- [x] **PKGE-03**: The shared packaged evidence is reviewable through
   checked-in fixtures and commands rather than manual spot checks.
 
 ### Visibility
@@ -95,9 +95,9 @@ Which phases cover which requirements. Populated during roadmap creation.
 | WPKG-01 | Phase 28 | Complete |
 | WPKG-02 | Phase 28 | Complete |
 | WPKG-03 | Phase 28 | Complete |
-| PKGE-01 | Phase 29 | Pending |
-| PKGE-02 | Phase 29 | Pending |
-| PKGE-03 | Phase 29 | Pending |
+| PKGE-01 | Phase 29 | Complete |
+| PKGE-02 | Phase 29 | Complete |
+| PKGE-03 | Phase 29 | Complete |
 | PVIS-01 | Phase 30 | Pending |
 | PVIS-02 | Phase 30 | Pending |
 | PVIS-03 | Phase 30 | Pending |
