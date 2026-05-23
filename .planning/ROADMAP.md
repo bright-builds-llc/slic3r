@@ -122,7 +122,11 @@ Plans:
 1. Docs explicitly avoid overclaiming signing, installers, AppImage/MSI/DMG support, or release channels.
 1. The roadmap and requirements traceability map every v1.7 requirement to exactly one phase.
 
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+
+- [ ] 30-01-PLAN.md — Publish packaged launcher status rows, align scoped docs, and verify v1.7 traceability.
 
 ## Requirement Coverage
 
@@ -153,7 +157,7 @@ Phases execute in numeric order: 27 -> 28 -> 29 -> 30
 | 27. Linux Packaged Launcher Slice | v1.7 | 1/1 | Complete | 2026-05-23 |
 | 28. Windows Packaged Launcher Slice | v1.7 | 3/3 | Complete | 2026-05-23 |
 | 29. Cross-Platform Packaging Evidence | v1.7 | 1/1 | Complete | 2026-05-23 |
-| 30. Packaging Visibility and Docs | v1.7 | 0/TBD | Not started | - |
+| 30. Packaging Visibility and Docs | v1.7 | 0/1 | Not started | - |
 
 ### Phase 31: create github actions/workflows that create release builds for macOS, Linux, and Windows
 
