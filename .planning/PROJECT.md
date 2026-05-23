@@ -117,6 +117,12 @@ v1.6 shipped the Windows parity foundation milestone:
   cross-platform coverage
 - Revisit cross-platform packaging and release-channel automation after the
   launcher-packaging evidence surface expands beyond macOS
+- Establish a downstream fork vendor-intake track for PrusaSlicer, Bambu
+  Studio, and OrcaSlicer after the base packaging/release groundwork is planned
+- Port each downstream fork as a modular Rust-backed flavor with full parity
+  evidence, extra-feature documentation, and maintainer-facing checklists
+- Add cross-flavor GitHub Actions builds and nightly review-gated vendor sync
+  automation after the fork ports reach full parity
 
 ## Requirements
 
@@ -184,6 +190,11 @@ v1.6 shipped the Windows parity foundation milestone:
   surface remain secondary to packaging parity and GUI strategy decisions
 - Treating the legacy package as an active feature-development surface — it
   remains the reference implementation except for minimal oracle upkeep
+- Downstream fork vendoring, fork parity ports, and fork-flavor builds are
+  future milestone work beyond the active v1.7 scope
+- Nightly vendor sync and Codex-assisted merge automation require full fork
+  parity, stable vendor references, and review-gated automation before they are
+  safe to enable
 
 ## Context
 

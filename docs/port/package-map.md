@@ -16,9 +16,9 @@
 |---------|------|
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
 | `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, and CLI crate boundaries plus a Bazel-native verification surface |
-| `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, and the scoped macOS packaged launcher/startup surface |
-| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, and scoped macOS packaged launcher slices |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, and scoped macOS packaged launcher slices |
+| `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, the scoped Windows packaged launcher tree, and the scoped macOS packaged launcher/startup surface |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, and Windows packaged launcher slices |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, and `windows-packaged-launcher` slices |
 
 ## Notes
 
@@ -46,3 +46,15 @@
 - Phase 25 adds a shared Windows runtime parity command under `packages/parity`.
 - Phase 26 publishes the bounded Windows runtime validation state through
   `packages/parity/status.tsv` and the migration docs.
+- Phase 28 adds a scoped Windows packaged launcher tree through
+  `//packages/launcher:windows_packaged_launcher_tree`.
+- Phase 29 adds shared packaged launcher evidence through
+  `//packages/parity:linux_packaged_launcher_parity` and
+  `//packages/parity:windows_packaged_launcher_parity`, backed by
+  `linux-packaged-launcher` and `windows-packaged-launcher` fixtures under
+  `packages/parity-fixtures`.
+- Phase 30 publishes `linux.packaged-launcher` and
+  `windows.packaged-launcher` through `packages/parity/status.tsv` while
+  keeping AppImage, MSI, DMG, installers, signing, GUI packaging, release
+  archives, native/cross-compiled release binaries, broad dependency bundling,
+  and release channels deferred.

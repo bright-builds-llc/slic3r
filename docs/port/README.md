@@ -81,6 +81,10 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   `bazel run //packages/launcher:windows_slic3r -- --help`
 - Phase 18 adds a scoped macOS packaged launcher bundle through
   `bazel run //packages/launcher:macos_packaged_launcher_bundle`
+- Phase 27 and Phase 28 add scoped Linux and Windows packaged launcher trees;
+  Phase 29 verifies those package-shaped launcher trees through
+  `//packages/parity:linux_packaged_launcher_parity` and
+  `//packages/parity:windows_packaged_launcher_parity`
 
 ## Current Contract Inventory State
 
@@ -118,6 +122,12 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   command for the verified scoped Linux runtime slice
 - `bazel run //packages/parity:windows_runtime_parity` is the shared parity
   command for the verified scoped Windows runtime slice
+- `bazel run //packages/parity:linux_packaged_launcher_parity` is the shared
+  parity command for the verified scoped Linux packaged launcher tree
+- `bazel run //packages/parity:windows_packaged_launcher_parity` is the shared
+  parity command for the verified scoped Windows packaged launcher tree
+- `linux.packaged-launcher` and `windows.packaged-launcher` are checked-in
+  status rows in `packages/parity/status.tsv`
 - `packages/parity/status.tsv` is the checked-in status data source
 - `packages/parity-fixtures/README.md` defines the package-local fixture update
   rules, and the fixture package now contains seeded corpora for:
@@ -129,3 +139,5 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   - `export.workflows`
   - `transform.workflows`
   - `launcher-packaging`
+  - `linux.packaged-launcher`
+  - `windows.packaged-launcher`

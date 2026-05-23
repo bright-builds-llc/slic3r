@@ -41,6 +41,11 @@ entrypoint path.
   Bazel smoke surface. The tree is written to
   `.planning/.tmp/windows-packaged-launcher/Slic3r-windows`, and its startup
   executable is `Slic3r-console.exe`.
+- Phase 29 adds shared parity evidence for the scoped packaged launcher tree
+  surfaces through `//packages/parity:linux_packaged_launcher_parity` and
+  `//packages/parity:windows_packaged_launcher_parity`.
+- Phase 30 publishes the package-shaped launcher tree evidence as
+  `linux.packaged-launcher` and `windows.packaged-launcher` status rows.
 - Merge/cut/layout, multi-input transforms, geometry/output-content parity, and
   release-grade packaging remain legacy-owned until later phases expand the
   supported slice. Windows `Slic3r.exe` GUI packaging, MSI, signing,

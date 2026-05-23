@@ -53,7 +53,7 @@ slice.
 - The packaged startup command reuses the thin Linux shell handoff and execs the
   bundled Rust CLI binary; no business behavior moves into packaging shell code.
 - This surface is not AppImage, distro package, installer, signing, GUI, or
-  release-channel support. Shared packaged parity evidence remains later work.
+  release-channel support.
 
 ## Phase 24 Windows Runtime Slice
 
@@ -62,8 +62,9 @@ slice.
 - The Windows runtime path is a direct Rust console entrypoint instead of a
   PowerShell or shell wrapper, so Bazel can build and invoke it without
   depending on macOS or Linux launcher shims.
-- Windows packaging-visible behavior remains deferred; this phase only
-  establishes the bounded runtime handoff boundary.
+- Later phases add the scoped Windows package-shaped launcher tree and shared
+  packaged parity evidence; this phase only establishes the bounded runtime
+  handoff boundary.
 
 ## Phase 28 Windows Packaged Launcher Slice
 
@@ -76,3 +77,15 @@ slice.
 - This packaged startup path is a direct Rust executable handoff. It introduces
   no Linux/macOS shell shim, PowerShell/PAR bundle, MSI, signing, GUI, or
   release-channel support.
+
+## Phase 29 Cross-Platform Packaged Launcher Evidence
+
+- `bazel run //packages/parity:linux_packaged_launcher_parity` verifies the
+  scoped Linux packaged launcher tree for layout, scope notes, startup handoff,
+  and the supported help/version/config/export/transform slice.
+- `bazel run //packages/parity:windows_packaged_launcher_parity` verifies the
+  scoped Windows packaged launcher tree for layout, scope notes, direct console
+  startup, and the supported help/version/config/export/transform slice.
+- These evidence commands do not add AppImage, MSI, DMG, installer, signing,
+  GUI packaging, release archive, native/cross-compiled release binary, broad
+  bundled dependency layout, or release-channel support.

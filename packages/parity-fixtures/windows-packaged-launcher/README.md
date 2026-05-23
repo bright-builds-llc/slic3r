@@ -1,7 +1,9 @@
 # Windows Packaged Launcher Fixtures
 
 These fixtures cover the bounded Phase 29 Windows packaged launcher parity
-slice.
+slice. They support the scoped packaged launcher tree evidence command:
+
+- `bazel run //packages/parity:windows_packaged_launcher_parity`
 
 They prove the package-shaped tree produced by:
 
@@ -16,9 +18,11 @@ Included evidence:
 - package file layout for `Slic3r-windows`
 - `share/slic3r/packaged-slice.txt` contents
 - direct packaged startup handoff through `Slic3r-console.exe`
+- shared help/version/config/export/transform behavior through the scoped
+  packaged launcher tree
 
 Deferred:
 
-- MSI, zip release archives, signing, GUI packaging, native Windows release
-  output, cross-compiled release output, broad DLL bundling, and release
-  channels
+- MSI, installer support, zip release archives, signing, GUI packaging, native
+  Windows release output, cross-compiled release output, broad DLL bundling,
+  and release channels

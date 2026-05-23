@@ -28,3 +28,8 @@ corpora.
 - Phase 25 adds a Windows runtime parity bundle that reuses the verified
   help/version/config/export/transform fixtures for the preferred Windows
   runtime path.
+- Phase 29 adds Linux and Windows packaged launcher fixture bundles:
+  `linux-packaged-launcher` is verified by
+  `//packages/parity:linux_packaged_launcher_parity`, and
+  `windows-packaged-launcher` is verified by
+  `//packages/parity:windows_packaged_launcher_parity`.

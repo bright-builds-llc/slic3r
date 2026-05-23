@@ -22,6 +22,9 @@ surfaces for the Rust port.
   - `bazel run //packages/launcher:windows_packaged_launcher_tree`
 - Smoke the scoped Windows packaged launcher startup path:
   - `bazel test //packages/launcher:windows_packaged_launcher_smoke`
+- Verify the scoped Windows packaged launcher tree through shared parity
+  evidence:
+  - `bazel run //packages/parity:windows_packaged_launcher_parity`
 
 ## Scope Boundary
 
@@ -41,8 +44,8 @@ surfaces for the Rust port.
   automation, release archives, broad bundled DLL layout, native Windows
   installer output, or installer behavior.
 - Shared Windows parity evidence now exists for the bounded runtime slice, and
-  the published Windows validation state now flows through the parity status
-  surface. Shared cross-platform packaged parity evidence remains later work.
+  the scoped packaged launcher tree is verified through
+  `//packages/parity:windows_packaged_launcher_parity`.
 
 ## Relationship To Legacy Windows Packaging
 
@@ -64,4 +67,10 @@ surfaces for the Rust port.
   `bazel run //packages/parity:status`, `packages/parity/status.tsv`, and the
   migration documentation surfaces.
 - Phase 28 adds the scoped Windows packaged launcher build and smoke targets.
-  Shared cross-platform packaged parity evidence remains Phase 29 scope.
+- Phase 29 adds shared packaged launcher parity evidence through
+  `bazel run //packages/parity:windows_packaged_launcher_parity`.
+- The scoped packaged launcher tree is verified for layout, scope notes,
+  direct console startup, and the existing help/version/config/export/transform
+  slice; MSI, installer support, signing, GUI packaging, release archives,
+  native/cross-compiled release output, broad DLL bundling, and release-channel
+  support remain deferred.

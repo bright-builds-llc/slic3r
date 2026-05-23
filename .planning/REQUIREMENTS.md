@@ -70,6 +70,32 @@ Deferred to future milestones.
   through a documented release-channel workflow.
 - **REL-02**: Maintainer can generate installer-grade packages such as AppImage,
   MSI, DMG, or platform-specific release bundles.
+- **REL-03**: Maintainer can use GitHub Actions to produce base Slic3r release
+  build artifacts for macOS, Linux, and Windows through the Rust/Bazel workflow.
+
+### Downstream Fork Vendor Maintenance
+
+- **FORK-01**: Maintainer can track PrusaSlicer, Bambu Studio, and OrcaSlicer
+  through pinned vendor references such as submodules or explicitly documented
+  mirrors, with licensing and update rules recorded.
+- **FORK-02**: Maintainer has a feature inventory for each fork that separates
+  base Slic3r behavior, shared downstream behavior, and fork-specific behavior.
+- **FORK-03**: Maintainer can port each fork as a modular Rust-backed flavor
+  without forking the Rust codebase wholesale.
+- **FORK-04**: Maintainer can verify full parity for PrusaSlicer-specific
+  features through checked-in evidence, tests, docs, and checklists.
+- **FORK-05**: Maintainer can verify full parity for Bambu Studio-specific
+  features through checked-in evidence, tests, docs, and checklists.
+- **FORK-06**: Maintainer can verify full parity for OrcaSlicer-specific
+  features through checked-in evidence, tests, docs, and checklists.
+- **FORK-07**: Maintainer can build every supported Slic3r-family flavor for
+  every supported platform through GitHub Actions.
+- **FORK-08**: Maintainer can run nightly review-gated vendor sync automation
+  that detects new upstream fork behavior and uses Codex to prepare Rust port
+  updates, parity evidence, and documentation updates as pull requests.
+- **FORK-09**: Maintainers and contributors can inspect comprehensive
+  extra-feature documentation and parity checklists for PrusaSlicer, Bambu
+  Studio, and OrcaSlicer.
 
 ## Out of Scope
 
@@ -82,6 +108,8 @@ Explicit exclusions for this milestone.
 | AppImage, MSI, DMG, or installer parity | Installer formats are higher-level packaging/release concerns beyond the scoped launcher artifact. |
 | New CLI behavior beyond the verified help/version/config/export/transform slice | The goal is packaging parity for the verified slice, not expansion of the Rust-backed behavioral surface. |
 | Legacy package feature development | The legacy package remains the parity oracle except for minimal upkeep needed to preserve comparison value. |
+| Downstream fork vendoring, fork parity ports, and fork-flavor builds | These are now tracked as future milestones after the base packaging/release groundwork is planned. |
+| Nightly vendor sync and Codex-assisted merge automation | This requires full fork parity, stable vendor references, and review-gated automation before it is safe to enable. |
 
 ## Traceability
 

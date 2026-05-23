@@ -42,10 +42,10 @@ boundaries.
 
 ## Fixture Update Protocol
 
-- The future shared fixture home is `packages/parity-fixtures`. Until the corpus
-  exists, contributors should document intended fixture additions in the Phase 4
-  docs and in review descriptions rather than treating ad hoc local files as a
-  hidden baseline.
+- The shared fixture home is `packages/parity-fixtures`. It now contains
+  fixture corpora for the verified help/version/config/export/transform slices,
+  Linux and Windows runtime paths, the scoped macOS packaged launcher bundle,
+  and the scoped Linux and Windows package-shaped launcher trees.
 - `packages/parity-fixtures/README.md` is the package-local fixture workflow
   reference and should stay aligned with this guide.
 - Every future fixture should record provenance: which legacy command or source
@@ -61,17 +61,20 @@ boundaries.
 
 ## Scope Now vs Deferred
 
-- Phase 4 scope now:
-  - inventory the six externally visible surface families
-  - document launcher replacement rules
-  - document the parity evidence model
-  - document the fixture update protocol
-  - keep the repo's status language conservative and macOS-first
+- Current verified scope now includes the preferred Rust-backed launcher slice,
+  Linux and Windows runtime paths, and scoped packaged launcher trees:
+  - `//packages/parity:linux_packaged_launcher_parity` verifies the Linux
+    package-shaped launcher tree for the supported help/version/config/export/
+    transform slice.
+  - `//packages/parity:windows_packaged_launcher_parity` verifies the Windows
+    package-shaped launcher tree for the supported help/version/config/export/
+    transform slice.
 - Deferred to later phases:
-  - Rust-backed CLI implementation and preferred entrypoint replacement
-  - the shared fixture corpus under `packages/parity-fixtures`
-  - Linux and Windows packaging-visible parity
+  - broader CLI behavior beyond the verified slice
   - GUI replacement work
+  - release-grade package formats such as AppImage, MSI, and DMG
+  - installers, signing, notarization, native/cross-compiled release binaries,
+    broad bundled dependency layout, downstream fork work, and release channels
 - The docs should prefer plain statements of what is deferred over optimistic
   wording. If the repo cannot prove a surface today, keep it `legacy-only` and
   say so.

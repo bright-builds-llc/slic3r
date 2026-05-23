@@ -29,8 +29,13 @@
 - `status.tsv` is the checked-in data source for that command.
 
 Linux and Windows runtime validation now publish as their own status rows.
-Linux and Windows packaged launcher parity now has runnable shared evidence;
-status publication remains deferred to the packaging visibility phase.
+Linux and Windows packaged launcher parity now has runnable shared evidence and
+checked-in status rows:
+
+- `linux.packaged-launcher` ->
+  `//packages/parity:linux_packaged_launcher_parity`
+- `windows.packaged-launcher` ->
+  `//packages/parity:windows_packaged_launcher_parity`
 
 ## Scope
 
