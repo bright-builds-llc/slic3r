@@ -30,7 +30,7 @@ Usage: slic3r [ OPTIONS ] [ file.stl ] [ file2.stl ] ...
 
   Rust-backed launcher paths in this milestone:
     macOS packaged launcher, Linux runtime, Linux packaged launcher tree,
-    and Windows runtime hand off to this Rust CLI slice
+    Windows runtime, and Windows packaged launcher tree hand off to this Rust CLI slice
 
   Still legacy-owned in this milestone:
     merge/cut/layout, multi-input transforms, release-grade packaging, GUI packaging, and geometry/content parity
