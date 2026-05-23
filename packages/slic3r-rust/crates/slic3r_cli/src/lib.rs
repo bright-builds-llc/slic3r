@@ -113,7 +113,7 @@ fn help_text() -> &'static str {
         "\n",
         "  Rust-backed launcher paths in this milestone:\n",
         "    macOS packaged launcher, Linux runtime, Linux packaged launcher tree,\n",
-        "    and Windows runtime hand off to this Rust CLI slice\n",
+        "    Windows runtime, and Windows packaged launcher tree hand off to this Rust CLI slice\n",
         "\n",
         "  Still legacy-owned in this milestone:\n",
         "    merge/cut/layout, multi-input transforms, release-grade packaging, GUI packaging, and geometry/content parity\n",
