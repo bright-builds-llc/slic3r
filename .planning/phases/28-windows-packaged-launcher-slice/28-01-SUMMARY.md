@@ -117,8 +117,6 @@ completed: 2026-05-23
   and `bazel run //packages/launcher:windows_packaged_launcher_tree` both pass.
 - **Committed in:** `0e6ec324c`
 
----
-
 **Total deviations:** 1 auto-fixed (Rule 3 - Blocking)
 **Impact on plan:** Required for Bazel shell targets; no scope change.
 
@@ -134,8 +132,6 @@ None - no external service configuration required.
 
 Plan 28-02 can update the Rust help text, help test, and help fixture to name
 the scoped Windows packaged launcher tree without expanding CLI behavior.
-
----
 
 *Phase: 28-windows-packaged-launcher-slice*
 *Completed: 2026-05-23*
