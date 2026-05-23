@@ -23,12 +23,12 @@ Requirements for the current milestone. Each maps to exactly one roadmap phase.
 
 ### Windows Packaging
 
-- [ ] **WPKG-01**: Maintainer can build a scoped Windows packaging-visible
+- [x] **WPKG-01**: Maintainer can build a scoped Windows packaging-visible
   launcher artifact for the already verified Rust-backed
   help/version/config/export/transform slice.
-- [ ] **WPKG-02**: Maintainer can run the Windows packaged startup path through
+- [x] **WPKG-02**: Maintainer can run the Windows packaged startup path through
   Bazel smoke coverage without relying on Linux or macOS launcher shims.
-- [ ] **WPKG-03**: The Windows packaged launcher surface keeps
+- [x] **WPKG-03**: The Windows packaged launcher surface keeps
   startup/bootstrap logic thin and does not overclaim installer or
   release-channel support.
 
@@ -92,9 +92,9 @@ Which phases cover which requirements. Populated during roadmap creation.
 | LPKG-01 | Phase 27 | Complete |
 | LPKG-02 | Phase 27 | Complete |
 | LPKG-03 | Phase 27 | Complete |
-| WPKG-01 | Phase 28 | Pending |
-| WPKG-02 | Phase 28 | Pending |
-| WPKG-03 | Phase 28 | Pending |
+| WPKG-01 | Phase 28 | Complete |
+| WPKG-02 | Phase 28 | Complete |
+| WPKG-03 | Phase 28 | Complete |
 | PKGE-01 | Phase 29 | Pending |
 | PKGE-02 | Phase 29 | Pending |
 | PKGE-03 | Phase 29 | Pending |
