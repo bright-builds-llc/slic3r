@@ -13,6 +13,7 @@ slice.
 | Lower-level Rust implementation | `packages/slic3r-rust/crates/slic3r_core` | Hold reusable implementation details that are not themselves the stable launcher contract |
 | Runtime and packaged startup shims | `packages/launcher/package/osx`, `packages/launcher/package/linux` | Stay thin and limited to runtime or packaged handoff into the Rust CLI binary; no Perl business logic moves here |
 | Windows runtime entrypoint | `packages/slic3r-rust/crates/slic3r_cli/src/bin/slic3r_windows_runtime.rs`, `packages/launcher/BUILD.bazel` | Expose the preferred Windows console-style runtime target for the supported slice without adding platform shell shims |
+| Windows packaged launcher startup | `packages/launcher/package/win`, `packages/launcher/BUILD.bazel` | Copy the direct `Slic3r-console.exe` runtime into a scoped package tree with metadata only; no Perl, PowerShell/PAR, or shell shim business logic moves here |
 | Retained reference behavior | `packages/legacy-slic3r` | Remain the parity oracle for unsupported CLI behavior until later phases migrate it |
 
 ## Phase 5 Scope
@@ -63,3 +64,15 @@ slice.
   depending on macOS or Linux launcher shims.
 - Windows packaging-visible behavior remains deferred; this phase only
   establishes the bounded runtime handoff boundary.
+
+## Phase 28 Windows Packaged Launcher Slice
+
+- `bazel run //packages/launcher:windows_packaged_launcher_tree` now
+  materializes a scoped Windows package-shaped launcher tree under
+  `.planning/.tmp/windows-packaged-launcher/Slic3r-windows`.
+- `bazel test //packages/launcher:windows_packaged_launcher_smoke` executes
+  `Slic3r-console.exe` directly through representative help/version/config/
+  export/transform startup flows.
+- This packaged startup path is a direct Rust executable handoff. It introduces
+  no Linux/macOS shell shim, PowerShell/PAR bundle, MSI, signing, GUI, or
+  release-channel support.
