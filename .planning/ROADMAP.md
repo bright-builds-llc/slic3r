@@ -91,6 +91,7 @@ Rust-backed slice.
 **Plans**: 3 plans
 
 Plans:
+
 - [x] 28-01-PLAN.md — Build and smoke the scoped Windows package tree.
 - [x] 28-02-PLAN.md — Align Rust help text and help parity fixtures.
 - [x] 28-03-PLAN.md — Document package-local Windows launcher discoverability.
@@ -149,7 +150,18 @@ Phases execute in numeric order: 27 -> 28 -> 29 -> 30
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 | --- | --- | --- | --- | --- |
-| 27. Linux Packaged Launcher Slice | v1.7 | 1/1 | Complete    | 2026-05-23 |
-| 28. Windows Packaged Launcher Slice | v1.7 | 3/3 | Complete    | 2026-05-23 |
+| 27. Linux Packaged Launcher Slice | v1.7 | 1/1 | Complete | 2026-05-23 |
+| 28. Windows Packaged Launcher Slice | v1.7 | 3/3 | Complete | 2026-05-23 |
 | 29. Cross-Platform Packaging Evidence | v1.7 | 1/1 | Complete | 2026-05-23 |
 | 30. Packaging Visibility and Docs | v1.7 | 0/TBD | Not started | - |
+
+### Phase 31: create github actions/workflows that create release builds for macOS, Linux, and Windows
+
+**Goal:** [To be planned]
+**Requirements**: TBD
+**Depends on:** Phase 30
+**Plans:** 0 plans
+
+Plans:
+
+- [ ] TBD (run /gsd-plan-phase 31 to break down)

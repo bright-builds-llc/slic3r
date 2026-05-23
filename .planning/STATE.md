@@ -7,10 +7,10 @@ current_phase_name: Packaging Visibility and Docs
 current_plan: Not started
 status: verifying
 stopped_at: Completed 29-01-PLAN.md
-last_updated: "2026-05-23T11:55:30.054Z"
+last_updated: "2026-05-23T11:55:46.829Z"
 last_activity: 2026-05-23
 progress:
-  total_phases: 4
+  total_phases: 5
   completed_phases: 3
   total_plans: 5
   completed_plans: 5
@@ -33,7 +33,7 @@ Plan: 1 of 1
 Current Phase: 30
 Current Phase Name: Packaging Visibility and Docs
 Current Plan: Not started
-Total Phases: 4
+Total Phases: 5
 Total Plans in Phase: TBD
 Status: Phase complete — transitioned to Phase 30
 Last activity: 2026-05-23
@@ -82,6 +82,10 @@ Recent decisions affecting current work:
 - Shared parity commands and fixture corpora are the evidence surface for the verified CLI/export/transform slice.
 - v1.7 scope is limited to Linux and Windows packaging-visible launcher parity for the existing verified slice.
 - GUI rewrite, signing/notarization, AppImage/MSI/DMG/installer parity, release-channel automation, and new CLI behavior remain out of scope.
+
+### Roadmap Evolution
+
+- Phase 31 added: create github actions/workflows that create release builds for macOS, Linux, and Windows
 
 ### Pending Todos
 
