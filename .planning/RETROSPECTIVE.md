@@ -2,6 +2,73 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.7 — Cross-Platform Packaging-Visible Parity
+
+**Shipped:** 2026-05-23\
+**Phases:** 4 | **Plans:** 8 | **Sessions:** 1 focused milestone run plus
+manual archive cleanup
+
+### What Was Built
+
+- Scoped Linux and Windows packaged launcher/startup surfaces for the verified
+  Rust-backed help/version/config/export/transform slice
+- Shared Linux and Windows packaged launcher parity commands with checked-in
+  package layout, scope-note, and behavior fixtures
+- Verified `linux.packaged-launcher` and `windows.packaged-launcher` parity
+  status rows
+- Updated migration, launcher, package, parity, and fixture docs for the exact
+  packaged launcher scope
+- Archived v1.7 roadmap, requirements, and phase history while activating the
+  v1.8 release automation milestone
+
+### What Worked
+
+- Reusing the existing macOS packaging pattern kept Linux and Windows packaged
+  launcher work scoped to thin startup handoff logic.
+- Shared packaged launcher evidence made the status/docs publication phase
+  concrete instead of documentation-only.
+- Final traceability and packaged parity reruns caught the exact acceptance
+  boundary before milestone closeout.
+
+### What Was Inefficient
+
+- `REQUIREMENTS.md` still had Phase 30 PVIS rows marked pending after the phase
+  summaries and verification showed them complete, so archive cleanup had to
+  reconcile the stale status manually.
+- The installed `gsd-tools` does not expose the `milestone complete` command
+  referenced by the workflow, leaving milestone archival as a manual operation.
+- Summary verification can misread generated package-tree files as repo files;
+  lifecycle verification was the more accurate closeout signal for this
+  milestone.
+
+### Patterns Established
+
+- Cross-platform packaged launcher parity should publish separate
+  platform-specific status rows rather than broad aggregate packaging claims.
+- Release automation should reuse verified packaged launcher evidence rather
+  than introducing a second, uncorrelated release-build proof path.
+- Phase directories can be archived under the milestone once a new active phase
+  exists, keeping `.planning/phases/` aligned with the active roadmap.
+
+### Key Lessons
+
+1. Visibility requirements need to be updated in both phase summaries and the
+   live requirements table before closeout; otherwise the milestone archive
+   inherits stale pending rows.
+1. Milestone transition should verify what the next GSD target resolver sees,
+   not only whether the archive files exist.
+
+### Cost Observations
+
+- Model mix: Codex-led execution with Bazel parity evidence reused from the
+  verified runtime and packaging surfaces
+- Sessions: 1 focused milestone run plus closeout cleanup
+- Notable: packaged launcher parity stayed manageable because the evidence
+  commands reused existing behavior fixtures and only added platform-specific
+  package layout expectations
+
+______________________________________________________________________
+
 ## Milestone: v1.6 — Windows Parity Foundation
 
 **Shipped:** 2026-05-21\

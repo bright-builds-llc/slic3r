@@ -2,50 +2,54 @@
 gsd_state_version: 1.0
 milestone: v1.8
 milestone_name: Cross-Platform Release Build Automation
-current_phase: 30
-current_phase_name: Packaging Visibility and Docs
-current_plan: Complete
-status: complete
-stopped_at: Completed 30-03-PLAN.md
-last_updated: "2026-05-23T14:15:27.890Z"
-last_activity: 2026-05-23 -- Phase 30 complete
+current_phase: 31
+current_phase_name: Cross-Platform Release Build Workflow
+current_plan: Not started
+status: planning
+stopped_at: Ready to plan Phase 31
+last_updated: "2026-05-24T05:49:17Z"
+last_activity: 2026-05-24 -- v1.7 archived; v1.8 activated
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 8
-  completed_plans: 8
-  percent: 100
+  total_phases: 1
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-05-22)
+See: `.planning/PROJECT.md` (updated 2026-05-24)
 
-**Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
-**Current focus:** Phase 30 — Packaging Visibility and Docs complete
+**Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
+legacy behavior and interfaces closely enough that the old implementation can
+eventually be retired without breaking the contracts users and integrators
+depend on.
+**Current focus:** Phase 31 — Cross-Platform Release Build Workflow planning
 
 ## Current Position
 
-Phase: 30 (Packaging Visibility and Docs) — COMPLETE
-Plan: 3 of 3
-Current Phase: 30
-Current Phase Name: Packaging Visibility and Docs
-Current Plan: Complete
-Total Phases: 4
-Total Plans in Phase: 3
-Status: Complete
-Last activity: 2026-05-23 -- Phase 30 complete
-Last Activity Description: Phase 30 complete
+Phase: 31 (Cross-Platform Release Build Workflow) — NOT STARTED
+Plan: not created
+Current Phase: 31
+Current Phase Name: Cross-Platform Release Build Workflow
+Current Plan: Not started
+Total Phases: 1
+Total Plans in Phase: 0
+Status: Planning
+Last activity: 2026-05-24 -- v1.7 archived; v1.8 activated
+Last Activity Description: v1.7 milestone archived and v1.8 planning files
+activated
 
-Progress: [##########] 100%
+Progress: [----------] 0%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 8
+- Total plans completed: 0 in the active milestone
 - Average duration: N/A
 - Total execution time: 0.0 hours
 
@@ -53,22 +57,12 @@ Progress: [##########] 100%
 
 | Phase | Plans | Total | Avg/Plan |
 | --- | --- | --- | --- |
-| 27. Linux Packaged Launcher Slice | 1/1 | 0.0h | N/A |
-| 28. Windows Packaged Launcher Slice | 0/TBD | 0.0h | N/A |
-| 29. Cross-Platform Packaging Evidence | 0/TBD | 0.0h | N/A |
-| 30. Packaging Visibility and Docs | 0/TBD | 0.0h | N/A |
-| 28 | 3 | - | - |
-| 29 | 1 | - | - |
-| 30 | 3 | - | - |
+| 31. Cross-Platform Release Build Workflow | 0/0 | 0.0h | N/A |
 
 **Recent Trend:**
 
-- Last 5 plans: None
+- Last 5 plans: None in active milestone
 - Trend: N/A
-
-| Phase 28 P01 | 12min | 3 tasks | 4 files |
-| Phase 28 P02 | 5min | 3 tasks | 3 files |
-| Phase 28 P03 | 4min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -80,21 +74,27 @@ Recent decisions affecting current work:
 
 - Bazel remains the top-level build and test entrypoint for the migration.
 - Legacy Slic3r remains the retained parity oracle and reference package.
-- Shared parity commands and fixture corpora are the evidence surface for the verified CLI/export/transform slice.
-- v1.7 scope is limited to Linux and Windows packaging-visible launcher parity for the existing verified slice.
-- GUI rewrite, signing/notarization, AppImage/MSI/DMG/installer parity, release-channel automation, and new CLI behavior remain out of scope.
+- Shared parity commands and fixture corpora are the evidence surface for the
+  verified CLI/export/transform slice.
+- v1.8 scope is limited to base Slic3r release build artifacts for macOS,
+  Linux, and Windows.
+- Signing, notarization, installers, AppImage/MSI/DMG packaging,
+  release-channel publishing, fork-flavor builds, GUI work, and new CLI
+  behavior remain out of scope.
 
 ### Roadmap Evolution
 
-- Phase 31 added: create github actions/workflows that create release builds for macOS, Linux, and Windows
-- Future fork roadmap added: vendor and maintain PrusaSlicer, Bambu Studio,
-  and OrcaSlicer; port each fork as a modular Rust-backed flavor; document
-  extra-feature checklists; add cross-flavor GitHub Actions builds; and add
-  review-gated nightly vendor sync with Codex-assisted Rust port updates.
+- v1.7 archived after completing Linux and Windows packaged launcher slices,
+  shared packaged launcher evidence, and packaging visibility/docs.
+- Phase 31 is the active v1.8 seed phase for GitHub Actions release builds
+  across macOS, Linux, and Windows.
+- Future fork roadmap remains staged after base release automation: vendor
+  intake, modular PrusaSlicer/Bambu Studio/OrcaSlicer parity ports,
+  cross-flavor build automation, and review-gated nightly vendor sync.
 
 ### Pending Todos
 
-None yet.
+- Plan Phase 31.
 
 ### Blockers/Concerns
 
@@ -102,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-23T03:07:37.231Z
-Stopped at: Completed 28-03-PLAN.md
+Last session: 2026-05-24T05:49:17Z
+Stopped at: Ready to plan Phase 31
 Resume file: None

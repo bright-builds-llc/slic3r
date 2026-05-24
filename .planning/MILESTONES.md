@@ -1,5 +1,41 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.7 Cross-Platform Packaging-Visible Parity (Shipped: 2026-05-23)
+
+**Delivered:** Extended scoped packaging-visible launcher parity to Linux and
+Windows, proved both packaged startup paths through shared evidence, and
+published the exact verified scope in parity status and migration docs.
+
+**Phases completed:** 27-30 (8 plans total)
+
+**Key accomplishments:**
+
+- Delivered scoped Linux and Windows packaged launcher/startup surfaces for the
+  verified Rust-backed help/version/config/export/transform slice
+- Added shared Linux and Windows packaged launcher parity commands backed by
+  checked-in layout, scope-note, and behavior fixtures
+- Published `linux.packaged-launcher` and `windows.packaged-launcher` as
+  verified rows in the parity status source
+- Aligned migration, launcher, package, parity, and fixture docs with the
+  scoped packaged launcher evidence without overclaiming signing, installers,
+  GUI packaging, or release channels
+- Verified v1.7 traceability across roadmap, requirements, summary metadata,
+  and final packaged launcher parity evidence
+
+**Stats:**
+
+- 4 phases, 8 plans
+- 4 shipped phase commits for phases 27-30, plus phase planning and closeout
+  commits
+- Milestone archive: [v1.7-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.7-ROADMAP.md)
+- Phase archive: [v1.7-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.7-phases/)
+
+**What's next:** automate base Slic3r release builds for macOS, Linux, and
+Windows through GitHub Actions while keeping signing, installers, release
+channels, GUI work, and fork-flavor builds deferred
+
+______________________________________________________________________
+
 ## v1.6 Windows Parity Foundation (Shipped: 2026-05-21)
 
 **Delivered:** Established the preferred Rust-backed Windows runtime path for
