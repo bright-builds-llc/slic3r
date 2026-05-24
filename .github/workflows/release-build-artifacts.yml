@@ -31,6 +31,10 @@ jobs:
             bazel_output_user_root: C:/b
 
     steps:
+      - name: Configure Git line endings
+        if: runner.os == 'Windows'
+        run: git config --global core.autocrlf false
+
       - name: Check out repository
         uses: actions/checkout@v4
 

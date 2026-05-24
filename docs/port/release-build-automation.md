@@ -20,8 +20,9 @@ The matrix builds on:
 - `ubuntu-latest`
 - `windows-latest`
 
-The Windows job sets `BAZEL_OUTPUT_USER_ROOT=C:/b` so Bazel and MSVC use a
-short output path on hosted Windows runners.
+The Windows job disables automatic CRLF checkout conversion before checkout
+so parity fixtures keep LF endings, and sets `BAZEL_OUTPUT_USER_ROOT=C:/b` so
+Bazel and MSVC use a short output path on hosted Windows runners.
 
 Each matrix job checks out the repo, sets up Bazelisk, runs the repo-owned
 release artifact script, and uploads the generated archive and manifest with
