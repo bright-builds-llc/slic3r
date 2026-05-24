@@ -37,6 +37,10 @@ resolve_input() {
 		printf '%s/%s\n' "$(cd "$(dirname "${path}")" && pwd)" "$(basename "${path}")"
 		return
 	fi
+	if [[ -e "${repo_root}/bazel-bin/${path}" ]]; then
+		printf '%s/bazel-bin/%s\n' "${repo_root}" "${path}"
+		return
+	fi
 	printf '%s/%s\n' "${repo_root}" "${path}"
 }
 
