@@ -74,6 +74,17 @@ runtime_visible_path() {
 	printf '%s\n' "${path}"
 }
 
+runtime_visible_child_path() {
+	local parent="${1}"
+	local filename="${2}"
+	if [[ "${platform}" == "windows" ]] && command -v cygpath >/dev/null 2>&1; then
+		printf '%s\\%s\n' "$(runtime_visible_path "${parent}")" "${filename}"
+		return
+	fi
+
+	printf '%s/%s\n' "${parent}" "${filename}"
+}
+
 build_package="$(resolve_input "${build_package}")"
 runtime_launcher="$(resolve_input "${runtime_launcher}")"
 if [[ "${startup_script}" != "-" ]]; then
@@ -152,7 +163,7 @@ model_path="${temp_root}/model.stl"
 cp "${export_model}" "${model_path}"
 
 gcode_output="$("${launcher_path}" --export-gcode "${model_path}")"
-expected_gcode_target="$(runtime_visible_path "${temp_root}/model.gcode")"
+expected_gcode_target="$(runtime_visible_child_path "${temp_root}" "model.gcode")"
 assert_equal "${platform} packaged export stdout" "Exported G-code to ${expected_gcode_target}" "${gcode_output}"
 assert_equal "${platform} packaged export content" "$(cat "${export_gcode_expected}")" "$(cat "${temp_root}/model.gcode")"
 
