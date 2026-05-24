@@ -62,19 +62,24 @@ boundaries.
 ## Scope Now vs Deferred
 
 - Current verified scope now includes the preferred Rust-backed launcher slice,
-  Linux and Windows runtime paths, and scoped packaged launcher trees:
+  Linux and Windows runtime paths, scoped packaged launcher trees, and scoped
+  base release build artifacts:
   - `//packages/parity:linux_packaged_launcher_parity` verifies the Linux
     package-shaped launcher tree for the supported help/version/config/export/
     transform slice.
   - `//packages/parity:windows_packaged_launcher_parity` verifies the Windows
     package-shaped launcher tree for the supported help/version/config/export/
     transform slice.
+  - `.github/workflows/release-build-artifacts.yml` uploads macOS, Linux, and
+    Windows base package archives with `release-provenance.txt` after running
+    the matching packaged launcher parity target.
 - Deferred to later phases:
   - broader CLI behavior beyond the verified slice
   - GUI replacement work
   - release-grade package formats such as AppImage, MSI, and DMG
   - installers, signing, notarization, native/cross-compiled release binaries,
-    broad bundled dependency layout, downstream fork work, and release channels
+    broad bundled dependency layout, downstream fork work, fork-flavor builds,
+    GitHub Release publishing, and release channels
 - The docs should prefer plain statements of what is deferred over optimistic
   wording. If the repo cannot prove a surface today, keep it `legacy-only` and
   say so.

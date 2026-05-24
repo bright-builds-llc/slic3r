@@ -27,6 +27,8 @@ expected to update the relevant docs here in the same change.
   parity evidence, fixture protocol, and scope-now-versus-deferred rules
 - [`packaged-launcher-slice.md`](./packaged-launcher-slice.md) - scoped macOS
   packaged launcher bundle and startup layout expectations
+- [`release-build-automation.md`](./release-build-automation.md) - scoped
+  GitHub Actions release build artifacts, provenance, and evidence gates
 - [`windows-launcher-slice.md`](./windows-launcher-slice.md) - scoped Windows
   runtime launcher surface and its deferred packaging boundaries
 - [`parity-matrix.md`](./parity-matrix.md) - contract-surface status using the
@@ -85,6 +87,9 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   Phase 29 verifies those package-shaped launcher trees through
   `//packages/parity:linux_packaged_launcher_parity` and
   `//packages/parity:windows_packaged_launcher_parity`
+- Phase 31 adds scoped GitHub Actions release build artifacts for the base
+  package through `.github/workflows/release-build-artifacts.yml`, with
+  provenance embedded in each uploaded package tree.
 
 ## Current Contract Inventory State
 

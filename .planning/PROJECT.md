@@ -37,6 +37,10 @@ v1.7 shipped the cross-platform packaging-visible parity milestone:
   installers, AppImage/MSI/DMG support, GUI packaging, or release channels
 - the v1.7 phase history and milestone requirements are archived under
   `.planning/milestones/`
+- Phase 31 now adds scoped GitHub Actions release build artifacts for the base
+  Rust-backed package on macOS, Linux, and Windows, with provenance embedded in
+  each package tree and existing packaged launcher parity evidence used as the
+  upload gate
 
 <details>
 <summary>v1.6 shipped the Windows parity foundation milestone</summary>
@@ -126,13 +130,7 @@ v1.7 shipped the cross-platform packaging-visible parity milestone:
 
 ## Next Milestone Goals
 
-- Build base Slic3r release artifacts for macOS, Linux, and Windows through
-  GitHub Actions
-- Attach enough provenance to release artifacts for maintainers to identify
-  platform, commit, build mode, and supported package scope
-- Reuse verified packaged launcher evidence in release-build automation
-- Document supported release-build outputs while keeping signing,
-  notarization, installers, and release channels explicitly deferred
+- Archive v1.8 after release build automation review is accepted
 - Define the GUI migration strategy once base release automation is stable
 - Establish a downstream fork vendor-intake track for PrusaSlicer, Bambu
   Studio, and OrcaSlicer after the base packaging/release groundwork is planned
@@ -194,17 +192,20 @@ v1.7 shipped the cross-platform packaging-visible parity milestone:
   cross-platform packaging-visible launcher scope without overclaiming
   installer, signing, AppImage/MSI/DMG support, GUI packaging, or release
   channels — v1.7
+- ✓ Maintainer can use GitHub Actions to produce base Slic3r release build
+  artifacts for macOS, Linux, and Windows through the Rust/Bazel workflow —
+  v1.8
+- ✓ Release build artifacts carry enough provenance to identify platform,
+  commit, build mode, and supported package scope — v1.8
+- ✓ Release build automation reuses verified packaged launcher evidence
+  instead of inventing parallel release logic — v1.8
+- ✓ Docs describe supported release-build outputs and remaining exclusions
+  such as signing, notarization, installers, or release channels — v1.8
 
 ### Active
 
-- [ ] Maintainer can use GitHub Actions to produce base Slic3r release build
-  artifacts for macOS, Linux, and Windows through the Rust/Bazel workflow
-- [ ] Release build artifacts carry enough provenance to identify platform,
-  commit, build mode, and supported package scope
-- [ ] Release build automation reuses verified packaged launcher evidence
-  instead of inventing parallel release logic
-- [ ] Docs describe supported release-build outputs and remaining exclusions
-  such as signing, notarization, installers, or release channels
+None yet — v1.8 requirements are complete and ready for milestone archive
+review.
 
 ### Out of Scope
 
@@ -284,4 +285,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-24 after archiving v1.7 and activating v1.8*
+*Last updated: 2026-05-24 after Phase 31 release build automation*

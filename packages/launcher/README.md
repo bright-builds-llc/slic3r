@@ -46,6 +46,11 @@ entrypoint path.
   `//packages/parity:windows_packaged_launcher_parity`.
 - Phase 30 publishes the package-shaped launcher tree evidence as
   `linux.packaged-launcher` and `windows.packaged-launcher` status rows.
+- Phase 31 adds `.github/workflows/release-build-artifacts.yml` and
+  `tools/release/build_release_artifact.sh`, which build scoped base Slic3r
+  release artifact archives for macOS, Linux, and Windows after running the
+  matching packaged launcher parity evidence. Each uploaded package tree
+  includes `release-provenance.txt`.
 - Merge/cut/layout, multi-input transforms, geometry/output-content parity, and
   release-grade packaging remain legacy-owned until later phases expand the
   supported slice. Windows `Slic3r.exe` GUI packaging, MSI, signing,

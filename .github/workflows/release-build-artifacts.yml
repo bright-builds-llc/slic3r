@@ -1,0 +1,52 @@
+name: Release Build Artifacts
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build-release-artifact:
+    name: Build ${{ matrix.platform }} artifact
+    runs-on: ${{ matrix.runner }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos
+            runner: macos-latest
+          - platform: linux
+            runner: ubuntu-latest
+          - platform: windows
+            runner: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bazelisk
+        uses: bazelbuild/setup-bazelisk@v3
+
+      - name: Show Bazel version
+        run: bazel version
+
+      - name: Build scoped release artifact
+        env:
+          BUILD_MODE: bazel-opt
+        run: bash tools/release/build_release_artifact.sh "${{ matrix.platform }}" "$PWD/release-artifacts"
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: slic3r-${{ matrix.platform }}-${{ github.sha }}
+          if-no-files-found: error
+          path: |
+            release-artifacts/${{ matrix.platform }}/archives/*
+            release-artifacts/${{ matrix.platform }}/release-manifest.txt

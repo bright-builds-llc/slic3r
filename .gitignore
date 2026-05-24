@@ -37,6 +37,7 @@ serial.txt
 
 # Local Rust workspace build artifacts
 packages/slic3r-rust/target/
+release-artifacts/
 
 slic3r
 gui_test

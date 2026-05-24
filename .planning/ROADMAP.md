@@ -68,9 +68,9 @@ artifacts for the base Rust-backed Slic3r package on macOS, Linux, and Windows.
 
 - v1.8 continues from the previous shipped milestone, starting at Phase 31
 
-- [ ] **Phase 31: Cross-Platform Release Build Workflow** - Maintainer can
+- [x] **Phase 31: Cross-Platform Release Build Workflow** - Maintainer can
   build base Slic3r release artifacts for macOS, Linux, and Windows through
-  GitHub Actions.
+  GitHub Actions. (completed 2026-05-24)
 
 ## Phase Details
 
@@ -91,11 +91,12 @@ artifacts for the base Rust-backed Slic3r package on macOS, Linux, and Windows.
    as signing, notarization, installers, or release channels if those are still
    deferred.
 
-**Plans**: 0 plans
+**Plans**: 1 plan
 
 Plans:
 
-- [ ] TBD (run `/gsd-plan-phase 31` to break down release build automation)
+- [x] 31-01-PLAN.md - Create the release artifact workflow, provenance script,
+  and docs.
 
 ## Requirement Coverage
 
@@ -115,7 +116,7 @@ Phases execute in numeric order: 31
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 | --- | --- | --- | --- | --- |
-| 31. Cross-Platform Release Build Workflow | v1.8 | 0/0 | Not started | - |
+| 31. Cross-Platform Release Build Workflow | v1.8 | 1/1 | Complete | 2026-05-24 |
 
 ## Future Roadmap
 

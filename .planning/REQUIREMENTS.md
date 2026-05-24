@@ -14,14 +14,14 @@ automation phase.
 
 ### Release Build Automation
 
-- [ ] **REL-03**: Maintainer can use GitHub Actions to produce base Slic3r
+- [x] **REL-03**: Maintainer can use GitHub Actions to produce base Slic3r
   release build artifacts for macOS, Linux, and Windows through the Rust/Bazel
   workflow.
-- [ ] **REL-04**: Release build artifacts carry enough provenance to identify
+- [x] **REL-04**: Release build artifacts carry enough provenance to identify
   platform, commit, build mode, and supported package scope.
-- [ ] **REL-05**: Release build automation reuses the verified packaged
+- [x] **REL-05**: Release build automation reuses the verified packaged
   launcher evidence instead of inventing parallel release logic.
-- [ ] **REL-06**: Docs describe supported release-build outputs and remaining
+- [x] **REL-06**: Docs describe supported release-build outputs and remaining
   exclusions such as signing, notarization, installers, or release channels.
 
 ## Future Requirements
@@ -86,10 +86,10 @@ Which phases cover which requirements.
 
 | Requirement | Phase | Status |
 | --- | --- | --- |
-| REL-03 | Phase 31 | Pending |
-| REL-04 | Phase 31 | Pending |
-| REL-05 | Phase 31 | Pending |
-| REL-06 | Phase 31 | Pending |
+| REL-03 | Phase 31 | Complete |
+| REL-04 | Phase 31 | Complete |
+| REL-05 | Phase 31 | Complete |
+| REL-06 | Phase 31 | Complete |
 
 **Coverage:**
 
@@ -100,4 +100,4 @@ Which phases cover which requirements.
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-24*
-*Last updated: 2026-05-24 after v1.8 milestone activation*
+*Last updated: 2026-05-24 after Phase 31 release build automation*

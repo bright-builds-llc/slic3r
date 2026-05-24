@@ -8,7 +8,8 @@
 | `docs/` | Human-readable migration, contract, and project documentation |
 | `tools/` | Repo-level helper scripts such as Bazel smoke tests |
 | `.planning/` | GSD project memory, research, roadmap, and execution metadata |
-| `.github/`, `.travis.yml`, `appveyor.yml`, Bright Builds files | Repo metadata and inherited automation surfaces retained at the root |
+| `.github/`, `.travis.yml`, `appveyor.yml`, Bright Builds files | Repo metadata and inherited automation surfaces retained at the root; Phase 31 adds `.github/workflows/release-build-artifacts.yml` for scoped base package release build artifacts |
+| `tools/release/` | Repo-owned release artifact scripts used by GitHub Actions and local maintainer checks |
 
 ## Packages
 
@@ -58,3 +59,10 @@
   keeping AppImage, MSI, DMG, installers, signing, GUI packaging, release
   archives, native/cross-compiled release binaries, broad dependency bundling,
   and release channels deferred.
+- Phase 31 adds scoped release build automation through
+  `.github/workflows/release-build-artifacts.yml` and
+  `tools/release/build_release_artifact.sh`. The workflow uploads base Slic3r
+  macOS, Linux, and Windows package-tree archives with provenance after running
+  the matching packaged launcher parity evidence. It still keeps signing,
+  notarization, installers, AppImage, MSI, DMG, GUI packaging, release-channel
+  publishing, fork-flavor builds, and new CLI behavior deferred.
