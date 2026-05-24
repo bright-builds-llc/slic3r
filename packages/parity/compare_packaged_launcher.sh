@@ -54,6 +54,16 @@ assert_equal() {
 	fi
 }
 
+runtime_visible_path() {
+	local path="${1}"
+	if [[ "${platform}" == "windows" ]] && command -v cygpath >/dev/null 2>&1; then
+		cygpath -m -s "${path}"
+		return
+	fi
+
+	printf '%s\n' "${path}"
+}
+
 build_package="$(resolve_input "${build_package}")"
 runtime_launcher="$(resolve_input "${runtime_launcher}")"
 if [[ "${startup_script}" != "-" ]]; then
@@ -117,8 +127,9 @@ assert_equal "${platform} packaged help" "$(cat "${help_expected}")" "${help_out
 
 save_target="${temp_root}/saved.ini"
 save_output="$("${launcher_path}" --save "${save_target}")"
+expected_save_target="$(runtime_visible_path "${save_target}")"
 assert_equal "${platform} packaged save contents" "$(cat "${config_save_expected}")" "$(cat "${save_target}")"
-assert_equal "${platform} packaged save stdout" "Saved config to ${save_target}" "${save_output}"
+assert_equal "${platform} packaged save stdout" "Saved config to ${expected_save_target}" "${save_output}"
 
 datadir="${temp_root}/profiles"
 mkdir -p "${datadir}"
@@ -131,7 +142,8 @@ model_path="${temp_root}/model.stl"
 cp "${export_model}" "${model_path}"
 
 gcode_output="$("${launcher_path}" --export-gcode "${model_path}")"
-assert_equal "${platform} packaged export stdout" "Exported G-code to ${temp_root}/model.gcode" "${gcode_output}"
+expected_gcode_target="$(runtime_visible_path "${temp_root}/model.gcode")"
+assert_equal "${platform} packaged export stdout" "Exported G-code to ${expected_gcode_target}" "${gcode_output}"
 assert_equal "${platform} packaged export content" "$(cat "${export_gcode_expected}")" "$(cat "${temp_root}/model.gcode")"
 
 info_output="$("${launcher_path}" --info "${model_path}")"
