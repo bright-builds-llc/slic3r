@@ -57,7 +57,17 @@ assert_equal() {
 runtime_visible_path() {
 	local path="${1}"
 	if [[ "${platform}" == "windows" ]] && command -v cygpath >/dev/null 2>&1; then
-		cygpath -m -s "${path}"
+		local converted
+		converted="$(cygpath -m "${path}")"
+		local short_temp_root
+		short_temp_root="$(cygpath -m -s /tmp)"
+		local long_temp_root
+		long_temp_root="$(cygpath -m /tmp)"
+		if [[ "${converted}" == "${long_temp_root}/"* ]]; then
+			printf '%s/%s\n' "${short_temp_root}" "${converted#"${long_temp_root}/"}"
+			return
+		fi
+		printf '%s\n' "${converted}"
 		return
 	fi
 
