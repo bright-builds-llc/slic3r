@@ -10,21 +10,38 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone: v1.8 Cross-Platform Release Build Automation
+## Current Milestone: None
 
-**Goal:** Use GitHub Actions to produce release build artifacts for the base
-Rust-backed Slic3r package on macOS, Linux, and Windows.
+v1.8 is shipped and archived. The next milestone should define fresh
+requirements for v1.9 Fork Vendor Intake and Module Architecture.
 
-**Target features:**
+**Next target features:**
 
-- Cross-platform GitHub Actions release build workflow for the base package
-- Artifact provenance for platform, commit, build mode, and supported scope
-- Reuse of verified packaged launcher evidence in release-build automation
-- Docs describing supported release outputs and deferred distribution work
+- Vendor-source strategy for PrusaSlicer, Bambu Studio, and OrcaSlicer
+- Fork feature inventories that distinguish base, shared downstream, and
+  fork-specific behavior
+- Modular Rust package boundaries for fork-specific behavior
+- Parity checklist and documentation templates for downstream fork work
 
 ## Current State
 
-v1.7 shipped the cross-platform packaging-visible parity milestone:
+v1.8 shipped cross-platform release build automation:
+
+- the `Release Build Artifacts` workflow now builds scoped base package
+  archives for macOS, Linux, and Windows
+- each hosted runner job invokes the repo-owned release artifact builder after
+  running the matching packaged launcher parity target
+- each package tree carries `release-provenance.txt`, and each platform output
+  includes an archive, checksum, and `release-manifest.txt`
+- release automation docs describe the supported artifact boundary and keep
+  signing, notarization, installers, AppImage/MSI/DMG support, GUI packaging,
+  fork-flavor builds, and release channels deferred
+- the final hosted workflow run passed on macOS, Linux, and Windows
+- the v1.8 roadmap, requirements, audit, and Phase 31 history are archived
+  under `.planning/milestones/`
+
+<details>
+<summary>v1.7 shipped the cross-platform packaging-visible parity milestone</summary>
 
 - scoped Linux and Windows packaged launcher/startup surfaces now exist for
   the verified help/version/config/export/transform slice
@@ -37,10 +54,8 @@ v1.7 shipped the cross-platform packaging-visible parity milestone:
   installers, AppImage/MSI/DMG support, GUI packaging, or release channels
 - the v1.7 phase history and milestone requirements are archived under
   `.planning/milestones/`
-- Phase 31 now adds scoped GitHub Actions release build artifacts for the base
-  Rust-backed package on macOS, Linux, and Windows, with provenance embedded in
-  each package tree and existing packaged launcher parity evidence used as the
-  upload gate
+
+</details>
 
 <details>
 <summary>v1.6 shipped the Windows parity foundation milestone</summary>
@@ -130,10 +145,11 @@ v1.7 shipped the cross-platform packaging-visible parity milestone:
 
 ## Next Milestone Goals
 
-- Archive v1.8 after release build automation review is accepted
-- Define the GUI migration strategy once base release automation is stable
+- Start v1.9 Fork Vendor Intake and Module Architecture
 - Establish a downstream fork vendor-intake track for PrusaSlicer, Bambu
-  Studio, and OrcaSlicer after the base packaging/release groundwork is planned
+  Studio, and OrcaSlicer
+- Define how fork-specific behavior plugs into the Rust workspace without
+  forking the Rust codebase wholesale
 - Port each downstream fork as a modular Rust-backed flavor with full parity
   evidence, extra-feature documentation, and maintainer-facing checklists
 - Add cross-flavor GitHub Actions builds and nightly review-gated vendor sync
@@ -204,8 +220,7 @@ v1.7 shipped the cross-platform packaging-visible parity milestone:
 
 ### Active
 
-None yet — v1.8 requirements are complete and ready for milestone archive
-review.
+None yet — v1.9 requirements should be defined by the next milestone cycle.
 
 ### Out of Scope
 
@@ -263,6 +278,9 @@ The audience for this work is broad:
 | Replace the active Perl launcher path with a documented Rust/Bazel/shell strategy | The migration should remove Perl from the preferred path without losing the current user-facing behavior | ✓ First Rust-backed slice shipped in v1.0 |
 | Add a parity-check command that covers both status reporting and behavior comparison over time | The project needs both visible progress tracking and evidence-based parity validation | ✓ Shipped in v1.0 |
 | Require migration docs and checklists under `docs/` by process before adding automation | Documentation discipline is important immediately, but hard enforcement can follow once the workflow settles | ✓ Process shipped in v1.0 |
+| Treat GitHub Actions uploaded artifacts as the v1.8 release build surface | The project needed repeatable downloadable artifacts before release-channel publishing, signing, or installers | ✓ Shipped in v1.8 |
+| Reuse packaged launcher parity as the release build evidence gate | Release automation should rely on the same checked-in evidence as the packaging-visible parity surface | ✓ Shipped in v1.8 |
+| Embed release provenance inside each package tree | Maintainers need platform, commit, build mode, scope, package target, and evidence target visible in every artifact | ✓ Shipped in v1.8 |
 
 ## Evolution
 
@@ -285,4 +303,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-24 after Phase 31 release build automation*
+*Last updated: 2026-05-24 after v1.8 milestone archive*

@@ -2,6 +2,69 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.8 — Cross-Platform Release Build Automation
+
+**Shipped:** 2026-05-24\
+**Phases:** 1 | **Plans:** 1 | **Sessions:** 1 focused milestone run plus
+hosted workflow hardening
+
+### What Was Built
+
+- A `Release Build Artifacts` GitHub Actions workflow for macOS, Linux, and
+  Windows hosted runners
+- A repo-owned release artifact script that runs packaged launcher parity
+  evidence before creating platform archives
+- Embedded `release-provenance.txt`, release manifests, and checksums for each
+  platform output
+- Release automation docs that publish the supported artifact boundary and
+  deferred distribution work
+- A verified hosted workflow matrix that passed on all three platforms after
+  CI hardening
+
+### What Worked
+
+- Reusing packaged launcher parity targets kept release automation tied to the
+  already trusted packaging-visible evidence surface.
+- Keeping the workflow thin and pushing artifact logic into a repo-owned Bash
+  script made local smoke verification practical.
+- Running the new workflow immediately exposed real hosted-runner differences
+  that local package-shaped smoke tests could not fully simulate.
+
+### What Was Inefficient
+
+- Windows hosted runners exposed several separate path and checkout behaviors:
+  Bazel output-root length, Bazel runfiles resolution, CRLF fixture checkout,
+  MSYS temp path conversion, and Windows-derived default export separators.
+- The milestone summary one-liner extractor returned no accomplishment for the
+  generated summary, so the milestone entry needed manual cleanup.
+
+### Patterns Established
+
+- Release build automation should remain a thin matrix wrapper around
+  repo-owned scripts.
+- Windows release CI should use a short Bazel output root and disable automatic
+  CRLF checkout conversion before checkout.
+- Cross-platform parity scripts need deterministic sorting and explicit
+  normalization where Git Bash path conversion affects observed stdout.
+
+### Key Lessons
+
+1. Hosted workflow verification is not optional for cross-platform release
+   automation; Windows runner behavior can differ meaningfully from local
+   package-shaped smoke checks.
+1. Provenance and manifest generation are easiest to trust when they are part
+   of the same script that runs the evidence gate and builds the package tree.
+
+### Cost Observations
+
+- Model mix: Codex-led execution with GSD planning and one integration-checker
+  subagent during milestone audit
+- Sessions: 1 milestone run plus CI hardening and archive closeout
+- Notable: Most fixes were CI harness normalization, not release feature
+  redesign, because the release workflow reused existing package/parity targets
+
+______________________________________________________________________
+
 ## Milestone: v1.7 — Cross-Platform Packaging-Visible Parity
 
 **Shipped:** 2026-05-23\

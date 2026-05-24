@@ -1,5 +1,48 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.8 Cross-Platform Release Build Automation (Shipped: 2026-05-24)
+
+**Delivered:** Added repeatable GitHub Actions release build automation for
+base Slic3r artifacts across macOS, Linux, and Windows, with packaged launcher
+parity gates and embedded provenance in every package tree.
+
+**Phases completed:** Phase 31 (1 plan total)
+
+**Key accomplishments:**
+
+- Added the `Release Build Artifacts` GitHub Actions workflow with manual and
+  version-tag triggers for macOS, Linux, and Windows hosted runners
+
+- Added `tools/release/build_release_artifact.sh`, a repo-owned release
+  artifact builder that runs packaged launcher parity evidence before packaging
+
+- Embedded `release-provenance.txt` in each platform package tree and wrote
+  manifests/checksums beside uploaded archives
+
+- Documented supported outputs and explicit exclusions for signing,
+  notarization, installers, AppImage, MSI, DMG, GUI packaging, fork-flavor
+  builds, and release-channel publishing
+
+- Verified the hosted workflow matrix after CI hardening; the final run passed
+  on macOS, Linux, and Windows
+
+**Stats:**
+
+- 1 phase, 1 plan
+- 7 shipped commits after v1.7, including workflow creation and hosted-runner
+  hardening fixes
+
+- Milestone archive: [v1.8-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-ROADMAP.md)
+- Requirements archive: [v1.8-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-REQUIREMENTS.md)
+- Audit: [v1.8-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-MILESTONE-AUDIT.md)
+- Phase archive: [v1.8-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-phases/)
+
+**What's next:** start v1.9 fork vendor intake and module architecture, using
+the now-stable base release automation as the foundation for later fork-flavor
+builds
+
+---
+
 ## v1.7 Cross-Platform Packaging-Visible Parity (Shipped: 2026-05-23)
 
 **Delivered:** Extended scoped packaging-visible launcher parity to Linux and
@@ -12,13 +55,17 @@ published the exact verified scope in parity status and migration docs.
 
 - Delivered scoped Linux and Windows packaged launcher/startup surfaces for the
   verified Rust-backed help/version/config/export/transform slice
+
 - Added shared Linux and Windows packaged launcher parity commands backed by
   checked-in layout, scope-note, and behavior fixtures
+
 - Published `linux.packaged-launcher` and `windows.packaged-launcher` as
   verified rows in the parity status source
+
 - Aligned migration, launcher, package, parity, and fixture docs with the
   scoped packaged launcher evidence without overclaiming signing, installers,
   GUI packaging, or release channels
+
 - Verified v1.7 traceability across roadmap, requirements, summary metadata,
   and final packaged launcher parity evidence
 
@@ -27,6 +74,7 @@ published the exact verified scope in parity status and migration docs.
 - 4 phases, 8 plans
 - 4 shipped phase commits for phases 27-30, plus phase planning and closeout
   commits
+
 - Milestone archive: [v1.7-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.7-ROADMAP.md)
 - Phase archive: [v1.7-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.7-phases/)
 
@@ -49,10 +97,13 @@ migration surfaces.
 
 - Delivered a preferred Windows runtime target and Bazel smoke surface for the
   existing verified Rust-backed slice
+
 - Added shared Windows runtime parity evidence backed by a dedicated fixture
   bundle that reuses the verified slice fixtures
+
 - Published `windows.runtime` as `verified` in the checked-in parity status
   data source and aligned the migration docs to that exact scope
+
 - Closed the milestone with phase UAT and security verification artifacts for
   the Windows visibility phase
 
@@ -61,6 +112,7 @@ migration surfaces.
 - 3 phases, 7 plans
 - 3 shipped phase commits for phases 24-26, plus milestone-init and closeout
   validation/security commits
+
 - Milestone archive: [v1.6-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.6-ROADMAP.md)
 
 **What's next:** extend packaging-visible launcher parity cross-platform,

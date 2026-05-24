@@ -5,10 +5,10 @@ milestone_name: Cross-Platform Release Build Automation
 current_phase: 31
 current_phase_name: Cross-Platform Release Build Workflow
 current_plan: Complete
-status: complete
+status: completed
 stopped_at: Completed 31-01-PLAN.md
-last_updated: "2026-05-24T13:48:44Z"
-last_activity: 2026-05-24 -- Phase 31 complete
+last_updated: "2026-05-24T18:50:10.023Z"
+last_activity: 2026-05-24
 progress:
   total_phases: 1
   completed_phases: 1
@@ -27,7 +27,7 @@ See: `.planning/PROJECT.md` (updated 2026-05-24)
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
-**Current focus:** Phase 31 — Cross-Platform Release Build Workflow complete
+**Current focus:** Planning next milestone after v1.8 archive
 
 ## Current Position
 
@@ -39,8 +39,8 @@ Current Plan: Complete
 Total Phases: 1
 Total Plans in Phase: 1
 Status: Complete
-Last activity: 2026-05-24 -- Phase 31 complete
-Last Activity Description: Phase 31 release build automation complete
+Last activity: 2026-05-24
+Last Activity Description: v1.8 milestone completed and archived
 
 Progress: [##########] 100%
 
@@ -75,8 +75,10 @@ Recent decisions affecting current work:
 - Legacy Slic3r remains the retained parity oracle and reference package.
 - Shared parity commands and fixture corpora are the evidence surface for the
   verified CLI/export/transform slice.
+
 - v1.8 scope is limited to base Slic3r release build artifacts for macOS,
   Linux, and Windows.
+
 - Signing, notarization, installers, AppImage/MSI/DMG packaging,
   release-channel publishing, fork-flavor builds, GUI work, and new CLI
   behavior remain out of scope.
@@ -85,8 +87,10 @@ Recent decisions affecting current work:
 
 - v1.7 archived after completing Linux and Windows packaged launcher slices,
   shared packaged launcher evidence, and packaging visibility/docs.
-- Phase 31 is the active v1.8 seed phase for GitHub Actions release builds
-  across macOS, Linux, and Windows.
+
+- v1.8 archived after completing GitHub Actions release builds across macOS,
+  Linux, and Windows.
+
 - Future fork roadmap remains staged after base release automation: vendor
   intake, modular PrusaSlicer/Bambu Studio/OrcaSlicer parity ports,
   cross-flavor build automation, and review-gated nightly vendor sync.
