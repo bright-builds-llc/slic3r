@@ -78,15 +78,24 @@ manifest_path="${platform_root}/release-manifest.txt"
 artifact_root="${package_output_root}/${artifact_dir_name}"
 provenance_path="${package_output_root}/${provenance_relative_path}"
 
+run_bazel() {
+	if [[ -n "${BAZEL_OUTPUT_USER_ROOT:-}" ]]; then
+		"${bazel_cmd}" "--output_user_root=${BAZEL_OUTPUT_USER_ROOT}" "$@"
+		return
+	fi
+
+	"${bazel_cmd}" "$@"
+}
+
 printf 'Preparing release artifact workspace: %s\n' "${platform_root}"
 rm -rf "${platform_root}"
 mkdir -p "${package_output_root}" "${archive_root}"
 
 printf 'Verifying packaged launcher evidence for %s...\n' "${platform}"
-"${bazel_cmd}" run --compilation_mode="${compilation_mode}" "${evidence_target}"
+run_bazel run --compilation_mode="${compilation_mode}" "${evidence_target}"
 
 printf 'Building %s package tree with %s...\n' "${platform}" "${package_target}"
-"${bazel_cmd}" run --compilation_mode="${compilation_mode}" "${package_target}" -- "${package_output_root}"
+run_bazel run --compilation_mode="${compilation_mode}" "${package_target}" -- "${package_output_root}"
 
 if [[ ! -d "${artifact_root}" ]]; then
 	printf 'Expected artifact root missing: %s\n' "${artifact_root}" >&2

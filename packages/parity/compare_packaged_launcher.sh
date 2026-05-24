@@ -99,7 +99,7 @@ esac
 [[ -x "${launcher_path}" ]]
 [[ -f "${artifact_root}/share/slic3r/packaged-slice.txt" ]]
 
-actual_files="$(cd "${artifact_root}" && find . -type f | sort)"
+actual_files="$(cd "${artifact_root}" && find . -type f | LC_ALL=C sort)"
 assert_equal "${platform} packaged file list" "$(cat "${expected_files}")" "${actual_files}"
 
 actual_notes="$(cat "${artifact_root}/share/slic3r/packaged-slice.txt")"

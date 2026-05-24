@@ -22,10 +22,13 @@ jobs:
         include:
           - platform: macos
             runner: macos-latest
+            bazel_output_user_root: ''
           - platform: linux
             runner: ubuntu-latest
+            bazel_output_user_root: ''
           - platform: windows
             runner: windows-latest
+            bazel_output_user_root: C:/b
 
     steps:
       - name: Check out repository
@@ -35,11 +38,19 @@ jobs:
         uses: bazelbuild/setup-bazelisk@v3
 
       - name: Show Bazel version
-        run: bazel version
+        env:
+          BAZEL_OUTPUT_USER_ROOT: ${{ matrix.bazel_output_user_root }}
+        run: |
+          if [[ -n "${BAZEL_OUTPUT_USER_ROOT}" ]]; then
+            bazel "--output_user_root=${BAZEL_OUTPUT_USER_ROOT}" version
+          else
+            bazel version
+          fi
 
       - name: Build scoped release artifact
         env:
           BUILD_MODE: bazel-opt
+          BAZEL_OUTPUT_USER_ROOT: ${{ matrix.bazel_output_user_root }}
         run: bash tools/release/build_release_artifact.sh "${{ matrix.platform }}" "$PWD/release-artifacts"
 
       - name: Upload release artifact

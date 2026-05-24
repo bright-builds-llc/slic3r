@@ -64,7 +64,7 @@ app_root="${temp_root}/Slic3r.app"
 startup_path="${app_root}/Contents/MacOS/Slic3r"
 info_plist="${app_root}/Contents/Info.plist"
 
-actual_files="$(cd "${app_root}" && find . -type f | sort)"
+actual_files="$(cd "${app_root}" && find . -type f | LC_ALL=C sort)"
 expected_files_contents="$(cat "${expected_files}")"
 if [[ "${actual_files}" != "${expected_files_contents}" ]]; then
 	printf 'bundle file list mismatch\nexpected:\n%s\nactual:\n%s\n' "${expected_files_contents}" "${actual_files}" >&2
