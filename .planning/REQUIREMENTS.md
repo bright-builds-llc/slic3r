@@ -13,14 +13,14 @@ Requirements for the v1.9 milestone. Each maps to one roadmap phase.
 
 ### Vendor Source Intake
 
-- [ ] **VEND-01**: Maintainer can inspect one checked-in vendor source registry
+- [x] **VEND-01**: Maintainer can inspect one checked-in vendor source registry
   for PrusaSlicer, Bambu Studio, and OrcaSlicer that records official
   repository URL, selected stable tag, peeled commit, observed default branch
   head, capture date, lineage, source paths, and refresh command.
-- [ ] **VEND-02**: Maintainer can run a repo-owned verification target that
+- [x] **VEND-02**: Maintainer can run a repo-owned verification target that
   validates every vendor registry row resolves to the recorded upstream tag and
   commit without cloning or building the full upstream fork repositories.
-- [ ] **VEND-03**: Maintainer can inspect license and provenance metadata for
+- [x] **VEND-03**: Maintainer can inspect license and provenance metadata for
   each tracked fork, including SPDX identifier, license source, attribution
   notes, and explicit non-free or network-plugin cautions.
 
@@ -118,13 +118,13 @@ Explicitly excluded from v1.9. Documented to prevent scope creep.
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
+Which phases cover which requirements. Updated as phases complete.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| VEND-01 | Phase 32 | Pending |
-| VEND-02 | Phase 32 | Pending |
-| VEND-03 | Phase 32 | Pending |
+| VEND-01 | Phase 32 | Complete |
+| VEND-02 | Phase 32 | Complete |
+| VEND-03 | Phase 32 | Complete |
 | INV-01 | Phase 33 | Pending |
 | INV-02 | Phase 33 | Pending |
 | INV-03 | Phase 33 | Pending |
@@ -147,4 +147,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-26*
-*Last updated: 2026-05-26 after roadmap creation*
+*Last updated: 2026-05-26 after Phase 32 completion*

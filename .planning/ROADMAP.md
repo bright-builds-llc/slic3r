@@ -41,8 +41,9 @@
 
 ## Current Status
 
-v1.9 is active. Phase 32 is ready to plan. The roadmap continues from the last
-shipped phase, Phase 31, and covers only the v1.9 active requirements.
+v1.9 is active. Phase 32 is complete, and Phase 33 is ready to plan. The
+roadmap continues from the last shipped phase, Phase 31, and covers only the
+v1.9 active requirements.
 
 ## Overview
 
