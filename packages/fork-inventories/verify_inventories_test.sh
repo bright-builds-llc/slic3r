@@ -185,6 +185,32 @@ test_wrong_source_ref_fails() {
 	assert_contains "${tmp_dir}/wrong-source-ref.err" 'source_ref'
 }
 
+test_selected_tag_can_equal_observed_branch_head() {
+	# Arrange
+	dir="$(make_fixture_dir "tag-equals-branch-head")"
+	append_fork_row "${dir}/forks.tsv" \
+		"testvendor" "v1.0.0" "1111111111111111111111111111111111111111" \
+		"1111111111111111111111111111111111111111"
+	append_inventory_row "${dir}/prusaslicer.tsv" \
+		"testvendor.base" "testvendor" \
+		"testvendor:v1.0.0@1111111111111111111111111111111111111111" \
+		"src/base" "base-core" "base-core" "base-slic3r" "none" \
+		"cli.version" "no-action-base" "none" \
+		"Valid release tag currently equals observed branch head."
+	append_category_row "${dir}/category-map.tsv" \
+		"base" "base-core" "base-slic3r" "no-action-base" \
+		"testvendor.base" "Valid release tag map."
+
+	# Act
+	if ! run_verifier "${dir}" "${tmp_dir}/tag-equals-branch-head.out" "${tmp_dir}/tag-equals-branch-head.err"; then
+		sed -n '1,120p' "${tmp_dir}/tag-equals-branch-head.err" >&2
+		fail "selected tag equal to observed branch head failed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/tag-equals-branch-head.out" '^ok: inventory verification passed$'
+}
+
 test_row_shape_and_enums_fail() {
 	# Arrange
 	for case_name in unknown-vendor invalid-enum empty-required bad-column-count; do
@@ -329,6 +355,51 @@ test_missing_required_bambu_or_orca_coverage_fails() {
 	done
 }
 
+test_header_only_canonical_vendor_coverage_fails() {
+	# Arrange
+	dir="$(make_fixture_dir "header-only-canonical-vendor")"
+	append_fork_row "${dir}/forks.tsv" \
+		"bambustudio" "v02.06.00.51" \
+		"b506005bc4ee62124e24bf00e0f58656db3646a6" \
+		"e150b502b3d2afc98b83dcc9e5720e998f9eb79a"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/header-only-canonical-vendor.out" "${tmp_dir}/header-only-canonical-vendor.err"; then
+		fail "header-only canonical vendor fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/header-only-canonical-vendor.err" 'bambustudio: missing required feature_surface'
+}
+
+test_missing_orca_network_device_coverage_fails() {
+	# Arrange
+	dir="$(make_fixture_dir "missing-orca-network-device")"
+	append_fork_row "${dir}/forks.tsv" \
+		"orcaslicer" "v2.3.2" \
+		"c724a3f5f51c52336624b689e846c8fbc943a912" \
+		"e0c4d11baefa328331be113533c47ee89fda16c6"
+	for surface in base-core calibration-flow wall-seam support-generation adaptive-mesh profile-library community-profile; do
+		append_inventory_row "${dir}/orcaslicer.tsv" \
+			"orcaslicer.${surface}" "orcaslicer" \
+			"orcaslicer:v2.3.2@c724a3f5f51c52336624b689e846c8fbc943a912" \
+			"src/${surface}" "${surface}" "${surface}" "fork-specific" "medium" \
+			"none" "needs-review" "runtime-parity-not-verified" \
+			"Complete non-network Orca coverage row."
+		append_category_row "${dir}/category-map.tsv" \
+			"orca.${surface}" "${surface}" "fork-specific" "needs-review" \
+			"orcaslicer.${surface}" "Complete non-network Orca coverage map."
+	done
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-orca-network-device.out" "${tmp_dir}/missing-orca-network-device.err"; then
+		fail "missing Orca network-device coverage fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-orca-network-device.err" 'orcaslicer: missing required feature_surface network-device'
+}
+
 test_unsafe_caution_rows_fail() {
 	# Arrange
 	for case_name in not-deferred missing-runtime-flag; do
@@ -363,11 +434,14 @@ test_unsafe_caution_rows_fail() {
 
 test_valid_single_vendor_fixture_passes
 test_wrong_source_ref_fails
+test_selected_tag_can_equal_observed_branch_head
 test_row_shape_and_enums_fail
 test_stale_category_reference_fails
 test_missing_or_duplicate_category_references_fail
 test_unknown_parity_dependency_fails
 test_missing_required_bambu_or_orca_coverage_fails
+test_header_only_canonical_vendor_coverage_fails
+test_missing_orca_network_device_coverage_fails
 test_unsafe_caution_rows_fail
 
 printf 'ok: verify_inventories_test\n'

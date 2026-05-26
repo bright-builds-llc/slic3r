@@ -211,12 +211,11 @@ validate_pin_ref() {
 		error "${label}: vendor lookup mismatch"
 	fi
 
-	ref_commit="${source_ref##*@}"
-	if [[ "${ref_commit}" == "${observed_head}" ]]; then
-		error "${label}: source_ref uses observed default branch head"
-	fi
-
 	if [[ "${source_ref}" != "${expected_ref}" ]]; then
+		ref_commit="${source_ref##*@}"
+		if [[ "${ref_commit}" == "${observed_head}" ]]; then
+			error "${label}: source_ref uses observed default branch head"
+		fi
 		error "${label}: source_ref must equal ${expected_ref}"
 	fi
 }
@@ -472,9 +471,9 @@ validate_category_map() {
 	done <"${inventory_ids_file}"
 }
 
-vendor_has_rows() {
+vendor_ref_exists() {
 	local vendor_id="$1"
-	awk -F '\t' -v vendor_id="${vendor_id}" '$2 == vendor_id { found=1 } END { exit found ? 0 : 1 }' "${inventory_meta_file}"
+	awk -F '\t' -v vendor_id="${vendor_id}" '$1 == vendor_id { found=1 } END { exit found ? 0 : 1 }' "${vendor_refs_file}"
 }
 
 vendor_has_surface() {
@@ -490,7 +489,7 @@ validate_required_surfaces() {
 	local required_surfaces="$2"
 	local feature_surface
 
-	if ! vendor_has_rows "${vendor_id}"; then
+	if ! vendor_ref_exists "${vendor_id}"; then
 		return
 	fi
 
@@ -520,7 +519,7 @@ validate_required_surfaces "prusaslicer" \
 validate_required_surfaces "bambustudio" \
 	"base-core project-file profile-schema network-device support-generation step-import arc-fitting assembly-workflow"
 validate_required_surfaces "orcaslicer" \
-	"base-core calibration-flow wall-seam support-generation adaptive-mesh profile-library community-profile"
+	"base-core calibration-flow wall-seam support-generation adaptive-mesh profile-library community-profile network-device"
 
 validate_category_map
 
