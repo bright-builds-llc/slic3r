@@ -1,175 +1,391 @@
 # Project Research Summary
 
 **Project:** Slic3r Rust Port
-**Domain:** Brownfield desktop 3D slicer migration
-**Researched:** 2026-04-06
-**Confidence:** MEDIUM
+**Domain:** v1.9 fork vendor intake and modular Rust flavor architecture
+**Researched:** 2026-05-26
+**Confidence:** HIGH for v1.9 intake and architecture direction; MEDIUM for future fork parity coverage
 
 ## Executive Summary
 
-This is a legacy desktop 3D-slicer modernization program, not a greenfield rewrite. The research points to a Bazel-driven monorepo with explicit package boundaries as the right top-level shape, because the repository needs to keep the legacy implementation buildable as a parity oracle while the new Rust implementation grows beside it. The migration should be macOS-first, GUI-later, and contract-first: preserve exported behavior, then replace implementation detail behind stable CLI/config/output surfaces.
+v1.9 is a vendor-intake and architecture milestone for a brownfield Rust port
+of Slic3r. It should prepare future PrusaSlicer, Bambu Studio, and OrcaSlicer
+parity work without importing those large C++ codebases or creating separate
+Rust forks. Experts would treat the downstream slicers as pinned evidence
+sources first: capture official repository refs, stable release tags, peeled
+commits, licenses, lineage, feature inventories, and explicit deferrals before
+any implementation phase claims support.
 
-The main recommendation is to separate concerns early. Keep the legacy code isolated as a retained reference package, make Rust the new implementation target, and add a parity harness plus a simple status command as soon as the first Rust surfaces exist. The biggest risks are parity drift, non-hermetic Bazel integration, launcher sprawl, fixture decay, and documentation drift. The roadmap should therefore start with build/package structure and contract inventory, then move to Rust core/CLI replacement, then expand parity comparison and only later broaden platforms or GUI work.
+The recommended approach is narrow and manifest-driven. Add a checked-in fork
+vendor manifest, validation target, source-pinned feature inventory templates,
+and a small typed Rust flavor metadata layer. Keep source checkouts optional,
+gitignored, and human-operated for inventory work only. Prefer release tags and
+peeled commits over branch heads, and prefer one shared flavor registry over
+vendor-specific Rust workspaces or broad Cargo feature switches.
+
+The main risks are non-reproducible source references, marketing-list feature
+inventories, overclaimed fork parity, licensing mistakes around AGPL and
+optional non-free/network components, and hidden release-scope expansion.
+Mitigate them by making `vendor-pinned`, `inventoried`, `planned`, `deferred`,
+and `verified` distinct states; by refusing fork parity rows until executable
+evidence exists; and by keeping GUI, release channels, fork-flavor builds,
+nightly sync, cloud/device integrations, and profile auto-update execution
+explicitly out of v1.9 scope.
 
 ## Key Findings
 
 ### Recommended Stack
 
-The stack research favors Bazel 9 with Bzlmod at the repository root, Bazelisk for contributor ergonomics, and Rust stable 1.94.0 with the 2024 edition inside a Cargo workspace under `packages/`. `rules_rust` is the correct Bazel bridge for the Rust targets, while `rustfmt`, `clippy`, and `cargo test` remain the inner Rust-quality tools. On macOS, the native toolchain should rely on Xcode command line tools. For parity comparisons, use a dedicated Rust CLI or Bazel test target plus fixture-diff helpers such as `cmp` and `diff`.
+v1.9 should stay on the existing Bazel/Rust stack and add only a small
+metadata, docs, and validation layer. The research consistently rejects
+submodules, vendored source copies, Bzlmod external repos for upstream fork
+trees, and C++ build ingestion for this milestone. The fork sources are
+references, not production build inputs.
 
 **Core technologies:**
 
-- Bazel 9.0 LTS: top-level monorepo build/test orchestration and package boundary owner
-- Rust stable 1.94.0: new implementation language for the port
-- Bazelisk: contributor-friendly Bazel pinning and launch wrapper
-- `rules_rust`: Bazel integration for Rust binaries, libraries, tests, `rustfmt`, and `clippy`
+- Bazel + Bzlmod, repo-pinned at Bazel 8.6.0: keep one top-level build/test
+  entrypoint and add ordinary validation targets for vendor metadata.
+- `rules_rust` 0.69.0: keep Rust crates, tests, clippy, and rustfmt under the
+  existing Bazel integration.
+- Rust stable 1.94.1, edition 2024: model flavor IDs, vendor source pins,
+  feature origins, and checklist states as typed, std-only domain values.
+- Git CLI: verify official upstream tags and commits with `git ls-remote`
+  without cloning the full fork repositories in CI.
+- TSV manifest: use a small checked-in line-oriented manifest for fork source
+  truth, matching the repo's existing TSV parity-status style.
+- Markdown inventory and checklist templates: keep feature classification
+  reviewable and explicit instead of pretending README summaries are parity
+  evidence.
+- `slic3r_flavors` crate: add a pure, std-only registry for flavor metadata if
+  v1.9 needs Rust code; keep Git, filesystem, networking, and implementation
+  behavior out of this crate.
+
+**Pinned vendor baseline:**
+
+- PrusaSlicer: official repo `prusa3d/PrusaSlicer`, stable tag
+  `version_2.9.5`, peeled commit
+  `9a583bd438b195856f3bcf7ea99b69ba4003a961`.
+- Bambu Studio: official repo `bambulab/BambuStudio`, stable tag
+  `v02.06.00.51`, peeled commit
+  `b506005bc4ee62124e24bf00e0f58656db3646a6`.
+- OrcaSlicer: official repo `OrcaSlicer/OrcaSlicer`, stable tag `v2.3.2`,
+  peeled commit `c724a3f5f51c52336624b689e846c8fbc943a912`.
+
+Default branch heads should be recorded as drift context only. They should not
+be the canonical v1.9 inventory baseline.
 
 ### Expected Features
 
-The migration program itself has a small set of table-stakes capabilities: the legacy package must remain buildable and testable, the Rust package must live beside it, Bazel must become the canonical entrypoint, macOS must be the first validated platform, and the existing contracts and file formats must be preserved. Research also suggests two differentiators that make the port trustworthy rather than merely rewritten: a parity status command and a differential legacy-vs-Rust harness.
+The v1.9 feature set is primarily maintainer-facing. It should produce
+reproducible source references, structured inventories, typed module metadata,
+and future parity templates. It should not port downstream algorithms, GUI
+flows, profile loaders, cloud integrations, release channels, or fork builds.
 
 **Must have (table stakes):**
 
-- Legacy package stays buildable and testable — parity oracle and reference implementation
-- Rust package exists beside the legacy package — actual new implementation target
-- Bazel becomes the top-level build/test entrypoint — one reproducible repo-wide surface
-- macOS-first CLI/core parity path — the highest-value initial platform
-- Preserved exported contracts and file formats — parity only matters if users see the same behavior
-- Fixture corpus for legacy-vs-Rust comparison — regression-proofing requires shared cases
+- Vendor source registry for PrusaSlicer, Bambu Studio, and OrcaSlicer with
+  official URL, selected release/tag, peeled commit, observed default-branch
+  head, capture date, license, lineage, source paths, and refresh command.
+- Fork lineage model that distinguishes base Slic3r, shared downstream
+  Prusa-family behavior, Bambu-specific behavior, Orca-specific behavior, and
+  unknown rows needing review.
+- Feature inventory template with source evidence, ownership classification,
+  surface, complexity, dependency on existing parity surfaces, and v1.9
+  decision.
+- Per-fork initial inventories for PrusaSlicer, Bambu Studio, and OrcaSlicer,
+  plus shared downstream classification where at least two source-backed forks
+  justify it.
+- Dependency mapping to current verified parity surfaces such as CLI help,
+  version, config persistence, export, transform, runtime, packaging-visible
+  launcher, and release artifacts.
+- Modular flavor metadata and contracts so future fork behavior can plug into
+  the Rust workspace without copying `slic3r_core` or creating separate Rust
+  workspaces per vendor.
+- Parity checklist and documentation templates that include source pin,
+  inventory row ID, candidate module, fixture need, evidence command, docs
+  touched, license/security note, and deferred scope.
+- Exclusion ledger that keeps full fork parity, GUI migration, fork-flavor
+  release builds, nightly vendor sync, cloud/device integrations, and profile
+  auto-update execution out of v1.9.
 
-**Should have (competitive):**
+**Should have (differentiators):**
 
-- Parity status command — makes migration progress visible
-- Dual-run legacy/Rust comparison harness — turns the legacy code into an executable oracle
-- Bazel-native package boundaries — keeps the migration readable for contributors
-- Documented shell/Rust replacement for the Perl launcher — removes launcher complexity without losing behavior
+- Cross-fork feature matrix generated or derived from structured inventory
+  rows, not maintained only as prose.
+- Source-pinned evidence per feature using official upstream repositories,
+  release metadata, repo paths, wiki pages, or source files.
+- Risk-ranked future parity backlog that separates inventory-only work from
+  implementable CLI/config/profile/export surfaces.
+- Shared downstream module candidate markers for behavior that should become a
+  shared Rust capability rather than duplicated fork-local code.
+- Profile schema comparison notes for Prusa INI/IDX bundles versus Bambu/Orca
+  JSON profile trees, kept as analysis rather than loaders.
+- Non-free/network boundary marker for Bambu/Orca remote printer integrations
+  and optional networking plugins.
+- Fixture-seeding recommendations for future parity work, without adding broad
+  fork fixture corpora before executable behavior exists.
 
-**Defer (v2+):**
+**Defer (v2+ or later v1.x):**
 
-- Linux and Windows parity for the new Rust implementation — defer until macOS proves the strategy
-- Full GUI rewrite in Rust — too much surface area for the first milestone
-- Automated docs/checklist enforcement — required by process first, automation later
-- Deleting the legacy package entirely — only after parity is proven
+- Full PrusaSlicer, Bambu Studio, or OrcaSlicer runtime parity.
+- Wholesale downstream source import, Git submodules as normal inputs, or Git
+  subtree vendoring.
+- Vendor-specific Rust core crates with copied base behavior.
+- Fork-flavor release packages, signing/notarization/installers, release
+  channels, or GitHub Actions matrices.
+- GUI migration or GUI feature parity.
+- Network printer/cloud implementation, real credentials, optional non-free
+  plugin ingestion, or vendor service calls.
+- Profile update/download execution and online profile-distribution support.
+- Nightly vendor sync or automated merge assistance.
 
 ### Architecture Approach
 
-The recommended architecture is a strangler-style migration with explicit boundaries: `packages/legacy-slic3r` remains a buildable oracle, `packages/slic3r-rust` holds the new Rust workspace, `packages/parity` and `packages/parity-fixtures` own comparison logic and corpus data, and `packages/launcher` stays thin while Perl is retired. `docs/port/` should track parity matrices, migration notes, and checklists as first-class artifacts so progress is visible even before enforcement becomes automated.
+Fork intake should be an evidence layer beside the existing Rust migration.
+The legacy Slic3r package remains the base parity oracle. The fork repositories
+enter the repo as pinned references, feature inventories, typed metadata, and
+future parity checklist inputs. Runtime fork support is a later milestone.
 
 **Major components:**
 
-1. Bazel root — owns the build graph, targets, and top-level orchestration
-1. Legacy reference package — preserves current behavior with minimal change
-1. Rust migration workspace — hosts contract/core/CLI/parity crates
-1. Parity harness and fixtures — compares legacy and Rust outputs on the same corpus
-1. Thin launcher layer and docs — keep entrypoints understandable and migration state visible
+1. `packages/fork-vendors` - recommended manifest package for official fork
+   source pins, license notes, lineage, and Bazel-visible validation. The
+   architecture research used `packages/vendor-forks` in places; resolve the
+   naming tension by choosing `packages/fork-vendors` for v1.9 because the
+   stack research already defines its `forks.tsv` and verify target shape.
+2. `docs/port/forks` - human-facing inventories, fork delta docs, parity
+   checklist templates, source strategy notes, and explicit deferrals.
+3. `slic3r_contracts` - stable domain types for flavor IDs, downstream fork
+   IDs, vendor source IDs, feature origin, parity surface, and checklist
+   status. Raw strings should be parsed here before reaching core code.
+4. `slic3r_flavors` - pure registry/composition crate for base, shared
+   downstream, and fork-specific metadata. It must not perform Git, network,
+   filesystem, or process I/O.
+5. `slic3r_core` - remains base reusable behavior. It should receive typed
+   policies or feature sets, not know about vendor docs, branch names, or raw
+   fork strings.
+6. `slic3r_cli` and `packages/launcher` - future thin shell and entrypoint
+   owners for flavor selection after metadata is typed. Do not add flavor
+   package claims in v1.9.
+7. `packages/parity` and `packages/parity-fixtures` - future fork evidence
+   namespace and fixture provenance. v1.9 may define templates and naming, but
+   should not mark any fork runtime surface verified.
 
 ### Critical Pitfalls
 
-The highest-risk failures are predictable. A “clean rewrite” can drift from the legacy CLI, config, and outputs without anyone noticing. Bazel can become a wrapper around old host-specific scripts instead of a real hermetic build. The Perl launcher can be replaced by a second legacy system made of shell glue. Fixture corpora can stagnate, docs can drift into theater, and platform scope can expand too early.
-
-1. **Parity drift from a clean rewrite** — keep the legacy oracle buildable and compare both implementations on a real fixture corpus
-1. **Non-hermetic Bazel migration** — use pinned toolchains, Bzlmod, and explicit package ownership instead of host probing
-1. **Launcher becomes a second legacy system** — keep launchers thin and move behavior into Rust or Bazel-owned entrypoints
-1. **Fixture and corpus erosion** — version the corpus and require deliberate updates
-1. **Documentation theater** — keep `docs/` and checklists tied to Rust changes by process
-1. **Platform scope creep** — keep macOS first and stage Linux/Windows later
+1. **Branch-named vendor references** - avoid with release tags, peeled
+   commits, capture dates, official source URLs, and manifest validation.
+2. **AGPL treated as a checkbox** - record SPDX IDs, license file URLs,
+   attribution, optional non-free component notes, and excluded binaries/plugins.
+3. **Marketing-list inventories** - require source refs, surfaces,
+   classification, candidate module, evidence need, and v1.9 decision on every
+   row.
+4. **Overclaimed parity from intake artifacts** - use narrow status vocabulary
+   and reserve `verified` for future executable parity evidence.
+5. **Three Rust codebase forks** - model capability families and typed flavor
+   composition instead of vendor-specific copies or core `if flavor == ...`
+   conditionals.
+6. **Hidden release scope expansion** - keep fork builds, signing, installers,
+   release channels, and CI matrices deferred until fork parity modules exist.
+7. **Network/cloud feature leakage** - classify remote control, monitoring,
+   cloud, LAN, credentials, and optional networking plugins as deferred
+   security/licensing review surfaces.
 
 ## Implications for Roadmap
 
-Based on research, the roadmap should begin with repository shape and contract inventory, not feature rewriting. The first phase should establish Bazel as the top-level orchestrator, isolate the legacy package, define the migration docs/checklists, and seed the parity corpus/status surface. The second phase should introduce the Rust contract/core/CLI path and the thin launcher replacement strategy on macOS. The third phase should harden parity with comparison runs and broaden the corpus. Only after those pieces are trustworthy should the roadmap expand to GUI planning or other platforms.
+Based on research, the roadmap should use this v1.9 phase structure:
 
-### Phase 1: Monorepo Foundation
+### Phase 1: Vendor Source Manifest and License Baseline
 
-**Rationale:** The repo needs a stable build shape and a clear oracle before implementation can move safely.
+**Rationale:** Inventories and module decisions need reproducible source truth
+first. Branch heads and "latest" labels are not stable enough for future parity
+work.
 
-**Delivers:** Bazel root, `packages/` layout, legacy package isolation, migration docs/checklists, and an initial parity status command.
+**Delivers:** `packages/fork-vendors`, `forks.tsv`, official repo URLs, stable
+release tags, peeled commits, observed branch heads, capture timestamps,
+license fields, non-free/network notes, update policy, and
+`//packages/fork-vendors:verify`.
 
-**Addresses:** legacy package stays buildable, Bazel as top-level entrypoint, docs/checklist discipline, fixture corpus bootstrap.
+**Addresses:** vendor source registry, fork lineage model, upstream source
+verification, license baseline.
 
-**Avoids:** non-hermetic Bazel setup, documentation theater, and early parity drift.
+**Avoids:** branch-named references, AGPL/provenance gaps, unofficial download
+sources, and premature source vendoring.
 
-### Phase 2: Rust Core and CLI
+### Phase 2: Inventory Templates and Source-Pinned Fork Inventories
 
-**Rationale:** Once the repository shape is stable, the highest-value contract surface is the CLI/core path on macOS.
+**Rationale:** Feature rows must be classified before they become roadmap or
+module work. Bambu and Orca inherit substantial Prusa-family behavior, so
+brand-first inventories will duplicate shared behavior.
 
-**Delivers:** Rust contracts/core/CLI crates, a macOS-first entrypoint strategy, and replacement of the Perl launcher path with thin Rust/Bazel/shell glue.
+**Delivers:** `docs/port/forks`, feature inventory template, parity checklist
+template draft, per-fork Prusa/Bambu/Orca inventories, shared downstream
+inventory, cross-fork category map, and deferred-scope ledger.
 
-**Uses:** Rust stable, Cargo workspace, `rules_rust`, macOS CLT/Xcode, and the retained legacy oracle.
+**Uses:** pinned manifest source IDs, official upstream docs/repos, existing
+`docs/port` parity vocabulary.
 
-**Implements:** contract-first Rust migration workspace and thin launcher layer.
+**Avoids:** marketing-list inventories, treating fork-specific behavior as
+universal, network/cloud leakage, and stale inventory ambiguity.
 
-### Phase 3: Parity Harness
+### Phase 3: Rust Flavor Contracts
 
-**Rationale:** The port needs evidence, not optimism, so behavior comparison must become routine after the first Rust surfaces exist.
+**Rationale:** Typed contracts should exist before runtime modules so illegal
+states are ruled out at the boundary. The Rust port should parse raw flavor and
+source strings once, then pass domain values through pure logic.
 
-**Delivers:** fixture-based comparison runs, clearer status reporting, and growth of the legacy-vs-Rust corpus.
+**Delivers:** `ForkFlavor`, `DownstreamFork`, `FeatureOrigin`,
+`VendorSourceId`, `FeatureId`, `ParitySurface`, and checklist status types in
+`slic3r_contracts`, with focused unit tests.
 
-**Uses:** fixture corpus, diff tooling, parity CLI or Bazel test targets.
+**Implements:** modular Rust metadata/contracts for base Slic3r, shared
+downstream behavior, and fork-specific behavior.
 
-**Implements:** differential parity harness and corpus management.
+**Avoids:** raw vendor strings in core logic, invalid flavor/source
+combinations, and broad compile-time feature switches.
 
-### Phase 4: Expansion
+### Phase 4: Flavor Registry Boundary
 
-**Rationale:** Linux/Windows and GUI work should come after the macOS core proves the migration strategy.
+**Rationale:** One registry should describe composition before any fork module
+ports behavior. This creates a single place to map base, shared downstream, and
+fork-specific metadata without forking the Rust workspace.
 
-**Delivers:** staged platform expansion, GUI planning, and later enforcement around docs/checklists if the process needs it.
+**Delivers:** std-only `slic3r_flavors` crate or documented pre-crate module
+boundary, pure registry functions, source-pin metadata mirrors, and metadata
+tests. It should not expose runtime support claims.
 
-**Uses:** the stabilized Rust workspace, Bazel package boundaries, and the established parity corpus.
+**Uses:** `slic3r_contracts`, the manifest baseline, inventory ownership
+labels, and Bright Builds functional-core guidance.
 
-**Implements:** platform-specific targets and deferred surfaces.
+**Avoids:** vendor-specific core copies, core dependencies on fork crates, and
+feature-flag soup.
+
+### Phase 5: Parity, Fixture, Launcher, and Deferral Templates
+
+**Rationale:** Future fork support needs a repeatable evidence ladder, but
+v1.9 should stop at templates and vocabulary. Runtime support should not be
+inferred from source pins or inventories.
+
+**Delivers:** fork parity checklist template, optional `fork-status.tsv`
+template or documented row shape, fixture namespace conventions under
+`packages/parity-fixtures/forks/`, future launcher target shape, manual drift
+refresh instructions, and explicit release/network/GUI deferrals.
+
+**Addresses:** parity checklist templates, documentation templates, future
+fixture planning, status vocabulary, and release-scope boundaries.
+
+**Avoids:** overclaimed fork support, generic checklists, fork rows marked
+verified, accidental release workflow changes, and nightly sync scope creep.
 
 ### Phase Ordering Rationale
 
-- Build shape and oracle first, because parity is impossible to trust without a stable legacy reference.
-- Rust core and CLI before GUI, because the CLI/core path is the smallest testable slice of the product.
-- Parity harness before broad expansion, because hidden drift is the main migration risk.
-- macOS before Linux/Windows, because the current development environment and validation path are already macOS-centered.
+- Vendor pins must precede inventories because every feature claim needs a
+  reproducible source ref.
+- Inventories must precede Rust module decisions because shared downstream
+  behavior should be discovered before code boundaries harden.
+- Contract types should precede the registry so raw source/CLI/manifest data is
+  parsed into valid domain values first.
+- The registry should precede parity/launcher templates so future entrypoints
+  select typed flavor metadata instead of brand strings.
+- Parity and release templates come last because they must communicate future
+  evidence requirements without claiming runtime fork support.
 
 ### Research Flags
 
 Phases likely needing deeper research during planning:
 
-- **Phase 1:** Bazel module/toolchain details and how to wrap the legacy build without making Bazel non-hermetic
-- **Phase 2:** CLI contract mapping and launcher replacement strategy for preserving exported behavior
-- **Phase 3:** Fixture corpus design and output normalization rules for fair comparisons
+- **Phase 2:** Exact per-fork inventories need source-level validation beyond
+  README/wiki feature bullets, especially CLI deltas, profile schemas, support
+  behavior, calibration tooling, and Orca community profile handling.
+- **Phase 5:** Any movement beyond templates into network/cloud, release
+  automation, installers, or fork-flavor packaging requires separate legal,
+  security, and release engineering research.
 
-Phases with standard patterns (skip research-phase):
+Phases with standard patterns where `/gsd-research-phase` should usually be
+skipped:
 
-- **Phase 4:** Platform expansion and GUI planning can follow established migration patterns once the core is stable
+- **Phase 1:** Manifest validation with Git `ls-remote`, TSV parsing, and
+  license metadata is well understood. Verify pins, but do not re-research the
+  architecture.
+- **Phase 3:** Rust contract types follow established repo and Bright Builds
+  patterns: parse at boundaries, newtypes/enums, unit tests.
+- **Phase 4:** A pure std-only flavor registry is a standard Rust composition
+  boundary as long as it remains metadata-only.
+- **Phase 5:** Checklist and fixture namespace templates can follow existing
+  `docs/port`, `packages/parity`, and `packages/parity-fixtures` patterns.
 
 ## Confidence Assessment
 
 | Area | Confidence | Notes |
 |------|------------|-------|
-| Stack | MEDIUM | Bazel/Rust choices are well-supported, but exact versions and rule pinning still need implementation validation |
-| Features | HIGH | The migration-program feature set follows directly from the project brief and current codebase state |
-| Architecture | MEDIUM | The package boundaries are practical and consistent with the research, but exact repo layout still needs implementation work |
-| Pitfalls | HIGH | The failure modes are strongly evidenced by the legacy codebase shape and the migration requirements |
+| Stack | HIGH | Current repo pins, Bazel/Rust surfaces, and official upstream refs support a narrow metadata-and-validation stack. No new dependencies are needed. |
+| Features | HIGH for v1.9, MEDIUM for future parity | The v1.9 deliverables are clear. Exact downstream behavior still needs source-level inventories before implementation phases. |
+| Architecture | HIGH for intake boundaries, MEDIUM for future modules | Manifest, docs, contracts, and registry boundaries are well supported. Future fork behavior ownership depends on inventory evidence. |
+| Pitfalls | HIGH | Process, scope, licensing, source-control, and overclaiming risks are strongly evidenced across all research files. |
 
-**Overall confidence:** MEDIUM
+**Overall confidence:** HIGH for the v1.9 roadmap; MEDIUM for downstream fork
+parity after v1.9.
 
 ### Gaps to Address
 
-- Exact Bazel rule set and pinning strategy: confirm during implementation and lock it in early
-- Concrete fixture corpus selection: choose representative jobs/models before parity work starts
-- Launcher replacement contract: define what shell/Bazel shims remain versus what Rust owns
+- **Package naming tension:** Stack recommends `packages/fork-vendors`, while
+  architecture uses `packages/vendor-forks` in places. Use
+  `packages/fork-vendors` for v1.9 to match the fork vendor intake language and
+  concrete verify-target proposal.
+- **Manifest versus source checkout tension:** Prefer manifest-only CI and
+  optional gitignored partial clones for human inventory work. Require explicit
+  future evidence before submodules, source vendoring, or build ingestion.
+- **Taxonomy tension:** Features research uses `shared-prusa-family`,
+  `bambu-specific`, and `orca-specific`; stack architecture uses
+  `base-slic3r`, `shared-downstream`, and `fork-specific`. Use the broader
+  Rust/domain taxonomy in code and allow inventory rows to add fork-family
+  detail as a subcategory.
+- **Contracts versus registry timing:** Add contract types first. Add
+  `slic3r_flavors` in v1.9 only if it remains pure metadata/registry code; do
+  not add empty fork behavior crates.
+- **License/network policy:** Bambu and Orca optional networking components
+  need explicit future legal/security review before implementation. v1.9 should
+  only inventory and defer them.
+- **Profile schema depth:** Prusa INI/IDX and Bambu/Orca JSON profile trees are
+  important future surfaces, but v1.9 should stop at schema-family inventory
+  and representative source paths.
+- **Drift protocol:** Record capture dates, observed heads, and refresh
+  commands now. Automated nightly sync remains deferred until fork modules and
+  parity evidence exist.
 
 ## Sources
 
 ### Primary (HIGH confidence)
 
-- `.planning/PROJECT.md` — project goals, constraints, and phase direction
-- `.planning/codebase/ARCHITECTURE.md` — current architecture and migration boundaries
-- `.planning/codebase/STACK.md` — current and recommended toolchain shape
-- `.planning/codebase/CONCERNS.md` — legacy debt, risks, and fragile areas
-- `.planning/codebase/INTEGRATIONS.md` — external services and build dependencies
+- `.planning/PROJECT.md` - v1.9 milestone goal, active requirements, current
+  verified parity surface, and out-of-scope boundaries.
+- `.planning/research/STACK.md` - recommended Bazel/Rust/Git/TSV stack,
+  release pins, crate/package suggestions, and source-vendoring alternatives.
+- `.planning/research/FEATURES.md` - v1.9 table stakes, differentiators,
+  anti-features, dependency notes, inventory row shape, and competitor feature
+  observations.
+- `.planning/research/ARCHITECTURE.md` - evidence-layer architecture, component
+  responsibilities, data flow, build order, and roadmap implications.
+- `.planning/research/PITFALLS.md` - critical source-control, licensing,
+  parity, module, release, network, and checklist pitfalls.
+- Official upstream repositories: `https://github.com/prusa3d/PrusaSlicer`,
+  `https://github.com/bambulab/BambuStudio`, and
+  `https://github.com/OrcaSlicer/OrcaSlicer`.
 
 ### Secondary (MEDIUM confidence)
 
-- Bazel concepts and Bzlmod guidance referenced in the stack/architecture research
-- Rust Cargo and workspace layout guidance referenced in the stack/architecture research
+- Upstream wiki/release/profile observations captured by the research files for
+  PrusaSlicer, Bambu Studio, and OrcaSlicer feature families.
+- Bright Builds repo guidance and pinned standards at commit
+  `05f8d7a6c9c2e157ec4f922a05273e72dab97676`, especially architecture,
+  code-shape, verification, and Rust guidance.
 
-______________________________________________________________________
+### Tertiary (LOW confidence)
 
-*Research completed: 2026-04-06*
+- None used as source truth. Unofficial download sites, mirrors, blogs, and
+  community guides should remain discovery-only unless verified against
+  official upstream source.
+
+---
+*Research completed: 2026-05-26*
 *Ready for roadmap: yes*
