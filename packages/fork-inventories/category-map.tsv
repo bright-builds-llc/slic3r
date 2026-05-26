@@ -1,0 +1,16 @@
+# map_id	feature_category	ownership	v1_9_decision	inventory_ids	notes
+core.base	base-core	base-slic3r	no-action-base	prusaslicer.base-core;bambustudio.base-core;orcaslicer.base-core	Base Slic3r rows document ownership separation only.
+project.shared	project-file	shared-downstream	future-candidate	prusaslicer.project-file	Shared downstream project file row needs future fixture-backed parity.
+project.bambu	project-file	fork-specific	future-candidate	bambustudio.project-file	Bambu project file row needs future fixture-backed parity.
+profile.fork-schema	profile-schema	fork-specific	future-candidate	prusaslicer.profile-schema;bambustudio.profile-schema	Fork profile schema rows need future loader and config fixtures.
+support.shared	support-generation	shared-downstream	future-candidate	prusaslicer.support-generation;bambustudio.support-generation;orcaslicer.support-generation	Shared support rows need future generated-output parity fixtures.
+step.shared	step-import	shared-downstream	future-candidate	prusaslicer.step-import;bambustudio.step-import	STEP rows need future file-format fixture evidence.
+arc.shared	arc-fitting	shared-downstream	future-candidate	prusaslicer.arc-fitting;bambustudio.arc-fitting	Arc rows need future generated-output comparison evidence.
+seam.shared	wall-seam	shared-downstream	future-candidate	prusaslicer.wall-seam	Prusa seam row is a shared downstream future candidate.
+seam.orca	wall-seam	fork-specific	future-candidate	orcaslicer.wall-seam	Orca seam row is a fork-specific future candidate.
+assembly.bambu	assembly-workflow	fork-specific	future-candidate	bambustudio.assembly-workflow	Bambu assembly row needs project and GUI-scope review before implementation.
+adaptive.orca	adaptive-mesh	fork-specific	future-candidate	orcaslicer.adaptive-mesh	Orca adaptive mesh row needs slicing fixtures before implementation.
+calibration.orca	calibration-flow	fork-specific	needs-review	orcaslicer.calibration-flow	Orca calibration row stays needs-review because provenance and fixtures must be assessed.
+profile.orca-library	profile-library	fork-specific	needs-review	orcaslicer.profile-library	Orca profile library row stays needs-review until loader fixtures exist.
+profile.orca-community	community-profile	fork-specific	needs-review	orcaslicer.community-profile	Orca community profile row stays needs-review until provenance and fixtures are checked.
+network.deferred	network-device	fork-specific	deferred	prusaslicer.network-device;bambustudio.network-device;orcaslicer.network-device	Network/cloud/plugin/credential surfaces stay deferred and do not create runtime support.
