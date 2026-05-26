@@ -386,14 +386,16 @@ Source: commands used during research and compatible with Git's documented `ls-r
 |---|-------|---------|---------------|
 | A1 | Normalizing upstream "GNU Affero General Public License, version 3" to `AGPL-3.0-only` is the right metadata choice for this phase when no "or later" wording was found in README/LICENSE evidence. [ASSUMED] | License and Provenance Baseline | A legal reviewer could prefer a different expression or require file-level license scanning before accepting the normalized SPDX field. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Should Phase 32 include a file-level license scan?** [VERIFIED: 32-CONTEXT.md]
+   - RESOLVED: No. Phase 32 records README/LICENSE evidence and explicit upstream caution notes only; formal SBOM, external compliance tooling, and file-level license scanning stay deferred. [VERIFIED: .planning/REQUIREMENTS.md; 32-CONTEXT.md]
    - What we know: The phase requires license/provenance metadata, and formal SBOM or external compliance tooling is deferred. [VERIFIED: .planning/REQUIREMENTS.md; 32-CONTEXT.md]
    - What's unclear: Whether maintainers want a later legal/compliance pass to validate every file-level header across the selected upstream commits. [ASSUMED]
    - Recommendation: Do not add file-level scanning in Phase 32; record README/LICENSE evidence and explicit upstream caution notes, then leave deeper compliance to a later milestone. [VERIFIED: 32-CONTEXT.md]
 
 2. **Should the planner add a root alias such as `//packages:fork_vendor_verify`?** [VERIFIED: packages/BUILD.bazel]
+   - RESOLVED: No. Keep Phase 32 discoverability package-local with `//packages/fork-vendors:verify`; do not edit `packages/BUILD.bazel` unless a future docs or maintainer workflow explicitly needs a root/package alias. [VERIFIED: 32-CONTEXT.md; 32-01-PLAN.md]
    - What we know: `packages/BUILD.bazel` exposes selected package aliases and `packages/parity` has package-local commands. [VERIFIED: packages/BUILD.bazel; packages/parity/BUILD.bazel]
    - What's unclear: Whether vendor intake should be discoverable from `//packages` or remain package-local to avoid conflating it with parity evidence. [VERIFIED: 32-CONTEXT.md]
    - Recommendation: Add package-local `//packages/fork-vendors:verify` first; add a root/package alias only if docs need it for discoverability. [VERIFIED: 32-CONTEXT.md]
