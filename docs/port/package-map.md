@@ -79,3 +79,4 @@
   boundary: no upstream source import, no clone/vendor/build, no runtime fork
   parity claim, no online/cloud integration, no credential handling, and no
   non-free plugin ingestion.
+- Phase 34 extends `packages/slic3r-rust/crates/slic3r_contracts` with typed fork/flavor contract values and tests, and Phase 35 owns registry composition. The Phase 32/33 source-intake and inventory-only boundaries remain in force: no upstream source import, clone/vendor/build, runtime fork parity claim, online/cloud integration, credential handling, or non-free plugin ingestion.

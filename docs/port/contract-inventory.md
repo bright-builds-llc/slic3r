@@ -13,6 +13,35 @@ that govern how later phases should move these surfaces.
 | `source-only` | Repo source defines the contract, but the trusted oracle does not exercise it yet. |
 | `source-plus-deferred` | Repo source defines the contract and there is additional evidence, but that evidence is broader, weaker, or currently deferred rather than trusted. |
 
+## Rust Flavor Contracts
+
+Rust flavor contracts parse fork and flavor metadata into typed Rust values before core migration logic receives them.
+
+Public contracts:
+
+- `DownstreamFork`
+- `FlavorId`
+- `VendorSourceRef`
+- `FeatureOrigin`
+- `ParitySurface`
+- `ChecklistStatus`
+
+Canonical source pins:
+
+- `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`
+- `bambustudio:v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6`
+- `orcaslicer:v2.3.2@c724a3f5f51c52336624b689e846c8fbc943a912`
+
+Feature-origin tokens are `base-slic3r`, `shared-downstream`,
+`fork-specific`, and `unknown-needs-review`.
+
+Checklist-status tokens are `future-candidate`, `deferred`,
+`no-action-base`, and `needs-review`.
+
+Parity-surface tokens are sourced from `packages/parity/status.tsv`.
+
+These contracts are metadata boundaries only; they do not implement a flavor registry, runtime fork behavior, fork-flavor release builds, online/cloud integration, credential handling, non-free plugin ingestion, or executable fork parity.
+
 ## CLI Behavior
 
 | Contract Item | Legacy Source of Truth | Trusted Check | Evidence Status | Current Scope | Weaker Or Deferred Evidence | Deferred Notes | Future Owner |

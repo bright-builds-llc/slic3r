@@ -15,7 +15,9 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
 - `Cargo.toml` - virtual workspace root for the Rust package
 - `BUILD.bazel` - package-level Bazel surface for build and verify commands
 - `crates/slic3r_core/` - lower-level Rust implementation crate
-- `crates/slic3r_contracts/` - stable contract-oriented launcher types
+- `crates/slic3r_contracts/` - stable contract-oriented launcher types plus
+  Rust flavor contracts for downstream fork identity, flavor identity, vendor
+  source identity, feature origin, parity surface, and checklist status
 - `crates/slic3r_cli/` - launcher-facing CLI scaffold
 
 ## Bazel Commands
@@ -44,6 +46,8 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
   - `bazel run //packages/launcher:slic3r -- --split model.stl`
 - Run the package verification suite:
   - `//packages/slic3r-rust:verify`
+- Run the flavor contract parser tests:
+  - `//packages/slic3r-rust/crates/slic3r_contracts:flavor_contracts_test`
 - Run write-mode formatting with the pinned Rust toolchain:
   - `bazel run @rules_rust//:rustfmt`
 
@@ -58,5 +62,8 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
   remain later work.
 - Phase 14 verifies the supported export and transform/info slices through the
   parity package fixture commands.
+- `crates/slic3r_contracts/` owns `DownstreamFork`, `FlavorId`,
+  `VendorSourceRef`, `FeatureOrigin`, `ParitySurface`, and `ChecklistStatus`
+  as pure Rust flavor contract values for downstream metadata boundaries.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).
