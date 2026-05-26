@@ -62,7 +62,7 @@ without importing upstream source trees or claiming runtime fork support.
 
 - This milestone starts at Phase 32 because Phase 31 shipped in v1.8
 
-- [ ] **Phase 32: Vendor Source Manifest and License Baseline** - Maintainers
+- [x] **Phase 32: Vendor Source Manifest and License Baseline** - Maintainers (completed 2026-05-26)
   can inspect and verify pinned official fork source refs, lineage, and
   license/provenance notes.
 
@@ -108,7 +108,7 @@ for PrusaSlicer, Bambu Studio, and OrcaSlicer.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 32-01-PLAN.md — Create the fork vendor source registry, Git ref verifier, and maintainer documentation boundary.
+- [x] 32-01-PLAN.md — Create the fork vendor source registry, Git ref verifier, and maintainer documentation boundary.
 
 ### Phase 33: Inventory Templates and Source-Pinned Fork Inventories
 
@@ -231,7 +231,7 @@ Phases execute in numeric order: 32 -> 33 -> 34 -> 35 -> 36
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 32. Vendor Source Manifest and License Baseline | 0/1 | Not started | - |
+| 32. Vendor Source Manifest and License Baseline | 1/1 | Complete   | 2026-05-26 |
 | 33. Inventory Templates and Source-Pinned Fork Inventories | 0/TBD | Not started | - |
 | 34. Rust Flavor Contracts | 0/TBD | Not started | - |
 | 35. Flavor Registry Boundary | 0/TBD | Not started | - |
