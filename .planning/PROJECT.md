@@ -26,9 +26,10 @@ OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
 
 ## Current State
 
-v1.9 Phases 32 and 33 have shipped the fork vendor intake and source-pinned
-inventory baseline. Phase 34 is next and will turn those source and inventory
-concepts into typed Rust flavor contracts.
+v1.9 Phases 32, 33, and 34 have shipped the fork vendor intake,
+source-pinned inventory baseline, and typed Rust flavor contract boundary.
+Phase 35 is next and will use those contracts to define the pure flavor
+registry boundary for base, shared downstream, and fork-specific behavior.
 
 Phase 32 shipped the fork vendor source and license/provenance baseline:
 
@@ -54,6 +55,17 @@ Phase 33 shipped the fork feature inventory baseline:
 - port docs publish inventories as source-observed planning inputs only, not
   executable fork parity, online/cloud integration, credential handling, or
   non-free plugin support
+
+Phase 34 shipped the typed Rust flavor contract boundary:
+
+- `packages/slic3r-rust/crates/slic3r_contracts` owns typed contracts for
+  downstream fork identity, flavor identity, vendor source identity, feature
+  origin, parity surface, and checklist status
+- `//packages/slic3r-rust:verify` now checks the contracts through the
+  aggregate Rust verification target, including formatting, clippy, build, and
+  contract tests
+- port docs publish the contract boundary while keeping flavor registry logic,
+  executable fork parity, and runtime fork-flavor behavior deferred
 
 <details>
 <summary>v1.8 shipped cross-platform release build automation</summary>
@@ -255,6 +267,9 @@ Phase 33 shipped the fork feature inventory baseline:
 - ✓ v1.9 requirements define fork feature inventories that distinguish base
   Slic3r behavior, shared downstream behavior, fork-specific behavior, and
   deferred source-observed planning inputs — Phase 33
+- ✓ v1.9 requirements define typed Rust contracts for downstream fork
+  identity, flavor identity, vendor source identity, feature origin, parity
+  surface, and checklist status — Phase 34
 
 ### Active
 
@@ -326,6 +341,7 @@ The audience for this work is broad:
 | Reuse packaged launcher parity as the release build evidence gate | Release automation should rely on the same checked-in evidence as the packaging-visible parity surface | ✓ Shipped in v1.8 |
 | Embed release provenance inside each package tree | Maintainers need platform, commit, build mode, scope, package target, and evidence target visible in every artifact | ✓ Shipped in v1.8 |
 | Treat source-pinned fork inventories as planning inputs, not runtime parity evidence | v1.9 needs feature ownership and scope metadata before fork behavior becomes implementation work | ✓ Shipped in Phase 33 |
+| Model downstream fork and flavor metadata as typed Rust contracts before registry or core logic | Raw vendor strings, source pins, feature origins, parity surfaces, and checklist status labels should not leak across Rust boundaries | ✓ Shipped in Phase 34 |
 
 ## Evolution
 
@@ -348,4 +364,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-26 after Phase 33 completion*
+*Last updated: 2026-05-26 after Phase 34 completion*
