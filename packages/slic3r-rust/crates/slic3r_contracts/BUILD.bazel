@@ -4,7 +4,10 @@ package(default_visibility = ["//visibility:public"])
 
 rust_library(
     name = "slic3r_contracts",
-    srcs = ["src/lib.rs"],
+    srcs = [
+        "src/flavor.rs",
+        "src/lib.rs",
+    ],
     edition = "2024",
 )
 
@@ -15,10 +18,18 @@ rust_test(
     edition = "2024",
 )
 
+rust_test(
+    name = "flavor_contracts_test",
+    srcs = ["tests/flavor_contracts.rs"],
+    deps = [":slic3r_contracts"],
+    edition = "2024",
+)
+
 rust_clippy(
     name = "clippy",
     testonly = True,
     deps = [
+        ":flavor_contracts_test",
         ":slic3r_contracts",
         ":slic3r_contracts_test",
     ],
@@ -27,6 +38,7 @@ rust_clippy(
 rustfmt_test(
     name = "rustfmt_check",
     targets = [
+        ":flavor_contracts_test",
         ":slic3r_contracts",
         ":slic3r_contracts_test",
     ],

@@ -36,6 +36,7 @@ test_suite(
         "//packages/slic3r-rust/crates/slic3r_cli:slic3r_cli_test",
         "//packages/slic3r-rust/crates/slic3r_contracts:rustfmt_check",
         "//packages/slic3r-rust/crates/slic3r_core:rustfmt_check",
+        "//packages/slic3r-rust/crates/slic3r_contracts:flavor_contracts_test",
         "//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts_test",
         "//packages/slic3r-rust/crates/slic3r_core:slic3r_core_smoke_test",
     ],
