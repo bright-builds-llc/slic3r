@@ -1,0 +1,53 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "README.md",
+    "inventory-template.tsv",
+    "prusaslicer.tsv",
+    "bambustudio.tsv",
+    "orcaslicer.tsv",
+    "category-map.tsv",
+])
+
+sh_binary(
+    name = "verify",
+    srcs = ["verify_inventories.sh"],
+    data = [
+        "inventory-template.tsv",
+        "prusaslicer.tsv",
+        "bambustudio.tsv",
+        "orcaslicer.tsv",
+        "category-map.tsv",
+        "//packages/fork-vendors:forks.tsv",
+        "//packages/parity:status.tsv",
+    ],
+    args = [
+        "$(location inventory-template.tsv)",
+        "$(location prusaslicer.tsv)",
+        "$(location bambustudio.tsv)",
+        "$(location orcaslicer.tsv)",
+        "$(location category-map.tsv)",
+        "$(location //packages/fork-vendors:forks.tsv)",
+        "$(location //packages/parity:status.tsv)",
+    ],
+)
+
+sh_test(
+    name = "verify_inventories_test",
+    srcs = ["verify_inventories_test.sh"],
+    data = ["verify_inventories.sh"],
+)
+
+filegroup(
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "inventory-template.tsv",
+        "prusaslicer.tsv",
+        "bambustudio.tsv",
+        "orcaslicer.tsv",
+        "category-map.tsv",
+        "verify_inventories.sh",
+        "verify_inventories_test.sh",
+    ],
+)
