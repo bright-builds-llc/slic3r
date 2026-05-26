@@ -26,7 +26,11 @@ OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
 
 ## Current State
 
-v1.9 Phase 32 shipped the fork vendor source and license/provenance baseline:
+v1.9 Phases 32 and 33 have shipped the fork vendor intake and source-pinned
+inventory baseline. Phase 34 is next and will turn those source and inventory
+concepts into typed Rust flavor contracts.
+
+Phase 32 shipped the fork vendor source and license/provenance baseline:
 
 - `packages/fork-vendors/forks.tsv` records pinned PrusaSlicer, Bambu Studio,
   and OrcaSlicer source refs, branch observations, lineage, source paths,
@@ -37,6 +41,19 @@ v1.9 Phase 32 shipped the fork vendor source and license/provenance baseline:
 - port docs publish the vendor-intake boundary while keeping branch heads
   drift-only, license metadata not legal review, and fork runtime parity
   deferred
+
+Phase 33 shipped the fork feature inventory baseline:
+
+- `packages/fork-inventories` owns the checked-in feature inventory template,
+  source-pinned PrusaSlicer, Bambu Studio, and OrcaSlicer inventory TSVs, and
+  an exact-once cross-fork category map
+- `bazel run //packages/fork-inventories:verify` validates TSV shape, source
+  pins, enum values, parity dependencies, required fork surface coverage,
+  caution policy, and category-map references without fetching, cloning,
+  building, importing, or vendoring upstream fork source trees
+- port docs publish inventories as source-observed planning inputs only, not
+  executable fork parity, online/cloud integration, credential handling, or
+  non-free plugin support
 
 <details>
 <summary>v1.8 shipped cross-platform release build automation</summary>
@@ -235,11 +252,12 @@ v1.9 Phase 32 shipped the fork vendor source and license/provenance baseline:
   such as signing, notarization, installers, or release channels — v1.8
 - ✓ v1.9 requirements define a vendor-source strategy for PrusaSlicer,
   Bambu Studio, and OrcaSlicer — Phase 32
+- ✓ v1.9 requirements define fork feature inventories that distinguish base
+  Slic3r behavior, shared downstream behavior, fork-specific behavior, and
+  deferred source-observed planning inputs — Phase 33
 
 ### Active
 
-- [ ] v1.9 requirements define fork feature inventories that distinguish base
-  Slic3r behavior, shared downstream behavior, and fork-specific behavior.
 - [ ] v1.9 requirements define modular Rust package boundaries for
   fork-specific behavior without forking the Rust codebase wholesale.
 - [ ] v1.9 requirements define parity checklist and documentation templates
@@ -307,6 +325,7 @@ The audience for this work is broad:
 | Treat GitHub Actions uploaded artifacts as the v1.8 release build surface | The project needed repeatable downloadable artifacts before release-channel publishing, signing, or installers | ✓ Shipped in v1.8 |
 | Reuse packaged launcher parity as the release build evidence gate | Release automation should rely on the same checked-in evidence as the packaging-visible parity surface | ✓ Shipped in v1.8 |
 | Embed release provenance inside each package tree | Maintainers need platform, commit, build mode, scope, package target, and evidence target visible in every artifact | ✓ Shipped in v1.8 |
+| Treat source-pinned fork inventories as planning inputs, not runtime parity evidence | v1.9 needs feature ownership and scope metadata before fork behavior becomes implementation work | ✓ Shipped in Phase 33 |
 
 ## Evolution
 
@@ -329,4 +348,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-26 after Phase 32 completion*
+*Last updated: 2026-05-26 after Phase 33 completion*
