@@ -134,7 +134,10 @@ before any downstream behavior becomes implementation scope.
    base Slic3r, shared downstream, fork-specific, or unknown-needs-review,
    with deferred rows separated from future implementation candidates.
 
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+- [ ] 33-01-PLAN.md — Create the fork inventory package, source-pinned TSVs, verifier, tests, and port-doc links.
 
 ### Phase 34: Rust Flavor Contracts
 
