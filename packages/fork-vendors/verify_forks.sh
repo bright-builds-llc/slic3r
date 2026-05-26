@@ -122,7 +122,11 @@ verify_tag_ref() {
 		error "${vendor_id}: missing peeled tag ref ${peeled_ref}"
 	fi
 
-	if [[ "${tag_kind}" == "lightweight" && -z "${actual_peeled_commit_sha}" ]]; then
+	if [[ "${tag_kind}" == "lightweight" && -n "${actual_peeled_commit_sha}" ]]; then
+		error "${vendor_id}: recorded lightweight tag ${selected_stable_tag}, but remote exposes peeled annotated tag ${peeled_ref}"
+	fi
+
+	if [[ "${tag_kind}" == "lightweight" ]]; then
 		actual_peeled_commit_sha="${actual_tag_ref_sha}"
 	fi
 
@@ -149,6 +153,10 @@ warn_on_branch_drift() {
 row_number=0
 while IFS= read -r line || [[ -n "${line}" ]]; do
 	row_number=$((row_number + 1))
+
+	if [[ "${line}" == *$'\r'* ]]; then
+		error "row ${row_number}: registry must use LF row delimiters and fields must not contain carriage returns"
+	fi
 
 	if [[ -z "${line}" || "${line}" == \#* ]]; then
 		continue

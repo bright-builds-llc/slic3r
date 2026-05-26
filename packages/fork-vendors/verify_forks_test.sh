@@ -268,6 +268,51 @@ test_tag_mismatches_fail() {
 	assert_contains "${tmp_dir}/lightweight.err" '^error:'
 }
 
+test_lightweight_row_rejects_annotated_remote_tag() {
+	# Arrange
+	registry="${tmp_dir}/lightweight-annotated-remote.tsv"
+	write_header "${registry}"
+	append_row "${registry}" \
+		"misclassified" "Misclassified" "https://github.com/example/Annotated" \
+		"v1.0.0" "lightweight" \
+		"1111111111111111111111111111111111111111" "-" \
+		"2222222222222222222222222222222222222222" \
+		"master" "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" \
+		"2026-05-26T16:23:36Z" "slic3r" "src" \
+		"git ls-remote --tags https://github.com/example/Annotated refs/tags/v1.0.0 refs/tags/v1.0.0^{}" \
+		"AGPL-3.0-only" "AGPL-3.0" \
+		"README.md@v1.0.0;LICENSE@v1.0.0" "Attribution" \
+		"metadata-only-not-legal-review" "none" "No caution"
+
+	# Act
+	if run_verifier "${registry}" "${tmp_dir}/misclassified.out" "${tmp_dir}/misclassified.err"; then
+		fail "lightweight row with annotated remote tag passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/misclassified.err" 'recorded lightweight tag v1.0.0, but remote exposes peeled annotated tag'
+}
+
+test_crlf_rows_fail_before_git() {
+	# Arrange
+	registry="${tmp_dir}/crlf.tsv"
+	write_header "${registry}"
+	append_lightweight_row "${registry}" "lightweight" \
+		"3333333333333333333333333333333333333333"
+	perl -0pi -e 's/\n/\r\n/g' "${registry}"
+
+	# Act
+	if run_verifier "${registry}" "${tmp_dir}/crlf.out" "${tmp_dir}/crlf.err"; then
+		fail "CRLF registry passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/crlf.err" 'registry must use LF row delimiters'
+	if [[ -e "${tmp_dir}/network-called" ]]; then
+		fail "network check ran for CRLF registry"
+	fi
+}
+
 test_branch_drift_warns_without_failing() {
 	# Arrange
 	registry="${tmp_dir}/branch-drift.tsv"
@@ -312,6 +357,8 @@ test_refresh_command_is_never_executed() {
 
 test_invalid_rows_fail_before_git
 test_tag_mismatches_fail
+test_lightweight_row_rejects_annotated_remote_tag
+test_crlf_rows_fail_before_git
 test_branch_drift_warns_without_failing
 test_refresh_command_is_never_executed
 
