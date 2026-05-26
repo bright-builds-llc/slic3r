@@ -1,0 +1,22 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "README.md",
+    "forks.tsv",
+])
+
+sh_binary(
+    name = "verify",
+    srcs = ["verify_forks.sh"],
+    data = ["forks.tsv"],
+    args = ["$(location forks.tsv)"],
+)
+
+filegroup(
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "forks.tsv",
+        "verify_forks.sh",
+    ],
+)
