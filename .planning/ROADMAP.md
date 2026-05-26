@@ -41,9 +41,9 @@
 
 ## Current Status
 
-v1.9 is active. Phase 32 is complete, and Phase 33 is ready to plan. The
-roadmap continues from the last shipped phase, Phase 31, and covers only the
-v1.9 active requirements.
+v1.9 is active. Phases 32 and 33 are complete, and Phase 34 is ready to plan.
+The roadmap continues from the last shipped phase, Phase 31, and covers only
+the v1.9 active requirements.
 
 ## Overview
 
@@ -67,9 +67,10 @@ without importing upstream source trees or claiming runtime fork support.
   can inspect and verify pinned official fork source refs, lineage, and
   license/provenance notes.
 
-- [ ] **Phase 33: Inventory Templates and Source-Pinned Fork Inventories** -
+- [x] **Phase 33: Inventory Templates and Source-Pinned Fork Inventories** -
   Maintainers can use source-pinned inventory templates and inspect initial
   PrusaSlicer, Bambu Studio, OrcaSlicer, and cross-fork classifications.
+  (completed 2026-05-26)
 
 - [ ] **Phase 34: Rust Flavor Contracts** - Developers can use typed Rust
   contracts for fork identity, vendor source identity, feature origins, parity
@@ -137,7 +138,7 @@ before any downstream behavior becomes implementation scope.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 33-01-PLAN.md — Create the fork inventory package, source-pinned TSVs, verifier, tests, and port-doc links.
+- [x] 33-01-PLAN.md — Create the fork inventory package, source-pinned TSVs, verifier, tests, and port-doc links.
 
 ### Phase 34: Rust Flavor Contracts
 
@@ -236,7 +237,7 @@ Phases execute in numeric order: 32 -> 33 -> 34 -> 35 -> 36
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 32. Vendor Source Manifest and License Baseline | 1/1 | Complete    | 2026-05-26 |
-| 33. Inventory Templates and Source-Pinned Fork Inventories | 0/TBD | Not started | - |
+| 33. Inventory Templates and Source-Pinned Fork Inventories | 1/1 | Complete    | 2026-05-26 |
 | 34. Rust Flavor Contracts | 0/TBD | Not started | - |
 | 35. Flavor Registry Boundary | 0/TBD | Not started | - |
 | 36. Parity, Fixture, Launcher, and Deferral Templates | 0/TBD | Not started | - |

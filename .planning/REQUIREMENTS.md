@@ -26,23 +26,23 @@ Requirements for the v1.9 milestone. Each maps to one roadmap phase.
 
 ### Fork Feature Inventories
 
-- [ ] **INV-01**: Maintainer can use a checked-in fork feature inventory
+- [x] **INV-01**: Maintainer can use a checked-in fork feature inventory
   template that requires source reference, ownership classification, feature
   surface, complexity, dependency on existing parity surfaces, v1.9 decision,
   and future parity notes for every row.
-- [ ] **INV-02**: Maintainer can inspect a PrusaSlicer feature inventory that
+- [x] **INV-02**: Maintainer can inspect a PrusaSlicer feature inventory that
   separates base Slic3r behavior, shared downstream behavior, and
   Prusa-specific behavior from the pinned PrusaSlicer source baseline.
-- [ ] **INV-03**: Maintainer can inspect a Bambu Studio feature inventory that
+- [x] **INV-03**: Maintainer can inspect a Bambu Studio feature inventory that
   separates inherited Prusa-family behavior, shared downstream behavior, and
   Bambu-specific project, profile, network, support, STEP, arc, and assembly
   behavior from the pinned Bambu Studio source baseline.
-- [ ] **INV-04**: Maintainer can inspect an OrcaSlicer feature inventory that
+- [x] **INV-04**: Maintainer can inspect an OrcaSlicer feature inventory that
   separates inherited Prusa/Bambu-family behavior, shared downstream behavior,
   and Orca-specific calibration, wall/seam, support, adaptive mesh, profile
   library, and community-profile behavior from the pinned OrcaSlicer source
   baseline.
-- [ ] **INV-05**: Maintainer can inspect a cross-fork category map that shows
+- [x] **INV-05**: Maintainer can inspect a cross-fork category map that shows
   which inventory rows are base Slic3r, shared downstream, fork-specific, or
   unknown-needs-review, with deferred rows clearly separated from future
   implementation candidates.
@@ -125,11 +125,11 @@ Which phases cover which requirements. Updated as phases complete.
 | VEND-01 | Phase 32 | Complete |
 | VEND-02 | Phase 32 | Complete |
 | VEND-03 | Phase 32 | Complete |
-| INV-01 | Phase 33 | Pending |
-| INV-02 | Phase 33 | Pending |
-| INV-03 | Phase 33 | Pending |
-| INV-04 | Phase 33 | Pending |
-| INV-05 | Phase 33 | Pending |
+| INV-01 | Phase 33 | Complete |
+| INV-02 | Phase 33 | Complete |
+| INV-03 | Phase 33 | Complete |
+| INV-04 | Phase 33 | Complete |
+| INV-05 | Phase 33 | Complete |
 | ARCH-01 | Phase 34 | Pending |
 | ARCH-02 | Phase 35 | Pending |
 | ARCH-03 | Phase 35 | Pending |
@@ -147,4 +147,4 @@ Which phases cover which requirements. Updated as phases complete.
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-26*
-*Last updated: 2026-05-26 after Phase 32 completion*
+*Last updated: 2026-05-26 after Phase 33 completion*
