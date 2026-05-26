@@ -26,7 +26,8 @@ set -euo pipefail
 : "${GIT_CALL_LOG:?}"
 : "${GIT_NETWORK_MARKER:?}"
 
-printf '%s' "$1" >>"${GIT_CALL_LOG}"
+git_command="$1"
+printf '%s' "${git_command}" >>"${GIT_CALL_LOG}"
 shift
 for arg in "$@"; do
 	printf '\t%s' "${arg}" >>"${GIT_CALL_LOG}"
@@ -34,13 +35,13 @@ done
 printf '\n' >>"${GIT_CALL_LOG}"
 : >"${GIT_NETWORK_MARKER}"
 
-if [[ "$1" != "ls-remote" ]]; then
+if [[ "${git_command}" != "ls-remote" ]]; then
 	printf 'unexpected git command\n' >&2
 	exit 1
 fi
 
-mode="$2"
-repo="$3"
+mode="$1"
+repo="$2"
 
 if [[ "${mode}" == "--tags" ]]; then
 	case "${repo}" in
