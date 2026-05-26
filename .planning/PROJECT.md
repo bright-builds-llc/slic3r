@@ -10,12 +10,13 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone: None
+## Current Milestone: v1.9 Fork Vendor Intake and Module Architecture
 
-v1.8 is shipped and archived. The next milestone should define fresh
-requirements for v1.9 Fork Vendor Intake and Module Architecture.
+**Goal:** Establish pinned downstream fork references, feature inventories,
+and modular Rust package boundaries so PrusaSlicer, Bambu Studio, and
+OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
 
-**Next target features:**
+**Target features:**
 
 - Vendor-source strategy for PrusaSlicer, Bambu Studio, and OrcaSlicer
 - Fork feature inventories that distinguish base, shared downstream, and
@@ -220,7 +221,14 @@ v1.8 shipped cross-platform release build automation:
 
 ### Active
 
-None yet — v1.9 requirements should be defined by the next milestone cycle.
+- [ ] v1.9 requirements define a vendor-source strategy for PrusaSlicer,
+  Bambu Studio, and OrcaSlicer.
+- [ ] v1.9 requirements define fork feature inventories that distinguish base
+  Slic3r behavior, shared downstream behavior, and fork-specific behavior.
+- [ ] v1.9 requirements define modular Rust package boundaries for
+  fork-specific behavior without forking the Rust codebase wholesale.
+- [ ] v1.9 requirements define parity checklist and documentation templates
+  for downstream fork work.
 
 ### Out of Scope
 
@@ -233,11 +241,14 @@ None yet — v1.9 requirements should be defined by the next milestone cycle.
   surface remain secondary to release automation and GUI strategy decisions
 - Treating the legacy package as an active feature-development surface — it
   remains the reference implementation except for minimal oracle upkeep
-- Downstream fork vendoring, fork parity ports, and fork-flavor builds are
-  future milestone work beyond the active v1.8 scope
+- Full PrusaSlicer, Bambu Studio, and OrcaSlicer parity ports remain future
+  implementation milestones after v1.9 establishes vendor intake and module
+  architecture.
+- Fork-flavor build automation remains future release work after downstream
+  parity modules exist.
 - Nightly vendor sync and Codex-assisted merge automation require full fork
   parity, stable vendor references, and review-gated automation before they are
-  safe to enable
+  safe to enable.
 
 ## Context
 
@@ -303,4 +314,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-24 after v1.8 milestone archive*
+*Last updated: 2026-05-26 after v1.9 milestone start*

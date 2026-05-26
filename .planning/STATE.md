@@ -1,54 +1,55 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.8
-milestone_name: Cross-Platform Release Build Automation
-current_phase: 31
-current_phase_name: Cross-Platform Release Build Workflow
-current_plan: Complete
-status: completed
-stopped_at: Completed 31-01-PLAN.md
-last_updated: "2026-05-24T18:50:10.023Z"
-last_activity: 2026-05-24
+milestone: v1.9
+milestone_name: Fork Vendor Intake and Module Architecture
+current_phase: null
+current_phase_name: Defining requirements
+current_plan: null
+status: defining_requirements
+stopped_at: Milestone v1.9 started
+last_updated: "2026-05-26T10:36:35Z"
+last_activity: 2026-05-26
 progress:
-  total_phases: 1
-  completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-05-24)
+See: `.planning/PROJECT.md` (updated 2026-05-26)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
-**Current focus:** Planning next milestone after v1.8 archive
+**Current focus:** Defining requirements for v1.9 Fork Vendor Intake and
+Module Architecture
 
 ## Current Position
 
-Phase: 31 (Cross-Platform Release Build Workflow) — COMPLETE
-Plan: 1 of 1
-Current Phase: 31
-Current Phase Name: Cross-Platform Release Build Workflow
-Current Plan: Complete
-Total Phases: 1
-Total Plans in Phase: 1
-Status: Complete
-Last activity: 2026-05-24
-Last Activity Description: v1.8 milestone completed and archived
+Phase: Not started (defining requirements)
+Plan: —
+Current Phase: Not started
+Current Phase Name: Defining requirements
+Current Plan: —
+Total Phases: 0
+Total Plans in Phase: 0
+Status: Defining requirements
+Last activity: 2026-05-26
+Last Activity Description: Milestone v1.9 started
 
-Progress: [##########] 100%
+Progress: [----------] 0%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 1 in the active milestone
+- Total plans completed: 0 in the active milestone
 - Average duration: N/A
 - Total execution time: 0.0 hours
 
@@ -56,11 +57,11 @@ Progress: [##########] 100%
 
 | Phase | Plans | Total | Avg/Plan |
 | --- | --- | --- | --- |
-| 31. Cross-Platform Release Build Workflow | 1/1 | 0.0h | N/A |
+| Not started | 0/0 | 0.0h | N/A |
 
 **Recent Trend:**
 
-- Last 5 plans: Phase 31 P01
+- Last 5 plans: None in v1.9 yet
 - Trend: N/A
 
 ## Accumulated Context
@@ -72,16 +73,18 @@ Decisions are logged in `PROJECT.md` Key Decisions table.
 Recent decisions affecting current work:
 
 - Bazel remains the top-level build and test entrypoint for the migration.
+
 - Legacy Slic3r remains the retained parity oracle and reference package.
+
 - Shared parity commands and fixture corpora are the evidence surface for the
   verified CLI/export/transform slice.
 
-- v1.8 scope is limited to base Slic3r release build artifacts for macOS,
-  Linux, and Windows.
+- v1.9 scope is limited to vendor intake, fork feature inventories, module
+  architecture, and parity checklist templates.
 
 - Signing, notarization, installers, AppImage/MSI/DMG packaging,
-  release-channel publishing, fork-flavor builds, GUI work, and new CLI
-  behavior remain out of scope.
+  release-channel publishing, full fork parity ports, fork-flavor builds, GUI
+  work, and new CLI behavior remain out of scope.
 
 ### Roadmap Evolution
 
