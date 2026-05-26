@@ -49,7 +49,7 @@ Requirements for the v1.9 milestone. Each maps to one roadmap phase.
 
 ### Modular Rust Flavor Architecture
 
-- [ ] **ARCH-01**: Developer can use typed Rust contracts for downstream fork
+- [x] **ARCH-01**: Developer can use typed Rust contracts for downstream fork
   identity, flavor identity, vendor source identity, feature origin, parity
   surface, and checklist status instead of passing raw vendor strings through
   core logic.
@@ -130,7 +130,7 @@ Which phases cover which requirements. Updated as phases complete.
 | INV-03 | Phase 33 | Complete |
 | INV-04 | Phase 33 | Complete |
 | INV-05 | Phase 33 | Complete |
-| ARCH-01 | Phase 34 | Pending |
+| ARCH-01 | Phase 34 | Complete |
 | ARCH-02 | Phase 35 | Pending |
 | ARCH-03 | Phase 35 | Pending |
 | PAR-01 | Phase 36 | Pending |
@@ -147,4 +147,4 @@ Which phases cover which requirements. Updated as phases complete.
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-26*
-*Last updated: 2026-05-26 after Phase 33 completion*
+*Last updated: 2026-05-26 after Phase 34 completion*
