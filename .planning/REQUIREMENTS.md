@@ -122,29 +122,29 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| VEND-01 | TBD | Pending |
-| VEND-02 | TBD | Pending |
-| VEND-03 | TBD | Pending |
-| INV-01 | TBD | Pending |
-| INV-02 | TBD | Pending |
-| INV-03 | TBD | Pending |
-| INV-04 | TBD | Pending |
-| INV-05 | TBD | Pending |
-| ARCH-01 | TBD | Pending |
-| ARCH-02 | TBD | Pending |
-| ARCH-03 | TBD | Pending |
-| PAR-01 | TBD | Pending |
-| PAR-02 | TBD | Pending |
-| PAR-03 | TBD | Pending |
-| PAR-04 | TBD | Pending |
+| VEND-01 | Phase 32 | Pending |
+| VEND-02 | Phase 32 | Pending |
+| VEND-03 | Phase 32 | Pending |
+| INV-01 | Phase 33 | Pending |
+| INV-02 | Phase 33 | Pending |
+| INV-03 | Phase 33 | Pending |
+| INV-04 | Phase 33 | Pending |
+| INV-05 | Phase 33 | Pending |
+| ARCH-01 | Phase 34 | Pending |
+| ARCH-02 | Phase 35 | Pending |
+| ARCH-03 | Phase 35 | Pending |
+| PAR-01 | Phase 36 | Pending |
+| PAR-02 | Phase 36 | Pending |
+| PAR-03 | Phase 36 | Pending |
+| PAR-04 | Phase 36 | Pending |
 
 **Coverage:**
 
 - v1 requirements: 15 total
-- Mapped to phases: 0
-- Unmapped: 15
+- Mapped to phases: 15
+- Unmapped: 0
 
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-26*
-*Last updated: 2026-05-26 after initial definition*
+*Last updated: 2026-05-26 after roadmap creation*

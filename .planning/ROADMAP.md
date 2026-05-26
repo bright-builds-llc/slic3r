@@ -2,9 +2,8 @@
 
 ## Milestones
 
-- Next: **v1.9 Fork Vendor Intake and Module Architecture** - PrusaSlicer,
-  Bambu Studio, and OrcaSlicer vendor references, feature inventories, and
-  modular port boundaries
+- Active: **v1.9 Fork Vendor Intake and Module Architecture** - Phases 32-36
+  (planned)
 - Future: **v1.10 PrusaSlicer Parity Port** - Modular Rust parity for
   PrusaSlicer-specific behavior
 - Future: **v1.11 Bambu Studio Parity Port** - Modular Rust parity for Bambu
@@ -42,97 +41,211 @@
 
 ## Current Status
 
-No active milestone is open. v1.8 is archived, and the next step is to start
-the v1.9 milestone cycle with fresh requirements.
+v1.9 is active. Phase 32 is ready to plan. The roadmap continues from the last
+shipped phase, Phase 31, and covers only the v1.9 active requirements.
 
-## Shipped Milestone Details
+## Overview
 
-<details>
-<summary>v1.8 Cross-Platform Release Build Automation (Phase 31) - shipped 2026-05-24</summary>
+v1.9 establishes a maintainer-facing intake and architecture layer for
+PrusaSlicer, Bambu Studio, and OrcaSlicer. The milestone pins official vendor
+source references, inventories downstream feature ownership, defines typed Rust
+flavor boundaries, and creates parity templates for later fork-port milestones
+without importing upstream source trees or claiming runtime fork support.
 
-- [x] Phase 31: Cross-Platform Release Build Workflow (1/1 plans) - completed
-  2026-05-24
-- Archive: [.planning/milestones/v1.8-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-ROADMAP.md)
-- Requirements archive:
-  [.planning/milestones/v1.8-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-REQUIREMENTS.md)
-- Audit:
-  [.planning/milestones/v1.8-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-MILESTONE-AUDIT.md)
+## Phases
 
-</details>
+**Phase Numbering:**
 
-## Future Roadmap
+- Integer phases (32, 33, 34): Planned milestone work
 
-These entries are future milestone candidates after the shipped v1.8 release
-build automation milestone. They should be converted into active milestone
-requirements and phase directories when the project is ready to plan them.
+- Decimal phases (32.1, 32.2): Urgent insertions, if needed later
 
-### v1.9 Fork Vendor Intake and Module Architecture
+- This milestone starts at Phase 32 because Phase 31 shipped in v1.8
 
-**Goal:** Maintainer can track PrusaSlicer, Bambu Studio, and OrcaSlicer as
-pinned vendor sources and can see how their downstream features map into
-modular Rust packages.
-**Depends on:** v1.8 release-build automation, or an explicit decision to
-prioritize fork intake first.
+- [ ] **Phase 32: Vendor Source Manifest and License Baseline** - Maintainers
+  can inspect and verify pinned official fork source refs, lineage, and
+  license/provenance notes.
+
+- [ ] **Phase 33: Inventory Templates and Source-Pinned Fork Inventories** -
+  Maintainers can use source-pinned inventory templates and inspect initial
+  PrusaSlicer, Bambu Studio, OrcaSlicer, and cross-fork classifications.
+
+- [ ] **Phase 34: Rust Flavor Contracts** - Developers can use typed Rust
+  contracts for fork identity, vendor source identity, feature origins, parity
+  surfaces, and checklist status.
+
+- [ ] **Phase 35: Flavor Registry Boundary** - Developers can inspect a pure
+  flavor registry boundary that maps base, shared downstream, and fork-specific
+  metadata without copied Rust workspaces.
+
+- [ ] **Phase 36: Parity, Fixture, Launcher, and Deferral Templates** -
+  Maintainers can use fork parity, fixture namespace, launcher-shape, drift
+  refresh, and deferral templates without overclaiming fork support.
+
+## Phase Details
+
+### Phase 32: Vendor Source Manifest and License Baseline
+
+**Goal**: Maintainers have a reproducible vendor-source and license baseline
+for PrusaSlicer, Bambu Studio, and OrcaSlicer.
+**Depends on**: Phase 31
+**Requirements**: VEND-01, VEND-02, VEND-03
 **Success Criteria** (what must be TRUE):
 
-1. The repo has a documented vendor-source strategy for PrusaSlicer, Bambu
-   Studio, and OrcaSlicer, using submodules or another pinned mirror approach
-   with explicit update and licensing rules.
-1. Each fork has a checked-in feature inventory that separates base Slic3r
-   behavior, shared downstream behavior, and fork-specific behavior.
-1. The Rust module/package architecture defines how fork-specific features plug
-   into the base implementation without forking the Rust codebase wholesale.
-1. Parity checklists and documentation templates exist for downstream fork
-   feature work.
+1. Maintainer can inspect one checked-in vendor source registry for
+   PrusaSlicer, Bambu Studio, and OrcaSlicer with official URL, stable tag,
+   peeled commit, observed branch head, capture date, lineage, source paths,
+   and refresh command.
+1. Maintainer can run a repo-owned verification target that confirms each
+   registry row resolves to the recorded upstream tag and commit without
+   cloning or building the full upstream fork repositories.
+1. Maintainer can inspect per-fork SPDX identifier, license source,
+   attribution, provenance, and explicit non-free or network-plugin caution
+   notes.
+1. Maintainer can distinguish canonical release tags and peeled commits from
+   drift-only branch-head observations.
 
-### v1.10 PrusaSlicer Parity Port
+**Plans**: TBD
 
-**Goal:** Maintainer can build and verify a modular Rust-backed PrusaSlicer
-flavor with full parity for the PrusaSlicer-specific feature inventory.
-**Depends on:** v1.9 fork vendor intake and module architecture.
+### Phase 33: Inventory Templates and Source-Pinned Fork Inventories
 
-### v1.11 Bambu Studio Parity Port
+**Goal**: Maintainers can classify fork features from pinned source baselines
+before any downstream behavior becomes implementation scope.
+**Depends on**: Phase 32
+**Requirements**: INV-01, INV-02, INV-03, INV-04, INV-05
+**Success Criteria** (what must be TRUE):
 
-**Goal:** Maintainer can build and verify a modular Rust-backed Bambu Studio
-flavor with full parity for the Bambu Studio-specific feature inventory.
-**Depends on:** v1.9 fork vendor intake and module architecture, plus any
-shared downstream modules proven during the PrusaSlicer port.
+1. Maintainer can use a checked-in feature inventory template that requires
+   source reference, ownership classification, feature surface, complexity,
+   existing parity-surface dependency, v1.9 decision, and future parity notes
+   for every row.
+1. Maintainer can inspect source-pinned PrusaSlicer, Bambu Studio, and
+   OrcaSlicer inventories that separate inherited base behavior, shared
+   downstream behavior, and fork-specific behavior.
+1. Maintainer can inspect Bambu and Orca inventory rows for project, profile,
+   network, support, STEP, arc, assembly, calibration, wall/seam, adaptive
+   mesh, library, and community-profile surfaces without treating them as
+   verified runtime support.
+1. Maintainer can inspect a cross-fork category map that classifies rows as
+   base Slic3r, shared downstream, fork-specific, or unknown-needs-review,
+   with deferred rows separated from future implementation candidates.
 
-### v1.12 OrcaSlicer Parity Port
+**Plans**: TBD
 
-**Goal:** Maintainer can build and verify a modular Rust-backed OrcaSlicer
-flavor with full parity for the OrcaSlicer-specific feature inventory.
-**Depends on:** v1.9 fork vendor intake and module architecture, plus shared
-downstream modules proven during earlier fork ports.
+### Phase 34: Rust Flavor Contracts
 
-### v1.13 Fork Feature Documentation and Checklists
+**Goal**: Developers can model fork and flavor concepts as typed Rust domain
+values before they reach core migration logic.
+**Depends on**: Phase 33
+**Requirements**: ARCH-01
+**Success Criteria** (what must be TRUE):
 
-**Goal:** Maintainers and contributors can inspect a comprehensive feature
-catalog for every downstream fork and understand parity status, implementation
-ownership, evidence commands, and remaining gaps.
-**Depends on:** v1.10, v1.11, and v1.12 parity ports.
+1. Developer can use typed Rust contracts for downstream fork identity,
+   flavor identity, vendor source identity, feature origin, parity surface,
+   and checklist status.
+1. Developer can parse raw vendor, flavor, source, feature, parity, and
+   checklist strings into typed values at the boundary before they enter core
+   logic.
+1. Developer can rely on focused contract tests or examples that distinguish
+   base Slic3r, shared downstream, and fork-specific values without raw
+   vendor strings.
 
-### v1.14 Cross-Flavor Build Automation
+**Plans**: TBD
 
-**Goal:** Maintainer can use GitHub Actions to build every supported
-Slic3r-family flavor for every supported platform.
-**Depends on:** v1.10, v1.11, v1.12, and v1.13.
+### Phase 35: Flavor Registry Boundary
 
-### v1.15 Nightly Vendor Sync and Codex-Assisted Porting
+**Goal**: Developers can inspect a single metadata boundary for flavor
+composition without fork-specific core copies or side-effecting registry code.
+**Depends on**: Phase 34
+**Requirements**: ARCH-02, ARCH-03
+**Success Criteria** (what must be TRUE):
 
-**Goal:** Maintainer can run review-gated nightly automation that refreshes
-vendor fork code, detects newly added upstream features, and uses Codex to
-prepare Rust port updates with tests and documentation.
-**Depends on:** v1.14 cross-flavor build automation and full parity for each
-tracked fork.
+1. Developer can inspect a documented module boundary that keeps base Slic3r
+   behavior in shared core packages while future fork behavior plugs in
+   through capability-oriented flavor metadata.
+1. Developer can use or inspect a pure flavor registry boundary that maps
+   base, shared downstream, and fork-specific metadata without performing
+   Git, filesystem, network, process, or release operations.
+1. Developer can trace registry metadata back to vendor source identities and
+   inventory ownership labels without claiming runtime fork parity.
+1. Developer can confirm future fork work does not require vendor-specific
+   Rust workspaces or copied base behavior.
+
+**Plans**: TBD
+
+### Phase 36: Parity, Fixture, Launcher, and Deferral Templates
+
+**Goal**: Maintainers have repeatable templates and vocabulary for future fork
+parity work while v1.9 remains intake and architecture only.
+**Depends on**: Phase 35
+**Requirements**: PAR-01, PAR-02, PAR-03, PAR-04
+**Success Criteria** (what must be TRUE):
+
+1. Maintainer can use a fork parity checklist template that requires
+   inventory row ID, source pin, candidate Rust module, fixture need,
+   evidence command, docs touched, license or security note, deferred scope,
+   and reviewer signoff before a future fork feature can be marked verified.
+1. Maintainer can inspect documented fork fixture namespace and parity-status
+   conventions that reserve verified fork status for future executable parity
+   evidence, not source pins or inventories.
+1. Maintainer can inspect v1.9 documentation that explicitly defers full fork
+   parity ports, GUI migration, fork-flavor release builds, signing,
+   installers, release channels, nightly vendor sync, cloud or network device
+   integrations, profile auto-update execution, and non-free plugin
+   ingestion.
+1. Maintainer can run or follow a manual drift-refresh protocol that compares
+   pinned vendor refs with current upstream heads before any later fork
+   parity milestone begins.
+
+**Plans**: TBD
+
+## Coverage
+
+| Requirement | Phase |
+|-------------|-------|
+| VEND-01 | Phase 32 |
+| VEND-02 | Phase 32 |
+| VEND-03 | Phase 32 |
+| INV-01 | Phase 33 |
+| INV-02 | Phase 33 |
+| INV-03 | Phase 33 |
+| INV-04 | Phase 33 |
+| INV-05 | Phase 33 |
+| ARCH-01 | Phase 34 |
+| ARCH-02 | Phase 35 |
+| ARCH-03 | Phase 35 |
+| PAR-01 | Phase 36 |
+| PAR-02 | Phase 36 |
+| PAR-03 | Phase 36 |
+| PAR-04 | Phase 36 |
+
+Mapped: 15/15 v1 requirements.
 
 ## Progress
 
-| Milestone | Phases | Plans | Status | Shipped |
-| --- | --- | --- | --- | --- |
-| v1.8 Cross-Platform Release Build Automation | 31 | 1/1 | Shipped | 2026-05-24 |
+**Execution Order:**
+Phases execute in numeric order: 32 -> 33 -> 34 -> 35 -> 36
 
-## Next Step
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 32. Vendor Source Manifest and License Baseline | 0/TBD | Not started | - |
+| 33. Inventory Templates and Source-Pinned Fork Inventories | 0/TBD | Not started | - |
+| 34. Rust Flavor Contracts | 0/TBD | Not started | - |
+| 35. Flavor Registry Boundary | 0/TBD | Not started | - |
+| 36. Parity, Fixture, Launcher, and Deferral Templates | 0/TBD | Not started | - |
 
-Run `/gsd-new-milestone v1.9 Fork Vendor Intake and Module Architecture` to
-create fresh requirements and an active roadmap for the next milestone.
+## Future Roadmap
+
+Future milestones remain dependent on v1.9 intake and architecture:
+
+- **v1.10 PrusaSlicer Parity Port** depends on v1.9 vendor intake,
+  inventories, contracts, registry boundaries, and parity templates.
+- **v1.11 Bambu Studio Parity Port** depends on v1.9 and any shared downstream
+  modules proven during the PrusaSlicer port.
+- **v1.12 OrcaSlicer Parity Port** depends on v1.9 and shared downstream
+  modules proven during earlier fork ports.
+- **v1.13 Fork Feature Documentation and Checklists** depends on completed
+  fork parity ports.
+- **v1.14 Cross-Flavor Build Automation** depends on verified fork behavior.
+- **v1.15 Nightly Vendor Sync and Codex-Assisted Porting** depends on stable
+  cross-flavor builds and review-gated refresh policy.
