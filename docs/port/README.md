@@ -146,3 +146,18 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   - `launcher-packaging`
   - `linux.packaged-launcher`
   - `windows.packaged-launcher`
+
+## Current Fork Vendor Intake State
+
+- `packages/fork-vendors/forks.tsv` is the checked-in vendor source registry
+  for PrusaSlicer, Bambu Studio, and OrcaSlicer.
+- `bazel run //packages/fork-vendors:verify` validates the selected stable tags
+  and peeled commits recorded for those forks.
+- Selected stable tags and peeled commits are the accepted source baseline for
+  Phase 32. Branch heads are drift-only observations and are not accepted
+  release-pin evidence.
+- Source pins, source path inventories, license metadata, provenance notes, and
+  branch observations are intake evidence only; they do not mark fork parity as verified.
+- Non-free and network-plugin cautions remain scope and provenance warnings.
+  They do not create runtime fork parity, online integration, credential, cloud,
+  or plugin ingestion support.

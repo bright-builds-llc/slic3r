@@ -20,6 +20,7 @@
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, the scoped Windows packaged launcher tree, and the scoped macOS packaged launcher/startup surface |
 | `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, and Windows packaged launcher slices |
 | `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, and `windows-packaged-launcher` slices |
+| `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 
 ## Notes
 
@@ -66,3 +67,8 @@
   the matching packaged launcher parity evidence. It still keeps signing,
   notarization, installers, AppImage, MSI, DMG, GUI packaging, release-channel
   publishing, fork-flavor builds, and new CLI behavior deferred.
+- Phase 32 adds `packages/fork-vendors` for vendor source references, selected
+  release pins, branch drift-only observations, SPDX/license provenance, and
+  non-free/network-plugin cautions. Runtime fork parity, fork-flavor builds,
+  online integrations, non-free plugin ingestion, and full drift-refresh
+  protocol templates remain deferred.
