@@ -217,7 +217,7 @@ This layout follows the Phase 33 package decision and the existing `packages/for
 # map_id	feature_category	ownership	v1_9_decision	inventory_ids	notes
 ```
 
-**Validation rules:** every `inventory_id` reference must exist in exactly one per-fork inventory row; every inventory row should appear in at least one category-map row; rows grouped together should share the same `ownership` and `v1_9_decision`; `deferred` and `future-candidate` rows must be in different map rows. [VERIFIED: 33-CONTEXT.md]
+**Validation rules:** every `inventory_id` reference must exist in exactly one per-fork inventory row; every inventory row must appear exactly once in `category-map.tsv`; rows grouped together should share the same `ownership` and `v1_9_decision`; `deferred` and `future-candidate` rows must be in different map rows. [RESOLVED: chosen for plan determinism; VERIFIED: 33-CONTEXT.md]
 
 ### Pattern 3: Bazel-Owned Verification
 
@@ -415,17 +415,15 @@ This style matches the existing verifier's small helper functions and early fail
 | A1 | Source-path overlap across pinned trees is a sufficient starting signal for `shared-downstream` classification, while uncertain rows can be downgraded to `unknown-needs-review`. [ASSUMED] | Architecture Patterns / Minimal Source-Pinned Row Coverage | Some initial rows may need ownership reclassification during implementation review, but verifier and map design still hold. |
 | A2 | The initial inventories can satisfy INV-02 through INV-04 with bounded rows for named surfaces rather than exhaustive upstream feature archaeology. [ASSUMED] | Architecture Patterns / Minimal Source-Pinned Row Coverage | Planner may need to add more rows if reviewers expect broader fork inventory coverage. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Should Prusa network/Prusa Connect be included in the initial inventory?** [VERIFIED: GitHub API tree query; .planning/REQUIREMENTS.md]
+1. **RESOLVED: Include Prusa network/Prusa Connect as deferred caution metadata.** [VERIFIED: GitHub API tree query; .planning/REQUIREMENTS.md]
    - What we know: PrusaSlicer pinned tree contains `src/slic3r/Utils/PrusaConnect.cpp` and related GUI request handler paths. [CITED: https://api.github.com/repos/prusa3d/PrusaSlicer/git/trees/9a583bd438b195856f3bcf7ea99b69ba4003a961?recursive=1]
-   - What's unclear: INV-02 does not require named Prusa network coverage. [VERIFIED: .planning/REQUIREMENTS.md]
-   - Recommendation: Include one deferred caution row if the planner wants symmetry with Bambu/Orca network cautions; otherwise keep Prusa minimum coverage to base/shared/Prusa-specific separation. [VERIFIED: 33-CONTEXT.md]
+   - Resolution: Include one Prusa network caution row to make source-observed network/cloud surfaces visible while keeping it deferred and inventory-only. The row must use `v1_9_decision` = `deferred`, include `network-scope;credential-scope;runtime-parity-not-verified`, and state that v1.9 has no online integration, credential handling, device communication, or runtime fork support. [RESOLVED: planner input; VERIFIED: 33-CONTEXT.md]
 
-2. **Should every inventory row be required to appear exactly once in `category-map.tsv`?** [VERIFIED: 33-CONTEXT.md]
+2. **RESOLVED: Require every inventory row to appear exactly once in `category-map.tsv`.** [VERIFIED: 33-CONTEXT.md]
    - What we know: Cross-map stale or unknown row references must fail verification. [VERIFIED: 33-CONTEXT.md]
-   - What's unclear: The context grants discretion on exact cross-map shape. [VERIFIED: 33-CONTEXT.md]
-   - Recommendation: Require every row to appear at least once and reject duplicate appearances unless a future category-map design intentionally permits multi-category rows. [ASSUMED]
+   - Resolution: Use exact-once membership for Phase 33 so missing references, duplicate references, and stale references fail deterministically. Future multi-category mapping can be introduced only by a later phase that changes the map contract explicitly. [RESOLVED: planner input]
 
 ## Environment Availability
 
