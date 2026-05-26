@@ -105,7 +105,10 @@ for PrusaSlicer, Bambu Studio, and OrcaSlicer.
 1. Maintainer can distinguish canonical release tags and peeled commits from
    drift-only branch-head observations.
 
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+- [ ] 32-01-PLAN.md — Create the fork vendor source registry, Git ref verifier, and maintainer documentation boundary.
 
 ### Phase 33: Inventory Templates and Source-Pinned Fork Inventories
 
@@ -228,7 +231,7 @@ Phases execute in numeric order: 32 -> 33 -> 34 -> 35 -> 36
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 32. Vendor Source Manifest and License Baseline | 0/TBD | Not started | - |
+| 32. Vendor Source Manifest and License Baseline | 0/1 | Not started | - |
 | 33. Inventory Templates and Source-Pinned Fork Inventories | 0/TBD | Not started | - |
 | 34. Rust Flavor Contracts | 0/TBD | Not started | - |
 | 35. Flavor Registry Boundary | 0/TBD | Not started | - |
