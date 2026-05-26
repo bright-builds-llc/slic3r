@@ -104,7 +104,7 @@ Source for all content in this block: `.planning/phases/33-inventory-templates-a
 |----|-------------|------------------|
 | INV-01 | Maintainer can use a checked-in fork feature inventory template requiring source reference, ownership classification, feature surface, complexity, parity dependency, v1.9 decision, and future parity notes. [VERIFIED: .planning/REQUIREMENTS.md] | Use `inventory-template.tsv` plus a verifier-enforced 12-column schema. [VERIFIED: 33-CONTEXT.md; packages/fork-vendors/verify_forks.sh] |
 | INV-02 | Maintainer can inspect a PrusaSlicer inventory separating base, shared downstream, and Prusa-specific behavior from the pinned PrusaSlicer baseline. [VERIFIED: .planning/REQUIREMENTS.md] | Seed `prusaslicer.tsv` with rows anchored to `version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`. [VERIFIED: packages/fork-vendors/forks.tsv] |
-| INV-03 | Maintainer can inspect a Bambu Studio inventory separating inherited and Bambu-specific project, profile, network, support, STEP, arc, and assembly surfaces. [VERIFIED: .planning/REQUIREMENTS.md] | Seed `bambustudio.tsv` with rows anchored to `v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6a` and source paths verified in the pinned tree. [VERIFIED: packages/fork-vendors/forks.tsv; CITED: https://api.github.com/repos/bambulab/BambuStudio/git/trees/b506005bc4ee62124e24bf00e0f58656db3646a6a?recursive=1] |
+| INV-03 | Maintainer can inspect a Bambu Studio inventory separating inherited and Bambu-specific project, profile, network, support, STEP, arc, and assembly surfaces. [VERIFIED: .planning/REQUIREMENTS.md] | Seed `bambustudio.tsv` with rows anchored to `v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6` and source paths verified in the pinned tree. [VERIFIED: packages/fork-vendors/forks.tsv; CITED: https://api.github.com/repos/bambulab/BambuStudio/git/trees/b506005bc4ee62124e24bf00e0f58656db3646a6?recursive=1] |
 | INV-04 | Maintainer can inspect an OrcaSlicer inventory separating inherited and Orca-specific calibration, wall/seam, support, adaptive mesh, profile library, and community-profile surfaces. [VERIFIED: .planning/REQUIREMENTS.md] | Seed `orcaslicer.tsv` with rows anchored to `v2.3.2@c724a3f5f51c52336624b689e846c8fbc943a912` and source paths verified in the pinned tree. [VERIFIED: packages/fork-vendors/forks.tsv; CITED: https://api.github.com/repos/OrcaSlicer/OrcaSlicer/git/trees/c724a3f5f51c52336624b689e846c8fbc943a912?recursive=1] |
 | INV-05 | Maintainer can inspect a cross-fork category map separating base, shared downstream, fork-specific, unknown-needs-review, deferred, and future-candidate rows. [VERIFIED: .planning/REQUIREMENTS.md] | Use `category-map.tsv` with row-ID references and fail verification on unknown or stale inventory IDs. [VERIFIED: 33-CONTEXT.md] |
 </phase_requirements>
@@ -273,7 +273,7 @@ This shape mirrors the checked-in fork vendor package pattern and keeps the veri
 
 **PrusaSlicer minimum rows:** include `base-core`, `project`, `profiles-prusaresearch`, `support`, `step`, `arc`, `wall-seam`, and optional `network-prusa-connect` caution rows so the inventory clearly separates base, shared downstream, and Prusa-specific behavior. [VERIFIED: .planning/REQUIREMENTS.md; CITED: https://api.github.com/repos/prusa3d/PrusaSlicer/git/trees/9a583bd438b195856f3bcf7ea99b69ba4003a961?recursive=1]
 
-**Bambu Studio minimum rows:** include inherited `base-core` plus Bambu rows for `project`, `profile`, `network`, `support`, `step`, `arc`, and `assembly`. [VERIFIED: .planning/REQUIREMENTS.md; CITED: https://api.github.com/repos/bambulab/BambuStudio/git/trees/b506005bc4ee62124e24bf00e0f58656db3646a6a?recursive=1]
+**Bambu Studio minimum rows:** include inherited `base-core` plus Bambu rows for `project`, `profile`, `network`, `support`, `step`, `arc`, and `assembly`. [VERIFIED: .planning/REQUIREMENTS.md; CITED: https://api.github.com/repos/bambulab/BambuStudio/git/trees/b506005bc4ee62124e24bf00e0f58656db3646a6?recursive=1]
 
 **OrcaSlicer minimum rows:** include inherited `base-core` plus Orca rows for `calibration`, `wall-seam`, `support`, `adaptive-mesh`, `profile-library`, and `community-profile`. [VERIFIED: .planning/REQUIREMENTS.md; CITED: https://api.github.com/repos/OrcaSlicer/OrcaSlicer/git/trees/c724a3f5f51c52336624b689e846c8fbc943a912?recursive=1]
 
@@ -352,7 +352,7 @@ This shape mirrors the checked-in fork vendor package pattern and keeps the veri
 
 ```tsv
 # inventory_id	vendor_id	source_ref	source_paths	feature_surface	feature_category	ownership	complexity	parity_dependency	v1_9_decision	caution_flags	future_parity_notes
-bambustudio.network-device	bambustudio	bambustudio:v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6a	src/slic3r/GUI/DeviceCore;src/slic3r/Utils/NetworkAgent.cpp	network	network-device	fork-specific	high	none	deferred	network-scope;credential-scope;runtime-parity-not-verified	Inventory only; no cloud login, credential handling, device communication, or runtime fork support in v1.9.
+bambustudio.network-device	bambustudio	bambustudio:v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6	src/slic3r/GUI/DeviceCore;src/slic3r/Utils/NetworkAgent.cpp	network	network-device	fork-specific	high	none	deferred	network-scope;credential-scope;runtime-parity-not-verified	Inventory only; no cloud login, credential handling, device communication, or runtime fork support in v1.9.
 orcaslicer.profile-library	orcaslicer	orcaslicer:v2.3.2@c724a3f5f51c52336624b689e846c8fbc943a912	resources/profiles/OrcaFilamentLibrary.json;resources/profiles/OrcaFilamentLibrary	profile-library	profile-library	fork-specific	medium	config;config.persistence	needs-review	runtime-parity-not-verified	Inventory only; future parity needs fixture and loader evidence before support can be claimed.
 ```
 
@@ -481,7 +481,7 @@ Security enforcement is enabled by default because `.planning/config.json` does 
 ### Primary Web / Official Source Trees (HIGH Confidence for Path Presence)
 
 - `https://api.github.com/repos/prusa3d/PrusaSlicer/git/trees/9a583bd438b195856f3bcf7ea99b69ba4003a961?recursive=1` - pinned PrusaSlicer tree; query returned HTTP 200, `truncated=false`, 4533 entries. [CITED: GitHub API; VERIFIED: command output]
-- `https://api.github.com/repos/bambulab/BambuStudio/git/trees/b506005bc4ee62124e24bf00e0f58656db3646a6a?recursive=1` - pinned Bambu Studio tree; query returned HTTP 200, `truncated=false`, 10416 entries. [CITED: GitHub API; VERIFIED: command output]
+- `https://api.github.com/repos/bambulab/BambuStudio/git/trees/b506005bc4ee62124e24bf00e0f58656db3646a6?recursive=1` - pinned Bambu Studio tree; query returned HTTP 200, `truncated=false`, 10416 entries. [CITED: GitHub API; VERIFIED: command output]
 - `https://api.github.com/repos/OrcaSlicer/OrcaSlicer/git/trees/c724a3f5f51c52336624b689e846c8fbc943a912?recursive=1` - pinned OrcaSlicer tree; query returned HTTP 200, `truncated=false`, 17636 entries. [CITED: GitHub API; VERIFIED: command output]
 
 ### Standards (HIGH Confidence)
