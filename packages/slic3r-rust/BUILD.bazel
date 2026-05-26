@@ -25,7 +25,11 @@ alias(
 sh_test(
     name = "clippy_check",
     srcs = ["verify_clippy.sh"],
-    data = ["//packages/slic3r-rust/crates/slic3r_core:clippy"],
+    data = [
+        "//packages/slic3r-rust/crates/slic3r_cli:clippy",
+        "//packages/slic3r-rust/crates/slic3r_contracts:clippy",
+        "//packages/slic3r-rust/crates/slic3r_core:clippy",
+    ],
 )
 
 test_suite(
