@@ -1,6 +1,14 @@
 #![forbid(unsafe_code)]
 //! Stable contract-oriented entrypoint types for the staged Rust launcher work.
 
+pub mod flavor;
+
+pub use flavor::{
+    ChecklistStatus, ChecklistStatusParseError, DownstreamFork, DownstreamForkParseError,
+    FeatureOrigin, FeatureOriginParseError, FlavorId, FlavorIdParseError, ParitySurface,
+    ParitySurfaceParseError, VendorSourceRef, VendorSourceRefParseError,
+};
+
 /// Scoped export workflows that the Rust launcher can own in Phase 12.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ExportKind {
