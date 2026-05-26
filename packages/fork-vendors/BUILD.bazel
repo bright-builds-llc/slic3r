@@ -12,6 +12,12 @@ sh_binary(
     args = ["$(location forks.tsv)"],
 )
 
+sh_test(
+    name = "verify_forks_test",
+    srcs = ["verify_forks_test.sh"],
+    data = ["verify_forks.sh"],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
