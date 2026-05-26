@@ -26,7 +26,20 @@ OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
 
 ## Current State
 
-v1.8 shipped cross-platform release build automation:
+v1.9 Phase 32 shipped the fork vendor source and license/provenance baseline:
+
+- `packages/fork-vendors/forks.tsv` records pinned PrusaSlicer, Bambu Studio,
+  and OrcaSlicer source refs, branch observations, lineage, source paths,
+  refresh commands, SPDX metadata, provenance notes, and caution flags
+- `bazel run //packages/fork-vendors:verify` validates the selected stable tags
+  and peeled commits without cloning, fetching, building, or vendoring upstream
+  fork repositories
+- port docs publish the vendor-intake boundary while keeping branch heads
+  drift-only, license metadata not legal review, and fork runtime parity
+  deferred
+
+<details>
+<summary>v1.8 shipped cross-platform release build automation</summary>
 
 - the `Release Build Artifacts` workflow now builds scoped base package
   archives for macOS, Linux, and Windows
@@ -40,6 +53,8 @@ v1.8 shipped cross-platform release build automation:
 - the final hosted workflow run passed on macOS, Linux, and Windows
 - the v1.8 roadmap, requirements, audit, and Phase 31 history are archived
   under `.planning/milestones/`
+
+</details>
 
 <details>
 <summary>v1.7 shipped the cross-platform packaging-visible parity milestone</summary>
@@ -218,11 +233,11 @@ v1.8 shipped cross-platform release build automation:
   instead of inventing parallel release logic — v1.8
 - ✓ Docs describe supported release-build outputs and remaining exclusions
   such as signing, notarization, installers, or release channels — v1.8
+- ✓ v1.9 requirements define a vendor-source strategy for PrusaSlicer,
+  Bambu Studio, and OrcaSlicer — Phase 32
 
 ### Active
 
-- [ ] v1.9 requirements define a vendor-source strategy for PrusaSlicer,
-  Bambu Studio, and OrcaSlicer.
 - [ ] v1.9 requirements define fork feature inventories that distinguish base
   Slic3r behavior, shared downstream behavior, and fork-specific behavior.
 - [ ] v1.9 requirements define modular Rust package boundaries for
@@ -314,4 +329,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-26 after v1.9 milestone start*
+*Last updated: 2026-05-26 after Phase 32 completion*
