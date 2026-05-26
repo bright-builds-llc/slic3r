@@ -161,3 +161,13 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
 - Non-free and network-plugin cautions remain scope and provenance warnings.
   They do not create runtime fork parity, online integration, credential, cloud,
   or plugin ingestion support.
+
+## Current Fork Feature Inventory State
+
+- `packages/fork-inventories` owns source-pinned feature inventory templates
+  and per-fork inventory TSVs for PrusaSlicer, Bambu Studio, and OrcaSlicer.
+- Run `bazel run //packages/fork-inventories:verify` to validate TSV shape,
+  source pins, enum values, required surface coverage, parity dependencies, and
+  category-map references without fetching, cloning, building, or importing
+  upstream fork source trees.
+- Inventories are source-observed planning inputs only. They do not prove executable parity, user-facing behavior, GUI support, fork release builds, or support for non-free/network plugins.

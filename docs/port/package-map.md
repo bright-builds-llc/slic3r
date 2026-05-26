@@ -21,6 +21,7 @@
 | `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, and Windows packaged launcher slices |
 | `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, and `windows-packaged-launcher` slices |
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
+| `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
 
 ## Notes
 
@@ -72,3 +73,9 @@
   non-free/network-plugin cautions. Runtime fork parity, fork-flavor builds,
   online integrations, non-free plugin ingestion, and full drift-refresh
   protocol templates remain deferred.
+- Phase 33 adds `packages/fork-inventories` for source-pinned feature inventory
+  templates and per-fork inventory TSVs, the cross-fork category map, and
+  `bazel run //packages/fork-inventories:verify`. This preserves the Phase 32
+  boundary: no upstream source import, no clone/vendor/build, no runtime fork
+  parity claim, no online/cloud integration, no credential handling, and no
+  non-free plugin ingestion.
