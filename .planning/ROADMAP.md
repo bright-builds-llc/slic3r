@@ -183,7 +183,7 @@ composition without fork-specific core copies or side-effecting registry code.
 
 Plans:
 - [x] 35-01-PLAN.md — Add static parity-surface constructors for registry data.
-- [ ] 35-02-PLAN.md — Create the pure `slic3r_flavors` crate, static registry metadata, lookup helpers, and verification wiring.
+- [x] 35-02-PLAN.md — Create the pure `slic3r_flavors` crate, static registry metadata, lookup helpers, and verification wiring.
 - [ ] 35-03-PLAN.md — Document the flavor registry module boundary and metadata-only scope.
 
 ### Phase 36: Parity, Fixture, Launcher, and Deferral Templates
@@ -244,7 +244,7 @@ Phases execute in numeric order: 32 -> 33 -> 34 -> 35 -> 36
 | 32. Vendor Source Manifest and License Baseline | 1/1 | Complete    | 2026-05-26 |
 | 33. Inventory Templates and Source-Pinned Fork Inventories | 1/1 | Complete    | 2026-05-26 |
 | 34. Rust Flavor Contracts | 1/1 | Complete    | 2026-05-26 |
-| 35. Flavor Registry Boundary | 1/3 | In Progress | - |
+| 35. Flavor Registry Boundary | 2/3 | In Progress | - |
 | 36. Parity, Fixture, Launcher, and Deferral Templates | 0/TBD | Not started | - |
 
 ## Future Roadmap

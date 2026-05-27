@@ -9,6 +9,7 @@
 - Perl 5 - CLI wrapper, packaging glue, tests, and legacy XS bindings in `slic3r.pl`, `Build.PL`, `lib/Slic3r.pm`, and `xs/Build.PL`
 
 **Secondary:**
+- Rust 2024 - staged Rust port crates under `packages/slic3r-rust/crates/`
 - Bash - build/deploy scripts in `package/common/`, `package/linux/`, `package/osx/`, and `package/deploy/`
 - PowerShell - Windows bootstrap/build/deploy scripts in `package/win/`
 - C - vendored C dependencies such as `xs/src/miniz/miniz.c` and `xs/src/expat/*.c`
@@ -36,6 +37,8 @@
 - Perl `App::Prove` - used by `Build.PL` to run the Perl test suite after prerequisites are installed
 
 **Build/Dev:**
+- Bazel / rules_rust - top-level monorepo build and verification surface for the retained legacy package, Rust crates, launcher, parity, and fork metadata packages
+- Cargo - Rust workspace package manager and test/build runner under `packages/slic3r-rust/`
 - `ExtUtils::CppGuess` - detects compiler and linker flags in `xs/Build.PL`
 - `Devel::CheckLib` - verifies native library availability for the XS build
 - `local::lib` - isolates Perl dependencies in `local-lib/`
@@ -43,6 +46,8 @@
 ## Key Dependencies
 
 **Critical:**
+- `slic3r_contracts` - local Rust contract crate for typed launcher and flavor metadata values
+- `slic3r_flavors` - local Rust metadata crate for static flavor registry composition and lookup helpers
 - Boost - filesystem, thread, system, and nowide support across the C++ and XS builds
 - wxWidgets - GUI frontend and GUI test harness support
 - OpenGL - GUI rendering dependency in `src/CMakeLists.txt`
@@ -63,6 +68,8 @@
 - `WXDIR`, `ARCH`, `FORCE_WX_BUILD`, and `FORCE_BOOST_REINSTALL` are used by the Windows packaging scripts
 
 **Build:**
+- `BUILD.bazel` and package-level `BUILD.bazel` files - Bazel package graph and aggregate verification targets
+- `packages/slic3r-rust/Cargo.toml` - Rust virtual workspace for `slic3r_cli`, `slic3r_contracts`, `slic3r_core`, and `slic3r_flavors`
 - `Build.PL` - installs Perl dependencies and runs tests for the main Perl/XS path
 - `xs/Build.PL` - builds the XS/C++ extension layer
 - `src/CMakeLists.txt` - defines `slic3r`, `slic3r_test`, `gui_test`, `libslic3r`, and optional `extrude-tin`

@@ -39,10 +39,16 @@
 - Depends on: `libslic3r`, Boost, Catch2 for tests, and wxWidgets when `Enable_GUI` is on.
 - Used by: the packaged binary, local developer builds, and native tests.
 
+**Rust Migration Layer:**
+- Purpose: stage the preferred Rust-backed implementation beside the retained legacy oracle without replacing it all at once.
+- Contains: `packages/slic3r-rust/crates/slic3r_core/`, `slic3r_contracts/`, `slic3r_cli/`, and `slic3r_flavors/`.
+- Depends on: Cargo, Bazel `rules_rust`, and local crate boundaries.
+- Used by: the launcher package, parity evidence, typed contract tests, and flavor registry metadata inspection.
+
 **Test and Verification Layer:**
 - Purpose: exercise both the legacy Perl-facing API and the native C++ implementation.
-- Contains: `t/*.t`, `xs/t/*.t`, `src/test/*.cpp`, `src/test/test_data.*`.
-- Depends on: `Test::More`, `Catch2`, XS bindings, and the generated `src/test/test_options.hpp`.
+- Contains: `t/*.t`, `xs/t/*.t`, `src/test/*.cpp`, `src/test/test_data.*`, and Rust integration tests under `packages/slic3r-rust/crates/*/tests/`.
+- Depends on: `Test::More`, `Catch2`, XS bindings, Cargo, Bazel, and the generated `src/test/test_options.hpp`.
 - Used by: `Build.PL`, `xs/Build.PL`, and the native CMake test target.
 
 ## Data Flow
@@ -72,6 +78,7 @@
 - Mutable application state lives mostly in `Slic3r::Config`, `Slic3r::Model`, `Slic3r::Print`, and GUI controller objects.
 - Geometry objects are heavily value-like, but several classes cache derived state such as meshes, slices, and print statistics.
 - Threading is used in Perl space for parallel slicing and cleanup coordination, with explicit thread lifecycle handling in `lib/Slic3r.pm`.
+- Rust flavor contracts and registry metadata are pure typed values and static slices; they do not perform filesystem, process, environment, clock, network, or runtime TSV loading.
 
 ## Key Abstractions
 
@@ -89,6 +96,11 @@
 - Purpose: define printer, filament, and print job settings and apply them consistently.
 - Examples: `Slic3r::Config`, `Slic3r::Config::Static`, `Slic3r::Config::Print`, `Slic3r::Config::PrintObject`.
 - Pattern: layered config objects with normalization, validation, and CLI loading support.
+
+**Flavor Metadata Boundary:**
+- Purpose: model base Slic3r, shared downstream, and fork-specific planning metadata without copying core Rust workspaces.
+- Examples: `FlavorId`, `VendorSourceRef`, `FeatureOrigin`, `ParitySurface`, `ChecklistStatus`, `FlavorRegistryEntry`, and `FlavorCapability`.
+- Pattern: typed contract values plus a pure static registry in `slic3r_flavors`.
 
 **GCode Pipeline:**
 - Purpose: convert print state into extrusion paths and machine instructions.

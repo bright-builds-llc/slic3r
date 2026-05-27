@@ -4,17 +4,17 @@ milestone: v1.9
 milestone_name: milestone
 current_phase: 35
 current_phase_name: Flavor Registry Boundary
-current_plan: 2
+current_plan: 3
 status: executing
-stopped_at: Completed 35-01-PLAN.md
-last_updated: "2026-05-27T12:24:10.251Z"
+stopped_at: Completed 35-02-PLAN.md
+last_updated: "2026-05-27T12:44:56.288Z"
 last_activity: 2026-05-27
 progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 6
-  completed_plans: 4
-  percent: 67
+  completed_plans: 5
+  percent: 83
 ---
 
 # Project State
@@ -32,25 +32,25 @@ depend on.
 ## Current Position
 
 Phase: 35 (Flavor Registry Boundary) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Current Phase: 35
 Current Phase Name: Flavor Registry Boundary
-Current Plan: 2
+Current Plan: 3
 Total Phases: 5
 Total Plans in Phase: 3
 Status: Ready to execute
 Last activity: 2026-05-27
-Last Activity Description: Completed 35-01-PLAN.md
+Last Activity Description: Completed 35-02-PLAN.md
 
-Progress: [#######---] 67%
+Progress: [########--] 83%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 4 in the active milestone
-- Average duration: 5 min
-- Total execution time: 5 min
+- Total plans completed: 5 in the active milestone
+- Average duration: 8 min
+- Total execution time: 16 min
 
 **By Phase:**
 
@@ -59,19 +59,20 @@ Progress: [#######---] 67%
 | 32. Vendor Source Manifest and License Baseline | 1/1 | Not recorded | N/A |
 | 33. Inventory Templates and Source-Pinned Fork Inventories | 1/1 | Not recorded | N/A |
 | 34. Rust Flavor Contracts | 1/1 | Not recorded | N/A |
-| 35. Flavor Registry Boundary | 1/3 | 5 min | 5 min |
+| 35. Flavor Registry Boundary | 2/3 | 16 min | 8 min |
 | 36. Parity, Fixture, Launcher, and Deferral Templates | 0/TBD | 0.0h | N/A |
 
 **Recent Trend:**
 
-- Last 5 plans: 32-01 complete, 33-01 complete, 34-01 complete, 35-01 complete
-- Trend: Four active-milestone plans completed
+- Last 5 plans: 32-01 complete, 33-01 complete, 34-01 complete, 35-01 complete, 35-02 complete
+- Trend: Five active-milestone plans completed
 
 **Plan Metrics:**
 
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 35 P01 | 5 min | 1 task | 2 files |
+| Phase 35 P02 | 11 min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -96,6 +97,10 @@ Recent decisions affecting current work:
 - [Phase 35]: Added named ParitySurface const constructors instead of exposing the tuple field or adding arbitrary string conversion.
 - [Phase 35]: Routed successful ParitySurface parser branches through the new constructors so parser and constructor values stay coupled.
 - [Phase 35]: Kept registry composition, runtime parsing, and side-effecting APIs deferred to later Phase 35 plans.
+- [Phase 35]: Created one shared `slic3r_flavors` crate instead of vendor-specific Rust workspaces.
+- [Phase 35]: Kept registry construction as hand-curated static Rust metadata with no runtime TSV parsing or side-effecting APIs.
+- [Phase 35]: Represented Orca needs-review inventory evidence as fork-specific origin plus needs-review checklist status instead of inventing an unknown-origin row.
+- [Phase 35]: Moved Cargo workspace membership into Task 1 so the Rust pre-commit sequence compiled the new crate before the first commit.
 
 ### Pending Todos
 
@@ -107,6 +112,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-27T12:24:10.249Z
-Stopped at: Completed 35-01-PLAN.md
+Last session: 2026-05-27T12:44:56.286Z
+Stopped at: Completed 35-02-PLAN.md
 Resume file: None

@@ -57,7 +57,7 @@ Requirements for the v1.9 milestone. Each maps to one roadmap phase.
   keeps base Slic3r behavior in shared core packages while future fork behavior
   plugs in through capability-oriented flavor metadata rather than copied Rust
   workspaces.
-- [ ] **ARCH-03**: Developer can use or inspect a pure flavor registry boundary
+- [x] **ARCH-03**: Developer can use or inspect a pure flavor registry boundary
   that maps base, shared downstream, and fork-specific metadata without
   performing Git, filesystem, network, process, or release operations.
 
@@ -132,7 +132,7 @@ Which phases cover which requirements. Updated as phases complete.
 | INV-05 | Phase 33 | Complete |
 | ARCH-01 | Phase 34 | Complete |
 | ARCH-02 | Phase 35 | Pending |
-| ARCH-03 | Phase 35 | Pending |
+| ARCH-03 | Phase 35 | Complete |
 | PAR-01 | Phase 36 | Pending |
 | PAR-02 | Phase 36 | Pending |
 | PAR-03 | Phase 36 | Pending |

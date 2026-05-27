@@ -13,6 +13,7 @@ Slic3r/
 ├── xs/                       # XS bindings plus vendored C/C++ dependencies
 ├── t/                        # Legacy Perl test suite
 ├── package/                  # Packaging, release, and installer scripts
+├── packages/                 # Bazel monorepo packages for retained legacy, Rust port, launcher, parity, and fork metadata
 ├── utils/                    # Standalone helper scripts for conversion and inspection
 ├── translation/              # .po locale catalogs
 ├── var/                      # Icons, artwork, and bundled runtime assets
@@ -52,6 +53,12 @@ Slic3r/
 - Key files: `package/common/util.sh`, `package/linux/make_archive.sh`, `package/linux/appimage.sh`, `package/osx/make_dmg.sh`, `package/win/package_win32.ps1`.
 - Subdirectories: `package/common/`, `package/linux/`, `package/osx/`, `package/win/`, `package/deploy/`.
 
+**`packages/`:**
+- Purpose: Bazel-organized migration packages that let the retained legacy package, Rust port, launcher, parity evidence, and fork metadata evolve side by side.
+- Contains: `packages/legacy-slic3r/`, `packages/slic3r-rust/`, `packages/launcher/`, `packages/parity/`, `packages/parity-fixtures/`, `packages/fork-vendors/`, and `packages/fork-inventories/`.
+- Key files: `packages/slic3r-rust/Cargo.toml`, `packages/slic3r-rust/BUILD.bazel`, `packages/slic3r-rust/crates/slic3r_flavors/src/registry.rs`.
+- Subdirectories: `packages/slic3r-rust/crates/` contains the Rust crate boundaries for contracts, core, CLI, and flavor registry metadata.
+
 **`utils/`:**
 - Purpose: ad hoc helper scripts for mesh conversion, G-code inspection, and viewer-style workflows.
 - Contains: Perl scripts and a small `utils/clang_format` helper.
@@ -81,6 +88,7 @@ Slic3r/
 **Entry Points:**
 - `slic3r.pl`: primary user-facing launcher.
 - `src/slic3r.cpp`: native CLI executable entry point.
+- `packages/slic3r-rust/crates/slic3r_cli/src/main.rs`: preferred Rust-backed CLI entrypoint for the verified slice.
 - `src/test/test_harness.cpp`: Catch2 main for native tests.
 - `Build.PL`: Perl bootstrap and test runner.
 - `xs/Build.PL`: XS compilation bootstrap.
@@ -96,12 +104,15 @@ Slic3r/
 - `lib/Slic3r/*`: domain models, geometry, print, gcode, and config classes.
 - `xs/src/libslic3r/*`: C++ geometry and slicing implementation.
 - `src/GUI/*`: GUI controllers, view state, and widgets.
+- `packages/slic3r-rust/crates/slic3r_contracts/src/flavor.rs`: typed Rust flavor and fork contract values.
+- `packages/slic3r-rust/crates/slic3r_flavors/src/registry.rs`: pure static flavor registry metadata and lookup helpers.
 
 **Testing:**
 - `t/*.t`: Perl tests for runtime and geometry behavior.
 - `xs/t/*.t`: XS-level unit tests.
 - `src/test/*.cpp`: native Catch2 tests and test data helpers.
 - `src/test/test_options.hpp.in`: generated include for test input paths.
+- `packages/slic3r-rust/crates/*/tests/*.rs`: Rust crate integration tests run through Cargo and Bazel.
 
 **Documentation:**
 - `README.md`: high-level project overview, install info, and structure summary.

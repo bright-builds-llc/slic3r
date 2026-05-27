@@ -15,9 +15,15 @@
 - `xs/t/*.t` also uses `Test::More`
 - These suites are still present, but `README.md` labels both as deprecated
 
+**Rust migration test suites**
+- Rust crates under `packages/slic3r-rust/crates/` use Cargo integration tests and Bazel `rust_test` targets.
+- The package aggregate `//packages/slic3r-rust:verify` includes Rust tests, rustfmt checks, and clippy checks for wired crates.
+- `packages/slic3r-rust/crates/slic3r_flavors/tests/flavor_registry.rs` covers pure static flavor registry metadata and provenance behavior.
+
 **Assertions and style**
 - Catch2 tests use `TEST_CASE`, `SCENARIO`, `GIVEN`, `WHEN`, `THEN`, and `REQUIRE`
 - Legacy TAP tests use `ok`, `is`, `is_deeply`, `plan tests => N`, and `done_testing()`
+- Rust tests use `#[test]`, `assert!`, `assert_eq!`, and explicit Arrange/Act/Assert comments for behavior-focused cases.
 
 ## Test File Organization
 
@@ -43,6 +49,11 @@
 - The active C++ suite is meant to be run through a CMake build directory with `ctest`
 - `src/CMakeLists.txt` also supports `GUI_BUILD_TESTS` for GUI-specific test builds
 
+**Rust and Bazel**
+- `rustup run 1.94.1 cargo test --manifest-path packages/slic3r-rust/Cargo.toml --all-features`
+- `bazel test //packages/slic3r-rust:verify`
+- Crate-focused Rust checks can target package tests such as `rustup run 1.94.1 cargo test --manifest-path packages/slic3r-rust/Cargo.toml -p slic3r_flavors --test flavor_registry`.
+
 ## Test Structure
 
 **Catch2 examples**
@@ -64,6 +75,7 @@
 ## Practical Guidance
 
 - For new core behavior, prefer the Catch2 tree under `src/test/`
+- For new Rust-port behavior, prefer focused crate integration tests under `packages/slic3r-rust/crates/<crate>/tests/` and wire them into the crate-local Bazel `rust_test`.
 - For legacy Perl-facing behavior, add or update `t/*.t` or `xs/t/*.t` only when the old path is still the right coverage surface
 - Keep each test focused on a single behavior and use concrete fixture data rather than synthetic mocks when the code is geometry-heavy
 - GUI tests should go through the dedicated harness in `src/test/GUI/test_harness_gui.cpp` rather than trying to exercise the event loop ad hoc
