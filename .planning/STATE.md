@@ -3,18 +3,18 @@ gsd_state_version: 1.0
 milestone: v1.9
 milestone_name: milestone
 current_phase: 36
-current_phase_name: parity, fixture, launcher, and deferral templates
-current_plan: Not started
-status: planning
-stopped_at: Phase 36 context gathered
-last_updated: "2026-05-27T13:39:39.035Z"
+current_phase_name: Parity, Fixture, Launcher, and Deferral Templates
+current_plan: 2
+status: executing
+stopped_at: Completed 36-01-PLAN.md
+last_updated: "2026-05-27T14:18:32.963Z"
 last_activity: 2026-05-27
 progress:
   total_phases: 5
   completed_phases: 4
-  total_plans: 6
-  completed_plans: 6
-  percent: 100
+  total_plans: 8
+  completed_plans: 7
+  percent: 88
 ---
 
 # Project State
@@ -31,18 +31,18 @@ depend on.
 
 ## Current Position
 
-Phase: 36 (Parity, Fixture, Launcher, and Deferral Templates) — READY TO PLAN
-Plan: Not started
+Phase: 36 (Parity, Fixture, Launcher, and Deferral Templates) — EXECUTING
+Plan: 2 of 2
 Current Phase: 36
-Current Phase Name: parity, fixture, launcher, and deferral templates
-Current Plan: Not started
+Current Phase Name: Parity, Fixture, Launcher, and Deferral Templates
+Current Plan: 2
 Total Phases: 5
-Total Plans in Phase: TBD
-Status: Ready to plan
+Total Plans in Phase: 2
+Status: Ready to execute
 Last activity: 2026-05-27
-Last Activity Description: Phase 35 complete, transitioned to Phase 36
+Last Activity Description: Completed 36-01-PLAN.md
 
-Progress: [##########] 100%
+Progress: [#########-] 88%
 
 ## Performance Metrics
 
@@ -74,6 +74,7 @@ Progress: [##########] 100%
 | Phase 35 P01 | 5 min | 1 task | 2 files |
 | Phase 35 P02 | 11 min | 3 tasks | 8 files |
 | Phase 35 P03 | 5 min | 2 tasks | 4 files |
+| Phase 36 P01 | 4 min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -105,6 +106,9 @@ Recent decisions affecting current work:
 - [Phase 35]: Documented `slic3r_flavors` as the shared static flavor registry boundary instead of vendor-specific Rust workspaces.
 - [Phase 35]: Kept registry entries explicitly metadata-only and not verified or supported fork behavior.
 - [Phase 35]: Reused the Plan 35-02 needs-review distinction: `ChecklistStatus::NeedsReview` on source-backed Orca rows, with no invented `FeatureOrigin::UnknownNeedsReview` evidence.
+- [Phase 36]: Kept Phase 36 fork template verification local-only and wording-based; it does not prove fork parity.
+- [Phase 36]: Kept drift refresh manual and reviewer-gated by referencing the existing fork vendor verifier instead of adding sync automation.
+- [Phase 36]: Kept fork status rows and fork fixture files out of v1.9; future verified fork status requires executable parity evidence.
 
 ### Pending Todos
 
@@ -116,6 +120,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-27T13:39:39.031Z
-Stopped at: Phase 36 context gathered
-Resume file: .planning/phases/36-parity-fixture-launcher-and-deferral-templates/36-CONTEXT.md
+Last session: 2026-05-27T14:18:32.960Z
+Stopped at: Completed 36-01-PLAN.md
+Resume file: None

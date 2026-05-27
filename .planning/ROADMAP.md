@@ -245,7 +245,7 @@ Phases execute in numeric order: 32 -> 33 -> 34 -> 35 -> 36
 | 33. Inventory Templates and Source-Pinned Fork Inventories | 1/1 | Complete    | 2026-05-26 |
 | 34. Rust Flavor Contracts | 1/1 | Complete    | 2026-05-26 |
 | 35. Flavor Registry Boundary | 3/3 | Complete    | 2026-05-27 |
-| 36. Parity, Fixture, Launcher, and Deferral Templates | 0/TBD | Not started | - |
+| 36. Parity, Fixture, Launcher, and Deferral Templates | 1/2 | In Progress|  |
 
 ## Future Roadmap
 

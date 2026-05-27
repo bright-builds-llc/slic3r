@@ -63,7 +63,7 @@ Requirements for the v1.9 milestone. Each maps to one roadmap phase.
 
 ### Parity Checklist and Scope Templates
 
-- [ ] **PAR-01**: Maintainer can use a fork parity checklist template that
+- [x] **PAR-01**: Maintainer can use a fork parity checklist template that
   requires inventory row ID, source pin, candidate Rust module, fixture need,
   evidence command, docs touched, license or security note, deferred scope, and
   reviewer signoff before a future fork feature can be marked verified.
@@ -75,7 +75,7 @@ Requirements for the v1.9 milestone. Each maps to one roadmap phase.
   signing, installers, release channels, nightly vendor sync, cloud or network
   device integrations, profile auto-update execution, and non-free plugin
   ingestion.
-- [ ] **PAR-04**: Maintainer can run or follow a manual drift-refresh protocol
+- [x] **PAR-04**: Maintainer can run or follow a manual drift-refresh protocol
   that compares pinned vendor refs with current upstream heads before any
   later fork parity milestone begins.
 
@@ -133,10 +133,10 @@ Which phases cover which requirements. Updated as phases complete.
 | ARCH-01 | Phase 34 | Complete |
 | ARCH-02 | Phase 35 | Complete |
 | ARCH-03 | Phase 35 | Complete |
-| PAR-01 | Phase 36 | Pending |
+| PAR-01 | Phase 36 | Complete |
 | PAR-02 | Phase 36 | Pending |
 | PAR-03 | Phase 36 | Pending |
-| PAR-04 | Phase 36 | Pending |
+| PAR-04 | Phase 36 | Complete |
 
 **Coverage:**
 
