@@ -18,6 +18,9 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
 - `crates/slic3r_contracts/` - stable contract-oriented launcher types plus
   Rust flavor contracts for downstream fork identity, flavor identity, vendor
   source identity, feature origin, parity surface, and checklist status
+- `crates/slic3r_flavors/` - pure static flavor registry crate that depends on
+  `slic3r_contracts` and composes base, shared downstream, and fork-specific
+  capability metadata
 - `crates/slic3r_cli/` - launcher-facing CLI scaffold
 
 ## Bazel Commands
@@ -48,6 +51,8 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
   - `//packages/slic3r-rust:verify`
 - Run the flavor contract parser tests:
   - `//packages/slic3r-rust/crates/slic3r_contracts:flavor_contracts_test`
+- Run the flavor registry metadata tests:
+  - `//packages/slic3r-rust/crates/slic3r_flavors:flavor_registry_test`
 - Run write-mode formatting with the pinned Rust toolchain:
   - `bazel run @rules_rust//:rustfmt`
 
@@ -65,5 +70,9 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
 - `crates/slic3r_contracts/` owns `DownstreamFork`, `FlavorId`,
   `VendorSourceRef`, `FeatureOrigin`, `ParitySurface`, and `ChecklistStatus`
   as pure Rust flavor contract values for downstream metadata boundaries.
+- `crates/slic3r_flavors/` is static metadata only. It does not implement
+  runtime fork behavior, launcher dispatch, fork-flavor release builds,
+  online/cloud integration, credential handling, non-free plugin ingestion, or
+  executable fork parity.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).

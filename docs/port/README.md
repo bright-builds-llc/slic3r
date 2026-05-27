@@ -171,3 +171,16 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   category-map references without fetching, cloning, building, or importing
   upstream fork source trees.
 - Inventories are source-observed planning inputs only. They do not prove executable parity, user-facing behavior, GUI support, fork release builds, or support for non-free/network plugins.
+
+## Current Flavor Registry Boundary State
+
+- `packages/slic3r-rust/crates/slic3r_flavors` consumes the Phase 34 typed
+  contracts from `slic3r_contracts` and exposes `FlavorRegistryEntry`,
+  `FlavorCapability`, `FlavorProvenance`, `all_flavors()`,
+  `maybe_flavor(FlavorId)`, and capability filtering helpers.
+- Rust flavor registry entries are planning and architecture metadata only.
+  They do not mark fork behavior as verified or supported.
+- The registry boundary is side-effect free static Rust metadata. No Git,
+  filesystem, network, process, environment, clock, release,
+  launcher-dispatch, runtime TSV parsing, online/cloud, credential, or plugin
+  ingestion behavior belongs in this boundary.
