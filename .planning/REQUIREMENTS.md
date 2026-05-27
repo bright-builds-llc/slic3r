@@ -67,10 +67,10 @@ Requirements for the v1.9 milestone. Each maps to one roadmap phase.
   requires inventory row ID, source pin, candidate Rust module, fixture need,
   evidence command, docs touched, license or security note, deferred scope, and
   reviewer signoff before a future fork feature can be marked verified.
-- [ ] **PAR-02**: Maintainer can inspect documented fork fixture namespace and
+- [x] **PAR-02**: Maintainer can inspect documented fork fixture namespace and
   parity-status conventions that reserve verified fork status for future
   executable parity evidence, not source pins or inventories.
-- [ ] **PAR-03**: Maintainer can inspect v1.9 documentation that explicitly
+- [x] **PAR-03**: Maintainer can inspect v1.9 documentation that explicitly
   defers full fork parity ports, GUI migration, fork-flavor release builds,
   signing, installers, release channels, nightly vendor sync, cloud or network
   device integrations, profile auto-update execution, and non-free plugin
@@ -134,8 +134,8 @@ Which phases cover which requirements. Updated as phases complete.
 | ARCH-02 | Phase 35 | Complete |
 | ARCH-03 | Phase 35 | Complete |
 | PAR-01 | Phase 36 | Complete |
-| PAR-02 | Phase 36 | Pending |
-| PAR-03 | Phase 36 | Pending |
+| PAR-02 | Phase 36 | Complete |
+| PAR-03 | Phase 36 | Complete |
 | PAR-04 | Phase 36 | Complete |
 
 **Coverage:**

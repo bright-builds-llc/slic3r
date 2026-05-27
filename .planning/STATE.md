@@ -5,16 +5,16 @@ milestone_name: milestone
 current_phase: 36
 current_phase_name: Parity, Fixture, Launcher, and Deferral Templates
 current_plan: 2
-status: executing
-stopped_at: Completed 36-01-PLAN.md
-last_updated: "2026-05-27T14:18:32.963Z"
+status: verifying
+stopped_at: Completed 36-02-PLAN.md
+last_updated: "2026-05-27T14:28:13.659Z"
 last_activity: 2026-05-27
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 8
-  completed_plans: 7
-  percent: 88
+  completed_plans: 8
+  percent: 100
 ---
 
 # Project State
@@ -38,7 +38,7 @@ Current Phase Name: Parity, Fixture, Launcher, and Deferral Templates
 Current Plan: 2
 Total Phases: 5
 Total Plans in Phase: 2
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-05-27
 Last Activity Description: Completed 36-01-PLAN.md
 
@@ -75,6 +75,7 @@ Progress: [#########-] 88%
 | Phase 35 P02 | 11 min | 3 tasks | 8 files |
 | Phase 35 P03 | 5 min | 2 tasks | 4 files |
 | Phase 36 P01 | 4 min | 3 tasks | 7 files |
+| Phase 36 P02 | 4 min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -109,6 +110,9 @@ Recent decisions affecting current work:
 - [Phase 36]: Kept Phase 36 fork template verification local-only and wording-based; it does not prove fork parity.
 - [Phase 36]: Kept drift refresh manual and reviewer-gated by referencing the existing fork vendor verifier instead of adding sync automation.
 - [Phase 36]: Kept fork status rows and fork fixture files out of v1.9; future verified fork status requires executable parity evidence.
+- [Phase 36]: Centralized the complete v1.9 fork parity deferral list in docs/port/README.md and linked other docs to that anchor.
+- [Phase 36]: Reserved future fork fixture and status vocabulary without adding packages/parity-fixtures/forks files or packages/parity/status.tsv rows.
+- [Phase 36]: Kept drift refresh manual and reviewer-gated by linking vendor docs to the existing fork vendor verifier and Phase 36 protocol.
 
 ### Pending Todos
 
@@ -120,6 +124,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-27T14:18:32.960Z
-Stopped at: Completed 36-01-PLAN.md
+Last session: 2026-05-27T14:28:13.657Z
+Stopped at: Completed 36-02-PLAN.md
 Resume file: None
