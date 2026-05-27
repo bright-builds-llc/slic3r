@@ -546,17 +546,19 @@ fn base_registry_entry_keeps_base_flavor_identity_without_losing_provenance() {
 | A11 | A 30-day validity window is appropriate for this local architecture research. [ASSUMED: 30-day stability window] | Metadata | Low; planner should re-check sooner if source files change. |
 | A12 | The registry field should be named `parity_dependencies`, and APIs should avoid "verified" or "supported" fork-status wording. [ASSUMED: recommended synthesis] | Common Pitfalls | Medium; poor naming can overclaim runtime parity even if the underlying data remains correct. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Does D-12 require literal `FeatureOrigin::UnknownNeedsReview` registry data or `ChecklistStatus::NeedsReview` review metadata?** [VERIFIED: 35-CONTEXT.md D-12]
    - What we know: The contract enum supports `FeatureOrigin::UnknownNeedsReview`, and the inventory docs allow `unknown-needs-review`. [VERIFIED: flavor.rs; VERIFIED: packages/fork-inventories/README.md]
    - What's unclear: Current per-fork inventory rows do not contain ownership `unknown-needs-review`; they contain Orca rows with `v1_9_decision` of `needs-review`. [VERIFIED: packages/fork-inventories/orcaslicer.tsv; VERIFIED: rg unknown-needs-review]
    - Recommendation: Do not fabricate source-backed unknown ownership. Plan tests for `ChecklistStatus::NeedsReview` using Orca rows, and add an explicit planner note if literal `FeatureOrigin::UnknownNeedsReview` must wait for a future inventory row. [ASSUMED: recommended synthesis]
+   - **RESOLVED:** Phase 35 uses current source-backed `ChecklistStatus::NeedsReview` metadata for Orca rows such as `orcaslicer.calibration-flow` and does not fabricate a `FeatureOrigin::UnknownNeedsReview` registry row unless a future inventory row actually uses that ownership label. Plan 35-02 includes an explicit test for this distinction. [VERIFIED: .planning/phases/35-flavor-registry-boundary/35-02-PLAN.md]
 
 2. **Which docs are the minimum Phase 35 documentation surface?** [VERIFIED: 35-CONTEXT.md D-14]
    - What we know: Context names `packages/slic3r-rust/README.md` and port docs; integration points specifically name `docs/port/contract-inventory.md` and `docs/port/package-map.md`. [VERIFIED: 35-CONTEXT.md]
    - What's unclear: `docs/port/README.md` may also need a short "Current Flavor Registry State" update for discoverability. [VERIFIED: docs/port/README.md]
    - Recommendation: Update all three port docs only if the extra README note is concise; otherwise update `contract-inventory.md` and `package-map.md` plus the Rust README. [ASSUMED: recommended synthesis]
+   - **RESOLVED:** Phase 35 updates `packages/slic3r-rust/README.md`, `docs/port/README.md`, `docs/port/contract-inventory.md`, and `docs/port/package-map.md`. Plan 35-03 keeps the overview note concise while making the registry boundary discoverable from the Rust workspace and port control-plane docs. [VERIFIED: .planning/phases/35-flavor-registry-boundary/35-03-PLAN.md]
 
 ## Environment Availability
 
