@@ -172,6 +172,43 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   upstream fork source trees.
 - Inventories are source-observed planning inputs only. They do not prove executable parity, user-facing behavior, GUI support, fork release builds, or support for non-free/network plugins.
 
+## Current Fork Template Package State
+
+- `packages/fork-templates` owns the Phase 36 fork parity checklist,
+  launcher-shape template, and manual drift-refresh protocol for later
+  PrusaSlicer, Bambu Studio, and OrcaSlicer parity milestones.
+- Run `bazel run //packages/fork-templates:verify` to check required template
+  labels and reserved non-overclaiming wording. template verification does not prove fork parity.
+- The manual drift protocol lives at
+  `packages/fork-templates/manual-drift-refresh-protocol.md` and uses
+  `bazel run //packages/fork-vendors:verify` as the current comparison tool.
+- Source pins, inventories, templates, and registry metadata are planning
+  inputs only. They do not prove fork runtime support, user-facing fork
+  behavior, fork release builds, or support for online/cloud integrations,
+  profile auto-update execution, credentials, or non-free plugin ingestion.
+
+## v1.9 Fork Parity Deferrals
+
+Phase 36 keeps the complete v1.9 fork-parity deferral list here so package
+docs can link to one stable control-plane statement. The following work is out
+of scope for v1.9:
+
+- full fork parity ports
+- GUI migration
+- fork-flavor release builds
+- signing
+- installers
+- release channels
+- nightly vendor sync
+- cloud or network device integrations
+- profile auto-update execution
+- non-free plugin ingestion
+
+These deferrals remain in force even when source pins, inventories, templates,
+and flavor registry metadata exist. Future fork work needs executable parity
+evidence before maintainers can publish fork fixture files, fork status rows, or
+runtime support claims.
+
 ## Current Flavor Registry Boundary State
 
 - `packages/slic3r-rust/crates/slic3r_flavors` consumes the Phase 34 typed

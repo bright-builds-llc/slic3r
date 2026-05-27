@@ -22,6 +22,7 @@
 | `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, and `windows-packaged-launcher` slices |
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
+| `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
 
 ## Notes
 
@@ -89,3 +90,10 @@
   remain in force: no upstream source import, clone/vendor/build, runtime fork
   parity claim, online/cloud integration, credential handling, or non-free
   plugin ingestion.
+- Phase 36 adds `packages/fork-templates` as the documentation and template
+  package for future fork parity checklists, launcher-shape planning, and the
+  manual drift-refresh protocol. Link to the central
+  [fork-parity deferral](./README.md#v19-fork-parity-deferrals) block instead
+  of duplicating the complete v1.9 deferral list. `bazel run
+  //packages/fork-templates:verify` checks template wording only; template
+  verification does not prove fork parity.
