@@ -94,6 +94,5 @@
   package for future fork parity checklists, launcher-shape planning, and the
   manual drift-refresh protocol. Link to the central
   [fork-parity deferral](./README.md#v19-fork-parity-deferrals) block instead
-  of duplicating the complete v1.9 deferral list. `bazel run
-  //packages/fork-templates:verify` checks template wording only; template
+  of duplicating the complete v1.9 deferral list. `bazel run //packages/fork-templates:verify` checks template wording only; template
   verification does not prove fork parity.

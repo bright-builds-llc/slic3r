@@ -12,12 +12,16 @@ update accepted source pins automatically.
    bazel run //packages/fork-vendors:verify
    ```
 
-2. Record each selected stable tag confirmation from the verifier output.
-3. Record each peeled commit confirmation for the selected stable tag.
-4. Record branch-head warnings as drift-only observations.
-5. Ask a reviewer to decide whether any observed drift needs a future intake
+1. Record each selected stable tag confirmation from the verifier output.
+
+1. Record each peeled commit confirmation for the selected stable tag.
+
+1. Record branch-head warnings as drift-only observations.
+
+1. Ask a reviewer to decide whether any observed drift needs a future intake
    update before fork parity implementation starts.
-6. Keep accepted source pins unchanged unless a future reviewed intake change
+
+1. Keep accepted source pins unchanged unless a future reviewed intake change
    updates `packages/fork-vendors/forks.tsv`.
 
 ## Required Distinction

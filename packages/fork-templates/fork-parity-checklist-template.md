@@ -28,11 +28,11 @@ support.
 
 1. Confirm the inventory row traces to the accepted source pin, not a branch
    drift observation.
-2. Confirm the evidence command is a future executable parity command before
+1. Confirm the evidence command is a future executable parity command before
    any future status row is marked verified.
-3. Keep network, cloud, credential, profile auto-update, and non-free plugin
+1. Keep network, cloud, credential, profile auto-update, and non-free plugin
    ingestion notes explicit when the inventory row touches those surfaces.
-4. Do not add fork rows to packages/parity/status.tsv in v1.9.
+1. Do not add fork rows to packages/parity/status.tsv in v1.9.
 
 ## Future Evidence Notes
 
