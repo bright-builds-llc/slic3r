@@ -3,6 +3,7 @@ members = [
     "crates/slic3r_cli",
     "crates/slic3r_contracts",
     "crates/slic3r_core",
+    "crates/slic3r_flavors",
 ]
 resolver = "3"
 

@@ -17,3 +17,10 @@ version = "0.1.0"
 [[package]]
 name = "slic3r_core"
 version = "0.1.0"
+
+[[package]]
+name = "slic3r_flavors"
+version = "0.1.0"
+dependencies = [
+ "slic3r_contracts",
+]

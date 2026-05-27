@@ -1,0 +1,40 @@
+load("@rules_rust//rust:defs.bzl", "rust_clippy", "rust_library", "rust_test", "rustfmt_test")
+
+package(default_visibility = ["//visibility:public"])
+
+rust_library(
+    name = "slic3r_flavors",
+    srcs = [
+        "src/lib.rs",
+        "src/registry.rs",
+    ],
+    deps = ["//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts"],
+    edition = "2024",
+)
+
+rust_test(
+    name = "flavor_registry_test",
+    srcs = ["tests/flavor_registry.rs"],
+    deps = [
+        ":slic3r_flavors",
+        "//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts",
+    ],
+    edition = "2024",
+)
+
+rust_clippy(
+    name = "clippy",
+    testonly = True,
+    deps = [
+        ":flavor_registry_test",
+        ":slic3r_flavors",
+    ],
+)
+
+rustfmt_test(
+    name = "rustfmt_check",
+    targets = [
+        ":flavor_registry_test",
+        ":slic3r_flavors",
+    ],
+)

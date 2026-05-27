@@ -1,0 +1,15 @@
+[package]
+name = "slic3r_flavors"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+slic3r_contracts = { path = "../slic3r_contracts" }
+
+[lints]
+workspace = true
