@@ -18,6 +18,11 @@ alias(
 )
 
 alias(
+    name = "slic3r_flavors",
+    actual = "//packages/slic3r-rust/crates/slic3r_flavors:slic3r_flavors",
+)
+
+alias(
     name = "slic3r_cli",
     actual = "//packages/slic3r-rust/crates/slic3r_cli:slic3r_cli",
 )
@@ -29,6 +34,7 @@ sh_test(
         "//packages/slic3r-rust/crates/slic3r_cli:clippy",
         "//packages/slic3r-rust/crates/slic3r_contracts:clippy",
         "//packages/slic3r-rust/crates/slic3r_core:clippy",
+        "//packages/slic3r-rust/crates/slic3r_flavors:clippy",
     ],
 )
 
@@ -40,8 +46,10 @@ test_suite(
         "//packages/slic3r-rust/crates/slic3r_cli:slic3r_cli_test",
         "//packages/slic3r-rust/crates/slic3r_contracts:rustfmt_check",
         "//packages/slic3r-rust/crates/slic3r_core:rustfmt_check",
+        "//packages/slic3r-rust/crates/slic3r_flavors:rustfmt_check",
         "//packages/slic3r-rust/crates/slic3r_contracts:flavor_contracts_test",
         "//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts_test",
         "//packages/slic3r-rust/crates/slic3r_core:slic3r_core_smoke_test",
+        "//packages/slic3r-rust/crates/slic3r_flavors:flavor_registry_test",
     ],
 )
