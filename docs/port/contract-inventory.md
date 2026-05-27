@@ -42,6 +42,42 @@ Parity-surface tokens are sourced from `packages/parity/status.tsv`.
 
 These contracts are metadata boundaries only; they do not implement a flavor registry, runtime fork behavior, fork-flavor release builds, online/cloud integration, credential handling, non-free plugin ingestion, or executable fork parity.
 
+## Rust Flavor Registry Boundary
+
+`packages/slic3r-rust/crates/slic3r_flavors` composes the typed Rust flavor
+contracts into static registry metadata for base Slic3r, shared downstream,
+and fork-specific planning rows.
+
+Public registry API:
+
+- `FlavorRegistryEntry`
+- `FlavorCapability`
+- `FlavorProvenance`
+- `all_flavors()`
+- `maybe_flavor(FlavorId)`
+- `all_capabilities()`
+- `capabilities_by_origin(FeatureOrigin)`
+- `capabilities_by_checklist_status(ChecklistStatus)`
+
+Capability records use typed `FlavorId`, `VendorSourceRef`, `FeatureOrigin`,
+`ParitySurface`, and `ChecklistStatus` values. Source-reference and ownership
+traceability lives on capability/provenance records and traces back to
+`packages/fork-vendors/forks.tsv`, `packages/fork-inventories/*.tsv`, and
+`packages/fork-inventories/category-map.tsv`.
+
+Rust flavor registry entries are planning and architecture metadata only.
+They do not mark fork behavior as verified or supported.
+
+Current needs-review metadata is represented by `ChecklistStatus::NeedsReview`
+on source-backed rows such as `orcaslicer.calibration-flow`; current inventory
+evidence does not include a source-backed `FeatureOrigin::UnknownNeedsReview`
+row.
+
+Generated Rust registry data, fork parity checklist templates, fixture
+namespaces, launcher-shape wording, drift-refresh protocol templates, runtime
+fork behavior, fork-specific CLI dispatch, fork release builds, online/cloud
+integration, credential handling, and non-free plugin support remain deferred.
+
 ## CLI Behavior
 
 | Contract Item | Legacy Source of Truth | Trusted Check | Evidence Status | Current Scope | Weaker Or Deferred Evidence | Deferred Notes | Future Owner |
