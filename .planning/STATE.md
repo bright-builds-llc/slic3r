@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.9
 milestone_name: milestone
-current_phase: 35
-current_phase_name: Flavor Registry Boundary
-current_plan: 3
-status: verifying
-stopped_at: Completed 35-03-PLAN.md
-last_updated: "2026-05-27T12:58:31.069Z"
+current_phase: 36
+current_phase_name: parity, fixture, launcher, and deferral templates
+current_plan: Not started
+status: planning
+stopped_at: Phase 35 complete, transitioned to Phase 36
+last_updated: "2026-05-27T13:19:53.863Z"
 last_activity: 2026-05-27
 progress:
   total_phases: 5
@@ -27,20 +27,20 @@ See: `.planning/PROJECT.md` (updated 2026-05-26)
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
-**Current focus:** Phase 35 — Flavor Registry Boundary
+**Current focus:** Phase 36 — Parity, Fixture, Launcher, and Deferral Templates
 
 ## Current Position
 
-Phase: 35 (Flavor Registry Boundary) — VERIFYING
-Plan: 3 of 3
-Current Phase: 35
-Current Phase Name: Flavor Registry Boundary
-Current Plan: 3
+Phase: 36 (Parity, Fixture, Launcher, and Deferral Templates) — READY TO PLAN
+Plan: Not started
+Current Phase: 36
+Current Phase Name: parity, fixture, launcher, and deferral templates
+Current Plan: Not started
 Total Phases: 5
-Total Plans in Phase: 3
-Status: Phase complete — ready for verification
+Total Plans in Phase: TBD
+Status: Ready to plan
 Last activity: 2026-05-27
-Last Activity Description: Completed 35-03-PLAN.md
+Last Activity Description: Phase 35 complete, transitioned to Phase 36
 
 Progress: [##########] 100%
 
@@ -48,7 +48,7 @@ Progress: [##########] 100%
 
 **Velocity:**
 
-- Total plans completed: 6 in the active milestone
+- Total plans completed: 9 in the active milestone
 - Average duration: 7 min
 - Total execution time: 21 min
 
@@ -65,7 +65,7 @@ Progress: [##########] 100%
 **Recent Trend:**
 
 - Last 5 plans: 33-01 complete, 34-01 complete, 35-01 complete, 35-02 complete, 35-03 complete
-- Trend: Six active-milestone plans completed
+- Trend: Nine active-milestone plans completed
 
 **Plan Metrics:**
 
@@ -116,6 +116,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-27T12:58:31.067Z
-Stopped at: Completed 35-03-PLAN.md
+Last session: 2026-05-27T13:19:53.863Z
+Stopped at: Phase 35 complete, transitioned to Phase 36
 Resume file: None
