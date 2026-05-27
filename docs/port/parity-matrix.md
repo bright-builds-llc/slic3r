@@ -27,3 +27,13 @@ parity, and fixture rules.
   and `packages/parity/status.tsv` is its checked-in data source.
 - Phase 4 inventories all six parity surface families now. Later phases are
   responsible for moving individual surfaces from `legacy-only` to `in progress`, `rust-backed`, and eventually `verified`.
+
+## Fork Parity Interpretation
+
+- There are no v1.9 fork rows in `packages/parity/status.tsv`.
+- Future fork rows should use `fork.<inventory_id>` or an inventory-derived
+  stable slug only after executable parity evidence exists.
+- A future fork row reaches `verified` only when backed by a real
+  `//packages/parity:*_parity` evidence command.
+- Do not infer fork runtime support from source pins, inventories, templates,
+  checklist completion, or flavor registry metadata.

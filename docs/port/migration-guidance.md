@@ -54,10 +54,26 @@ boundaries.
 - Fixture naming should follow the contract surface first, then the scenario.
   For example, launcher fixtures should not be mixed into generated-output or
   config fixture names.
+- Future fork fixture work is reserved under
+  `packages/parity-fixtures/forks/<vendor_id>/<inventory_id-or-slug>/<scenario>/`.
+  Phase 36 documents that namespace only; it does not create fork fixture files.
 - When a change adds, removes, or materially alters a fixture-backed parity
   surface, update the relevant rows in `docs/port/contract-inventory.md` and
   `docs/port/parity-matrix.md`. If the protocol itself changes, update this
   guide in the same change.
+
+## Future Fork Parity Status
+
+- The complete v1.9 fork-parity deferral list lives in
+  [`README.md#v19-fork-parity-deferrals`](./README.md#v19-fork-parity-deferrals).
+  Link to that block instead of repeating the full list in every package doc.
+- Phase 36 does not add fork rows to `packages/parity/status.tsv`.
+- Future fork status tokens should use `fork.<inventory_id>` or an
+  inventory-derived stable slug, and `verified` requires a real
+  `//packages/parity:*_parity` evidence command.
+- Future fork status requires executable parity evidence. Source pins,
+  inventories, templates, checklist completion, and registry metadata remain
+  planning inputs only.
 
 ## Scope Now vs Deferred
 

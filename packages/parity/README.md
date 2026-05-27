@@ -41,3 +41,17 @@ checked-in status rows:
 
 - Keep status reporting conservative.
 - Do not mark a slice `verified` until the shared fixture comparison exists.
+
+## Future Fork Status Rows
+
+Phase 36 does not add fork rows to `packages/parity/status.tsv`. Future fork
+status rows are reserved for executable parity targets only.
+
+Future fork status tokens should use `fork.<inventory_id>` or an
+inventory-derived stable slug that traces back to `packages/fork-inventories`.
+A fork row may become `verified` only when maintainers can rerun a real
+`//packages/parity:*_parity` evidence command for that fork slice.
+
+Source pins, inventories, templates, checklist completion, and flavor registry
+metadata are planning inputs only. They do not prove fork runtime support and
+must not be used as status evidence.

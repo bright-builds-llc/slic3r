@@ -11,6 +11,19 @@ corpora.
 - Update the relevant `docs/port/` surfaces whenever a fixture-backed parity
   workflow is added or changed.
 
+## Future Fork Fixture Namespace
+
+Future fork parity fixtures are reserved under:
+
+```text
+packages/parity-fixtures/forks/<vendor_id>/<inventory_id-or-slug>/<scenario>/
+```
+
+Phase 36 does not create fork fixture files. This namespace is documentation
+only until a future fork feature has an executable parity command, a reviewed
+checklist, and a matching future status row. Source pins, inventories,
+templates, and registry metadata do not justify fixture files by themselves.
+
 ## Current State
 
 - Phase 7 defines the package and workflow rules.
