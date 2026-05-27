@@ -53,7 +53,7 @@ Requirements for the v1.9 milestone. Each maps to one roadmap phase.
   identity, flavor identity, vendor source identity, feature origin, parity
   surface, and checklist status instead of passing raw vendor strings through
   core logic.
-- [ ] **ARCH-02**: Developer can inspect a documented module boundary that
+- [x] **ARCH-02**: Developer can inspect a documented module boundary that
   keeps base Slic3r behavior in shared core packages while future fork behavior
   plugs in through capability-oriented flavor metadata rather than copied Rust
   workspaces.
@@ -131,7 +131,7 @@ Which phases cover which requirements. Updated as phases complete.
 | INV-04 | Phase 33 | Complete |
 | INV-05 | Phase 33 | Complete |
 | ARCH-01 | Phase 34 | Complete |
-| ARCH-02 | Phase 35 | Pending |
+| ARCH-02 | Phase 35 | Complete |
 | ARCH-03 | Phase 35 | Complete |
 | PAR-01 | Phase 36 | Pending |
 | PAR-02 | Phase 36 | Pending |
