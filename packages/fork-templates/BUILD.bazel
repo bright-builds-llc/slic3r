@@ -1,0 +1,44 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "README.md",
+    "fork-parity-checklist-template.md",
+    "fork-launcher-shape-template.md",
+    "manual-drift-refresh-protocol.md",
+])
+
+sh_binary(
+    name = "verify",
+    srcs = ["verify_templates.sh"],
+    data = [
+        "README.md",
+        "fork-parity-checklist-template.md",
+        "fork-launcher-shape-template.md",
+        "manual-drift-refresh-protocol.md",
+    ],
+    args = [
+        "$(location README.md)",
+        "$(location fork-parity-checklist-template.md)",
+        "$(location fork-launcher-shape-template.md)",
+        "$(location manual-drift-refresh-protocol.md)",
+    ],
+)
+
+sh_test(
+    name = "verify_templates_test",
+    srcs = ["verify_templates_test.sh"],
+    data = ["verify_templates.sh"],
+)
+
+filegroup(
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "fork-parity-checklist-template.md",
+        "fork-launcher-shape-template.md",
+        "manual-drift-refresh-protocol.md",
+        "verify_templates.sh",
+        "verify_templates_test.sh",
+    ],
+)
+

@@ -180,4 +180,3 @@ test_missing_non_overclaiming_phrase_fails
 test_missing_drift_only_distinction_fails
 
 printf 'ok: verify_templates_test\n'
-
