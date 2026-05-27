@@ -257,6 +257,49 @@ fn parity_surfaces_parse_display_and_reject_non_surface_tokens() {
 }
 
 #[test]
+fn parity_surface_constructors_return_canonical_tokens() {
+    // Arrange
+    let cases = [
+        (ParitySurface::cli_version(), "cli.version"),
+        (ParitySurface::cli_help(), "cli.help"),
+        (ParitySurface::cli_other(), "cli.other"),
+        (ParitySurface::export_workflows(), "export.workflows"),
+        (ParitySurface::transform_workflows(), "transform.workflows"),
+        (ParitySurface::linux_runtime(), "linux.runtime"),
+        (ParitySurface::windows_runtime(), "windows.runtime"),
+        (
+            ParitySurface::linux_packaged_launcher(),
+            "linux.packaged-launcher",
+        ),
+        (
+            ParitySurface::windows_packaged_launcher(),
+            "windows.packaged-launcher",
+        ),
+        (ParitySurface::config(), "config"),
+        (ParitySurface::config_persistence(), "config.persistence"),
+        (ParitySurface::file_formats(), "file-formats"),
+        (ParitySurface::generated_outputs(), "generated-outputs"),
+        (ParitySurface::launcher_packaging(), "launcher-packaging"),
+    ];
+
+    // Act
+    let validated = cases.map(|(constructed_surface, token)| {
+        (
+            constructed_surface,
+            token,
+            constructed_surface.as_str(),
+            ParitySurface::try_from(token),
+        )
+    });
+
+    // Assert
+    for (constructed_surface, token, constructed_token, parsed_surface) in validated {
+        assert_eq!(constructed_token, token);
+        assert_eq!(parsed_surface, Ok(constructed_surface));
+    }
+}
+
+#[test]
 fn checklist_statuses_parse_display_and_reject_executable_parity_words() {
     // Arrange
     let accepted = [

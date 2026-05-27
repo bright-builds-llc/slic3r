@@ -386,6 +386,76 @@ impl ParitySurface {
     pub const fn as_str(self) -> &'static str {
         self.0
     }
+
+    /// Returns the canonical `cli.version` parity surface.
+    pub const fn cli_version() -> Self {
+        Self("cli.version")
+    }
+
+    /// Returns the canonical `cli.help` parity surface.
+    pub const fn cli_help() -> Self {
+        Self("cli.help")
+    }
+
+    /// Returns the canonical `cli.other` parity surface.
+    pub const fn cli_other() -> Self {
+        Self("cli.other")
+    }
+
+    /// Returns the canonical `export.workflows` parity surface.
+    pub const fn export_workflows() -> Self {
+        Self("export.workflows")
+    }
+
+    /// Returns the canonical `transform.workflows` parity surface.
+    pub const fn transform_workflows() -> Self {
+        Self("transform.workflows")
+    }
+
+    /// Returns the canonical `linux.runtime` parity surface.
+    pub const fn linux_runtime() -> Self {
+        Self("linux.runtime")
+    }
+
+    /// Returns the canonical `windows.runtime` parity surface.
+    pub const fn windows_runtime() -> Self {
+        Self("windows.runtime")
+    }
+
+    /// Returns the canonical `linux.packaged-launcher` parity surface.
+    pub const fn linux_packaged_launcher() -> Self {
+        Self("linux.packaged-launcher")
+    }
+
+    /// Returns the canonical `windows.packaged-launcher` parity surface.
+    pub const fn windows_packaged_launcher() -> Self {
+        Self("windows.packaged-launcher")
+    }
+
+    /// Returns the canonical `config` parity surface.
+    pub const fn config() -> Self {
+        Self("config")
+    }
+
+    /// Returns the canonical `config.persistence` parity surface.
+    pub const fn config_persistence() -> Self {
+        Self("config.persistence")
+    }
+
+    /// Returns the canonical `file-formats` parity surface.
+    pub const fn file_formats() -> Self {
+        Self("file-formats")
+    }
+
+    /// Returns the canonical `generated-outputs` parity surface.
+    pub const fn generated_outputs() -> Self {
+        Self("generated-outputs")
+    }
+
+    /// Returns the canonical `launcher-packaging` parity surface.
+    pub const fn launcher_packaging() -> Self {
+        Self("launcher-packaging")
+    }
 }
 
 impl fmt::Display for ParitySurface {
@@ -407,20 +477,20 @@ impl TryFrom<&str> for ParitySurface {
 
     fn try_from(value: &str) -> Result<Self, Self::Error> {
         match value {
-            "cli.version" => Ok(Self("cli.version")),
-            "cli.help" => Ok(Self("cli.help")),
-            "cli.other" => Ok(Self("cli.other")),
-            "export.workflows" => Ok(Self("export.workflows")),
-            "transform.workflows" => Ok(Self("transform.workflows")),
-            "linux.runtime" => Ok(Self("linux.runtime")),
-            "windows.runtime" => Ok(Self("windows.runtime")),
-            "linux.packaged-launcher" => Ok(Self("linux.packaged-launcher")),
-            "windows.packaged-launcher" => Ok(Self("windows.packaged-launcher")),
-            "config" => Ok(Self("config")),
-            "config.persistence" => Ok(Self("config.persistence")),
-            "file-formats" => Ok(Self("file-formats")),
-            "generated-outputs" => Ok(Self("generated-outputs")),
-            "launcher-packaging" => Ok(Self("launcher-packaging")),
+            "cli.version" => Ok(Self::cli_version()),
+            "cli.help" => Ok(Self::cli_help()),
+            "cli.other" => Ok(Self::cli_other()),
+            "export.workflows" => Ok(Self::export_workflows()),
+            "transform.workflows" => Ok(Self::transform_workflows()),
+            "linux.runtime" => Ok(Self::linux_runtime()),
+            "windows.runtime" => Ok(Self::windows_runtime()),
+            "linux.packaged-launcher" => Ok(Self::linux_packaged_launcher()),
+            "windows.packaged-launcher" => Ok(Self::windows_packaged_launcher()),
+            "config" => Ok(Self::config()),
+            "config.persistence" => Ok(Self::config_persistence()),
+            "file-formats" => Ok(Self::file_formats()),
+            "generated-outputs" => Ok(Self::generated_outputs()),
+            "launcher-packaging" => Ok(Self::launcher_packaging()),
             _ => Err(ParitySurfaceParseError {
                 value: value.to_owned(),
             }),
