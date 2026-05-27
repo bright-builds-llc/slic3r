@@ -16,6 +16,12 @@ Selected stable tags and peeled commits from `packages/fork-vendors/forks.tsv`
 are the only accepted row source refs. Branch heads in that registry are
 drift-only observations and are not valid inventory anchors.
 
+Future fork parity reviews should start from the Phase 36
+[fork parity checklist template](../fork-templates/fork-parity-checklist-template.md).
+Inventory rows are planning inputs only; future verified fork parity requires
+checklist review plus future executable parity evidence such as a rerunnable
+`//packages/parity:*_parity` command.
+
 ## Inventory TSV Contract
 
 `inventory-template.tsv`, `prusaslicer.tsv`, `bambustudio.tsv`, and

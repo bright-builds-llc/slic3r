@@ -14,6 +14,18 @@ The verifier checks the selected stable tag ref and peeled commit recorded in
 or import upstream fork source trees. Source pins, inventories, license
 metadata, and branch observations are intake evidence only; they do not mark fork parity as verified.
 
+## Manual Drift Refresh
+
+Use the Phase 36
+[manual drift-refresh protocol](../fork-templates/manual-drift-refresh-protocol.md)
+before any later fork parity milestone begins.
+`bazel run //packages/fork-vendors:verify` remains the manual comparison tool
+for selected stable tags, peeled commits, and branch-head observations.
+
+Branch heads are drift-only observations. drift observations do not change accepted source pins by themselves. Accepted source pins change only through a
+future reviewed intake update to `forks.tsv`; this package does not run nightly
+sync automation or update vendor refs automatically.
+
 ## Registry Format
 
 `forks.tsv` is a fixed-column registry. It uses:
