@@ -179,7 +179,12 @@ composition without fork-specific core copies or side-effecting registry code.
 1. Developer can confirm future fork work does not require vendor-specific
    Rust workspaces or copied base behavior.
 
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 35-01-PLAN.md — Add static parity-surface constructors for registry data.
+- [ ] 35-02-PLAN.md — Create the pure `slic3r_flavors` crate, static registry metadata, lookup helpers, and verification wiring.
+- [ ] 35-03-PLAN.md — Document the flavor registry module boundary and metadata-only scope.
 
 ### Phase 36: Parity, Fixture, Launcher, and Deferral Templates
 
