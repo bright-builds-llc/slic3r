@@ -4,17 +4,17 @@ milestone: v1.9
 milestone_name: milestone
 current_phase: 35
 current_phase_name: Flavor Registry Boundary
-current_plan: 1
+current_plan: 2
 status: executing
-stopped_at: Phase 35 context gathered
-last_updated: "2026-05-27T12:15:14.588Z"
-last_activity: 2026-05-27 -- Phase 35 execution started
+stopped_at: Completed 35-01-PLAN.md
+last_updated: "2026-05-27T12:24:10.251Z"
+last_activity: 2026-05-27
 progress:
   total_phases: 5
   completed_phases: 3
   total_plans: 6
-  completed_plans: 3
-  percent: 50
+  completed_plans: 4
+  percent: 67
 ---
 
 # Project State
@@ -32,25 +32,25 @@ depend on.
 ## Current Position
 
 Phase: 35 (Flavor Registry Boundary) — EXECUTING
-Plan: 1 of 3
+Plan: 2 of 3
 Current Phase: 35
 Current Phase Name: Flavor Registry Boundary
-Current Plan: 1
+Current Plan: 2
 Total Phases: 5
 Total Plans in Phase: 3
-Status: Executing Phase 35
-Last activity: 2026-05-27 -- Phase 35 execution started
-Last Activity Description: Phase 35 execution started
+Status: Ready to execute
+Last activity: 2026-05-27
+Last Activity Description: Completed 35-01-PLAN.md
 
-Progress: [######----] 60%
+Progress: [#######---] 67%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 3 in the active milestone
-- Average duration: N/A
-- Total execution time: Not recorded
+- Total plans completed: 4 in the active milestone
+- Average duration: 5 min
+- Total execution time: 5 min
 
 **By Phase:**
 
@@ -59,13 +59,19 @@ Progress: [######----] 60%
 | 32. Vendor Source Manifest and License Baseline | 1/1 | Not recorded | N/A |
 | 33. Inventory Templates and Source-Pinned Fork Inventories | 1/1 | Not recorded | N/A |
 | 34. Rust Flavor Contracts | 1/1 | Not recorded | N/A |
-| 35. Flavor Registry Boundary | 0/TBD | 0.0h | N/A |
+| 35. Flavor Registry Boundary | 1/3 | 5 min | 5 min |
 | 36. Parity, Fixture, Launcher, and Deferral Templates | 0/TBD | 0.0h | N/A |
 
 **Recent Trend:**
 
-- Last 5 plans: 32-01 complete, 33-01 complete, 34-01 complete
-- Trend: Three active-milestone plans completed
+- Last 5 plans: 32-01 complete, 33-01 complete, 34-01 complete, 35-01 complete
+- Trend: Four active-milestone plans completed
+
+**Plan Metrics:**
+
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| Phase 35 P01 | 5 min | 1 task | 2 files |
 
 ## Accumulated Context
 
@@ -87,6 +93,10 @@ Recent decisions affecting current work:
   `requirements-completed` stays hyphenated, and phase summaries are not
   formatted with mdformat.
 
+- [Phase 35]: Added named ParitySurface const constructors instead of exposing the tuple field or adding arbitrary string conversion.
+- [Phase 35]: Routed successful ParitySurface parser branches through the new constructors so parser and constructor values stay coupled.
+- [Phase 35]: Kept registry composition, runtime parsing, and side-effecting APIs deferred to later Phase 35 plans.
+
 ### Pending Todos
 
 None yet.
@@ -97,6 +107,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-27T11:31:47.042Z
-Stopped at: Phase 35 context gathered
-Resume file: .planning/phases/35-flavor-registry-boundary/35-CONTEXT.md
+Last session: 2026-05-27T12:24:10.249Z
+Stopped at: Completed 35-01-PLAN.md
+Resume file: None
