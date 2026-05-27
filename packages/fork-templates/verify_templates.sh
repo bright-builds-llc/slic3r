@@ -51,7 +51,7 @@ verify_checklist_labels() {
 		"License or security note" \
 		"Deferred scope" \
 		"Reviewer signoff"; do
-		require_text "${checklist_file}" "fork-parity-checklist-template.md" "${label}"
+		require_text "${checklist_file}" "fork-parity-checklist-template.md" "| ${label} |"
 	done
 }
 
@@ -64,6 +64,10 @@ verify_non_overclaiming_phrases() {
 		"future executable parity evidence"
 	require_text "${readme_file}" "README.md" \
 		"do not add fork rows to packages/parity/status.tsv in v1.9"
+	require_text "${checklist_file}" "fork-parity-checklist-template.md" \
+		"Completing this checklist also does not prove fork parity"
+	require_text "${launcher_file}" "fork-launcher-shape-template.md" \
+		"real fork parity evidence before any user-facing fork launcher"
 	require_text "${drift_file}" "manual-drift-refresh-protocol.md" \
 		"drift observations do not change accepted source pins by themselves"
 }

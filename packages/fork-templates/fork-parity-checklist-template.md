@@ -5,9 +5,10 @@ status. source pins and inventories are planning inputs only; future fork work
 needs future executable parity evidence before any status row can move to
 verified.
 
-template verification does not prove fork parity. Completing this checklist
-also does not prove fork parity; it prepares the review package that a later
-executable `//packages/parity:*_parity` target must support.
+template verification does not prove fork parity.
+Completing this checklist also does not prove fork parity; it prepares the
+review package that a later executable `//packages/parity:*_parity` target must
+support.
 
 ## Checklist
 
@@ -38,4 +39,3 @@ executable `//packages/parity:*_parity` target must support.
 Future verified fork status requires executable parity evidence that can be
 rerun by maintainers. A completed checklist may justify planning a parity
 target, fixture namespace, and docs update, but it is not itself evidence.
-

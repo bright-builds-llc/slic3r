@@ -50,6 +50,7 @@ write_valid_fixture() {
 
 bazel run //packages/fork-templates:verify
 template verification does not prove fork parity.
+Completing this checklist also does not prove fork parity.
 source pins and inventories are planning inputs only.
 future executable parity evidence is required.
 do not add fork rows to packages/parity/status.tsv in v1.9.
@@ -60,6 +61,7 @@ EOF
 # Fixture Checklist
 
 template verification does not prove fork parity.
+Completing this checklist also does not prove fork parity.
 source pins and inventories are planning inputs only.
 future executable parity evidence is required.
 do not add fork rows to packages/parity/status.tsv in v1.9.
@@ -82,6 +84,7 @@ EOF
 
 fork-flavor release builds stay deferred.
 [deferrals](../../docs/port/README.md#v19-fork-parity-deferrals)
+real fork parity evidence before any user-facing fork launcher is required.
 EOF
 
 	cat >"${dir}/manual-drift-refresh-protocol.md" <<'EOF'
@@ -130,7 +133,8 @@ test_missing_checklist_label_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-label"
 	write_valid_fixture "${dir}"
-	remove_line_containing "${dir}/fork-parity-checklist-template.md" "Fixture need"
+	echo "Fixture need remains in prose, but the required table row is absent." >>"${dir}/fork-parity-checklist-template.md"
+	remove_line_containing "${dir}/fork-parity-checklist-template.md" "| Fixture need |"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/missing-label.out" "${tmp_dir}/missing-label.err"; then
@@ -158,6 +162,38 @@ test_missing_non_overclaiming_phrase_fails() {
 	assert_contains "${tmp_dir}/missing-phrase.err" 'template verification does not prove fork parity'
 }
 
+test_missing_checklist_template_warning_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-checklist-warning"
+	write_valid_fixture "${dir}"
+	remove_line_containing "${dir}/fork-parity-checklist-template.md" "Completing this checklist also does not prove fork parity"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-checklist-warning.out" "${tmp_dir}/missing-checklist-warning.err"; then
+		fail "missing checklist warning fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-checklist-warning.err" '^error:'
+	assert_contains "${tmp_dir}/missing-checklist-warning.err" 'Completing this checklist also does not prove fork parity'
+}
+
+test_missing_launcher_template_warning_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-launcher-warning"
+	write_valid_fixture "${dir}"
+	remove_line_containing "${dir}/fork-launcher-shape-template.md" "real fork parity evidence before any user-facing fork launcher"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-launcher-warning.out" "${tmp_dir}/missing-launcher-warning.err"; then
+		fail "missing launcher warning fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-launcher-warning.err" '^error:'
+	assert_contains "${tmp_dir}/missing-launcher-warning.err" 'real fork parity evidence before any user-facing fork launcher'
+}
+
 test_missing_drift_only_distinction_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-drift"
@@ -177,6 +213,8 @@ test_missing_drift_only_distinction_fails() {
 test_complete_package_fixture_passes
 test_missing_checklist_label_fails
 test_missing_non_overclaiming_phrase_fails
+test_missing_checklist_template_warning_fails
+test_missing_launcher_template_warning_fails
 test_missing_drift_only_distinction_fails
 
 printf 'ok: verify_templates_test\n'

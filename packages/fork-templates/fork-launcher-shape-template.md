@@ -26,7 +26,6 @@ integration, profile auto-update execution, or non-free plugin ingestion.
 
 ## Future Review Notes
 
-Future launcher work must point back to the central deferral block and to real
-fork parity evidence before any user-facing fork launcher or release behavior
-is documented as supported.
-
+Future launcher work must point back to the central deferral block and requires
+real fork parity evidence before any user-facing fork launcher or release
+behavior is documented as supported.
