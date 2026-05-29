@@ -10,62 +10,46 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone: v1.9 Fork Vendor Intake and Module Architecture
+## Last Shipped Milestone: v1.9 Fork Vendor Intake and Module Architecture
 
-**Goal:** Establish pinned downstream fork references, feature inventories,
-and modular Rust package boundaries so PrusaSlicer, Bambu Studio, and
+**Shipped:** 2026-05-29
+
+**Goal achieved:** Established pinned downstream fork references, feature
+inventories, typed Rust flavor contracts, a pure shared flavor registry
+boundary, and fork parity templates so PrusaSlicer, Bambu Studio, and
 OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
-
-**Target features:**
-
-- Vendor-source strategy for PrusaSlicer, Bambu Studio, and OrcaSlicer
-- Fork feature inventories that distinguish base, shared downstream, and
-  fork-specific behavior
-- Modular Rust package boundaries for fork-specific behavior
-- Parity checklist and documentation templates for downstream fork work
 
 ## Current State
 
-v1.9 Phases 32, 33, and 34 have shipped the fork vendor intake,
-source-pinned inventory baseline, and typed Rust flavor contract boundary.
-Phase 35 is next and will use those contracts to define the pure flavor
-registry boundary for base, shared downstream, and fork-specific behavior.
+v1.9 has shipped and is archived under `.planning/milestones/`. The live
+planning set is ready for the next milestone cycle, with no active phase
+currently planned.
 
-Phase 32 shipped the fork vendor source and license/provenance baseline:
+v1.9 delivered:
 
-- `packages/fork-vendors/forks.tsv` records pinned PrusaSlicer, Bambu Studio,
-  and OrcaSlicer source refs, branch observations, lineage, source paths,
-  refresh commands, SPDX metadata, provenance notes, and caution flags
-- `bazel run //packages/fork-vendors:verify` validates the selected stable tags
-  and peeled commits without cloning, fetching, building, or vendoring upstream
-  fork repositories
-- port docs publish the vendor-intake boundary while keeping branch heads
-  drift-only, license metadata not legal review, and fork runtime parity
-  deferred
+- `packages/fork-vendors/forks.tsv` and
+  `bazel run //packages/fork-vendors:verify`, giving maintainers pinned
+  PrusaSlicer, Bambu Studio, and OrcaSlicer source refs, branch observations,
+  lineage, source paths, refresh commands, SPDX metadata, provenance notes, and
+  caution flags without cloning, fetching, building, or vendoring upstream fork
+  repositories
+- `packages/fork-inventories`, source-pinned per-fork inventory TSVs, and an
+  exact-once cross-fork category map that classify base, shared downstream,
+  fork-specific, and deferred source-observed planning inputs without treating
+  them as executable fork parity
+- typed Rust contracts in `slic3r_contracts` for downstream fork identity,
+  flavor identity, vendor source identity, feature origin, parity surface, and
+  checklist status
+- a pure `slic3r_flavors` registry crate with hand-curated static metadata,
+  lookup helpers, provenance tests, Cargo/Bazel verification, and no runtime
+  Git, filesystem, network, process, release, sync, or TSV parsing side
+  effects
+- fork parity checklist, fixture namespace, launcher-shape, manual drift
+  refresh, and deferral templates that reserve verified fork status for future
+  executable evidence
 
-Phase 33 shipped the fork feature inventory baseline:
-
-- `packages/fork-inventories` owns the checked-in feature inventory template,
-  source-pinned PrusaSlicer, Bambu Studio, and OrcaSlicer inventory TSVs, and
-  an exact-once cross-fork category map
-- `bazel run //packages/fork-inventories:verify` validates TSV shape, source
-  pins, enum values, parity dependencies, required fork surface coverage,
-  caution policy, and category-map references without fetching, cloning,
-  building, importing, or vendoring upstream fork source trees
-- port docs publish inventories as source-observed planning inputs only, not
-  executable fork parity, online/cloud integration, credential handling, or
-  non-free plugin support
-
-Phase 34 shipped the typed Rust flavor contract boundary:
-
-- `packages/slic3r-rust/crates/slic3r_contracts` owns typed contracts for
-  downstream fork identity, flavor identity, vendor source identity, feature
-  origin, parity surface, and checklist status
-- `//packages/slic3r-rust:verify` now checks the contracts through the
-  aggregate Rust verification target, including formatting, clippy, build, and
-  contract tests
-- port docs publish the contract boundary while keeping flavor registry logic,
-  executable fork parity, and runtime fork-flavor behavior deferred
+The next milestone should define executable fork parity scope, starting with
+PrusaSlicer if the existing future roadmap remains valid.
 
 <details>
 <summary>v1.8 shipped cross-platform release build automation</summary>
@@ -190,15 +174,16 @@ Phase 34 shipped the typed Rust flavor contract boundary:
 
 ## Next Milestone Goals
 
-- Start v1.9 Fork Vendor Intake and Module Architecture
-- Establish a downstream fork vendor-intake track for PrusaSlicer, Bambu
-  Studio, and OrcaSlicer
-- Define how fork-specific behavior plugs into the Rust workspace without
-  forking the Rust codebase wholesale
-- Port each downstream fork as a modular Rust-backed flavor with full parity
-  evidence, extra-feature documentation, and maintainer-facing checklists
-- Add cross-flavor GitHub Actions builds and nightly review-gated vendor sync
-  automation after the fork ports reach full parity
+- Start the next milestone with fresh requirements using the v1.9 vendor
+  intake, inventory, contract, registry, and template artifacts as inputs.
+- If the existing future roadmap still holds, begin v1.10 with a scoped
+  PrusaSlicer parity port that adds executable evidence before marking any
+  fork behavior verified.
+- Use the v1.9 checklist and fixture/status vocabulary to define future fork
+  fixtures, status rows, evidence commands, docs updates, license/security
+  notes, and reviewer signoff.
+- Keep Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly
+  vendor sync deferred until preceding fork parity evidence exists.
 
 ## Requirements
 
@@ -270,30 +255,38 @@ Phase 34 shipped the typed Rust flavor contract boundary:
 - ✓ v1.9 requirements define typed Rust contracts for downstream fork
   identity, flavor identity, vendor source identity, feature origin, parity
   surface, and checklist status — Phase 34
+- ✓ v1.9 requirements define modular Rust package boundaries for
+  fork-specific behavior without forking the Rust codebase wholesale — Phase 35
+- ✓ v1.9 requirements define parity checklist and documentation templates
+  for downstream fork work without overclaiming runtime fork support — Phase 36
 
 ### Active
 
-- [ ] v1.9 requirements define modular Rust package boundaries for
-  fork-specific behavior without forking the Rust codebase wholesale.
-- [ ] v1.9 requirements define parity checklist and documentation templates
-  for downstream fork work.
+- [ ] Define the next milestone requirements from the shipped v1.9 vendor
+  source registry, inventories, typed contracts, flavor registry, and fork
+  parity templates.
+- [ ] Define executable fork parity evidence, fixture namespaces, status rows,
+  and reviewer signoff before marking any fork behavior verified.
+- [ ] Decide whether PrusaSlicer remains the first fork parity port for v1.10
+  before planning Bambu Studio, OrcaSlicer, cross-flavor builds, or vendor sync.
 
 ### Out of Scope
 
-- GUI migration planning and implementation remain out of scope until base
-  release automation is stable
+- GUI migration planning and implementation remain out of scope until the
+  fork-parity evidence path is credible enough not to destabilize the base
+  migration track
 - Signing, notarization, AppImage, MSI, DMG, installer parity, and
-  release-channel publishing remain future packaging/release work beyond this
-  release-build automation milestone
+  release-channel publishing remain future packaging/release work beyond the
+  current base artifact automation
 - Broad feature redesign or new CLI slices beyond the currently verified
   surface remain secondary to release automation and GUI strategy decisions
 - Treating the legacy package as an active feature-development surface — it
   remains the reference implementation except for minimal oracle upkeep
 - Full PrusaSlicer, Bambu Studio, and OrcaSlicer parity ports remain future
-  implementation milestones after v1.9 establishes vendor intake and module
-  architecture.
+  implementation milestones after v1.9; v1.9 artifacts are planning and
+  architecture inputs, not runtime support.
 - Fork-flavor build automation remains future release work after downstream
-  parity modules exist.
+  parity modules and executable evidence exist.
 - Nightly vendor sync and Codex-assisted merge automation require full fork
   parity, stable vendor references, and review-gated automation before they are
   safe to enable.
@@ -342,6 +335,10 @@ The audience for this work is broad:
 | Embed release provenance inside each package tree | Maintainers need platform, commit, build mode, scope, package target, and evidence target visible in every artifact | ✓ Shipped in v1.8 |
 | Treat source-pinned fork inventories as planning inputs, not runtime parity evidence | v1.9 needs feature ownership and scope metadata before fork behavior becomes implementation work | ✓ Shipped in Phase 33 |
 | Model downstream fork and flavor metadata as typed Rust contracts before registry or core logic | Raw vendor strings, source pins, feature origins, parity surfaces, and checklist status labels should not leak across Rust boundaries | ✓ Shipped in Phase 34 |
+| Use one shared `slic3r_flavors` crate instead of vendor-specific Rust workspaces | Future fork behavior should plug into shared capability metadata without copying base Rust workspace structure per vendor | ✓ Shipped in Phase 35 |
+| Keep the flavor registry metadata-only and side-effect free | v1.9 registry data should be inspectable and testable without Git, filesystem, network, process, release, sync, or runtime parsing side effects | ✓ Shipped in Phase 35 |
+| Reserve verified fork status for future executable evidence | Source pins, inventories, docs, and templates are necessary planning inputs but do not prove runtime fork behavior | ✓ Shipped in Phase 36 |
+| Keep drift refresh manual and reviewer-gated until fork modules and fixtures exist | Automated vendor sync is unsafe before stable executable evidence and review boundaries exist | ✓ Shipped in Phase 36 |
 
 ## Evolution
 
@@ -364,4 +361,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-26 after Phase 34 completion*
+*Last updated: 2026-05-29 after v1.9 milestone completion*

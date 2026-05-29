@@ -1,5 +1,61 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.9 Fork Vendor Intake and Module Architecture (Shipped: 2026-05-29)
+
+**Delivered:** Established pinned downstream fork references, source-pinned
+feature inventories, typed Rust flavor contracts, a pure shared flavor
+registry boundary, and fork parity templates for PrusaSlicer, Bambu Studio,
+and OrcaSlicer without importing upstream source trees or claiming runtime fork
+support.
+
+**Phases completed:** 32-36 (8 plans total)
+
+**Key accomplishments:**
+
+- Added a metadata-only fork vendor registry with Git ref verification and
+  license/provenance caution boundaries
+
+- Added a source-pinned fork inventory TSV package with exact-once category
+  mapping and a Bazel verifier
+
+- Added strict Rust flavor metadata contracts with source-pin validation,
+  typed taxonomy parsers, Bazel coverage, and metadata-only port docs
+
+- Added public const constructors for canonical parity surfaces, with
+  parser-drift tests and no registry side effects
+
+- Added the pure `slic3r_flavors` registry crate with static typed capability
+  metadata, provenance tests, and Cargo/Bazel verification coverage
+
+- Documented the `slic3r_flavors` registry boundary with metadata-only scope,
+  API names, and source-evidence traceability
+
+- Added fork parity checklist, launcher-shape template, manual drift protocol,
+  and local Bazel verifier coverage for Phase 36 template contracts
+
+- Centralized fork-parity deferrals, future fixture/status vocabulary, and
+  cross-package links for fork template usage
+
+**Stats:**
+
+- 5 phases, 8 plans, 21 plan tasks
+
+- Milestone audit passed before archive
+
+- Milestone archive: [v1.9-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.9-ROADMAP.md)
+
+- Requirements archive: [v1.9-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.9-REQUIREMENTS.md)
+
+- Audit: [v1.9-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.9-MILESTONE-AUDIT.md)
+
+- Phase archive: [v1.9-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.9-phases/)
+
+**What's next:** start the next milestone with fresh requirements, likely
+v1.10 PrusaSlicer parity if the current future roadmap remains valid, and
+require executable evidence before any fork behavior is marked verified
+
+______________________________________________________________________
+
 ## v1.8 Cross-Platform Release Build Automation (Shipped: 2026-05-24)
 
 **Delivered:** Added repeatable GitHub Actions release build automation for
@@ -29,19 +85,23 @@ parity gates and embedded provenance in every package tree.
 **Stats:**
 
 - 1 phase, 1 plan
+
 - 7 shipped commits after v1.7, including workflow creation and hosted-runner
   hardening fixes
 
 - Milestone archive: [v1.8-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-ROADMAP.md)
+
 - Requirements archive: [v1.8-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-REQUIREMENTS.md)
+
 - Audit: [v1.8-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-MILESTONE-AUDIT.md)
+
 - Phase archive: [v1.8-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.8-phases/)
 
 **What's next:** start v1.9 fork vendor intake and module architecture, using
 the now-stable base release automation as the foundation for later fork-flavor
 builds
 
----
+______________________________________________________________________
 
 ## v1.7 Cross-Platform Packaging-Visible Parity (Shipped: 2026-05-23)
 
@@ -72,10 +132,12 @@ published the exact verified scope in parity status and migration docs.
 **Stats:**
 
 - 4 phases, 8 plans
+
 - 4 shipped phase commits for phases 27-30, plus phase planning and closeout
   commits
 
 - Milestone archive: [v1.7-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.7-ROADMAP.md)
+
 - Phase archive: [v1.7-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.7-phases/)
 
 **What's next:** automate base Slic3r release builds for macOS, Linux, and
@@ -110,6 +172,7 @@ migration surfaces.
 **Stats:**
 
 - 3 phases, 7 plans
+
 - 3 shipped phase commits for phases 24-26, plus milestone-init and closeout
   validation/security commits
 

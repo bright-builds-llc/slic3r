@@ -2,6 +2,83 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.9 — Fork Vendor Intake and Module Architecture
+
+**Shipped:** 2026-05-29\
+**Phases:** 5 | **Plans:** 8 | **Sessions:** yolo phase execution plus
+milestone audit and archive closeout
+
+### What Was Built
+
+- A metadata-only fork vendor registry for PrusaSlicer, Bambu Studio, and
+  OrcaSlicer with pinned source refs, branch observations, lineage, source
+  paths, refresh commands, SPDX metadata, provenance notes, and caution flags
+- Source-pinned fork feature inventories, a reusable inventory template, and an
+  exact-once category map for base, shared downstream, fork-specific, and
+  deferred source-observed planning inputs
+- Typed Rust flavor contracts for downstream fork identity, flavor identity,
+  vendor source identity, feature origin, parity surface, and checklist status
+- A pure `slic3r_flavors` registry crate with hand-curated static metadata,
+  lookup helpers, provenance tests, and Cargo/Bazel verification
+- Fork parity checklist, fixture namespace, launcher-shape, manual drift
+  refresh, and deferral templates that reserve verified fork status for future
+  executable evidence
+
+### What Worked
+
+- Pinned refs plus local verifiers gave maintainers reproducible fork intake
+  facts without cloning, fetching, building, or vendoring upstream fork source
+  trees.
+- Modeling typed Rust contracts before registry data kept vendor names,
+  source pins, feature origins, parity surfaces, and checklist labels from
+  leaking as raw strings.
+- Keeping the registry pure and static made it easy to test metadata without
+  coupling the milestone to runtime parsing, sync automation, or release
+  behavior.
+- Phase 36 templates made future fork parity expectations explicit without
+  falsely promoting source-observed rows to verified runtime support.
+
+### What Was Inefficient
+
+- Live planning status drifted after Phase 36 and had to be corrected during
+  milestone audit and archive closeout.
+- The milestone completion helper moved and copied the core archive artifacts
+  correctly, but still left `PROJECT.md`, `ROADMAP.md`, and `STATE.md`
+  needing manual cleanup.
+- Summary and audit markdown with YAML frontmatter remains incompatible with
+  blanket `mdformat` use, so closeout verification needs targeted frontmatter
+  and diff checks.
+
+### Patterns Established
+
+- Fork intake should begin with pinned source references and explicit caution
+  boundaries before any runtime porting work starts.
+- Source-observed inventory rows are planning inputs only until executable
+  fixtures, status rows, and reviewer signoff exist.
+- A shared flavor registry is the right boundary for fork metadata;
+  vendor-specific Rust workspaces would duplicate base behavior too early.
+- Drift refresh should stay manual and reviewer-gated until fork modules,
+  fixtures, and evidence commands are stable.
+
+### Key Lessons
+
+1. The first fork milestone should protect trust boundaries more than it
+   expands runtime scope.
+1. Metadata-only architecture work needs as much wording verification as code
+   verification because the main regression risk is overclaiming support.
+1. Future fork parity milestones need executable evidence before docs or status
+   rows use `verified`.
+
+### Cost Observations
+
+- Model mix: balanced GSD profile with Codex-led archive closeout
+- Sessions: yolo discuss/plan/execute flow for final phase work plus
+  milestone audit and completion
+- Notable: final audit used the fork vendor, fork inventory, fork template,
+  and Rust aggregate Bazel verification targets before archive
+
+______________________________________________________________________
+
 ## Milestone: v1.8 — Cross-Platform Release Build Automation
 
 **Shipped:** 2026-05-24\
@@ -461,6 +538,7 @@ ______________________________________________________________________
 
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
+| v1.9 | yolo plus audit/closeout | 5 | Established fork intake and metadata architecture for downstream Slic3r-family work without claiming runtime fork support |
 | v1.4 | 1 | 3 | Expanded verified parity from macOS-only runtime/package surfaces into a verified Linux runtime slice with a dedicated Linux evidence command |
 | v1.3 | 1 | 3 | Extended verified parity into packaging-visible launcher behavior and hardened the packaged evidence surface with a representative config-persistence proof |
 | v1.2 | 1 | 6 | Expanded verified parity from help/config into export and transform slices, then hardened fixture coverage and audit metadata |
@@ -471,6 +549,7 @@ ______________________________________________________________________
 
 | Milestone | Tests | Coverage | Zero-Dep Additions |
 |-----------|-------|----------|-------------------|
+| v1.9 | Verified fork vendor refs, fork inventory TSVs, fork template contracts, Rust flavor contracts, and pure flavor registry metadata | milestone-scoped | kept fork source trees, runtime fork support, sync automation, and vendor-specific Rust workspaces out of scope |
 | v1.4 | Verified Linux launcher runtime parity for representative help/version/config/export/transform flows | milestone-scoped | reused the existing slice fixtures instead of cloning a second platform-specific corpus |
 | v1.3 | Verified packaged launcher parity for bundle layout, startup handoff, packaged help/version, and representative config persistence | milestone-scoped | reused the existing bundled Rust CLI slice instead of broadening packaged scope prematurely |
 | v1.2 | Verified fixture parity for export and transform workflows plus summary metadata auditability | milestone-scoped | kept parity command-per-slice-family and added summary requirement metadata |
@@ -482,3 +561,5 @@ ______________________________________________________________________
 1. Shared parity fixtures should arrive as soon as a supported Rust-backed slice exists.
 1. Migration docs and executable package boundaries need to move together.
 1. Milestone audit metadata should be treated as a first-class artifact, not post-hoc prose.
+1. Source-observed fork metadata should stay separate from verified fork
+   behavior until executable evidence exists.
