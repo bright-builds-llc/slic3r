@@ -75,6 +75,10 @@ boundaries.
   inventories, templates, checklist completion, and registry metadata remain
   planning inputs only.
 
+Phase 37 routes PrusaSlicer baseline review through `packages/prusa-baseline`;
+that package is a baseline/checklist gate only. Prusa fixture files remain Phase
+38 scope, and executable parity/status publication remains Phase 40 scope.
+
 ## Scope Now vs Deferred
 
 - Current verified scope now includes the preferred Rust-backed launcher slice,

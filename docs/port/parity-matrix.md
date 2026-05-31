@@ -37,3 +37,6 @@ parity, and fixture rules.
   `//packages/parity:*_parity` evidence command.
 - Do not infer fork runtime support from source pins, inventories, templates,
   checklist completion, or flavor registry metadata.
+- `packages/prusa-baseline` is the Phase 37 PrusaSlicer baseline/checklist gate.
+  Its records do not create Prusa runtime support, executable fork parity, fork
+  status rows, or Prusa fixture files.

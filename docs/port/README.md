@@ -187,6 +187,20 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   behavior, fork release builds, or support for online/cloud integrations,
   profile auto-update execution, credentials, or non-free plugin ingestion.
 
+## Current Prusa Baseline Gate State
+
+- `packages/prusa-baseline` owns the Phase 37 PrusaSlicer baseline and checklist
+  gate for the narrow v1.10 profile schema/config evidence slice.
+- Run `bazel run //packages/prusa-baseline:verify` to check the recorded
+  `version_2.9.5` source pin, peeled commit
+  `9a583bd438b195856f3bcf7ea99b69ba4003a961`, and
+  `prusaslicer.profile-schema` checklist gate.
+- Phase 37 verification does not prove Prusa runtime support.
+- Phase 37 verification does not prove executable fork parity.
+- Phase 37 creates no Prusa fixture files, fork parity status rows, executable
+  Prusa parity targets, upstream source imports, runtime fork support, GUI
+  support, sync automation, or fork release packaging.
+
 ## v1.9 Fork Parity Deferrals
 
 Phase 36 keeps the complete v1.9 fork-parity deferral list here so package

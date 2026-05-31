@@ -23,6 +23,7 @@
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
 | `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
+| `packages/prusa-baseline` | Phase 37 PrusaSlicer baseline and checklist gate package for the narrow v1.10 profile schema/config evidence slice |
 
 ## Notes
 
@@ -96,3 +97,8 @@
   [fork-parity deferral](./README.md#v19-fork-parity-deferrals) block instead
   of duplicating the complete v1.9 deferral list. `bazel run //packages/fork-templates:verify` checks template wording only; template
   verification does not prove fork parity.
+- Phase 37 adds `packages/prusa-baseline`, records the accepted Prusa baseline
+  `version_2.9.5` at `9a583bd438b195856f3bcf7ea99b69ba4003a961`, records the
+  `prusaslicer.profile-schema` checklist gate, and keeps fixtures, parity
+  status rows, executable parity commands, runtime fork support, GUI support,
+  sync automation, and fork release packaging out of Phase 37.
