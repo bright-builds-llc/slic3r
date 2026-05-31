@@ -120,42 +120,39 @@ verify_drift_record() {
 }
 
 verify_checklist_labels() {
-	local label
-	for label in \
-		"Inventory row ID" \
-		"Source pin" \
-		"Candidate Rust module" \
-		"Fixture need" \
-		"Evidence command" \
-		"Docs touched" \
-		"License or security note" \
-		"Deferred scope" \
-		"Reviewer signoff"; do
-		require_text "${checklist_file}" "profile-schema-checklist.md" "| ${label} |"
-	done
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Checklist" "Inventory row ID" "\`prusaslicer.profile-schema\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Checklist" "Source pin" "\`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Checklist" "Candidate Rust module" "\`packages/slic3r-rust\` shared profile/config boundary for Phase 39; exact crate or module name deferred by the roadmap. No Prusa-only Rust workspace and no copied upstream source tree."
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Checklist" "Fixture need" "Planned Phase 38 namespace \`packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/...\`; not created in Phase 37."
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Checklist" "Evidence command" "Planned Phase 40 command \`bazel run //packages/parity:prusaslicer_profile_schema_parity\`; not created in Phase 37."
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Checklist" "Docs touched" "\`docs/port/README.md\`; \`docs/port/package-map.md\`; \`docs/port/migration-guidance.md\`; \`docs/port/parity-matrix.md\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Checklist" "License or security note" "\`AGPL-3.0-only\`; metadata-only-not-legal-review; no network, cloud, credential, profile auto-update, plugin ingestion, or runtime support scope in Phase 37."
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Checklist" "Reviewer signoff" "PENDING - human reviewer name and UTC date required before implementation consumes this gate."
 }
 
 verify_checklist_values() {
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"prusaslicer.profile-schema"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"packages/slic3r-rust"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"resources/profiles/PrusaResearch.ini"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"profile-schema"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"fork-specific"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"medium"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"config;config.persistence"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"future-candidate"
-	require_text "${checklist_file}" "profile-schema-checklist.md" \
-		"PENDING - human reviewer name and UTC date required before implementation consumes this gate."
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Source Row Details" "Source path" "\`resources/profiles/PrusaResearch.ini\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Source Row Details" "Feature surface" "\`profile-schema\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Source Row Details" "Feature category" "\`profile-schema\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Source Row Details" "Ownership" "\`fork-specific\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Source Row Details" "Complexity" "\`medium\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Source Row Details" "Parity dependency" "\`config;config.persistence\`"
+	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
+		"## Source Row Details" "v1.9 decision" "\`future-candidate\`"
 }
 
 verify_non_overclaiming_phrases() {

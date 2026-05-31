@@ -115,6 +115,8 @@ EOF
 Completing this checklist does not prove Prusa
 runtime support or executable fork parity.
 
+## Checklist
+
 | Required Field | Maintainer Entry |
 | --- | --- |
 | Inventory row ID | `prusaslicer.profile-schema` |
@@ -127,12 +129,17 @@ runtime support or executable fork parity.
 | Deferred scope | Prusa project files; STEP import; support generation; arc fitting; wall seam behavior; network/device integration; profile auto-update execution; full fork runtime support; GUI support; fork release builds; sync automation; upstream source imports; Prusa fixtures; executable Prusa parity commands. |
 | Reviewer signoff | PENDING - human reviewer name and UTC date required before implementation consumes this gate. |
 
-resources/profiles/PrusaResearch.ini
-profile-schema
-fork-specific
-medium
-config;config.persistence
-future-candidate
+## Source Row Details
+
+| Field | Value |
+| --- | --- |
+| Source path | `resources/profiles/PrusaResearch.ini` |
+| Feature surface | `profile-schema` |
+| Feature category | `profile-schema` |
+| Ownership | `fork-specific` |
+| Complexity | `medium` |
+| Parity dependency | `config;config.persistence` |
+| v1.9 decision | `future-candidate` |
 EOF
 }
 
@@ -235,6 +242,46 @@ test_missing_checklist_label_fails() {
 	assert_contains "${tmp_dir}/missing-label.err" 'Evidence command'
 }
 
+test_wrong_inventory_row_id_fails_even_when_id_appears_elsewhere() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-inventory-row-id"
+	write_valid_fixture "${dir}"
+	replace_first_line_containing \
+		"${dir}/profile-schema-checklist.md" \
+		"| Inventory row ID | \`prusaslicer.profile-schema\` |" \
+		"| Inventory row ID | \`wrong.inventory\` |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/wrong-inventory-row-id.out" "${tmp_dir}/wrong-inventory-row-id.err"; then
+		fail "wrong inventory row ID fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/wrong-inventory-row-id.err" '^error:'
+	assert_contains "${tmp_dir}/wrong-inventory-row-id.err" 'Inventory row ID'
+	assert_contains "${tmp_dir}/wrong-inventory-row-id.err" 'prusaslicer.profile-schema'
+}
+
+test_wrong_source_path_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-source-path-row"
+	write_valid_fixture "${dir}"
+	replace_first_line_containing \
+		"${dir}/profile-schema-checklist.md" \
+		"| Source path | \`resources/profiles/PrusaResearch.ini\` |" \
+		"| Source path | \`resources/profiles/Wrong.ini\` |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/wrong-source-path-row.out" "${tmp_dir}/wrong-source-path-row.err"; then
+		fail "wrong source path row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/wrong-source-path-row.err" '^error:'
+	assert_contains "${tmp_dir}/wrong-source-path-row.err" 'Source path'
+	assert_contains "${tmp_dir}/wrong-source-path-row.err" 'resources/profiles/PrusaResearch.ini'
+}
+
 test_missing_pending_human_review_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-pending-review"
@@ -312,6 +359,8 @@ test_missing_accepted_tag_fails
 test_missing_peeled_commit_fails
 test_wrong_accepted_tag_row_fails_even_when_tag_appears_elsewhere
 test_missing_checklist_label_fails
+test_wrong_inventory_row_id_fails_even_when_id_appears_elsewhere
+test_wrong_source_path_row_fails
 test_missing_pending_human_review_fails
 test_wrong_reviewer_decision_row_fails
 test_missing_non_overclaiming_phrase_fails
