@@ -10,6 +10,25 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
+## Current Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
+
+**Goal:** Prove the first narrow, executable PrusaSlicer parity slice using the
+v1.9 vendor pins, inventories, contracts, registry, and checklist templates.
+
+**Target features:**
+
+- Reviewer-gated PrusaSlicer source baseline refresh using the v1.9 manual
+  drift protocol
+- Completed checklist coverage for the first Prusa candidate rows, with
+  source pins, fixture needs, evidence command, docs, license/security notes,
+  deferred scope, and reviewer signoff recorded before implementation claims
+- Prusa fork fixture namespace and parity status conventions in the real
+  parity package
+- Rust-backed Prusa profile schema boundary using typed fork/flavor contracts
+  and the shared flavor registry
+- Executable Prusa profile/config parity command with fixtures and docs that
+  distinguish verified evidence from deferred full fork support
+
 ## Last Shipped Milestone: v1.9 Fork Vendor Intake and Module Architecture
 
 **Shipped:** 2026-05-29
@@ -21,9 +40,11 @@ OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
 
 ## Current State
 
-v1.9 has shipped and is archived under `.planning/milestones/`. The live
-planning set is ready for the next milestone cycle, with no active phase
-currently planned.
+v1.10 is starting from the v1.9 fork intake and architecture baseline. The
+milestone is intentionally narrower than a full PrusaSlicer port: it should
+prove the first executable Prusa evidence path end to end before later
+milestones broaden into more Prusa surfaces, Bambu Studio, OrcaSlicer,
+cross-flavor builds, or vendor sync.
 
 v1.9 delivered:
 
@@ -48,8 +69,10 @@ v1.9 delivered:
   refresh, and deferral templates that reserve verified fork status for future
   executable evidence
 
-The next milestone should define executable fork parity scope, starting with
-PrusaSlicer if the existing future roadmap remains valid.
+The first recommended executable slice is Prusa profile schema/config parity
+because it is fork-specific, medium complexity, and can build on the already
+verified config/config-persistence evidence instead of jumping directly to
+high-risk generated-output or network/cloud surfaces.
 
 <details>
 <summary>v1.8 shipped cross-platform release build automation</summary>
@@ -174,16 +197,17 @@ PrusaSlicer if the existing future roadmap remains valid.
 
 ## Next Milestone Goals
 
-- Start the next milestone with fresh requirements using the v1.9 vendor
-  intake, inventory, contract, registry, and template artifacts as inputs.
-- If the existing future roadmap still holds, begin v1.10 with a scoped
-  PrusaSlicer parity port that adds executable evidence before marking any
-  fork behavior verified.
-- Use the v1.9 checklist and fixture/status vocabulary to define future fork
-  fixtures, status rows, evidence commands, docs updates, license/security
-  notes, and reviewer signoff.
-- Keep Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly
-  vendor sync deferred until preceding fork parity evidence exists.
+- Define and execute v1.10 as a PrusaSlicer parity evidence foundation rather
+  than a full PrusaSlicer runtime port.
+- Use the v1.9 vendor source registry, Prusa inventory, typed contracts,
+  flavor registry, checklist template, fixture vocabulary, and drift protocol
+  as required inputs.
+- Establish the first real fork fixture/status conventions and executable
+  Prusa parity command before marking any Prusa behavior verified.
+- Keep generated-output features, STEP import, support generation, arc fitting,
+  wall seam, network/device integration, Bambu Studio, OrcaSlicer,
+  cross-flavor builds, and vendor sync deferred until the evidence path is
+  proven.
 
 ## Requirements
 
@@ -262,13 +286,14 @@ PrusaSlicer if the existing future roadmap remains valid.
 
 ### Active
 
-- [ ] Define the next milestone requirements from the shipped v1.9 vendor
-  source registry, inventories, typed contracts, flavor registry, and fork
-  parity templates.
-- [ ] Define executable fork parity evidence, fixture namespaces, status rows,
-  and reviewer signoff before marking any fork behavior verified.
-- [ ] Decide whether PrusaSlicer remains the first fork parity port for v1.10
-  before planning Bambu Studio, OrcaSlicer, cross-flavor builds, or vendor sync.
+- [ ] v1.10 requirements define a reviewer-gated PrusaSlicer source baseline
+  refresh and checklist record before implementation claims.
+- [ ] v1.10 requirements define fork fixture namespace and parity status
+  conventions that can carry real Prusa executable evidence.
+- [ ] v1.10 requirements define a Rust-backed Prusa profile schema/config
+  boundary using typed fork/flavor contracts and shared registry metadata.
+- [ ] v1.10 requirements define an executable Prusa profile/config parity
+  command with fixtures, docs, and non-overclaiming status updates.
 
 ### Out of Scope
 
@@ -283,8 +308,9 @@ PrusaSlicer if the existing future roadmap remains valid.
 - Treating the legacy package as an active feature-development surface — it
   remains the reference implementation except for minimal oracle upkeep
 - Full PrusaSlicer, Bambu Studio, and OrcaSlicer parity ports remain future
-  implementation milestones after v1.9; v1.9 artifacts are planning and
-  architecture inputs, not runtime support.
+  implementation milestones after the v1.10 evidence foundation; v1.9
+  artifacts are planning and architecture inputs, and v1.10 should verify only
+  the narrow Prusa evidence slice it actually implements.
 - Fork-flavor build automation remains future release work after downstream
   parity modules and executable evidence exist.
 - Nightly vendor sync and Codex-assisted merge automation require full fork
@@ -339,6 +365,7 @@ The audience for this work is broad:
 | Keep the flavor registry metadata-only and side-effect free | v1.9 registry data should be inspectable and testable without Git, filesystem, network, process, release, sync, or runtime parsing side effects | ✓ Shipped in Phase 35 |
 | Reserve verified fork status for future executable evidence | Source pins, inventories, docs, and templates are necessary planning inputs but do not prove runtime fork behavior | ✓ Shipped in Phase 36 |
 | Keep drift refresh manual and reviewer-gated until fork modules and fixtures exist | Automated vendor sync is unsafe before stable executable evidence and review boundaries exist | ✓ Shipped in Phase 36 |
+| Start fork implementation with a narrow PrusaSlicer evidence foundation instead of a full fork port | Prusa is the cleanest first downstream fork, and a profile/config slice proves the evidence workflow without high-risk generated-output or network/cloud scope | — Pending in v1.10 |
 
 ## Evolution
 
@@ -361,4 +388,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-29 after v1.9 milestone completion*
+*Last updated: 2026-05-31 after v1.10 milestone start*
