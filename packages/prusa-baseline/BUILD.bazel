@@ -1,0 +1,16 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "README.md",
+    "drift-refresh-record.md",
+    "profile-schema-checklist.md",
+])
+
+filegroup(
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "drift-refresh-record.md",
+        "profile-schema-checklist.md",
+    ],
+)
