@@ -68,7 +68,7 @@ version_2.9.5
 prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961
 bazel run //packages/fork-vendors:verify
 Branch-head data is drift-only observation.
-accepted source pins remain unchanged unless a future reviewed intake update modifies packages/fork-vendors/forks.tsv
+accepted source pins remain unchanged unless a future reviewed intake update modifies packages/fork-vendors/forks.tsv.
 PENDING - human reviewer UTC date required before implementation consumes this gate.
 PENDING - human reviewer name and UTC date required before implementation consumes this gate.
 Reviewer decision
@@ -80,6 +80,9 @@ EOF
 
 	cat >"${dir}/profile-schema-checklist.md" <<'EOF'
 # Prusa Profile Schema Checklist
+
+Completing this checklist does not prove Prusa
+runtime support or executable fork parity.
 
 | Required Field | Maintainer Entry |
 | --- | --- |
@@ -185,7 +188,8 @@ test_missing_pending_human_review_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-pending-review"
 	write_valid_fixture "${dir}"
-	remove_line_containing "${dir}/profile-schema-checklist.md" "PENDING - human reviewer name and UTC date required before implementation consumes this gate."
+	remove_line_containing "${dir}/profile-schema-checklist.md" "| Reviewer signoff |"
+	printf '| Reviewer signoff | REVIEWER OMITTED |\n' >>"${dir}/profile-schema-checklist.md"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/missing-pending-review.out" "${tmp_dir}/missing-pending-review.err"; then
@@ -217,7 +221,10 @@ test_missing_phase37_future_only_wording_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-future-only"
 	write_valid_fixture "${dir}"
-	remove_line_containing "${dir}/profile-schema-checklist.md" "not created in Phase 37"
+	remove_line_containing "${dir}/profile-schema-checklist.md" "| Fixture need |"
+	remove_line_containing "${dir}/profile-schema-checklist.md" "| Evidence command |"
+	printf '| Fixture need | Planned future fixture namespace. |\n' >>"${dir}/profile-schema-checklist.md"
+	printf '| Evidence command | Planned future command. |\n' >>"${dir}/profile-schema-checklist.md"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/missing-future-only.out" "${tmp_dir}/missing-future-only.err"; then

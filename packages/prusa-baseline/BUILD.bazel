@@ -6,11 +6,34 @@ exports_files([
     "profile-schema-checklist.md",
 ])
 
+sh_binary(
+    name = "verify",
+    srcs = ["verify_prusa_baseline.sh"],
+    data = [
+        "README.md",
+        "drift-refresh-record.md",
+        "profile-schema-checklist.md",
+    ],
+    args = [
+        "$(location README.md)",
+        "$(location drift-refresh-record.md)",
+        "$(location profile-schema-checklist.md)",
+    ],
+)
+
+sh_test(
+    name = "verify_prusa_baseline_test",
+    srcs = ["verify_prusa_baseline_test.sh"],
+    data = ["verify_prusa_baseline.sh"],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
         "README.md",
         "drift-refresh-record.md",
         "profile-schema-checklist.md",
+        "verify_prusa_baseline.sh",
+        "verify_prusa_baseline_test.sh",
     ],
 )

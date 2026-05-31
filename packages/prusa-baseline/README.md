@@ -17,9 +17,9 @@ planning inputs only.
 future executable parity evidence required.
 
 This package creates no Prusa fixture files, fork parity status rows,
-executable Prusa parity targets, upstream source imports, vendored fork source
-trees, automatic sync, runtime fork support, GUI support, network/device
-integration, profile auto-update execution, or fork release packaging.
+executable Prusa parity targets, upstream source imports, vendored fork source trees,
+automatic sync, runtime fork support, GUI support, network/device integration,
+profile auto-update execution, or fork release packaging.
 
 ## Records
 
