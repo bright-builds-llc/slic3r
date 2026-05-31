@@ -37,6 +37,24 @@ require_text() {
 	fi
 }
 
+require_section_table_row() {
+	local file="$1"
+	local label="$2"
+	local section="$3"
+	local field="$4"
+	local value="$5"
+	local row="| ${field} | ${value} |"
+
+	if ! awk -v section="${section}" -v row="${row}" '
+		$0 == section { in_section = 1; next }
+		in_section && /^## / { exit }
+		in_section && $0 == row { found = 1; exit }
+		END { exit found ? 0 : 1 }
+	' "${file}"; then
+		error "${label}: missing required table row in ${section}: ${row}"
+	fi
+}
+
 require_count_at_least() {
 	local file="$1"
 	local label="$2"
@@ -52,37 +70,47 @@ require_count_at_least() {
 verify_accepted_baseline() {
 	require_text "${readme_file}" "README.md" \
 		"prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"https://github.com/prusa3d/PrusaSlicer"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"version_2.9.5"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"29bfec81347bd07dc738269d2c010fe4c4a5dc07"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"9a583bd438b195856f3bcf7ea99b69ba4003a961"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"43f3cdb1a6f25ee8627f5f20b9a21f3e62c6ad9b"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Accepted Source Baseline" "Vendor" "\`prusaslicer\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Accepted Source Baseline" "Display name" "\`PrusaSlicer\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Accepted Source Baseline" "Upstream repo" "\`https://github.com/prusa3d/PrusaSlicer\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Accepted Source Baseline" "Selected stable tag" "\`version_2.9.5\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Accepted Source Baseline" "Tag ref SHA" "\`29bfec81347bd07dc738269d2c010fe4c4a5dc07\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Accepted Source Baseline" "Peeled commit" "\`9a583bd438b195856f3bcf7ea99b69ba4003a961\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Accepted Source Baseline" "Recorded observed branch head" "\`43f3cdb1a6f25ee8627f5f20b9a21f3e62c6ad9b\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Accepted Source Baseline" "Source pin" "\`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\`"
 }
 
 verify_drift_record() {
 	require_text "${drift_file}" "drift-refresh-record.md" \
 		"bazel run //packages/fork-vendors:verify"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"Selected stable tag confirmation"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"Peeled commit confirmation"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"Branch drift observation"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"Reviewer decision"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"Reviewer signoff"
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"PENDING - human reviewer UTC date required before implementation consumes this gate."
-	require_text "${drift_file}" "drift-refresh-record.md" \
-		"PENDING - human reviewer name and UTC date required before implementation consumes this gate."
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Review date" "PENDING - human reviewer UTC date required before implementation consumes this gate."
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Vendor" "\`prusaslicer\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Upstream repo" "\`https://github.com/prusa3d/PrusaSlicer\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Selected stable tag" "\`version_2.9.5\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Selected stable tag confirmation" "confirmed by bazel run //packages/fork-vendors:verify during Phase 37 execution"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Peeled commit" "\`9a583bd438b195856f3bcf7ea99b69ba4003a961\`"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Peeled commit confirmation" "confirmed by bazel run //packages/fork-vendors:verify during Phase 37 execution"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Branch drift observation" "none observed during Phase 37 execution"
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Reviewer decision" "PENDING - human reviewer must choose keep accepted source pin, plan future intake update, or defer before implementation consumes this gate."
+	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
+		"## Reviewer Record" "Reviewer signoff" "PENDING - human reviewer name and UTC date required before implementation consumes this gate."
 	require_text "${drift_file}" "drift-refresh-record.md" \
 		"Branch-head data is drift-only observation."
 	require_text "${drift_file}" "drift-refresh-record.md" \

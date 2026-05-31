@@ -41,6 +41,19 @@ remove_line_containing() {
 	mv "${tmp_file}" "${file}"
 }
 
+replace_first_line_containing() {
+	local file="$1"
+	local pattern="$2"
+	local replacement="$3"
+	local tmp_file
+	tmp_file="${file}.tmp"
+	awk -v pattern="${pattern}" -v replacement="${replacement}" '
+		!replaced && index($0, pattern) { print replacement; replaced = 1; next }
+		{ print }
+	' "${file}" >"${tmp_file}"
+	mv "${tmp_file}" "${file}"
+}
+
 write_valid_fixture() {
 	local dir="$1"
 	mkdir -p "${dir}"
@@ -60,22 +73,40 @@ EOF
 	cat >"${dir}/drift-refresh-record.md" <<'EOF'
 # PrusaSlicer Drift-Refresh Record
 
-https://github.com/prusa3d/PrusaSlicer
-version_2.9.5
-29bfec81347bd07dc738269d2c010fe4c4a5dc07
-9a583bd438b195856f3bcf7ea99b69ba4003a961
-43f3cdb1a6f25ee8627f5f20b9a21f3e62c6ad9b
-prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961
 bazel run //packages/fork-vendors:verify
+
+## Accepted Source Baseline
+
+| Field | Maintainer Entry |
+| --- | --- |
+| Vendor | `prusaslicer` |
+| Display name | `PrusaSlicer` |
+| Upstream repo | `https://github.com/prusa3d/PrusaSlicer` |
+| Selected stable tag | `version_2.9.5` |
+| Tag ref SHA | `29bfec81347bd07dc738269d2c010fe4c4a5dc07` |
+| Peeled commit | `9a583bd438b195856f3bcf7ea99b69ba4003a961` |
+| Recorded observed branch head | `43f3cdb1a6f25ee8627f5f20b9a21f3e62c6ad9b` |
+| Source pin | `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` |
+
+## Reviewer Record
+
+| Field | Maintainer Entry |
+| --- | --- |
+| Review date | PENDING - human reviewer UTC date required before implementation consumes this gate. |
+| Vendor | `prusaslicer` |
+| Upstream repo | `https://github.com/prusa3d/PrusaSlicer` |
+| Selected stable tag | `version_2.9.5` |
+| Selected stable tag confirmation | confirmed by bazel run //packages/fork-vendors:verify during Phase 37 execution |
+| Peeled commit | `9a583bd438b195856f3bcf7ea99b69ba4003a961` |
+| Peeled commit confirmation | confirmed by bazel run //packages/fork-vendors:verify during Phase 37 execution |
+| Branch drift observation | none observed during Phase 37 execution |
+| Reviewer decision | PENDING - human reviewer must choose keep accepted source pin, plan future intake update, or defer before implementation consumes this gate. |
+| Reviewer signoff | PENDING - human reviewer name and UTC date required before implementation consumes this gate. |
+
+## Boundary
+
 Branch-head data is drift-only observation.
 accepted source pins remain unchanged unless a future reviewed intake update modifies packages/fork-vendors/forks.tsv.
-PENDING - human reviewer UTC date required before implementation consumes this gate.
-PENDING - human reviewer name and UTC date required before implementation consumes this gate.
-Reviewer decision
-Reviewer signoff
-Selected stable tag confirmation
-Peeled commit confirmation
-Branch drift observation
 EOF
 
 	cat >"${dir}/profile-schema-checklist.md" <<'EOF'
@@ -168,6 +199,26 @@ test_missing_peeled_commit_fails() {
 	assert_contains "${tmp_dir}/missing-commit.err" '9a583bd438b195856f3bcf7ea99b69ba4003a961'
 }
 
+test_wrong_accepted_tag_row_fails_even_when_tag_appears_elsewhere() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-accepted-tag-row"
+	write_valid_fixture "${dir}"
+	replace_first_line_containing \
+		"${dir}/drift-refresh-record.md" \
+		"| Selected stable tag | \`version_2.9.5\` |" \
+		"| Selected stable tag | \`version_2.9.4\` |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/wrong-accepted-tag-row.out" "${tmp_dir}/wrong-accepted-tag-row.err"; then
+		fail "wrong accepted tag row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/wrong-accepted-tag-row.err" '^error:'
+	assert_contains "${tmp_dir}/wrong-accepted-tag-row.err" 'Selected stable tag'
+	assert_contains "${tmp_dir}/wrong-accepted-tag-row.err" 'version_2.9.5'
+}
+
 test_missing_checklist_label_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-label"
@@ -199,6 +250,26 @@ test_missing_pending_human_review_fails() {
 	# Assert
 	assert_contains "${tmp_dir}/missing-pending-review.err" '^error:'
 	assert_contains "${tmp_dir}/missing-pending-review.err" 'PENDING - human reviewer name and UTC date required before implementation consumes this gate'
+}
+
+test_wrong_reviewer_decision_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-reviewer-decision-row"
+	write_valid_fixture "${dir}"
+	replace_first_line_containing \
+		"${dir}/drift-refresh-record.md" \
+		'| Reviewer decision | PENDING - human reviewer must choose keep accepted source pin, plan future intake update, or defer before implementation consumes this gate. |' \
+		'| Reviewer decision | REVIEWER DECISION OMITTED |'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/wrong-reviewer-decision-row.out" "${tmp_dir}/wrong-reviewer-decision-row.err"; then
+		fail "wrong reviewer decision row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/wrong-reviewer-decision-row.err" '^error:'
+	assert_contains "${tmp_dir}/wrong-reviewer-decision-row.err" 'Reviewer decision'
+	assert_contains "${tmp_dir}/wrong-reviewer-decision-row.err" 'PENDING - human reviewer must choose keep accepted source pin'
 }
 
 test_missing_non_overclaiming_phrase_fails() {
@@ -239,8 +310,10 @@ test_missing_phase37_future_only_wording_fails() {
 test_complete_fixture_passes
 test_missing_accepted_tag_fails
 test_missing_peeled_commit_fails
+test_wrong_accepted_tag_row_fails_even_when_tag_appears_elsewhere
 test_missing_checklist_label_fails
 test_missing_pending_human_review_fails
+test_wrong_reviewer_decision_row_fails
 test_missing_non_overclaiming_phrase_fails
 test_missing_phase37_future_only_wording_fails
 
