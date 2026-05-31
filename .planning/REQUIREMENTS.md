@@ -116,26 +116,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PRUSA-01 | TBD | Pending |
-| PRUSA-02 | TBD | Pending |
-| PRUSA-03 | TBD | Pending |
-| EVID-01 | TBD | Pending |
-| EVID-02 | TBD | Pending |
-| EVID-03 | TBD | Pending |
-| PROF-01 | TBD | Pending |
-| PROF-02 | TBD | Pending |
-| PROF-03 | TBD | Pending |
-| PPAR-01 | TBD | Pending |
-| PPAR-02 | TBD | Pending |
-| PPAR-03 | TBD | Pending |
+| PRUSA-01 | Phase 37 | Pending |
+| PRUSA-02 | Phase 37 | Pending |
+| PRUSA-03 | Phase 37 | Pending |
+| EVID-01 | Phase 38 | Pending |
+| EVID-02 | Phase 38 | Pending |
+| EVID-03 | Phase 38 | Pending |
+| PROF-01 | Phase 39 | Pending |
+| PROF-02 | Phase 39 | Pending |
+| PROF-03 | Phase 39 | Pending |
+| PPAR-01 | Phase 40 | Pending |
+| PPAR-02 | Phase 40 | Pending |
+| PPAR-03 | Phase 40 | Pending |
 
 **Coverage:**
 
 - v1 requirements: 12 total
-- Mapped to phases: 0
-- Unmapped: 12
+- Mapped to phases: 12
+- Unmapped: 0
 
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-31*
-*Last updated: 2026-05-31 after v1.10 requirements definition*
+*Last updated: 2026-05-31 after v1.10 roadmap creation*

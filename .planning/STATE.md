@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.10
 milestone_name: PrusaSlicer Parity Evidence Foundation
-current_phase: null
-current_phase_name: null
+current_phase: 37
+current_phase_name: Prusa Baseline and Checklist Gate
 current_plan: null
-status: defining requirements
-stopped_at: Milestone v1.10 started
+status: ready to discuss phase 37
+stopped_at: v1.10 roadmap created; Phase 37 ready for discussion
 last_updated: "2026-05-31T22:19:13Z"
 last_activity: 2026-05-31
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -35,11 +35,11 @@ depend on.
 Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
 Current Phase: not started
 Current Plan: none
-Total Phases: not defined yet
-Total Plans: not defined yet
-Status: Defining requirements
+Total Phases: 4
+Total Plans: 0
+Status: Ready to discuss Phase 37
 Last activity: 2026-05-31
-Last Activity Description: Milestone v1.10 started from the recommended PrusaSlicer parity evidence foundation scope
+Last Activity Description: v1.10 roadmap created; Phase 37 ready for discussion
 
 Progress: [----------] 0%
 
@@ -48,8 +48,16 @@ Progress: [----------] 0%
 **Prior milestone baseline:**
 
 - v1.9 completed 5 phases, 8 plans, and 21 plan tasks.
-- v1.10 starts with no active phases or plans until requirements and roadmap
-  are defined.
+- v1.10 starts with 4 planned phases and no phase plans yet.
+
+**By Phase:**
+
+| Phase | Plans | Status | Completed |
+|-------|-------|--------|-----------|
+| 37. Prusa Baseline and Checklist Gate | 0/TBD | Not Started | - |
+| 38. Prusa Fixture and Status Evidence Surface | 0/TBD | Not Started | - |
+| 39. Rust Prusa Profile Boundary | 0/TBD | Not Started | - |
+| 40. Executable Prusa Profile Parity | 0/TBD | Not Started | - |
 
 ## Accumulated Context
 
@@ -89,5 +97,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-05-31T22:19:13Z
-Stopped at: Milestone v1.10 started; requirements next
+Stopped at: v1.10 roadmap created; Phase 37 ready for discussion
 Resume file: None
