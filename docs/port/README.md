@@ -220,6 +220,25 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
 - Phase 39 creates Rust parsing; Phase 40 creates executable parity evidence and any verified status publication.
 - Phase 38 adds no Rust parsing, no executable Prusa parity command, no Prusa status row, no upstream source-tree import, no vendor sync automation, no profile auto-update execution, no Bambu Studio fixtures, no OrcaSlicer fixtures, no network/cloud/credential fixtures, no non-free plugin fixtures, no GUI support, and no fork release packaging.
 
+## Current Prusa Rust Boundary State
+
+- Phase 39 creates parser/metadata readiness only through
+  `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
+  `prusa_profile_schema_metadata`.
+- The Rust boundary traces `prusaslicer.profile-schema` to
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
+  source path `resources/profiles/PrusaResearch.ini`, fixture path
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
+  checklist path `packages/prusa-baseline/profile-schema-checklist.md`, and
+  checklist status `future-candidate`.
+- Phase 40 owns
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity` and any
+  `packages/parity/status.tsv` row for `fork.prusaslicer.profile-schema`.
+- Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
+- Phase 39 creates no full PrusaSlicer runtime support, GUI support,
+  network/device/cloud/credential behavior, profile auto-update execution,
+  non-free plugin ingestion, vendor sync automation, or fork release packaging.
+
 ## v1.9 Fork Parity Deferrals
 
 Phase 36 keeps the complete v1.9 fork-parity deferral list here so package

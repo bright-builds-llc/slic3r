@@ -44,7 +44,18 @@ checked-in status rows:
 
 ## Future Fork Status Rows
 
-Phase 38 does not add a Prusa row to packages/parity/status.tsv.
+Phase 39 documents parser/metadata readiness for `prusaslicer.profile-schema`
+through `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
+`prusa_profile_schema_metadata`; it does not add a Prusa row to
+`packages/parity/status.tsv`.
+
+That Rust boundary traces to
+`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
+source path `resources/profiles/PrusaResearch.ini`, fixture path
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
+checklist path `packages/prusa-baseline/profile-schema-checklist.md`, and
+checklist status `future-candidate`.
+
 The docs-only token `fork.prusaslicer.profile-schema` is reserved for the
 future Prusa profile/config evidence slice.
 
@@ -56,7 +67,10 @@ A fork row may become `verified` only when maintainers can rerun a real
 `fork.prusaslicer.profile-schema` cannot be marked `verified` until a
 rerunnable `bazel run //packages/parity:prusaslicer_profile_schema_parity`
 command exists and passes in Phase 40.
+Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
 
 Source pins, inventories, checklist records, flavor metadata, and static
 fixtures are planning inputs only. They do not prove full PrusaSlicer support,
-fork runtime support, or status evidence by themselves.
+fork runtime support, GUI support, network/device/cloud/credential behavior,
+profile auto-update execution, non-free plugin ingestion, vendor sync
+automation, fork release packaging, or status evidence by themselves.

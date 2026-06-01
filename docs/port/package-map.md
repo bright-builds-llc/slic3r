@@ -108,3 +108,14 @@
   `//packages/parity-fixtures:verify_prusa_profile_schema_fixture`. The status
   token `fork.prusaslicer.profile-schema` is reserved for Phase 40, and
   packages/parity/status.tsv remains unchanged in Phase 38.
+- Phase 39 adds the Rust parser/metadata boundary
+  `slic3r_flavors::prusa_profile` with `parse_prusa_profile_bundle` and
+  `prusa_profile_schema_metadata` for `prusaslicer.profile-schema`. It traces
+  the accepted source
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
+  `resources/profiles/PrusaResearch.ini`,
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
+  `packages/prusa-baseline/profile-schema-checklist.md`, and
+  `future-candidate` status. Phase 40 still owns
+  `//packages/parity:prusaslicer_profile_schema_parity` and any
+  `packages/parity/status.tsv` publication.

@@ -77,8 +77,17 @@ boundaries.
   `//packages/parity:*_parity` evidence command.
 - `fork.prusaslicer.profile-schema` is reserved for Phase 40 only and requires
   `bazel run //packages/parity:prusaslicer_profile_schema_parity`.
+- Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
 - `packages/parity/status.tsv` must remain free of Prusa profile-schema rows
   until that command exists and passes.
+- Phase 39 creates parser/metadata readiness only through
+  `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
+  `prusa_profile_schema_metadata`. It traces `prusaslicer.profile-schema` to
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
+  source path `resources/profiles/PrusaResearch.ini`, fixture path
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
+  checklist path `packages/prusa-baseline/profile-schema-checklist.md`, and
+  checklist status `future-candidate`.
 - Future fork status requires executable parity evidence. Source pins,
   inventories, templates, checklist completion, and registry metadata remain
   planning inputs only.
@@ -105,6 +114,9 @@ Phase 40 creates executable parity/status publication.
 - Deferred to later phases:
   - broader CLI behavior beyond the verified slice
   - GUI replacement work
+  - full PrusaSlicer runtime support, network/device/cloud/credential behavior,
+    profile auto-update execution, non-free plugin ingestion, vendor sync
+    automation, and fork release packaging
   - release-grade package formats such as AppImage, MSI, and DMG
   - installers, signing, notarization, native/cross-compiled release binaries,
     broad bundled dependency layout, downstream fork work, fork-flavor builds,

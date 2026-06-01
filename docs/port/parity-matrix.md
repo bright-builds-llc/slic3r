@@ -44,3 +44,18 @@ parity, and fixture rules.
   Static fixtures and source pins do not create full PrusaSlicer support or
   `verified` status, and the checked-in status table has no Prusa row in
   Phase 38.
+- Phase 39 adds parser/metadata readiness only through
+  `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
+  `prusa_profile_schema_metadata` for `prusaslicer.profile-schema`. The
+  boundary traces to
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
+  `resources/profiles/PrusaResearch.ini`,
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
+  `packages/prusa-baseline/profile-schema-checklist.md`, and
+  `future-candidate` status.
+- Phase 40 owns
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity` and any
+  `packages/parity/status.tsv` row for `fork.prusaslicer.profile-schema`.
+  Phase 39 does not prove full PrusaSlicer runtime support, GUI support,
+  network/device/cloud/credential behavior, profile auto-update execution,
+  non-free plugin ingestion, vendor sync automation, or fork release packaging.
