@@ -70,7 +70,7 @@ surfaces, fork release builds, Bambu Studio, OrcaSlicer, and vendor sync.
   refresh the accepted Prusa source baseline manually, record reviewer-gated
   checklist decisions, and lock the narrow v1.10 scope before implementation.
 
-- [ ] **Phase 38: Prusa Fixture and Status Evidence Surface** - Maintainers can
+- [x] **Phase 38: Prusa Fixture and Status Evidence Surface** - Maintainers can (completed 2026-06-01)
   inspect Prusa profile/config fixtures, fixture update rules, and status
   vocabulary that reserve verified claims for executable evidence.
 
@@ -135,7 +135,7 @@ profile/config evidence before Rust parsing or parity commands rely on it.
 
 Plans:
 
-- [ ] 38-01-PLAN.md — Create the static Prusa profile-schema fixture bundle,
+- [x] 38-01-PLAN.md — Create the static Prusa profile-schema fixture bundle,
   provenance manifest, Bazel verifier, failure-mode tests, and docs/status
   vocabulary guards without publishing a Prusa status row.
 
@@ -207,7 +207,7 @@ Phases execute in numeric order: 37 -> 38 -> 39 -> 40
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 37. Prusa Baseline and Checklist Gate | 1/1 | Complete    | 2026-06-01 |
-| 38. Prusa Fixture and Status Evidence Surface | 0/TBD | Not Started | - |
+| 38. Prusa Fixture and Status Evidence Surface | 1/1 | Complete    | 2026-06-01 |
 | 39. Rust Prusa Profile Boundary | 0/TBD | Not Started | - |
 | 40. Executable Prusa Profile Parity | 0/TBD | Not Started | - |
 
