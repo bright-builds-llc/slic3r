@@ -1,3 +1,18 @@
+use slic3r_contracts::VendorSourceRef;
+
+pub(crate) const PRUSA_PROFILE_SCHEMA_INVENTORY_ID: &str = "prusaslicer.profile-schema";
+pub(crate) const PRUSA_PROFILE_SCHEMA_VENDOR_ID: &str = "prusaslicer";
+pub(crate) const PRUSA_PROFILE_SCHEMA_FLAVOR_DISPLAY: &str = "PrusaSlicer";
+pub(crate) const PRUSA_PROFILE_SCHEMA_SOURCE_REF: VendorSourceRef =
+    VendorSourceRef::prusa_slicer_version_2_9_5();
+pub(crate) const PRUSA_PROFILE_SCHEMA_SOURCE_PATH: &str = "resources/profiles/PrusaResearch.ini";
+pub(crate) const PRUSA_PROFILE_SCHEMA_FIXTURE_PATH: &str =
+    "packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini";
+pub(crate) const PRUSA_PROFILE_SCHEMA_CHECKLIST_PATH: &str =
+    "packages/prusa-baseline/profile-schema-checklist.md";
+pub(crate) const PRUSA_PROFILE_SCHEMA_RESERVED_STATUS_TOKEN: &str =
+    "fork.prusaslicer.profile-schema";
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PrusaProfileBundle {
     pub sections: Vec<PrusaProfileSection>,
@@ -47,7 +62,32 @@ pub enum PrusaProfileParseError {
     EmptyKey { line_number: usize },
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaProfileSchemaMetadata {
+    pub inventory_id: &'static str,
+    pub vendor_id: &'static str,
+    pub flavor_display: &'static str,
+    pub source_ref: VendorSourceRef,
+    pub source_path: &'static str,
+    pub fixture_path: &'static str,
+    pub checklist_path: &'static str,
+    pub reserved_future_status_token: &'static str,
+}
+
 pub type PrusaProfileParseResult = Result<PrusaProfileBundle, PrusaProfileParseError>;
+
+pub const fn prusa_profile_schema_metadata() -> PrusaProfileSchemaMetadata {
+    PrusaProfileSchemaMetadata {
+        inventory_id: PRUSA_PROFILE_SCHEMA_INVENTORY_ID,
+        vendor_id: PRUSA_PROFILE_SCHEMA_VENDOR_ID,
+        flavor_display: PRUSA_PROFILE_SCHEMA_FLAVOR_DISPLAY,
+        source_ref: PRUSA_PROFILE_SCHEMA_SOURCE_REF,
+        source_path: PRUSA_PROFILE_SCHEMA_SOURCE_PATH,
+        fixture_path: PRUSA_PROFILE_SCHEMA_FIXTURE_PATH,
+        checklist_path: PRUSA_PROFILE_SCHEMA_CHECKLIST_PATH,
+        reserved_future_status_token: PRUSA_PROFILE_SCHEMA_RESERVED_STATUS_TOKEN,
+    }
+}
 
 pub fn parse_prusa_profile_bundle(input: &str) -> PrusaProfileParseResult {
     let mut sections = Vec::new();

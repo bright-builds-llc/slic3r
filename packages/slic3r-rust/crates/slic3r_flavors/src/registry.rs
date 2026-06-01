@@ -1,3 +1,7 @@
+use crate::prusa_profile::{
+    PRUSA_PROFILE_SCHEMA_INVENTORY_ID, PRUSA_PROFILE_SCHEMA_SOURCE_PATH,
+    PRUSA_PROFILE_SCHEMA_SOURCE_REF,
+};
 use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface, VendorSourceRef};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -33,6 +37,8 @@ static BASE_CORE_PARITY: [ParitySurface; 2] =
     [ParitySurface::cli_version(), ParitySurface::cli_help()];
 static FILE_FORMATS_PARITY: [ParitySurface; 1] = [ParitySurface::file_formats()];
 static GENERATED_OUTPUTS_PARITY: [ParitySurface; 1] = [ParitySurface::generated_outputs()];
+static PRUSA_PROFILE_SCHEMA_PARITY: [ParitySurface; 2] =
+    [ParitySurface::config(), ParitySurface::config_persistence()];
 
 static PRUSA_BASE_CORE_PATHS: [&str; 1] = ["src/libslic3r"];
 static BAMBU_BASE_CORE_PATHS: [&str; 1] = ["src/libslic3r"];
@@ -80,18 +86,40 @@ static PRUSA_PROJECT_FILE_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance 
     ownership: FeatureOrigin::SharedDownstream,
 }];
 
-static PRUSA_CAPABILITIES: [FlavorCapability; 1] = [FlavorCapability {
-    flavor_id: FlavorId::PrusaSlicer,
-    capability_id: "prusaslicer.project-file",
-    feature_surface: "project-file",
-    feature_category: "project-file",
-    origin: FeatureOrigin::SharedDownstream,
-    parity_dependencies: &FILE_FORMATS_PARITY,
-    checklist_status: ChecklistStatus::FutureCandidate,
-    provenance: &PRUSA_PROJECT_FILE_PROVENANCE,
-    caution_flags: &[],
-    future_parity_notes: "Source-observed project file planning row; future parity requires fixture-backed load/save evidence.",
+static PRUSA_PROFILE_SCHEMA_PATHS: [&str; 1] = [PRUSA_PROFILE_SCHEMA_SOURCE_PATH];
+static PRUSA_PROFILE_SCHEMA_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
+    inventory_id: PRUSA_PROFILE_SCHEMA_INVENTORY_ID,
+    vendor_source: PRUSA_PROFILE_SCHEMA_SOURCE_REF,
+    source_paths: &PRUSA_PROFILE_SCHEMA_PATHS,
+    ownership: FeatureOrigin::ForkSpecific,
 }];
+
+static PRUSA_CAPABILITIES: [FlavorCapability; 2] = [
+    FlavorCapability {
+        flavor_id: FlavorId::PrusaSlicer,
+        capability_id: "prusaslicer.project-file",
+        feature_surface: "project-file",
+        feature_category: "project-file",
+        origin: FeatureOrigin::SharedDownstream,
+        parity_dependencies: &FILE_FORMATS_PARITY,
+        checklist_status: ChecklistStatus::FutureCandidate,
+        provenance: &PRUSA_PROJECT_FILE_PROVENANCE,
+        caution_flags: &[],
+        future_parity_notes: "Source-observed project file planning row; future parity requires fixture-backed load/save evidence.",
+    },
+    FlavorCapability {
+        flavor_id: FlavorId::PrusaSlicer,
+        capability_id: "prusaslicer.profile-schema",
+        feature_surface: "profile-schema",
+        feature_category: "profile-schema",
+        origin: FeatureOrigin::ForkSpecific,
+        parity_dependencies: &PRUSA_PROFILE_SCHEMA_PARITY,
+        checklist_status: ChecklistStatus::FutureCandidate,
+        provenance: &PRUSA_PROFILE_SCHEMA_PROVENANCE,
+        caution_flags: &[],
+        future_parity_notes: "Prusa profile schema planning row; future parity requires loader fixtures and config comparison evidence.",
+    },
+];
 
 static BAMBU_PROJECT_FILE_PATHS: [&str; 1] = ["src/libslic3r/Format/bbs_3mf.cpp"];
 static BAMBU_PROJECT_FILE_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {

@@ -6,8 +6,9 @@ pub mod registry;
 
 pub use prusa_profile::{
     PrusaProfileBundle, PrusaProfileEntry, PrusaProfileKey, PrusaProfileParseError,
-    PrusaProfileSection, PrusaProfileSectionKind, PrusaProfileSectionName, PrusaProfileValue,
-    parse_prusa_profile_bundle,
+    PrusaProfileParseResult, PrusaProfileSchemaMetadata, PrusaProfileSection,
+    PrusaProfileSectionKind, PrusaProfileSectionName, PrusaProfileValue,
+    parse_prusa_profile_bundle, prusa_profile_schema_metadata,
 };
 pub use registry::{
     FlavorCapability, FlavorProvenance, FlavorRegistryEntry, all_capabilities, all_flavors,

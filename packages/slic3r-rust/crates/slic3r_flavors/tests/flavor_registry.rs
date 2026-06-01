@@ -1,7 +1,10 @@
-use slic3r_contracts::{ChecklistStatus, DownstreamFork, FeatureOrigin, FlavorId, VendorSourceRef};
+use slic3r_contracts::{
+    ChecklistStatus, DownstreamFork, FeatureOrigin, FlavorId, ParitySurface, VendorSourceRef,
+};
 use slic3r_flavors::{
     FlavorCapability, FlavorProvenance, FlavorRegistryEntry, all_capabilities, all_flavors,
     capabilities_by_checklist_status, capabilities_by_origin, maybe_flavor,
+    prusa_profile_schema_metadata,
 };
 
 #[test]
@@ -230,6 +233,86 @@ fn shared_downstream_filter_returns_source_observed_project_file_row() {
 }
 
 #[test]
+fn prusa_profile_schema_registry_row_traces_to_source_and_parity_dependencies() {
+    // Arrange
+    let maybe_profile_schema = maybe_capability("prusaslicer.profile-schema");
+    let expected_dependencies = [ParitySurface::config(), ParitySurface::config_persistence()];
+
+    // Act
+    let profile_schema = match maybe_profile_schema {
+        Some(capability) => capability,
+        None => {
+            assert!(
+                maybe_profile_schema.is_some(),
+                "prusaslicer.profile-schema capability missing"
+            );
+            return;
+        }
+    };
+
+    // Assert
+    assert_eq!(profile_schema.flavor_id, FlavorId::PrusaSlicer);
+    assert_eq!(profile_schema.capability_id, "prusaslicer.profile-schema");
+    assert_eq!(profile_schema.feature_surface, "profile-schema");
+    assert_eq!(profile_schema.feature_category, "profile-schema");
+    assert_eq!(profile_schema.origin, FeatureOrigin::ForkSpecific);
+    assert_eq!(
+        profile_schema.checklist_status,
+        ChecklistStatus::FutureCandidate
+    );
+    assert_eq!(profile_schema.parity_dependencies, expected_dependencies);
+    assert_eq!(profile_schema.provenance.len(), 1);
+    assert_eq!(
+        profile_schema.provenance[0].inventory_id,
+        "prusaslicer.profile-schema"
+    );
+    assert_eq!(
+        profile_schema.provenance[0].vendor_source,
+        VendorSourceRef::prusa_slicer_version_2_9_5()
+    );
+    assert_eq!(
+        profile_schema.provenance[0].vendor_source.as_str(),
+        "prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
+    );
+    assert_eq!(
+        profile_schema.provenance[0].source_paths,
+        ["resources/profiles/PrusaResearch.ini"]
+    );
+    assert_eq!(
+        profile_schema.provenance[0].ownership,
+        FeatureOrigin::ForkSpecific
+    );
+}
+
+#[test]
+fn prusa_profile_schema_metadata_exposes_fixture_checklist_and_reserved_status() {
+    // Arrange
+    let metadata = prusa_profile_schema_metadata();
+
+    // Act
+    let source_ref = metadata.source_ref;
+
+    // Assert
+    assert_eq!(metadata.inventory_id, "prusaslicer.profile-schema");
+    assert_eq!(metadata.vendor_id, "prusaslicer");
+    assert_eq!(metadata.flavor_display, "PrusaSlicer");
+    assert_eq!(source_ref, VendorSourceRef::prusa_slicer_version_2_9_5());
+    assert_eq!(metadata.source_path, "resources/profiles/PrusaResearch.ini");
+    assert_eq!(
+        metadata.fixture_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini"
+    );
+    assert_eq!(
+        metadata.checklist_path,
+        "packages/prusa-baseline/profile-schema-checklist.md"
+    );
+    assert_eq!(
+        metadata.reserved_future_status_token,
+        "fork.prusaslicer.profile-schema"
+    );
+}
+
+#[test]
 fn deferred_filter_returns_bambu_network_device_as_cautioned_metadata() {
     // Arrange
     let status = ChecklistStatus::Deferred;
@@ -273,24 +356,41 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
     let risky_words = [
         joined_word("veri", "fied"),
         joined_word("supp", "orted"),
+        "runtime".to_owned(),
         joined_word("dis", "patch"),
         joined_word("rel", "ease"),
+        "executable".to_owned(),
     ];
+    let profile_schema_metadata = prusa_profile_schema_metadata();
     let public_helper_names = [
         "all_flavors",
         "maybe_flavor",
         "all_capabilities",
         "capabilities_by_origin",
         "capabilities_by_checklist_status",
+        "prusa_profile_schema_metadata",
+    ];
+    let metadata_values = [
+        profile_schema_metadata.inventory_id,
+        profile_schema_metadata.vendor_id,
+        profile_schema_metadata.flavor_display,
+        profile_schema_metadata.source_path,
+        profile_schema_metadata.fixture_path,
+        profile_schema_metadata.checklist_path,
+        profile_schema_metadata.reserved_future_status_token,
     ];
 
     // Act
     let maybe_risky_helper = public_helper_names
         .iter()
         .find(|helper_name| risky_words.iter().any(|word| helper_name.contains(word)));
+    let maybe_risky_metadata_value = metadata_values
+        .iter()
+        .find(|metadata_value| risky_words.iter().any(|word| metadata_value.contains(word)));
 
     // Assert
     assert!(maybe_risky_helper.is_none());
+    assert!(maybe_risky_metadata_value.is_none());
 }
 
 fn maybe_capability(capability_id: &str) -> Option<&'static FlavorCapability> {
