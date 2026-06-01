@@ -466,17 +466,17 @@ fn parses_checked_in_prusa_research_fixture_without_side_effects() {
 | A2 | The GSD security template's legacy ASVS category labels should be kept for planner compatibility even though OWASP ASVS 5.0.0 recommends version-qualified numeric identifiers. [ASSUMED: GSD template compatibility] | Security Domain / Metadata | Low; affects wording only, not parser controls. |
 | A3 | Research validity through 2026-07-01 is an estimate for local architecture and fixture findings. [ASSUMED] | Metadata | Low; planner can re-run targeted version checks if implementation happens later. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Checklist signoff wording remains pending**
+1. **RESOLVED - Checklist signoff wording remains pending**
    - What we know: `packages/prusa-baseline/profile-schema-checklist.md` still says reviewer signoff is `PENDING - human reviewer name and UTC date required before implementation consumes this gate`. [VERIFIED: profile-schema-checklist.md]
-   - What's unclear: Phase 39 context is marked ready in yolo mode, so the planner needs to decide whether this pending wording is acceptable for implementation or should become a documentation/task item. [VERIFIED: 39-CONTEXT.md frontmatter; VERIFIED: STATE.md]
-   - Recommendation: Do not block research; include a planning task or verification note to preserve or resolve the signoff wording according to current project process. [VERIFIED: profile-schema-checklist.md; VERIFIED: 39-CONTEXT.md frontmatter]
+   - Resolution: The pending human-review field is acceptable for Phase 39 implementation because Phase 39 consumes the checked-in baseline, inventory, and fixture provenance as planning/evidence inputs, not as maintainer signoff for verified Prusa runtime support. The Phase 39 plans preserve this boundary by keeping executable parity evidence, `packages/parity/status.tsv` publication, and the Phase 40 parity command out of scope. [VERIFIED: 39-CONTEXT.md D-03, D-10, D-14, D-15; VERIFIED: 39-01-PLAN.md threat model and verification; VERIFIED: 39-02-PLAN.md scope guard]
+   - Planning impact: No extra blocker task is required before execution. Documentation and verification tasks must continue to state that full PrusaSlicer runtime support and verified status publication remain deferred until Phase 40 executable evidence. [VERIFIED: 39-02-PLAN.md Task 1 and Task 2]
 
-2. **Exact metadata field placement**
+2. **RESOLVED - Exact metadata field placement**
    - What we know: Existing `FlavorCapability` has checklist status and provenance but lacks fixture path, checklist path, or future status token fields. [VERIFIED: registry.rs]
-   - What's unclear: The implementation can either extend `FlavorCapability` globally or add adjacent Prusa profile-schema metadata. [VERIFIED: 39-CONTEXT.md "the agent's Discretion"]
-   - Recommendation: Prefer adjacent `PrusaProfileSchemaMetadata` unless multiple capabilities need fixture/checklist/future-token fields in this phase. [VERIFIED: registry.rs; VERIFIED: 39-CONTEXT.md "the agent's Discretion"]
+   - Resolution: Use adjacent Prusa profile-schema metadata for fixture path, checklist path, inventory id, vendor id, flavor display, and reserved future status token instead of adding fields to every `FlavorCapability`. This keeps the existing registry type focused on shared capability metadata while still satisfying Phase 39 traceability. [VERIFIED: 39-CONTEXT.md D-08 through D-10; VERIFIED: 39-01-PLAN.md Task 2]
+   - Planning impact: Plan 39-01 explicitly requires `PrusaProfileSchemaMetadata` and `prusa_profile_schema_metadata()` in `src/prusa_profile.rs`, plus registry tests for exact provenance and no-overclaiming. [VERIFIED: 39-01-PLAN.md Task 2]
 
 ## Environment Availability
 
