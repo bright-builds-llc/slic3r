@@ -157,7 +157,14 @@ typed, side-effect-free Rust domain values that trace back to source metadata.
 1. Developer can confirm the new Rust logic performs no Git, network,
    filesystem discovery, process, release, or vendor sync operations.
 
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 39-01-PLAN.md — Create the pure Rust Prusa profile parser, metadata
+  traceability, and Cargo/Bazel verification wiring.
+- [ ] 39-02-PLAN.md — Document the Phase 39 parser boundary while preserving
+  Phase 40 parity/status deferrals.
 
 ### Phase 40: Executable Prusa Profile Parity
 
