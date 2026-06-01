@@ -114,6 +114,77 @@ verify_provenance() {
 		"no-bambu-no-orca-no-network-no-cloud-no-credentials-no-profile-auto-update-no-non-free-plugin-no-runtime-no-gui-no-sync-no-release"; do
 		require_text "${provenance_file}" "fixture-provenance.tsv" "${required_text}"
 	done
+
+	verify_provenance_row \
+		"PrusaResearch.ini" \
+		"resources/profiles/PrusaResearch.ini" \
+		"https://raw.githubusercontent.com/prusa3d/PrusaSlicer/9a583bd438b195856f3bcf7ea99b69ba4003a961/resources/profiles/PrusaResearch.ini" \
+		"1543688" \
+		"a6155d92471d3b0ae11bed051bb04a4c1157fd6b05fef22416eafd12bce9c839" \
+		"lf" \
+		"raw-vendor-bundle-input"
+	verify_provenance_row \
+		"PrusaResearch.idx" \
+		"resources/profiles/PrusaResearch.idx" \
+		"https://raw.githubusercontent.com/prusa3d/PrusaSlicer/9a583bd438b195856f3bcf7ea99b69ba4003a961/resources/profiles/PrusaResearch.idx" \
+		"31543" \
+		"65fc21319b2954e5df36040e5a581a313fb409ad9337c2007b1d0f9f2b2352f1" \
+		"crlf" \
+		"raw-vendor-bundle-index"
+}
+
+verify_provenance_row() {
+	local fixture_id="$1"
+	local source_path="$2"
+	local upstream_url="$3"
+	local bytes="$4"
+	local sha256="$5"
+	local line_endings="$6"
+	local role="$7"
+
+	awk -F '\t' \
+		-v fixture_id="${fixture_id}" \
+		-v vendor_id="prusaslicer" \
+		-v inventory_id="prusaslicer.profile-schema" \
+		-v source_ref="prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961" \
+		-v accepted_tag="version_2.9.5" \
+		-v peeled_commit="9a583bd438b195856f3bcf7ea99b69ba4003a961" \
+		-v source_path="${source_path}" \
+		-v upstream_url="${upstream_url}" \
+		-v bytes="${bytes}" \
+		-v sha256="${sha256}" \
+		-v line_endings="${line_endings}" \
+		-v role="${role}" \
+		-v phase37_checklist="packages/prusa-baseline/profile-schema-checklist.md" \
+		-v update_route="reviewed-intake-change-updates-packages/fork-vendors/forks.tsv-and-prusa-baseline-gate" \
+		-v status_scope="Phase-38-fixture-status-preparation-only" \
+		-v exclusions="no-bambu-no-orca-no-network-no-cloud-no-credentials-no-profile-auto-update-no-non-free-plugin-no-runtime-no-gui-no-sync-no-release" '
+		$1 == fixture_id {
+			found = 1
+			if ($2 != vendor_id ||
+			    $3 != inventory_id ||
+			    $4 != source_ref ||
+			    $5 != accepted_tag ||
+			    $6 != peeled_commit ||
+			    $7 != source_path ||
+			    $8 != upstream_url ||
+			    $9 != bytes ||
+			    $10 != sha256 ||
+			    $11 != line_endings ||
+			    $12 != role ||
+			    $13 != phase37_checklist ||
+			    $14 != update_route ||
+			    $15 != status_scope ||
+			    $16 != exclusions) {
+				exit 2
+			}
+		}
+		END {
+			if (!found) {
+				exit 1
+			}
+		}
+	' "${provenance_file}" || error "fixture-provenance.tsv: invalid row for ${fixture_id}"
 }
 
 verify_scope_wording() {
@@ -147,10 +218,13 @@ verify_forbidden_namespaces() {
 		return
 	fi
 
+	forks_root="$(cd "${forks_root}" && pwd -P)"
 	allowed_namespace="${forks_root}/prusaslicer/prusaslicer.profile-schema"
 
 	while IFS= read -r namespace_path; do
-		lower_path="$(printf '%s' "${namespace_path}" | tr '[:upper:]' '[:lower:]')"
+		namespace_path="$(cd "${namespace_path}" && pwd -P)"
+		relative_path="${namespace_path#"${forks_root}"/}"
+		lower_path="$(printf '%s' "${relative_path}" | tr '[:upper:]' '[:lower:]')"
 		for forbidden_token in \
 			bambustudio \
 			orca \
@@ -173,7 +247,7 @@ verify_forbidden_namespaces() {
 		"${allowed_namespace}" | "${allowed_namespace}"/*) ;;
 		*) error "unexpected Phase 38 fork fixture namespace path: ${namespace_path}" ;;
 		esac
-	done < <(find "${forks_root}" -mindepth 1 -print)
+	done < <(find "${forks_root}" -mindepth 1 -type d -print)
 }
 
 verify_status_not_published() {

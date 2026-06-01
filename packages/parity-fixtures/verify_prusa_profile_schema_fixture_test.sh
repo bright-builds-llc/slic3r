@@ -152,6 +152,28 @@ test_missing_source_ref_fails() {
 	assert_contains "${tmp_dir}/missing-source-ref.err" "prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
 }
 
+test_swapped_provenance_rows_fail() {
+	# Arrange
+	local dir="${tmp_dir}/swapped-provenance"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${dir}/forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv" \
+		"PrusaResearch.ini	prusaslicer" \
+		"PrusaResearch.ini	prusaslicer	prusaslicer.profile-schema	prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961	version_2.9.5	9a583bd438b195856f3bcf7ea99b69ba4003a961	resources/profiles/PrusaResearch.ini	https://raw.githubusercontent.com/prusa3d/PrusaSlicer/9a583bd438b195856f3bcf7ea99b69ba4003a961/resources/profiles/PrusaResearch.ini	31543	65fc21319b2954e5df36040e5a581a313fb409ad9337c2007b1d0f9f2b2352f1	crlf	raw-vendor-bundle-index	packages/prusa-baseline/profile-schema-checklist.md	reviewed-intake-change-updates-packages/fork-vendors/forks.tsv-and-prusa-baseline-gate	Phase-38-fixture-status-preparation-only	no-bambu-no-orca-no-network-no-cloud-no-credentials-no-profile-auto-update-no-non-free-plugin-no-runtime-no-gui-no-sync-no-release"
+	replace_first_line_containing \
+		"${dir}/forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv" \
+		"PrusaResearch.idx	prusaslicer" \
+		"PrusaResearch.idx	prusaslicer	prusaslicer.profile-schema	prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961	version_2.9.5	9a583bd438b195856f3bcf7ea99b69ba4003a961	resources/profiles/PrusaResearch.idx	https://raw.githubusercontent.com/prusa3d/PrusaSlicer/9a583bd438b195856f3bcf7ea99b69ba4003a961/resources/profiles/PrusaResearch.idx	1543688	a6155d92471d3b0ae11bed051bb04a4c1157fd6b05fef22416eafd12bce9c839	lf	raw-vendor-bundle-input	packages/prusa-baseline/profile-schema-checklist.md	reviewed-intake-change-updates-packages/fork-vendors/forks.tsv-and-prusa-baseline-gate	Phase-38-fixture-status-preparation-only	no-bambu-no-orca-no-network-no-cloud-no-credentials-no-profile-auto-update-no-non-free-plugin-no-runtime-no-gui-no-sync-no-release"
+
+	# Act
+	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/swapped-provenance.out" "${tmp_dir}/swapped-provenance.err"; then
+		fail "swapped provenance row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/swapped-provenance.err" "fixture-provenance.tsv: invalid row for PrusaResearch.ini"
+}
+
 test_missing_static_input_boundary_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-static-boundary"
@@ -182,6 +204,21 @@ test_forbidden_bambu_namespace_fails() {
 	assert_contains "${tmp_dir}/forbidden-bambu.err" "bambustudio"
 }
 
+test_parent_directory_forbidden_token_passes() {
+	# Arrange
+	local dir="${tmp_dir}/cloud/valid"
+	write_valid_fixture_copy "${dir}"
+
+	# Act
+	if ! PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/parent-cloud.out" "${tmp_dir}/parent-cloud.err"; then
+		sed -n '1,160p' "${tmp_dir}/parent-cloud.err" >&2
+		fail "parent directory forbidden token caused valid fixture failure"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/parent-cloud.out" "ok: Prusa profile-schema fixture verification passed"
+}
+
 test_status_row_fails() {
 	# Arrange
 	local dir="${tmp_dir}/status-row"
@@ -202,8 +239,10 @@ test_complete_fixture_passes
 test_missing_prusa_research_ini_fails
 test_wrong_ini_checksum_fails
 test_missing_source_ref_fails
+test_swapped_provenance_rows_fail
 test_missing_static_input_boundary_fails
 test_forbidden_bambu_namespace_fails
+test_parent_directory_forbidden_token_passes
 test_status_row_fails
 
 printf 'ok: verify_prusa_profile_schema_fixture_test\n'
