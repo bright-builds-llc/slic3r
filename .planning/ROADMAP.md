@@ -131,7 +131,13 @@ profile/config evidence before Rust parsing or parity commands rely on it.
 1. Maintainer can confirm no Bambu Studio, OrcaSlicer, network, cloud,
    credential, or non-free plugin fixtures were introduced by this milestone.
 
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+
+- [ ] 38-01-PLAN.md — Create the static Prusa profile-schema fixture bundle,
+  provenance manifest, Bazel verifier, failure-mode tests, and docs/status
+  vocabulary guards without publishing a Prusa status row.
 
 ### Phase 39: Rust Prusa Profile Boundary
 
