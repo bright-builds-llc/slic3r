@@ -29,14 +29,14 @@ Requirements for the v1.10 milestone. Each maps to one roadmap phase.
 
 ### Fork Evidence Surfaces
 
-- [ ] **EVID-01**: Maintainer can inspect a Prusa fixture namespace and update
+- [x] **EVID-01**: Maintainer can inspect a Prusa fixture namespace and update
   rules in the parity fixture package for the profile/config evidence slice,
   with no Bambu Studio, OrcaSlicer, network, cloud, credential, or non-free
   plugin fixtures introduced by this milestone.
-- [ ] **EVID-02**: Maintainer can inspect checked-in Prusa profile/config
+- [x] **EVID-02**: Maintainer can inspect checked-in Prusa profile/config
   fixtures that are traceable to the accepted Prusa source pin and are suitable
   for rerunnable executable parity checks.
-- [ ] **EVID-03**: Maintainer can inspect parity status vocabulary or status
+- [x] **EVID-03**: Maintainer can inspect parity status vocabulary or status
   rows that reserve verified Prusa status for the v1.10 executable evidence
   command only, without marking full PrusaSlicer support verified.
 
@@ -119,9 +119,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PRUSA-01 | Phase 37 | Complete |
 | PRUSA-02 | Phase 37 | Complete |
 | PRUSA-03 | Phase 37 | Complete |
-| EVID-01 | Phase 38 | Pending |
-| EVID-02 | Phase 38 | Pending |
-| EVID-03 | Phase 38 | Pending |
+| EVID-01 | Phase 38 | Complete |
+| EVID-02 | Phase 38 | Complete |
+| EVID-03 | Phase 38 | Complete |
 | PROF-01 | Phase 39 | Pending |
 | PROF-02 | Phase 39 | Pending |
 | PROF-03 | Phase 39 | Pending |
@@ -138,4 +138,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-31*
-*Last updated: 2026-05-31 after v1.10 roadmap creation*
+*Last updated: 2026-06-01 after Phase 38 completion*

@@ -40,11 +40,10 @@ OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
 
 ## Current State
 
-v1.10 is starting from the v1.9 fork intake and architecture baseline. The
-milestone is intentionally narrower than a full PrusaSlicer port: it should
-prove the first executable Prusa evidence path end to end before later
-milestones broaden into more Prusa surfaces, Bambu Studio, OrcaSlicer,
-cross-flavor builds, or vendor sync.
+v1.10 has completed the reviewer-gated Prusa baseline and the fixture/status
+evidence surface. The next phase is the Rust Prusa profile boundary, which
+should parse and normalize the checked-in Prusa profile/config fixtures before
+the milestone marks any executable Prusa parity evidence verified.
 
 v1.9 delivered:
 
@@ -283,13 +282,13 @@ high-risk generated-output or network/cloud surfaces.
   fork-specific behavior without forking the Rust codebase wholesale — Phase 35
 - ✓ v1.9 requirements define parity checklist and documentation templates
   for downstream fork work without overclaiming runtime fork support — Phase 36
+- ✓ v1.10 requirements define a reviewer-gated PrusaSlicer source baseline
+  refresh and checklist record before implementation claims — Phase 37
+- ✓ v1.10 requirements define fork fixture namespace and parity status
+  conventions that can carry real Prusa executable evidence — Phase 38
 
 ### Active
 
-- [ ] v1.10 requirements define a reviewer-gated PrusaSlicer source baseline
-  refresh and checklist record before implementation claims.
-- [ ] v1.10 requirements define fork fixture namespace and parity status
-  conventions that can carry real Prusa executable evidence.
 - [ ] v1.10 requirements define a Rust-backed Prusa profile schema/config
   boundary using typed fork/flavor contracts and shared registry metadata.
 - [ ] v1.10 requirements define an executable Prusa profile/config parity
@@ -388,4 +387,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-05-31 after v1.10 milestone start*
+*Last updated: 2026-06-01 after Phase 38 completion*
