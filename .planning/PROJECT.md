@@ -40,10 +40,11 @@ OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
 
 ## Current State
 
-v1.10 has completed the reviewer-gated Prusa baseline and the fixture/status
-evidence surface. The next phase is the Rust Prusa profile boundary, which
-should parse and normalize the checked-in Prusa profile/config fixtures before
-the milestone marks any executable Prusa parity evidence verified.
+v1.10 has completed the reviewer-gated Prusa baseline, the fixture/status
+evidence surface, and the Rust Prusa profile boundary. The next phase is the
+executable Prusa profile/config parity command, which should compare the
+checked-in Prusa fixtures against Rust-backed parsed or normalized output
+before the milestone marks the narrow Prusa evidence slice verified.
 
 v1.9 delivered:
 
@@ -286,11 +287,12 @@ high-risk generated-output or network/cloud surfaces.
   refresh and checklist record before implementation claims — Phase 37
 - ✓ v1.10 requirements define fork fixture namespace and parity status
   conventions that can carry real Prusa executable evidence — Phase 38
+- ✓ v1.10 requirements define a Rust-backed Prusa profile schema/config
+  boundary using typed fork/flavor contracts and shared registry metadata —
+  Phase 39
 
 ### Active
 
-- [ ] v1.10 requirements define a Rust-backed Prusa profile schema/config
-  boundary using typed fork/flavor contracts and shared registry metadata.
 - [ ] v1.10 requirements define an executable Prusa profile/config parity
   command with fixtures, docs, and non-overclaiming status updates.
 
@@ -364,6 +366,7 @@ The audience for this work is broad:
 | Keep the flavor registry metadata-only and side-effect free | v1.9 registry data should be inspectable and testable without Git, filesystem, network, process, release, sync, or runtime parsing side effects | ✓ Shipped in Phase 35 |
 | Reserve verified fork status for future executable evidence | Source pins, inventories, docs, and templates are necessary planning inputs but do not prove runtime fork behavior | ✓ Shipped in Phase 36 |
 | Keep drift refresh manual and reviewer-gated until fork modules and fixtures exist | Automated vendor sync is unsafe before stable executable evidence and review boundaries exist | ✓ Shipped in Phase 36 |
+| Keep the Prusa profile boundary pure and caller-supplied until executable parity owns status publication | Phase 39 needs typed parser and provenance data without Git, network, filesystem discovery, process, release, sync, or premature status-row side effects | ✓ Shipped in Phase 39 |
 | Start fork implementation with a narrow PrusaSlicer evidence foundation instead of a full fork port | Prusa is the cleanest first downstream fork, and a profile/config slice proves the evidence workflow without high-risk generated-output or network/cloud scope | — Pending in v1.10 |
 
 ## Evolution
@@ -387,4 +390,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-01 after Phase 38 completion*
+*Last updated: 2026-06-01 after Phase 39 completion*

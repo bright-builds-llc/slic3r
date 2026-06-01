@@ -74,7 +74,7 @@ surfaces, fork release builds, Bambu Studio, OrcaSlicer, and vendor sync.
   inspect Prusa profile/config fixtures, fixture update rules, and status
   vocabulary that reserve verified claims for executable evidence.
 
-- [ ] **Phase 39: Rust Prusa Profile Boundary** - Developers can parse and
+- [x] **Phase 39: Rust Prusa Profile Boundary** - Developers can parse and (completed 2026-06-01)
   normalize Prusa profile/config fixtures into typed Rust domain values that
   trace back to v1.9 inventory and source metadata.
 
@@ -161,9 +161,9 @@ typed, side-effect-free Rust domain values that trace back to source metadata.
 
 Plans:
 
-- [ ] 39-01-PLAN.md — Create the pure Rust Prusa profile parser, metadata
+- [x] 39-01-PLAN.md — Create the pure Rust Prusa profile parser, metadata
   traceability, and Cargo/Bazel verification wiring.
-- [ ] 39-02-PLAN.md — Document the Phase 39 parser boundary while preserving
+- [x] 39-02-PLAN.md — Document the Phase 39 parser boundary while preserving
   Phase 40 parity/status deferrals.
 
 ### Phase 40: Executable Prusa Profile Parity
@@ -215,7 +215,7 @@ Phases execute in numeric order: 37 -> 38 -> 39 -> 40
 |-------|----------------|--------|-----------|
 | 37. Prusa Baseline and Checklist Gate | 1/1 | Complete    | 2026-06-01 |
 | 38. Prusa Fixture and Status Evidence Surface | 1/1 | Complete    | 2026-06-01 |
-| 39. Rust Prusa Profile Boundary | 0/TBD | Not Started | - |
+| 39. Rust Prusa Profile Boundary | 2/2 | Complete    | 2026-06-01 |
 | 40. Executable Prusa Profile Parity | 0/TBD | Not Started | - |
 
 ## Future Roadmap

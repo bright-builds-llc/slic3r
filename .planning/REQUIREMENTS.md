@@ -42,13 +42,13 @@ Requirements for the v1.10 milestone. Each maps to one roadmap phase.
 
 ### Rust Prusa Profile Boundary
 
-- [ ] **PROF-01**: Developer can parse the v1.10 Prusa profile/config fixtures
+- [x] **PROF-01**: Developer can parse the v1.10 Prusa profile/config fixtures
   into typed Rust domain values before the data reaches core profile or config
   logic.
-- [ ] **PROF-02**: Developer can trace the Prusa profile schema/config
+- [x] **PROF-02**: Developer can trace the Prusa profile schema/config
   capability from Rust metadata back to the Prusa inventory row, accepted
   vendor source identity, source path, and checklist status.
-- [ ] **PROF-03**: Developer can verify Prusa profile/config parsing and
+- [x] **PROF-03**: Developer can verify Prusa profile/config parsing and
   normalization logic with focused Rust unit tests that do not perform Git,
   network, filesystem discovery, process, release, or vendor sync operations.
 
@@ -122,9 +122,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EVID-01 | Phase 38 | Complete |
 | EVID-02 | Phase 38 | Complete |
 | EVID-03 | Phase 38 | Complete |
-| PROF-01 | Phase 39 | Pending |
-| PROF-02 | Phase 39 | Pending |
-| PROF-03 | Phase 39 | Pending |
+| PROF-01 | Phase 39 | Complete |
+| PROF-02 | Phase 39 | Complete |
+| PROF-03 | Phase 39 | Complete |
 | PPAR-01 | Phase 40 | Pending |
 | PPAR-02 | Phase 40 | Pending |
 | PPAR-03 | Phase 40 | Pending |
@@ -138,4 +138,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ______________________________________________________________________
 
 *Requirements defined: 2026-05-31*
-*Last updated: 2026-06-01 after Phase 38 completion*
+*Last updated: 2026-06-01 after Phase 39 completion*
