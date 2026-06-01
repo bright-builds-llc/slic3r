@@ -436,12 +436,13 @@ fi
 | A3 | Add fixture-local `.gitattributes` with `-text` for the raw fixture files. [ASSUMED] | Summary; Exact Files; Pitfalls | Medium: this adds one extra file but protects raw-byte provenance for the CRLF `.idx` file. [VERIFIED: local `.gitattributes` audit; local `file` check] |
 | A4 | Use target names `prusa_profile_schema_bundle`, `verify_prusa_profile_schema_fixture`, and matching aliases/tests. [ASSUMED] | Likely Bazel Targets | Low: target names are discretionary, but Phase 39/40 plans need stable labels once chosen. [VERIFIED: packages/parity-fixtures/BUILD.bazel pattern] |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Does committing upstream AGPL profile fixture data need maintainer/legal review beyond recorded provenance?** [VERIFIED: packages/fork-vendors/forks.tsv]
    - What we know: Phase 38 is locked to checked-in raw Prusa fixture inputs, and the vendor registry records `AGPL-3.0-only` plus `metadata-only-not-legal-review`. [VERIFIED: .planning/phases/38-prusa-fixture-and-status-evidence-surface/38-CONTEXT.md; packages/fork-vendors/forks.tsv]
-   - What's unclear: Automation cannot decide legal sufficiency. [ASSUMED]
-   - Recommendation: Proceed with clear attribution/provenance and avoid any "legal review complete" wording; escalate separately only if the maintainer wants legal approval before committing upstream fixture content. [ASSUMED; VERIFIED: packages/fork-vendors/README.md]
+   - Resolution: Proceed in Phase 38 with clear attribution/provenance, `AGPL-3.0-only`, and `metadata-only-not-legal-review` wording, because the roadmap and context explicitly require checked-in static fixture inputs and no separate legal-review gate is recorded in repo instructions, requirements, or Phase 37 outputs. [VERIFIED: .planning/ROADMAP.md; .planning/REQUIREMENTS.md; .planning/phases/38-prusa-fixture-and-status-evidence-surface/38-CONTEXT.md; .planning/phases/37-prusa-baseline-and-checklist-gate/37-01-SUMMARY.md]
+   - Guardrail: Do not claim legal review is complete. Preserve `metadata-only-not-legal-review` wording in fixture provenance/docs, cite upstream source/license, and keep runtime support, plugin ingestion, network/cloud/credential behavior, source imports, and sync automation out of scope. [VERIFIED: packages/fork-vendors/README.md; packages/fork-vendors/forks.tsv; .planning/phases/38-prusa-fixture-and-status-evidence-surface/38-CONTEXT.md]
+   - Escalation rule: If a human maintainer later requires legal approval before committing upstream fixture content, stop before Task 1 and convert the plan to a non-autonomous checkpoint. No such requirement is currently present in the repo-local instructions or phase scope. [VERIFIED: AGENTS.md; .planning/REQUIREMENTS.md]
 
 ## Environment Availability
 
