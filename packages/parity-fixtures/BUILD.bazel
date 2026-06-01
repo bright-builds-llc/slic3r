@@ -55,6 +55,11 @@ exports_files([
     "windows-packaged-launcher/expected-packaged-slice.txt",
     "linux-runtime/README.md",
     "windows-runtime/README.md",
+    "forks/prusaslicer/prusaslicer.profile-schema/.gitattributes",
+    "forks/prusaslicer/prusaslicer.profile-schema/README.md",
+    "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
+    "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
+    "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
 ])
 
 alias(
@@ -324,6 +329,70 @@ filegroup(
     ],
 )
 
+alias(
+    name = "prusa_profile_schema_readme",
+    actual = "forks/prusaslicer/prusaslicer.profile-schema/README.md",
+)
+
+alias(
+    name = "prusa_profile_schema_provenance",
+    actual = "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
+)
+
+alias(
+    name = "prusa_profile_schema_prusa_research_ini",
+    actual = "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
+)
+
+alias(
+    name = "prusa_profile_schema_prusa_research_idx",
+    actual = "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
+)
+
+filegroup(
+    name = "prusa_profile_schema_bundle",
+    srcs = [
+        "forks/prusaslicer/prusaslicer.profile-schema/.gitattributes",
+        "forks/prusaslicer/prusaslicer.profile-schema/README.md",
+        "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
+        "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
+    ],
+)
+
+sh_binary(
+    name = "verify_prusa_profile_schema_fixture",
+    srcs = ["verify_prusa_profile_schema_fixture.sh"],
+    data = [
+        ":prusa_profile_schema_bundle",
+        "README.md",
+        "forks/prusaslicer/prusaslicer.profile-schema/README.md",
+        "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
+        "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
+        "//packages/parity:status.tsv",
+    ],
+    args = [
+        "$(location forks/prusaslicer/prusaslicer.profile-schema/README.md)",
+        "$(location forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv)",
+        "$(location forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini)",
+        "$(location forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx)",
+        "$(location //packages/parity:status.tsv)",
+        "$(location README.md)",
+    ],
+)
+
+sh_test(
+    name = "verify_prusa_profile_schema_fixture_test",
+    srcs = ["verify_prusa_profile_schema_fixture_test.sh"],
+    data = [
+        "verify_prusa_profile_schema_fixture.sh",
+        ":prusa_profile_schema_bundle",
+        "README.md",
+        "//packages/parity:status.tsv",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
@@ -380,5 +449,12 @@ filegroup(
         "windows-packaged-launcher/expected-packaged-slice.txt",
         "linux-runtime/README.md",
         "windows-runtime/README.md",
+        "forks/prusaslicer/prusaslicer.profile-schema/.gitattributes",
+        "forks/prusaslicer/prusaslicer.profile-schema/README.md",
+        "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
+        "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
+        "verify_prusa_profile_schema_fixture.sh",
+        "verify_prusa_profile_schema_fixture_test.sh",
     ],
 )

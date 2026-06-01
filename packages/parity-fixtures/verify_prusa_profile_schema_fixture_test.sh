@@ -140,7 +140,8 @@ test_missing_source_ref_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-source-ref"
 	write_valid_fixture_copy "${dir}"
-	remove_line_containing "${dir}/forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv" "prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
+	perl -0pi -e 's/prusaslicer:version_2\.9\.5\@9a583bd438b195856f3bcf7ea99b69ba4003a961/prusaslicer:version_2.9.4@9a583bd438b195856f3bcf7ea99b69ba4003a961/g' \
+		"${dir}/forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv"
 
 	# Act
 	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/missing-source-ref.out" "${tmp_dir}/missing-source-ref.err"; then
