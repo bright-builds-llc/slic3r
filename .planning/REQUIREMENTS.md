@@ -13,16 +13,16 @@ Requirements for the v1.10 milestone. Each maps to one roadmap phase.
 
 ### Prusa Baseline and Scope Control
 
-- [ ] **PRUSA-01**: Maintainer can run the manual PrusaSlicer drift-refresh
+- [x] **PRUSA-01**: Maintainer can run the manual PrusaSlicer drift-refresh
   protocol against the accepted v1.9 source pin and record selected stable tag
   confirmation, peeled commit confirmation, branch drift observation, reviewer
   decision, and reviewer signoff without automatically changing accepted source
   pins.
-- [ ] **PRUSA-02**: Maintainer can inspect completed Prusa checklist records
+- [x] **PRUSA-02**: Maintainer can inspect completed Prusa checklist records
   for the v1.10 profile schema/config evidence slice, including inventory row
   ID, source pin, candidate Rust module, fixture need, evidence command, docs
   touched, license or security note, deferred scope, and reviewer signoff.
-- [ ] **PRUSA-03**: Maintainer can distinguish the narrow v1.10 Prusa
+- [x] **PRUSA-03**: Maintainer can distinguish the narrow v1.10 Prusa
   profile/config evidence scope from deferred Prusa project files, STEP import,
   support generation, arc fitting, wall seam behavior, network/device
   integration, full fork runtime support, and fork release builds.
@@ -116,9 +116,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PRUSA-01 | Phase 37 | Pending |
-| PRUSA-02 | Phase 37 | Pending |
-| PRUSA-03 | Phase 37 | Pending |
+| PRUSA-01 | Phase 37 | Complete |
+| PRUSA-02 | Phase 37 | Complete |
+| PRUSA-03 | Phase 37 | Complete |
 | EVID-01 | Phase 38 | Pending |
 | EVID-02 | Phase 38 | Pending |
 | EVID-03 | Phase 38 | Pending |

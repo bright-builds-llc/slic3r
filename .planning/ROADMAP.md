@@ -66,7 +66,7 @@ surfaces, fork release builds, Bambu Studio, OrcaSlicer, and vendor sync.
 
 - This milestone starts at Phase 37 because Phase 36 shipped in v1.9
 
-- [ ] **Phase 37: Prusa Baseline and Checklist Gate** - Maintainers can
+- [x] **Phase 37: Prusa Baseline and Checklist Gate** - Maintainers can (completed 2026-05-31)
   refresh the accepted Prusa source baseline manually, record reviewer-gated
   checklist decisions, and lock the narrow v1.10 scope before implementation.
 
@@ -110,7 +110,7 @@ the narrow v1.10 profile/config evidence slice before implementation begins.
 
 Plans:
 
-- [ ] 37-01-PLAN.md — Create the Prusa baseline records, fail-closed
+- [x] 37-01-PLAN.md — Create the Prusa baseline records, fail-closed
   verifier, failure-mode tests, and port docs routing for the Phase 37 gate.
 
 ### Phase 38: Prusa Fixture and Status Evidence Surface
@@ -200,7 +200,7 @@ Phases execute in numeric order: 37 -> 38 -> 39 -> 40
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 37. Prusa Baseline and Checklist Gate | 0/1 | Not Started | - |
+| 37. Prusa Baseline and Checklist Gate | 1/1 | Complete   | 2026-05-31 |
 | 38. Prusa Fixture and Status Evidence Surface | 0/TBD | Not Started | - |
 | 39. Rust Prusa Profile Boundary | 0/TBD | Not Started | - |
 | 40. Executable Prusa Profile Parity | 0/TBD | Not Started | - |
