@@ -201,6 +201,25 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   Prusa parity targets, upstream source imports, runtime fork support, GUI
   support, sync automation, or fork release packaging.
 
+## Current Prusa Fixture/Status Preparation State
+
+- `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/`
+  owns the Phase 38 static fixture namespace for the narrow Prusa profile
+  schema/config evidence slice.
+- `//packages/parity-fixtures:prusa_profile_schema_bundle` exports the raw
+  fixture README, provenance TSV, `PrusaResearch.ini`, and `PrusaResearch.idx`
+  files.
+- `//packages/parity-fixtures:verify_prusa_profile_schema_fixture` checks the
+  fixture files, source pin, sizes, SHA-256 values, provenance text, namespace
+  boundary, and status non-publication.
+- `PrusaResearch.ini` and `PrusaResearch.idx` are static fixture inputs from
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.
+- `fork.prusaslicer.profile-schema` is docs-only reserved status vocabulary in
+  Phase 38.
+- Phase 38 fixture/status preparation only.
+- Phase 39 creates Rust parsing; Phase 40 creates executable parity evidence and any verified status publication.
+- Phase 38 adds no Rust parsing, no executable Prusa parity command, no Prusa status row, no upstream source-tree import, no vendor sync automation, no profile auto-update execution, no Bambu Studio fixtures, no OrcaSlicer fixtures, no network/cloud/credential fixtures, no non-free plugin fixtures, no GUI support, and no fork release packaging.
+
 ## v1.9 Fork Parity Deferrals
 
 Phase 36 keeps the complete v1.9 fork-parity deferral list here so package

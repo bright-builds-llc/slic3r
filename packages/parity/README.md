@@ -44,14 +44,19 @@ checked-in status rows:
 
 ## Future Fork Status Rows
 
-Phase 36 does not add fork rows to `packages/parity/status.tsv`. Future fork
-status rows are reserved for executable parity targets only.
+Phase 38 does not add a Prusa row to packages/parity/status.tsv.
+The docs-only token `fork.prusaslicer.profile-schema` is reserved for the
+future Prusa profile/config evidence slice.
 
 Future fork status tokens should use `fork.<inventory_id>` or an
 inventory-derived stable slug that traces back to `packages/fork-inventories`.
 A fork row may become `verified` only when maintainers can rerun a real
 `//packages/parity:*_parity` evidence command for that fork slice.
 
-Source pins, inventories, templates, checklist completion, and flavor registry
-metadata are planning inputs only. They do not prove fork runtime support and
-must not be used as status evidence.
+`fork.prusaslicer.profile-schema` cannot be marked `verified` until a
+rerunnable `bazel run //packages/parity:prusaslicer_profile_schema_parity`
+command exists and passes in Phase 40.
+
+Source pins, inventories, checklist records, flavor metadata, and static
+fixtures are planning inputs only. They do not prove full PrusaSlicer support,
+fork runtime support, or status evidence by themselves.

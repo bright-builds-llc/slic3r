@@ -40,3 +40,7 @@ parity, and fixture rules.
 - `packages/prusa-baseline` is the Phase 37 PrusaSlicer baseline/checklist gate.
   Its records do not create Prusa runtime support, executable fork parity, fork
   status rows, or Prusa fixture files.
+- `fork.prusaslicer.profile-schema` is reserved vocabulary only in Phase 38.
+  Static fixtures and source pins do not create full PrusaSlicer support or
+  `verified` status, and the checked-in status table has no Prusa row in
+  Phase 38.

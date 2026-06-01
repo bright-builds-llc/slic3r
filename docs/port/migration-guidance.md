@@ -56,7 +56,11 @@ boundaries.
   config fixture names.
 - Future fork fixture work is reserved under
   `packages/parity-fixtures/forks/<vendor_id>/<inventory_id-or-slug>/<scenario>/`.
-  Phase 36 documents that namespace only; it does not create fork fixture files.
+  Phase 38 creates
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/` for
+  the Prusa profile/config evidence slice.
+- The Phase 38 Prusa fixture namespace update route is: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
+  Branch-head observations remain drift-only.
 - When a change adds, removes, or materially alters a fixture-backed parity
   surface, update the relevant rows in `docs/port/contract-inventory.md` and
   `docs/port/parity-matrix.md`. If the protocol itself changes, update this
@@ -67,17 +71,22 @@ boundaries.
 - The complete v1.9 fork-parity deferral list lives in
   [`README.md#v19-fork-parity-deferrals`](./README.md#v19-fork-parity-deferrals).
   Link to that block instead of repeating the full list in every package doc.
-- Phase 36 does not add fork rows to `packages/parity/status.tsv`.
+- Phase 38 does not add Prusa rows to `packages/parity/status.tsv`.
 - Future fork status tokens should use `fork.<inventory_id>` or an
   inventory-derived stable slug, and `verified` requires a real
   `//packages/parity:*_parity` evidence command.
+- `fork.prusaslicer.profile-schema` is reserved for Phase 40 only and requires
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity`.
+- `packages/parity/status.tsv` must remain free of Prusa profile-schema rows
+  until that command exists and passes.
 - Future fork status requires executable parity evidence. Source pins,
   inventories, templates, checklist completion, and registry metadata remain
   planning inputs only.
 
 Phase 37 routes PrusaSlicer baseline review through `packages/prusa-baseline`;
-that package is a baseline/checklist gate only. Prusa fixture files remain Phase
-38 scope, and executable parity/status publication remains Phase 40 scope.
+that package is a baseline/checklist gate only. Phase 38 fixture/status
+preparation creates static Prusa inputs only, Phase 39 creates Rust parsing, and
+Phase 40 creates executable parity/status publication.
 
 ## Scope Now vs Deferred
 

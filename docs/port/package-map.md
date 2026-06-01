@@ -19,7 +19,7 @@
 | `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface |
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, the scoped Windows packaged launcher tree, and the scoped macOS packaged launcher/startup surface |
 | `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, and Windows packaged launcher slices |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules and shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, and `windows-packaged-launcher` slices |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, and `windows-packaged-launcher` slices, plus the Phase 38 Prusa profile-schema fixture namespace |
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
 | `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
@@ -102,3 +102,9 @@
   `prusaslicer.profile-schema` checklist gate, and keeps fixtures, parity
   status rows, executable parity commands, runtime fork support, GUI support,
   sync automation, and fork release packaging out of Phase 37.
+- Phase 38 adds the static Prusa fixture namespace
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/` and
+  verifies it with
+  `//packages/parity-fixtures:verify_prusa_profile_schema_fixture`. The status
+  token `fork.prusaslicer.profile-schema` is reserved for Phase 40, and
+  packages/parity/status.tsv remains unchanged in Phase 38.

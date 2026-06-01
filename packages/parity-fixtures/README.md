@@ -11,18 +11,33 @@ corpora.
 - Update the relevant `docs/port/` surfaces whenever a fixture-backed parity
   workflow is added or changed.
 
-## Future Fork Fixture Namespace
+## Fork Fixture Namespace
 
-Future fork parity fixtures are reserved under:
+Fork parity fixtures are reserved under:
 
 ```text
 packages/parity-fixtures/forks/<vendor_id>/<inventory_id-or-slug>/<scenario>/
 ```
 
-Phase 36 does not create fork fixture files. This namespace is documentation
-only until a future fork feature has an executable parity command, a reviewed
-checklist, and a matching future status row. Source pins, inventories,
-templates, and registry metadata do not justify fixture files by themselves.
+Phase 38 creates the first real fork fixture namespace at
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/`.
+It contains raw static `PrusaResearch.ini` and `PrusaResearch.idx` inputs from
+`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.
+
+Update route: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
+Branch-head observations remain drift-only.
+Phase 38 verification does not fetch upstream source, run profile auto-update, ingest plugins, or execute a Prusa parity command.
+
+This fixture package does not introduce Bambu Studio fixtures, OrcaSlicer fixtures, network/device integration, cloud behavior, credentials, profile auto-update execution, non-free plugin ingestion, full Prusa runtime support, GUI support, sync automation, or fork release packaging.
+
+The fixture provenance cites the accepted upstream source URLs and
+`metadata-only-not-legal-review`; it is provenance for static fixture inputs,
+not legal-review completion.
+
+Other fork fixture namespaces remain future-only until a fork feature has an
+executable parity command, a reviewed checklist, and a matching future status
+row. Source pins, inventories, templates, and registry metadata do not justify
+additional fixture files by themselves.
 
 ## Current State
 
@@ -46,3 +61,7 @@ templates, and registry metadata do not justify fixture files by themselves.
   `//packages/parity:linux_packaged_launcher_parity`, and
   `windows-packaged-launcher` is verified by
   `//packages/parity:windows_packaged_launcher_parity`.
+- Phase 38 adds the Prusa profile-schema fixture bundle under
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/`,
+  exported as `//packages/parity-fixtures:prusa_profile_schema_bundle` and
+  checked by `//packages/parity-fixtures:verify_prusa_profile_schema_fixture`.
