@@ -75,9 +75,10 @@ boundaries.
 - Future fork status tokens should use `fork.<inventory_id>` or an
   inventory-derived stable slug, and `verified` requires a real
   `//packages/parity:*_parity` evidence command.
-- `fork.prusaslicer.profile-schema` is reserved for Phase 40 only and requires
-  `bazel run //packages/parity:prusaslicer_profile_schema_parity`.
 - Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
+- `fork.prusaslicer.profile-schema` is reserved until a rerunnable
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity` command
+  exists and passes.
 - `packages/parity/status.tsv` must remain free of Prusa profile-schema rows
   until that command exists and passes.
 - Phase 39 creates parser/metadata readiness only through

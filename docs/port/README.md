@@ -231,10 +231,9 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
   checklist path `packages/prusa-baseline/profile-schema-checklist.md`, and
   checklist status `future-candidate`.
-- Phase 40 owns
-  `bazel run //packages/parity:prusaslicer_profile_schema_parity` and any
-  `packages/parity/status.tsv` row for `fork.prusaslicer.profile-schema`.
 - Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
+- Phase 40 also owns any `packages/parity/status.tsv` row for
+  `fork.prusaslicer.profile-schema`.
 - Phase 39 creates no full PrusaSlicer runtime support, GUI support,
   network/device/cloud/credential behavior, profile auto-update execution,
   non-free plugin ingestion, vendor sync automation, or fork release packaging.

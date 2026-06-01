@@ -64,10 +64,10 @@ inventory-derived stable slug that traces back to `packages/fork-inventories`.
 A fork row may become `verified` only when maintainers can rerun a real
 `//packages/parity:*_parity` evidence command for that fork slice.
 
-`fork.prusaslicer.profile-schema` cannot be marked `verified` until a
-rerunnable `bazel run //packages/parity:prusaslicer_profile_schema_parity`
-command exists and passes in Phase 40.
 Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
+That target must have a rerunnable
+`bazel run //packages/parity:prusaslicer_profile_schema_parity` command that
+exists and passes before `fork.prusaslicer.profile-schema` can be verified.
 
 Source pins, inventories, checklist records, flavor metadata, and static
 fixtures are planning inputs only. They do not prove full PrusaSlicer support,
