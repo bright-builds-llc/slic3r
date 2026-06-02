@@ -13,19 +13,19 @@ Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior 
 ## Current Milestone: v1.11 PrusaSlicer Broader Parity Port
 
 **Goal:** Broaden PrusaSlicer parity beyond the v1.10 profile/config evidence
-slice while preserving the same evidence discipline: source-pinned fixtures,
-typed Rust boundaries, fail-closed parity commands, exact status rows, and
-non-overclaiming docs.
+slice by proving a narrow `prusaslicer.project-file` evidence path with the
+same evidence discipline: source-pinned fixtures, typed Rust boundaries,
+fail-closed parity commands, exact status rows, and non-overclaiming docs.
 
 **Target features:**
 
-- Select one or two broader PrusaSlicer behavior slices that can be verified
-  through rerunnable fixtures and checked-in expected artifacts.
-- Extend Rust fork/flavor boundaries only where the selected Prusa slices need
-  typed parsing, normalization, or summary behavior.
+- Review and lock the exact Prusa project-file fixture and expected-artifact
+  contract before implementation claims broader parity.
+- Extend Rust fork/flavor boundaries only where the selected project-file
+  evidence slice needs typed parsing, normalization, or summary behavior.
 - Publish maintainer-facing parity commands, failure guards, status rows, and
-  docs that distinguish verified Prusa evidence from deferred runtime, GUI,
-  release, network, plugin, and sync surfaces.
+  docs that distinguish verified project-file evidence from deferred runtime,
+  GUI, release, network, plugin, generated-output, and sync surfaces.
 
 ## Last Shipped Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
 
@@ -206,14 +206,14 @@ high-risk generated-output or network/cloud surfaces.
 
 ## Next Milestone Goals
 
-- Start v1.11 with fresh requirements focused on broader PrusaSlicer parity
-  after the trusted profile/config evidence path exists.
-- Promote only those broader Prusa surfaces that can be backed by rerunnable
+- Start v1.11 with fresh requirements focused on the
+  `prusaslicer.project-file` evidence slice after the trusted profile/config
+  evidence path exists.
+- Promote project-file evidence only after it can be backed by rerunnable
   fixtures, typed Rust boundaries, fail-closed parity commands, and exact docs
   or status wording.
-- Candidate surfaces include Prusa project file load/save, STEP import,
-  support generation, arc fitting, wall seam behavior, and other
-  generated-output evidence slices.
+- Keep STEP import, support generation, arc fitting, wall seam behavior, and
+  other generated-output evidence slices as future Prusa candidates.
 - Keep Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly
   vendor sync as later milestones unless v1.11 requirements deliberately pull a
   narrow dependency forward.
@@ -304,12 +304,12 @@ high-risk generated-output or network/cloud surfaces.
 
 ### Active
 
-- [ ] v1.11 selects broader PrusaSlicer evidence slices only when they can be
-  backed by source-pinned fixtures, typed Rust boundaries, fail-closed parity
-  commands, and exact status/docs wording.
-- [ ] v1.11 avoids broad Prusa runtime, GUI, release, network/cloud,
-  credential, plugin, and sync claims unless a deliberately scoped executable
-  evidence chain exists for that surface.
+- [ ] v1.11 defines and verifies a narrow `prusaslicer.project-file` evidence
+  slice through source-pinned fixtures, typed Rust boundaries, fail-closed
+  parity commands, and exact status/docs wording.
+- [ ] v1.11 avoids broad Prusa runtime, GUI, generated-output, release,
+  network/cloud, credential, plugin, and sync claims unless a deliberately
+  scoped executable evidence chain exists for that surface.
 
 ### Out of Scope
 
@@ -405,4 +405,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-02 after v1.11 milestone start*
+*Last updated: 2026-06-02 after v1.11 requirements and roadmap creation*
