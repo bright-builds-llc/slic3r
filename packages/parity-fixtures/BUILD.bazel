@@ -57,6 +57,7 @@ exports_files([
     "windows-runtime/README.md",
     "forks/prusaslicer/prusaslicer.profile-schema/.gitattributes",
     "forks/prusaslicer/prusaslicer.profile-schema/README.md",
+    "forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv",
     "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
     "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
     "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
@@ -340,6 +341,11 @@ alias(
 )
 
 alias(
+    name = "prusa_profile_schema_expected_summary",
+    actual = "forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv",
+)
+
+alias(
     name = "prusa_profile_schema_prusa_research_ini",
     actual = "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
 )
@@ -354,6 +360,7 @@ filegroup(
     srcs = [
         "forks/prusaslicer/prusaslicer.profile-schema/.gitattributes",
         "forks/prusaslicer/prusaslicer.profile-schema/README.md",
+        "forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv",
         "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
         "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
         "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
@@ -451,6 +458,7 @@ filegroup(
         "windows-runtime/README.md",
         "forks/prusaslicer/prusaslicer.profile-schema/.gitattributes",
         "forks/prusaslicer/prusaslicer.profile-schema/README.md",
+        "forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv",
         "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
         "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
         "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",

@@ -1,0 +1,26 @@
+surface	fork.prusaslicer.profile-schema
+inventory_id	prusaslicer.profile-schema
+vendor_id	prusaslicer
+flavor_display	PrusaSlicer
+source_ref	prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961
+source_path	resources/profiles/PrusaResearch.ini
+fixture_path	packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini
+checklist_path	packages/prusa-baseline/profile-schema-checklist.md
+status_token	fork.prusaslicer.profile-schema
+section_count	6976
+entry_count	27340
+section_kind_count	vendor	1
+section_kind_count	printer_model	35
+section_kind_count	print	633
+section_kind_count	filament	6069
+section_kind_count	printer	238
+sample_section	vendor	0	3	vendor
+sample_entry	vendor	0	4	repo_id	prusa-fff
+sample_section	printer_model	1	10	COREONEL
+sample_entry	printer_model	1	11	name	Prusa CORE One L
+sample_section	print	36	351	*common*
+sample_entry	print	36	352	avoid_crossing_perimeters	0
+sample_section	filament	669	8486	*common*
+sample_entry	filament	669	8487	cooling	1
+sample_section	printer	6738	39231	*common*
+sample_entry	printer	6738	39232	printer_technology	FFF

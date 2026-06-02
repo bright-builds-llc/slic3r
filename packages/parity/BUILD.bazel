@@ -103,6 +103,24 @@ sh_binary(
 )
 
 sh_binary(
+    name = "prusaslicer_profile_schema_parity",
+    srcs = ["compare_prusaslicer_profile_schema.sh"],
+    data = [
+        "status.tsv",
+        "//packages/slic3r-rust/crates/slic3r_flavors:prusa_profile_schema_summary",
+        "//packages/parity-fixtures:prusa_profile_schema_expected_summary",
+        "//packages/parity-fixtures:prusa_profile_schema_provenance",
+        "//packages/parity-fixtures:prusa_profile_schema_prusa_research_ini",
+    ],
+    args = [
+        "$(location //packages/slic3r-rust/crates/slic3r_flavors:prusa_profile_schema_summary)",
+        "$(location //packages/parity-fixtures:prusa_profile_schema_prusa_research_ini)",
+        "$(location //packages/parity-fixtures:prusa_profile_schema_expected_summary)",
+        "$(location //packages/parity-fixtures:prusa_profile_schema_provenance)",
+    ],
+)
+
+sh_binary(
     name = "linux_runtime_parity",
     srcs = ["compare_linux_runtime.sh"],
     data = [
