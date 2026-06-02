@@ -10,10 +10,22 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone
+## Current Milestone: v1.11 PrusaSlicer Broader Parity Port
 
-No active milestone. v1.10 shipped on 2026-06-02 and the next milestone should
-start with fresh requirements via `/gsd-new-milestone`.
+**Goal:** Broaden PrusaSlicer parity beyond the v1.10 profile/config evidence
+slice while preserving the same evidence discipline: source-pinned fixtures,
+typed Rust boundaries, fail-closed parity commands, exact status rows, and
+non-overclaiming docs.
+
+**Target features:**
+
+- Select one or two broader PrusaSlicer behavior slices that can be verified
+  through rerunnable fixtures and checked-in expected artifacts.
+- Extend Rust fork/flavor boundaries only where the selected Prusa slices need
+  typed parsing, normalization, or summary behavior.
+- Publish maintainer-facing parity commands, failure guards, status rows, and
+  docs that distinguish verified Prusa evidence from deferred runtime, GUI,
+  release, network, plugin, and sync surfaces.
 
 ## Last Shipped Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
 
@@ -292,7 +304,12 @@ high-risk generated-output or network/cloud surfaces.
 
 ### Active
 
-None.
+- [ ] v1.11 selects broader PrusaSlicer evidence slices only when they can be
+  backed by source-pinned fixtures, typed Rust boundaries, fail-closed parity
+  commands, and exact status/docs wording.
+- [ ] v1.11 avoids broad Prusa runtime, GUI, release, network/cloud,
+  credential, plugin, and sync claims unless a deliberately scoped executable
+  evidence chain exists for that surface.
 
 ### Out of Scope
 
@@ -388,4 +405,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-02 after v1.10 milestone archive*
+*Last updated: 2026-06-02 after v1.11 milestone start*
