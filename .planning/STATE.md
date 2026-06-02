@@ -4,17 +4,17 @@ milestone: v1.10
 milestone_name: milestone
 current_phase: 40
 current_phase_name: Executable Prusa Profile Parity
-current_plan: Not started
+current_plan: 1
 status: executing
-stopped_at: Phase 40 context gathered
-last_updated: "2026-06-02T12:43:54.759Z"
-last_activity: 2026-06-02 -- Phase 40 planning complete
+stopped_at: Completed 40-01-PLAN.md
+last_updated: "2026-06-02T12:56:50.338Z"
+last_activity: 2026-06-02
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 6
-  completed_plans: 4
-  percent: 67
+  completed_plans: 5
+  percent: 83
 ---
 
 # Project State
@@ -32,17 +32,17 @@ depend on.
 
 ## Current Position
 
-Phase: 40 (Executable Prusa Profile Parity) — NOT STARTED
-Plan: Not started
+Phase: 40 (Executable Prusa Profile Parity) — EXECUTING
+Plan: 2 of 2
 Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
 Current Phase: 40
 Current Phase Name: Executable Prusa Profile Parity
-Current Plan: Not started
+Current Plan: 1
 Total Phases: 4
 Total Plans: 0
 Status: Ready to execute
-Last activity: 2026-06-02 -- Phase 40 planning complete
-Last Activity Description: Phase 40 planning complete — 2 plans ready
+Last activity: 2026-06-02
+Last Activity Description: Phase 40 execution started
 
 Progress: [██████████] 100%
 
@@ -61,6 +61,7 @@ Progress: [██████████] 100%
 | 38. Prusa Fixture and Status Evidence Surface | 1/1 | Complete | 2026-06-01 |
 | 39. Rust Prusa Profile Boundary | 2/2 | Complete | 2026-06-01 |
 | 40. Executable Prusa Profile Parity | 0/TBD | Not Started | - |
+| Phase 40 P01 | 9m 7s | 3 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -95,6 +96,10 @@ Recent decisions affecting v1.10:
   `requirements-completed` stays hyphenated, and phase summaries are not
   formatted with mdformat.
 
+- [Phase 40]: Kept Prusa profile summary generation as pure Rust data-in/data-out logic.
+- [Phase 40]: Kept filesystem reads in a thin explicit-path Rust binary and the public maintainer command in packages/parity.
+- [Phase 40]: Stored the expected summary beside the Prusa fixture provenance so drift is reviewable in git.
+
 ### Pending Todos
 
 None.
@@ -105,6 +110,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-02T12:14:06.615Z
-Stopped at: Phase 40 context gathered
-Resume file: .planning/phases/40-executable-prusa-profile-parity/40-CONTEXT.md
+Last session: 2026-06-02T12:56:50.335Z
+Stopped at: Completed 40-01-PLAN.md
+Resume file: None

@@ -189,7 +189,7 @@ command while docs and status clearly limit what was verified.
 
 Plans:
 
-- [ ] 40-01-PLAN.md — Create the Rust-backed Prusa profile-schema summary,
+- [x] 40-01-PLAN.md — Create the Rust-backed Prusa profile-schema summary,
   expected artifact, public parity command, and divergence failure guard.
 - [ ] 40-02-PLAN.md — Publish the exact narrow Prusa status row, update the
   fixture verifier, and align package/port docs with executable evidence.
@@ -223,7 +223,7 @@ Phases execute in numeric order: 37 -> 38 -> 39 -> 40
 | 37. Prusa Baseline and Checklist Gate | 1/1 | Complete    | 2026-06-01 |
 | 38. Prusa Fixture and Status Evidence Surface | 1/1 | Complete    | 2026-06-01 |
 | 39. Rust Prusa Profile Boundary | 2/2 | Complete    | 2026-06-01 |
-| 40. Executable Prusa Profile Parity | 0/2 | Not Started | - |
+| 40. Executable Prusa Profile Parity | 1/2 | In Progress|  |
 
 ## Future Roadmap
 
