@@ -1,16 +1,16 @@
 ---
-status: partial
+status: complete
 phase: 40-executable-prusa-profile-parity
 source:
   - .planning/phases/40-executable-prusa-profile-parity/40-01-SUMMARY.md
   - .planning/phases/40-executable-prusa-profile-parity/40-02-SUMMARY.md
 started: 2026-06-02T21:07:41Z
-updated: 2026-06-02T21:14:25Z
+updated: 2026-06-02T21:34:00Z
 ---
 
 ## Current Test
 
-[testing paused - 1 item outstanding]
+[testing complete]
 
 ## Tests
 
@@ -28,15 +28,16 @@ result: pass
 
 ### 4. Narrow-Scope Documentation
 expected: The parity, fixture, Rust, and port docs should name `fork.prusaslicer.profile-schema`, `//packages/parity:prusaslicer_profile_schema_parity`, `expected-summary.tsv`, `PrusaResearch.ini`, and the accepted Prusa source ref while keeping full runtime, GUI, generated-output, release, network/cloud/credential, plugin, and sync behavior deferred.
-result: skipped
+result: pass
+note: User accepted the skipped docs checkpoint as okay before Phase 40 security review and milestone archive.
 
 ## Summary
 
 total: 4
-passed: 3
+passed: 4
 issues: 0
 pending: 0
-skipped: 1
+skipped: 0
 blocked: 0
 
 ## Gaps

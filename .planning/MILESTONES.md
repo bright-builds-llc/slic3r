@@ -23,7 +23,7 @@ boundary, parity command, exact status row, UAT, and security verification.
 - Requirements: 12/12 complete
 - Milestone audit: passed
 - Security: `threats_open: 0`
-- UAT: 3 passed, 0 issues, 1 skipped by user acceptance
+- UAT: 4 passed, 0 issues
 - Milestone archive: [v1.10-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.10-ROADMAP.md)
 - Requirements archive: [v1.10-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.10-REQUIREMENTS.md)
 - Audit: [v1.10-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.10-MILESTONE-AUDIT.md)

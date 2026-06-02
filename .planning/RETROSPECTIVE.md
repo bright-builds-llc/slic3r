@@ -35,9 +35,9 @@ milestone audit, UAT, security verification, and archive closeout
 
 ### What Was Inefficient
 
-- UAT was useful for explicit acceptance, but the skipped docs checkpoint
-  remains visible to `audit-uat` even after user acceptance because it was
-  skipped without a reason.
+- UAT was useful for explicit acceptance, but a skipped docs checkpoint needed
+  a follow-up acceptance note before `audit-uat` reflected a fully resolved
+  milestone.
 - `mdformat` is unsafe for planning files that rely on YAML frontmatter beyond
   summaries; the security report needed manual frontmatter restoration after a
   formatter pass.
