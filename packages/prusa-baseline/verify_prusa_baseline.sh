@@ -92,7 +92,7 @@ verify_drift_record() {
 	require_text "${drift_file}" "drift-refresh-record.md" \
 		"bazel run //packages/fork-vendors:verify"
 	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
-		"## Reviewer Record" "Review date" "PENDING - human reviewer UTC date required before implementation consumes this gate."
+		"## Reviewer Record" "Review date" "2026-06-02"
 	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
 		"## Reviewer Record" "Vendor" "\`prusaslicer\`"
 	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
@@ -108,9 +108,9 @@ verify_drift_record() {
 	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
 		"## Reviewer Record" "Branch drift observation" "none observed during Phase 37 execution"
 	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
-		"## Reviewer Record" "Reviewer decision" "PENDING - human reviewer must choose keep accepted source pin, plan future intake update, or defer before implementation consumes this gate."
+		"## Reviewer Record" "Reviewer decision" "Approved - keep accepted source pin for v1.10 Prusa profile/config evidence slice."
 	require_section_table_row "${drift_file}" "drift-refresh-record.md" \
-		"## Reviewer Record" "Reviewer signoff" "PENDING - human reviewer name and UTC date required before implementation consumes this gate."
+		"## Reviewer Record" "Reviewer signoff" "Peter Ryszkiewicz, 2026-06-02 UTC"
 	require_text "${drift_file}" "drift-refresh-record.md" \
 		"Branch-head data is drift-only observation."
 	require_text "${drift_file}" "drift-refresh-record.md" \
@@ -135,7 +135,7 @@ verify_checklist_labels() {
 	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
 		"## Checklist" "License or security note" "\`AGPL-3.0-only\`; metadata-only-not-legal-review; no network, cloud, credential, profile auto-update, plugin ingestion, or runtime support scope in Phase 37."
 	require_section_table_row "${checklist_file}" "profile-schema-checklist.md" \
-		"## Checklist" "Reviewer signoff" "PENDING - human reviewer name and UTC date required before implementation consumes this gate."
+		"## Checklist" "Reviewer signoff" "Peter Ryszkiewicz, 2026-06-02 UTC"
 }
 
 verify_checklist_values() {

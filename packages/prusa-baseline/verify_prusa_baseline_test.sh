@@ -92,7 +92,7 @@ bazel run //packages/fork-vendors:verify
 
 | Field | Maintainer Entry |
 | --- | --- |
-| Review date | PENDING - human reviewer UTC date required before implementation consumes this gate. |
+| Review date | 2026-06-02 |
 | Vendor | `prusaslicer` |
 | Upstream repo | `https://github.com/prusa3d/PrusaSlicer` |
 | Selected stable tag | `version_2.9.5` |
@@ -100,8 +100,8 @@ bazel run //packages/fork-vendors:verify
 | Peeled commit | `9a583bd438b195856f3bcf7ea99b69ba4003a961` |
 | Peeled commit confirmation | confirmed by bazel run //packages/fork-vendors:verify during Phase 37 execution |
 | Branch drift observation | none observed during Phase 37 execution |
-| Reviewer decision | PENDING - human reviewer must choose keep accepted source pin, plan future intake update, or defer before implementation consumes this gate. |
-| Reviewer signoff | PENDING - human reviewer name and UTC date required before implementation consumes this gate. |
+| Reviewer decision | Approved - keep accepted source pin for v1.10 Prusa profile/config evidence slice. |
+| Reviewer signoff | Peter Ryszkiewicz, 2026-06-02 UTC |
 
 ## Boundary
 
@@ -127,7 +127,7 @@ runtime support or executable fork parity.
 | Docs touched | `docs/port/README.md`; `docs/port/package-map.md`; `docs/port/migration-guidance.md`; `docs/port/parity-matrix.md` |
 | License or security note | `AGPL-3.0-only`; metadata-only-not-legal-review; no network, cloud, credential, profile auto-update, plugin ingestion, or runtime support scope in Phase 37. |
 | Deferred scope | Prusa project files; STEP import; support generation; arc fitting; wall seam behavior; network/device integration; profile auto-update execution; full fork runtime support; GUI support; fork release builds; sync automation; upstream source imports; Prusa fixtures; executable Prusa parity commands. |
-| Reviewer signoff | PENDING - human reviewer name and UTC date required before implementation consumes this gate. |
+| Reviewer signoff | Peter Ryszkiewicz, 2026-06-02 UTC |
 
 ## Source Row Details
 
@@ -282,21 +282,21 @@ test_wrong_source_path_row_fails() {
 	assert_contains "${tmp_dir}/wrong-source-path-row.err" 'resources/profiles/PrusaResearch.ini'
 }
 
-test_missing_pending_human_review_fails() {
+test_missing_reviewer_signoff_fails() {
 	# Arrange
-	local dir="${tmp_dir}/missing-pending-review"
+	local dir="${tmp_dir}/missing-reviewer-signoff"
 	write_valid_fixture "${dir}"
 	remove_line_containing "${dir}/profile-schema-checklist.md" "| Reviewer signoff |"
 	printf '| Reviewer signoff | REVIEWER OMITTED |\n' >>"${dir}/profile-schema-checklist.md"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/missing-pending-review.out" "${tmp_dir}/missing-pending-review.err"; then
-		fail "missing pending human review fixture passed"
+	if run_verifier "${dir}" "${tmp_dir}/missing-reviewer-signoff.out" "${tmp_dir}/missing-reviewer-signoff.err"; then
+		fail "missing reviewer signoff fixture passed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/missing-pending-review.err" '^error:'
-	assert_contains "${tmp_dir}/missing-pending-review.err" 'PENDING - human reviewer name and UTC date required before implementation consumes this gate'
+	assert_contains "${tmp_dir}/missing-reviewer-signoff.err" '^error:'
+	assert_contains "${tmp_dir}/missing-reviewer-signoff.err" 'Peter Ryszkiewicz, 2026-06-02 UTC'
 }
 
 test_wrong_reviewer_decision_row_fails() {
@@ -305,7 +305,7 @@ test_wrong_reviewer_decision_row_fails() {
 	write_valid_fixture "${dir}"
 	replace_first_line_containing \
 		"${dir}/drift-refresh-record.md" \
-		'| Reviewer decision | PENDING - human reviewer must choose keep accepted source pin, plan future intake update, or defer before implementation consumes this gate. |' \
+		'| Reviewer decision | Approved - keep accepted source pin for v1.10 Prusa profile/config evidence slice. |' \
 		'| Reviewer decision | REVIEWER DECISION OMITTED |'
 
 	# Act
@@ -316,7 +316,7 @@ test_wrong_reviewer_decision_row_fails() {
 	# Assert
 	assert_contains "${tmp_dir}/wrong-reviewer-decision-row.err" '^error:'
 	assert_contains "${tmp_dir}/wrong-reviewer-decision-row.err" 'Reviewer decision'
-	assert_contains "${tmp_dir}/wrong-reviewer-decision-row.err" 'PENDING - human reviewer must choose keep accepted source pin'
+	assert_contains "${tmp_dir}/wrong-reviewer-decision-row.err" 'Approved - keep accepted source pin'
 }
 
 test_missing_non_overclaiming_phrase_fails() {
@@ -361,7 +361,7 @@ test_wrong_accepted_tag_row_fails_even_when_tag_appears_elsewhere
 test_missing_checklist_label_fails
 test_wrong_inventory_row_id_fails_even_when_id_appears_elsewhere
 test_wrong_source_path_row_fails
-test_missing_pending_human_review_fails
+test_missing_reviewer_signoff_fails
 test_wrong_reviewer_decision_row_fails
 test_missing_non_overclaiming_phrase_fails
 test_missing_phase37_future_only_wording_fails

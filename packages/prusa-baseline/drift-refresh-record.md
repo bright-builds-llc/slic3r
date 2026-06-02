@@ -32,7 +32,7 @@ bazel run //packages/fork-vendors:verify
 
 | Field | Maintainer Entry |
 | --- | --- |
-| Review date | PENDING - human reviewer UTC date required before implementation consumes this gate. |
+| Review date | 2026-06-02 |
 | Vendor | `prusaslicer` |
 | Upstream repo | `https://github.com/prusa3d/PrusaSlicer` |
 | Selected stable tag | `version_2.9.5` |
@@ -40,8 +40,8 @@ bazel run //packages/fork-vendors:verify
 | Peeled commit | `9a583bd438b195856f3bcf7ea99b69ba4003a961` |
 | Peeled commit confirmation | confirmed by bazel run //packages/fork-vendors:verify during Phase 37 execution |
 | Branch drift observation | none observed during Phase 37 execution |
-| Reviewer decision | PENDING - human reviewer must choose keep accepted source pin, plan future intake update, or defer before implementation consumes this gate. |
-| Reviewer signoff | PENDING - human reviewer name and UTC date required before implementation consumes this gate. |
+| Reviewer decision | Approved - keep accepted source pin for v1.10 Prusa profile/config evidence slice. |
+| Reviewer signoff | Peter Ryszkiewicz, 2026-06-02 UTC |
 
 ## Boundary
 

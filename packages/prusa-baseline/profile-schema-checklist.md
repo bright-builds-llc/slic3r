@@ -16,7 +16,7 @@ runtime support or executable fork parity.
 | Docs touched | `docs/port/README.md`; `docs/port/package-map.md`; `docs/port/migration-guidance.md`; `docs/port/parity-matrix.md` |
 | License or security note | `AGPL-3.0-only`; metadata-only-not-legal-review; no network, cloud, credential, profile auto-update, plugin ingestion, or runtime support scope in Phase 37. |
 | Deferred scope | Prusa project files; STEP import; support generation; arc fitting; wall seam behavior; network/device integration; profile auto-update execution; full fork runtime support; GUI support; fork release builds; sync automation; upstream source imports; Prusa fixtures; executable Prusa parity commands. |
-| Reviewer signoff | PENDING - human reviewer name and UTC date required before implementation consumes this gate. |
+| Reviewer signoff | Peter Ryszkiewicz, 2026-06-02 UTC |
 
 ## Source Row Details
 
