@@ -1,4 +1,4 @@
-load("@rules_rust//rust:defs.bzl", "rust_clippy", "rust_library", "rust_test", "rustfmt_test")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_clippy", "rust_library", "rust_test", "rustfmt_test")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -10,6 +10,14 @@ rust_library(
         "src/registry.rs",
     ],
     deps = ["//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts"],
+    edition = "2024",
+)
+
+rust_binary(
+    name = "prusa_profile_schema_summary",
+    srcs = ["src/bin/prusa_profile_schema_summary.rs"],
+    crate_root = "src/bin/prusa_profile_schema_summary.rs",
+    deps = [":slic3r_flavors"],
     edition = "2024",
 )
 
@@ -37,6 +45,7 @@ rust_clippy(
     deps = [
         ":flavor_registry_test",
         ":prusa_profile_test",
+        ":prusa_profile_schema_summary",
         ":slic3r_flavors",
     ],
 )
@@ -46,6 +55,7 @@ rustfmt_test(
     targets = [
         ":flavor_registry_test",
         ":prusa_profile_test",
+        ":prusa_profile_schema_summary",
         ":slic3r_flavors",
     ],
 )

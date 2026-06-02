@@ -76,6 +76,14 @@ pub struct PrusaProfileSchemaMetadata {
 
 pub type PrusaProfileParseResult = Result<PrusaProfileBundle, PrusaProfileParseError>;
 
+const PRUSA_PROFILE_SCHEMA_SECTION_KIND_ORDER: [PrusaProfileSectionKind; 5] = [
+    PrusaProfileSectionKind::Vendor,
+    PrusaProfileSectionKind::PrinterModel,
+    PrusaProfileSectionKind::Print,
+    PrusaProfileSectionKind::Filament,
+    PrusaProfileSectionKind::Printer,
+];
+
 pub const fn prusa_profile_schema_metadata() -> PrusaProfileSchemaMetadata {
     PrusaProfileSchemaMetadata {
         inventory_id: PRUSA_PROFILE_SCHEMA_INVENTORY_ID,
@@ -118,6 +126,71 @@ pub fn parse_prusa_profile_bundle(input: &str) -> PrusaProfileParseResult {
     Ok(PrusaProfileBundle { sections })
 }
 
+pub fn prusa_profile_schema_summary_lines(
+    input: &str,
+) -> Result<Vec<String>, PrusaProfileParseError> {
+    let bundle = parse_prusa_profile_bundle(input)?;
+    let metadata = prusa_profile_schema_metadata();
+    let entry_count: usize = bundle
+        .sections
+        .iter()
+        .map(|section| section.entries.len())
+        .sum();
+    let mut lines = Vec::new();
+
+    lines.push(summary_line(
+        "surface",
+        metadata.reserved_future_status_token,
+    ));
+    lines.push(summary_line("inventory_id", metadata.inventory_id));
+    lines.push(summary_line("vendor_id", metadata.vendor_id));
+    lines.push(summary_line("flavor_display", metadata.flavor_display));
+    lines.push(summary_line("source_ref", &metadata.source_ref.to_string()));
+    lines.push(summary_line("source_path", metadata.source_path));
+    lines.push(summary_line("fixture_path", metadata.fixture_path));
+    lines.push(summary_line("checklist_path", metadata.checklist_path));
+    lines.push(summary_line(
+        "status_token",
+        metadata.reserved_future_status_token,
+    ));
+    lines.push(format!("section_count\t{}", bundle.sections.len()));
+    lines.push(format!("entry_count\t{entry_count}"));
+
+    for kind in PRUSA_PROFILE_SCHEMA_SECTION_KIND_ORDER {
+        let count = bundle
+            .sections
+            .iter()
+            .filter(|section| section.kind == kind)
+            .count();
+        lines.push(format!("section_kind_count\t{}\t{count}", kind.as_str()));
+    }
+
+    for kind in PRUSA_PROFILE_SCHEMA_SECTION_KIND_ORDER {
+        let maybe_section = bundle.sections.iter().find(|section| section.kind == kind);
+        if let Some(section) = maybe_section {
+            lines.push(format!(
+                "sample_section\t{}\t{}\t{}\t{}",
+                kind.as_str(),
+                section.index,
+                section.line_number,
+                section.name.as_str()
+            ));
+            if let Some(entry) = section.entries.first() {
+                lines.push(format!(
+                    "sample_entry\t{}\t{}\t{}\t{}\t{}",
+                    kind.as_str(),
+                    entry.section_index,
+                    entry.line_number,
+                    entry.key.as_str(),
+                    entry.value.as_str()
+                ));
+            }
+        }
+    }
+
+    Ok(lines)
+}
+
 impl PrusaProfileSectionKind {
     pub const fn as_str(self) -> &'static str {
         match self {
@@ -150,6 +223,10 @@ impl PrusaProfileValue {
 
 fn should_skip_line(line: &str) -> bool {
     line.is_empty() || line.starts_with('#') || line.starts_with(';')
+}
+
+fn summary_line(key: &str, value: &str) -> String {
+    format!("{key}\t{value}")
 }
 
 fn parse_section_header(
