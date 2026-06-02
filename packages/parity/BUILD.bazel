@@ -120,6 +120,18 @@ sh_binary(
     ],
 )
 
+sh_test(
+    name = "prusaslicer_profile_schema_parity_failure_test",
+    srcs = ["compare_prusaslicer_profile_schema_test.sh"],
+    data = [
+        "compare_prusaslicer_profile_schema.sh",
+        "//packages/slic3r-rust/crates/slic3r_flavors:prusa_profile_schema_summary",
+        "//packages/parity-fixtures:prusa_profile_schema_expected_summary",
+        "//packages/parity-fixtures:prusa_profile_schema_provenance",
+        "//packages/parity-fixtures:prusa_profile_schema_prusa_research_ini",
+    ],
+)
+
 sh_binary(
     name = "linux_runtime_parity",
     srcs = ["compare_linux_runtime.sh"],
