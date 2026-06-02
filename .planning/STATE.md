@@ -4,10 +4,10 @@ milestone: v1.10
 milestone_name: milestone
 current_phase: 40
 current_phase_name: Executable Prusa Profile Parity
-current_plan: 1
-status: verifying
-stopped_at: Completed 40-02-PLAN.md
-last_updated: "2026-06-02T13:15:03.143Z"
+current_plan: Complete
+status: milestone_complete
+stopped_at: Phase 40 verified and v1.10 phase work complete
+last_updated: "2026-06-02T16:04:44.336Z"
 last_activity: 2026-06-02
 progress:
   total_phases: 4
@@ -21,28 +21,28 @@ progress:
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-01)
+See: `.planning/PROJECT.md` (updated 2026-06-02)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Phase 40 — Executable Prusa Profile Parity
+**Current focus:** v1.10 phase work complete — ready for milestone archival
 
 ## Current Position
 
-Phase: 40 (Executable Prusa Profile Parity) — EXECUTING
+Phase: 40 (Executable Prusa Profile Parity) — COMPLETE
 Plan: 2 of 2
 Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
 Current Phase: 40
 Current Phase Name: Executable Prusa Profile Parity
-Current Plan: 1
+Current Plan: Complete
 Total Phases: 4
-Total Plans: 0
-Status: Phase complete — ready for verification
+Total Plans: 6
+Status: Milestone phase work complete — ready for milestone archival
 Last activity: 2026-06-02
-Last Activity Description: Phase 40 execution started
+Last Activity Description: Phase 40 verified and completed
 
 Progress: [██████████] 100%
 
@@ -60,7 +60,7 @@ Progress: [██████████] 100%
 | 37. Prusa Baseline and Checklist Gate | 1/1 | Complete | 2026-06-01 |
 | 38. Prusa Fixture and Status Evidence Surface | 1/1 | Complete | 2026-06-01 |
 | 39. Rust Prusa Profile Boundary | 2/2 | Complete | 2026-06-01 |
-| 40. Executable Prusa Profile Parity | 0/TBD | Not Started | - |
+| 40. Executable Prusa Profile Parity | 2/2 | Complete | 2026-06-02 |
 | Phase 40 P01 | 9m 7s | 3 tasks | 10 files |
 | Phase 40-executable-prusa-profile-parity P02 | 11m 49s | 2 tasks | 12 files |
 
@@ -98,10 +98,15 @@ Recent decisions affecting v1.10:
   formatted with mdformat.
 
 - [Phase 40]: Kept Prusa profile summary generation as pure Rust data-in/data-out logic.
+
 - [Phase 40]: Kept filesystem reads in a thin explicit-path Rust binary and the public maintainer command in packages/parity.
+
 - [Phase 40]: Stored the expected summary beside the Prusa fixture provenance so drift is reviewable in git.
+
 - [Phase 40]: Published exactly one fork.prusaslicer.profile-schema row only after the parity command passed.
+
 - [Phase 40]: Made fixture verification require the exact tab-delimited status row, evidence command, and two scope phrases.
+
 - [Phase 40]: Updated docs to publish only the narrow parser/config evidence slice backed by expected-summary.tsv.
 
 ### Pending Todos
@@ -115,5 +120,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-02T13:15:03.132Z
-Stopped at: Completed 40-02-PLAN.md
+Stopped at: Phase 40 verified and v1.10 phase work complete
 Resume file: None

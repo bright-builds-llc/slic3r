@@ -220,10 +220,10 @@ Phases execute in numeric order: 37 -> 38 -> 39 -> 40
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 37. Prusa Baseline and Checklist Gate | 1/1 | Complete    | 2026-06-01 |
-| 38. Prusa Fixture and Status Evidence Surface | 1/1 | Complete    | 2026-06-01 |
-| 39. Rust Prusa Profile Boundary | 2/2 | Complete    | 2026-06-01 |
-| 40. Executable Prusa Profile Parity | 2/2 | Complete   | 2026-06-02 |
+| 37. Prusa Baseline and Checklist Gate | 1/1 | Complete | 2026-06-01 |
+| 38. Prusa Fixture and Status Evidence Surface | 1/1 | Complete | 2026-06-01 |
+| 39. Rust Prusa Profile Boundary | 2/2 | Complete | 2026-06-01 |
+| 40. Executable Prusa Profile Parity | 2/2 | Complete | 2026-06-02 |
 
 ## Future Roadmap
 
