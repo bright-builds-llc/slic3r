@@ -372,6 +372,7 @@ sh_binary(
     srcs = ["verify_prusa_profile_schema_fixture.sh"],
     data = [
         ":prusa_profile_schema_bundle",
+        "//packages/parity-fixtures:prusa_profile_schema_expected_summary",
         "README.md",
         "forks/prusaslicer/prusaslicer.profile-schema/README.md",
         "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",

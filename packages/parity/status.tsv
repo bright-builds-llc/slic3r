@@ -13,3 +13,4 @@ config.persistence	verified	//packages/parity:cli_config_persistence_parity	Shar
 file-formats	in progress	docs/port/cli-slice.md	Scoped export format families are fixture-verified; broader input and format parity remain legacy-owned
 generated-outputs	in progress	docs/port/cli-slice.md	Scoped export plus repair/split artifact naming are fixture-verified; geometry and output-content parity are deferred
 launcher-packaging	verified	//packages/parity:macos_packaged_launcher_parity	Shared parity evidence proves the scoped macOS packaged launcher bundle, startup handoff, and representative packaged config persistence for the verified slice
+fork.prusaslicer.profile-schema	verified	//packages/parity:prusaslicer_profile_schema_parity	Shared fixture comparison proves the narrow Prusa profile-schema parser/config evidence slice only; full PrusaSlicer runtime support remains deferred

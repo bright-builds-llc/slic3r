@@ -18,12 +18,14 @@ if [[ "$#" -eq 0 ]]; then
 	fi
 	fixture_readme="${package_dir}/forks/prusaslicer/prusaslicer.profile-schema/README.md"
 	provenance_file="${package_dir}/forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv"
+	expected_summary_file="${package_dir}/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv"
 	ini_file="${package_dir}/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini"
 	idx_file="${package_dir}/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx"
 	package_readme="${package_dir}/README.md"
 elif [[ "$#" -eq 6 ]]; then
 	fixture_readme="$1"
 	provenance_file="$2"
+	expected_summary_file="$(dirname "${fixture_readme}")/expected-summary.tsv"
 	ini_file="$3"
 	idx_file="$4"
 	status_file="$5"
@@ -189,11 +191,13 @@ verify_provenance_row() {
 
 verify_scope_wording() {
 	local exclusion_sentence
-	exclusion_sentence="This fixture package does not introduce Bambu Studio fixtures, OrcaSlicer fixtures, network/device integration, cloud behavior, credentials, profile auto-update execution, non-free plugin ingestion, full Prusa runtime support, GUI support, sync automation, or fork release packaging."
+	exclusion_sentence="This fixture package does not introduce Bambu Studio fixtures, OrcaSlicer fixtures, network/device integration, cloud behavior, credentials, profile auto-update execution, non-free plugin ingestion, full PrusaSlicer runtime support, GUI support, sync automation, or fork release packaging."
 
 	require_text "${fixture_readme}" "fixture README" "# PrusaSlicer Profile Schema Fixture"
-	require_text "${fixture_readme}" "fixture README" "Phase 38 fixture/status preparation only."
+	require_text "${fixture_readme}" "fixture README" "Phase 38 supplies the static fixture inputs."
 	require_text "${fixture_readme}" "fixture README" "Static fixture input only."
+	require_text "${fixture_readme}" "fixture README" "expected-summary.tsv"
+	require_text "${fixture_readme}" "fixture README" "narrow Prusa profile-schema parser/config evidence slice only"
 	require_text "${fixture_readme}" "fixture README" "Source ref: prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
 	require_text "${fixture_readme}" "fixture README" "Accepted tag: version_2.9.5"
 	require_text "${fixture_readme}" "fixture README" "Peeled commit: 9a583bd438b195856f3bcf7ea99b69ba4003a961"
@@ -202,10 +206,13 @@ verify_scope_wording() {
 	require_text "${fixture_readme}" "fixture README" "metadata-only-not-legal-review"
 	require_text "${fixture_readme}" "fixture README" "Update route: update this fixture only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate."
 	require_text "${fixture_readme}" "fixture README" "Branch-head observations remain drift-only and do not update this fixture."
-	require_text "${fixture_readme}" "fixture README" "Phase 39 creates Rust parsing; Phase 40 creates executable parity evidence and any verified status publication."
+	require_text "${fixture_readme}" "fixture README" "bazel run //packages/parity:prusaslicer_profile_schema_parity"
+	require_text "${fixture_readme}" "fixture README" "full PrusaSlicer runtime support remains deferred"
 	require_text "${fixture_readme}" "fixture README" "${exclusion_sentence}"
-	require_text "${fixture_readme}" "fixture README" "The planned Phase 40 command shape is bazel run //packages/parity:prusaslicer_profile_schema_parity; Phase 38 must not create that target."
 	require_file "${package_readme}" "packages/parity-fixtures/README.md"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "expected-summary.tsv"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "bazel run //packages/parity:prusaslicer_profile_schema_parity"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "full PrusaSlicer runtime support remains deferred"
 }
 
 verify_forbidden_namespaces() {
@@ -250,17 +257,51 @@ verify_forbidden_namespaces() {
 	done < <(find "${forks_root}" -mindepth 1 -type d -print)
 }
 
-verify_status_not_published() {
-	local maybe_match
-	maybe_match="$(awk '/fork\.prusaslicer|prusaslicer\.profile-schema|prusaslicer_profile_schema_parity/ { print; exit }' "${status_file}")"
-	if [[ -n "${maybe_match}" ]]; then
-		error "packages/parity/status.tsv must not publish Prusa profile-schema status in Phase 38: ${maybe_match}"
-	fi
+verify_status_published() {
+	local status_errors
+	status_errors="$(awk -F '\t' \
+		-v surface="fork.prusaslicer.profile-schema" \
+		-v required_status="verified" \
+		-v required_evidence="//packages/parity:prusaslicer_profile_schema_parity" \
+		-v required_narrow="narrow Prusa profile-schema parser/config evidence slice only" \
+		-v required_runtime="full PrusaSlicer runtime support remains deferred" '
+		$1 == surface {
+			count++
+			if ($2 != required_status) {
+				printf "%s status: expected %s, got %s\n", surface, required_status, $2
+				failed = 1
+			}
+			if ($3 != required_evidence) {
+				printf "%s evidence: expected %s, got %s\n", surface, required_evidence, $3
+				failed = 1
+			}
+			if (index($4, required_narrow) == 0) {
+				printf "%s notes: missing %s\n", surface, required_narrow
+				failed = 1
+			}
+			if (index($4, required_runtime) == 0) {
+				printf "%s notes: missing %s\n", surface, required_runtime
+				failed = 1
+			}
+		}
+		END {
+			if (count == 0) {
+				printf "%s status: missing row\n", surface
+				failed = 1
+			}
+			if (count > 1) {
+				printf "%s status: duplicate rows: %d\n", surface, count
+				failed = 1
+			}
+			exit failed ? 1 : 0
+		}
+	' "${status_file}")" || error "packages/parity/status.tsv: ${status_errors}"
 }
 
 for required_file in \
 	"${fixture_readme}" \
 	"${provenance_file}" \
+	"${expected_summary_file}" \
 	"${status_file}" \
 	"${package_readme}"; do
 	require_file "${required_file}" "input"
@@ -270,6 +311,6 @@ verify_fixture_files
 verify_provenance
 verify_scope_wording
 verify_forbidden_namespaces
-verify_status_not_published
+verify_status_published
 
 printf 'ok: Prusa profile-schema fixture verification passed\n'

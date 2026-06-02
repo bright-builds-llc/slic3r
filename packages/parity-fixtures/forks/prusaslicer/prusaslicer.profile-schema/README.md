@@ -1,7 +1,8 @@
 # PrusaSlicer Profile Schema Fixture
 
-Phase 38 fixture/status preparation only.
+Phase 38 supplies the static fixture inputs.
 Static fixture input only.
+Phase 40 adds `expected-summary.tsv` as the checked-in expected artifact for the narrow Prusa profile-schema parser/config evidence slice only.
 
 ## Provenance
 
@@ -22,9 +23,9 @@ Branch-head observations remain drift-only and do not update this fixture.
 
 ## Status Boundary
 
-Phase 39 creates Rust parsing; Phase 40 creates executable parity evidence and any verified status publication.
-The planned Phase 40 command shape is bazel run //packages/parity:prusaslicer_profile_schema_parity; Phase 38 must not create that target.
+Executable evidence command: `bazel run //packages/parity:prusaslicer_profile_schema_parity`.
+The verified status token is `fork.prusaslicer.profile-schema` for the narrow Prusa profile-schema parser/config evidence slice only; full PrusaSlicer runtime support remains deferred.
 
 ## Exclusions
 
-This fixture package does not introduce Bambu Studio fixtures, OrcaSlicer fixtures, network/device integration, cloud behavior, credentials, profile auto-update execution, non-free plugin ingestion, full Prusa runtime support, GUI support, sync automation, or fork release packaging.
+This fixture package does not introduce Bambu Studio fixtures, OrcaSlicer fixtures, network/device integration, cloud behavior, credentials, profile auto-update execution, non-free plugin ingestion, full PrusaSlicer runtime support, GUI support, sync automation, or fork release packaging.

@@ -23,12 +23,15 @@ Phase 38 creates the first real fork fixture namespace at
 `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/`.
 It contains raw static `PrusaResearch.ini` and `PrusaResearch.idx` inputs from
 `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.
+Phase 40 adds `expected-summary.tsv` as the checked-in expected artifact for the
+narrow Prusa profile-schema parser/config evidence slice only, verified by
+`bazel run //packages/parity:prusaslicer_profile_schema_parity`.
 
 Update route: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
 Branch-head observations remain drift-only.
-Phase 38 verification does not fetch upstream source, run profile auto-update, ingest plugins, or execute a Prusa parity command.
+Fixture verification does not fetch upstream source, run profile auto-update execution, or ingest plugins.
 
-This fixture package does not introduce Bambu Studio fixtures, OrcaSlicer fixtures, network/device integration, cloud behavior, credentials, profile auto-update execution, non-free plugin ingestion, full Prusa runtime support, GUI support, sync automation, or fork release packaging.
+This fixture package does not introduce Bambu Studio fixtures, OrcaSlicer fixtures, network/device integration, cloud behavior, credentials, profile auto-update execution, non-free plugin ingestion, full PrusaSlicer runtime support, GUI support, sync automation, or fork release packaging. The narrow parser/config evidence is verified, and full PrusaSlicer runtime support remains deferred.
 
 The fixture provenance cites the accepted upstream source URLs and
 `metadata-only-not-legal-review`; it is provenance for static fixture inputs,
@@ -65,3 +68,5 @@ additional fixture files by themselves.
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/`,
   exported as `//packages/parity-fixtures:prusa_profile_schema_bundle` and
   checked by `//packages/parity-fixtures:verify_prusa_profile_schema_fixture`.
+- Phase 40 adds `expected-summary.tsv` to that bundle and verifies it through
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity`.

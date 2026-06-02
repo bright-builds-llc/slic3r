@@ -12,6 +12,7 @@ verifier="${workspace_root}/packages/parity-fixtures/verify_prusa_profile_schema
 source_fixture_dir="${workspace_root}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema"
 source_status_file="${workspace_root}/packages/parity/status.tsv"
 source_package_readme="${workspace_root}/packages/parity-fixtures/README.md"
+valid_prusa_status_row=$'fork.prusaslicer.profile-schema\tverified\t//packages/parity:prusaslicer_profile_schema_parity\tShared fixture comparison proves the narrow Prusa profile-schema parser/config evidence slice only; full PrusaSlicer runtime support remains deferred'
 
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/verify-prusa-profile-schema-fixture-test.XXXXXX")"
 trap 'rm -rf "${tmp_dir}"' EXIT
@@ -80,6 +81,7 @@ write_valid_fixture_copy() {
 	mkdir -p "${fixture_dir}"
 	cp "${source_fixture_dir}/.gitattributes" "${fixture_dir}/.gitattributes"
 	cp "${source_fixture_dir}/README.md" "${fixture_dir}/README.md"
+	cp "${source_fixture_dir}/expected-summary.tsv" "${fixture_dir}/expected-summary.tsv"
 	cp "${source_fixture_dir}/fixture-provenance.tsv" "${fixture_dir}/fixture-provenance.tsv"
 	cp "${source_fixture_dir}/PrusaResearch.ini" "${fixture_dir}/PrusaResearch.ini"
 	cp "${source_fixture_dir}/PrusaResearch.idx" "${fixture_dir}/PrusaResearch.idx"
@@ -219,20 +221,113 @@ test_parent_directory_forbidden_token_passes() {
 	assert_contains "${tmp_dir}/parent-cloud.out" "ok: Prusa profile-schema fixture verification passed"
 }
 
-test_status_row_fails() {
+test_missing_prusa_status_row_fails() {
 	# Arrange
-	local dir="${tmp_dir}/status-row"
+	local dir="${tmp_dir}/missing-status-row"
 	write_valid_fixture_copy "${dir}"
-	printf 'fork.prusaslicer.profile-schema\tverified\t//packages/parity:prusaslicer_profile_schema_parity\tinvalid Phase 38 row\n' >>"${dir}/status.tsv"
+	remove_line_containing "${dir}/status.tsv" "fork.prusaslicer.profile-schema"
 
 	# Act
-	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/status-row.out" "${tmp_dir}/status-row.err"; then
-		fail "Prusa status row fixture passed"
+	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/missing-status-row.out" "${tmp_dir}/missing-status-row.err"; then
+		fail "missing Prusa status row fixture passed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/status-row.err" "packages/parity/status.tsv"
-	assert_contains "${tmp_dir}/status-row.err" "fork.prusaslicer.profile-schema"
+	assert_contains "${tmp_dir}/missing-status-row.err" "packages/parity/status.tsv"
+	assert_contains "${tmp_dir}/missing-status-row.err" "fork.prusaslicer.profile-schema"
+	assert_contains "${tmp_dir}/missing-status-row.err" "status"
+}
+
+test_wrong_prusa_status_evidence_fails() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-status-evidence"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${dir}/status.tsv" \
+		"fork.prusaslicer.profile-schema" \
+		$'fork.prusaslicer.profile-schema\tverified\t//packages/parity:wrong_prusa_profile_schema_parity\tShared fixture comparison proves the narrow Prusa profile-schema parser/config evidence slice only; full PrusaSlicer runtime support remains deferred'
+
+	# Act
+	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/wrong-status-evidence.out" "${tmp_dir}/wrong-status-evidence.err"; then
+		fail "wrong Prusa status evidence fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/wrong-status-evidence.err" "fork.prusaslicer.profile-schema"
+	assert_contains "${tmp_dir}/wrong-status-evidence.err" "evidence"
+}
+
+test_wrong_prusa_status_value_fails() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-status-value"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${dir}/status.tsv" \
+		"fork.prusaslicer.profile-schema" \
+		$'fork.prusaslicer.profile-schema\tin progress\t//packages/parity:prusaslicer_profile_schema_parity\tShared fixture comparison proves the narrow Prusa profile-schema parser/config evidence slice only; full PrusaSlicer runtime support remains deferred'
+
+	# Act
+	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/wrong-status-value.out" "${tmp_dir}/wrong-status-value.err"; then
+		fail "wrong Prusa status value fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/wrong-status-value.err" "fork.prusaslicer.profile-schema"
+	assert_contains "${tmp_dir}/wrong-status-value.err" "status"
+}
+
+test_duplicate_prusa_status_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-status-row"
+	write_valid_fixture_copy "${dir}"
+	printf '%s\n' "${valid_prusa_status_row}" >>"${dir}/status.tsv"
+
+	# Act
+	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/duplicate-status-row.out" "${tmp_dir}/duplicate-status-row.err"; then
+		fail "duplicate Prusa status row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/duplicate-status-row.err" "fork.prusaslicer.profile-schema"
+	assert_contains "${tmp_dir}/duplicate-status-row.err" "status"
+}
+
+test_prusa_status_notes_missing_narrow_scope_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-narrow-status-notes"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${dir}/status.tsv" \
+		"fork.prusaslicer.profile-schema" \
+		$'fork.prusaslicer.profile-schema\tverified\t//packages/parity:prusaslicer_profile_schema_parity\tShared fixture comparison proves broad Prusa profile evidence; full PrusaSlicer runtime support remains deferred'
+
+	# Act
+	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/missing-narrow-status-notes.out" "${tmp_dir}/missing-narrow-status-notes.err"; then
+		fail "Prusa status notes missing narrow scope passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-narrow-status-notes.err" "fork.prusaslicer.profile-schema"
+	assert_contains "${tmp_dir}/missing-narrow-status-notes.err" "notes"
+}
+
+test_prusa_status_notes_missing_runtime_deferral_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-runtime-status-notes"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${dir}/status.tsv" \
+		"fork.prusaslicer.profile-schema" \
+		$'fork.prusaslicer.profile-schema\tverified\t//packages/parity:prusaslicer_profile_schema_parity\tShared fixture comparison proves the narrow Prusa profile-schema parser/config evidence slice only'
+
+	# Act
+	if PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/missing-runtime-status-notes.out" "${tmp_dir}/missing-runtime-status-notes.err"; then
+		fail "Prusa status notes missing runtime deferral passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-runtime-status-notes.err" "fork.prusaslicer.profile-schema"
+	assert_contains "${tmp_dir}/missing-runtime-status-notes.err" "notes"
 }
 
 test_complete_fixture_passes
@@ -243,6 +338,11 @@ test_swapped_provenance_rows_fail
 test_missing_static_input_boundary_fails
 test_forbidden_bambu_namespace_fails
 test_parent_directory_forbidden_token_passes
-test_status_row_fails
+test_missing_prusa_status_row_fails
+test_wrong_prusa_status_evidence_fails
+test_wrong_prusa_status_value_fails
+test_duplicate_prusa_status_row_fails
+test_prusa_status_notes_missing_narrow_scope_fails
+test_prusa_status_notes_missing_runtime_deferral_fails
 
 printf 'ok: verify_prusa_profile_schema_fixture_test\n'
