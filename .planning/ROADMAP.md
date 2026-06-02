@@ -78,7 +78,7 @@ surfaces, fork release builds, Bambu Studio, OrcaSlicer, and vendor sync.
   normalize Prusa profile/config fixtures into typed Rust domain values that
   trace back to v1.9 inventory and source metadata.
 
-- [ ] **Phase 40: Executable Prusa Profile Parity** - Maintainers can run a
+- [x] **Phase 40: Executable Prusa Profile Parity** - Maintainers can run a (completed 2026-06-02)
   repo-owned Bazel parity command that compares Rust-backed Prusa
   profile/config behavior against checked-in fixture expectations and publishes
   exact docs/status scope.
@@ -191,7 +191,7 @@ Plans:
 
 - [x] 40-01-PLAN.md — Create the Rust-backed Prusa profile-schema summary,
   expected artifact, public parity command, and divergence failure guard.
-- [ ] 40-02-PLAN.md — Publish the exact narrow Prusa status row, update the
+- [x] 40-02-PLAN.md — Publish the exact narrow Prusa status row, update the
   fixture verifier, and align package/port docs with executable evidence.
 
 ## Coverage
@@ -223,7 +223,7 @@ Phases execute in numeric order: 37 -> 38 -> 39 -> 40
 | 37. Prusa Baseline and Checklist Gate | 1/1 | Complete    | 2026-06-01 |
 | 38. Prusa Fixture and Status Evidence Surface | 1/1 | Complete    | 2026-06-01 |
 | 39. Rust Prusa Profile Boundary | 2/2 | Complete    | 2026-06-01 |
-| 40. Executable Prusa Profile Parity | 1/2 | In Progress|  |
+| 40. Executable Prusa Profile Parity | 2/2 | Complete   | 2026-06-02 |
 
 ## Future Roadmap
 

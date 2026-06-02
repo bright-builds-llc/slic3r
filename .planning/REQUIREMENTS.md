@@ -59,7 +59,7 @@ Requirements for the v1.10 milestone. Each maps to one roadmap phase.
 - [x] **PPAR-02**: Maintainer can see the Prusa parity command fail when the
   Rust-backed parsed or normalized profile/config output diverges from the
   checked-in Prusa fixture expectations.
-- [ ] **PPAR-03**: Maintainer can inspect docs and parity status updates that
+- [x] **PPAR-03**: Maintainer can inspect docs and parity status updates that
   name the exact verified Prusa profile/config evidence slice and keep full
   PrusaSlicer runtime support, GUI support, generated-output parity, fork
   release builds, and sync automation deferred.
@@ -127,7 +127,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PROF-03 | Phase 39 | Complete |
 | PPAR-01 | Phase 40 | Complete |
 | PPAR-02 | Phase 40 | Complete |
-| PPAR-03 | Phase 40 | Pending |
+| PPAR-03 | Phase 40 | Complete |
 
 **Coverage:**
 

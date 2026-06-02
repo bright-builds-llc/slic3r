@@ -5,16 +5,16 @@ milestone_name: milestone
 current_phase: 40
 current_phase_name: Executable Prusa Profile Parity
 current_plan: 1
-status: executing
-stopped_at: Completed 40-01-PLAN.md
-last_updated: "2026-06-02T12:56:50.338Z"
+status: verifying
+stopped_at: Completed 40-02-PLAN.md
+last_updated: "2026-06-02T13:15:03.143Z"
 last_activity: 2026-06-02
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 6
-  completed_plans: 5
-  percent: 83
+  completed_plans: 6
+  percent: 100
 ---
 
 # Project State
@@ -40,7 +40,7 @@ Current Phase Name: Executable Prusa Profile Parity
 Current Plan: 1
 Total Phases: 4
 Total Plans: 0
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-02
 Last Activity Description: Phase 40 execution started
 
@@ -62,6 +62,7 @@ Progress: [██████████] 100%
 | 39. Rust Prusa Profile Boundary | 2/2 | Complete | 2026-06-01 |
 | 40. Executable Prusa Profile Parity | 0/TBD | Not Started | - |
 | Phase 40 P01 | 9m 7s | 3 tasks | 10 files |
+| Phase 40-executable-prusa-profile-parity P02 | 11m 49s | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -99,6 +100,9 @@ Recent decisions affecting v1.10:
 - [Phase 40]: Kept Prusa profile summary generation as pure Rust data-in/data-out logic.
 - [Phase 40]: Kept filesystem reads in a thin explicit-path Rust binary and the public maintainer command in packages/parity.
 - [Phase 40]: Stored the expected summary beside the Prusa fixture provenance so drift is reviewable in git.
+- [Phase 40]: Published exactly one fork.prusaslicer.profile-schema row only after the parity command passed.
+- [Phase 40]: Made fixture verification require the exact tab-delimited status row, evidence command, and two scope phrases.
+- [Phase 40]: Updated docs to publish only the narrow parser/config evidence slice backed by expected-summary.tsv.
 
 ### Pending Todos
 
@@ -110,6 +114,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-02T12:56:50.335Z
-Stopped at: Completed 40-01-PLAN.md
+Last session: 2026-06-02T13:15:03.132Z
+Stopped at: Completed 40-02-PLAN.md
 Resume file: None
