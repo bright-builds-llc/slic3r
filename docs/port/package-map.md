@@ -16,10 +16,10 @@
 | Package | Role |
 |---------|------|
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
-| `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface |
+| `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface; `slic3r_flavors` owns the Prusa profile parser and summary helper |
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, the scoped Windows packaged launcher tree, and the scoped macOS packaged launcher/startup surface |
-| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, and Windows packaged launcher slices |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, and `windows-packaged-launcher` slices, plus the Phase 38 Prusa profile-schema fixture namespace |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, Windows packaged launcher, and narrow Prusa profile-schema slices |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, `windows-packaged-launcher`, and Prusa profile-schema slices, including the checked-in `expected-summary.tsv` artifact |
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
 | `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
@@ -105,9 +105,7 @@
 - Phase 38 adds the static Prusa fixture namespace
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/` and
   verifies it with
-  `//packages/parity-fixtures:verify_prusa_profile_schema_fixture`. The status
-  token `fork.prusaslicer.profile-schema` is reserved for Phase 40, and
-  packages/parity/status.tsv remains unchanged in Phase 38.
+  `//packages/parity-fixtures:verify_prusa_profile_schema_fixture`.
 - Phase 39 adds the Rust parser/metadata boundary
   `slic3r_flavors::prusa_profile` with `parse_prusa_profile_bundle` and
   `prusa_profile_schema_metadata` for `prusaslicer.profile-schema`. It traces
@@ -116,6 +114,10 @@
   `resources/profiles/PrusaResearch.ini`,
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
   `packages/prusa-baseline/profile-schema-checklist.md`, and
-  `future-candidate` status. Phase 40 still owns
-  `//packages/parity:prusaslicer_profile_schema_parity` and any
-  `packages/parity/status.tsv` publication.
+  `future-candidate` status.
+- Phase 40 makes the Prusa package boundaries discoverable:
+  `packages/parity` owns `bazel run //packages/parity:prusaslicer_profile_schema_parity` and the
+  `fork.prusaslicer.profile-schema` status row, `packages/parity-fixtures` owns
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`,
+  and `packages/slic3r-rust/crates/slic3r_flavors` owns parser/summary logic for
+  the narrow Prusa profile-schema parser/config evidence slice.

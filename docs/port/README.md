@@ -207,36 +207,48 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   owns the Phase 38 static fixture namespace for the narrow Prusa profile
   schema/config evidence slice.
 - `//packages/parity-fixtures:prusa_profile_schema_bundle` exports the raw
-  fixture README, provenance TSV, `PrusaResearch.ini`, and `PrusaResearch.idx`
-  files.
+  fixture README, provenance TSV, `expected-summary.tsv`, `PrusaResearch.ini`,
+  and `PrusaResearch.idx` files.
 - `//packages/parity-fixtures:verify_prusa_profile_schema_fixture` checks the
   fixture files, source pin, sizes, SHA-256 values, provenance text, namespace
-  boundary, and status non-publication.
+  boundary, and exact `fork.prusaslicer.profile-schema` status publication.
 - `PrusaResearch.ini` and `PrusaResearch.idx` are static fixture inputs from
   `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.
-- `fork.prusaslicer.profile-schema` is docs-only reserved status vocabulary in
-  Phase 38.
-- Phase 38 fixture/status preparation only.
-- Phase 39 creates Rust parsing; Phase 40 creates executable parity evidence and any verified status publication.
-- Phase 38 adds no Rust parsing, no executable Prusa parity command, no Prusa status row, no upstream source-tree import, no vendor sync automation, no profile auto-update execution, no Bambu Studio fixtures, no OrcaSlicer fixtures, no network/cloud/credential fixtures, no non-free plugin fixtures, no GUI support, and no fork release packaging.
+- `fork.prusaslicer.profile-schema` is now verified in
+  `packages/parity/status.tsv` only for the narrow Prusa profile-schema parser/
+  config evidence slice backed by `expected-summary.tsv`.
+- Phase 38 supplies static fixture inputs, Phase 39 supplies Rust parsing, and
+  Phase 40 supplies executable parity evidence through
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity`.
+- Phase 40 still adds no upstream source-tree import, vendor sync automation,
+  profile auto-update execution, Bambu Studio fixtures, OrcaSlicer fixtures,
+  network/cloud/credential fixtures, non-free plugin fixtures, GUI support,
+  generated-output parity, fork release builds, or full PrusaSlicer runtime
+  support.
 
 ## Current Prusa Rust Boundary State
 
 - Phase 39 creates parser/metadata readiness only through
   `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
   `prusa_profile_schema_metadata`.
-- The Rust boundary traces `prusaslicer.profile-schema` to
+- The Rust boundary and Phase 40 summary evidence trace
+  `prusaslicer.profile-schema` to
   `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
   source path `resources/profiles/PrusaResearch.ini`, fixture path
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
+  expected artifact path
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`,
   checklist path `packages/prusa-baseline/profile-schema-checklist.md`, and
   checklist status `future-candidate`.
-- Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
-- Phase 40 also owns any `packages/parity/status.tsv` row for
-  `fork.prusaslicer.profile-schema`.
-- Phase 39 creates no full PrusaSlicer runtime support, GUI support,
-  network/device/cloud/credential behavior, profile auto-update execution,
-  non-free plugin ingestion, vendor sync automation, or fork release packaging.
+- The exact current command is
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity`.
+- `fork.prusaslicer.profile-schema` verifies the narrow Prusa profile-schema
+  parser/config evidence slice only.
+- Full PrusaSlicer runtime support remains deferred. GUI support remains
+  deferred, generated-output parity remains deferred, fork release builds remain
+  deferred, profile auto-update execution remains deferred, network/cloud/
+  credential behavior remains deferred, non-free plugin ingestion remains
+  deferred, and sync automation remains deferred.
 
 ## v1.9 Fork Parity Deferrals
 

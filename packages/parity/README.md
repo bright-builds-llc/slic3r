@@ -26,6 +26,9 @@
   parity evidence for the scoped Linux packaged launcher tree.
 - `bazel run //packages/parity:windows_packaged_launcher_parity` runs the
   shared parity evidence for the scoped Windows packaged launcher tree.
+- `bazel run //packages/parity:prusaslicer_profile_schema_parity` runs the
+  shared fixture comparison for the narrow Prusa profile-schema parser/config
+  evidence slice backed by `expected-summary.tsv`.
 - `status.tsv` is the checked-in data source for that command.
 
 Linux and Windows runtime validation now publish as their own status rows.
@@ -42,35 +45,34 @@ checked-in status rows:
 - Keep status reporting conservative.
 - Do not mark a slice `verified` until the shared fixture comparison exists.
 
-## Future Fork Status Rows
+## Fork Status Rows
 
-Phase 39 documents parser/metadata readiness for `prusaslicer.profile-schema`
-through `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
-`prusa_profile_schema_metadata`; it does not add a Prusa row to
-`packages/parity/status.tsv`.
+`fork.prusaslicer.profile-schema` is verified only for the narrow Prusa
+profile-schema parser/config evidence slice. The evidence command is
+`bazel run //packages/parity:prusaslicer_profile_schema_parity`, and the checked
+expectation is
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`.
 
-That Rust boundary traces to
+That evidence traces to
 `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
 source path `resources/profiles/PrusaResearch.ini`, fixture path
 `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
 checklist path `packages/prusa-baseline/profile-schema-checklist.md`, and
 checklist status `future-candidate`.
 
-The docs-only token `fork.prusaslicer.profile-schema` is reserved for the
-future Prusa profile/config evidence slice.
-
 Future fork status tokens should use `fork.<inventory_id>` or an
 inventory-derived stable slug that traces back to `packages/fork-inventories`.
 A fork row may become `verified` only when maintainers can rerun a real
 `//packages/parity:*_parity` evidence command for that fork slice.
-
-Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
-That target must have a rerunnable
-`bazel run //packages/parity:prusaslicer_profile_schema_parity` command that
-exists and passes before `fork.prusaslicer.profile-schema` can be verified.
 
 Source pins, inventories, checklist records, flavor metadata, and static
 fixtures are planning inputs only. They do not prove full PrusaSlicer support,
 fork runtime support, GUI support, network/device/cloud/credential behavior,
 profile auto-update execution, non-free plugin ingestion, vendor sync
 automation, fork release packaging, or status evidence by themselves.
+
+Full PrusaSlicer runtime support remains deferred. GUI support remains deferred,
+generated-output parity remains deferred, fork release builds remain deferred,
+profile auto-update execution remains deferred, network/cloud/credential
+behavior remains deferred, non-free plugin ingestion remains deferred, and sync
+automation remains deferred.

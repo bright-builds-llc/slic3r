@@ -71,16 +71,13 @@ boundaries.
 - The complete v1.9 fork-parity deferral list lives in
   [`README.md#v19-fork-parity-deferrals`](./README.md#v19-fork-parity-deferrals).
   Link to that block instead of repeating the full list in every package doc.
-- Phase 38 does not add Prusa rows to `packages/parity/status.tsv`.
 - Future fork status tokens should use `fork.<inventory_id>` or an
   inventory-derived stable slug, and `verified` requires a real
   `//packages/parity:*_parity` evidence command.
-- Phase 40 owns `//packages/parity:prusaslicer_profile_schema_parity`.
-- `fork.prusaslicer.profile-schema` is reserved until a rerunnable
-  `bazel run //packages/parity:prusaslicer_profile_schema_parity` command
-  exists and passes.
-- `packages/parity/status.tsv` must remain free of Prusa profile-schema rows
-  until that command exists and passes.
+- `fork.prusaslicer.profile-schema` is verified for this narrow Prusa
+  profile-schema parser/config evidence slice only. Its executable evidence is
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity`, backed by
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`.
 - Phase 39 creates parser/metadata readiness only through
   `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
   `prusa_profile_schema_metadata`. It traces `prusaslicer.profile-schema` to
@@ -94,9 +91,9 @@ boundaries.
   planning inputs only.
 
 Phase 37 routes PrusaSlicer baseline review through `packages/prusa-baseline`;
-that package is a baseline/checklist gate only. Phase 38 fixture/status
-preparation creates static Prusa inputs only, Phase 39 creates Rust parsing, and
-Phase 40 creates executable parity/status publication.
+that package is a baseline/checklist gate only. Phase 38 creates static Prusa
+inputs only, Phase 39 creates Rust parsing, and Phase 40 creates executable
+parity/status publication for the narrow slice.
 
 ## Scope Now vs Deferred
 
@@ -118,6 +115,7 @@ Phase 40 creates executable parity/status publication.
   - full PrusaSlicer runtime support, network/device/cloud/credential behavior,
     profile auto-update execution, non-free plugin ingestion, vendor sync
     automation, and fork release packaging
+  - generated-output parity for the Prusa profile-schema slice
   - release-grade package formats such as AppImage, MSI, and DMG
   - installers, signing, notarization, native/cross-compiled release binaries,
     broad bundled dependency layout, downstream fork work, fork-flavor builds,
@@ -125,3 +123,8 @@ Phase 40 creates executable parity/status publication.
 - The docs should prefer plain statements of what is deferred over optimistic
   wording. If the repo cannot prove a surface today, keep it `legacy-only` and
   say so.
+- Full PrusaSlicer runtime support remains deferred. GUI support remains
+  deferred, generated-output parity remains deferred, fork release builds remain
+  deferred, profile auto-update execution remains deferred, network/cloud/
+  credential behavior remains deferred, non-free plugin ingestion remains
+  deferred, and sync automation remains deferred.

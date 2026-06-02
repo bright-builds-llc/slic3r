@@ -30,7 +30,6 @@ parity, and fixture rules.
 
 ## Fork Parity Interpretation
 
-- There are no v1.9 fork rows in `packages/parity/status.tsv`.
 - Future fork rows should use `fork.<inventory_id>` or an inventory-derived
   stable slug only after executable parity evidence exists.
 - A future fork row reaches `verified` only when backed by a real
@@ -40,10 +39,6 @@ parity, and fixture rules.
 - `packages/prusa-baseline` is the Phase 37 PrusaSlicer baseline/checklist gate.
   Its records do not create Prusa runtime support, executable fork parity, fork
   status rows, or Prusa fixture files.
-- `fork.prusaslicer.profile-schema` is reserved vocabulary only in Phase 38.
-  Static fixtures and source pins do not create full PrusaSlicer support or
-  `verified` status, and the checked-in status table has no Prusa row in
-  Phase 38.
 - Phase 39 adds parser/metadata readiness only through
   `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
   `prusa_profile_schema_metadata` for `prusaslicer.profile-schema`. The
@@ -53,9 +48,13 @@ parity, and fixture rules.
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
   `packages/prusa-baseline/profile-schema-checklist.md`, and
   `future-candidate` status.
-- Phase 40 owns
-  `bazel run //packages/parity:prusaslicer_profile_schema_parity` and any
-  `packages/parity/status.tsv` row for `fork.prusaslicer.profile-schema`.
-  Phase 39 does not prove full PrusaSlicer runtime support, GUI support,
-  network/device/cloud/credential behavior, profile auto-update execution,
-  non-free plugin ingestion, vendor sync automation, or fork release packaging.
+- `fork.prusaslicer.profile-schema` is verified in
+  `packages/parity/status.tsv` for the narrow Prusa profile-schema parser/config
+  evidence slice only. The evidence command is
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity`, backed by
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`.
+- Full PrusaSlicer runtime support remains deferred. GUI support remains
+  deferred, generated-output parity remains deferred, fork release builds remain
+  deferred, profile auto-update execution remains deferred, network/cloud/
+  credential behavior remains deferred, non-free plugin ingestion remains
+  deferred, and sync automation remains deferred.

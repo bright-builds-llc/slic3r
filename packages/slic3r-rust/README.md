@@ -10,8 +10,9 @@ and output parity remain later work. Phase 10 adds the scoped config
 persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
 13 adds the scoped Rust-backed transform/info workflows. Phase 39 adds the
 `slic3r_flavors::prusa_profile` parser and metadata boundary for the
-PrusaSlicer profile-schema fixture only; executable Prusa parity and status
-publication remain Phase 40 scope.
+PrusaSlicer profile-schema fixture only. Phase 40 adds the Rust summary helper
+and `bazel run //packages/parity:prusaslicer_profile_schema_parity` as narrow
+executable Prusa profile-schema parser/config evidence.
 
 ## Layout
 
@@ -58,6 +59,10 @@ publication remain Phase 40 scope.
   - `//packages/slic3r-rust/crates/slic3r_flavors:flavor_registry_test`
 - Run the Prusa profile-schema parser boundary tests:
   - `//packages/slic3r-rust/crates/slic3r_flavors:prusa_profile_test`
+- Run the Prusa profile-schema summary helper:
+  - `//packages/slic3r-rust/crates/slic3r_flavors:prusa_profile_schema_summary`
+- Run the narrow Prusa profile-schema parity command:
+  - `bazel run //packages/parity:prusaslicer_profile_schema_parity`
 - Run write-mode formatting with the pinned Rust toolchain:
   - `bazel run @rules_rust//:rustfmt`
 
@@ -81,18 +86,24 @@ publication remain Phase 40 scope.
   executable fork parity.
 - Phase 39 exposes `slic3r_flavors::prusa_profile`,
   `parse_prusa_profile_bundle`, and `prusa_profile_schema_metadata` for
-  parser/metadata readiness only. The boundary traces
+  parser/metadata readiness only. Phase 40 adds
+  `prusa_profile_schema_summary` and the summary binary for deterministic
+  parser/config evidence. The boundary traces
   `prusaslicer.profile-schema` to
   `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
   `resources/profiles/PrusaResearch.ini`,
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini`,
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`,
   `packages/prusa-baseline/profile-schema-checklist.md`, and checklist status
   `future-candidate`.
-- Phase 40 owns
-  `bazel run //packages/parity:prusaslicer_profile_schema_parity` and any
-  `packages/parity/status.tsv` row for `fork.prusaslicer.profile-schema`.
-  Phase 39 does not claim full PrusaSlicer runtime support, GUI support,
-  network/device/cloud/credential behavior, profile auto-update execution,
-  vendor sync automation, or fork release packaging.
+- `slic3r_flavors::prusa_profile` remains parser/metadata plus summary evidence
+  only. `fork.prusaslicer.profile-schema` is verified through
+  `bazel run //packages/parity:prusaslicer_profile_schema_parity` for the
+  narrow Prusa profile-schema parser/config evidence slice only.
+- Full PrusaSlicer runtime support remains deferred. GUI support remains
+  deferred, generated-output parity remains deferred, fork release builds remain
+  deferred, profile auto-update execution remains deferred, network/cloud/
+  credential behavior remains deferred, non-free plugin ingestion remains
+  deferred, and sync automation remains deferred.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).
