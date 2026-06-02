@@ -1,5 +1,38 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.10 PrusaSlicer Parity Evidence Foundation (Shipped: 2026-06-02)
+
+**Delivered:** Proved the first narrow executable PrusaSlicer profile/config
+evidence slice, from reviewer-gated baseline and fixtures through Rust parser
+boundary, parity command, exact status row, UAT, and security verification.
+
+**Phases completed:** 37-40 (6 plans total, 15 plan tasks)
+
+**Key accomplishments:**
+
+- PrusaSlicer profile-schema baseline gate with checked records, fail-closed verification, and port-doc routing
+- Static Prusa profile-schema fixture bundle with provenance, fail-closed Bazel verification, and docs-only status reservation
+- Std-only Prusa profile parser with typed fixture metadata and Cargo/Bazel verification for the profile-schema boundary
+- Prusa profile-schema parser documentation with exact fixture traceability and Phase 40 status deferral
+- Rust-backed PrusaResearch.ini profile-schema parity command with checked-in TSV expectations and a mutation failure guard
+- Verified Prusa profile-schema status publication with exact-row fixture enforcement and narrow-scope docs
+
+**Stats:**
+
+- 4 phases, 6 plans, 15 plan tasks
+- Requirements: 12/12 complete
+- Milestone audit: passed
+- Security: `threats_open: 0`
+- UAT: 3 passed, 0 issues, 1 skipped by user acceptance
+- Milestone archive: [v1.10-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.10-ROADMAP.md)
+- Requirements archive: [v1.10-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.10-REQUIREMENTS.md)
+- Audit: [v1.10-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.10-MILESTONE-AUDIT.md)
+
+**What's next:** start v1.11 with fresh requirements for broader PrusaSlicer
+parity, using the v1.10 profile/config evidence path as the trust foundation.
+
+______________________________________________________________________
+
 ## v1.9 Fork Vendor Intake and Module Architecture (Shipped: 2026-05-29)
 
 **Delivered:** Established pinned downstream fork references, source-pinned

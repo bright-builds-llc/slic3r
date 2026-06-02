@@ -10,42 +10,36 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
+## Current Milestone
 
-**Goal:** Prove the first narrow, executable PrusaSlicer parity slice using the
-v1.9 vendor pins, inventories, contracts, registry, and checklist templates.
+No active milestone. v1.10 shipped on 2026-06-02 and the next milestone should
+start with fresh requirements via `/gsd-new-milestone`.
 
-**Target features:**
+## Last Shipped Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
 
-- Reviewer-gated PrusaSlicer source baseline refresh using the v1.9 manual
-  drift protocol
-- Completed checklist coverage for the first Prusa candidate rows, with
-  source pins, fixture needs, evidence command, docs, license/security notes,
-  deferred scope, and reviewer signoff recorded before implementation claims
-- Prusa fork fixture namespace and parity status conventions in the real
-  parity package
-- Rust-backed Prusa profile schema boundary using typed fork/flavor contracts
-  and the shared flavor registry
-- Executable Prusa profile/config parity command with fixtures and docs that
-  distinguish verified evidence from deferred full fork support
+**Shipped:** 2026-06-02
 
-## Last Shipped Milestone: v1.9 Fork Vendor Intake and Module Architecture
-
-**Shipped:** 2026-05-29
-
-**Goal achieved:** Established pinned downstream fork references, feature
-inventories, typed Rust flavor contracts, a pure shared flavor registry
-boundary, and fork parity templates so PrusaSlicer, Bambu Studio, and
-OrcaSlicer parity work can proceed without forking the Rust codebase wholesale.
+**Goal achieved:** Proved the first narrow, executable PrusaSlicer
+profile/config parity slice using the v1.9 vendor pins, inventories, typed
+contracts, shared flavor registry, checklist template, fixture vocabulary, and
+manual drift protocol.
 
 ## Current State
 
-v1.10 has completed the reviewer-gated Prusa baseline, the fixture/status
-evidence surface, the Rust Prusa profile boundary, and the executable Prusa
-profile/config parity command. Maintainers can now run the repo-owned
-PrusaSlicer profile-schema parity command, inspect the exact verified status
-row, and see docs that keep the claim limited to the narrow parser/config
-evidence slice while broader fork behavior remains deferred.
+v1.10 is archived. Maintainers can now run
+`bazel run //packages/parity:prusaslicer_profile_schema_parity`, inspect the
+single `fork.prusaslicer.profile-schema` verified status row, and review docs
+that keep the claim limited to the narrow Prusa parser/config evidence slice.
+The milestone also records reviewer-gated Prusa baseline signoff, checked-in
+Prusa profile-schema fixtures, a pure Rust parser/summary boundary, a mutation
+failure guard, UAT, and security verification with `threats_open: 0`.
+
+Broader PrusaSlicer runtime support, GUI support, generated-output parity,
+fork release builds, profile auto-update execution, network/cloud/credential
+behavior, non-free plugin ingestion, and sync automation remain deferred.
+
+<details>
+<summary>v1.9 shipped fork vendor intake and module architecture</summary>
 
 v1.9 delivered:
 
@@ -74,6 +68,8 @@ The first recommended executable slice is Prusa profile schema/config parity
 because it is fork-specific, medium complexity, and can build on the already
 verified config/config-persistence evidence instead of jumping directly to
 high-risk generated-output or network/cloud surfaces.
+
+</details>
 
 <details>
 <summary>v1.8 shipped cross-platform release build automation</summary>
@@ -198,17 +194,17 @@ high-risk generated-output or network/cloud surfaces.
 
 ## Next Milestone Goals
 
-- Define and execute v1.10 as a PrusaSlicer parity evidence foundation rather
-  than a full PrusaSlicer runtime port.
-- Use the v1.9 vendor source registry, Prusa inventory, typed contracts,
-  flavor registry, checklist template, fixture vocabulary, and drift protocol
-  as required inputs.
-- Establish the first real fork fixture/status conventions and executable
-  Prusa parity command before marking any Prusa behavior verified.
-- Keep generated-output features, STEP import, support generation, arc fitting,
-  wall seam, network/device integration, Bambu Studio, OrcaSlicer,
-  cross-flavor builds, and vendor sync deferred until the evidence path is
-  proven.
+- Start v1.11 with fresh requirements focused on broader PrusaSlicer parity
+  after the trusted profile/config evidence path exists.
+- Promote only those broader Prusa surfaces that can be backed by rerunnable
+  fixtures, typed Rust boundaries, fail-closed parity commands, and exact docs
+  or status wording.
+- Candidate surfaces include Prusa project file load/save, STEP import,
+  support generation, arc fitting, wall seam behavior, and other
+  generated-output evidence slices.
+- Keep Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly
+  vendor sync as later milestones unless v1.11 requirements deliberately pull a
+  narrow dependency forward.
 
 ## Requirements
 
@@ -392,4 +388,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-02 after Phase 40 completion*
+*Last updated: 2026-06-02 after v1.10 milestone archive*

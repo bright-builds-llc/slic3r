@@ -5,9 +5,9 @@ milestone_name: milestone
 current_phase: 40
 current_phase_name: Executable Prusa Profile Parity
 current_plan: Complete
-status: milestone_complete
-stopped_at: Phase 40 verified and v1.10 phase work complete
-last_updated: "2026-06-02T16:04:44.336Z"
+status: archived
+stopped_at: v1.10 milestone archived; ready for next milestone
+last_updated: "2026-06-02T21:25:49.346Z"
 last_activity: 2026-06-02
 progress:
   total_phases: 4
@@ -28,7 +28,7 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** v1.10 phase work complete — ready for milestone archival
+**Current focus:** v1.10 archived — ready to define v1.11 with fresh requirements
 
 ## Current Position
 
@@ -40,18 +40,18 @@ Current Phase Name: Executable Prusa Profile Parity
 Current Plan: Complete
 Total Phases: 4
 Total Plans: 6
-Status: Milestone phase work complete — ready for milestone archival
+Status: Milestone archived — ready for next milestone definition
 Last activity: 2026-06-02
-Last Activity Description: Phase 40 verified and completed
+Last Activity Description: v1.10 milestone completed and archived
 
 Progress: [██████████] 100%
 
 ## Performance Metrics
 
-**Prior milestone baseline:**
+**Milestone summary:**
 
-- v1.9 completed 5 phases, 8 plans, and 21 plan tasks.
-- v1.10 starts with 4 planned phases and no phase plans yet.
+- v1.10 completed 4 phases, 6 plans, and 15 plan tasks.
+- v1.10 archive files exist under `.planning/milestones/`.
 
 **By Phase:**
 
@@ -70,7 +70,7 @@ Progress: [██████████] 100%
 
 Decisions are logged in `PROJECT.md` Key Decisions table.
 
-Recent decisions affecting v1.10:
+Recent decisions affecting v1.10 and the next milestone:
 
 - Start fork implementation with a narrow PrusaSlicer parity evidence
   foundation instead of a full PrusaSlicer runtime port.
@@ -111,7 +111,7 @@ Recent decisions affecting v1.10:
 
 ### Pending Todos
 
-None.
+None. Start `/gsd-new-milestone` to define v1.11 requirements.
 
 ### Blockers/Concerns
 
@@ -119,6 +119,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-02T13:15:03.132Z
-Stopped at: Phase 40 verified and v1.10 phase work complete
+Last session: 2026-06-02T21:25:49.346Z
+Stopped at: v1.10 milestone archived and ready for next milestone definition
 Resume file: None
