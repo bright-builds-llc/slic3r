@@ -2,6 +2,80 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.10 — PrusaSlicer Parity Evidence Foundation
+
+**Shipped:** 2026-06-02\
+**Phases:** 4 | **Plans:** 6 | **Sessions:** yolo phase execution plus
+milestone audit, UAT, security verification, and archive closeout
+
+### What Was Built
+
+- Reviewer-gated PrusaSlicer profile-schema baseline and checklist records
+  with fail-closed verification and maintainer signoff
+- Static Prusa profile-schema fixture namespace with provenance, checksum
+  guards, update rules, and docs-only status reservation
+- A pure Rust Prusa profile parser and summary boundary with typed fixture
+  metadata traceable to accepted source refs and registry capability metadata
+- A public `//packages/parity:prusaslicer_profile_schema_parity` command backed
+  by checked-in `expected-summary.tsv` and a mutation failure guard
+- Exact `fork.prusaslicer.profile-schema` status publication, fixture/status
+  verifier coverage, narrow-scope docs, UAT, and security verification
+
+### What Worked
+
+- Keeping the first fork slice narrow made the evidence defensible: every
+  verified claim points to a fixture, source ref, checked-in expected artifact,
+  status row, or rerunnable command.
+- The v1.9 typed contracts and flavor registry made Prusa metadata traceable
+  without adding vendor-specific Rust workspaces.
+- Fail-closed Bash verifiers were effective at protecting TSV/status/doc
+  boundaries because the data format is intentionally narrow and reviewable.
+- The milestone audit caught governance debt in reviewer signoff before
+  archive, and the final signoff turned the audit from tech-debt to passed.
+
+### What Was Inefficient
+
+- UAT was useful for explicit acceptance, but the skipped docs checkpoint
+  remains visible to `audit-uat` even after user acceptance because it was
+  skipped without a reason.
+- `mdformat` is unsafe for planning files that rely on YAML frontmatter beyond
+  summaries; the security report needed manual frontmatter restoration after a
+  formatter pass.
+- The milestone completion helper created archive artifacts and moved the audit
+  correctly, but still required manual ROADMAP, PROJECT, STATE, MILESTONES, and
+  retrospective cleanup.
+
+### Patterns Established
+
+- Verified fork status rows should appear only after the exact evidence command
+  passes and the fixture verifier rejects missing, duplicate, wrong-evidence,
+  and overclaiming rows.
+- Docs for narrow fork evidence should name both the verified slice and the
+  deferred runtime, GUI, generated-output, release, network, plugin, and sync
+  surfaces together.
+- Future fork parity work should use a pure Rust parser/summary core plus thin
+  explicit-path binaries and package-owned parity commands.
+
+### Key Lessons
+
+1. Fork parity milestones should ship a complete trust chain before broadening:
+   source pin, fixture, typed parser, expected artifact, parity command, status
+   row, docs, UAT, and security.
+1. Frontmatter-bearing planning files need targeted validation instead of
+   blanket Markdown formatting.
+1. Broader Prusa work should proceed one executable slice at a time; generated
+   output and runtime claims need their own fixtures and fail-closed guards.
+
+### Cost Observations
+
+- Model mix: balanced GSD profile with Codex-led closeout
+- Sessions: yolo discuss/plan/execute phases plus final audit, signoff, UAT,
+  security, and milestone archive
+- Notable: most late closeout effort was governance/documentation alignment,
+  not implementation repair
+
+______________________________________________________________________
+
 ## Milestone: v1.9 — Fork Vendor Intake and Module Architecture
 
 **Shipped:** 2026-05-29\
