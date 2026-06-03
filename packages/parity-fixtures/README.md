@@ -27,6 +27,16 @@ Phase 40 adds `expected-summary.tsv` as the checked-in expected artifact for the
 narrow Prusa profile-schema parser/config evidence slice only, verified by
 `bazel run //packages/parity:prusaslicer_profile_schema_parity`.
 
+Phase 42 adds the Prusa project-file fixture namespace at
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/`. It
+contains the checked-in `seam_test_object.3mf` fixture,
+`fixture-provenance.tsv`, and `expected-project-summary.tsv` for the fixture
+surface only. The fixture bundle target is
+`//packages/parity-fixtures:prusa_project_file_bundle`, and maintainers can
+verify the fixture surface with
+`bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture`.
+Executable project-file parity remains unavailable until Phase 44.
+
 Update route: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
 Branch-head observations remain drift-only.
 Fixture verification does not fetch upstream source, run profile auto-update execution, or ingest plugins.
@@ -70,3 +80,8 @@ additional fixture files by themselves.
   checked by `//packages/parity-fixtures:verify_prusa_profile_schema_fixture`.
 - Phase 40 adds `expected-summary.tsv` to that bundle and verifies it through
   `bazel run //packages/parity:prusaslicer_profile_schema_parity`.
+- Phase 42 adds the Prusa project-file fixture namespace under
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/`,
+  exported as `//packages/parity-fixtures:prusa_project_file_bundle` and
+  checked by
+  `bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture`.

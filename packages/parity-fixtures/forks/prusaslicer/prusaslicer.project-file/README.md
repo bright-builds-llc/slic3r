@@ -12,6 +12,7 @@ Executable project-file parity remains unavailable until Phase 44.
 - Peeled commit: `9a583bd438b195856f3bcf7ea99b69ba4003a961`
 - Source path: tests/data/seam_test_object.3mf
 - Fixture: `seam_test_object.3mf`
+- Expected artifact: `expected-project-summary.tsv`
 - Byte count: `2514963`
 - SHA-256:
   `9fa91ee2f54a33dc65fd681bb24dce666c77a501196815548a051d54e857bdc2`
@@ -30,11 +31,11 @@ Phase 42 supplies fixture bytes and presence-level expected artifacts only.
 Executable project-file parity remains unavailable until Phase 44.
 This namespace does not publish executable parity, parser readiness, generated
 output, or runtime support.
+No generated output is introduced or verified by this namespace.
+
+Verifier command:
+`bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture`.
 
 ## Exclusions
 
-This fixture package does not introduce full 3MF import/export, PrusaSlicer
-runtime support, GUI project behavior, generated-output parity, STEP import,
-support generation, arc fitting, wall seam behavior, network/device
-integration, profile auto-update execution, fork release builds, Bambu Studio,
-OrcaSlicer, upstream source imports, sync automation, or generated output.
+This fixture package does not introduce full PrusaSlicer runtime support, GUI project behavior, full 3MF import/export, generated-output parity, STEP import, support generation, arc fitting, wall seam behavior, network/device integration, profile auto-update execution, fork release builds, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation.
