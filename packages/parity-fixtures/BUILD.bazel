@@ -61,6 +61,11 @@ exports_files([
     "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
     "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
     "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
+    "forks/prusaslicer/prusaslicer.project-file/.gitattributes",
+    "forks/prusaslicer/prusaslicer.project-file/README.md",
+    "forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv",
+    "forks/prusaslicer/prusaslicer.project-file/fixture-provenance.tsv",
+    "forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf",
 ])
 
 alias(
@@ -367,6 +372,37 @@ filegroup(
     ],
 )
 
+alias(
+    name = "prusa_project_file_readme",
+    actual = "forks/prusaslicer/prusaslicer.project-file/README.md",
+)
+
+alias(
+    name = "prusa_project_file_provenance",
+    actual = "forks/prusaslicer/prusaslicer.project-file/fixture-provenance.tsv",
+)
+
+alias(
+    name = "prusa_project_file_expected_project_summary",
+    actual = "forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv",
+)
+
+alias(
+    name = "prusa_project_file_seam_test_object",
+    actual = "forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf",
+)
+
+filegroup(
+    name = "prusa_project_file_bundle",
+    srcs = [
+        "forks/prusaslicer/prusaslicer.project-file/.gitattributes",
+        "forks/prusaslicer/prusaslicer.project-file/README.md",
+        "forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv",
+        "forks/prusaslicer/prusaslicer.project-file/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf",
+    ],
+)
+
 sh_binary(
     name = "verify_prusa_profile_schema_fixture",
     srcs = ["verify_prusa_profile_schema_fixture.sh"],
@@ -463,6 +499,11 @@ filegroup(
         "forks/prusaslicer/prusaslicer.profile-schema/fixture-provenance.tsv",
         "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.ini",
         "forks/prusaslicer/prusaslicer.profile-schema/PrusaResearch.idx",
+        "forks/prusaslicer/prusaslicer.project-file/.gitattributes",
+        "forks/prusaslicer/prusaslicer.project-file/README.md",
+        "forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv",
+        "forks/prusaslicer/prusaslicer.project-file/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf",
         "verify_prusa_profile_schema_fixture.sh",
         "verify_prusa_profile_schema_fixture_test.sh",
     ],
