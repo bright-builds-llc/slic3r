@@ -73,7 +73,7 @@ OrcaSlicer, and vendor sync automation.
   lock the exact `prusaslicer.project-file` evidence contract before fixtures,
   parser work, or status claims are created.
 
-- [ ] **Phase 42: Prusa Project-File Fixture Surface** - Maintainers can
+- [x] **Phase 42: Prusa Project-File Fixture Surface** - Maintainers can (completed 2026-06-03)
   inspect checked-in project-file fixtures, provenance, expected artifacts, and
   fail-closed fixture verification for the selected evidence contract.
 
@@ -135,7 +135,7 @@ Plans:
 
 - [x] 42-01-PLAN.md - Create the source-pinned Prusa project-file fixture namespace, provenance manifest, and presence-level expected artifact.
 - [x] 42-02-PLAN.md - Wire project-file fixture Bazel targets and add the fail-closed verifier with failure-mode tests.
-- [ ] 42-03-PLAN.md - Publish the Phase 42 fixture surface through package and port docs without claiming executable parity.
+- [x] 42-03-PLAN.md - Publish the Phase 42 fixture surface through package and port docs without claiming executable parity.
 
 ### Phase 43: Rust Prusa Project-File Boundary
 
@@ -207,7 +207,7 @@ Phases execute in numeric order: 41 -> 42 -> 43 -> 44
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 41. Prusa Project-File Scope Gate | 1/1 | Complete | 2026-06-03 |
-| 42. Prusa Project-File Fixture Surface | 2/3 | In Progress | - |
+| 42. Prusa Project-File Fixture Surface | 3/3 | Complete   | 2026-06-03 |
 | 43. Rust Prusa Project-File Boundary | 0/0 | Pending | - |
 | 44. Executable Prusa Project-File Parity | 0/0 | Pending | - |
 
