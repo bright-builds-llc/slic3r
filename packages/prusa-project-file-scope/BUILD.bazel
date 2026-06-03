@@ -4,3 +4,32 @@ exports_files([
     "README.md",
     "project-file-scope.md",
 ])
+
+sh_binary(
+    name = "verify",
+    srcs = ["verify_prusa_project_file_scope.sh"],
+    data = [
+        "README.md",
+        "project-file-scope.md",
+    ],
+    args = [
+        "$(location README.md)",
+        "$(location project-file-scope.md)",
+    ],
+)
+
+sh_test(
+    name = "verify_prusa_project_file_scope_test",
+    srcs = ["verify_prusa_project_file_scope_test.sh"],
+    data = ["verify_prusa_project_file_scope.sh"],
+)
+
+filegroup(
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "project-file-scope.md",
+        "verify_prusa_project_file_scope.sh",
+        "verify_prusa_project_file_scope_test.sh",
+    ],
+)
