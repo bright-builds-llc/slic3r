@@ -129,7 +129,13 @@ commands rely on it.
    project-file fixture provenance, expected artifacts, update rules, or
    non-overclaiming scope text are missing or inconsistent.
 
-**Plans**: 0 plans yet
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 42-01-PLAN.md - Create the source-pinned Prusa project-file fixture namespace, provenance manifest, and presence-level expected artifact.
+- [ ] 42-02-PLAN.md - Wire project-file fixture Bazel targets and add the fail-closed verifier with failure-mode tests.
+- [ ] 42-03-PLAN.md - Publish the Phase 42 fixture surface through package and port docs without claiming executable parity.
 
 ### Phase 43: Rust Prusa Project-File Boundary
 
