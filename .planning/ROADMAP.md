@@ -72,7 +72,7 @@ fork release builds, Bambu Studio, OrcaSlicer, and vendor sync automation.
 
 - This milestone starts at Phase 41 because Phase 40 shipped in v1.10
 
-- [ ] **Phase 41: Prusa Project-File Scope Gate** - Maintainers can review and
+- [x] **Phase 41: Prusa Project-File Scope Gate** - Maintainers can review and (completed 2026-06-03)
   lock the exact `prusaslicer.project-file` evidence contract before fixtures,
   parser work, or status claims are created.
 
@@ -113,7 +113,7 @@ narrow v1.11 evidence contract before implementation begins.
 
 Plans:
 
-- [ ] 41-01-PLAN.md - Create the checked-in Prusa project-file scope record,
+- [x] 41-01-PLAN.md - Create the checked-in Prusa project-file scope record,
   fail-closed verifier, and non-overclaiming docs route.
 
 ### Phase 42: Prusa Project-File Fixture Surface
@@ -203,7 +203,7 @@ Phases execute in numeric order: 41 -> 42 -> 43 -> 44
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 41. Prusa Project-File Scope Gate | 0/0 | Pending | - |
+| 41. Prusa Project-File Scope Gate | 1/1 | Complete    | 2026-06-03 |
 | 42. Prusa Project-File Fixture Surface | 0/0 | Pending | - |
 | 43. Rust Prusa Project-File Boundary | 0/0 | Pending | - |
 | 44. Executable Prusa Project-File Parity | 0/0 | Pending | - |

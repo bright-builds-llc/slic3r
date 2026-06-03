@@ -13,12 +13,12 @@ Requirements for the v1.11 milestone. Each maps to one roadmap phase.
 
 ### Prusa Project-File Scope Gate
 
-- [ ] **PSEL-01**: Maintainer can inspect a reviewed Prusa project-file scope
+- [x] **PSEL-01**: Maintainer can inspect a reviewed Prusa project-file scope
   record for `prusaslicer.project-file`, including accepted source identity,
   inventory row ID, fixture source decision, expected-artifact contract,
   candidate Rust boundary, planned evidence command, docs touched, license or
   security note, deferred scope, and reviewer signoff.
-- [ ] **PSEL-02**: Maintainer can distinguish the narrow v1.11 Prusa
+- [x] **PSEL-02**: Maintainer can distinguish the narrow v1.11 Prusa
   project-file evidence contract from full 3MF import/export, full
   PrusaSlicer runtime support, GUI project behavior, generated-output parity,
   STEP import, support generation, arc fitting, wall seam behavior,
@@ -113,8 +113,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PSEL-01 | Phase 41 | Pending |
-| PSEL-02 | Phase 41 | Pending |
+| PSEL-01 | Phase 41 | Complete |
+| PSEL-02 | Phase 41 | Complete |
 | PFIX-01 | Phase 42 | Pending |
 | PFIX-02 | Phase 42 | Pending |
 | PPROJ-01 | Phase 43 | Pending |
