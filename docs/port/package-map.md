@@ -19,7 +19,7 @@
 | `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface; `slic3r_flavors` owns the Prusa profile parser and summary helper |
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, the scoped Windows packaged launcher tree, and the scoped macOS packaged launcher/startup surface |
 | `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, Windows packaged launcher, and narrow Prusa profile-schema slices |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, `windows-packaged-launcher`, and Prusa profile-schema slices, including the checked-in `expected-summary.tsv` artifact |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, `windows-packaged-launcher`, Prusa profile-schema, and Phase 42 Prusa project-file fixture slices, including checked-in expected artifacts such as `expected-summary.tsv` and `expected-project-summary.tsv` |
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
 | `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
@@ -127,3 +127,11 @@
   fixture bytes, expected artifacts, Rust parser code, parity targets, status
   rows, upstream source imports, Bambu Studio scope, OrcaSlicer scope, or sync
   automation.
+- Phase 42 adds the project-file fixture namespace at
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/`, with
+  `seam_test_object.3mf`, `fixture-provenance.tsv`,
+  `expected-project-summary.tsv`, the
+  `//packages/parity-fixtures:prusa_project_file_bundle` bundle, and
+  `bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture`.
+  `packages/parity` still does not publish a project-file parity command or
+  status row.

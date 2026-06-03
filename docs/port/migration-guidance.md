@@ -61,10 +61,11 @@ boundaries.
   the Prusa profile/config evidence slice.
 - `prusaslicer.project-file` fixture work must start from
   [`packages/prusa-project-file-scope`](../../packages/prusa-project-file-scope)
-  and its reviewed Phase 41 scope record before Phase 42 adds fixture bytes.
-  The reserved fixture path is
-  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/`, and
-  the accepted source identity remains
+  and its reviewed Phase 41 scope record. The Phase 42 fixture now exists at
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/`, uses
+  `seam_test_object.3mf`, and is checked by
+  `bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture`.
+  The accepted source identity remains
   `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` from
   `src/libslic3r/Format/3mf.cpp`.
 - The Phase 38 Prusa fixture namespace update route is: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
@@ -86,10 +87,8 @@ boundaries.
   profile-schema parser/config evidence slice only. Its executable evidence is
   `bazel run //packages/parity:prusaslicer_profile_schema_parity`, backed by
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`.
-- `fork.prusaslicer.project-file` is unavailable until a real Phase 44
-  `bazel run //packages/parity:prusaslicer_project_file_parity` command exists
-  and passes against the Phase 42 expected artifact. The Phase 41
-  `prusaslicer.project-file` scope record names the planned
+- The status rule is: fork.prusaslicer.project-file is unavailable until a real Phase 44 bazel run //packages/parity:prusaslicer_project_file_parity command exists and passes against the Phase 42 expected artifact.
+  The Phase 41 `prusaslicer.project-file` scope record names the planned
   `slic3r_flavors::prusa_project_file` Rust boundary, but it is not executable
   parity evidence.
 - Phase 39 creates parser/metadata readiness only through

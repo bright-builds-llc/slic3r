@@ -275,6 +275,19 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   Studio, OrcaSlicer, upstream source imports, and sync automation outside the
   Phase 41 scope gate.
 
+## Current Prusa Project-File Fixture Surface State
+
+Phase 42 adds fixture bytes, fixture provenance, expected-project-summary.tsv, and bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture for prusaslicer.project-file.
+The fixture namespace lives at
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/` and
+contains `seam_test_object.3mf`, `fixture-provenance.tsv`, and
+`expected-project-summary.tsv`.
+
+Phase 43 `slic3r_flavors::prusa_project_file` is still unavailable. Phase 44
+`bazel run //packages/parity:prusaslicer_project_file_parity` is still
+unavailable, and `packages/parity/status.tsv` still must not publish
+`fork.prusaslicer.project-file`.
+
 ## v1.9 Fork Parity Deferrals
 
 Phase 36 keeps the complete v1.9 fork-parity deferral list here so package
