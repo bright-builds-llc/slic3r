@@ -84,6 +84,17 @@ require_exact_header() {
 	fi
 }
 
+require_line_count() {
+	local file="$1"
+	local label="$2"
+	local expected_count="$3"
+	local actual_count
+	actual_count="$(wc -l <"${file}" | tr -d ' ')"
+	if [[ "${actual_count}" != "${expected_count}" ]]; then
+		error "${label}: expected ${expected_count} rows, got ${actual_count}"
+	fi
+}
+
 require_size() {
 	local file="$1"
 	local label="$2"
@@ -189,6 +200,8 @@ verify_provenance() {
 			}
 		}
 	' "${provenance_file}" || error "fixture-provenance.tsv: invalid row for seam_test_object.3mf; expected ${PHASE41_SCOPE_RECORD}"
+
+	require_line_count "${provenance_file}" "fixture-provenance.tsv" "2"
 }
 
 verify_expected_summary() {
@@ -215,6 +228,8 @@ verify_expected_summary() {
 	require_exact_line "${expected_summary_file}" "expected-project-summary.tsv" \
 		$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf\tMetadata/Slic3r_PE_model.config\tSlic3r_PE_model.config-member-present\tmember-presence-only\tModel metadata config file is present; no model/geometry semantics claimed.' \
 		"Metadata/Slic3r_PE_model.config"
+
+	require_line_count "${expected_summary_file}" "expected-project-summary.tsv" "8"
 }
 
 verify_archive_members() {

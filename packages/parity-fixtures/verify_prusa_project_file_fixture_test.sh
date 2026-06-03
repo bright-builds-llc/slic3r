@@ -177,6 +177,22 @@ test_missing_expected_archive_member_rows_fail() {
 	done
 }
 
+test_extra_expected_summary_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/extra-expected-summary-row"
+	local expected_file="${dir}/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	printf '%s\n' $'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf\t3D/3dmodel.model\tfull-import-export-parity\tunsupported-semantic-claim\tInjected overclaim row must fail.' >>"${expected_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/extra-expected-row.out" "${tmp_dir}/extra-expected-row.err"; then
+		fail "extra expected-project-summary row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/extra-expected-row.err" "expected-project-summary.tsv: expected 8 rows"
+}
+
 test_missing_scope_path_in_provenance_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-scope-path-provenance"
@@ -191,6 +207,22 @@ test_missing_scope_path_in_provenance_fails() {
 
 	# Assert
 	assert_contains "${tmp_dir}/missing-scope-provenance.err" "packages/prusa-project-file-scope/project-file-scope.md"
+}
+
+test_extra_provenance_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/extra-provenance-row"
+	local provenance_file="${dir}/forks/prusaslicer/prusaslicer.project-file/fixture-provenance.tsv"
+	write_valid_fixture_copy "${dir}"
+	printf '%s\n' $'extra_semantic_fixture\tprusaslicer\tprusaslicer.project-file\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tversion_2.9.5\t9a583bd438b195856f3bcf7ea99b69ba4003a961\ttests/data/extra.3mf\thttps://example.invalid/extra.3mf\t1\t0\tbinary\tunsupported-semantic-fixture\tpackages/prusa-project-file-scope/project-file-scope.md\tmanual\tPhase-42-fixture-surface-only-no-parity-status\tunsupported-extra-row' >>"${provenance_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/extra-provenance-row.out" "${tmp_dir}/extra-provenance-row.err"; then
+		fail "extra provenance row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/extra-provenance-row.err" "fixture-provenance.tsv: expected 2 rows"
 }
 
 test_missing_scope_path_in_readme_fails() {
@@ -258,7 +290,9 @@ test_complete_fixture_passes
 test_wrong_project_file_checksum_fails
 test_missing_expected_header_fails
 test_missing_expected_archive_member_rows_fail
+test_extra_expected_summary_row_fails
 test_missing_scope_path_in_provenance_fails
+test_extra_provenance_row_fails
 test_missing_scope_path_in_readme_fails
 test_premature_status_row_fails
 test_premature_parity_target_fails
