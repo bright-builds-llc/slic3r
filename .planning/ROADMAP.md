@@ -133,7 +133,7 @@ commands rely on it.
 
 Plans:
 
-- [ ] 42-01-PLAN.md - Create the source-pinned Prusa project-file fixture namespace, provenance manifest, and presence-level expected artifact.
+- [x] 42-01-PLAN.md - Create the source-pinned Prusa project-file fixture namespace, provenance manifest, and presence-level expected artifact.
 - [ ] 42-02-PLAN.md - Wire project-file fixture Bazel targets and add the fail-closed verifier with failure-mode tests.
 - [ ] 42-03-PLAN.md - Publish the Phase 42 fixture surface through package and port docs without claiming executable parity.
 
@@ -207,7 +207,7 @@ Phases execute in numeric order: 41 -> 42 -> 43 -> 44
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 41. Prusa Project-File Scope Gate | 1/1 | Complete | 2026-06-03 |
-| 42. Prusa Project-File Fixture Surface | 0/0 | Pending | - |
+| 42. Prusa Project-File Fixture Surface | 1/3 | In Progress | - |
 | 43. Rust Prusa Project-File Boundary | 0/0 | Pending | - |
 | 44. Executable Prusa Project-File Parity | 0/0 | Pending | - |
 

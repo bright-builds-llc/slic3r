@@ -27,7 +27,7 @@ Requirements for the v1.11 milestone. Each maps to one roadmap phase.
 
 ### Prusa Project-File Fixture Surface
 
-- [ ] **PFIX-01**: Maintainer can inspect a Prusa project-file fixture
+- [x] **PFIX-01**: Maintainer can inspect a Prusa project-file fixture
   namespace, provenance manifest, update rules, and checked-in expected
   artifact that trace to the Phase 41 scope gate and accepted source decision.
 - [ ] **PFIX-02**: Maintainer can run a repo-owned fixture verifier that fails
@@ -119,7 +119,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 |-------------|-------|--------|
 | PSEL-01 | Phase 41 | Complete |
 | PSEL-02 | Phase 41 | Complete |
-| PFIX-01 | Phase 42 | Pending |
+| PFIX-01 | Phase 42 | Complete |
 | PFIX-02 | Phase 42 | Pending |
 | PPROJ-01 | Phase 43 | Pending |
 | PPROJ-02 | Phase 43 | Pending |
