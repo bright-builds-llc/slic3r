@@ -59,6 +59,14 @@ boundaries.
   Phase 38 creates
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/` for
   the Prusa profile/config evidence slice.
+- `prusaslicer.project-file` fixture work must start from
+  [`packages/prusa-project-file-scope`](../../packages/prusa-project-file-scope)
+  and its reviewed Phase 41 scope record before Phase 42 adds fixture bytes.
+  The reserved fixture path is
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/`, and
+  the accepted source identity remains
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` from
+  `src/libslic3r/Format/3mf.cpp`.
 - The Phase 38 Prusa fixture namespace update route is: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
   Branch-head observations remain drift-only.
 - When a change adds, removes, or materially alters a fixture-backed parity
@@ -78,6 +86,12 @@ boundaries.
   profile-schema parser/config evidence slice only. Its executable evidence is
   `bazel run //packages/parity:prusaslicer_profile_schema_parity`, backed by
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`.
+- `fork.prusaslicer.project-file` is unavailable until a real Phase 44
+  `bazel run //packages/parity:prusaslicer_project_file_parity` command exists
+  and passes against the Phase 42 expected artifact. The Phase 41
+  `prusaslicer.project-file` scope record names the planned
+  `slic3r_flavors::prusa_project_file` Rust boundary, but it is not executable
+  parity evidence.
 - Phase 39 creates parser/metadata readiness only through
   `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
   `prusa_profile_schema_metadata`. It traces `prusaslicer.profile-schema` to
@@ -128,3 +142,10 @@ parity/status publication for the narrow slice.
   deferred, profile auto-update execution remains deferred, network/cloud/
   credential behavior remains deferred, non-free plugin ingestion remains
   deferred, and sync automation remains deferred.
+- For `prusaslicer.project-file`, full 3MF import/export, full PrusaSlicer
+  runtime support, GUI project behavior, generated-output parity, STEP import,
+  support generation, arc fitting, wall seam behavior, network/device
+  integration, profile auto-update execution, fork release builds, Bambu
+  Studio, OrcaSlicer, upstream source imports, and sync automation remain
+  deferred until later executable evidence deliberately covers one of those
+  surfaces.

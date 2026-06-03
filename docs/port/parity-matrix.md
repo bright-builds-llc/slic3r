@@ -53,6 +53,18 @@ parity, and fixture rules.
   evidence slice only. The evidence command is
   `bazel run //packages/parity:prusaslicer_profile_schema_parity`, backed by
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`.
+- `fork.prusaslicer.project-file` is not a verified row in
+  `packages/parity/status.tsv`. The Phase 41 `prusaslicer.project-file` scope
+  record in `packages/prusa-project-file-scope` reserves the Phase 42 fixture
+  contract, Phase 43 `slic3r_flavors::prusa_project_file` boundary, and Phase
+  44 `bazel run //packages/parity:prusaslicer_project_file_parity` command
+  name without publishing executable evidence.
+- `prusaslicer.project-file` scope records do not prove full 3MF import/export
+  or full PrusaSlicer runtime support. GUI project behavior,
+  generated-output parity, STEP import, support generation, arc fitting, wall
+  seam behavior, network/device integration, profile auto-update execution,
+  fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, and
+  sync automation remain deferred.
 - Full PrusaSlicer runtime support remains deferred. GUI support remains
   deferred, generated-output parity remains deferred, fork release builds remain
   deferred, profile auto-update execution remains deferred, network/cloud/

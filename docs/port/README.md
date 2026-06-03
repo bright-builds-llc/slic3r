@@ -250,6 +250,31 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   credential behavior remains deferred, non-free plugin ingestion remains
   deferred, and sync automation remains deferred.
 
+## Current Prusa Project-File Scope Gate State
+
+- `packages/prusa-project-file-scope` owns the Phase 41 checked-in scope gate
+  for `prusaslicer.project-file`; run
+  `bazel run //packages/prusa-project-file-scope:verify` to check the reviewed
+  contract.
+- The accepted source identity is
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, with
+  source path `src/libslic3r/Format/3mf.cpp`.
+- The Phase 42 fixture path contract is
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/`; no
+  fixture bytes or expected artifacts exist in Phase 41.
+- The Phase 43 Rust boundary is planned as
+  `slic3r_flavors::prusa_project_file`, but Phase 41 creates no Rust parser.
+- The Phase 44 command is planned as
+  `bazel run //packages/parity:prusaslicer_project_file_parity`, and the Phase
+  44 status token is planned as `fork.prusaslicer.project-file`; neither the
+  command nor the status row exists in Phase 41.
+- The deferred scope keeps full PrusaSlicer runtime support, GUI project
+  behavior, full 3MF import/export, generated-output parity, STEP import,
+  support generation, arc fitting, wall seam behavior, network/device
+  integration, profile auto-update execution, fork release builds, Bambu
+  Studio, OrcaSlicer, upstream source imports, and sync automation outside the
+  Phase 41 scope gate.
+
 ## v1.9 Fork Parity Deferrals
 
 Phase 36 keeps the complete v1.9 fork-parity deferral list here so package

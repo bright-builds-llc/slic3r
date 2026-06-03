@@ -24,6 +24,7 @@
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
 | `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
 | `packages/prusa-baseline` | Phase 37 PrusaSlicer baseline and checklist gate package for the narrow v1.10 profile schema/config evidence slice |
+| `packages/prusa-project-file-scope` | Phase 41 checked-in scope record and verifier package for the narrow `prusaslicer.project-file` evidence contract only |
 
 ## Notes
 
@@ -121,3 +122,8 @@
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`,
   and `packages/slic3r-rust/crates/slic3r_flavors` owns parser/summary logic for
   the narrow Prusa profile-schema parser/config evidence slice.
+- Phase 41 adds `packages/prusa-project-file-scope`, which owns the checked-in
+  `prusaslicer.project-file` scope record and verifier only. It does not create
+  fixture bytes, expected artifacts, Rust parser code, parity targets, status
+  rows, upstream source imports, Bambu Studio scope, OrcaSlicer scope, or sync
+  automation.
