@@ -109,7 +109,12 @@ narrow v1.11 evidence contract before implementation begins.
    fitting, wall seam behavior, network/device integration, profile
    auto-update execution, fork release builds, and sync automation.
 
-**Plans**: 0 plans yet
+**Plans**: 1 plan
+
+Plans:
+
+- [ ] 41-01-PLAN.md - Create the checked-in Prusa project-file scope record,
+  fail-closed verifier, and non-overclaiming docs route.
 
 ### Phase 42: Prusa Project-File Fixture Surface
 
