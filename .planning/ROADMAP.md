@@ -4,16 +4,12 @@
 
 - Active: **v1.11 PrusaSlicer Broader Parity Port** - Phases 41-44
   (planned)
-- Future: **v1.12 Bambu Studio Parity Port** - Modular Rust parity for Bambu
-  Studio-specific behavior
-- Future: **v1.13 OrcaSlicer Parity Port** - Modular Rust parity for
-  OrcaSlicer-specific behavior
-- Future: **v1.14 Fork Feature Documentation and Checklists** - Cross-fork
-  feature catalogs, parity checklists, and gap docs
-- Future: **v1.15 Cross-Flavor Build Automation** - GitHub Actions build
-  matrix for every supported Slic3r-family flavor and platform
-- Future: **v1.16 Nightly Vendor Sync and Codex-Assisted Porting** -
-  review-gated automation for upstream fork refreshes and Rust feature merges
+- Speculative revisit: **Non-Prusa Slicer-family ports** - Bambu Studio,
+  OrcaSlicer, and other fork ports are paused and may be reconsidered only
+  after an explicit new planning decision.
+- Speculative revisit: **Cross-Flavor Build Automation and Vendor Sync** -
+  paused until a future planning decision establishes verified non-Prusa fork
+  behavior and review policy.
 - Shipped: **v1.10 PrusaSlicer Parity Evidence Foundation** - Phases 37-40
   (shipped 2026-06-02)
   Archive: [.planning/milestones/v1.10-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.10-ROADMAP.md)
@@ -60,7 +56,8 @@ non-overclaiming docs.
 The milestone intentionally avoids full PrusaSlicer runtime parity, GUI
 project behavior, full 3MF import/export, generated-output parity, STEP import,
 support generation, arc fitting, wall seam behavior, network/device surfaces,
-fork release builds, Bambu Studio, OrcaSlicer, and vendor sync automation.
+fork release builds, non-Prusa Slicer-family ports such as Bambu Studio or
+OrcaSlicer, and vendor sync automation.
 
 ## Phases
 
@@ -203,21 +200,20 @@ Phases execute in numeric order: 41 -> 42 -> 43 -> 44
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 41. Prusa Project-File Scope Gate | 1/1 | Complete    | 2026-06-03 |
+| 41. Prusa Project-File Scope Gate | 1/1 | Complete | 2026-06-03 |
 | 42. Prusa Project-File Fixture Surface | 0/0 | Pending | - |
 | 43. Rust Prusa Project-File Boundary | 0/0 | Pending | - |
 | 44. Executable Prusa Project-File Parity | 0/0 | Pending | - |
 
-## Future Roadmap
+## Future Revisit Candidates
 
-Future milestones depend on the v1.11 evidence foundation:
+There are no scheduled non-Prusa fork port milestones in the active roadmap.
+Only PrusaSlicer porting work is being considered in this repo for now.
 
-- **v1.12 Bambu Studio Parity Port** depends on Prusa-family shared downstream
-  evidence and the project-file boundary proven in v1.11.
-- **v1.13 OrcaSlicer Parity Port** depends on Prusa/Bambu-family evidence and
-  shared downstream modules from earlier fork ports.
-- **v1.14 Fork Feature Documentation and Checklists** depends on completed fork
-  parity ports.
-- **v1.15 Cross-Flavor Build Automation** depends on verified fork behavior.
-- **v1.16 Nightly Vendor Sync and Codex-Assisted Porting** depends on stable
-  cross-flavor builds and review-gated refresh policy.
+- Non-Prusa Slicer-family ports, including Bambu Studio and OrcaSlicer, are
+  paused parking-lot candidates until an explicit new planning decision moves
+  one into the roadmap.
+- Cross-flavor build automation is paused until verified fork behavior exists
+  and a future planning decision defines supported flavors.
+- Nightly vendor sync and Codex-assisted porting are paused until stable fork
+  modules, executable evidence, and review-gated refresh policy exist.

@@ -4,7 +4,7 @@ milestone: v1.11
 milestone_name: PrusaSlicer Broader Parity Port
 status: ready_for_phase_planning
 stopped_at: Phase 41 complete; ready to discuss Phase 42
-last_updated: "2026-06-03T12:53:58.211Z"
+last_updated: "2026-06-03T13:03:12Z"
 last_activity: 2026-06-03
 progress:
   total_phases: 4
@@ -20,7 +20,7 @@ current_phase_name: Prusa Project-File Fixture Surface
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-02)
+See: `.planning/PROJECT.md` (updated 2026-06-03)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
@@ -76,9 +76,10 @@ Recent decisions affecting v1.11:
   checked-in expected artifact, public Bazel parity command, negative failure
   guard, exact status row, docs, UAT, and security verification.
 
-- Keep Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly
-  vendor sync deferred unless v1.11 requirements deliberately pull a narrow
-  prerequisite forward.
+- Limit active downstream-fork porting consideration to PrusaSlicer for now;
+  Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly vendor
+  sync are paused and may be revisited only after an explicit new planning
+  decision.
 
 ### Pending Todos
 

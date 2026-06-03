@@ -49,6 +49,9 @@ failure guard, UAT, and security verification with `threats_open: 0`.
 Broader PrusaSlicer runtime support, GUI support, generated-output parity,
 fork release builds, profile auto-update execution, network/cloud/credential
 behavior, non-free plugin ingestion, and sync automation remain deferred.
+Active downstream-fork port planning is limited to PrusaSlicer for now.
+Non-Prusa Slicer-family ports, including Bambu Studio and OrcaSlicer, are
+speculative parking-lot candidates and are not scheduled roadmap milestones.
 
 v1.11 Phase 41 is complete. Maintainers can inspect the checked-in
 `packages/prusa-project-file-scope` scope package, run
@@ -223,9 +226,10 @@ high-risk generated-output or network/cloud surfaces.
   or status wording.
 - Keep STEP import, support generation, arc fitting, wall seam behavior, and
   other generated-output evidence slices as future Prusa candidates.
-- Keep Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly
-  vendor sync as later milestones unless v1.11 requirements deliberately pull a
-  narrow dependency forward.
+- Limit active downstream-fork porting consideration to PrusaSlicer for now;
+  Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly vendor
+  sync are paused and may be revisited only after an explicit new planning
+  decision.
 
 ## Requirements
 
@@ -344,15 +348,17 @@ high-risk generated-output or network/cloud surfaces.
   surface remain secondary to release automation and GUI strategy decisions
 - Treating the legacy package as an active feature-development surface — it
   remains the reference implementation except for minimal oracle upkeep
-- Full PrusaSlicer, Bambu Studio, and OrcaSlicer parity ports remain future
-  implementation milestones after the v1.10 evidence foundation; v1.9
-  artifacts are planning and architecture inputs, and v1.10 should verify only
-  the narrow Prusa evidence slice it actually implements.
-- Fork-flavor build automation remains future release work after downstream
-  parity modules and executable evidence exist.
-- Nightly vendor sync and Codex-assisted merge automation require full fork
-  parity, stable vendor references, and review-gated automation before they are
-  safe to enable.
+- Full PrusaSlicer parity remains outside the current milestone beyond the
+  narrow evidence slices it explicitly implements.
+- Non-Prusa Slicer-family ports, including Bambu Studio and OrcaSlicer, are
+  paused parking-lot candidates; v1.9 artifacts remain historical planning and
+  architecture inputs, not active roadmap commitments.
+- Fork-flavor build automation is a paused parking-lot candidate until
+  executable fork evidence and an explicit future planning decision define
+  supported flavors.
+- Nightly vendor sync and Codex-assisted merge automation are paused
+  parking-lot candidates until stable fork modules, executable evidence, and
+  review-gated refresh policy exist.
 
 ## Context
 
@@ -405,6 +411,7 @@ The audience for this work is broad:
 | Keep the Prusa profile boundary pure and caller-supplied until executable parity owns status publication | Phase 39 needs typed parser and provenance data without Git, network, filesystem discovery, process, release, sync, or premature status-row side effects | ✓ Shipped in Phase 39 |
 | Start fork implementation with a narrow PrusaSlicer evidence foundation instead of a full fork port | Prusa is the cleanest first downstream fork, and a profile/config slice proves the evidence workflow without high-risk generated-output or network/cloud scope | ✓ Shipped in v1.10 |
 | Gate Prusa project-file parity behind a checked-in scope package before fixtures, parser work, parity targets, or status rows | Project-file support is close enough to broad 3MF/runtime behavior that maintainers need a reviewed evidence contract before implementation can make claims | ✓ Shipped in Phase 41 |
+| Limit active downstream-fork porting consideration to PrusaSlicer for now | Non-Prusa Slicer-family ports need an explicit new planning decision before moving from parking lot into the roadmap | ✓ Adopted 2026-06-03 |
 
 ## Evolution
 
@@ -427,4 +434,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-03 after Phase 41 scope gate completion*
+*Last updated: 2026-06-03 after non-Prusa porting scope clarification*

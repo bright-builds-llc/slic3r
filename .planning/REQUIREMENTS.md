@@ -63,7 +63,8 @@ Requirements for the v1.11 milestone. Each maps to one roadmap phase.
 
 ## v2 Requirements
 
-Deferred to future milestones. Tracked but not in the current roadmap.
+Deferred or speculative work. Tracked here only as parking-lot context, not as
+current roadmap commitments.
 
 ### Broader PrusaSlicer Parity
 
@@ -78,17 +79,20 @@ Deferred to future milestones. Tracked but not in the current roadmap.
 - **PRUSA-FUT-06**: Maintainer can build and verify broader Rust-backed
   PrusaSlicer flavor behavior after project-file evidence is trusted.
 
-### Later Fork and Release Work
+### Speculative Non-Prusa and Release Parking Lot
 
-- **FORK-FUT-01**: Maintainer can build and verify modular Rust-backed Bambu
-  Studio behavior after Prusa-family shared downstream evidence exists.
-- **FORK-FUT-02**: Maintainer can build and verify modular Rust-backed
-  OrcaSlicer behavior after shared Prusa/Bambu-family evidence exists.
-- **FORK-FUT-03**: Maintainer can use cross-flavor build automation for
-  supported Slic3r-family flavors after fork behavior has executable parity
-  evidence.
-- **FORK-FUT-04**: Maintainer can use review-gated vendor refresh automation
-  after fork modules, fixtures, and parity evidence exist.
+- **FORK-FUT-01**: Possible future reconsideration of modular Rust-backed
+  Bambu Studio behavior after an explicit new planning decision; not in the
+  active roadmap.
+- **FORK-FUT-02**: Possible future reconsideration of modular Rust-backed
+  OrcaSlicer behavior after an explicit new planning decision; not in the
+  active roadmap.
+- **FORK-FUT-03**: Possible future reconsideration of cross-flavor build
+  automation after verified fork behavior and supported flavor policy exist;
+  not in the active roadmap.
+- **FORK-FUT-04**: Possible future reconsideration of review-gated vendor
+  refresh automation after stable fork modules, fixtures, and parity evidence
+  exist; not in the active roadmap.
 
 ## Out of Scope
 
@@ -100,12 +104,12 @@ Explicitly excluded from v1.11. Documented to prevent scope creep.
 | Full 3MF import/export implementation | Phase 41 must first lock the exact project-file evidence contract; v1.11 should not silently become a full container/parser port. |
 | Prusa GUI project behavior | GUI load/save behavior requires separate interaction, state, and visual validation. |
 | STEP import, support generation, arc fitting, or wall seam parity | These remain valid future Prusa candidates but require stronger file-format or generated-output evidence. |
-| Bambu Studio or OrcaSlicer parity implementation | These depend on the Prusa-family evidence path and should not be mixed into the Prusa project-file milestone. |
+| Bambu Studio, OrcaSlicer, or other non-Prusa Slicer-family parity implementation | Only PrusaSlicer porting work is being considered in this repo for now; non-Prusa ports may be revisited only after an explicit new planning decision. |
 | Prusa network/device integration, cloud behavior, credentials, profile auto-update execution, or non-free plugin ingestion | These surfaces need separate licensing, privacy, credential, and threat-model review. |
 | Git submodules, Git subtree imports, vendored fork source trees, or Bzlmod external repos for upstream fork code | v1.11 should use accepted source pins, inventories, and fixtures, not import upstream source trees. |
 | Building upstream PrusaSlicer C++ in Bazel | The milestone verifies a narrow Rust-backed evidence slice and does not expand into upstream fork build integration. |
 | Fork release packages, signing, notarization, installers, AppImage, MSI, DMG, or release channels | Release engineering requires broader verified fork behavior first. |
-| Nightly vendor sync or Codex-assisted merge automation | Automated refresh remains unsafe before stable fork modules, fixtures, and evidence commands exist. |
+| Nightly vendor sync or Codex-assisted merge automation | Automated refresh is not in the active roadmap and remains unsafe before stable fork modules, fixtures, evidence commands, and an explicit new planning decision exist. |
 
 ## Traceability
 
@@ -133,4 +137,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ______________________________________________________________________
 
 *Requirements defined: 2026-06-02*
-*Last updated: 2026-06-02 after v1.11 roadmap creation*
+*Last updated: 2026-06-03 after non-Prusa porting scope clarification*
