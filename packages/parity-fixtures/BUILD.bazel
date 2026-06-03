@@ -437,6 +437,41 @@ sh_test(
     ],
 )
 
+sh_binary(
+    name = "verify_prusa_project_file_fixture",
+    srcs = ["verify_prusa_project_file_fixture.sh"],
+    data = [
+        ":prusa_project_file_bundle",
+        "README.md",
+        "//packages/parity:BUILD.bazel",
+        "//packages/parity:status.tsv",
+        "//packages/slic3r-rust/crates/slic3r_flavors:src/bin/prusa_profile_schema_summary.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:src/lib.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:src/prusa_profile.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:src/registry.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:tests/flavor_registry.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:tests/prusa_profile.rs",
+    ],
+)
+
+sh_test(
+    name = "verify_prusa_project_file_fixture_test",
+    srcs = ["verify_prusa_project_file_fixture_test.sh"],
+    data = [
+        "verify_prusa_project_file_fixture.sh",
+        ":prusa_project_file_bundle",
+        "README.md",
+        "//packages/parity:BUILD.bazel",
+        "//packages/parity:status.tsv",
+        "//packages/slic3r-rust/crates/slic3r_flavors:src/bin/prusa_profile_schema_summary.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:src/lib.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:src/prusa_profile.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:src/registry.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:tests/flavor_registry.rs",
+        "//packages/slic3r-rust/crates/slic3r_flavors:tests/prusa_profile.rs",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
@@ -506,5 +541,7 @@ filegroup(
         "forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf",
         "verify_prusa_profile_schema_fixture.sh",
         "verify_prusa_profile_schema_fixture_test.sh",
+        "verify_prusa_project_file_fixture.sh",
+        "verify_prusa_project_file_fixture_test.sh",
     ],
 )
