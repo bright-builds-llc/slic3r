@@ -1,6 +1,9 @@
-______________________________________________________________________
-
-## generated_by: gsd-discuss-phase lifecycle_mode: yolo phase_lifecycle_id: 42-2026-06-03T20-35-51 generated_at: 2026-06-03T20:35:51.198Z
+---
+generated_by: gsd-discuss-phase
+lifecycle_mode: yolo
+phase_lifecycle_id: 42-2026-06-03T20-35-51
+generated_at: 2026-06-03T20:35:51.198Z
+---
 
 # Phase 42: Prusa Project-File Fixture Surface - Context
 

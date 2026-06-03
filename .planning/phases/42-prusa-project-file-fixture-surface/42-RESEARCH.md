@@ -461,9 +461,13 @@ The `bazel query //packages/parity:prusaslicer_project_file_parity` command shou
 
 All claims in this research were verified or cited; no `[ASSUMED]` claims are present. [VERIFIED: source tagging review of this file]
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **None blocking.** The exact prose for `expected-project-summary.tsv` rows is delegated to the agent's discretion, but the allowed columns, required archive members, and nonsemantic boundary are locked. [VERIFIED: .planning/phases/42-prusa-project-file-fixture-surface/42-CONTEXT.md]
+1. **RESOLVED: None blocking.** The exact prose for
+   `expected-project-summary.tsv` rows is delegated to the agent's discretion,
+   but the allowed columns, required archive members, and nonsemantic boundary
+   are locked. [VERIFIED:
+   .planning/phases/42-prusa-project-file-fixture-surface/42-CONTEXT.md]
 
 ## Environment Availability
 
