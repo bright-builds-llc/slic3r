@@ -50,6 +50,15 @@ Broader PrusaSlicer runtime support, GUI support, generated-output parity,
 fork release builds, profile auto-update execution, network/cloud/credential
 behavior, non-free plugin ingestion, and sync automation remain deferred.
 
+v1.11 Phase 41 is complete. Maintainers can inspect the checked-in
+`packages/prusa-project-file-scope` scope package, run
+`bazel run //packages/prusa-project-file-scope:verify`, and trace
+`prusaslicer.project-file` back to the accepted PrusaSlicer source identity and
+inventory row before fixtures, parser work, parity targets, or status rows are
+introduced. The scope gate completes PSEL-01 and PSEL-02 while keeping broad
+3MF import/export, runtime, GUI, generated-output, release, network, plugin,
+profile-update, and sync claims deferred.
+
 <details>
 <summary>v1.9 shipped fork vendor intake and module architecture</summary>
 
@@ -301,12 +310,24 @@ high-risk generated-output or network/cloud surfaces.
   Phase 39
 - ✓ v1.10 requirements define an executable Prusa profile/config parity
   command with fixtures, docs, and non-overclaiming status updates — Phase 40
+- ✓ v1.11 requirements define a reviewed `prusaslicer.project-file` scope
+  record with accepted source identity, inventory row ID, fixture source
+  decision, expected-artifact contract, candidate Rust boundary, planned
+  evidence command, docs touched, license/security note, deferred scope, and
+  reviewer signoff — Phase 41
+- ✓ v1.11 requirements distinguish the narrow project-file evidence contract
+  from broad Prusa runtime, GUI, generated-output, release, network/cloud,
+  credential, plugin, profile-update, and sync claims — Phase 41
 
 ### Active
 
-- [ ] v1.11 defines and verifies a narrow `prusaslicer.project-file` evidence
-  slice through source-pinned fixtures, typed Rust boundaries, fail-closed
-  parity commands, and exact status/docs wording.
+- [ ] v1.11 creates the `prusaslicer.project-file` fixture surface and
+  expected-artifact contract from the Phase 41 scope record.
+- [ ] v1.11 extends the typed Rust fork/flavor boundary only where the selected
+  project-file evidence slice needs parsing, normalization, or summary
+  behavior.
+- [ ] v1.11 publishes fail-closed parity commands, exact status rows, and
+  non-overclaiming docs for the verified project-file evidence slice.
 - [ ] v1.11 avoids broad Prusa runtime, GUI, generated-output, release,
   network/cloud, credential, plugin, and sync claims unless a deliberately
   scoped executable evidence chain exists for that surface.
@@ -383,6 +404,7 @@ The audience for this work is broad:
 | Keep drift refresh manual and reviewer-gated until fork modules and fixtures exist | Automated vendor sync is unsafe before stable executable evidence and review boundaries exist | ✓ Shipped in Phase 36 |
 | Keep the Prusa profile boundary pure and caller-supplied until executable parity owns status publication | Phase 39 needs typed parser and provenance data without Git, network, filesystem discovery, process, release, sync, or premature status-row side effects | ✓ Shipped in Phase 39 |
 | Start fork implementation with a narrow PrusaSlicer evidence foundation instead of a full fork port | Prusa is the cleanest first downstream fork, and a profile/config slice proves the evidence workflow without high-risk generated-output or network/cloud scope | ✓ Shipped in v1.10 |
+| Gate Prusa project-file parity behind a checked-in scope package before fixtures, parser work, parity targets, or status rows | Project-file support is close enough to broad 3MF/runtime behavior that maintainers need a reviewed evidence contract before implementation can make claims | ✓ Shipped in Phase 41 |
 
 ## Evolution
 
@@ -405,4 +427,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-02 after v1.11 requirements and roadmap creation*
+*Last updated: 2026-06-03 after Phase 41 scope gate completion*
