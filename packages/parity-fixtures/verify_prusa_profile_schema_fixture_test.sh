@@ -221,6 +221,22 @@ test_parent_directory_forbidden_token_passes() {
 	assert_contains "${tmp_dir}/parent-cloud.out" "ok: Prusa profile-schema fixture verification passed"
 }
 
+test_project_file_namespace_passes() {
+	# Arrange
+	local dir="${tmp_dir}/project-file-namespace"
+	write_valid_fixture_copy "${dir}"
+	mkdir -p "${dir}/forks/prusaslicer/prusaslicer.project-file"
+
+	# Act
+	if ! PRUSA_FIXTURE_FORKS_ROOT="${dir}/forks" run_verifier "${dir}" "${tmp_dir}/project-file-namespace.out" "${tmp_dir}/project-file-namespace.err"; then
+		sed -n '1,160p' "${tmp_dir}/project-file-namespace.err" >&2
+		fail "project-file namespace caused valid fixture failure"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/project-file-namespace.out" "ok: Prusa profile-schema fixture verification passed"
+}
+
 test_missing_prusa_status_row_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-status-row"
@@ -338,6 +354,7 @@ test_swapped_provenance_rows_fail
 test_missing_static_input_boundary_fails
 test_forbidden_bambu_namespace_fails
 test_parent_directory_forbidden_token_passes
+test_project_file_namespace_passes
 test_missing_prusa_status_row_fails
 test_wrong_prusa_status_evidence_fails
 test_wrong_prusa_status_value_fails

@@ -217,6 +217,7 @@ verify_scope_wording() {
 
 verify_forbidden_namespaces() {
 	local allowed_namespace
+	local allowed_project_file_namespace
 	local forbidden_token
 	local lower_path
 	local namespace_path
@@ -227,6 +228,7 @@ verify_forbidden_namespaces() {
 
 	forks_root="$(cd "${forks_root}" && pwd -P)"
 	allowed_namespace="${forks_root}/prusaslicer/prusaslicer.profile-schema"
+	allowed_project_file_namespace="${forks_root}/prusaslicer/prusaslicer.project-file"
 
 	while IFS= read -r namespace_path; do
 		namespace_path="$(cd "${namespace_path}" && pwd -P)"
@@ -252,7 +254,8 @@ verify_forbidden_namespaces() {
 		fi
 		case "${namespace_path}" in
 		"${allowed_namespace}" | "${allowed_namespace}"/*) ;;
-		*) error "unexpected Phase 38 fork fixture namespace path: ${namespace_path}" ;;
+		"${allowed_project_file_namespace}" | "${allowed_project_file_namespace}"/*) ;;
+		*) error "unexpected Prusa fork fixture namespace path: ${namespace_path}" ;;
 		esac
 	done < <(find "${forks_root}" -mindepth 1 -type d -print)
 }
