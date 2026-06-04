@@ -62,6 +62,15 @@ introduced. The scope gate completes PSEL-01 and PSEL-02 while keeping broad
 3MF import/export, runtime, GUI, generated-output, release, network, plugin,
 profile-update, and sync claims deferred.
 
+v1.11 Phase 42 is complete. Maintainers can inspect the checked-in
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file` fixture
+namespace, provenance manifest, update rules, and presence-level
+`expected-project-summary.tsv`, then run
+`bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture` to
+validate the source-pinned fixture surface. The fixture surface completes
+PFIX-01 and PFIX-02 while keeping Phase 43 Rust parser work and Phase 44
+executable parity/status publication unavailable.
+
 <details>
 <summary>v1.9 shipped fork vendor intake and module architecture</summary>
 
@@ -411,6 +420,7 @@ The audience for this work is broad:
 | Keep the Prusa profile boundary pure and caller-supplied until executable parity owns status publication | Phase 39 needs typed parser and provenance data without Git, network, filesystem discovery, process, release, sync, or premature status-row side effects | ✓ Shipped in Phase 39 |
 | Start fork implementation with a narrow PrusaSlicer evidence foundation instead of a full fork port | Prusa is the cleanest first downstream fork, and a profile/config slice proves the evidence workflow without high-risk generated-output or network/cloud scope | ✓ Shipped in v1.10 |
 | Gate Prusa project-file parity behind a checked-in scope package before fixtures, parser work, parity targets, or status rows | Project-file support is close enough to broad 3MF/runtime behavior that maintainers need a reviewed evidence contract before implementation can make claims | ✓ Shipped in Phase 41 |
+| Keep Prusa project-file fixture TSVs exact instead of append-only | Phase 42 fixture artifacts are a narrow evidence surface, so extra provenance or expected-summary rows could overclaim parser or parity behavior while the verifier still passed | ✓ Shipped in Phase 42 |
 | Limit active downstream-fork porting consideration to PrusaSlicer for now | Non-Prusa Slicer-family ports need an explicit new planning decision before moving from parking lot into the roadmap | ✓ Adopted 2026-06-03 |
 
 ## Evolution
@@ -434,4 +444,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-03 after non-Prusa porting scope clarification*
+*Last updated: 2026-06-04 after Phase 42 project-file fixture verification*
