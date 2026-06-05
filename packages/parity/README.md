@@ -29,7 +29,11 @@
 - `bazel run //packages/parity:prusaslicer_profile_schema_parity` runs the
   shared fixture comparison for the narrow Prusa profile-schema parser/config
   evidence slice backed by `expected-summary.tsv`.
-- `status.tsv` is the checked-in data source for that command.
+- `bazel run //packages/parity:prusaslicer_project_file_parity` runs the
+  shared fixture comparison for the narrow Prusa project-file expected-summary
+  evidence slice backed by `expected-project-summary.tsv`.
+- `status.tsv` is the checked-in data source for those commands and status
+  rows.
 
 Linux and Windows runtime validation now publish as their own status rows.
 Linux and Windows packaged launcher parity now has runnable shared evidence and
@@ -60,14 +64,19 @@ source path `resources/profiles/PrusaResearch.ini`, fixture path
 checklist path `packages/prusa-baseline/profile-schema-checklist.md`, and
 checklist status `future-candidate`.
 
-`fork.prusaslicer.project-file` remains unavailable in
-`packages/parity/status.tsv` until the Phase 44 command
-`bazel run //packages/parity:prusaslicer_project_file_parity` exists and
-passes against the Phase 42 expected artifact
+`fork.prusaslicer.project-file` is verified only for the narrow
+`prusaslicer.project-file` expected-summary evidence slice. The evidence
+command is `bazel run //packages/parity:prusaslicer_project_file_parity`,
+backed by
 `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`.
-The Phase 43 reserved future status token is traceability metadata only for
-`prusaslicer.project-file`, `slic3r_flavors::prusa_project_file`, and the
-source path `src/libslic3r/Format/3mf.cpp`; it is not status publication.
+That evidence is backed by the Phase 42 fixture and the Phase 43 Rust summary
+boundary:
+`//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary`.
+It traces `prusaslicer.project-file` to
+`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, source
+path `src/libslic3r/Format/3mf.cpp`, fixture path
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf`,
+and status row `fork.prusaslicer.project-file`.
 
 Future fork status tokens should use `fork.<inventory_id>` or an
 inventory-derived stable slug that traces back to `packages/fork-inventories`.

@@ -298,12 +298,15 @@ and traces `prusaslicer.project-file` to
 source path `src/libslic3r/Format/3mf.cpp`, fixture path
 `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf`,
 scope record `packages/prusa-project-file-scope/project-file-scope.md`, and
-reserved future status token `fork.prusaslicer.project-file`.
+status token `fork.prusaslicer.project-file`.
 
-Phase 44 still owns executable parity and status publication:
-`bazel run //packages/parity:prusaslicer_project_file_parity` remains
-unavailable, and `packages/parity/status.tsv` still must not publish
-`fork.prusaslicer.project-file`.
+Phase 44 provides executable parity and status publication. The exact command
+is `bazel run //packages/parity:prusaslicer_project_file_parity`, and the exact
+status row is `fork.prusaslicer.project-file` in
+`packages/parity/status.tsv`. The verified slice is the narrow
+`prusaslicer.project-file` expected-summary evidence backed by
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`,
+the Phase 42 fixture, and the Phase 43 Rust summary boundary.
 
 Full 3MF import/export, full PrusaSlicer runtime support, GUI project behavior,
 generated-output parity, STEP import, support generation, arc fitting, wall

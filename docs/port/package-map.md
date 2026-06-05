@@ -18,7 +18,7 @@
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
 | `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface; `slic3r_flavors` owns the Prusa profile parser/summary helper and the Phase 43 `prusa_project_file` parser/metadata boundary |
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, the scoped Windows packaged launcher tree, and the scoped macOS packaged launcher/startup surface |
-| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, Windows packaged launcher, and narrow Prusa profile-schema slices |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, Windows packaged launcher, narrow Prusa profile-schema, and narrow Prusa project-file slices |
 | `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, `windows-packaged-launcher`, Prusa profile-schema, and Phase 42 Prusa project-file fixture slices, including checked-in expected artifacts such as `expected-summary.tsv` and `expected-project-summary.tsv` |
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
@@ -139,7 +139,11 @@
   `packages/slic3r-rust/crates/slic3r_flavors` for the typed
   `prusa_project_file` boundary over
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`.
-  `packages/parity` still does not own
-  `bazel run //packages/parity:prusaslicer_project_file_parity` or a
-  `fork.prusaslicer.project-file` row in `packages/parity/status.tsv` until
-  Phase 44.
+- Phase 44 makes the Prusa project-file package boundaries discoverable:
+  `packages/parity` owns
+  `bazel run //packages/parity:prusaslicer_project_file_parity` and the
+  `fork.prusaslicer.project-file` status row, `packages/parity-fixtures` owns
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`
+  and the fixture artifact, and
+  `packages/slic3r-rust/crates/slic3r_flavors` owns Rust summary logic for the
+  narrow expected-summary evidence slice.

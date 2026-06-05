@@ -12,7 +12,11 @@ persistence path. Phase 12 adds the scoped Rust-backed export workflows. Phase
 `slic3r_flavors::prusa_profile` parser and metadata boundary for the
 PrusaSlicer profile-schema fixture only. Phase 40 adds the Rust summary helper
 and `bazel run //packages/parity:prusaslicer_profile_schema_parity` as narrow
-executable Prusa profile-schema parser/config evidence.
+executable Prusa profile-schema parser/config evidence. Phase 43 adds the
+`slic3r_flavors::prusa_project_file` parser/metadata boundary, and Phase 44
+adds the Rust summary helper plus
+`bazel run //packages/parity:prusaslicer_project_file_parity` as narrow
+executable Prusa project-file expected-summary evidence.
 
 ## Layout
 
@@ -63,6 +67,10 @@ executable Prusa profile-schema parser/config evidence.
   - `//packages/slic3r-rust/crates/slic3r_flavors:prusa_profile_schema_summary`
 - Run the narrow Prusa profile-schema parity command:
   - `bazel run //packages/parity:prusaslicer_profile_schema_parity`
+- Run the Prusa project-file summary helper:
+  - `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary`
+- Run the narrow Prusa project-file parity command:
+  - `bazel run //packages/parity:prusaslicer_project_file_parity`
 - Run write-mode formatting with the pinned Rust toolchain:
   - `bazel run @rules_rust//:rustfmt`
 
@@ -119,10 +127,15 @@ executable Prusa profile-schema parser/config evidence.
   expected summary path
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`,
   scope record `packages/prusa-project-file-scope/project-file-scope.md`, and
-  reserved future status token `fork.prusaslicer.project-file`.
-- Phase 43 does not publish executable project-file parity. Phase 44 still owns
-  `bazel run //packages/parity:prusaslicer_project_file_parity` and any
-  `fork.prusaslicer.project-file` row in `packages/parity/status.tsv`.
+  status token `fork.prusaslicer.project-file`.
+- Phase 44 adds
+  `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary`
+  and verifies `fork.prusaslicer.project-file` through
+  `bazel run //packages/parity:prusaslicer_project_file_parity` for the narrow
+  Prusa project-file expected-summary evidence slice only. The Rust adapter
+  reads only the caller-supplied `expected-project-summary.tsv`; it does not
+  inspect Git, network, process, profile auto-update, upstream source import,
+  release, or sync surfaces.
 - Full 3MF import/export, full PrusaSlicer runtime support, GUI project
   behavior, generated-output parity, STEP import, support generation, arc
   fitting, wall seam behavior, network/device integration, profile auto-update

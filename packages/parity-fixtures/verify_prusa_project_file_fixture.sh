@@ -61,19 +61,15 @@ require_text() {
 	fi
 }
 
-require_any_text() {
-	local file="$1"
-	local label="$2"
-	shift 2
+require_project_file_parity_scope_text() {
+	if grep -Fq -- "Executable project-file parity remains unavailable until Phase 44." "${fixture_readme}"; then
+		return
+	fi
 
-	local pattern
-	for pattern in "$@"; do
-		if grep -Fq -- "${pattern}" "${file}"; then
-			return
-		fi
-	done
-
-	error "${label}: missing one of required text: $*"
+	require_text "${fixture_readme}" "fixture README" "Executable project-file parity is provided by"
+	require_text "${fixture_readme}" "fixture README" "bazel run //packages/parity:prusaslicer_project_file_parity"
+	require_text "${fixture_readme}" "fixture README" "for the narrow"
+	require_text "${fixture_readme}" "fixture README" "expected-summary evidence slice"
 }
 
 require_exact_header() {
@@ -261,9 +257,7 @@ verify_readme_scope() {
 
 	require_text "${fixture_readme}" "fixture README" "# PrusaSlicer Project-File Fixture"
 	require_text "${fixture_readme}" "fixture README" "Phase 42 supplies fixture bytes and presence-level expected artifacts only."
-	require_any_text "${fixture_readme}" "fixture README" \
-		"Executable project-file parity remains unavailable until Phase 44." \
-		"Executable project-file parity is provided by \`bazel run //packages/parity:prusaslicer_project_file_parity\` for the narrow expected-summary evidence slice."
+	require_project_file_parity_scope_text
 	require_text "${fixture_readme}" "fixture README" "Vendor ID: \`prusaslicer\`"
 	require_text "${fixture_readme}" "fixture README" "Inventory ID: \`prusaslicer.project-file\`"
 	require_text "${fixture_readme}" "fixture README" "Source ref: ${SOURCE_REF}"

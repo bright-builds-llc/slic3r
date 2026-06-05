@@ -53,21 +53,19 @@ parity, and fixture rules.
   evidence slice only. The evidence command is
   `bazel run //packages/parity:prusaslicer_profile_schema_parity`, backed by
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`.
-- `fork.prusaslicer.project-file` is not a verified row in
-  `packages/parity/status.tsv`. The Phase 41 `prusaslicer.project-file` scope
-  record in `packages/prusa-project-file-scope` reserves the fixture contract,
-  and Phase 42 supplies the fixture namespace, provenance, and expected
-  artifact only.
+- `fork.prusaslicer.project-file` is verified in
+  `packages/parity/status.tsv` for the narrow `prusaslicer.project-file`
+  expected-summary evidence slice only. The evidence command is
+  `bazel run //packages/parity:prusaslicer_project_file_parity`, backed by
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`,
+  the Phase 42 fixture, and the Phase 43 Rust summary boundary.
 - Phase 43 supplies `slic3r_flavors::prusa_project_file` parser/metadata
-  readiness only through `parse_prusa_project_file_summary`,
-  `prusa_project_file_metadata`, `prusa_project_file_summary_lines`, and
-  `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`.
-  Phase 44 still owns executable parity and status publication through the
-  future
-  `bazel run //packages/parity:prusaslicer_project_file_parity` command and
-  `fork.prusaslicer.project-file` row.
-- `prusaslicer.project-file` scope records do not prove full 3MF import/export
-  or full PrusaSlicer runtime support. GUI project behavior,
+  readiness through `parse_prusa_project_file_summary`,
+  `prusa_project_file_metadata`, `prusa_project_file_summary_lines`,
+  `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`, and
+  `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary`.
+- The verified `prusaslicer.project-file` row does not prove full 3MF
+  import/export or full PrusaSlicer runtime support. GUI project behavior,
   generated-output parity, STEP import, support generation, arc fitting, wall
   seam behavior, network/device integration, profile auto-update execution,
   fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, and

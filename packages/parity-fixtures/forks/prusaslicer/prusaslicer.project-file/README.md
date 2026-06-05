@@ -1,7 +1,9 @@
 # PrusaSlicer Project-File Fixture
 
 Phase 42 supplies fixture bytes and presence-level expected artifacts only.
-Executable project-file parity remains unavailable until Phase 44.
+Executable project-file parity is provided by
+`bazel run //packages/parity:prusaslicer_project_file_parity` for the narrow
+expected-summary evidence slice.
 
 ## Provenance
 
@@ -28,7 +30,9 @@ Branch-head observations remain drift-only and do not update this fixture.
 ## Status Boundary
 
 Phase 42 supplies fixture bytes and presence-level expected artifacts only.
-Executable project-file parity remains unavailable until Phase 44.
+Executable project-file parity is provided by
+`bazel run //packages/parity:prusaslicer_project_file_parity` for the narrow
+expected-summary evidence slice.
 This namespace does not publish executable parity, parser readiness, generated
 output, or runtime support.
 No generated output is introduced or verified by this namespace.
