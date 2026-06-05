@@ -100,6 +100,7 @@ if ! "${summary_binary}" "${expected_artifact}" >"${expected_summary_lines}"; th
 	printf 'error: expected-project-summary.tsv failed Rust summary validation for %s\n' \
 		"${expected_artifact}" >&2
 	if ! diff_output="$(diff -u "${rust_summary_input}" "${expected_artifact}")"; then
+		printf 'diff -u %s %s\n' "${rust_summary_input}" "${expected_artifact}" >&2
 		printf '%s\n' "${diff_output}" >&2
 	fi
 	exit 1
@@ -109,6 +110,7 @@ if ! diff_output="$(diff -u "${expected_summary_lines}" "${actual_summary}")"; t
 	mismatch_label="$(first_mismatch_label "${expected_summary_lines}" "${actual_summary}")"
 	printf 'error: expected-project-summary.tsv mismatch at %s in %s\n' \
 		"${mismatch_label}" "${expected_artifact}" >&2
+	printf 'diff -u %s %s\n' "${expected_summary_lines}" "${actual_summary}" >&2
 	printf '%s\n' "${diff_output}" >&2
 	exit 1
 fi
