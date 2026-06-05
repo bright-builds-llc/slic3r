@@ -7,6 +7,7 @@ rust_library(
     srcs = [
         "src/lib.rs",
         "src/prusa_profile.rs",
+        "src/prusa_project_file.rs",
         "src/registry.rs",
     ],
     deps = ["//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts"],
@@ -39,12 +40,27 @@ rust_test(
     edition = "2024",
 )
 
+rust_test(
+    name = "prusa_project_file_test",
+    srcs = ["tests/prusa_project_file.rs"],
+    compile_data = [
+        "src/prusa_project_file.rs",
+        "//packages/parity-fixtures:prusa_project_file_expected_project_summary",
+    ],
+    deps = [
+        ":slic3r_flavors",
+        "//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts",
+    ],
+    edition = "2024",
+)
+
 rust_clippy(
     name = "clippy",
     testonly = True,
     deps = [
         ":flavor_registry_test",
         ":prusa_profile_test",
+        ":prusa_project_file_test",
         ":prusa_profile_schema_summary",
         ":slic3r_flavors",
     ],
@@ -55,6 +71,7 @@ rustfmt_test(
     targets = [
         ":flavor_registry_test",
         ":prusa_profile_test",
+        ":prusa_project_file_test",
         ":prusa_profile_schema_summary",
         ":slic3r_flavors",
     ],
