@@ -22,6 +22,14 @@ rust_binary(
     edition = "2024",
 )
 
+rust_binary(
+    name = "prusa_project_file_summary",
+    srcs = ["src/bin/prusa_project_file_summary.rs"],
+    crate_root = "src/bin/prusa_project_file_summary.rs",
+    deps = [":slic3r_flavors"],
+    edition = "2024",
+)
+
 rust_test(
     name = "flavor_registry_test",
     srcs = ["tests/flavor_registry.rs"],
@@ -61,6 +69,7 @@ rust_clippy(
         ":flavor_registry_test",
         ":prusa_profile_test",
         ":prusa_project_file_test",
+        ":prusa_project_file_summary",
         ":prusa_profile_schema_summary",
         ":slic3r_flavors",
     ],
@@ -72,6 +81,7 @@ rustfmt_test(
         ":flavor_registry_test",
         ":prusa_profile_test",
         ":prusa_project_file_test",
+        ":prusa_project_file_summary",
         ":prusa_profile_schema_summary",
         ":slic3r_flavors",
     ],
