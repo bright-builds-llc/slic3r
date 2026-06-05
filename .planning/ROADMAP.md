@@ -189,7 +189,14 @@ docs and status clearly limit what was verified.
    seam behavior, fork release builds, network/device integration, profile
    auto-update execution, and sync automation remain deferred.
 
-**Plans**: 0 plans yet
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 44-01-PLAN.md - Create the Rust-backed project-file parity command and
+  mutation failure guard.
+- [ ] 44-02-PLAN.md - Publish the verified project-file status row and
+  non-overclaiming docs.
 
 ## Coverage
 
@@ -218,7 +225,7 @@ Phases execute in numeric order: 41 -> 42 -> 43 -> 44
 | 41. Prusa Project-File Scope Gate | 1/1 | Complete | 2026-06-03 |
 | 42. Prusa Project-File Fixture Surface | 3/3 | Complete    | 2026-06-04 |
 | 43. Rust Prusa Project-File Boundary | 3/3 | Complete    | 2026-06-05 |
-| 44. Executable Prusa Project-File Parity | 0/0 | Pending | - |
+| 44. Executable Prusa Project-File Parity | 0/2 | Pending | - |
 
 ## Future Revisit Candidates
 
