@@ -550,7 +550,7 @@ This phase does not rename a runtime key or migrate external stored state; it pu
 |---|-------|---------|---------------|
 | None | All planning-relevant claims in this research were verified against local files, command probes, prior phase artifacts, or cited official standards. [VERIFIED: source tags throughout this file] | All sections | No user confirmation is needed before planning. [VERIFIED: source tags throughout this file] |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **No blocking implementation questions remain for planning.** [VERIFIED: .planning/phases/44-executable-prusa-project-file-parity/44-CONTEXT.md; codebase audit]
    - What we know: the command target, status token, expected artifact, source ref, fixture path, docs surfaces, failure guard shape, and deferred scope are locked. [VERIFIED: .planning/phases/44-executable-prusa-project-file-parity/44-CONTEXT.md]
