@@ -13,6 +13,7 @@ source_fixture_dir="${workspace_root}/packages/parity-fixtures/forks/prusaslicer
 source_status_file="${workspace_root}/packages/parity/status.tsv"
 source_parity_build="${workspace_root}/packages/parity/BUILD.bazel"
 source_package_readme="${workspace_root}/packages/parity-fixtures/README.md"
+valid_project_file_status_row=$'fork.prusaslicer.project-file\tverified\t//packages/parity:prusaslicer_project_file_parity\tShared fixture comparison proves the narrow Prusa project-file expected-summary evidence slice backed by the Phase 42 fixture and Phase 43 Rust summary boundary only; full 3MF import/export, PrusaSlicer runtime, GUI, generated-output, STEP, support generation, arc fitting, wall seam, network/device, profile auto-update, fork release, and sync surfaces remain deferred'
 
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/verify-prusa-project-file-fixture-test.XXXXXX")"
 trap 'rm -rf "${tmp_dir}"' EXIT
@@ -50,6 +51,19 @@ remove_line_containing() {
 	local tmp_file
 	tmp_file="${file}.tmp"
 	awk -v pattern="${pattern}" 'index($0, pattern) == 0 { print }' "${file}" >"${tmp_file}"
+	mv "${tmp_file}" "${file}"
+}
+
+replace_first_line_containing() {
+	local file="$1"
+	local pattern="$2"
+	local replacement="$3"
+	local tmp_file
+	tmp_file="${file}.tmp"
+	awk -v pattern="${pattern}" -v replacement="${replacement}" '
+		!replaced && index($0, pattern) { print replacement; replaced = 1; next }
+		{ print }
+	' "${file}" >"${tmp_file}"
 	mv "${tmp_file}" "${file}"
 }
 
@@ -228,34 +242,111 @@ test_missing_scope_path_in_readme_fails() {
 	assert_contains "${tmp_dir}/missing-scope-readme.err" "packages/prusa-project-file-scope/project-file-scope.md"
 }
 
-test_premature_status_row_fails() {
+test_missing_project_file_status_row_fails() {
 	# Arrange
-	local dir="${tmp_dir}/premature-status-row"
+	local dir="${tmp_dir}/missing-project-file-status-row"
 	write_valid_fixture_copy "${dir}"
-	printf '%s\n' $'fork.prusaslicer.project-file\tverified\t//packages/parity:prusaslicer_project_file_parity\tpremature project-file row' >>"${dir}/status.tsv"
+	remove_line_containing "${dir}/status.tsv" "fork.prusaslicer.project-file"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-status.out" "${tmp_dir}/premature-status.err"; then
-		fail "premature project-file status row fixture passed"
+	if run_verifier "${dir}" "${tmp_dir}/missing-project-file-status.out" "${tmp_dir}/missing-project-file-status.err"; then
+		fail "missing project-file status row fixture passed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-status.err" "fork.prusaslicer.project-file"
+	assert_contains "${tmp_dir}/missing-project-file-status.err" "fork.prusaslicer.project-file"
+	assert_contains "${tmp_dir}/missing-project-file-status.err" "status"
 }
 
-test_premature_parity_target_fails() {
+test_wrong_project_file_status_fails() {
 	# Arrange
-	local dir="${tmp_dir}/premature-parity-target"
+	local dir="${tmp_dir}/wrong-project-file-status"
 	write_valid_fixture_copy "${dir}"
-	printf '\nsh_binary(name = "prusaslicer_project_file_parity", srcs = ["placeholder.sh"])\n' >>"${dir}/parity.BUILD.bazel"
+	replace_first_line_containing \
+		"${dir}/status.tsv" \
+		"fork.prusaslicer.project-file" \
+		$'fork.prusaslicer.project-file\tin progress\t//packages/parity:prusaslicer_project_file_parity\tShared fixture comparison proves the narrow Prusa project-file expected-summary evidence slice backed by the Phase 42 fixture and Phase 43 Rust summary boundary only; full 3MF import/export, PrusaSlicer runtime, GUI, generated-output, STEP, support generation, arc fitting, wall seam, network/device, profile auto-update, fork release, and sync surfaces remain deferred'
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-target.out" "${tmp_dir}/premature-target.err"; then
-		fail "premature project-file parity target fixture passed"
+	if run_verifier "${dir}" "${tmp_dir}/wrong-project-file-status.out" "${tmp_dir}/wrong-project-file-status.err"; then
+		fail "wrong project-file status fixture passed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-target.err" "prusaslicer_project_file_parity"
+	assert_contains "${tmp_dir}/wrong-project-file-status.err" "fork.prusaslicer.project-file"
+	assert_contains "${tmp_dir}/wrong-project-file-status.err" "status"
+}
+
+test_wrong_project_file_evidence_fails() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-project-file-evidence"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${dir}/status.tsv" \
+		"fork.prusaslicer.project-file" \
+		$'fork.prusaslicer.project-file\tverified\t//packages/parity:wrong_prusaslicer_project_file_parity\tShared fixture comparison proves the narrow Prusa project-file expected-summary evidence slice backed by the Phase 42 fixture and Phase 43 Rust summary boundary only; full 3MF import/export, PrusaSlicer runtime, GUI, generated-output, STEP, support generation, arc fitting, wall seam, network/device, profile auto-update, fork release, and sync surfaces remain deferred'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/wrong-project-file-evidence.out" "${tmp_dir}/wrong-project-file-evidence.err"; then
+		fail "wrong project-file evidence fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/wrong-project-file-evidence.err" "fork.prusaslicer.project-file"
+	assert_contains "${tmp_dir}/wrong-project-file-evidence.err" "evidence"
+}
+
+test_duplicate_project_file_status_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-project-file-status-row"
+	write_valid_fixture_copy "${dir}"
+	printf '%s\n' "${valid_project_file_status_row}" >>"${dir}/status.tsv"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/duplicate-project-file-status.out" "${tmp_dir}/duplicate-project-file-status.err"; then
+		fail "duplicate project-file status row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/duplicate-project-file-status.err" "fork.prusaslicer.project-file"
+	assert_contains "${tmp_dir}/duplicate-project-file-status.err" "status"
+}
+
+test_project_file_status_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/project-file-status-overclaim"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${dir}/status.tsv" \
+		"fork.prusaslicer.project-file" \
+		$'fork.prusaslicer.project-file\tverified\t//packages/parity:prusaslicer_project_file_parity\tfull PrusaSlicer runtime support verified'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/project-file-status-overclaim.out" "${tmp_dir}/project-file-status-overclaim.err"; then
+		fail "project-file status overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/project-file-status-overclaim.err" "fork.prusaslicer.project-file"
+	assert_contains "${tmp_dir}/project-file-status-overclaim.err" "notes"
+}
+
+test_missing_project_file_parity_target_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-project-file-parity-target"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${dir}/parity.BUILD.bazel" \
+		'name = "prusaslicer_project_file_parity"' \
+		'    name = "missing_prusaslicer_project_file_parity",'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-project-file-target.out" "${tmp_dir}/missing-project-file-target.err"; then
+		fail "missing project-file parity target fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-project-file-target.err" "prusaslicer_project_file_parity"
 }
 
 test_phase43_rust_surface_is_allowed() {
@@ -284,8 +375,12 @@ test_extra_expected_summary_row_fails
 test_missing_scope_path_in_provenance_fails
 test_extra_provenance_row_fails
 test_missing_scope_path_in_readme_fails
-test_premature_status_row_fails
-test_premature_parity_target_fails
+test_missing_project_file_status_row_fails
+test_wrong_project_file_status_fails
+test_wrong_project_file_evidence_fails
+test_duplicate_project_file_status_row_fails
+test_project_file_status_overclaim_fails
+test_missing_project_file_parity_target_fails
 test_phase43_rust_surface_is_allowed
 
 printf 'ok: verify_prusa_project_file_fixture_test\n'
