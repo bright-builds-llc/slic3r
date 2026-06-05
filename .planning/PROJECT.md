@@ -71,6 +71,15 @@ validate the source-pinned fixture surface. The fixture surface completes
 PFIX-01 and PFIX-02 while keeping Phase 43 Rust parser work and Phase 44
 executable parity/status publication unavailable.
 
+v1.11 Phase 43 is complete. Developers can use the pure
+`slic3r_flavors::prusa_project_file` boundary to parse and summarize the
+Phase 42 expected project summary into typed Rust metadata and presence-level
+evidence rows. Registry metadata now traces the project-file surface through
+shared typed constants, the fixture verifier allows the reviewed Rust surface,
+and docs publish parser readiness without adding the Phase 44 executable
+parity target or `fork.prusaslicer.project-file` status row. The boundary
+completes PPROJ-01, PPROJ-02, and PPROJ-03.
+
 <details>
 <summary>v1.9 shipped fork vendor intake and module architecture</summary>
 
@@ -331,14 +340,14 @@ high-risk generated-output or network/cloud surfaces.
 - ✓ v1.11 requirements distinguish the narrow project-file evidence contract
   from broad Prusa runtime, GUI, generated-output, release, network/cloud,
   credential, plugin, profile-update, and sync claims — Phase 41
+- ✓ v1.11 creates the `prusaslicer.project-file` fixture surface and
+  expected-artifact contract from the Phase 41 scope record — Phase 42
+- ✓ v1.11 extends the typed Rust fork/flavor boundary only where the selected
+  project-file evidence slice needs parsing, normalization, or summary
+  behavior — Phase 43
 
 ### Active
 
-- [ ] v1.11 creates the `prusaslicer.project-file` fixture surface and
-  expected-artifact contract from the Phase 41 scope record.
-- [ ] v1.11 extends the typed Rust fork/flavor boundary only where the selected
-  project-file evidence slice needs parsing, normalization, or summary
-  behavior.
 - [ ] v1.11 publishes fail-closed parity commands, exact status rows, and
   non-overclaiming docs for the verified project-file evidence slice.
 - [ ] v1.11 avoids broad Prusa runtime, GUI, generated-output, release,
@@ -444,4 +453,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-04 after Phase 42 project-file fixture verification*
+*Last updated: 2026-06-05 after Phase 43 Rust project-file boundary verification*

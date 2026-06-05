@@ -4,7 +4,7 @@ milestone: v1.11
 milestone_name: milestone
 status: verifying
 stopped_at: Completed 43-03-PLAN.md
-last_updated: "2026-06-05T14:08:12.333Z"
+last_updated: "2026-06-05T14:26:19.534Z"
 last_activity: 2026-06-05
 progress:
   total_phases: 4
@@ -25,16 +25,16 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Phase 43 — Rust Prusa Project-File Boundary
+**Current focus:** Phase 44 — Executable Prusa Project-File Parity
 
 ## Current Position
 
-Phase: 43 (Rust Prusa Project-File Boundary) — VERIFYING
-Plan: 3 of 3
+Phase: 44
+Plan: Not started
 Milestone: v1.11 PrusaSlicer Broader Parity Port
 Status: Phase complete — ready for verification
 Last activity: 2026-06-05
-Last Activity Description: Completed Phase 43 Plan 03
+Last Activity Description: Phase 43 complete, transitioned to Phase 44
 
 Progress: [██████████] 100%
 
