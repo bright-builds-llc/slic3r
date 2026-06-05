@@ -60,6 +60,15 @@ source path `resources/profiles/PrusaResearch.ini`, fixture path
 checklist path `packages/prusa-baseline/profile-schema-checklist.md`, and
 checklist status `future-candidate`.
 
+`fork.prusaslicer.project-file` remains unavailable in
+`packages/parity/status.tsv` until the Phase 44 command
+`bazel run //packages/parity:prusaslicer_project_file_parity` exists and
+passes against the Phase 42 expected artifact
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`.
+The Phase 43 reserved future status token is traceability metadata only for
+`prusaslicer.project-file`, `slic3r_flavors::prusa_project_file`, and the
+source path `src/libslic3r/Format/3mf.cpp`; it is not status publication.
+
 Future fork status tokens should use `fork.<inventory_id>` or an
 inventory-derived stable slug that traces back to `packages/fork-inventories`.
 A fork row may become `verified` only when maintainers can rerun a real
@@ -71,8 +80,8 @@ fork runtime support, GUI support, network/device/cloud/credential behavior,
 profile auto-update execution, non-free plugin ingestion, vendor sync
 automation, fork release packaging, or status evidence by themselves.
 
-Full PrusaSlicer runtime support remains deferred. GUI support remains deferred,
-generated-output parity remains deferred, fork release builds remain deferred,
-profile auto-update execution remains deferred, network/cloud/credential
-behavior remains deferred, non-free plugin ingestion remains deferred, and sync
-automation remains deferred.
+Full 3MF import/export, full PrusaSlicer runtime support, GUI project behavior,
+generated-output parity, STEP import, support generation, arc fitting, wall
+seam behavior, network/device integration, profile auto-update execution, fork
+release builds, Bambu Studio, OrcaSlicer, upstream source imports, and sync
+automation remain deferred.

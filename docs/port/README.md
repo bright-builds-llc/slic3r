@@ -283,10 +283,33 @@ The fixture namespace lives at
 contains `seam_test_object.3mf`, `fixture-provenance.tsv`, and
 `expected-project-summary.tsv`.
 
-Phase 43 `slic3r_flavors::prusa_project_file` is still unavailable. Phase 44
-`bazel run //packages/parity:prusaslicer_project_file_parity` is still
+## Current Prusa Project-File Rust Boundary State
+
+Phase 43 supplies parser/metadata readiness only through
+`slic3r_flavors::prusa_project_file`,
+`parse_prusa_project_file_summary`, `prusa_project_file_metadata`, and
+`prusa_project_file_summary_lines`. The focused Rust verification target is
+`//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`.
+
+The boundary consumes caller-supplied TSV text from
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`
+and traces `prusaslicer.project-file` to
+`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
+source path `src/libslic3r/Format/3mf.cpp`, fixture path
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf`,
+scope record `packages/prusa-project-file-scope/project-file-scope.md`, and
+reserved future status token `fork.prusaslicer.project-file`.
+
+Phase 44 still owns executable parity and status publication:
+`bazel run //packages/parity:prusaslicer_project_file_parity` remains
 unavailable, and `packages/parity/status.tsv` still must not publish
 `fork.prusaslicer.project-file`.
+
+Full 3MF import/export, full PrusaSlicer runtime support, GUI project behavior,
+generated-output parity, STEP import, support generation, arc fitting, wall
+seam behavior, network/device integration, profile auto-update execution, fork
+release builds, Bambu Studio, OrcaSlicer, upstream source imports, and sync
+automation remain deferred.
 
 ## v1.9 Fork Parity Deferrals
 

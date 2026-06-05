@@ -35,7 +35,13 @@ surface only. The fixture bundle target is
 `//packages/parity-fixtures:prusa_project_file_bundle`, and maintainers can
 verify the fixture surface with
 `bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture`.
-Executable project-file parity remains unavailable until Phase 44.
+Phase 43 now consumes `expected-project-summary.tsv` through the
+`slic3r_flavors::prusa_project_file` Rust parser/metadata boundary with
+`parse_prusa_project_file_summary`, while fixture verification remains local to
+this package. Executable project-file parity remains unavailable until Phase
+44, including the future
+`bazel run //packages/parity:prusaslicer_project_file_parity` command and
+`fork.prusaslicer.project-file` status row.
 
 Update route: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
 Branch-head observations remain drift-only.
@@ -85,3 +91,6 @@ additional fixture files by themselves.
   exported as `//packages/parity-fixtures:prusa_project_file_bundle` and
   checked by
   `bazel run //packages/parity-fixtures:verify_prusa_project_file_fixture`.
+  Phase 43 consumes the checked-in `expected-project-summary.tsv` through the
+  Rust parser boundary only; Phase 44 still owns executable project-file parity
+  and status publication.

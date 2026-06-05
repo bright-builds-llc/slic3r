@@ -87,10 +87,16 @@ boundaries.
   profile-schema parser/config evidence slice only. Its executable evidence is
   `bazel run //packages/parity:prusaslicer_profile_schema_parity`, backed by
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.profile-schema/expected-summary.tsv`.
-- The status rule is: fork.prusaslicer.project-file is unavailable until a real Phase 44 bazel run //packages/parity:prusaslicer_project_file_parity command exists and passes against the Phase 42 expected artifact.
-  The Phase 41 `prusaslicer.project-file` scope record names the planned
-  `slic3r_flavors::prusa_project_file` Rust boundary, but it is not executable
-  parity evidence.
+- The status rule is: `fork.prusaslicer.project-file` is unavailable in
+  `packages/parity/status.tsv` until a real Phase 44
+  `bazel run //packages/parity:prusaslicer_project_file_parity` command exists
+  and passes against the Phase 42 expected artifact
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`.
+  Phase 43 parser/metadata readiness now exists through
+  `slic3r_flavors::prusa_project_file`,
+  `parse_prusa_project_file_summary`, `prusa_project_file_metadata`, and
+  `prusa_project_file_summary_lines`, but it is not executable parity evidence
+  or status publication.
 - Phase 39 creates parser/metadata readiness only through
   `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
   `prusa_profile_schema_metadata`. It traces `prusaslicer.profile-schema` to

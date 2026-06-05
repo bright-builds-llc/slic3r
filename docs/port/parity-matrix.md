@@ -56,10 +56,16 @@ parity, and fixture rules.
 - `fork.prusaslicer.project-file` is not a verified row in
   `packages/parity/status.tsv`. The Phase 41 `prusaslicer.project-file` scope
   record in `packages/prusa-project-file-scope` reserves the fixture contract,
-  Phase 43 `slic3r_flavors::prusa_project_file` boundary, and Phase 44
-  `bazel run //packages/parity:prusaslicer_project_file_parity` command name
-  without publishing executable evidence.
-- Phase 42 supplies the fixture namespace, provenance, and expected artifact only.
+  and Phase 42 supplies the fixture namespace, provenance, and expected
+  artifact only.
+- Phase 43 supplies `slic3r_flavors::prusa_project_file` parser/metadata
+  readiness only through `parse_prusa_project_file_summary`,
+  `prusa_project_file_metadata`, `prusa_project_file_summary_lines`, and
+  `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`.
+  Phase 44 still owns executable parity and status publication through the
+  future
+  `bazel run //packages/parity:prusaslicer_project_file_parity` command and
+  `fork.prusaslicer.project-file` row.
 - `prusaslicer.project-file` scope records do not prove full 3MF import/export
   or full PrusaSlicer runtime support. GUI project behavior,
   generated-output parity, STEP import, support generation, arc fitting, wall

@@ -100,10 +100,33 @@ executable Prusa profile-schema parser/config evidence.
   only. `fork.prusaslicer.profile-schema` is verified through
   `bazel run //packages/parity:prusaslicer_profile_schema_parity` for the
   narrow Prusa profile-schema parser/config evidence slice only.
-- Full PrusaSlicer runtime support remains deferred. GUI support remains
-  deferred, generated-output parity remains deferred, fork release builds remain
-  deferred, profile auto-update execution remains deferred, network/cloud/
-  credential behavior remains deferred, non-free plugin ingestion remains
-  deferred, and sync automation remains deferred.
+- Phase 43 exposes `slic3r_flavors::prusa_project_file`,
+  `parse_prusa_project_file_summary`, `prusa_project_file_metadata`, and
+  `prusa_project_file_summary_lines` for the
+  `prusaslicer.project-file` parser/metadata boundary. The focused Bazel test
+  target is
+  `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`.
+  Production Rust accepts caller-supplied TSV text from
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`
+  and returns typed project-file summary values. It does not discover files,
+  inspect Git, access the network, spawn processes, execute profile
+  auto-update behavior, create release behavior, import upstream source trees,
+  or run vendor sync behavior.
+- The Phase 43 project-file metadata traces `prusaslicer.project-file` to
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
+  source path `src/libslic3r/Format/3mf.cpp`, fixture path
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf`,
+  expected summary path
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv`,
+  scope record `packages/prusa-project-file-scope/project-file-scope.md`, and
+  reserved future status token `fork.prusaslicer.project-file`.
+- Phase 43 does not publish executable project-file parity. Phase 44 still owns
+  `bazel run //packages/parity:prusaslicer_project_file_parity` and any
+  `fork.prusaslicer.project-file` row in `packages/parity/status.tsv`.
+- Full 3MF import/export, full PrusaSlicer runtime support, GUI project
+  behavior, generated-output parity, STEP import, support generation, arc
+  fitting, wall seam behavior, network/device integration, profile auto-update
+  execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source
+  imports, and sync automation remain deferred.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).
