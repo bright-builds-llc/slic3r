@@ -410,9 +410,10 @@ All claims in this research were verified from local repository artifacts, local
 
 No assumed claims were recorded. [VERIFIED: Sources section]
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Metadata field naming for the Phase 41 record path**
+   - RESOLVED: Use `scope_record_path` as the Rust metadata field for the Phase 41 scope record.
    - What we know: Context D-08 requires metadata to expose `packages/prusa-project-file-scope/project-file-scope.md` as the scope record, while PPROJ-02 says checklist path. [VERIFIED: 43-CONTEXT.md; .planning/REQUIREMENTS.md]
    - What's unclear: Whether the public Rust field should be named `scope_record_path`, `checklist_path`, or both. [VERIFIED: 43-CONTEXT.md; .planning/REQUIREMENTS.md]
    - Recommendation: Use `scope_record_path` in the Rust type and test it as satisfying the project-file checklist/record traceability requirement, because this evidence slice has a scope record rather than a Prusa baseline checklist. [VERIFIED: packages/prusa-project-file-scope/project-file-scope.md; 43-CONTEXT.md]
