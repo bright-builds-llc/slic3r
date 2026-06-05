@@ -77,7 +77,7 @@ OrcaSlicer, and vendor sync automation.
   inspect checked-in project-file fixtures, provenance, expected artifacts, and
   fail-closed fixture verification for the selected evidence contract.
 
-- [ ] **Phase 43: Rust Prusa Project-File Boundary** - Developers can parse or
+- [x] **Phase 43: Rust Prusa Project-File Boundary** - Developers can parse or (completed 2026-06-05)
   summarize the selected project-file evidence into typed, side-effect-free
   Rust domain values that trace back to the source and fixture metadata.
 
@@ -166,7 +166,7 @@ Plans:
   tests, and Bazel/Cargo wiring.
 - [x] 43-02-PLAN.md - Couple registry traceability to the Rust boundary and
   update the fixture verifier guard for Phase 43.
-- [ ] 43-03-PLAN.md - Publish the Rust project-file boundary through docs
+- [x] 43-03-PLAN.md - Publish the Rust project-file boundary through docs
   while preserving Phase 44 command/status deferral.
 
 ### Phase 44: Executable Prusa Project-File Parity
@@ -217,7 +217,7 @@ Phases execute in numeric order: 41 -> 42 -> 43 -> 44
 |-------|----------------|--------|-----------|
 | 41. Prusa Project-File Scope Gate | 1/1 | Complete | 2026-06-03 |
 | 42. Prusa Project-File Fixture Surface | 3/3 | Complete    | 2026-06-04 |
-| 43. Rust Prusa Project-File Boundary | 2/3 | In Progress | - |
+| 43. Rust Prusa Project-File Boundary | 3/3 | Complete   | 2026-06-05 |
 | 44. Executable Prusa Project-File Parity | 0/0 | Pending | - |
 
 ## Future Revisit Candidates
