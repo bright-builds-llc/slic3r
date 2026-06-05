@@ -23,41 +23,60 @@ const COLUMNS: [&str; EXPECTED_COLUMN_COUNT] = [
     "deferred_semantics",
     "notes",
 ];
+const CONTENT_TYPES_NOTE: &str = "Content type member declares 3D model and PNG thumbnail defaults; no import/export behavior claimed.";
+const ROOT_RELATIONSHIPS_NOTE: &str =
+    "Relationship target /3D/3dmodel.model is present; no load/save behavior claimed.";
+const VERSION_MARKER_NOTE: &str =
+    "3MF model carries Prusa/Slic3r version marker; no mesh details or semantics claimed.";
+const APPLICATION_MARKER_NOTE: &str = "Application marker only; no runtime version parity claimed.";
+const THUMBNAIL_NOTE: &str =
+    "Thumbnail archive member is present; no image decoding semantics claimed.";
+const PROJECT_CONFIG_NOTE: &str =
+    "Project metadata config file is present; no profile semantics claimed.";
+const MODEL_CONFIG_NOTE: &str =
+    "Model metadata config file is present; no model/geometry semantics claimed.";
 const EXPECTED_ROWS: [ExpectedProjectFileRow; 7] = [
     ExpectedProjectFileRow {
         archive_member: PrusaProjectFileArchiveMember::ContentTypes,
         project_marker: PrusaProjectFileMarker::OpcContentTypes,
         deferred_semantics: PrusaProjectFileDeferredSemantics::MemberPresenceOnly,
+        note: CONTENT_TYPES_NOTE,
     },
     ExpectedProjectFileRow {
         archive_member: PrusaProjectFileArchiveMember::RootRelationships,
         project_marker: PrusaProjectFileMarker::StartPartRelationship,
         deferred_semantics: PrusaProjectFileDeferredSemantics::MemberPresenceOnly,
+        note: ROOT_RELATIONSHIPS_NOTE,
     },
     ExpectedProjectFileRow {
         archive_member: PrusaProjectFileArchiveMember::Model3d,
         project_marker: PrusaProjectFileMarker::Slic3rPeVersion3mf,
         deferred_semantics: PrusaProjectFileDeferredSemantics::MemberMarkerOnly,
+        note: VERSION_MARKER_NOTE,
     },
     ExpectedProjectFileRow {
         archive_member: PrusaProjectFileArchiveMember::Model3d,
         project_marker: PrusaProjectFileMarker::ApplicationPrusaSlicer280Alpha3,
         deferred_semantics: PrusaProjectFileDeferredSemantics::MemberMarkerOnly,
+        note: APPLICATION_MARKER_NOTE,
     },
     ExpectedProjectFileRow {
         archive_member: PrusaProjectFileArchiveMember::Thumbnail,
         project_marker: PrusaProjectFileMarker::ThumbnailMemberPresent,
         deferred_semantics: PrusaProjectFileDeferredSemantics::MemberPresenceOnly,
+        note: THUMBNAIL_NOTE,
     },
     ExpectedProjectFileRow {
         archive_member: PrusaProjectFileArchiveMember::ProjectConfig,
         project_marker: PrusaProjectFileMarker::Slic3rPeConfigMemberPresent,
         deferred_semantics: PrusaProjectFileDeferredSemantics::MemberPresenceOnly,
+        note: PROJECT_CONFIG_NOTE,
     },
     ExpectedProjectFileRow {
         archive_member: PrusaProjectFileArchiveMember::ModelConfig,
         project_marker: PrusaProjectFileMarker::Slic3rPeModelConfigMemberPresent,
         deferred_semantics: PrusaProjectFileDeferredSemantics::MemberPresenceOnly,
+        note: MODEL_CONFIG_NOTE,
     },
 ];
 
@@ -140,6 +159,10 @@ pub enum PrusaProjectFileParseError {
         line_number: usize,
         value: String,
     },
+    UnexpectedNote {
+        line_number: usize,
+        value: String,
+    },
     DuplicateRow {
         line_number: usize,
         archive_member: PrusaProjectFileArchiveMember,
@@ -180,6 +203,7 @@ struct ExpectedProjectFileRow {
     archive_member: PrusaProjectFileArchiveMember,
     project_marker: PrusaProjectFileMarker,
     deferred_semantics: PrusaProjectFileDeferredSemantics,
+    note: &'static str,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -382,13 +406,24 @@ fn parse_summary_row(
     validate_column_count(&columns, line_number)?;
     validate_required_values(&columns, line_number)?;
 
+    let source_ref = parse_source_ref(columns[0], line_number)?;
+    let fixture_path = parse_fixture_path(columns[1], line_number)?;
+    let archive_member = parse_archive_member(columns[2], line_number)?;
+    let project_marker = parse_project_marker(columns[3], line_number)?;
+    let deferred_semantics = parse_deferred_semantics(columns[4], line_number)?;
+    let row_key = PrusaProjectFileRowKey {
+        archive_member,
+        project_marker,
+        deferred_semantics,
+    };
+
     Ok(PrusaProjectFileSummaryRow {
-        source_ref: parse_source_ref(columns[0], line_number)?,
-        fixture_path: parse_fixture_path(columns[1], line_number)?,
-        archive_member: parse_archive_member(columns[2], line_number)?,
-        project_marker: parse_project_marker(columns[3], line_number)?,
-        deferred_semantics: parse_deferred_semantics(columns[4], line_number)?,
-        notes: PrusaProjectFileNote(columns[5].to_owned()),
+        source_ref,
+        fixture_path,
+        archive_member,
+        project_marker,
+        deferred_semantics,
+        notes: parse_note(columns[5], row_key, line_number)?,
     })
 }
 
@@ -508,11 +543,34 @@ fn parse_deferred_semantics(
     }
 }
 
-fn is_expected_row_key(row_key: PrusaProjectFileRowKey) -> bool {
+fn parse_note(
+    value: &str,
+    row_key: PrusaProjectFileRowKey,
+    line_number: usize,
+) -> Result<PrusaProjectFileNote, PrusaProjectFileParseError> {
+    let Some(expected_row) = expected_row_for_key(row_key) else {
+        return Ok(PrusaProjectFileNote(value.to_owned()));
+    };
+
+    if value != expected_row.note {
+        return Err(PrusaProjectFileParseError::UnexpectedNote {
+            line_number,
+            value: value.to_owned(),
+        });
+    }
+
+    Ok(PrusaProjectFileNote(value.to_owned()))
+}
+
+fn expected_row_for_key(row_key: PrusaProjectFileRowKey) -> Option<ExpectedProjectFileRow> {
     EXPECTED_ROWS
         .iter()
-        .map(|row| PrusaProjectFileRowKey::from_expected(*row))
-        .any(|expected_row_key| expected_row_key == row_key)
+        .copied()
+        .find(|row| PrusaProjectFileRowKey::from_expected(*row) == row_key)
+}
+
+fn is_expected_row_key(row_key: PrusaProjectFileRowKey) -> bool {
+    expected_row_for_key(row_key).is_some()
 }
 
 fn validate_missing_rows(

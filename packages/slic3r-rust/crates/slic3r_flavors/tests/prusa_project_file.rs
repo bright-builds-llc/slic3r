@@ -260,6 +260,27 @@ fn rejects_unsupported_deferred_semantics() {
 }
 
 #[test]
+fn rejects_unexpected_note_claim() {
+    // Arrange
+    let input = replace_first_data_row(&expected_row(
+        expected_source_ref(),
+        "[Content_Types].xml",
+        "opc-content-types",
+        "member-presence-only",
+        "full import/export parity verified",
+    ));
+
+    // Act
+    let result = parse_prusa_project_file_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaProjectFileParseError::UnexpectedNote { line_number: 2, .. })
+    ));
+}
+
+#[test]
 fn rejects_duplicate_row() {
     // Arrange
     let first_row = EXPECTED_PROJECT_SUMMARY
