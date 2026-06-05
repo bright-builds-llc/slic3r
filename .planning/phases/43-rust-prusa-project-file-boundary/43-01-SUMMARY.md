@@ -97,8 +97,6 @@ completed: 2026-06-05
 - **Verification:** `bazel test //packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test //packages/slic3r-rust:verify` passed.
 - **Committed in:** `ce051acd4`
 
----
-
 **Total deviations:** 1 auto-fixed (1 blocking)
 **Impact on plan:** Narrow Bazel wiring correction only. No source scope, parity command, or status publication was added.
 
@@ -146,6 +144,5 @@ Plan 43-02 can consume `PRUSA_PROJECT_FILE_INVENTORY_ID`, `PRUSA_PROJECT_FILE_SO
 - Confirmed `requirements-completed: [PPROJ-01, PPROJ-02, PPROJ-03]` is present in frontmatter.
 - Confirmed `git diff --check` passes for the summary file.
 
----
 *Phase: 43-rust-prusa-project-file-boundary*
 *Completed: 2026-06-05*

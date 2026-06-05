@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.11
 milestone_name: milestone
 status: executing
-stopped_at: Completed 43-01-PLAN.md
-last_updated: "2026-06-05T13:44:53.452Z"
+stopped_at: Completed 43-02-PLAN.md
+last_updated: "2026-06-05T13:59:27.928Z"
 last_activity: 2026-06-05
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 7
-  completed_plans: 5
-  percent: 71
+  completed_plans: 6
+  percent: 86
 ---
 
 # Project State
@@ -30,13 +30,13 @@ depend on.
 ## Current Position
 
 Phase: 43 (Rust Prusa Project-File Boundary) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Milestone: v1.11 PrusaSlicer Broader Parity Port
 Status: Ready to execute
 Last activity: 2026-06-05
-Last Activity Description: Completed Phase 43 Plan 01
+Last Activity Description: Completed Phase 43 Plan 02
 
-Progress: [███████░░░] 71%
+Progress: [█████████░] 86%
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ Progress: [███████░░░] 71%
 - 42-02 completed 2 tasks across 3 fixture verifier files in 9m 40s.
 - 42-03 completed 2 tasks across 8 docs/verifier files in 5m 25s.
 - 43-01 completed 2 tasks across 5 Rust parser/Bazel files in 9 min.
+- 43-02 completed 3 tasks across 7 registry/verifier/metadata files in 8m 1s.
 
 ## Accumulated Context
 
@@ -117,10 +118,13 @@ Recent decisions affecting v1.11:
 - [Phase 43]: Kept Prusa project-file parsing in slic3r_flavors as a pure data-in/data-out Rust boundary.
 - [Phase 43]: Kept fork.prusaslicer.project-file as reserved_future_status_token metadata only; no parity status row or command was added.
 - [Phase 43]: Declared direct Bazel compile-time inputs for the source-name guard and contract-typed metadata test.
+- [Phase 43]: Plan 43-02 kept the prusaslicer.project-file registry row as FutureCandidate metadata with file-formats dependency only.
+- [Phase 43]: Plan 43-02 replaced duplicated registry project-file source literals with constants from crate::prusa_project_file.
+- [Phase 43]: Plan 43-02 removed the obsolete Rust-surface absence guard while preserving project-file status-row and parity-target negative guards.
 
 ### Pending Todos
 
-- Execute Phase 43 Plan 02.
+- Execute Phase 43 Plan 03.
 
 ### Blockers/Concerns
 
@@ -128,6 +132,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-05T13:44:37.938Z
-Stopped at: Completed 43-01-PLAN.md
+Last session: 2026-06-05T13:59:27.899Z
+Stopped at: Completed 43-02-PLAN.md
 Resume file: None
