@@ -2,6 +2,9 @@ use crate::prusa_profile::{
     PRUSA_PROFILE_SCHEMA_INVENTORY_ID, PRUSA_PROFILE_SCHEMA_SOURCE_PATH,
     PRUSA_PROFILE_SCHEMA_SOURCE_REF,
 };
+use crate::prusa_project_file::{
+    PRUSA_PROJECT_FILE_INVENTORY_ID, PRUSA_PROJECT_FILE_SOURCE_PATH, PRUSA_PROJECT_FILE_SOURCE_REF,
+};
 use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface, VendorSourceRef};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -78,10 +81,10 @@ static BASE_CAPABILITIES: [FlavorCapability; 1] = [FlavorCapability {
     future_parity_notes: "Base Slic3r core row included to separate inherited base behavior from downstream fork surfaces.",
 }];
 
-static PRUSA_PROJECT_FILE_PATHS: [&str; 1] = ["src/libslic3r/Format/3mf.cpp"];
+static PRUSA_PROJECT_FILE_PATHS: [&str; 1] = [PRUSA_PROJECT_FILE_SOURCE_PATH];
 static PRUSA_PROJECT_FILE_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
-    inventory_id: "prusaslicer.project-file",
-    vendor_source: VendorSourceRef::prusa_slicer_version_2_9_5(),
+    inventory_id: PRUSA_PROJECT_FILE_INVENTORY_ID,
+    vendor_source: PRUSA_PROJECT_FILE_SOURCE_REF,
     source_paths: &PRUSA_PROJECT_FILE_PATHS,
     ownership: FeatureOrigin::SharedDownstream,
 }];
