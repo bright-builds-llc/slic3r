@@ -24,9 +24,7 @@ if [[ "$#" -eq 0 ]]; then
 	status_file="${workspace_root}/packages/parity/status.tsv"
 	parity_build_file="${workspace_root}/packages/parity/BUILD.bazel"
 	package_readme="${package_dir}/README.md"
-	rust_src_root="${workspace_root}/packages/slic3r-rust/crates/slic3r_flavors/src"
-	rust_tests_root="${workspace_root}/packages/slic3r-rust/crates/slic3r_flavors/tests"
-elif [[ "$#" -eq 9 ]]; then
+elif [[ "$#" -eq 7 ]]; then
 	fixture_readme="$1"
 	provenance_file="$2"
 	expected_summary_file="$3"
@@ -34,10 +32,8 @@ elif [[ "$#" -eq 9 ]]; then
 	status_file="$5"
 	parity_build_file="$6"
 	package_readme="$7"
-	rust_src_root="$8"
-	rust_tests_root="$9"
 else
-	error "usage: verify_prusa_project_file_fixture.sh [fixture-README fixture-provenance expected-project-summary seam_test_object.3mf parity-status parity-BUILD parity-fixtures-README rust-src-root rust-tests-root]"
+	error "usage: verify_prusa_project_file_fixture.sh [fixture-README fixture-provenance expected-project-summary seam_test_object.3mf parity-status parity-BUILD parity-fixtures-README]"
 fi
 
 readonly SOURCE_REF="prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
@@ -53,14 +49,6 @@ require_file() {
 	local label="$2"
 	if [[ ! -f "${file}" ]]; then
 		error "${label} file not found: ${file}"
-	fi
-}
-
-require_dir() {
-	local dir="$1"
-	local label="$2"
-	if [[ ! -d "${dir}" ]]; then
-		error "${label} directory not found: ${dir}"
 	fi
 }
 
@@ -308,19 +296,6 @@ verify_parity_target_absent() {
 	fi
 }
 
-verify_rust_surface_absent() {
-	local root
-	local file
-	for root in "${rust_src_root}" "${rust_tests_root}"; do
-		require_dir "${root}" "Rust flavor guard"
-		while IFS= read -r file; do
-			if grep -Fq -- "prusa_project_file" "${file}"; then
-				error "${file}: forbidden premature Rust project-file surface prusa_project_file"
-			fi
-		done < <(find "${root}" -type f -print)
-	done
-}
-
 for required_file in \
 	"${fixture_readme}" \
 	"${provenance_file}" \
@@ -340,6 +315,5 @@ verify_project_markers
 verify_readme_scope
 verify_status_row_absent
 verify_parity_target_absent
-verify_rust_surface_absent
 
 printf 'ok: Prusa project-file fixture verification passed\n'

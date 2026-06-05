@@ -445,12 +445,6 @@ sh_binary(
         "README.md",
         "//packages/parity:BUILD.bazel",
         "//packages/parity:status.tsv",
-        "//packages/slic3r-rust/crates/slic3r_flavors:src/bin/prusa_profile_schema_summary.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:src/lib.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:src/prusa_profile.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:src/registry.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:tests/flavor_registry.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:tests/prusa_profile.rs",
     ],
 )
 
@@ -463,12 +457,6 @@ sh_test(
         "README.md",
         "//packages/parity:BUILD.bazel",
         "//packages/parity:status.tsv",
-        "//packages/slic3r-rust/crates/slic3r_flavors:src/bin/prusa_profile_schema_summary.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:src/lib.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:src/prusa_profile.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:src/registry.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:tests/flavor_registry.rs",
-        "//packages/slic3r-rust/crates/slic3r_flavors:tests/prusa_profile.rs",
     ],
 )
 

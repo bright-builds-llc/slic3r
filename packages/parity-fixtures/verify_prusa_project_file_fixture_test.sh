@@ -13,8 +13,6 @@ source_fixture_dir="${workspace_root}/packages/parity-fixtures/forks/prusaslicer
 source_status_file="${workspace_root}/packages/parity/status.tsv"
 source_parity_build="${workspace_root}/packages/parity/BUILD.bazel"
 source_package_readme="${workspace_root}/packages/parity-fixtures/README.md"
-source_rust_src_root="${workspace_root}/packages/slic3r-rust/crates/slic3r_flavors/src"
-source_rust_tests_root="${workspace_root}/packages/slic3r-rust/crates/slic3r_flavors/tests"
 
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/verify-prusa-project-file-fixture-test.XXXXXX")"
 trap 'rm -rf "${tmp_dir}"' EXIT
@@ -46,13 +44,6 @@ assert_file_equals() {
 	fi
 }
 
-copy_tree() {
-	local source_dir="$1"
-	local dest_dir="$2"
-	mkdir -p "${dest_dir}"
-	cp -R "${source_dir}/." "${dest_dir}/"
-}
-
 remove_line_containing() {
 	local file="$1"
 	local pattern="$2"
@@ -75,8 +66,6 @@ write_valid_fixture_copy() {
 	cp "${source_status_file}" "${dir}/status.tsv"
 	cp "${source_parity_build}" "${dir}/parity.BUILD.bazel"
 	cp "${source_package_readme}" "${dir}/parity-fixtures-README.md"
-	copy_tree "${source_rust_src_root}" "${dir}/rust-src"
-	copy_tree "${source_rust_tests_root}" "${dir}/rust-tests"
 }
 
 run_verifier() {
@@ -93,9 +82,7 @@ run_verifier() {
 		"${fixture_dir}/seam_test_object.3mf" \
 		"${dir}/status.tsv" \
 		"${dir}/parity.BUILD.bazel" \
-		"${dir}/parity-fixtures-README.md" \
-		"${dir}/rust-src" \
-		"${dir}/rust-tests" >"${stdout_file}" 2>"${stderr_file}"
+		"${dir}/parity-fixtures-README.md" >"${stdout_file}" 2>"${stderr_file}"
 	local status="$?"
 	set -e
 
@@ -271,19 +258,22 @@ test_premature_parity_target_fails() {
 	assert_contains "${tmp_dir}/premature-target.err" "prusaslicer_project_file_parity"
 }
 
-test_premature_rust_surface_fails() {
+test_phase43_rust_surface_is_allowed() {
 	# Arrange
-	local dir="${tmp_dir}/premature-rust-surface"
+	local dir="${tmp_dir}/phase43-rust-surface"
 	write_valid_fixture_copy "${dir}"
+	mkdir -p "${dir}/rust-src" "${dir}/rust-tests"
 	printf '%s\n' "pub mod prusa_project_file;" >"${dir}/rust-src/prusa_project_file.rs"
+	printf '%s\n' "fn prusa_project_file_fixture_is_allowed() {}" >"${dir}/rust-tests/prusa_project_file.rs"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-rust.out" "${tmp_dir}/premature-rust.err"; then
-		fail "premature project-file Rust surface fixture passed"
+	if ! run_verifier "${dir}" "${tmp_dir}/phase43-rust.out" "${tmp_dir}/phase43-rust.err"; then
+		sed -n '1,160p' "${tmp_dir}/phase43-rust.err" >&2
+		fail "Phase 43 project-file Rust surface fixture failed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-rust.err" "prusa_project_file"
+	assert_file_equals "${tmp_dir}/phase43-rust.out" "ok: Prusa project-file fixture verification passed"
 }
 
 test_complete_fixture_passes
@@ -296,6 +286,6 @@ test_extra_provenance_row_fails
 test_missing_scope_path_in_readme_fails
 test_premature_status_row_fails
 test_premature_parity_target_fails
-test_premature_rust_surface_fails
+test_phase43_rust_surface_is_allowed
 
 printf 'ok: verify_prusa_project_file_fixture_test\n'
