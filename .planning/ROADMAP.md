@@ -158,7 +158,16 @@ source metadata.
 1. Developer can confirm the new Rust logic performs no Git, network,
    filesystem discovery, process, release, or vendor sync operations.
 
-**Plans**: 0 plans yet
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 43-01-PLAN.md - Create the pure Rust project-file parser, metadata API,
+  tests, and Bazel/Cargo wiring.
+- [ ] 43-02-PLAN.md - Couple registry traceability to the Rust boundary and
+  update the fixture verifier guard for Phase 43.
+- [ ] 43-03-PLAN.md - Publish the Rust project-file boundary through docs
+  while preserving Phase 44 command/status deferral.
 
 ### Phase 44: Executable Prusa Project-File Parity
 
@@ -208,7 +217,7 @@ Phases execute in numeric order: 41 -> 42 -> 43 -> 44
 |-------|----------------|--------|-----------|
 | 41. Prusa Project-File Scope Gate | 1/1 | Complete | 2026-06-03 |
 | 42. Prusa Project-File Fixture Surface | 3/3 | Complete    | 2026-06-04 |
-| 43. Rust Prusa Project-File Boundary | 0/0 | Pending | - |
+| 43. Rust Prusa Project-File Boundary | 0/3 | Pending | - |
 | 44. Executable Prusa Project-File Parity | 0/0 | Pending | - |
 
 ## Future Revisit Candidates
