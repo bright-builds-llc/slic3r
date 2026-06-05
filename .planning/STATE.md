@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.11
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 43-03-PLAN.md
-last_updated: "2026-06-05T14:26:19.534Z"
+stopped_at: Phase 44 context gathered
+last_updated: "2026-06-05T23:06:41.655Z"
 last_activity: 2026-06-05
 progress:
   total_phases: 4
@@ -136,6 +136,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-05T14:08:12.331Z
-Stopped at: Completed 43-03-PLAN.md
-Resume file: None
+Last session: 2026-06-05T23:06:41.652Z
+Stopped at: Phase 44 context gathered
+Resume file: .planning/phases/44-executable-prusa-project-file-parity/44-CONTEXT.md
