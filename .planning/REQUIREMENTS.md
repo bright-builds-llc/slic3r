@@ -36,14 +36,14 @@ Requirements for the v1.11 milestone. Each maps to one roadmap phase.
 
 ### Rust Prusa Project-File Boundary
 
-- [ ] **PPROJ-01**: Developer can parse or summarize the selected Prusa
+- [x] **PPROJ-01**: Developer can parse or summarize the selected Prusa
   project-file fixture evidence into typed Rust domain values before data
   reaches shared core profile, file-format, or config logic.
-- [ ] **PPROJ-02**: Developer can trace the Prusa project-file capability from
+- [x] **PPROJ-02**: Developer can trace the Prusa project-file capability from
   Rust metadata back to the Prusa inventory row, accepted vendor source
   identity, source path or reviewed sample source, fixture path, checklist
   path, and planned status token.
-- [ ] **PPROJ-03**: Developer can verify Prusa project-file summary or parsing
+- [x] **PPROJ-03**: Developer can verify Prusa project-file summary or parsing
   logic with focused Rust unit tests that do not perform Git, network,
   filesystem discovery, process, release, or vendor sync operations.
 
@@ -121,9 +121,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PSEL-02 | Phase 41 | Complete |
 | PFIX-01 | Phase 42 | Complete |
 | PFIX-02 | Phase 42 | Complete |
-| PPROJ-01 | Phase 43 | Pending |
-| PPROJ-02 | Phase 43 | Pending |
-| PPROJ-03 | Phase 43 | Pending |
+| PPROJ-01 | Phase 43 | Complete |
+| PPROJ-02 | Phase 43 | Complete |
+| PPROJ-03 | Phase 43 | Complete |
 | PPEV-01 | Phase 44 | Pending |
 | PPEV-02 | Phase 44 | Pending |
 | PPEV-03 | Phase 44 | Pending |

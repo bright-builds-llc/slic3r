@@ -19,6 +19,9 @@
 - Rust crates under `packages/slic3r-rust/crates/` use Cargo integration tests and Bazel `rust_test` targets.
 - The package aggregate `//packages/slic3r-rust:verify` includes Rust tests, rustfmt checks, and clippy checks for wired crates.
 - `packages/slic3r-rust/crates/slic3r_flavors/tests/flavor_registry.rs` covers pure static flavor registry metadata and provenance behavior.
+- `packages/slic3r-rust/crates/slic3r_flavors/tests/prusa_project_file.rs`
+  covers the pure Prusa project-file expected-summary parser, traceability
+  metadata, malformed inputs, and no-overclaiming public names.
 
 **Assertions and style**
 - Catch2 tests use `TEST_CASE`, `SCENARIO`, `GIVEN`, `WHEN`, `THEN`, and `REQUIRE`
@@ -53,6 +56,10 @@
 - `rustup run 1.94.1 cargo test --manifest-path packages/slic3r-rust/Cargo.toml --all-features`
 - `bazel test //packages/slic3r-rust:verify`
 - Crate-focused Rust checks can target package tests such as `rustup run 1.94.1 cargo test --manifest-path packages/slic3r-rust/Cargo.toml -p slic3r_flavors --test flavor_registry`.
+- Prusa project-file parser checks can target
+  `rustup run 1.94.1 cargo test --manifest-path packages/slic3r-rust/Cargo.toml -p slic3r_flavors --test prusa_project_file`
+  and
+  `bazel test //packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`.
 
 ## Test Structure
 

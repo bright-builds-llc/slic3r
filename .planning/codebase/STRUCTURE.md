@@ -56,7 +56,10 @@ Slic3r/
 **`packages/`:**
 - Purpose: Bazel-organized migration packages that let the retained legacy package, Rust port, launcher, parity evidence, and fork metadata evolve side by side.
 - Contains: `packages/legacy-slic3r/`, `packages/slic3r-rust/`, `packages/launcher/`, `packages/parity/`, `packages/parity-fixtures/`, `packages/fork-vendors/`, and `packages/fork-inventories/`.
-- Key files: `packages/slic3r-rust/Cargo.toml`, `packages/slic3r-rust/BUILD.bazel`, `packages/slic3r-rust/crates/slic3r_flavors/src/registry.rs`.
+- Key files: `packages/slic3r-rust/Cargo.toml`,
+  `packages/slic3r-rust/BUILD.bazel`,
+  `packages/slic3r-rust/crates/slic3r_flavors/src/registry.rs`, and
+  `packages/slic3r-rust/crates/slic3r_flavors/src/prusa_project_file.rs`.
 - Subdirectories: `packages/slic3r-rust/crates/` contains the Rust crate boundaries for contracts, core, CLI, and flavor registry metadata.
 
 **`utils/`:**
@@ -106,6 +109,8 @@ Slic3r/
 - `src/GUI/*`: GUI controllers, view state, and widgets.
 - `packages/slic3r-rust/crates/slic3r_contracts/src/flavor.rs`: typed Rust flavor and fork contract values.
 - `packages/slic3r-rust/crates/slic3r_flavors/src/registry.rs`: pure static flavor registry metadata and lookup helpers.
+- `packages/slic3r-rust/crates/slic3r_flavors/src/prusa_project_file.rs`:
+  pure Prusa project-file expected-summary parser and traceability metadata.
 
 **Testing:**
 - `t/*.t`: Perl tests for runtime and geometry behavior.
