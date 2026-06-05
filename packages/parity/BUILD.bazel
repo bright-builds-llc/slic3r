@@ -120,6 +120,23 @@ sh_binary(
     ],
 )
 
+sh_binary(
+    name = "prusaslicer_project_file_parity",
+    srcs = ["compare_prusaslicer_project_file.sh"],
+    data = [
+        "status.tsv",
+        "//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary",
+        "//packages/parity-fixtures:prusa_project_file_expected_project_summary",
+        "//packages/parity-fixtures:prusa_project_file_provenance",
+    ],
+    args = [
+        "$(location //packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary)",
+        "$(location //packages/parity-fixtures:prusa_project_file_expected_project_summary)",
+        "$(location //packages/parity-fixtures:prusa_project_file_expected_project_summary)",
+        "$(location //packages/parity-fixtures:prusa_project_file_provenance)",
+    ],
+)
+
 sh_test(
     name = "prusaslicer_profile_schema_parity_failure_test",
     srcs = ["compare_prusaslicer_profile_schema_test.sh"],
