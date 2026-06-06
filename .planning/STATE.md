@@ -1,10 +1,10 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.11
-milestone_name: milestone
-status: complete
-stopped_at: v1.11 complete, ready for milestone audit/archive
-last_updated: "2026-06-06T03:13:28.811Z"
+milestone_name: PrusaSlicer Broader Parity Port
+status: completed
+stopped_at: v1.11 archived; ready to start next milestone
+last_updated: "2026-06-06T03:27:40Z"
 last_activity: 2026-06-06
 progress:
   total_phases: 4
@@ -18,23 +18,24 @@ progress:
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-03)
+See: `.planning/PROJECT.md` (updated 2026-06-06)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** v1.11 complete — milestone audit/archive
+**Current focus:** no active milestone — start the next milestone with
+`$gsd-new-milestone` before new phase work.
 
 ## Current Position
 
-Phase: 44
-Plan: Not started
-Milestone: v1.11 PrusaSlicer Broader Parity Port
-Status: Milestone complete — ready to archive
+Phase: None
+Plan: None
+Milestone: None active; v1.11 PrusaSlicer Broader Parity Port is archived
+Status: Ready for next milestone planning
 Last activity: 2026-06-06
-Last Activity Description: Phase 44 complete
+Last Activity Description: v1.11 milestone completed and archived
 
 Progress: [██████████] 100%
 
@@ -45,7 +46,7 @@ Progress: [██████████] 100%
 - v1.10 completed 4 phases, 6 plans, and 15 plan tasks.
 - v1.11 starts after the first trusted Prusa profile/config evidence path.
 
-**Current milestone plan:**
+**Last completed milestone:**
 
 - 4 phases planned: 41-44.
 - 10 v1 requirements mapped.
@@ -58,6 +59,10 @@ Progress: [██████████] 100%
 - 43-01 completed 2 tasks across 5 Rust parser/Bazel files in 9 min.
 - 43-02 completed 3 tasks across 7 registry/verifier/metadata files in 8m 1s.
 - 43-03 completed 2 tasks across 7 docs files in 4m 19s.
+- 44-01 completed 3 tasks across Rust summary, parity command, Bazel, and
+  failure-guard files in 7 min.
+- 44-02 completed 2 tasks across status, verifier, fixture, package, and port
+  docs files in 8 min.
 
 ## Accumulated Context
 
@@ -135,6 +140,16 @@ Recent decisions affecting v1.11:
 
 - [Phase 43]: Plan 43-03 kept broad Prusa runtime, GUI, generated-output, release, network/device, Bambu, Orca, upstream import, and sync surfaces deferred in docs.
 
+- [Phase 44]: Project-file parity command and failure guard use explicit Bazel
+  inputs and checked-in expected artifacts rather than repository discovery.
+
+- [Phase 44]: Published exactly one verified
+  `fork.prusaslicer.project-file` status row for the narrow expected-summary
+  evidence slice.
+
+- [Phase 44]: Full PrusaSlicer runtime, GUI, generated-output, release,
+  network/device, profile-update, and sync surfaces remain deferred.
+
 ### Pending Todos
 
 - None.
@@ -145,6 +160,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-05T23:06:41.652Z
-Stopped at: Phase 44 context gathered
-Resume file: .planning/phases/44-executable-prusa-project-file-parity/44-CONTEXT.md
+Last session: 2026-06-06T03:27:40Z
+Stopped at: v1.11 archived; ready to start next milestone
+Resume file: .planning/PROJECT.md

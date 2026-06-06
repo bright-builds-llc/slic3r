@@ -10,39 +10,31 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone: v1.11 PrusaSlicer Broader Parity Port
+## Current Milestone: None
 
-**Goal:** Broaden PrusaSlicer parity beyond the v1.10 profile/config evidence
-slice by proving a narrow `prusaslicer.project-file` evidence path with the
-same evidence discipline: source-pinned fixtures, typed Rust boundaries,
-fail-closed parity commands, exact status rows, and non-overclaiming docs.
+No active milestone is defined. Start the next milestone with
+`$gsd-new-milestone` so fresh requirements and roadmap phases are created
+before new implementation work begins.
 
-**Target features:**
+## Last Shipped Milestone: v1.11 PrusaSlicer Broader Parity Port
 
-- Review and lock the exact Prusa project-file fixture and expected-artifact
-  contract before implementation claims broader parity.
-- Extend Rust fork/flavor boundaries only where the selected project-file
-  evidence slice needs typed parsing, normalization, or summary behavior.
-- Publish maintainer-facing parity commands, failure guards, status rows, and
-  docs that distinguish verified project-file evidence from deferred runtime,
-  GUI, release, network, plugin, generated-output, and sync surfaces.
+**Shipped:** 2026-06-06
 
-## Last Shipped Milestone: v1.10 PrusaSlicer Parity Evidence Foundation
-
-**Shipped:** 2026-06-02
-
-**Goal achieved:** Proved the first narrow, executable PrusaSlicer
-profile/config parity slice using the v1.9 vendor pins, inventories, typed
-contracts, shared flavor registry, checklist template, fixture vocabulary, and
-manual drift protocol.
+**Goal achieved:** Broadened PrusaSlicer parity beyond the v1.10
+profile/config evidence slice by proving a narrow `prusaslicer.project-file`
+evidence path with the same evidence discipline: source-pinned fixtures, typed
+Rust boundaries, fail-closed parity commands, exact status rows, and
+non-overclaiming docs.
 
 ## Current State
 
-v1.11 is complete and ready for milestone audit/archive. Maintainers can now
-run `bazel run //packages/parity:prusaslicer_project_file_parity`, inspect the
+v1.11 is archived. Maintainers can now run
+`bazel run //packages/parity:prusaslicer_project_file_parity`, inspect the
 single `fork.prusaslicer.project-file` verified status row, and review docs
 that keep the claim limited to the narrow Prusa project-file expected-summary
-evidence slice.
+evidence slice. The milestone archive records the reviewed scope gate,
+source-pinned fixture surface, pure Rust parser boundary, mutation failure
+guard, exact status publication, and milestone audit.
 
 v1.10 is archived. Maintainers can still run
 `bazel run //packages/parity:prusaslicer_profile_schema_parity`, inspect the
@@ -250,12 +242,12 @@ high-risk generated-output or network/cloud surfaces.
 
 ## Next Milestone Goals
 
-- Start v1.11 with fresh requirements focused on the
-  `prusaslicer.project-file` evidence slice after the trusted profile/config
-  evidence path exists.
-- Promote project-file evidence only after it can be backed by rerunnable
-  fixtures, typed Rust boundaries, fail-closed parity commands, and exact docs
-  or status wording.
+- Start the next milestone with fresh requirements before adding new phase
+  work.
+- Pick the next evidence slice deliberately, likely another narrow
+  PrusaSlicer surface that can reuse the source-pinned fixture, typed Rust
+  boundary, fail-closed command, exact status row, and non-overclaiming docs
+  pattern.
 - Keep STEP import, support generation, arc fitting, wall seam behavior, and
   other generated-output evidence slices as future Prusa candidates.
 - Limit active downstream-fork porting consideration to PrusaSlicer for now;
@@ -359,14 +351,16 @@ high-risk generated-output or network/cloud surfaces.
 - ✓ v1.11 extends the typed Rust fork/flavor boundary only where the selected
   project-file evidence slice needs parsing, normalization, or summary
   behavior — Phase 43
+- ✓ v1.11 publishes fail-closed parity commands, exact status rows, and
+  non-overclaiming docs for the verified project-file evidence slice — Phase
+  44
+- ✓ v1.11 avoids broad Prusa runtime, GUI, generated-output, release,
+  network/cloud, credential, plugin, and sync claims unless a deliberately
+  scoped executable evidence chain exists for that surface — Phase 44
 
 ### Active
 
-- [ ] v1.11 publishes fail-closed parity commands, exact status rows, and
-  non-overclaiming docs for the verified project-file evidence slice.
-- [ ] v1.11 avoids broad Prusa runtime, GUI, generated-output, release,
-  network/cloud, credential, plugin, and sync claims unless a deliberately
-  scoped executable evidence chain exists for that surface.
+- [ ] Define the next milestone requirements and roadmap phases.
 
 ### Out of Scope
 
@@ -444,6 +438,7 @@ The audience for this work is broad:
 | Start fork implementation with a narrow PrusaSlicer evidence foundation instead of a full fork port | Prusa is the cleanest first downstream fork, and a profile/config slice proves the evidence workflow without high-risk generated-output or network/cloud scope | ✓ Shipped in v1.10 |
 | Gate Prusa project-file parity behind a checked-in scope package before fixtures, parser work, parity targets, or status rows | Project-file support is close enough to broad 3MF/runtime behavior that maintainers need a reviewed evidence contract before implementation can make claims | ✓ Shipped in Phase 41 |
 | Keep Prusa project-file fixture TSVs exact instead of append-only | Phase 42 fixture artifacts are a narrow evidence surface, so extra provenance or expected-summary rows could overclaim parser or parity behavior while the verifier still passed | ✓ Shipped in Phase 42 |
+| Publish project-file parity only as a narrow expected-summary evidence slice | Phase 44 proves command/status wiring without claiming full 3MF import/export, GUI project behavior, runtime semantics, or generated-output parity | ✓ Shipped in Phase 44 |
 | Limit active downstream-fork porting consideration to PrusaSlicer for now | Non-Prusa Slicer-family ports need an explicit new planning decision before moving from parking lot into the roadmap | ✓ Adopted 2026-06-03 |
 
 ## Evolution
@@ -467,4 +462,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-06 after Phase 44 executable project-file parity verification*
+*Last updated: 2026-06-06 after v1.11 milestone archive*

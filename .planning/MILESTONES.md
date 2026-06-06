@@ -1,5 +1,43 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.11 PrusaSlicer Broader Parity Port (Shipped: 2026-06-06)
+
+**Delivered:** Proved a narrow executable PrusaSlicer project-file evidence
+slice, from reviewed scope gate and source-pinned fixtures through Rust parser
+boundary, parity command, exact status row, fail-closed divergence guard, and
+non-overclaiming docs.
+
+**Phases completed:** 41-44 (9 plans total, 21 plan tasks)
+
+**Key accomplishments:**
+
+- Checked-in `prusaslicer.project-file` scope gate with fail-closed Bazel verification and conservative port-doc routing
+- Source-pinned Prusa project-file fixture namespace with provenance and presence-level expected artifact
+- Fail-closed Prusa project-file fixture verification through Bash and Bazel
+- Maintainer docs for the Phase 42 Prusa project-file fixture surface with executable parity still deferred
+- Std-only Prusa project-file TSV parser with typed traceability metadata and Cargo/Bazel verification
+- Typed project-file registry traceability plus a verifier guard that allows Phase 43 Rust code while blocking Phase 44 publication
+- Phase 43 project-file parser metadata is discoverable in package and port docs while Phase 44 still owns executable parity and status publication
+- Rust-backed Prusa project-file parity command with fail-closed expected-artifact mutation guard
+- Verified Prusa project-file status publication with fail-closed fixture checks and non-overclaiming package/port docs
+
+**Stats:**
+
+- 4 phases, 9 plans, 21 plan tasks
+- Requirements: 10/10 complete
+- Milestone audit: passed
+- UAT: 0 outstanding items
+- Milestone archive: [v1.11-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.11-ROADMAP.md)
+- Requirements archive: [v1.11-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.11-REQUIREMENTS.md)
+- Audit: [v1.11-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.11-MILESTONE-AUDIT.md)
+- Phase archive: [v1.11-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.11-phases/)
+
+**What's next:** start the next milestone with fresh requirements before new
+phase work, likely choosing another deliberately narrow PrusaSlicer evidence
+slice if the current project direction remains valid.
+
+______________________________________________________________________
+
 ## v1.10 PrusaSlicer Parity Evidence Foundation (Shipped: 2026-06-02)
 
 **Delivered:** Proved the first narrow executable PrusaSlicer profile/config
