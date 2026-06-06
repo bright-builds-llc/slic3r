@@ -3,6 +3,7 @@ core.base	base-core	base-slic3r	no-action-base	prusaslicer.base-core;bambustudio
 project.shared	project-file	shared-downstream	future-candidate	prusaslicer.project-file	Shared downstream project file row needs future fixture-backed parity.
 project.bambu	project-file	fork-specific	future-candidate	bambustudio.project-file	Bambu project file row needs future fixture-backed parity.
 profile.fork-schema	profile-schema	fork-specific	future-candidate	prusaslicer.profile-schema;bambustudio.profile-schema	Fork profile schema rows need future loader and config fixtures.
+gcode.shared	gcode-output	shared-downstream	future-candidate	prusaslicer.gcode-output	Prusa G-code output row needs reviewed source-pinned summary evidence before generated-output behavior is claimed.
 support.shared	support-generation	shared-downstream	future-candidate	prusaslicer.support-generation;bambustudio.support-generation;orcaslicer.support-generation	Shared support rows need future generated-output parity fixtures.
 step.shared	step-import	shared-downstream	future-candidate	prusaslicer.step-import;bambustudio.step-import	STEP rows need future file-format fixture evidence.
 arc.shared	arc-fitting	shared-downstream	future-candidate	prusaslicer.arc-fitting;bambustudio.arc-fitting	Arc rows need future generated-output comparison evidence.
