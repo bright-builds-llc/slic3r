@@ -545,16 +545,17 @@ packages/parity/README.md; packages/parity-fixtures/README.md]
 All claims in this research were verified or cited; no assumed claims were
 used. [VERIFIED: research source audit]
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Exact reviewer signoff string**
+1. **Exact reviewer signoff string - RESOLVED**
    - What we know: PGSEL-01 and D-08 require reviewer signoff in the scope record. [VERIFIED: .planning/REQUIREMENTS.md; .planning/phases/45-prusa-g-code-output-scope-gate/45-CONTEXT.md]
-   - What's unclear: the context does not specify the exact signoff name/date text for Phase 45. [VERIFIED: .planning/phases/45-prusa-g-code-output-scope-gate/45-CONTEXT.md]
-   - Recommendation: planner should include a task to set the exact signoff row explicitly, following the Phase 41 row shape if the maintainer accepts that convention. [VERIFIED: packages/prusa-project-file-scope/project-file-scope.md]
-2. **Exact `prusaslicer.gcode-output` inventory row text**
+   - Prior uncertainty: the context did not specify the exact signoff name/date text for Phase 45. [VERIFIED: .planning/phases/45-prusa-g-code-output-scope-gate/45-CONTEXT.md]
+   - Resolution: Plan 45-02 sets and verifies the exact scope-record row `| Reviewer signoff | Peter Ryszkiewicz, 2026-06-06 UTC |`. [VERIFIED: .planning/phases/45-prusa-g-code-output-scope-gate/45-02-PLAN.md]
+2. **Exact `prusaslicer.gcode-output` inventory row text - RESOLVED**
    - What we know: the locked context requires the row, and the current inventory lacks it. [VERIFIED: .planning/phases/45-prusa-g-code-output-scope-gate/45-CONTEXT.md; packages/fork-inventories/prusaslicer.tsv]
-   - What's unclear: the exact `feature_category`, `source_paths` multi-value set, and `category-map.tsv` `map_id` are not specified in context. [VERIFIED: packages/fork-inventories/README.md; packages/fork-inventories/category-map.tsv]
-   - Recommendation: use `generated-outputs` as the parity dependency, `future-candidate` as the decision, and `src/libslic3r/GCode.cpp` as the minimum verified source anchor, then verify with `bazel run //packages/fork-inventories:verify`. [VERIFIED: packages/parity/status.tsv; packages/fork-inventories/README.md; CITED: https://raw.githubusercontent.com/prusa3d/PrusaSlicer/9a583bd438b195856f3bcf7ea99b69ba4003a961/src/libslic3r/GCode.cpp]
+   - Prior uncertainty: the exact `feature_category`, `source_paths` multi-value set, and `category-map.tsv` `map_id` were not specified in context. [VERIFIED: packages/fork-inventories/README.md; packages/fork-inventories/category-map.tsv]
+   - Resolution: Plan 45-01 sets the exact literal-tab-delimited inventory row to `prusaslicer.gcode-output	prusaslicer	prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961	src/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp	gcode-output	gcode-output	shared-downstream	high	generated-outputs	future-candidate	none	Source-observed G-code output planning row; parity requires reviewed source-pinned summary evidence before output behavior is claimed.` [VERIFIED: .planning/phases/45-prusa-g-code-output-scope-gate/45-01-PLAN.md]
+   - Resolution: Plan 45-01 sets the exact category-map row to `gcode.shared	gcode-output	shared-downstream	future-candidate	prusaslicer.gcode-output	Prusa G-code output row needs reviewed source-pinned summary evidence before generated-output behavior is claimed.` and verifies it with `bazel run //packages/fork-inventories:verify`. [VERIFIED: .planning/phases/45-prusa-g-code-output-scope-gate/45-01-PLAN.md]
 
 ## Environment Availability
 
