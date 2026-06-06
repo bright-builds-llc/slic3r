@@ -13,12 +13,12 @@ Requirements for the v1.12 milestone. Each maps to one roadmap phase.
 
 ### Prusa G-code Output Scope Gate
 
-- [ ] **PGSEL-01**: Maintainer can inspect a reviewed
+- [x] **PGSEL-01**: Maintainer can inspect a reviewed
   `prusaslicer.gcode-output` scope record with accepted source identity,
   fixture source decision, expected-summary contract, candidate Rust boundary,
   planned evidence command, planned status token, docs touched,
   license/security note, deferred scope, and reviewer signoff.
-- [ ] **PGSEL-02**: Maintainer can distinguish the narrow v1.12
+- [x] **PGSEL-02**: Maintainer can distinguish the narrow v1.12
   summary-only Prusa G-code evidence contract from byte-for-byte G-code parity,
   full generated-output parity, toolpath geometry, extrusion, timing, support
   generation, wall seam behavior, arc fitting, STEP import, full 3MF
@@ -137,8 +137,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 | --- | --- | --- |
-| PGSEL-01 | Phase 45 | Pending |
-| PGSEL-02 | Phase 45 | Pending |
+| PGSEL-01 | Phase 45 | Complete |
+| PGSEL-02 | Phase 45 | Complete |
 | PGFIX-01 | Phase 46 | Pending |
 | PGFIX-02 | Phase 46 | Pending |
 | PGSUM-01 | Phase 47 | Pending |

@@ -54,13 +54,13 @@ Slic3r/
 - Subdirectories: `package/common/`, `package/linux/`, `package/osx/`, `package/win/`, `package/deploy/`.
 
 **`packages/`:**
-- Purpose: Bazel-organized migration packages that let the retained legacy package, Rust port, launcher, parity evidence, and fork metadata evolve side by side.
-- Contains: `packages/legacy-slic3r/`, `packages/slic3r-rust/`, `packages/launcher/`, `packages/parity/`, `packages/parity-fixtures/`, `packages/fork-vendors/`, and `packages/fork-inventories/`.
+- Purpose: Bazel-organized migration packages that let the retained legacy package, Rust port, launcher, parity evidence, fork metadata, and reviewed fork scope gates evolve side by side.
+- Contains: `packages/legacy-slic3r/`, `packages/slic3r-rust/`, `packages/launcher/`, `packages/parity/`, `packages/parity-fixtures/`, `packages/fork-vendors/`, `packages/fork-inventories/`, `packages/prusa-project-file-scope/`, and `packages/prusa-gcode-output-scope/`.
 - Key files: `packages/slic3r-rust/Cargo.toml`,
   `packages/slic3r-rust/BUILD.bazel`,
   `packages/slic3r-rust/crates/slic3r_flavors/src/registry.rs`, and
   `packages/slic3r-rust/crates/slic3r_flavors/src/prusa_project_file.rs`.
-- Subdirectories: `packages/slic3r-rust/crates/` contains the Rust crate boundaries for contracts, core, CLI, and flavor registry metadata.
+- Subdirectories: `packages/slic3r-rust/crates/` contains the Rust crate boundaries for contracts, core, CLI, and flavor registry metadata. `packages/prusa-project-file-scope/` and `packages/prusa-gcode-output-scope/` contain metadata-only scope records and package-local Bazel verifiers for fork evidence slices before fixtures, Rust boundaries, parity commands, or status rows are published.
 
 **`utils/`:**
 - Purpose: ad hoc helper scripts for mesh conversion, G-code inspection, and viewer-style workflows.

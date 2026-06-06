@@ -123,7 +123,7 @@ Plans:
 
 - [x] 45-01-PLAN.md — Reconcile `prusaslicer.gcode-output` in the Prusa
   inventory and category map before the scope record cites it.
-- [ ] 45-02-PLAN.md — Create the metadata-only
+- [x] 45-02-PLAN.md — Create the metadata-only
   `packages/prusa-gcode-output-scope` package, scope record, verifier, and
   focused verifier tests.
 - [ ] 45-03-PLAN.md — Add minimal docs routing and final absence checks without
@@ -224,7 +224,7 @@ Phases execute in numeric order: 45 -> 46 -> 47 -> 48
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 45. Prusa G-code Output Scope Gate | 1/3 | In Progress | - |
+| 45. Prusa G-code Output Scope Gate | 2/3 | In Progress | - |
 | 46. Prusa G-code Fixture Surface | 0/TBD | Not started | - |
 | 47. Rust Prusa G-code Summary Boundary | 0/TBD | Not started | - |
 | 48. Executable Prusa G-code Evidence | 0/TBD | Not started | - |
