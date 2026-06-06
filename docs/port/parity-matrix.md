@@ -64,6 +64,7 @@ parity, and fixture rules.
   `prusa_project_file_metadata`, `prusa_project_file_summary_lines`,
   `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`, and
   `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary`.
+- `packages/prusa-gcode-output-scope` is the Phase 45 scope gate for `prusaslicer.gcode-output`. It records the accepted source identity, Phase 46 fixture and expected-summary contract, Phase 47 Rust boundary, Phase 48 command/status handoff, and deferred scope without creating fixture bytes, expected summary artifacts, Rust summary implementation, a parity command, or a status row. `fork.prusaslicer.gcode-output` is not verified in `packages/parity/status.tsv` during Phase 45, and broad `generated-outputs` remains `in progress`.
 - The verified `prusaslicer.project-file` row does not prove full 3MF
   import/export or full PrusaSlicer runtime support. GUI project behavior,
   generated-output parity, STEP import, support generation, arc fitting, wall
