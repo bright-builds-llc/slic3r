@@ -261,6 +261,22 @@ test_stale_project_file_parity_readme_fails() {
 	assert_contains "${tmp_dir}/stale-project-file-readme.err" "Executable project-file parity is provided by"
 }
 
+test_stale_no_executable_parity_readme_fails() {
+	# Arrange
+	local dir="${tmp_dir}/stale-no-executable-parity-readme"
+	local readme_file="${dir}/forks/prusaslicer/prusaslicer.project-file/README.md"
+	write_valid_fixture_copy "${dir}"
+	printf '\nThis namespace does not publish executable parity, parser readiness, generated\noutput, or runtime support.\n' >>"${readme_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/stale-no-executable-parity.out" "${tmp_dir}/stale-no-executable-parity.err"; then
+		fail "stale no-executable-parity README fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/stale-no-executable-parity.err" "This namespace does not publish executable parity"
+}
+
 test_missing_project_file_status_row_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-project-file-status-row"
@@ -395,6 +411,7 @@ test_missing_scope_path_in_provenance_fails
 test_extra_provenance_row_fails
 test_missing_scope_path_in_readme_fails
 test_stale_project_file_parity_readme_fails
+test_stale_no_executable_parity_readme_fails
 test_missing_project_file_status_row_fails
 test_wrong_project_file_status_fails
 test_wrong_project_file_evidence_fails

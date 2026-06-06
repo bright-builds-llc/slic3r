@@ -33,8 +33,8 @@ Phase 42 supplies fixture bytes and presence-level expected artifacts only.
 Executable project-file parity is provided by
 `bazel run //packages/parity:prusaslicer_project_file_parity` for the narrow
 expected-summary evidence slice.
-This namespace does not publish executable parity, parser readiness, generated
-output, or runtime support.
+This namespace publishes only the narrow expected-summary evidence slice.
+It does not introduce parser readiness, generated output, or runtime support.
 No generated output is introduced or verified by this namespace.
 
 Verifier command:

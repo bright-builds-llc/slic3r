@@ -62,6 +62,15 @@ require_text() {
 	fi
 }
 
+reject_text() {
+	local file="$1"
+	local label="$2"
+	local pattern="$3"
+	if grep -Fq -- "${pattern}" "${file}"; then
+		error "${label}: forbidden stale text: ${pattern}"
+	fi
+}
+
 require_project_file_parity_scope_text() {
 	require_text "${fixture_readme}" "fixture README" "Executable project-file parity is provided by"
 	require_text "${fixture_readme}" "fixture README" "bazel run //packages/parity:prusaslicer_project_file_parity"
@@ -264,8 +273,10 @@ verify_readme_scope() {
 	require_text "${fixture_readme}" "fixture README" "Phase 41 scope record: ${PHASE41_SCOPE_RECORD}"
 	require_text "${fixture_readme}" "fixture README" "Update route: update this fixture only after a reviewed intake change updates packages/fork-vendors/forks.tsv, packages/fork-inventories/prusaslicer.tsv, and packages/prusa-project-file-scope/project-file-scope.md."
 	require_text "${fixture_readme}" "fixture README" "Branch-head observations remain drift-only and do not update this fixture."
-	require_text "${fixture_readme}" "fixture README" "This namespace does not publish executable parity, parser readiness, generated"
-	require_text "${fixture_readme}" "fixture README" "output, or runtime support."
+	require_text "${fixture_readme}" "fixture README" "This namespace publishes only the narrow expected-summary evidence slice."
+	require_text "${fixture_readme}" "fixture README" "It does not introduce parser readiness, generated output, or runtime support."
+	require_text "${fixture_readme}" "fixture README" "No generated output is introduced or verified by this namespace."
+	reject_text "${fixture_readme}" "fixture README" "This namespace does not publish executable parity"
 
 	for required_term in \
 		"full 3MF import/export" \
