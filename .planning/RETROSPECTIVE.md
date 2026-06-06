@@ -2,6 +2,83 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.11 — PrusaSlicer Broader Parity Port
+
+**Shipped:** 2026-06-06\
+**Phases:** 4 | **Plans:** 9 | **Sessions:** yolo phase execution plus
+milestone audit, integration check, archive closeout, and requirements reset
+
+### What Was Built
+
+- Reviewed `prusaslicer.project-file` scope gate with accepted source identity,
+  fixture decision, expected-artifact contract, planned command, status token,
+  and explicit deferred surfaces
+- Source-pinned project-file fixture namespace with provenance, update rules,
+  presence-level expected summary, and fail-closed fixture verification
+- Pure Rust project-file parser and metadata boundary with typed traceability
+  to fixture, source, registry, and planned status data
+- Public `//packages/parity:prusaslicer_project_file_parity` command backed by
+  checked-in expected artifacts and a mutation failure guard
+- Exact `fork.prusaslicer.project-file` status publication plus package and
+  port docs that name the verified evidence slice without broad Prusa runtime
+  claims
+
+### What Worked
+
+- Reusing the v1.10 trust chain made the broader Prusa slice predictable:
+  scope gate, fixture, typed Rust boundary, expected artifact, parity command,
+  status row, docs, and audit all lined up.
+- The Phase 41 scope gate prevented project-file evidence from drifting into
+  full 3MF import/export, GUI behavior, generated-output parity, or runtime
+  support claims.
+- Fail-closed fixture and parity checks caught the important text/status/TSV
+  boundaries without requiring upstream source imports or network access.
+- The integration checker found stale current-state docs and requirements
+  metadata before archive, while confirming the executable flow was wired end
+  to end.
+
+### What Was Inefficient
+
+- Live planning state still drifted after implementation: requirements,
+  package README wording, PROJECT, STATE, and ROADMAP needed closeout cleanup
+  before archive.
+- `mdformat` again proved unsafe for planning files with YAML frontmatter; the
+  milestone audit frontmatter had to be manually restored after formatting.
+- The milestone completion helper handled the archive files and milestone
+  entry, but roadmap collapse, project evolution, state cleanup, phase
+  archival, requirements reset, and retrospective still required manual work.
+
+### Patterns Established
+
+- Broader PrusaSlicer parity should advance one executable evidence slice at a
+  time, with exact status rows only after a rerunnable command and failure
+  guard exist.
+- Project-file and future generated-output surfaces need explicit scope gates
+  before fixture or parser work starts.
+- Thin explicit-path binaries are a good boundary between Rust summary logic
+  and package-owned Bazel parity commands.
+- Milestone audits should be allowed to repair stale planning metadata before
+  the final archive report is written.
+
+### Key Lessons
+
+1. Evidence close to broad runtime behavior needs a reviewed scope package
+   before code or docs can make safe claims.
+1. The closeout path should treat planning metadata drift as expected audit
+   work, not as an implementation failure.
+1. Frontmatter-bearing planning files need targeted integrity checks; blanket
+   Markdown formatting can corrupt them.
+
+### Cost Observations
+
+- Model mix: balanced GSD profile with Codex-led audit and archive closeout
+- Sessions: yolo discuss/plan/execute phases plus final integration check,
+  audit, archive, requirements reset, and retrospective
+- Notable: late closeout effort was mostly governance alignment and archival
+  hygiene; implementation evidence itself passed cleanly
+
+______________________________________________________________________
+
 ## Milestone: v1.10 — PrusaSlicer Parity Evidence Foundation
 
 **Shipped:** 2026-06-02\
@@ -612,6 +689,8 @@ ______________________________________________________________________
 
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
+| v1.11 | yolo plus audit/integration/closeout | 4 | Reused the first Prusa trust chain for a broader project-file evidence slice without claiming full runtime or GUI support |
+| v1.10 | yolo plus audit/signoff/closeout | 4 | Established the first executable Prusa profile/config evidence chain with exact status publication and non-overclaiming docs |
 | v1.9 | yolo plus audit/closeout | 5 | Established fork intake and metadata architecture for downstream Slic3r-family work without claiming runtime fork support |
 | v1.4 | 1 | 3 | Expanded verified parity from macOS-only runtime/package surfaces into a verified Linux runtime slice with a dedicated Linux evidence command |
 | v1.3 | 1 | 3 | Extended verified parity into packaging-visible launcher behavior and hardened the packaged evidence surface with a representative config-persistence proof |
@@ -623,6 +702,8 @@ ______________________________________________________________________
 
 | Milestone | Tests | Coverage | Zero-Dep Additions |
 |-----------|-------|----------|-------------------|
+| v1.11 | Verified project-file scope, fixture, Rust parser, parity command, mutation guard, exact status row, and milestone audit | milestone-scoped | kept full 3MF import/export, GUI behavior, generated-output parity, runtime support, release, network/device, and sync surfaces out of scope |
+| v1.10 | Verified Prusa profile/config baseline, fixtures, Rust parser, parity command, mutation guard, status row, UAT, and security report | milestone-scoped | kept Prusa evidence narrow and avoided upstream source imports, runtime fork support, and profile auto-update execution |
 | v1.9 | Verified fork vendor refs, fork inventory TSVs, fork template contracts, Rust flavor contracts, and pure flavor registry metadata | milestone-scoped | kept fork source trees, runtime fork support, sync automation, and vendor-specific Rust workspaces out of scope |
 | v1.4 | Verified Linux launcher runtime parity for representative help/version/config/export/transform flows | milestone-scoped | reused the existing slice fixtures instead of cloning a second platform-specific corpus |
 | v1.3 | Verified packaged launcher parity for bundle layout, startup handoff, packaged help/version, and representative config persistence | milestone-scoped | reused the existing bundled Rust CLI slice instead of broadening packaged scope prematurely |
@@ -637,3 +718,6 @@ ______________________________________________________________________
 1. Milestone audit metadata should be treated as a first-class artifact, not post-hoc prose.
 1. Source-observed fork metadata should stay separate from verified fork
    behavior until executable evidence exists.
+1. Broader fork parity should advance one executable evidence slice at a time,
+   with exact status rows only after rerunnable commands and failure guards
+   pass.
