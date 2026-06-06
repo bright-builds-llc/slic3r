@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.12
 milestone_name: PrusaSlicer G-code Output Evidence Foundation
 status: executing
-stopped_at: Phase 45 context gathered
-last_updated: "2026-06-06T14:23:15.870Z"
-last_activity: 2026-06-06 -- Phase 45 planning complete
+stopped_at: Completed 45-01-PLAN.md
+last_updated: "2026-06-06T14:31:41.308Z"
+last_activity: 2026-06-06 -- Completed 45-01-PLAN.md
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 3
-  completed_plans: 0
-  percent: 0
+  completed_plans: 1
+  percent: 33
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 45 (1 of 4 in v1.12, Prusa G-code Output Scope Gate)
-Plan: Not planned yet
+Plan: 45-02 next (2 of 3 in Phase 45)
 Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
-Status: Ready to execute
-Last activity: 2026-06-06 -- Phase 45 planning complete
+Status: In Progress
+Last activity: 2026-06-06 -- Completed 45-01-PLAN.md
 
-Progress: [----------] 0%
+Progress: [###-------] 33%
 
 ## Performance Metrics
 
@@ -44,6 +44,7 @@ Progress: [----------] 0%
 - v1.11 completed 4 phases, 9 plans, and 21 plan tasks.
 - v1.12 begins with 4 planned phases and 10 mapped requirements.
 - Plan counts remain TBD until `/gsd-plan-phase` decomposes each phase.
+- Phase 45 Plan 01 completed 2 tasks across 2 files in 4 min on 2026-06-06.
 
 ## Accumulated Context
 
@@ -64,6 +65,10 @@ Recent decisions affecting v1.12:
 - Keep broad `generated-outputs` in progress; only the exact
   `fork.prusaslicer.gcode-output` row may be planned after executable evidence.
 
+- [Phase 45-prusa-g-code-output-scope-gate]: Kept prusaslicer.gcode-output as source-observed planning metadata only, not executable parity evidence.
+- [Phase 45-prusa-g-code-output-scope-gate]: Mapped the row under gcode-output, shared-downstream, and future-candidate without adding Bambu Studio or OrcaSlicer claims.
+- [Phase 45-prusa-g-code-output-scope-gate]: Left packages/parity/status.tsv unchanged so fork.prusaslicer.gcode-output remains unpublished before executable evidence.
+
 ### Pending Todos
 
 None.
@@ -74,6 +79,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-06T13:55:59.346Z
-Stopped at: Phase 45 context gathered
-Resume file: .planning/phases/45-prusa-g-code-output-scope-gate/45-CONTEXT.md
+Last session: 2026-06-06T14:31:41.305Z
+Stopped at: Completed 45-01-PLAN.md
+Resume file: None

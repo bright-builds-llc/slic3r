@@ -121,7 +121,7 @@ the narrow v1.12 summary-only evidence contract before implementation begins.
 
 Plans:
 
-- [ ] 45-01-PLAN.md — Reconcile `prusaslicer.gcode-output` in the Prusa
+- [x] 45-01-PLAN.md — Reconcile `prusaslicer.gcode-output` in the Prusa
   inventory and category map before the scope record cites it.
 - [ ] 45-02-PLAN.md — Create the metadata-only
   `packages/prusa-gcode-output-scope` package, scope record, verifier, and
@@ -224,7 +224,7 @@ Phases execute in numeric order: 45 -> 46 -> 47 -> 48
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 45. Prusa G-code Output Scope Gate | 0/3 | Not started | - |
+| 45. Prusa G-code Output Scope Gate | 1/3 | In Progress | - |
 | 46. Prusa G-code Fixture Surface | 0/TBD | Not started | - |
 | 47. Rust Prusa G-code Summary Boundary | 0/TBD | Not started | - |
 | 48. Executable Prusa G-code Evidence | 0/TBD | Not started | - |
