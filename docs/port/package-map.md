@@ -25,6 +25,7 @@
 | `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
 | `packages/prusa-baseline` | Phase 37 PrusaSlicer baseline and checklist gate package for the narrow v1.10 profile schema/config evidence slice |
 | `packages/prusa-project-file-scope` | Phase 41 checked-in scope record and verifier package for the narrow `prusaslicer.project-file` evidence contract only |
+| `packages/prusa-gcode-output-scope` | Phase 45 checked-in scope record and verifier package for the narrow `prusaslicer.gcode-output` summary-only evidence contract only |
 
 ## Notes
 
@@ -147,3 +148,4 @@
   and the fixture artifact, and
   `packages/slic3r-rust/crates/slic3r_flavors` owns Rust summary logic for the
   narrow expected-summary evidence slice.
+- Phase 45 adds `packages/prusa-gcode-output-scope`, which owns the checked-in `prusaslicer.gcode-output` scope record and verifier only. It does not create fixture bytes, `expected-gcode-summary.tsv`, Rust G-code summary implementation, parity targets, status rows, upstream source imports, Bambu Studio scope, OrcaSlicer scope, printer-runtime behavior, host upload, profile auto-update execution, or sync automation.
