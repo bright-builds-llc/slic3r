@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.11
 milestone_name: milestone
-status: executing
-stopped_at: Phase 44 context gathered
-last_updated: "2026-06-06T00:24:26.031Z"
+status: complete
+stopped_at: v1.11 complete, ready for milestone audit/archive
+last_updated: "2026-06-06T03:13:28.811Z"
 last_activity: 2026-06-06
 progress:
   total_phases: 4
@@ -25,14 +25,14 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Phase 44 — Executable Prusa Project-File Parity
+**Current focus:** v1.11 complete — milestone audit/archive
 
 ## Current Position
 
 Phase: 44
 Plan: Not started
 Milestone: v1.11 PrusaSlicer Broader Parity Port
-Status: Ready to execute
+Status: Milestone complete — ready to archive
 Last activity: 2026-06-06
 Last Activity Description: Phase 44 complete
 
@@ -49,9 +49,9 @@ Progress: [██████████] 100%
 
 - 4 phases planned: 41-44.
 - 10 v1 requirements mapped.
-- 7 plans created.
-- 7 plans complete.
-- 3 phases complete.
+- 9 plans created.
+- 9 plans complete.
+- 4 phases complete.
 - 42-01 completed 2 tasks across 5 fixture files in 3m 39s.
 - 42-02 completed 2 tasks across 3 fixture verifier files in 9m 40s.
 - 42-03 completed 2 tasks across 8 docs/verifier files in 5m 25s.
@@ -68,6 +68,7 @@ Decisions are logged in `PROJECT.md` Key Decisions table.
 Recent decisions affecting v1.11:
 
 - Continue phase numbering from Phase 41; do not reset to Phase 1.
+
 - Select `prusaslicer.project-file` as the first broader PrusaSlicer evidence
   slice after v1.10 profile/config parity.
 
@@ -117,13 +118,21 @@ Recent decisions affecting v1.11:
   namespaces remain rejected.
 
 - [Phase 43]: Kept Prusa project-file parsing in slic3r_flavors as a pure data-in/data-out Rust boundary.
+
 - [Phase 43]: Kept fork.prusaslicer.project-file as reserved_future_status_token metadata only; no parity status row or command was added.
+
 - [Phase 43]: Declared direct Bazel compile-time inputs for the source-name guard and contract-typed metadata test.
+
 - [Phase 43]: Plan 43-02 kept the prusaslicer.project-file registry row as FutureCandidate metadata with file-formats dependency only.
+
 - [Phase 43]: Plan 43-02 replaced duplicated registry project-file source literals with constants from crate::prusa_project_file.
+
 - [Phase 43]: Plan 43-02 removed the obsolete Rust-surface absence guard while preserving project-file status-row and parity-target negative guards.
+
 - [Phase 43]: Plan 43-03 published Phase 43 as parser/metadata readiness only, not executable project-file parity.
+
 - [Phase 43]: Plan 43-03 kept fork.prusaslicer.project-file as a reserved future status token until Phase 44 owns the parity command and status row.
+
 - [Phase 43]: Plan 43-03 kept broad Prusa runtime, GUI, generated-output, release, network/device, Bambu, Orca, upstream import, and sync surfaces deferred in docs.
 
 ### Pending Todos

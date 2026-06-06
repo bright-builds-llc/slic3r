@@ -38,7 +38,13 @@ manual drift protocol.
 
 ## Current State
 
-v1.10 is archived. Maintainers can now run
+v1.11 is complete and ready for milestone audit/archive. Maintainers can now
+run `bazel run //packages/parity:prusaslicer_project_file_parity`, inspect the
+single `fork.prusaslicer.project-file` verified status row, and review docs
+that keep the claim limited to the narrow Prusa project-file expected-summary
+evidence slice.
+
+v1.10 is archived. Maintainers can still run
 `bazel run //packages/parity:prusaslicer_profile_schema_parity`, inspect the
 single `fork.prusaslicer.profile-schema` verified status row, and review docs
 that keep the claim limited to the narrow Prusa parser/config evidence slice.
@@ -79,6 +85,14 @@ shared typed constants, the fixture verifier allows the reviewed Rust surface,
 and docs publish parser readiness without adding the Phase 44 executable
 parity target or `fork.prusaslicer.project-file` status row. The boundary
 completes PPROJ-01, PPROJ-02, and PPROJ-03.
+
+v1.11 Phase 44 is complete. Maintainers can run
+`bazel run //packages/parity:prusaslicer_project_file_parity`, see the command
+fail closed on expected-artifact drift, inspect the exact
+`fork.prusaslicer.project-file` status row, and read docs that keep full
+PrusaSlicer runtime, GUI, generated-output, release, network/device,
+profile-update, and sync surfaces deferred. The executable parity slice
+completes PPEV-01, PPEV-02, and PPEV-03.
 
 <details>
 <summary>v1.9 shipped fork vendor intake and module architecture</summary>
@@ -453,4 +467,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-05 after Phase 43 Rust project-file boundary verification*
+*Last updated: 2026-06-06 after Phase 44 executable project-file parity verification*

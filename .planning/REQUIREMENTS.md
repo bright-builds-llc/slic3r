@@ -49,12 +49,12 @@ Requirements for the v1.11 milestone. Each maps to one roadmap phase.
 
 ### Executable Prusa Project-File Parity
 
-- [ ] **PPEV-01**: Maintainer can run a repo-owned Bazel parity command for the
+- [x] **PPEV-01**: Maintainer can run a repo-owned Bazel parity command for the
   selected Prusa project-file evidence slice.
-- [ ] **PPEV-02**: Maintainer can see the Prusa project-file parity command
+- [x] **PPEV-02**: Maintainer can see the Prusa project-file parity command
   fail when the Rust-backed summary or checked-in expected artifact diverges
   from fixture expectations.
-- [ ] **PPEV-03**: Maintainer can inspect docs and parity status updates that
+- [x] **PPEV-03**: Maintainer can inspect docs and parity status updates that
   name the exact verified Prusa project-file evidence slice and keep full
   PrusaSlicer runtime support, GUI support, generated-output parity, STEP
   import, support generation, arc fitting, wall seam behavior, fork release
@@ -124,9 +124,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PPROJ-01 | Phase 43 | Complete |
 | PPROJ-02 | Phase 43 | Complete |
 | PPROJ-03 | Phase 43 | Complete |
-| PPEV-01 | Phase 44 | Pending |
-| PPEV-02 | Phase 44 | Pending |
-| PPEV-03 | Phase 44 | Pending |
+| PPEV-01 | Phase 44 | Complete |
+| PPEV-02 | Phase 44 | Complete |
+| PPEV-03 | Phase 44 | Complete |
 
 **Coverage:**
 
