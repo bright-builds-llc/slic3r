@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.11
-milestone_name: PrusaSlicer Broader Parity Port
-status: completed
-stopped_at: v1.11 archived; ready to start next milestone
-last_updated: "2026-06-06T03:27:40Z"
+milestone: v1.12
+milestone_name: PrusaSlicer G-code Output Evidence Foundation
+status: defining_requirements
+stopped_at: defining v1.12 requirements
+last_updated: "2026-06-06T03:45:00Z"
 last_activity: 2026-06-06
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 9
-  completed_plans: 9
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -25,26 +25,26 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** no active milestone — start the next milestone with
-`$gsd-new-milestone` before new phase work.
+**Current focus:** v1.12 PrusaSlicer G-code Output Evidence Foundation —
+defining requirements for a narrow, summary-only G-code evidence slice.
 
 ## Current Position
 
-Phase: None
-Plan: None
-Milestone: None active; v1.11 PrusaSlicer Broader Parity Port is archived
-Status: Ready for next milestone planning
+Phase: Not started (defining requirements)
+Plan: -
+Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
+Status: Defining requirements
 Last activity: 2026-06-06
-Last Activity Description: v1.11 milestone completed and archived
+Last Activity Description: Milestone v1.12 started
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
 **Prior milestone baseline:**
 
-- v1.10 completed 4 phases, 6 plans, and 15 plan tasks.
-- v1.11 starts after the first trusted Prusa profile/config evidence path.
+- v1.11 completed 4 phases, 9 plans, and 21 plan tasks.
+- v1.12 starts after the first trusted Prusa project-file evidence path.
 
 **Last completed milestone:**
 
@@ -69,6 +69,22 @@ Progress: [██████████] 100%
 ### Decisions
 
 Decisions are logged in `PROJECT.md` Key Decisions table.
+
+Recent decisions affecting v1.12:
+
+- Start generated-output work with one narrow PrusaSlicer G-code output
+  evidence slice.
+
+- Keep v1.12 expected artifacts summary-only; do not claim byte-for-byte
+  output parity.
+
+- Reuse the v1.10/v1.11 trust chain: reviewed scope, source-pinned fixture,
+  checked-in expected artifact, typed Rust boundary, public Bazel parity
+  command, failure guard, exact status row, and non-overclaiming docs.
+
+- Keep support generation, arc fitting, wall seam behavior, STEP import, full
+  3MF import/export, printer-runtime behavior, GUI behavior, release,
+  network/device, and sync surfaces deferred.
 
 Recent decisions affecting v1.11:
 
@@ -160,6 +176,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-06T03:27:40Z
-Stopped at: v1.11 archived; ready to start next milestone
+Last session: 2026-06-06T03:45:00Z
+Stopped at: defining v1.12 requirements
 Resume file: .planning/PROJECT.md
