@@ -137,24 +137,24 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 | --- | --- | --- |
-| PGSEL-01 | TBD | Pending |
-| PGSEL-02 | TBD | Pending |
-| PGFIX-01 | TBD | Pending |
-| PGFIX-02 | TBD | Pending |
-| PGSUM-01 | TBD | Pending |
-| PGSUM-02 | TBD | Pending |
-| PGSUM-03 | TBD | Pending |
-| PGEV-01 | TBD | Pending |
-| PGEV-02 | TBD | Pending |
-| PGEV-03 | TBD | Pending |
+| PGSEL-01 | Phase 45 | Pending |
+| PGSEL-02 | Phase 45 | Pending |
+| PGFIX-01 | Phase 46 | Pending |
+| PGFIX-02 | Phase 46 | Pending |
+| PGSUM-01 | Phase 47 | Pending |
+| PGSUM-02 | Phase 47 | Pending |
+| PGSUM-03 | Phase 47 | Pending |
+| PGEV-01 | Phase 48 | Pending |
+| PGEV-02 | Phase 48 | Pending |
+| PGEV-03 | Phase 48 | Pending |
 
 **Coverage:**
 
 - v1 requirements: 10 total
-- Mapped to phases: 0
-- Unmapped: 10 pending roadmap creation
+- Mapped to phases: 10
+- Unmapped: 0
 
 ______________________________________________________________________
 
 *Requirements defined: 2026-06-06*
-*Last updated: 2026-06-06 after initial v1.12 definition*
+*Last updated: 2026-06-06 after v1.12 roadmap creation*

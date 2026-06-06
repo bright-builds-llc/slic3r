@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.12
 milestone_name: PrusaSlicer G-code Output Evidence Foundation
-status: defining_requirements
-stopped_at: defining v1.12 requirements
-last_updated: "2026-06-06T03:45:00Z"
+status: roadmap_created
+stopped_at: Phase 45 ready to plan
+last_updated: "2026-06-06T04:40:47Z"
 last_activity: 2026-06-06
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -25,44 +25,25 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** v1.12 PrusaSlicer G-code Output Evidence Foundation —
-defining requirements for a narrow, summary-only G-code evidence slice.
+**Current focus:** Phase 45: Prusa G-code Output Scope Gate.
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: -
+Phase: 45 (1 of 4 in v1.12, Prusa G-code Output Scope Gate)
+Plan: Not planned yet
 Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
-Status: Defining requirements
-Last activity: 2026-06-06
-Last Activity Description: Milestone v1.12 started
+Status: Not started; roadmap created; ready to plan Phase 45
+Last activity: 2026-06-06 - v1.12 roadmap created
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [----------] 0%
 
 ## Performance Metrics
 
 **Prior milestone baseline:**
 
 - v1.11 completed 4 phases, 9 plans, and 21 plan tasks.
-- v1.12 starts after the first trusted Prusa project-file evidence path.
-
-**Last completed milestone:**
-
-- 4 phases planned: 41-44.
-- 10 v1 requirements mapped.
-- 9 plans created.
-- 9 plans complete.
-- 4 phases complete.
-- 42-01 completed 2 tasks across 5 fixture files in 3m 39s.
-- 42-02 completed 2 tasks across 3 fixture verifier files in 9m 40s.
-- 42-03 completed 2 tasks across 8 docs/verifier files in 5m 25s.
-- 43-01 completed 2 tasks across 5 Rust parser/Bazel files in 9 min.
-- 43-02 completed 3 tasks across 7 registry/verifier/metadata files in 8m 1s.
-- 43-03 completed 2 tasks across 7 docs files in 4m 19s.
-- 44-01 completed 3 tasks across Rust summary, parity command, Bazel, and
-  failure-guard files in 7 min.
-- 44-02 completed 2 tasks across status, verifier, fixture, package, and port
-  docs files in 8 min.
+- v1.12 begins with 4 planned phases and 10 mapped requirements.
+- Plan counts remain TBD until `/gsd-plan-phase` decomposes each phase.
 
 ## Accumulated Context
 
@@ -72,103 +53,18 @@ Decisions are logged in `PROJECT.md` Key Decisions table.
 
 Recent decisions affecting v1.12:
 
-- Start generated-output work with one narrow PrusaSlicer G-code output
-  evidence slice.
-
-- Keep v1.12 expected artifacts summary-only; do not claim byte-for-byte
-  output parity.
-
-- Reuse the v1.10/v1.11 trust chain: reviewed scope, source-pinned fixture,
-  checked-in expected artifact, typed Rust boundary, public Bazel parity
-  command, failure guard, exact status row, and non-overclaiming docs.
-
-- Keep support generation, arc fitting, wall seam behavior, STEP import, full
-  3MF import/export, printer-runtime behavior, GUI behavior, release,
-  network/device, and sync surfaces deferred.
-
-Recent decisions affecting v1.11:
-
-- Continue phase numbering from Phase 41; do not reset to Phase 1.
-
-- Select `prusaslicer.project-file` as the first broader PrusaSlicer evidence
-  slice after v1.10 profile/config parity.
-
-- Broaden PrusaSlicer parity one executable slice at a time instead of
-  treating v1.11 as full PrusaSlicer runtime or GUI support.
-
-- Phase 41 must lock the exact project-file fixture and expected-artifact
-  contract before fixture, parser, parity-command, or status implementation.
-
-- Reuse the v1.10 trust chain: source-pinned fixture, typed Rust boundary,
-  checked-in expected artifact, public Bazel parity command, negative failure
-  guard, exact status row, docs, UAT, and security verification.
-
-- Limit active downstream-fork porting consideration to PrusaSlicer for now;
-  Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly vendor
-  sync are paused and may be revisited only after an explicit new planning
-  decision.
-
-- [Phase 42]: Phase 42 Plan 01 keeps project-file evidence to fixture bytes,
-  provenance, README update rules, and presence-level expected artifacts only.
-
-- [Phase 42]: Executable project-file parity and status publication remain
-  deferred until later phases.
-
-- [Phase 42]: Expected-summary notes avoid semantic-count phrases to satisfy
-  non-overclaiming verification.
-
-- [Phase 42]: Plan 42-02 keeps project-file fixture verification local and
-  fail-closed with exact byte, provenance, expected-artifact, archive, marker,
-  README, and future-phase absence checks.
-
-- [Phase 42]: Phase 43 parser and Phase 44 parity/status surfaces remain
-  negative guards only until their dedicated implementation phases.
-
-- [Phase 42]: Verifier failure-mode tests mutate temp fixture copies instead
-  of checked-in project-file fixture artifacts.
-
-- [Phase 42]: Phase 42 Plan 03 publishes fixture evidence through package and
-  port docs without adding project-file executable parity or status publication.
-
-- [Phase 42]: Phase 42 Plan 03 keeps Phase 43 prusa_project_file Rust boundary
-  and Phase 44 prusaslicer_project_file_parity command unavailable until their
-  dedicated phases.
-
-- [Phase 42]: Phase 42 Plan 03 allows the reviewed prusaslicer.project-file
-  namespace in the profile-schema verifier while unrelated fork fixture
-  namespaces remain rejected.
-
-- [Phase 43]: Kept Prusa project-file parsing in slic3r_flavors as a pure data-in/data-out Rust boundary.
-
-- [Phase 43]: Kept fork.prusaslicer.project-file as reserved_future_status_token metadata only; no parity status row or command was added.
-
-- [Phase 43]: Declared direct Bazel compile-time inputs for the source-name guard and contract-typed metadata test.
-
-- [Phase 43]: Plan 43-02 kept the prusaslicer.project-file registry row as FutureCandidate metadata with file-formats dependency only.
-
-- [Phase 43]: Plan 43-02 replaced duplicated registry project-file source literals with constants from crate::prusa_project_file.
-
-- [Phase 43]: Plan 43-02 removed the obsolete Rust-surface absence guard while preserving project-file status-row and parity-target negative guards.
-
-- [Phase 43]: Plan 43-03 published Phase 43 as parser/metadata readiness only, not executable project-file parity.
-
-- [Phase 43]: Plan 43-03 kept fork.prusaslicer.project-file as a reserved future status token until Phase 44 owns the parity command and status row.
-
-- [Phase 43]: Plan 43-03 kept broad Prusa runtime, GUI, generated-output, release, network/device, Bambu, Orca, upstream import, and sync surfaces deferred in docs.
-
-- [Phase 44]: Project-file parity command and failure guard use explicit Bazel
-  inputs and checked-in expected artifacts rather than repository discovery.
-
-- [Phase 44]: Published exactly one verified
-  `fork.prusaslicer.project-file` status row for the narrow expected-summary
-  evidence slice.
-
-- [Phase 44]: Full PrusaSlicer runtime, GUI, generated-output, release,
-  network/device, profile-update, and sync surfaces remain deferred.
+- Continue phase numbering from Phase 45 because v1.11 ended at Phase 44.
+- Use the four-step evidence ladder: scope gate, fixture surface, Rust summary
+  boundary, executable evidence.
+- Keep v1.12 summary-only and narrow; do not claim byte-for-byte G-code,
+  broad generated-output, runtime/printer, geometry, support, seam, arc, STEP,
+  desktop app, release, network, or sync parity.
+- Keep broad `generated-outputs` in progress; only the exact
+  `fork.prusaslicer.gcode-output` row may be planned after executable evidence.
 
 ### Pending Todos
 
-- None.
+None.
 
 ### Blockers/Concerns
 
@@ -176,6 +72,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-06T03:45:00Z
-Stopped at: defining v1.12 requirements
-Resume file: .planning/PROJECT.md
+Last session: 2026-06-06T04:40:47Z
+Stopped at: v1.12 roadmap created; Phase 45 ready to plan
+Resume file: `.planning/ROADMAP.md`
