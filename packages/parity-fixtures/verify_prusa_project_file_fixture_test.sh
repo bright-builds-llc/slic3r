@@ -242,6 +242,25 @@ test_missing_scope_path_in_readme_fails() {
 	assert_contains "${tmp_dir}/missing-scope-readme.err" "packages/prusa-project-file-scope/project-file-scope.md"
 }
 
+test_stale_project_file_parity_readme_fails() {
+	# Arrange
+	local dir="${tmp_dir}/stale-project-file-parity-readme"
+	local readme_file="${dir}/forks/prusaslicer/prusaslicer.project-file/README.md"
+	write_valid_fixture_copy "${dir}"
+	remove_line_containing "${readme_file}" "Executable project-file parity is provided by"
+	remove_line_containing "${readme_file}" "bazel run //packages/parity:prusaslicer_project_file_parity"
+	remove_line_containing "${readme_file}" "expected-summary evidence slice"
+	printf '\nExecutable project-file parity remains unavailable until Phase 44.\n' >>"${readme_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/stale-project-file-readme.out" "${tmp_dir}/stale-project-file-readme.err"; then
+		fail "stale project-file README fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/stale-project-file-readme.err" "Executable project-file parity is provided by"
+}
+
 test_missing_project_file_status_row_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-project-file-status-row"
@@ -319,7 +338,7 @@ test_project_file_status_overclaim_fails() {
 	replace_first_line_containing \
 		"${dir}/status.tsv" \
 		"fork.prusaslicer.project-file" \
-		$'fork.prusaslicer.project-file\tverified\t//packages/parity:prusaslicer_project_file_parity\tfull PrusaSlicer runtime support verified'
+		"${valid_project_file_status_row}; full PrusaSlicer runtime support verified"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/project-file-status-overclaim.out" "${tmp_dir}/project-file-status-overclaim.err"; then
@@ -375,6 +394,7 @@ test_extra_expected_summary_row_fails
 test_missing_scope_path_in_provenance_fails
 test_extra_provenance_row_fails
 test_missing_scope_path_in_readme_fails
+test_stale_project_file_parity_readme_fails
 test_missing_project_file_status_row_fails
 test_wrong_project_file_status_fails
 test_wrong_project_file_evidence_fails

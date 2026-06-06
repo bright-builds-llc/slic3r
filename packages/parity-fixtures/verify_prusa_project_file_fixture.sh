@@ -43,6 +43,7 @@ readonly EXPECTED_SHA="9fa91ee2f54a33dc65fd681bb24dce666c77a501196815548a051d54e
 readonly PHASE41_SCOPE_RECORD="packages/prusa-project-file-scope/project-file-scope.md"
 readonly EXPECTED_SUMMARY_HEADER=$'source_ref\tfixture_path\tarchive_member\tproject_marker\tdeferred_semantics\tnotes'
 readonly PROVENANCE_HEADER=$'fixture_id\tvendor_id\tinventory_id\tsource_ref\taccepted_tag\tpeeled_commit\tsource_path\tupstream_url\tbytes\tsha256\tline_endings\trole\tphase41_scope_record\tupdate_route\tstatus_scope\texclusions'
+readonly PROJECT_FILE_STATUS_ROW=$'fork.prusaslicer.project-file\tverified\t//packages/parity:prusaslicer_project_file_parity\tShared fixture comparison proves the narrow Prusa project-file expected-summary evidence slice backed by the Phase 42 fixture and Phase 43 Rust summary boundary only; full 3MF import/export, PrusaSlicer runtime, GUI, generated-output, STEP, support generation, arc fitting, wall seam, network/device, profile auto-update, fork release, and sync surfaces remain deferred'
 
 require_file() {
 	local file="$1"
@@ -62,10 +63,6 @@ require_text() {
 }
 
 require_project_file_parity_scope_text() {
-	if grep -Fq -- "Executable project-file parity remains unavailable until Phase 44." "${fixture_readme}"; then
-		return
-	fi
-
 	require_text "${fixture_readme}" "fixture README" "Executable project-file parity is provided by"
 	require_text "${fixture_readme}" "fixture README" "bazel run //packages/parity:prusaslicer_project_file_parity"
 	require_text "${fixture_readme}" "fixture README" "for the narrow"
@@ -296,89 +293,17 @@ verify_readme_scope() {
 }
 
 verify_status_published() {
-	local status_errors
-	status_errors="$(awk -F '\t' \
-		-v surface="fork.prusaslicer.project-file" \
-		-v required_status="verified" \
-		-v required_evidence="//packages/parity:prusaslicer_project_file_parity" \
-		-v note_narrow="narrow Prusa project-file expected-summary evidence slice" \
-		-v note_phase42="Phase 42 fixture" \
-		-v note_phase43="Phase 43 Rust summary boundary" \
-		-v note_3mf="full 3MF import/export" \
-		-v note_runtime="PrusaSlicer runtime" \
-		-v note_gui="GUI" \
-		-v note_generated="generated-output" \
-		-v note_network="network/device" \
-		-v note_profile_update="profile auto-update" \
-		-v note_release="fork release" \
-		-v note_sync="sync surfaces remain deferred" '
-		$1 == surface {
-			count++
-			if ($2 != required_status) {
-				printf "%s status: expected %s, got %s\n", surface, required_status, $2
-				failed = 1
-			}
-			if ($3 != required_evidence) {
-				printf "%s evidence: expected %s, got %s\n", surface, required_evidence, $3
-				failed = 1
-			}
-			if (index($4, note_narrow) == 0) {
-				printf "%s notes: missing %s\n", surface, note_narrow
-				failed = 1
-			}
-			if (index($4, note_phase42) == 0) {
-				printf "%s notes: missing %s\n", surface, note_phase42
-				failed = 1
-			}
-			if (index($4, note_phase43) == 0) {
-				printf "%s notes: missing %s\n", surface, note_phase43
-				failed = 1
-			}
-			if (index($4, note_3mf) == 0) {
-				printf "%s notes: missing %s\n", surface, note_3mf
-				failed = 1
-			}
-			if (index($4, note_runtime) == 0) {
-				printf "%s notes: missing %s\n", surface, note_runtime
-				failed = 1
-			}
-			if (index($4, note_gui) == 0) {
-				printf "%s notes: missing %s\n", surface, note_gui
-				failed = 1
-			}
-			if (index($4, note_generated) == 0) {
-				printf "%s notes: missing %s\n", surface, note_generated
-				failed = 1
-			}
-			if (index($4, note_network) == 0) {
-				printf "%s notes: missing %s\n", surface, note_network
-				failed = 1
-			}
-			if (index($4, note_profile_update) == 0) {
-				printf "%s notes: missing %s\n", surface, note_profile_update
-				failed = 1
-			}
-			if (index($4, note_release) == 0) {
-				printf "%s notes: missing %s\n", surface, note_release
-				failed = 1
-			}
-			if (index($4, note_sync) == 0) {
-				printf "%s notes: missing %s\n", surface, note_sync
-				failed = 1
-			}
-		}
-		END {
-			if (count == 0) {
-				printf "%s status: missing row\n", surface
-				failed = 1
-			}
-			if (count > 1) {
-				printf "%s status: duplicate rows: %d\n", surface, count
-				failed = 1
-			}
-			exit failed ? 1 : 0
-		}
-	' "${status_file}")" || error "packages/parity/status.tsv: ${status_errors}"
+	require_exact_line \
+		"${status_file}" \
+		"packages/parity/status.tsv" \
+		"${PROJECT_FILE_STATUS_ROW}" \
+		"fork.prusaslicer.project-file status/evidence/notes"
+
+	local status_count
+	status_count="$(awk -F '\t' '$1 == "fork.prusaslicer.project-file" { count++ } END { print count + 0 }' "${status_file}")"
+	if [[ "${status_count}" != "1" ]]; then
+		error "packages/parity/status.tsv: fork.prusaslicer.project-file status: duplicate rows: ${status_count}"
+	fi
 }
 
 verify_parity_target_published() {
