@@ -81,7 +81,7 @@ OrcaSlicer, and vendor sync automation.
   summarize the selected project-file evidence into typed, side-effect-free
   Rust domain values that trace back to the source and fixture metadata.
 
-- [ ] **Phase 44: Executable Prusa Project-File Parity** - Maintainers can run
+- [x] **Phase 44: Executable Prusa Project-File Parity** - Maintainers can run (completed 2026-06-06)
   and trust the public project-file parity command while docs and status limit
   the verified claim to the exact evidence slice.
 
@@ -193,9 +193,9 @@ docs and status clearly limit what was verified.
 
 Plans:
 
-- [ ] 44-01-PLAN.md - Create the Rust-backed project-file parity command and
+- [x] 44-01-PLAN.md - Create the Rust-backed project-file parity command and
   mutation failure guard.
-- [ ] 44-02-PLAN.md - Publish the verified project-file status row and
+- [x] 44-02-PLAN.md - Publish the verified project-file status row and
   non-overclaiming docs.
 
 ## Coverage
@@ -225,7 +225,7 @@ Phases execute in numeric order: 41 -> 42 -> 43 -> 44
 | 41. Prusa Project-File Scope Gate | 1/1 | Complete | 2026-06-03 |
 | 42. Prusa Project-File Fixture Surface | 3/3 | Complete    | 2026-06-04 |
 | 43. Rust Prusa Project-File Boundary | 3/3 | Complete    | 2026-06-05 |
-| 44. Executable Prusa Project-File Parity | 0/2 | Pending | - |
+| 44. Executable Prusa Project-File Parity | 2/2 | Complete    | 2026-06-06 |
 
 ## Future Revisit Candidates
 
