@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.12
 milestone_name: PrusaSlicer G-code Output Evidence Foundation
-status: roadmap_created
-stopped_at: Phase 45 ready to plan
-last_updated: "2026-06-06T04:40:47Z"
+status: planning
+stopped_at: Phase 45 context gathered
+last_updated: "2026-06-06T13:55:59.350Z"
 last_activity: 2026-06-06
 progress:
   total_phases: 4
@@ -56,9 +56,11 @@ Recent decisions affecting v1.12:
 - Continue phase numbering from Phase 45 because v1.11 ended at Phase 44.
 - Use the four-step evidence ladder: scope gate, fixture surface, Rust summary
   boundary, executable evidence.
+
 - Keep v1.12 summary-only and narrow; do not claim byte-for-byte G-code,
   broad generated-output, runtime/printer, geometry, support, seam, arc, STEP,
   desktop app, release, network, or sync parity.
+
 - Keep broad `generated-outputs` in progress; only the exact
   `fork.prusaslicer.gcode-output` row may be planned after executable evidence.
 
@@ -72,6 +74,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-06T04:40:47Z
-Stopped at: v1.12 roadmap created; Phase 45 ready to plan
-Resume file: `.planning/ROADMAP.md`
+Last session: 2026-06-06T13:55:59.346Z
+Stopped at: Phase 45 context gathered
+Resume file: .planning/phases/45-prusa-g-code-output-scope-gate/45-CONTEXT.md
