@@ -1,0 +1,41 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "README.md",
+    "gcode-output-scope.md",
+])
+
+sh_binary(
+    name = "verify",
+    srcs = ["verify_prusa_gcode_output_scope.sh"],
+    data = [
+        "README.md",
+        "gcode-output-scope.md",
+        "//packages/fork-inventories:prusaslicer.tsv",
+        "//packages/fork-inventories:category-map.tsv",
+        "//packages/parity:status.tsv",
+    ],
+    args = [
+        "$(location README.md)",
+        "$(location gcode-output-scope.md)",
+        "$(location //packages/fork-inventories:prusaslicer.tsv)",
+        "$(location //packages/fork-inventories:category-map.tsv)",
+        "$(location //packages/parity:status.tsv)",
+    ],
+)
+
+sh_test(
+    name = "verify_prusa_gcode_output_scope_test",
+    srcs = ["verify_prusa_gcode_output_scope_test.sh"],
+    data = ["verify_prusa_gcode_output_scope.sh"],
+)
+
+filegroup(
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "gcode-output-scope.md",
+        "verify_prusa_gcode_output_scope.sh",
+        "verify_prusa_gcode_output_scope_test.sh",
+    ],
+)
