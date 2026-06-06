@@ -79,7 +79,7 @@ builds, and sync automation.
 
 - This milestone starts at Phase 45 because Phase 44 shipped in v1.11
 
-- [ ] **Phase 45: Prusa G-code Output Scope Gate** - Maintainers can inspect
+- [x] **Phase 45: Prusa G-code Output Scope Gate** - Maintainers can inspect (completed 2026-06-06)
   and verify the reviewed `prusaslicer.gcode-output` scope contract before
   fixture, Rust, parity, or status work lands.
 
@@ -126,7 +126,7 @@ Plans:
 - [x] 45-02-PLAN.md — Create the metadata-only
   `packages/prusa-gcode-output-scope` package, scope record, verifier, and
   focused verifier tests.
-- [ ] 45-03-PLAN.md — Add minimal docs routing and final absence checks without
+- [x] 45-03-PLAN.md — Add minimal docs routing and final absence checks without
   publishing fixture, Rust, parity, or status evidence.
 
 ### Phase 46: Prusa G-code Fixture Surface
@@ -224,7 +224,7 @@ Phases execute in numeric order: 45 -> 46 -> 47 -> 48
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 45. Prusa G-code Output Scope Gate | 2/3 | In Progress | - |
+| 45. Prusa G-code Output Scope Gate | 3/3 | Complete   | 2026-06-06 |
 | 46. Prusa G-code Fixture Surface | 0/TBD | Not started | - |
 | 47. Rust Prusa G-code Summary Boundary | 0/TBD | Not started | - |
 | 48. Executable Prusa G-code Evidence | 0/TBD | Not started | - |
