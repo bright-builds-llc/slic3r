@@ -300,6 +300,23 @@ fn rejects_duplicate_row() {
 }
 
 #[test]
+fn rejects_out_of_order_rows() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_PROJECT_SUMMARY.lines().collect();
+    lines.swap(3, 4);
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_project_file_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaProjectFileParseError::UnexpectedRowOrder { line_number: 4, .. })
+    ));
+}
+
+#[test]
 fn rejects_missing_row() {
     // Arrange
     let input = EXPECTED_PROJECT_SUMMARY

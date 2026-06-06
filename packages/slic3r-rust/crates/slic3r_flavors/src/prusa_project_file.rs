@@ -169,6 +169,15 @@ pub enum PrusaProjectFileParseError {
         project_marker: PrusaProjectFileMarker,
         deferred_semantics: PrusaProjectFileDeferredSemantics,
     },
+    UnexpectedRowOrder {
+        line_number: usize,
+        expected_archive_member: PrusaProjectFileArchiveMember,
+        expected_project_marker: PrusaProjectFileMarker,
+        expected_deferred_semantics: PrusaProjectFileDeferredSemantics,
+        actual_archive_member: PrusaProjectFileArchiveMember,
+        actual_project_marker: PrusaProjectFileMarker,
+        actual_deferred_semantics: PrusaProjectFileDeferredSemantics,
+    },
     MissingRow {
         archive_member: PrusaProjectFileArchiveMember,
         project_marker: PrusaProjectFileMarker,
@@ -265,6 +274,21 @@ pub fn parse_prusa_project_file_summary(input: &str) -> PrusaProjectFileParseRes
                 project_marker: row.project_marker,
                 deferred_semantics: row.deferred_semantics,
             });
+        }
+
+        if let Some(expected_row) = EXPECTED_ROWS.get(line_offset).copied() {
+            let expected_key = PrusaProjectFileRowKey::from_expected(expected_row);
+            if row_key != expected_key {
+                return Err(PrusaProjectFileParseError::UnexpectedRowOrder {
+                    line_number,
+                    expected_archive_member: expected_row.archive_member,
+                    expected_project_marker: expected_row.project_marker,
+                    expected_deferred_semantics: expected_row.deferred_semantics,
+                    actual_archive_member: row.archive_member,
+                    actual_project_marker: row.project_marker,
+                    actual_deferred_semantics: row.deferred_semantics,
+                });
+            }
         }
 
         row_keys.push(row_key);
