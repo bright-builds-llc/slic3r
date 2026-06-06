@@ -36,11 +36,20 @@ non-overclaiming docs.
 
 ## Current State
 
-v1.12 is defining requirements. The milestone should reuse the v1.10/v1.11
-trust chain for one deliberately narrow PrusaSlicer generated-output evidence
-slice: reviewed scope, source-pinned fixture, checked-in expected summary,
-typed Rust summary boundary, public Bazel parity command, failure guard, exact
-status row, and non-overclaiming docs.
+v1.12 Phase 45 is complete. Maintainers can inspect the checked-in
+`packages/prusa-gcode-output-scope` scope package, run
+`bazel run //packages/prusa-gcode-output-scope:verify`, and trace
+`prusaslicer.gcode-output` back to the accepted PrusaSlicer source identity and
+inventory row before fixtures, Rust summary work, parity targets, or status
+rows are introduced. The scope gate completes PGSEL-01 and PGSEL-02 while
+keeping byte-for-byte G-code parity, broad generated-output parity,
+runtime/printer behavior, geometry, support, seam, arc, STEP, release,
+network/device, Bambu Studio, OrcaSlicer, and sync claims deferred.
+
+The remaining v1.12 work should continue the same trust chain for the narrow
+PrusaSlicer generated-output evidence slice: source-pinned fixture, checked-in
+expected summary, typed Rust summary boundary, public Bazel parity command,
+failure guard, exact status row, and non-overclaiming docs.
 
 v1.11 is archived. Maintainers can now run
 `bazel run //packages/parity:prusaslicer_project_file_parity`, inspect the
@@ -256,8 +265,8 @@ high-risk generated-output or network/cloud surfaces.
 
 ## Next Milestone Goals
 
-- Start v1.12 with fresh requirements for a single PrusaSlicer G-code output
-  evidence slice.
+- Continue v1.12 with the Phase 46 source-pinned Prusa G-code fixture surface
+  and summary-only expected artifact.
 - Keep the expected artifact summary-only so the milestone proves stable G-code
   metadata and markers instead of byte-for-byte output parity.
 - Keep support generation, arc fitting, wall seam behavior, STEP import, full
@@ -370,6 +379,15 @@ high-risk generated-output or network/cloud surfaces.
 - ✓ v1.11 avoids broad Prusa runtime, GUI, generated-output, release,
   network/cloud, credential, plugin, and sync claims unless a deliberately
   scoped executable evidence chain exists for that surface — Phase 44
+- ✓ v1.12 requirements define a reviewed `prusaslicer.gcode-output` scope
+  record with accepted source identity, inventory row ID, fixture source
+  decision, expected-summary contract, candidate Rust boundary, planned
+  evidence command, planned status token, docs touched, license/security note,
+  deferred scope, and reviewer signoff — Phase 45
+- ✓ v1.12 requirements distinguish the narrow G-code output summary-only scope
+  from byte-for-byte G-code parity, full generated-output parity,
+  runtime/printer behavior, geometry, support, seam, arc, STEP, release,
+  network/device, Bambu Studio, OrcaSlicer, and sync claims — Phase 45
 
 ### Active
 
@@ -484,4 +502,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-06 after starting v1.12 milestone*
+*Last updated: 2026-06-06 after completing v1.12 Phase 45*
