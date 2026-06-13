@@ -66,6 +66,11 @@ exports_files([
     "forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv",
     "forks/prusaslicer/prusaslicer.project-file/fixture-provenance.tsv",
     "forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf",
+    "forks/prusaslicer/prusaslicer.gcode-output/.gitattributes",
+    "forks/prusaslicer/prusaslicer.gcode-output/README.md",
+    "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv",
+    "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
+    "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
 ])
 
 alias(
@@ -403,6 +408,37 @@ filegroup(
     ],
 )
 
+alias(
+    name = "prusa_gcode_output_readme",
+    actual = "forks/prusaslicer/prusaslicer.gcode-output/README.md",
+)
+
+alias(
+    name = "prusa_gcode_output_provenance",
+    actual = "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
+)
+
+alias(
+    name = "prusa_gcode_output_expected_gcode_summary",
+    actual = "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv",
+)
+
+alias(
+    name = "prusa_gcode_output_gcodewriter_set_speed",
+    actual = "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
+)
+
+filegroup(
+    name = "prusa_gcode_output_bundle",
+    srcs = [
+        "forks/prusaslicer/prusaslicer.gcode-output/.gitattributes",
+        "forks/prusaslicer/prusaslicer.gcode-output/README.md",
+        "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv",
+        "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
+    ],
+)
+
 sh_binary(
     name = "verify_prusa_profile_schema_fixture",
     srcs = ["verify_prusa_profile_schema_fixture.sh"],
@@ -454,6 +490,29 @@ sh_test(
     data = [
         "verify_prusa_project_file_fixture.sh",
         ":prusa_project_file_bundle",
+        "README.md",
+        "//packages/parity:BUILD.bazel",
+        "//packages/parity:status.tsv",
+    ],
+)
+
+sh_binary(
+    name = "verify_prusa_gcode_output_fixture",
+    srcs = ["verify_prusa_gcode_output_fixture.sh"],
+    data = [
+        ":prusa_gcode_output_bundle",
+        "README.md",
+        "//packages/parity:BUILD.bazel",
+        "//packages/parity:status.tsv",
+    ],
+)
+
+sh_test(
+    name = "verify_prusa_gcode_output_fixture_test",
+    srcs = ["verify_prusa_gcode_output_fixture_test.sh"],
+    data = [
+        "verify_prusa_gcode_output_fixture.sh",
+        ":prusa_gcode_output_bundle",
         "README.md",
         "//packages/parity:BUILD.bazel",
         "//packages/parity:status.tsv",
@@ -527,9 +586,16 @@ filegroup(
         "forks/prusaslicer/prusaslicer.project-file/expected-project-summary.tsv",
         "forks/prusaslicer/prusaslicer.project-file/fixture-provenance.tsv",
         "forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf",
+        "forks/prusaslicer/prusaslicer.gcode-output/.gitattributes",
+        "forks/prusaslicer/prusaslicer.gcode-output/README.md",
+        "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv",
+        "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
         "verify_prusa_profile_schema_fixture.sh",
         "verify_prusa_profile_schema_fixture_test.sh",
         "verify_prusa_project_file_fixture.sh",
         "verify_prusa_project_file_fixture_test.sh",
+        "verify_prusa_gcode_output_fixture.sh",
+        "verify_prusa_gcode_output_fixture_test.sh",
     ],
 )
