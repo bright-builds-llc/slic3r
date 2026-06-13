@@ -142,6 +142,10 @@ EOF
 # surface	status	evidence	notes
 generated-outputs	in progress	docs/port/cli-slice.md	Scoped export plus repair/split artifact naming are fixture-verified; geometry and output-content parity are deferred
 EOF
+
+	cat >"${dir}/packages/parity/BUILD.bazel" <<'EOF'
+package(default_visibility = ["//visibility:public"])
+EOF
 }
 
 run_verifier() {
@@ -313,37 +317,91 @@ test_premature_status_row_fails() {
 	assert_contains "${tmp_dir}/premature-status.err" 'fork\.prusaslicer\.gcode-output'
 }
 
-test_premature_fixture_namespace_fails() {
+test_phase46_fixture_namespace_is_allowed() {
 	# Arrange
-	local dir="${tmp_dir}/premature-fixture-namespace"
+	local dir="${tmp_dir}/phase46-fixture-namespace"
 	write_valid_fixture "${dir}"
 	mkdir -p "${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-fixture.out" "${tmp_dir}/premature-fixture.err"; then
-		fail "premature fixture namespace passed"
+	if ! run_verifier "${dir}" "${tmp_dir}/phase46-fixture.out" "${tmp_dir}/phase46-fixture.err"; then
+		sed -n '1,200p' "${tmp_dir}/phase46-fixture.err" >&2
+		fail "Phase 46 fixture namespace failed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-fixture.err" '^error:'
-	assert_contains "${tmp_dir}/premature-fixture.err" 'fixture namespace'
+	assert_contains "${tmp_dir}/phase46-fixture.out" '^ok: Prusa G-code output scope verification passed$'
 }
 
-test_premature_expected_summary_artifact_fails() {
+test_phase46_expected_summary_artifact_is_allowed() {
 	# Arrange
-	local dir="${tmp_dir}/premature-expected-summary"
+	local dir="${tmp_dir}/phase46-expected-summary"
 	write_valid_fixture "${dir}"
 	mkdir -p "${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output"
 	: >"${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-expected.out" "${tmp_dir}/premature-expected.err"; then
-		fail "premature expected summary artifact passed"
+	if ! run_verifier "${dir}" "${tmp_dir}/phase46-expected.out" "${tmp_dir}/phase46-expected.err"; then
+		sed -n '1,200p' "${tmp_dir}/phase46-expected.err" >&2
+		fail "Phase 46 expected summary artifact failed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-expected.err" '^error:'
-	assert_contains "${tmp_dir}/premature-expected.err" 'expected summary artifact'
+	assert_contains "${tmp_dir}/phase46-expected.out" '^ok: Prusa G-code output scope verification passed$'
+}
+
+test_premature_parity_target_fails() {
+	# Arrange
+	local dir="${tmp_dir}/premature-parity-target"
+	write_valid_fixture "${dir}"
+	printf '\nsh_binary(\n    name = "prusaslicer_gcode_output_parity",\n    srcs = ["placeholder.sh"],\n)\n' \
+		>>"${dir}/packages/parity/BUILD.bazel"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/premature-parity.out" "${tmp_dir}/premature-parity.err"; then
+		fail "premature parity target fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/premature-parity.err" '^error:'
+	assert_contains "${tmp_dir}/premature-parity.err" 'parity target'
+}
+
+test_premature_slic3r_flavors_marker_fails() {
+	# Arrange
+	local dir="${tmp_dir}/premature-slic3r-flavors-marker"
+	write_valid_fixture "${dir}"
+	mkdir -p "${dir}/packages/slic3r-rust/crates/slic3r_flavors/src"
+	printf '%s\n' "const SURFACE: &str = \"slic3r_flavors::prusa_gcode_output\";" \
+		>"${dir}/packages/slic3r-rust/crates/slic3r_flavors/src/lib.rs"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/premature-slic3r-flavors.out" "${tmp_dir}/premature-slic3r-flavors.err"; then
+		fail "premature slic3r_flavors marker fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/premature-slic3r-flavors.err" '^error:'
+	assert_contains "${tmp_dir}/premature-slic3r-flavors.err" 'slic3r_flavors::prusa_gcode_output'
+}
+
+test_premature_rust_marker_fails() {
+	# Arrange
+	local dir="${tmp_dir}/premature-rust-marker"
+	write_valid_fixture "${dir}"
+	mkdir -p "${dir}/packages/slic3r-rust/crates/slic3r_flavors/src"
+	printf '%s\n' "pub mod prusa_gcode_output;" \
+		"pub fn parse_prusa_gcode_output_summary() {}" \
+		>"${dir}/packages/slic3r-rust/crates/slic3r_flavors/src/lib.rs"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/premature-rust-marker.out" "${tmp_dir}/premature-rust-marker.err"; then
+		fail "premature Rust marker fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/premature-rust-marker.err" '^error:'
+	assert_contains "${tmp_dir}/premature-rust-marker.err" 'pub mod prusa_gcode_output|parse_prusa_gcode_output_summary'
 }
 
 test_complete_fixture_passes
@@ -355,7 +413,10 @@ test_missing_deferred_scope_term_fails
 test_missing_reviewer_signoff_fails
 test_readme_overclaim_fails
 test_premature_status_row_fails
-test_premature_fixture_namespace_fails
-test_premature_expected_summary_artifact_fails
+test_phase46_fixture_namespace_is_allowed
+test_phase46_expected_summary_artifact_is_allowed
+test_premature_parity_target_fails
+test_premature_slic3r_flavors_marker_fails
+test_premature_rust_marker_fails
 
 printf 'ok: verify_prusa_gcode_output_scope_test\n'
