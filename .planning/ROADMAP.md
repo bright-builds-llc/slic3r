@@ -156,7 +156,7 @@ Plans:
 
 - [x] 46-01-PLAN.md — Create the Prusa G-code fixture namespace,
   provenance, and exact summary-only expected artifact.
-- [ ] 46-02-PLAN.md — Add the fixture verifier, mutation tests, Bazel wiring,
+- [x] 46-02-PLAN.md — Add the fixture verifier, mutation tests, Bazel wiring,
   and Phase 45 scope-verifier reconciliation.
 - [ ] 46-03-PLAN.md — Update fixture/package docs, preserve status boundaries,
   and run final verification.
@@ -234,7 +234,7 @@ Phases execute in numeric order: 45 -> 46 -> 47 -> 48
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 45. Prusa G-code Output Scope Gate | 3/3 | Complete   | 2026-06-06 |
-| 46. Prusa G-code Fixture Surface | 1/3 | In Progress|  |
+| 46. Prusa G-code Fixture Surface | 2/3 | In Progress|  |
 | 47. Rust Prusa G-code Summary Boundary | 0/TBD | Not started | - |
 | 48. Executable Prusa G-code Evidence | 0/TBD | Not started | - |
 

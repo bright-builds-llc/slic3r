@@ -34,7 +34,7 @@ Requirements for the v1.12 milestone. Each maps to one roadmap phase.
   update rules, byte count, SHA-256, line-ending/encoding policy, and a
   summary-only `expected-gcode-summary.tsv` artifact that traces back to the
   scope gate.
-- [ ] **PGFIX-02**: Maintainer can run a repo-owned fixture verifier that
+- [x] **PGFIX-02**: Maintainer can run a repo-owned fixture verifier that
   fails when required Prusa G-code fixture provenance, checksums, line-ending
   policy, expected-summary shape, update rules, privacy/post-processing
   exclusions, or non-overclaiming scope text are missing or inconsistent.
@@ -140,7 +140,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PGSEL-01 | Phase 45 | Complete |
 | PGSEL-02 | Phase 45 | Complete |
 | PGFIX-01 | Phase 46 | Complete |
-| PGFIX-02 | Phase 46 | Pending |
+| PGFIX-02 | Phase 46 | Complete |
 | PGSUM-01 | Phase 47 | Pending |
 | PGSUM-02 | Phase 47 | Pending |
 | PGSUM-03 | Phase 47 | Pending |
