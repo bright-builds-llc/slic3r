@@ -4,8 +4,8 @@ milestone: v1.12
 milestone_name: milestone
 status: executing
 stopped_at: Phase 46 context gathered
-last_updated: "2026-06-13T17:45:47.625Z"
-last_activity: 2026-06-13 -- Phase 46 planning complete
+last_updated: "2026-06-13T17:48:28.152Z"
+last_activity: 2026-06-13 -- Phase 46 execution started
 progress:
   total_phases: 4
   completed_phases: 1
@@ -25,15 +25,15 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Phase 45: Prusa G-code Output Scope Gate.
+**Current focus:** Phase 46 — prusa-g-code-fixture-surface
 
 ## Current Position
 
-Phase: 45 (1 of 4 in v1.12, Prusa G-code Output Scope Gate)
-Plan: 45-03 complete (3 of 3 in Phase 45)
+Phase: 46 (prusa-g-code-fixture-surface) — EXECUTING
+Plan: 1 of 3
 Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
-Status: Ready to execute
-Last activity: 2026-06-13 -- Phase 46 planning complete
+Status: Executing Phase 46
+Last activity: 2026-06-13 -- Phase 46 execution started
 
 Progress: [##########] 100%
 
