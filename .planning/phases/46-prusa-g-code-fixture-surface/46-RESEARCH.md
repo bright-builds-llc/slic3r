@@ -407,17 +407,15 @@ All claims in this research were verified in local repo files, local tool probes
 |---|-------|---------|---------------|
 | None | No unverified assumptions recorded. | N/A | N/A |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Should maintainers explicitly approve the derived fixture because there is no upstream `.gcode` blob?**  
+1. **RESOLVED: Should maintainers explicitly approve the derived fixture because there is no upstream `.gcode` blob?**
    What we know: the accepted commit has zero `.gcode` blobs, and the Phase 46 context allows source-controlled test or fixture data under the accepted commit. [VERIFIED: GitHub API tree query; VERIFIED: .planning/phases/46-prusa-g-code-fixture-surface/46-CONTEXT.md]  
-   What's unclear: whether "derived from source-controlled expected-output literals" is acceptable to the maintainer as the concrete interpretation of D-04. [VERIFIED: .planning/phases/46-prusa-g-code-fixture-surface/46-CONTEXT.md]  
-   Recommendation: proceed with the derived `GCodeWriter` literal fixture and make the README/provenance explicit that no upstream `.gcode` blob exists at the accepted commit. [CITED: upstream `test_gcodewriter.cpp` lines 20-35]
+   Resolution: proceed with the derived `GCodeWriter` literal fixture because D-04 permits source-controlled test or fixture data under the accepted commit, and no source-controlled `.gcode` blob exists at that identity. The plan must make README and provenance explicit that the fixture is derived from upstream expected-output literals rather than copied from an upstream `.gcode` blob. [CITED: upstream `test_gcodewriter.cpp` lines 20-35; VERIFIED: .planning/phases/46-prusa-g-code-fixture-surface/46-CONTEXT.md]
 
-2. **Should Phase 46 update the Phase 45 scope package?**  
+2. **RESOLVED: Should Phase 46 update the Phase 45 scope package?**
    What we know: the Phase 45 verifier currently rejects the Phase 46 fixture namespace and expected summary, and the Phase 45 scope record names older expected-summary columns. [VERIFIED: packages/prusa-gcode-output-scope/verify_prusa_gcode_output_scope.sh; VERIFIED: packages/prusa-gcode-output-scope/gcode-output-scope.md]  
-   What's unclear: whether the plan should treat this as a Phase 46 reconciliation task or leave Phase 45 verification historical-only. [VERIFIED: .planning/phases/45-prusa-g-code-output-scope-gate/45-VERIFICATION.md]  
-   Recommendation: include a Phase 46 task to update the Phase 45 scope record/verifier so current repo verification remains coherent after the fixture lands. [VERIFIED: Bright Builds verification standard; VERIFIED: packages/prusa-project-file-scope/verify_prusa_project_file_scope.sh]
+   Resolution: include a Phase 46 reconciliation task for the Phase 45 scope verifier so current repo verification remains coherent after the fixture lands. The reconciliation must allow only the Phase 46 fixture namespace and `expected-gcode-summary.tsv` while still rejecting the Phase 47 Rust implementation marker, the Phase 48 parity target, and the Phase 48 status row. [VERIFIED: Bright Builds verification standard; VERIFIED: packages/prusa-project-file-scope/verify_prusa_project_file_scope.sh; VERIFIED: .planning/phases/46-prusa-g-code-fixture-surface/46-CONTEXT.md]
 
 ## Environment Availability
 
