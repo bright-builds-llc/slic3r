@@ -157,7 +157,9 @@ reject_status_row() {
 }
 
 reject_parity_target() {
-	if grep -Fq -- 'name = "prusaslicer_gcode_output_parity"' "${parity_build_file}"; then
+	local parity_target_pattern
+	parity_target_pattern="name[[:space:]]*=[[:space:]]*['\"]prusaslicer_gcode_output_parity['\"]"
+	if grep -Eq -- "${parity_target_pattern}" "${parity_build_file}"; then
 		error "packages/parity/BUILD.bazel: forbidden parity target exists: prusaslicer_gcode_output_parity"
 	fi
 }

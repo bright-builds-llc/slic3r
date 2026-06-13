@@ -145,11 +145,13 @@ reject_status_row() {
 
 reject_parity_target() {
 	local parity_build="${checkout_root}/packages/parity/BUILD.bazel"
+	local parity_target_pattern
 	if [[ ! -r "${parity_build}" ]]; then
 		return
 	fi
 
-	if grep -Fq -- 'name = "prusaslicer_gcode_output_parity"' "${parity_build}"; then
+	parity_target_pattern="name[[:space:]]*=[[:space:]]*['\"]prusaslicer_gcode_output_parity['\"]"
+	if grep -Eq -- "${parity_target_pattern}" "${parity_build}"; then
 		error "packages/parity/BUILD.bazel: forbidden Phase 45 parity target exists"
 	fi
 }

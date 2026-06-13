@@ -320,20 +320,30 @@ test_premature_status_row_fails() {
 	assert_contains "${tmp_dir}/premature-status.err" "fork\\.prusaslicer\\.gcode-output"
 }
 
-test_premature_parity_target_fails() {
+assert_premature_parity_target_form_fails() {
+	local case_name="$1"
+	local build_snippet="$2"
+	local dir="${tmp_dir}/premature-parity-target-${case_name}"
+	local stdout_file="${tmp_dir}/premature-parity-${case_name}.out"
+	local stderr_file="${tmp_dir}/premature-parity-${case_name}.err"
+
 	# Arrange
-	local dir="${tmp_dir}/premature-parity-target"
 	write_valid_fixture_copy "${dir}"
-	printf '\nsh_binary(\n    name = "prusaslicer_gcode_output_parity",\n    srcs = ["placeholder.sh"],\n)\n' \
-		>>"${dir}/packages/parity/BUILD.bazel"
+	printf '\n%s\n' "${build_snippet}" >>"${dir}/packages/parity/BUILD.bazel"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-parity.out" "${tmp_dir}/premature-parity.err"; then
-		fail "premature parity target fixture passed"
+	if run_verifier "${dir}" "${stdout_file}" "${stderr_file}"; then
+		fail "premature parity target fixture passed for ${case_name}"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-parity.err" "prusaslicer_gcode_output_parity"
+	assert_contains "${stderr_file}" "prusaslicer_gcode_output_parity"
+}
+
+test_premature_parity_target_fails() {
+	assert_premature_parity_target_form_fails "spaced" $'sh_binary(\n    name = "prusaslicer_gcode_output_parity",\n    srcs = ["placeholder.sh"],\n)'
+	assert_premature_parity_target_form_fails "compact" 'sh_binary(name="prusaslicer_gcode_output_parity", srcs=["placeholder.sh"])'
+	assert_premature_parity_target_form_fails "single-quoted" "sh_binary(name='prusaslicer_gcode_output_parity', srcs=['placeholder.sh'])"
 }
 
 test_premature_slic3r_flavors_marker_fails() {
