@@ -150,7 +150,16 @@ it.
    reuse, live generation, upstream fetching/importing, binary G-code,
    thumbnails, post-processing, and host upload behavior.
 
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 46-01-PLAN.md — Create the Prusa G-code fixture namespace,
+  provenance, and exact summary-only expected artifact.
+- [ ] 46-02-PLAN.md — Add the fixture verifier, mutation tests, Bazel wiring,
+  and Phase 45 scope-verifier reconciliation.
+- [ ] 46-03-PLAN.md — Update fixture/package docs, preserve status boundaries,
+  and run final verification.
 
 ### Phase 47: Rust Prusa G-code Summary Boundary
 
