@@ -36,20 +36,21 @@ non-overclaiming docs.
 
 ## Current State
 
-v1.12 Phase 45 is complete. Maintainers can inspect the checked-in
-`packages/prusa-gcode-output-scope` scope package, run
-`bazel run //packages/prusa-gcode-output-scope:verify`, and trace
-`prusaslicer.gcode-output` back to the accepted PrusaSlicer source identity and
-inventory row before fixtures, Rust summary work, parity targets, or status
-rows are introduced. The scope gate completes PGSEL-01 and PGSEL-02 while
-keeping byte-for-byte G-code parity, broad generated-output parity,
-runtime/printer behavior, geometry, support, seam, arc, STEP, release,
-network/device, Bambu Studio, OrcaSlicer, and sync claims deferred.
+v1.12 Phase 46 is complete. Maintainers can inspect the checked-in
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`
+fixture namespace, verify the source-pinned `gcodewriter-set-speed.gcode`
+fixture and `expected-gcode-summary.tsv`, and run
+`bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`.
+The fixture surface completes PGFIX-01 and PGFIX-02 while keeping Rust summary
+parsing, executable parity, `fork.prusaslicer.gcode-output` status publication,
+byte-for-byte G-code parity, broad generated-output parity, runtime/printer
+behavior, geometry, support, seam, arc, STEP, release, network/device, Bambu
+Studio, OrcaSlicer, and sync claims deferred.
 
 The remaining v1.12 work should continue the same trust chain for the narrow
-PrusaSlicer generated-output evidence slice: source-pinned fixture, checked-in
-expected summary, typed Rust summary boundary, public Bazel parity command,
-failure guard, exact status row, and non-overclaiming docs.
+PrusaSlicer generated-output evidence slice: typed Rust summary boundary,
+public Bazel parity command, failure guard, exact status row, and
+non-overclaiming docs.
 
 v1.11 is archived. Maintainers can now run
 `bazel run //packages/parity:prusaslicer_project_file_parity`, inspect the
@@ -265,8 +266,9 @@ high-risk generated-output or network/cloud surfaces.
 
 ## Next Milestone Goals
 
-- Continue v1.12 with the Phase 46 source-pinned Prusa G-code fixture surface
-  and summary-only expected artifact.
+- Continue v1.12 with the Phase 47 typed Rust Prusa G-code summary boundary
+  that consumes the Phase 46 source-pinned fixture surface and summary-only
+  expected artifact.
 - Keep the expected artifact summary-only so the milestone proves stable G-code
   metadata and markers instead of byte-for-byte output parity.
 - Keep support generation, arc fitting, wall seam behavior, STEP import, full
@@ -388,13 +390,13 @@ high-risk generated-output or network/cloud surfaces.
   from byte-for-byte G-code parity, full generated-output parity,
   runtime/printer behavior, geometry, support, seam, arc, STEP, release,
   network/device, Bambu Studio, OrcaSlicer, and sync claims — Phase 45
+- ✓ v1.12 selects one reviewed Prusa-generated G-code fixture with explicit
+  provenance and update rules — Phase 46
+- ✓ v1.12 defines a summary-only expected artifact for stable G-code metadata
+  and marker evidence — Phase 46
 
 ### Active
 
-- [ ] v1.12 selects one reviewed Prusa-generated G-code fixture with explicit
-  provenance and update rules.
-- [ ] v1.12 defines a summary-only expected artifact for stable G-code metadata
-  and marker evidence.
 - [ ] v1.12 adds a typed Rust summary boundary for the selected G-code evidence
   without adding printer-runtime, geometry, support, seam, arc-fitting, or GUI
   claims.
@@ -478,7 +480,7 @@ The audience for this work is broad:
 | Gate Prusa project-file parity behind a checked-in scope package before fixtures, parser work, parity targets, or status rows | Project-file support is close enough to broad 3MF/runtime behavior that maintainers need a reviewed evidence contract before implementation can make claims | ✓ Shipped in Phase 41 |
 | Keep Prusa project-file fixture TSVs exact instead of append-only | Phase 42 fixture artifacts are a narrow evidence surface, so extra provenance or expected-summary rows could overclaim parser or parity behavior while the verifier still passed | ✓ Shipped in Phase 42 |
 | Publish project-file parity only as a narrow expected-summary evidence slice | Phase 44 proves command/status wiring without claiming full 3MF import/export, GUI project behavior, runtime semantics, or generated-output parity | ✓ Shipped in Phase 44 |
-| Start generated-output work with summary-only G-code evidence | G-code is closer to real port value than another static input slice, but byte-for-byte output parity and printer-runtime claims are too broad for the first generated-output milestone | — Pending in v1.12 |
+| Start generated-output work with summary-only G-code evidence | G-code is closer to real port value than another static input slice, but byte-for-byte output parity and printer-runtime claims are too broad for the first generated-output milestone | ✓ Fixture surface shipped in Phase 46; Rust summary and executable evidence remain Phase 47-48 |
 | Limit active downstream-fork porting consideration to PrusaSlicer for now | Non-Prusa Slicer-family ports need an explicit new planning decision before moving from parking lot into the roadmap | ✓ Adopted 2026-06-03 |
 
 ## Evolution
@@ -502,4 +504,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-06 after completing v1.12 Phase 45*
+*Last updated: 2026-06-13 after completing v1.12 Phase 46*
