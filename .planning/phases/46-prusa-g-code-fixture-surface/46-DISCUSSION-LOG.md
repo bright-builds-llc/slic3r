@@ -32,7 +32,7 @@
 | Provenance-only artifact | Would leave Phase 47 without a checked-in expected summary boundary. | |
 
 **User's choice:** Yolo-selected the summary-only marker TSV.
-**Notes:** Recommended columns are `source_ref`, `fixture_path`, `evidence_kind`, `marker`, `expected_value`, `deferred_semantics`, and `notes`. Byte counts and hashes belong in provenance, not the expected summary.
+**Notes:** Use the exact Phase 45 reserved columns: `source_ref`, `fixture_path`, `metadata_key`, `metadata_value`, `marker_key`, `marker_value`, and `notes`. Byte counts and hashes belong in provenance, not the expected summary.
 
 ---
 

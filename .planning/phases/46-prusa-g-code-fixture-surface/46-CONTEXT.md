@@ -74,16 +74,16 @@ upstream source imports, or sync automation.
   metadata and marker evidence such as source identity, fixture path, slicer or
   generated-by marker, flavor or printer/profile marker when present,
   representative G-code command markers, and deferred semantics notes.
-- **D-08:** Use columns that are explicit enough for Phase 47 Rust typed
-  parsing, while avoiding runtime claims. Recommended shape:
-  `source_ref`, `fixture_path`, `evidence_kind`, `marker`, `expected_value`,
-  `deferred_semantics`, and `notes`.
+- **D-08:** Use the exact columns reserved by the Phase 45 scope record:
+  `source_ref`, `fixture_path`, `metadata_key`, `metadata_value`,
+  `marker_key`, `marker_value`, and `notes`.
 - **D-09:** Keep byte counts, hashes, upstream URLs, and update-route facts in
   provenance, not in `expected-gcode-summary.tsv`.
 - **D-10:** Do not include geometry counts, extrusion totals, print duration,
   toolpath correctness, firmware compatibility, printability semantics,
   post-processing behavior, thumbnail/binary payloads, host upload behavior,
   status rows, or broad generated-output claims in the expected artifact.
+  Use `notes` values to state the deferred semantics for each marker row.
 
 ### Fail-Closed Verifier
 
