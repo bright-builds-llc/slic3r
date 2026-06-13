@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.12
 milestone_name: milestone
 status: executing
-stopped_at: Phase 46 context gathered
-last_updated: "2026-06-13T17:48:28.152Z"
-last_activity: 2026-06-13 -- Phase 46 execution started
+stopped_at: Completed 46-01-PLAN.md
+last_updated: "2026-06-13T18:07:02.788Z"
+last_activity: 2026-06-13
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 6
-  completed_plans: 3
-  percent: 50
+  completed_plans: 4
+  percent: 67
 ---
 
 # Project State
@@ -30,10 +30,10 @@ depend on.
 ## Current Position
 
 Phase: 46 (prusa-g-code-fixture-surface) — EXECUTING
-Plan: 1 of 3
+Plan: 2 of 3
 Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
-Status: Executing Phase 46
-Last activity: 2026-06-13 -- Phase 46 execution started
+Status: Ready to execute
+Last activity: 2026-06-13
 
 Progress: [##########] 100%
 
@@ -47,6 +47,7 @@ Progress: [##########] 100%
 - Phase 45 Plan 01 completed 2 tasks across 2 files in 4 min on 2026-06-06.
 - Phase 45 Plan 02 completed 2 tasks across 5 files in 9 min on 2026-06-06.
 - Phase 45 Plan 03 completed 3 tasks across 4 files in 3 min on 2026-06-06.
+- Phase 46 Plan 01 completed 2 tasks across 5 files in 13 min on 2026-06-13.
 
 ## Accumulated Context
 
@@ -76,6 +77,9 @@ Recent decisions affecting v1.12:
 - [Phase 45-prusa-g-code-output-scope-gate]: Made the Phase 45 G-code output scope gate discoverable from port docs while preserving the no-evidence boundary.
 - [Phase 45-prusa-g-code-output-scope-gate]: Kept `generated-outputs` in progress and left `fork.prusaslicer.gcode-output` unpublished until Phase 48 executable evidence.
 - [Phase 45-prusa-g-code-output-scope-gate]: Documented Phase 46-48 handoff names as planned text only: fixture namespace, Rust boundary, parity command, and status token.
+- [Phase 46-prusa-g-code-fixture-surface]: Used the accepted PrusaSlicer set_speed expected-output literals because the accepted upstream tree has no checked-in .gcode blob.
+- [Phase 46-prusa-g-code-fixture-surface]: Kept byte count, SHA-256, upstream URL, and update-route facts in provenance rather than the expected summary.
+- [Phase 46-prusa-g-code-fixture-surface]: Kept the expected artifact to the exact Phase 45 seven-column metadata and marker schema with no broad G-code parity claims.
 
 ### Pending Todos
 
@@ -87,6 +91,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-13T17:01:38.594Z
-Stopped at: Phase 46 context gathered
-Resume file: .planning/phases/46-prusa-g-code-fixture-surface/46-CONTEXT.md
+Last session: 2026-06-13T18:07:02.785Z
+Stopped at: Completed 46-01-PLAN.md
+Resume file: None

@@ -29,7 +29,7 @@ Requirements for the v1.12 milestone. Each maps to one roadmap phase.
 
 ### Prusa G-code Fixture Surface
 
-- [ ] **PGFIX-01**: Maintainer can inspect a dedicated Prusa G-code fixture
+- [x] **PGFIX-01**: Maintainer can inspect a dedicated Prusa G-code fixture
   namespace containing one small reviewed ASCII `.gcode` fixture, provenance,
   update rules, byte count, SHA-256, line-ending/encoding policy, and a
   summary-only `expected-gcode-summary.tsv` artifact that traces back to the
@@ -139,7 +139,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | --- | --- | --- |
 | PGSEL-01 | Phase 45 | Complete |
 | PGSEL-02 | Phase 45 | Complete |
-| PGFIX-01 | Phase 46 | Pending |
+| PGFIX-01 | Phase 46 | Complete |
 | PGFIX-02 | Phase 46 | Pending |
 | PGSUM-01 | Phase 47 | Pending |
 | PGSUM-02 | Phase 47 | Pending |
