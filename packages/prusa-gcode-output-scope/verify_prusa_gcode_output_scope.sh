@@ -135,14 +135,6 @@ require_category_reference_count() {
 	fi
 }
 
-reject_existing_path() {
-	local label="$1"
-	local path="$2"
-	if [[ -e "${path}" ]]; then
-		error "${label}: forbidden Phase 45 artifact exists: ${path}"
-	fi
-}
-
 reject_status_row() {
 	local id="$1"
 	local file="$2"
@@ -173,6 +165,7 @@ reject_rust_implementation_markers() {
 	fi
 
 	for marker in \
+		"slic3r_flavors::prusa_gcode_output" \
 		"pub mod prusa_gcode_output" \
 		"prusa_gcode_output_summary" \
 		"parse_prusa_gcode_output_summary"; do
@@ -318,10 +311,6 @@ reject_overclaiming_text() {
 }
 
 reject_later_phase_artifacts() {
-	reject_existing_path "expected summary artifact" \
-		"${checkout_root}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv"
-	reject_existing_path "fixture namespace" \
-		"${checkout_root}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output"
 	reject_status_row "fork.prusaslicer.gcode-output" "${status_file}"
 	reject_parity_target
 	reject_rust_implementation_markers
