@@ -64,7 +64,24 @@ parity, and fixture rules.
   `prusa_project_file_metadata`, `prusa_project_file_summary_lines`,
   `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`, and
   `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary`.
-- `packages/prusa-gcode-output-scope` is the Phase 45 scope gate for `prusaslicer.gcode-output`. It records the accepted source identity, Phase 46 fixture and expected-summary contract, Phase 47 Rust boundary, Phase 48 command/status handoff, and deferred scope without creating fixture bytes, expected summary artifacts, Rust summary implementation, a parity command, or a status row. `fork.prusaslicer.gcode-output` is not verified in `packages/parity/status.tsv` during Phase 45, and broad `generated-outputs` remains `in progress`.
+- `packages/prusa-gcode-output-scope` is the Phase 45 scope gate for `prusaslicer.gcode-output`. It records the accepted source identity, Phase 46 fixture and expected-summary contract, Phase 47 Rust boundary, Phase 48 command/status handoff, and deferred scope.
+- Phase 46 fixture artifacts now exist at
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` with
+  `gcodewriter-set-speed.gcode`, `fixture-provenance.tsv`, and
+  `expected-gcode-summary.tsv`, verified by
+  `bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`.
+  The fixture proves only source-pinned fixture-surface integrity; broad `generated-outputs` remains `in progress`, and
+  `fork.prusaslicer.gcode-output` remains absent from
+  `packages/parity/status.tsv`.
+- The Phase 46 G-code fixture artifacts do not prove byte-for-byte G-code
+  parity, full generated-output parity, toolpath geometry, extrusion, timing,
+  support generation, wall seam behavior, arc fitting, STEP import, full 3MF
+  import/export, printer-runtime behavior, firmware or printability behavior,
+  GUI export or viewer behavior, binary G-code, thumbnails, post-processing,
+  host upload, network/device integration, profile auto-update execution, fork
+  release builds, Bambu Studio, OrcaSlicer, upstream source imports, or sync
+  automation.
+- Deferred Phase 46 G-code terms: byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, sync automation.
 - The verified `prusaslicer.project-file` row does not prove full 3MF
   import/export or full PrusaSlicer runtime support. GUI project behavior,
   generated-output parity, STEP import, support generation, arc fitting, wall

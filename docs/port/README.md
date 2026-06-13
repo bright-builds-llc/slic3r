@@ -318,10 +318,19 @@ automation remain deferred.
 
 - `packages/prusa-gcode-output-scope` owns the Phase 45 checked-in scope gate for `prusaslicer.gcode-output`; run `bazel run //packages/prusa-gcode-output-scope:verify` to check the reviewed contract.
 - The accepted source identity is `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, with source path `src/libslic3r/GCode.cpp` and companion API evidence `src/libslic3r/GCode.hpp`.
-- The Phase 46 fixture path contract is `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`; no fixture bytes or expected summary artifacts exist in Phase 45.
+- Phase 46 now owns the fixture bytes and `expected-gcode-summary.tsv`; Phase 45 remains the reviewed scope gate that selected the path.
 - The Phase 47 Rust boundary is planned as `slic3r_flavors::prusa_gcode_output`, but Phase 45 creates no Rust summary implementation.
 - The Phase 48 command is planned as `bazel run //packages/parity:prusaslicer_gcode_output_parity`, and the Phase 48 status token is planned as `fork.prusaslicer.gcode-output`; neither the command nor the status row exists in Phase 45.
 - Byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, and sync automation remain outside the Phase 45 scope gate.
+
+## Current Prusa G-code Output Fixture Surface State
+
+Phase 46 adds the fixture namespace `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` for `prusaslicer.gcode-output`.
+The namespace contains `gcodewriter-set-speed.gcode`, `fixture-provenance.tsv`, and `expected-gcode-summary.tsv`.
+Run `bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture` to verify the fixture surface.
+The fixture source is derived from source-controlled `GCodeWriter::set_speed` expected-output literals at `tests/fff_print/test_gcodewriter.cpp#L20-L35` under `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.
+Rust summary parsing remains Phase 47-owned; `bazel run //packages/parity:prusaslicer_gcode_output_parity` and `fork.prusaslicer.gcode-output` remain Phase 48-owned and absent in Phase 46.
+The fixture surface does not prove byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, or sync automation.
 
 ## v1.9 Fork Parity Deferrals
 
