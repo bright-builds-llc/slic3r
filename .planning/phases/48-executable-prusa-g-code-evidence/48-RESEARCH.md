@@ -519,17 +519,19 @@ This is the G-code analogue of the project-file fixture verifier's post-publicat
 
 All claims in this research were verified from repo files, local command output, or cited official project/standards pages; no user-confirmation assumptions are required before planning. [VERIFIED: Sources section]
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Exact failure-test mutation**
    - What we know: The locked decision permits any mutation that proves divergence and recommends G-code marker rows such as `line_1` through `line_4` or `source_literal`. [VERIFIED: 48-CONTEXT.md]
    - What's unclear: The exact row is left to the agent's discretion. [VERIFIED: 48-CONTEXT.md]
    - Recommendation: Use `line_4` because it is the final accepted marker row and produces a clear `line_4` mismatch label without changing source identity semantics. [VERIFIED: expected-gcode-summary.tsv]
+   - RESOLVED: Plan 48-01 selects `line_4` as the mutation row for `compare_prusaslicer_gcode_output_test.sh`. [VERIFIED: 48-01-PLAN.md]
 
 2. **Whether to update extra docs beyond the required four**
    - What we know: The locked decision requires `packages/parity/README.md`, `docs/port/parity-matrix.md`, `docs/port/README.md`, and any directly affected package-map or migration-guidance text discovered during planning. [VERIFIED: 48-CONTEXT.md]
    - What's unclear: `docs/port/package-map.md`, `docs/port/migration-guidance.md`, and `packages/slic3r-rust/README.md` currently contain Phase 46 or Phase 44-era G-code/project-file wording that may become stale when Phase 48 lands. [VERIFIED: docs/port/package-map.md, docs/port/migration-guidance.md, packages/slic3r-rust/README.md]
    - Recommendation: Include package-map and migration-guidance in planning; include `packages/slic3r-rust/README.md` only if a new summary binary is added. [VERIFIED: docs/port/package-map.md, packages/slic3r-rust/README.md]
+   - RESOLVED: Plan 48-03 includes `docs/port/package-map.md`, `docs/port/migration-guidance.md`, and `packages/slic3r-rust/README.md` because Plan 48-01 adds `prusa_gcode_output_summary`. [VERIFIED: 48-01-PLAN.md, 48-03-PLAN.md]
 
 ## Environment Availability
 
