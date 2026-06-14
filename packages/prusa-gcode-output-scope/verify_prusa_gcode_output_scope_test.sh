@@ -381,7 +381,9 @@ test_duplicate_status_row_fails() {
 	local dir="${tmp_dir}/duplicate-status-row"
 	local status_file="${dir}/packages/parity/status.tsv"
 	write_valid_fixture "${dir}"
-	awk -F '\t' '$1 == "fork.prusaslicer.gcode-output" { print; exit }' "${status_file}" >>"${status_file}"
+	local status_row
+	status_row="$(awk -F '\t' '$1 == "fork.prusaslicer.gcode-output" { print; exit }' "${status_file}")"
+	printf '%s\n' "${status_row}" >>"${status_file}"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/duplicate-status.out" "${tmp_dir}/duplicate-status.err"; then
