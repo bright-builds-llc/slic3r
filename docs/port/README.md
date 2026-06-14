@@ -131,6 +131,8 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   parity command for the verified scoped Linux packaged launcher tree
 - `bazel run //packages/parity:windows_packaged_launcher_parity` is the shared
   parity command for the verified scoped Windows packaged launcher tree
+- `bazel run //packages/parity:prusaslicer_gcode_output_parity` is the shared
+  parity command for the narrow summary-only Prusa G-code evidence slice
 - `linux.packaged-launcher` and `windows.packaged-launcher` are checked-in
   status rows in `packages/parity/status.tsv`
 - `packages/parity/status.tsv` is the checked-in status data source
@@ -314,23 +316,37 @@ seam behavior, network/device integration, profile auto-update execution, fork
 release builds, Bambu Studio, OrcaSlicer, upstream source imports, and sync
 automation remain deferred.
 
-## Current Prusa G-code Output Scope Gate State
+## Current Prusa G-code Output Evidence State
 
-- `packages/prusa-gcode-output-scope` owns the Phase 45 checked-in scope gate for `prusaslicer.gcode-output`; run `bazel run //packages/prusa-gcode-output-scope:verify` to check the reviewed contract.
-- The accepted source identity is `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, with source path `src/libslic3r/GCode.cpp` and companion API evidence `src/libslic3r/GCode.hpp`.
-- Phase 46 now owns the fixture bytes and `expected-gcode-summary.tsv`; Phase 45 remains the reviewed scope gate that selected the path.
-- The Phase 47 Rust boundary is planned as `slic3r_flavors::prusa_gcode_output`, but Phase 45 creates no Rust summary implementation.
-- The Phase 48 command is planned as `bazel run //packages/parity:prusaslicer_gcode_output_parity`, and the Phase 48 status token is planned as `fork.prusaslicer.gcode-output`; neither the command nor the status row exists in Phase 45.
-- Byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, and sync automation remain outside the Phase 45 scope gate.
-
-## Current Prusa G-code Output Fixture Surface State
-
-Phase 46 adds the fixture namespace `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` for `prusaslicer.gcode-output`.
-The namespace contains `gcodewriter-set-speed.gcode`, `fixture-provenance.tsv`, and `expected-gcode-summary.tsv`.
-Run `bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture` to verify the fixture surface.
-The fixture source is derived from source-controlled `GCodeWriter::set_speed` expected-output literals at `tests/fff_print/test_gcodewriter.cpp#L20-L35` under `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.
-Rust summary parsing remains Phase 47-owned; `bazel run //packages/parity:prusaslicer_gcode_output_parity` and `fork.prusaslicer.gcode-output` remain Phase 48-owned and absent in Phase 46.
-The fixture surface does not prove byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, or sync automation.
+- `packages/prusa-gcode-output-scope` owns the Phase 45 checked-in scope gate
+  for `prusaslicer.gcode-output`; run
+  `bazel run //packages/prusa-gcode-output-scope:verify` to check the reviewed
+  contract.
+- The accepted source identity is
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, with
+  source path `src/libslic3r/GCode.cpp` and companion API evidence
+  `src/libslic3r/GCode.hpp`.
+- Phase 46 proves fixture surface integrity. Phase 47 proves typed summary
+  parsing. Phase 48 proves executable summary-only evidence/status wiring.
+- Phase 46 owns the fixture namespace
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`, the
+  source-pinned `gcodewriter-set-speed.gcode` fixture,
+  `fixture-provenance.tsv`, and `expected-gcode-summary.tsv`.
+- Phase 47 owns `slic3r_flavors::prusa_gcode_output`,
+  `packages/slic3r-rust/crates/slic3r_flavors/src/prusa_gcode_output.rs`, and
+  the typed `prusa_gcode_output_summary_lines` boundary.
+- Phase 48 publishes
+  `bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
+  `fork.prusaslicer.gcode-output` row in `packages/parity/status.tsv` for the
+  narrow summary-only Prusa G-code evidence slice.
+- Byte-for-byte G-code parity, full generated-output parity, toolpath
+  geometry, extrusion, timing, support generation, wall seam behavior, arc
+  fitting, STEP import, full 3MF import/export, printer-runtime behavior,
+  firmware or printability behavior, GUI export or viewer behavior, binary
+  G-code, thumbnails, post-processing, host upload, network/device integration,
+  profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer,
+  upstream source imports, release behavior, and sync automation remain outside
+  the Phase 48 evidence slice.
 
 ## v1.9 Fork Parity Deferrals
 

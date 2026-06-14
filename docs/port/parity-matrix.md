@@ -12,7 +12,7 @@ parity, and fixture rules.
 | Windows runtime path | Preferred Windows runtime target plus the existing Rust-backed CLI slice | `verified` | [`contract-inventory.md#launcher-path`](./contract-inventory.md#launcher-path) | The preferred Windows runtime target is verified for representative help/version/config/export/transform flows through `//packages/parity:windows_runtime_parity`, and the scoped Windows packaged launcher tree is separately verified as `windows.packaged-launcher` through `//packages/parity:windows_packaged_launcher_parity` |
 | Config semantics | `packages/legacy-slic3r/lib/Slic3r/Config.pm` and related legacy config code | `in progress` | [`contract-inventory.md#config-semantics`](./contract-inventory.md#config-semantics) | The scoped save/load/datadir slice is verified through shared fixtures; broader config semantics remain legacy-only |
 | Supported file formats | Mixed: retained legacy runtime plus the scoped Rust-backed export slice | `in progress` | [`contract-inventory.md#supported-file-formats`](./contract-inventory.md#supported-file-formats) | The preferred launcher now verifies the scoped export families for G-code, STL, OBJ, AMF, 3MF, and SVG outputs; broader format parity remains legacy-only |
-| Generated outputs | Mixed: retained legacy output pipeline plus the scoped Rust-backed export and transform slice | `in progress` | [`contract-inventory.md#generated-outputs`](./contract-inventory.md#generated-outputs) | The preferred launcher now verifies scoped output naming and artifact creation for supported exports plus repair/split utilities, but geometry/content parity is still deferred |
+| Generated outputs | Mixed: retained legacy output pipeline plus the scoped Rust-backed export and transform slice | `in progress` | [`contract-inventory.md#generated-outputs`](./contract-inventory.md#generated-outputs) | The preferred launcher now verifies scoped output naming and artifact creation for supported exports plus repair/split utilities, and `fork.prusaslicer.gcode-output` is verified only for the narrow summary-only Prusa G-code evidence slice. Phase 46 proves fixture surface integrity. Phase 47 proves typed summary parsing. Phase 48 proves executable summary-only evidence/status wiring. Broad `generated-outputs` remains `in progress` because geometry/content parity is still deferred |
 | Launcher path | Mixed: retained legacy launcher plus the preferred Rust-backed launcher package | `in progress` | [`contract-inventory.md#launcher-path`](./contract-inventory.md#launcher-path) | `packages/launcher` now serves the supported Rust-backed CLI slice, the verified Linux runtime shim, the verified Windows runtime target, the scoped macOS packaged launcher surface, and the scoped Linux and Windows packaged launcher trees |
 | Packaging-visible behavior | Mixed: retained legacy packaging scripts plus scoped macOS, Linux, and Windows packaged launcher slices | `in progress` | [`contract-inventory.md#packaging-visible-behavior`](./contract-inventory.md#packaging-visible-behavior) | The scoped macOS packaged launcher bundle is parity-verified for the supported slice; each Linux and Windows scoped packaged launcher tree has its own status row: `linux.packaged-launcher` is verified through `//packages/parity:linux_packaged_launcher_parity`, and `windows.packaged-launcher` is verified through `//packages/parity:windows_packaged_launcher_parity`; AppImage, MSI, DMG, installers, signing, GUI packaging, release archives, native/cross-compiled release binaries, broad dependency bundling, and release channels remain deferred |
 
@@ -64,24 +64,38 @@ parity, and fixture rules.
   `prusa_project_file_metadata`, `prusa_project_file_summary_lines`,
   `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test`, and
   `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary`.
-- `packages/prusa-gcode-output-scope` is the Phase 45 scope gate for `prusaslicer.gcode-output`. It records the accepted source identity, Phase 46 fixture and expected-summary contract, Phase 47 Rust boundary, Phase 48 command/status handoff, and deferred scope.
-- Phase 46 fixture artifacts now exist at
+- `packages/prusa-gcode-output-scope` is the Phase 45 scope gate for
+  `prusaslicer.gcode-output`. It records the accepted source identity, Phase 46
+  fixture and expected-summary contract, Phase 47 Rust boundary, Phase 48
+  command/status publication, and deferred scope.
+- Phase 46 proves fixture surface integrity. Phase 47 proves typed summary
+  parsing. Phase 48 proves executable summary-only evidence/status wiring.
+- Phase 46 fixture artifacts exist at
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` with
   `gcodewriter-set-speed.gcode`, `fixture-provenance.tsv`, and
   `expected-gcode-summary.tsv`, verified by
   `bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`.
-  The fixture proves only source-pinned fixture-surface integrity; broad `generated-outputs` remains `in progress`, and
-  `fork.prusaslicer.gcode-output` remains absent from
-  `packages/parity/status.tsv`.
-- The Phase 46 G-code fixture artifacts do not prove byte-for-byte G-code
+- `fork.prusaslicer.gcode-output` is verified in `packages/parity/status.tsv`
+  only for the narrow summary-only Prusa G-code evidence slice through
+  `bazel run //packages/parity:prusaslicer_gcode_output_parity`, backed by the
+  Phase 46 fixture and Phase 47 Rust summary boundary. Broad
+  `generated-outputs` remains `in progress`.
+- The verified G-code evidence slice does not prove byte-for-byte G-code
   parity, full generated-output parity, toolpath geometry, extrusion, timing,
   support generation, wall seam behavior, arc fitting, STEP import, full 3MF
   import/export, printer-runtime behavior, firmware or printability behavior,
   GUI export or viewer behavior, binary G-code, thumbnails, post-processing,
   host upload, network/device integration, profile auto-update execution, fork
-  release builds, Bambu Studio, OrcaSlicer, upstream source imports, or sync
-  automation.
-- Deferred Phase 46 G-code terms: byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, sync automation.
+  release builds, Bambu Studio, OrcaSlicer, upstream source imports, release
+  behavior, or sync automation.
+- Deferred Phase 48 G-code terms: byte-for-byte G-code parity, full
+  generated-output parity, toolpath geometry, extrusion, timing, support
+  generation, wall seam behavior, arc fitting, STEP import, full 3MF
+  import/export, printer-runtime behavior, firmware or printability behavior,
+  GUI export or viewer behavior, binary G-code, thumbnails, post-processing,
+  host upload, network/device integration, profile auto-update execution, fork
+  release builds, Bambu Studio, OrcaSlicer, upstream source imports, release
+  behavior, sync automation.
 - The verified `prusaslicer.project-file` row does not prove full 3MF
   import/export or full PrusaSlicer runtime support. GUI project behavior,
   generated-output parity, STEP import, support generation, arc fitting, wall
