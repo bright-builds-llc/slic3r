@@ -32,6 +32,9 @@
 - `bazel run //packages/parity:prusaslicer_project_file_parity` runs the
   shared fixture comparison for the narrow Prusa project-file expected-summary
   evidence slice backed by `expected-project-summary.tsv`.
+- `bazel run //packages/parity:prusaslicer_gcode_output_parity` runs the
+  shared fixture comparison for the narrow summary-only Prusa G-code evidence
+  slice backed by `expected-gcode-summary.tsv`.
 - `status.tsv` is the checked-in data source for those commands and status
   rows.
 
@@ -78,6 +81,22 @@ path `src/libslic3r/Format/3mf.cpp`, fixture path
 `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf`,
 and status row `fork.prusaslicer.project-file`.
 
+`fork.prusaslicer.gcode-output` is verified only for the narrow summary-only
+`prusaslicer.gcode-output` evidence slice. The evidence command is
+`bazel run //packages/parity:prusaslicer_gcode_output_parity`, backed by
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv`.
+That evidence is backed by the Phase 46 fixture and the Phase 47 Rust summary
+boundary:
+`//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary`.
+Phase 48 proves executable summary-only evidence/status wiring through status
+row `fork.prusaslicer.gcode-output`. It traces `prusaslicer.gcode-output` to
+`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, fixture
+path `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`,
+expected summary path
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv`,
+and Rust boundary
+`packages/slic3r-rust/crates/slic3r_flavors/src/prusa_gcode_output.rs`.
+
 Future fork status tokens should use `fork.<inventory_id>` or an
 inventory-derived stable slug that traces back to `packages/fork-inventories`.
 A fork row may become `verified` only when maintainers can rerun a real
@@ -89,8 +108,11 @@ fork runtime support, GUI support, network/device/cloud/credential behavior,
 profile auto-update execution, non-free plugin ingestion, vendor sync
 automation, fork release packaging, or status evidence by themselves.
 
-Full 3MF import/export, full PrusaSlicer runtime support, GUI project behavior,
-generated-output parity, STEP import, support generation, arc fitting, wall
-seam behavior, network/device integration, profile auto-update execution, fork
-release builds, Bambu Studio, OrcaSlicer, upstream source imports, and sync
-automation remain deferred.
+Byte-for-byte G-code parity, full generated-output parity, toolpath geometry,
+extrusion, timing, support generation, wall seam behavior, arc fitting, STEP
+import, full 3MF import/export, full PrusaSlicer runtime support,
+printer-runtime behavior, firmware or printability, GUI project behavior, GUI
+export or viewer behavior, binary G-code, thumbnails, post-processing, host
+upload, network/device integration, profile auto-update execution, fork release
+builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior,
+and sync automation remain deferred.

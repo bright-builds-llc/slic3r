@@ -71,6 +71,10 @@ executable Prusa project-file expected-summary evidence.
   - `//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_summary`
 - Run the narrow Prusa project-file parity command:
   - `bazel run //packages/parity:prusaslicer_project_file_parity`
+- Run the Prusa G-code output summary helper:
+  - `//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary`
+- Run the narrow Prusa G-code output parity command:
+  - `bazel run //packages/parity:prusaslicer_gcode_output_parity`
 - Run write-mode formatting with the pinned Rust toolchain:
   - `bazel run @rules_rust//:rustfmt`
 
@@ -136,10 +140,21 @@ executable Prusa project-file expected-summary evidence.
   reads only the caller-supplied `expected-project-summary.tsv`; it does not
   inspect Git, network, process, profile auto-update, upstream source import,
   release, or sync surfaces.
-- Full 3MF import/export, full PrusaSlicer runtime support, GUI project
-  behavior, generated-output parity, STEP import, support generation, arc
-  fitting, wall seam behavior, network/device integration, profile auto-update
-  execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source
-  imports, and sync automation remain deferred.
+- Phase 47 exposes `slic3r_flavors::prusa_gcode_output` and the typed
+  `prusa_gcode_output_summary_lines` boundary for the
+  `prusaslicer.gcode-output` parser/metadata slice. Phase 48 adds
+  `//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary`
+  and verifies `fork.prusaslicer.gcode-output` through
+  `bazel run //packages/parity:prusaslicer_gcode_output_parity` for the narrow
+  summary-only Prusa G-code evidence slice only. The Rust adapter reads only
+  the caller-supplied `expected-gcode-summary.tsv`; it does not inspect Git,
+  network, process, raw G-code generation, printer-runtime, profile-update,
+  release, upstream import, or sync surfaces.
+- Byte-for-byte G-code parity, full generated-output parity, full 3MF
+  import/export, full PrusaSlicer runtime support, GUI project behavior,
+  generated-output parity, STEP import, support generation, arc fitting, wall
+  seam behavior, network/device integration, profile auto-update execution,
+  fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, and
+  sync automation remain deferred.
 - The package follows the Bright Builds coding and architecture requirements for Rust work.
 - Bazelisk is the expected local Bazel launcher on macOS because the repo pins Bazel in [`.bazelversion`](/Users/peterryszkiewicz/Repos/Slic3r/.bazelversion).

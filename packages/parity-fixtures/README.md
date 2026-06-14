@@ -43,21 +43,32 @@ this package. Phase 44 publishes executable project-file parity through
 `fork.prusaslicer.project-file` status row for the narrow expected-summary
 evidence slice only.
 
-Phase 46 adds the Prusa G-code output fixture namespace at `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`.
-It contains the checked-in `gcodewriter-set-speed.gcode` fixture,
+Phase 46 adds the Prusa G-code output fixture namespace at
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`. It
+contains the checked-in `gcodewriter-set-speed.gcode` fixture,
 `fixture-provenance.tsv`, and `expected-gcode-summary.tsv` for the fixture
 surface only. The fixture bundle target is
 `//packages/parity-fixtures:prusa_gcode_output_bundle`, and maintainers can
-verify the fixture surface with
+verify the Phase 46 fixture surface with
 `bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`.
 The selected fixture is derived from source-controlled
 `GCodeWriter::set_speed` expected-output literals at
 `tests/fff_print/test_gcodewriter.cpp#L20-L35` under
 `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` because
-the accepted upstream tree has no checked-in `.gcode` blob.
-Rust summary parsing remains Phase 47-owned, and executable parity plus the `fork.prusaslicer.gcode-output` status row remain Phase 48-owned.
+the accepted upstream tree has no checked-in `.gcode` blob. Phase 47 owns the
+Rust parser/metadata boundary, and the Phase 47 Rust summary output feeds
+Phase 48. Phase 48 now publishes
+`bazel run //packages/parity:prusaslicer_gcode_output_parity` plus the exact
+`fork.prusaslicer.gcode-output` row for the narrow summary-only evidence slice.
 
-The G-code fixture namespace does not prove byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, or sync automation.
+The G-code fixture namespace itself does not prove byte-for-byte G-code
+parity, full generated-output parity, toolpath geometry, extrusion, timing,
+support generation, wall seam behavior, arc fitting, STEP import, full 3MF
+import/export, printer-runtime behavior, firmware or printability behavior, GUI
+export or viewer behavior, binary G-code, thumbnails, post-processing, host
+upload, network/device integration, profile auto-update execution, fork release
+builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, or
+sync automation remain deferred.
 
 Update route: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
 Branch-head observations remain drift-only.
@@ -117,3 +128,8 @@ additional fixture files by themselves.
   exported as `//packages/parity-fixtures:prusa_gcode_output_bundle` and
   checked by
   `bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`.
+  Phase 47 consumes the checked-in `expected-gcode-summary.tsv` through the
+  Rust parser/metadata boundary, and Phase 48 verifies the narrow summary-only
+  evidence slice through
+  `bazel run //packages/parity:prusaslicer_gcode_output_parity` plus the exact
+  `fork.prusaslicer.gcode-output` status row.
