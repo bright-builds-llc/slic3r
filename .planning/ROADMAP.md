@@ -220,7 +220,7 @@ command while docs and status clearly limit what was verified.
 
 Plans:
 
-- [ ] 48-01-PLAN.md — Add the Rust-backed public G-code parity command and
+- [x] 48-01-PLAN.md — Add the Rust-backed public G-code parity command and
   `line_4` mutation failure guard.
 - [ ] 48-02-PLAN.md — Publish the exact `fork.prusaslicer.gcode-output`
   status row and reconcile prior guards with Phase 48 publication.
@@ -254,7 +254,7 @@ Phases execute in numeric order: 45 -> 46 -> 47 -> 48
 | 45. Prusa G-code Output Scope Gate | 3/3 | Complete   | 2026-06-06 |
 | 46. Prusa G-code Fixture Surface | 3/3 | Complete    | 2026-06-13 |
 | 47. Rust Prusa G-code Summary Boundary | 3/3 | Complete    | 2026-06-14 |
-| 48. Executable Prusa G-code Evidence | 0/TBD | Not started | - |
+| 48. Executable Prusa G-code Evidence | 1/3 | In Progress|  |
 
 ## Future Revisit Candidates
 
