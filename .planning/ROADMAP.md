@@ -216,7 +216,16 @@ command while docs and status clearly limit what was verified.
    behavior, geometry, support, seam, arc, STEP, desktop app behavior,
    release, network, and sync surfaces deferred.
 
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 48-01-PLAN.md — Add the Rust-backed public G-code parity command and
+  `line_4` mutation failure guard.
+- [ ] 48-02-PLAN.md — Publish the exact `fork.prusaslicer.gcode-output`
+  status row and reconcile prior guards with Phase 48 publication.
+- [ ] 48-03-PLAN.md — Update package/port docs and run final Phase 48
+  verification.
 
 ## Coverage
 
