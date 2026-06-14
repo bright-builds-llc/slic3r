@@ -177,6 +177,17 @@ sh_test(
     ],
 )
 
+sh_test(
+    name = "prusaslicer_gcode_output_parity_failure_test",
+    srcs = ["compare_prusaslicer_gcode_output_test.sh"],
+    data = [
+        "compare_prusaslicer_gcode_output.sh",
+        "//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary",
+        "//packages/parity-fixtures:prusa_gcode_output_expected_gcode_summary",
+        "//packages/parity-fixtures:prusa_gcode_output_provenance",
+    ],
+)
+
 sh_binary(
     name = "linux_runtime_parity",
     srcs = ["compare_linux_runtime.sh"],
