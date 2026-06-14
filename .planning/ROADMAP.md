@@ -91,7 +91,7 @@ builds, and sync automation.
   and test the typed Rust boundary that summarizes stable G-code metadata and
   markers without side effects or broad claims.
 
-- [ ] **Phase 48: Executable Prusa G-code Evidence** - Maintainers can run
+- [x] **Phase 48: Executable Prusa G-code Evidence** - Maintainers can run (completed 2026-06-14)
   fail-closed Bazel evidence and inspect exact status/docs for the narrow
   Prusa G-code slice.
 
@@ -224,7 +224,7 @@ Plans:
   `line_4` mutation failure guard.
 - [x] 48-02-PLAN.md — Publish the exact `fork.prusaslicer.gcode-output`
   status row and reconcile prior guards with Phase 48 publication.
-- [ ] 48-03-PLAN.md — Update package/port docs and run final Phase 48
+- [x] 48-03-PLAN.md — Update package/port docs and run final Phase 48
   verification.
 
 ## Coverage
@@ -254,7 +254,7 @@ Phases execute in numeric order: 45 -> 46 -> 47 -> 48
 | 45. Prusa G-code Output Scope Gate | 3/3 | Complete   | 2026-06-06 |
 | 46. Prusa G-code Fixture Surface | 3/3 | Complete    | 2026-06-13 |
 | 47. Rust Prusa G-code Summary Boundary | 3/3 | Complete    | 2026-06-14 |
-| 48. Executable Prusa G-code Evidence | 2/3 | In Progress|  |
+| 48. Executable Prusa G-code Evidence | 3/3 | Complete   | 2026-06-14 |
 
 ## Future Revisit Candidates
 
