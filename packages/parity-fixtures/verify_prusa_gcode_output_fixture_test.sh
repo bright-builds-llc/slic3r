@@ -304,46 +304,71 @@ test_readme_overclaim_fails() {
 	assert_contains "${tmp_dir}/readme-overclaim.err" "forbidden"
 }
 
-test_premature_status_row_fails() {
+test_missing_status_row_fails() {
 	# Arrange
-	local dir="${tmp_dir}/premature-status-row"
+	local dir="${tmp_dir}/missing-status-row"
+	local status_file="${dir}/packages/parity/status.tsv"
 	write_valid_fixture_copy "${dir}"
-	printf 'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tpremature\n' \
-		>>"${dir}/packages/parity/status.tsv"
+	remove_line_containing "${status_file}" "fork.prusaslicer.gcode-output"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-status.out" "${tmp_dir}/premature-status.err"; then
-		fail "premature status row fixture passed"
+	if run_verifier "${dir}" "${tmp_dir}/missing-status.out" "${tmp_dir}/missing-status.err"; then
+		fail "missing status row fixture passed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-status.err" "fork\\.prusaslicer\\.gcode-output"
+	assert_contains "${tmp_dir}/missing-status.err" "fork\\.prusaslicer\\.gcode-output"
 }
 
-assert_premature_parity_target_form_fails() {
-	local case_name="$1"
-	local build_snippet="$2"
-	local dir="${tmp_dir}/premature-parity-target-${case_name}"
-	local stdout_file="${tmp_dir}/premature-parity-${case_name}.out"
-	local stderr_file="${tmp_dir}/premature-parity-${case_name}.err"
-
+test_wrong_status_evidence_fails() {
 	# Arrange
+	local dir="${tmp_dir}/wrong-status-evidence"
+	local status_file="${dir}/packages/parity/status.tsv"
 	write_valid_fixture_copy "${dir}"
-	printf '\n%s\n' "${build_snippet}" >>"${dir}/packages/parity/BUILD.bazel"
+	replace_first_line_containing \
+		"${status_file}" \
+		"fork.prusaslicer.gcode-output" \
+		$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:wrong_gcode_output_parity\tShared fixture comparison proves the narrow summary-only Prusa G-code evidence slice backed by the Phase 46 fixture and Phase 47 Rust summary boundary only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
 
 	# Act
-	if run_verifier "${dir}" "${stdout_file}" "${stderr_file}"; then
-		fail "premature parity target fixture passed for ${case_name}"
+	if run_verifier "${dir}" "${tmp_dir}/wrong-evidence.out" "${tmp_dir}/wrong-evidence.err"; then
+		fail "wrong status evidence fixture passed"
 	fi
 
 	# Assert
-	assert_contains "${stderr_file}" "prusaslicer_gcode_output_parity"
+	assert_contains "${tmp_dir}/wrong-evidence.err" "fork\\.prusaslicer\\.gcode-output"
 }
 
-test_premature_parity_target_fails() {
-	assert_premature_parity_target_form_fails "spaced" $'sh_binary(\n    name = "prusaslicer_gcode_output_parity",\n    srcs = ["placeholder.sh"],\n)'
-	assert_premature_parity_target_form_fails "compact" 'sh_binary(name="prusaslicer_gcode_output_parity", srcs=["placeholder.sh"])'
-	assert_premature_parity_target_form_fails "single-quoted" "sh_binary(name='prusaslicer_gcode_output_parity', srcs=['placeholder.sh'])"
+test_duplicate_status_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-status-row"
+	local status_file="${dir}/packages/parity/status.tsv"
+	write_valid_fixture_copy "${dir}"
+	awk -F '\t' '$1 == "fork.prusaslicer.gcode-output" { print; exit }' "${status_file}" >>"${status_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/duplicate-status.out" "${tmp_dir}/duplicate-status.err"; then
+		fail "duplicate status row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/duplicate-status.err" "duplicate rows: 2"
+}
+
+test_missing_parity_target_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-parity-target"
+	local build_file="${dir}/packages/parity/BUILD.bazel"
+	write_valid_fixture_copy "${dir}"
+	remove_line_containing "${build_file}" "prusaslicer_gcode_output_parity"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-parity.out" "${tmp_dir}/missing-parity.err"; then
+		fail "missing parity target fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-parity.err" "prusaslicer_gcode_output_parity"
 }
 
 test_phase47_rust_summary_boundary_is_allowed() {
@@ -397,8 +422,10 @@ test_extra_expected_summary_row_fails
 test_missing_update_route_fails
 test_missing_privacy_exclusions_fails
 test_readme_overclaim_fails
-test_premature_status_row_fails
-test_premature_parity_target_fails
+test_missing_status_row_fails
+test_wrong_status_evidence_fails
+test_duplicate_status_row_fails
+test_missing_parity_target_fails
 test_phase47_rust_summary_boundary_is_allowed
 test_forbidden_verifier_behavior_fails
 

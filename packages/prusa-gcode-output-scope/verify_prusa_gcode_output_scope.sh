@@ -46,6 +46,7 @@ readonly ACCEPTED_SOURCE_IDENTITY="prusaslicer:version_2.9.5@9a583bd438b195856f3
 readonly PLANNED_PARITY_COMMAND="bazel run //packages/parity:prusaslicer""_gcode_output_parity"
 readonly INVENTORY_ROW=$'prusaslicer.gcode-output\tprusaslicer\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tsrc/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp\tgcode-output\tgcode-output\tshared-downstream\thigh\tgenerated-outputs\tfuture-candidate\tnone\tSource-observed G-code output planning row; parity requires reviewed source-pinned summary evidence before output behavior is claimed.'
 readonly CATEGORY_MAP_ROW=$'gcode.shared\tgcode-output\tshared-downstream\tfuture-candidate\tprusaslicer.gcode-output\tPrusa G-code output row needs reviewed source-pinned summary evidence before generated-output behavior is claimed.'
+readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow summary-only Prusa G-code evidence slice backed by the Phase 46 fixture and Phase 47 Rust summary boundary only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
 
 require_file() {
 	local file="$1"
@@ -135,25 +136,57 @@ require_category_reference_count() {
 	fi
 }
 
-reject_status_row() {
-	local id="$1"
-	local file="$2"
-	if awk -F '\t' -v id="${id}" '$1 == id { found = 1 } END { exit found ? 0 : 1 }' "${file}"; then
-		error "packages/parity/status.tsv: forbidden Phase 45 status row exists: ${id}"
+verify_status_published() {
+	if ! grep -Fxq -- "${GCODE_OUTPUT_STATUS_ROW}" "${status_file}"; then
+		error "packages/parity/status.tsv: missing required row for fork.prusaslicer.gcode-output status/evidence/notes"
+	fi
+
+	local status_count
+	status_count="$(awk -F '\t' '$1 == "fork.prusaslicer.gcode-output" { count++ } END { print count + 0 }' "${status_file}")"
+	if [[ "${status_count}" != "1" ]]; then
+		error "packages/parity/status.tsv: fork.prusaslicer.gcode-output status: duplicate rows: ${status_count}"
 	fi
 }
 
-reject_parity_target() {
+verify_parity_target_published() {
 	local parity_build="${checkout_root}/packages/parity/BUILD.bazel"
 	local parity_target_pattern
 	if [[ ! -r "${parity_build}" ]]; then
-		return
+		error "packages/parity/BUILD.bazel: missing parity build file"
 	fi
 
 	parity_target_pattern="name[[:space:]]*=[[:space:]]*['\"]prusaslicer_gcode_output_parity['\"]"
-	if grep -Eq -- "${parity_target_pattern}" "${parity_build}"; then
-		error "packages/parity/BUILD.bazel: forbidden Phase 45 parity target exists"
+	if ! grep -Eq -- "${parity_target_pattern}" "${parity_build}"; then
+		error "packages/parity/BUILD.bazel: missing parity target: prusaslicer_gcode_output_parity"
 	fi
+}
+
+verify_phase48_publication() {
+	verify_status_published
+	verify_parity_target_published
+}
+
+reject_overclaiming_text() {
+	local checked_file
+	local checked_label
+	local forbidden_claim
+
+	for checked_file in "${readme_file}" "${scope_file}"; do
+		checked_label="$(basename "${checked_file}")"
+		for forbidden_claim in \
+			"Phase 45 verifies Prusa G-code output parity" \
+			"verified Prusa G-code output parity" \
+			"byte-for-byte G-code parity verified" \
+			"full generated-output parity verified" \
+			"Phase 45 verifies Bambu Studio support" \
+			"verified Bambu Studio support" \
+			"Bambu Studio support verified" \
+			"Phase 45 verifies OrcaSlicer support" \
+			"verified OrcaSlicer support" \
+			"OrcaSlicer support verified"; do
+			reject_text "${checked_file}" "${checked_label}" "${forbidden_claim}"
+		done
+	done
 }
 
 verify_readme() {
@@ -261,34 +294,6 @@ verify_inventory_inputs() {
 	require_exact_tsv_row_once "${category_map_file}" "packages/fork-inventories/category-map.tsv" "${CATEGORY_MAP_ROW}"
 }
 
-reject_overclaiming_text() {
-	local checked_file
-	local checked_label
-	local forbidden_claim
-
-	for checked_file in "${readme_file}" "${scope_file}"; do
-		checked_label="$(basename "${checked_file}")"
-		for forbidden_claim in \
-			"Phase 45 verifies Prusa G-code output parity" \
-			"verified Prusa G-code output parity" \
-			"byte-for-byte G-code parity verified" \
-			"full generated-output parity verified" \
-			"Phase 45 verifies Bambu Studio support" \
-			"verified Bambu Studio support" \
-			"Bambu Studio support verified" \
-			"Phase 45 verifies OrcaSlicer support" \
-			"verified OrcaSlicer support" \
-			"OrcaSlicer support verified"; do
-			reject_text "${checked_file}" "${checked_label}" "${forbidden_claim}"
-		done
-	done
-}
-
-reject_later_phase_artifacts() {
-	reject_status_row "fork.prusaslicer.gcode-output" "${status_file}"
-	reject_parity_target
-}
-
 for required_file in \
 	"${readme_file}" \
 	"${scope_file}" \
@@ -304,6 +309,6 @@ verify_source_row_details
 verify_deferred_scope_terms
 verify_inventory_inputs
 reject_overclaiming_text
-reject_later_phase_artifacts
+verify_phase48_publication
 
 printf 'ok: Prusa G-code output scope verification passed\n'

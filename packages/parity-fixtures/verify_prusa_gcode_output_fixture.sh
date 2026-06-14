@@ -59,6 +59,7 @@ readonly EXPECTED_LINE_1_ROW=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7
 readonly EXPECTED_LINE_2_ROW=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_role\tsource-controlled-gcodewriter-set-speed-expected-output\tline_2\tG1 F1\tRepresentative integer feedrate command marker; no motion, extrusion, timing, or printability semantics claimed.'
 readonly EXPECTED_LINE_3_ROW=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_role\tsource-controlled-gcodewriter-set-speed-expected-output\tline_3\tG1 F203.2\tRepresentative one-decimal feedrate command marker; no motion, extrusion, timing, or printability semantics claimed.'
 readonly EXPECTED_LINE_4_ROW=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_role\tsource-controlled-gcodewriter-set-speed-expected-output\tline_4\tG1 F203.201\tRepresentative three-decimal rounded feedrate command marker; no motion, extrusion, timing, or printability semantics claimed.'
+readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow summary-only Prusa G-code evidence slice backed by the Phase 46 fixture and Phase 47 Rust summary boundary only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host '"upload"$', network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
 
 require_file() {
 	local file="$1"
@@ -148,19 +149,25 @@ require_ascii_lf() {
 	fi
 }
 
-reject_status_row() {
-	local id="$1"
-	local file="$2"
-	if awk -F '\t' -v id="${id}" '$1 == id { found = 1 } END { exit found ? 0 : 1 }' "${file}"; then
-		error "packages/parity/status.tsv: forbidden status row exists: ${id}"
+verify_status_published() {
+	require_exact_line \
+		"${status_file}" \
+		"packages/parity/status.tsv" \
+		"${GCODE_OUTPUT_STATUS_ROW}" \
+		"fork.prusaslicer.gcode-output status/evidence/notes"
+
+	local status_count
+	status_count="$(awk -F '\t' '$1 == "fork.prusaslicer.gcode-output" { count++ } END { print count + 0 }' "${status_file}")"
+	if [[ "${status_count}" != "1" ]]; then
+		error "packages/parity/status.tsv: fork.prusaslicer.gcode-output status: duplicate rows: ${status_count}"
 	fi
 }
 
-reject_parity_target() {
+verify_parity_target_published() {
 	local parity_target_pattern
 	parity_target_pattern="name[[:space:]]*=[[:space:]]*['\"]prusaslicer_gcode_output_parity['\"]"
-	if grep -Eq -- "${parity_target_pattern}" "${parity_build_file}"; then
-		error "packages/parity/BUILD.bazel: forbidden parity target exists: prusaslicer_gcode_output_parity"
+	if ! grep -Eq -- "${parity_target_pattern}" "${parity_build_file}"; then
+		error "packages/parity/BUILD.bazel: missing parity target: prusaslicer_gcode_output_parity"
 	fi
 }
 
@@ -318,7 +325,7 @@ verify_provenance
 verify_expected_summary
 verify_readme_scope
 reject_overclaiming_text
-reject_status_row "fork.prusaslicer.gcode-output" "${status_file}"
-reject_parity_target
+verify_status_published
+verify_parity_target_published
 
 printf 'ok: Prusa G-code output fixture verification passed\n'
