@@ -1,3 +1,6 @@
+use crate::prusa_gcode_output::{
+    PRUSA_GCODE_OUTPUT_INVENTORY_ID, PRUSA_GCODE_OUTPUT_SOURCE_PATH, PRUSA_GCODE_OUTPUT_SOURCE_REF,
+};
 use crate::prusa_profile::{
     PRUSA_PROFILE_SCHEMA_INVENTORY_ID, PRUSA_PROFILE_SCHEMA_SOURCE_PATH,
     PRUSA_PROFILE_SCHEMA_SOURCE_REF,
@@ -89,6 +92,14 @@ static PRUSA_PROJECT_FILE_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance 
     ownership: FeatureOrigin::SharedDownstream,
 }];
 
+static PRUSA_GCODE_OUTPUT_PATHS: [&str; 1] = [PRUSA_GCODE_OUTPUT_SOURCE_PATH];
+static PRUSA_GCODE_OUTPUT_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
+    inventory_id: PRUSA_GCODE_OUTPUT_INVENTORY_ID,
+    vendor_source: PRUSA_GCODE_OUTPUT_SOURCE_REF,
+    source_paths: &PRUSA_GCODE_OUTPUT_PATHS,
+    ownership: FeatureOrigin::SharedDownstream,
+}];
+
 static PRUSA_PROFILE_SCHEMA_PATHS: [&str; 1] = [PRUSA_PROFILE_SCHEMA_SOURCE_PATH];
 static PRUSA_PROFILE_SCHEMA_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
     inventory_id: PRUSA_PROFILE_SCHEMA_INVENTORY_ID,
@@ -97,7 +108,7 @@ static PRUSA_PROFILE_SCHEMA_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenanc
     ownership: FeatureOrigin::ForkSpecific,
 }];
 
-static PRUSA_CAPABILITIES: [FlavorCapability; 2] = [
+static PRUSA_CAPABILITIES: [FlavorCapability; 3] = [
     FlavorCapability {
         flavor_id: FlavorId::PrusaSlicer,
         capability_id: "prusaslicer.project-file",
@@ -109,6 +120,18 @@ static PRUSA_CAPABILITIES: [FlavorCapability; 2] = [
         provenance: &PRUSA_PROJECT_FILE_PROVENANCE,
         caution_flags: &[],
         future_parity_notes: "Source-observed project file planning row; future parity requires fixture-backed load/save evidence.",
+    },
+    FlavorCapability {
+        flavor_id: FlavorId::PrusaSlicer,
+        capability_id: "prusaslicer.gcode-output",
+        feature_surface: "gcode-output",
+        feature_category: "gcode-output",
+        origin: FeatureOrigin::SharedDownstream,
+        parity_dependencies: &GENERATED_OUTPUTS_PARITY,
+        checklist_status: ChecklistStatus::FutureCandidate,
+        provenance: &PRUSA_GCODE_OUTPUT_PROVENANCE,
+        caution_flags: &[],
+        future_parity_notes: "Source-observed G-code output planning row; summary-only parity requires fixture-backed Rust summary evidence and the Phase 48 executable command before output behavior is claimed.",
     },
     FlavorCapability {
         flavor_id: FlavorId::PrusaSlicer,

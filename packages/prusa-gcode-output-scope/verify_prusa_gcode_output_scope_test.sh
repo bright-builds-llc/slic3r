@@ -377,41 +377,25 @@ test_premature_parity_target_fails() {
 	assert_premature_parity_target_form_fails "single-quoted" "sh_binary(name='prusaslicer_gcode_output_parity', srcs=['placeholder.sh'])"
 }
 
-test_premature_slic3r_flavors_marker_fails() {
+test_phase47_rust_summary_boundary_is_allowed() {
 	# Arrange
-	local dir="${tmp_dir}/premature-slic3r-flavors-marker"
+	local dir="${tmp_dir}/phase47-rust-summary-boundary"
 	write_valid_fixture "${dir}"
 	mkdir -p "${dir}/packages/slic3r-rust/crates/slic3r_flavors/src"
 	printf '%s\n' "const SURFACE: &str = \"slic3r_flavors::prusa_gcode_output\";" \
+		"pub mod prusa_gcode_output;" \
 		>"${dir}/packages/slic3r-rust/crates/slic3r_flavors/src/lib.rs"
+	printf '%s\n' "pub fn parse_prusa_gcode_output_summary(input: &str) -> usize { input.len() }" \
+		>"${dir}/packages/slic3r-rust/crates/slic3r_flavors/src/prusa_gcode_output.rs"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-slic3r-flavors.out" "${tmp_dir}/premature-slic3r-flavors.err"; then
-		fail "premature slic3r_flavors marker fixture passed"
+	if ! run_verifier "${dir}" "${tmp_dir}/phase47-rust-boundary.out" "${tmp_dir}/phase47-rust-boundary.err"; then
+		sed -n '1,200p' "${tmp_dir}/phase47-rust-boundary.err" >&2
+		fail "Phase 47 Rust summary boundary fixture failed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-slic3r-flavors.err" '^error:'
-	assert_contains "${tmp_dir}/premature-slic3r-flavors.err" 'slic3r_flavors::prusa_gcode_output'
-}
-
-test_premature_rust_marker_fails() {
-	# Arrange
-	local dir="${tmp_dir}/premature-rust-marker"
-	write_valid_fixture "${dir}"
-	mkdir -p "${dir}/packages/slic3r-rust/crates/slic3r_flavors/src"
-	printf '%s\n' "pub mod prusa_gcode_output;" \
-		"pub fn parse_prusa_gcode_output_summary() {}" \
-		>"${dir}/packages/slic3r-rust/crates/slic3r_flavors/src/lib.rs"
-
-	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-rust-marker.out" "${tmp_dir}/premature-rust-marker.err"; then
-		fail "premature Rust marker fixture passed"
-	fi
-
-	# Assert
-	assert_contains "${tmp_dir}/premature-rust-marker.err" '^error:'
-	assert_contains "${tmp_dir}/premature-rust-marker.err" 'pub mod prusa_gcode_output|parse_prusa_gcode_output_summary'
+	assert_contains "${tmp_dir}/phase47-rust-boundary.out" '^ok: Prusa G-code output scope verification passed$'
 }
 
 test_complete_fixture_passes
@@ -426,7 +410,6 @@ test_premature_status_row_fails
 test_phase46_fixture_namespace_is_allowed
 test_phase46_expected_summary_artifact_is_allowed
 test_premature_parity_target_fails
-test_premature_slic3r_flavors_marker_fails
-test_premature_rust_marker_fails
+test_phase47_rust_summary_boundary_is_allowed
 
 printf 'ok: verify_prusa_gcode_output_scope_test\n'

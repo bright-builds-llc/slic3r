@@ -87,7 +87,7 @@ builds, and sync automation.
   verify the source-pinned Prusa `.gcode` fixture surface and summary-only
   expected artifact.
 
-- [ ] **Phase 47: Rust Prusa G-code Summary Boundary** - Developers can use
+- [x] **Phase 47: Rust Prusa G-code Summary Boundary** - Developers can use (completed 2026-06-14)
   and test the typed Rust boundary that summarizes stable G-code metadata and
   markers without side effects or broad claims.
 
@@ -184,7 +184,16 @@ metadata.
    discovery, process execution, upstream source import, release,
    printer-runtime, profile-update, or vendor sync operations.
 
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+
+- [x] 47-01-PLAN.md — Add the pure Rust G-code summary parser, metadata,
+  focused tests, and Bazel Rust wiring.
+- [x] 47-02-PLAN.md — Register `prusaslicer.gcode-output` as typed
+  future-candidate generated-output metadata.
+- [x] 47-03-PLAN.md — Reconcile fixture/scope verifiers with the Rust boundary
+  and run final Rust/Bazel validation.
 
 ### Phase 48: Executable Prusa G-code Evidence
 
@@ -235,7 +244,7 @@ Phases execute in numeric order: 45 -> 46 -> 47 -> 48
 |-------|----------------|--------|-----------|
 | 45. Prusa G-code Output Scope Gate | 3/3 | Complete   | 2026-06-06 |
 | 46. Prusa G-code Fixture Surface | 3/3 | Complete    | 2026-06-13 |
-| 47. Rust Prusa G-code Summary Boundary | 0/TBD | Not started | - |
+| 47. Rust Prusa G-code Summary Boundary | 3/3 | Complete    | 2026-06-14 |
 | 48. Executable Prusa G-code Evidence | 0/TBD | Not started | - |
 
 ## Future Revisit Candidates

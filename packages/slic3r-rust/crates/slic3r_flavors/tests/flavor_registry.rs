@@ -4,7 +4,7 @@ use slic3r_contracts::{
 use slic3r_flavors::{
     FlavorCapability, FlavorProvenance, FlavorRegistryEntry, all_capabilities, all_flavors,
     capabilities_by_checklist_status, capabilities_by_origin, maybe_flavor,
-    prusa_profile_schema_metadata, prusa_project_file_metadata,
+    prusa_gcode_output_metadata, prusa_profile_schema_metadata, prusa_project_file_metadata,
 };
 
 #[test]
@@ -219,7 +219,7 @@ fn needs_review_rows_do_not_invent_unknown_origin_inventory_evidence() {
 }
 
 #[test]
-fn shared_downstream_filter_returns_source_observed_project_file_row() {
+fn shared_downstream_filter_returns_source_observed_prusa_rows() {
     // Arrange
     let origin = FeatureOrigin::SharedDownstream;
 
@@ -229,7 +229,10 @@ fn shared_downstream_filter_returns_source_observed_project_file_row() {
         .collect();
 
     // Assert
-    assert_eq!(shared_capability_ids, ["prusaslicer.project-file"]);
+    assert_eq!(
+        shared_capability_ids,
+        ["prusaslicer.project-file", "prusaslicer.gcode-output"]
+    );
 }
 
 #[test]
@@ -317,6 +320,98 @@ fn prusa_project_file_metadata_exposes_fixture_scope_expected_summary_and_reserv
     assert_eq!(
         metadata.reserved_future_status_token,
         "fork.prusaslicer.project-file"
+    );
+}
+
+#[test]
+fn prusa_gcode_output_registry_row_traces_to_source_and_generated_output_dependency() {
+    // Arrange
+    let metadata = prusa_gcode_output_metadata();
+    let maybe_gcode_output = maybe_capability(metadata.inventory_id);
+    let expected_dependencies = [metadata.parity_dependency];
+
+    // Act
+    let gcode_output = match maybe_gcode_output {
+        Some(capability) => capability,
+        None => {
+            assert!(
+                maybe_gcode_output.is_some(),
+                "prusaslicer.gcode-output capability missing"
+            );
+            return;
+        }
+    };
+
+    // Assert
+    assert_eq!(gcode_output.flavor_id, FlavorId::PrusaSlicer);
+    assert_eq!(gcode_output.capability_id, metadata.inventory_id);
+    assert_eq!(gcode_output.feature_surface, "gcode-output");
+    assert_eq!(gcode_output.feature_category, "gcode-output");
+    assert_eq!(gcode_output.origin, FeatureOrigin::SharedDownstream);
+    assert_eq!(
+        gcode_output.checklist_status,
+        ChecklistStatus::FutureCandidate
+    );
+    assert_eq!(gcode_output.parity_dependencies, expected_dependencies);
+    assert_eq!(gcode_output.provenance.len(), 1);
+    assert_eq!(
+        gcode_output.provenance[0].inventory_id,
+        metadata.inventory_id
+    );
+    assert_eq!(
+        gcode_output.provenance[0].vendor_source,
+        metadata.source_ref
+    );
+    assert_eq!(
+        gcode_output.provenance[0].vendor_source.as_str(),
+        "prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
+    );
+    assert_eq!(
+        gcode_output.provenance[0].source_paths,
+        [metadata.source_path]
+    );
+    assert_eq!(
+        gcode_output.provenance[0].ownership,
+        FeatureOrigin::SharedDownstream
+    );
+    assert!(gcode_output.caution_flags.is_empty());
+}
+
+#[test]
+fn prusa_gcode_output_metadata_exposes_fixture_scope_expected_summary_and_reserved_status() {
+    // Arrange
+    let metadata = prusa_gcode_output_metadata();
+
+    // Act
+    let source_ref = metadata.source_ref;
+
+    // Assert
+    assert_eq!(metadata.inventory_id, "prusaslicer.gcode-output");
+    assert_eq!(metadata.vendor_id, "prusaslicer");
+    assert_eq!(metadata.flavor_id, FlavorId::PrusaSlicer);
+    assert_eq!(metadata.origin, FeatureOrigin::SharedDownstream);
+    assert_eq!(
+        metadata.parity_dependency,
+        ParitySurface::generated_outputs()
+    );
+    assert_eq!(metadata.checklist_status, ChecklistStatus::FutureCandidate);
+    assert_eq!(source_ref, VendorSourceRef::prusa_slicer_version_2_9_5());
+    assert_eq!(metadata.source_path, "tests/fff_print/test_gcodewriter.cpp");
+    assert_eq!(
+        metadata.fixture_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode"
+    );
+    assert_eq!(
+        metadata.expected_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv"
+    );
+    assert_eq!(
+        metadata.scope_record_path,
+        "packages/prusa-gcode-output-scope/gcode-output-scope.md"
+    );
+    assert_eq!(
+        metadata.reserved_future_status_token,
+        "fork.prusaslicer.gcode-output"
     );
 }
 
@@ -439,6 +534,23 @@ fn deferred_filter_returns_bambu_network_device_as_cautioned_metadata() {
 }
 
 #[test]
+fn future_candidate_filter_includes_prusa_gcode_output_boundary_row() {
+    // Arrange
+    let status = ChecklistStatus::FutureCandidate;
+
+    // Act
+    let future_candidate_ids: Vec<&'static str> = capabilities_by_checklist_status(status)
+        .map(|capability| capability.capability_id)
+        .collect();
+
+    // Assert
+    assert!(
+        future_candidate_ids.contains(&"prusaslicer.gcode-output"),
+        "FutureCandidate filter should include the Phase 47 Prusa G-code summary boundary row"
+    );
+}
+
+#[test]
 fn runtime_claim_words_do_not_become_public_helper_names() {
     // Arrange
     let risky_words = [
@@ -451,6 +563,7 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
     ];
     let profile_schema_metadata = prusa_profile_schema_metadata();
     let project_file_metadata = prusa_project_file_metadata();
+    let gcode_output_metadata = prusa_gcode_output_metadata();
     let public_helper_names = [
         "all_flavors",
         "maybe_flavor",
@@ -459,6 +572,9 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         "capabilities_by_checklist_status",
         "prusa_profile_schema_metadata",
         "prusa_project_file_metadata",
+        "prusa_gcode_output_metadata",
+        "parse_prusa_gcode_output_summary",
+        "prusa_gcode_output_summary_lines",
     ];
     let metadata_values = [
         profile_schema_metadata.inventory_id,
@@ -480,6 +596,18 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         project_file_metadata.expected_summary_path,
         project_file_metadata.scope_record_path,
         project_file_metadata.reserved_future_status_token,
+        gcode_output_metadata.inventory_id,
+        gcode_output_metadata.vendor_id,
+        gcode_output_metadata.flavor_id.as_str(),
+        gcode_output_metadata.origin.as_str(),
+        gcode_output_metadata.parity_dependency.as_str(),
+        gcode_output_metadata.checklist_status.as_str(),
+        gcode_output_metadata.source_ref.as_str(),
+        gcode_output_metadata.source_path,
+        gcode_output_metadata.fixture_path,
+        gcode_output_metadata.expected_summary_path,
+        gcode_output_metadata.scope_record_path,
+        gcode_output_metadata.reserved_future_status_token,
     ];
 
     // Act

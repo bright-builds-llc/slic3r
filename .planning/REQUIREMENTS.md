@@ -41,14 +41,14 @@ Requirements for the v1.12 milestone. Each maps to one roadmap phase.
 
 ### Rust Prusa G-code Summary Boundary
 
-- [ ] **PGSUM-01**: Developer can summarize the selected Prusa G-code fixture
+- [x] **PGSUM-01**: Developer can summarize the selected Prusa G-code fixture
   into typed Rust values for stable metadata and marker evidence before the
   data reaches shared parity or status publication logic.
-- [ ] **PGSUM-02**: Developer can trace the Prusa G-code output capability from
+- [x] **PGSUM-02**: Developer can trace the Prusa G-code output capability from
   Rust metadata back to the accepted Prusa source identity, fixture namespace,
   raw fixture path, expected summary artifact, planned status token, and broad
   generated-output deferrals.
-- [ ] **PGSUM-03**: Developer can verify Prusa G-code summary parsing with
+- [x] **PGSUM-03**: Developer can verify Prusa G-code summary parsing with
   focused Rust unit tests that reject unsupported evidence kinds,
   overclaiming notes, wrong source refs, wrong fixture paths, missing rows,
   duplicate rows, extra rows, and wrong ordering without performing Git,
@@ -141,9 +141,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PGSEL-02 | Phase 45 | Complete |
 | PGFIX-01 | Phase 46 | Complete |
 | PGFIX-02 | Phase 46 | Complete |
-| PGSUM-01 | Phase 47 | Pending |
-| PGSUM-02 | Phase 47 | Pending |
-| PGSUM-03 | Phase 47 | Pending |
+| PGSUM-01 | Phase 47 | Complete |
+| PGSUM-02 | Phase 47 | Complete |
+| PGSUM-03 | Phase 47 | Complete |
 | PGEV-01 | Phase 48 | Pending |
 | PGEV-02 | Phase 48 | Pending |
 | PGEV-03 | Phase 48 | Pending |

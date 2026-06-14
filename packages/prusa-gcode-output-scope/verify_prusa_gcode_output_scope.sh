@@ -156,34 +156,6 @@ reject_parity_target() {
 	fi
 }
 
-reject_rust_implementation_markers() {
-	local rust_dir="${checkout_root}/packages/slic3r-rust"
-	local marker
-	local maybe_match
-	local rust_file
-
-	if [[ ! -d "${rust_dir}" || ! -r "${rust_dir}" ]]; then
-		return
-	fi
-
-	for marker in \
-		"slic3r_flavors::prusa_gcode_output" \
-		"pub mod prusa_gcode_output" \
-		"prusa_gcode_output_summary" \
-		"parse_prusa_gcode_output_summary"; do
-		maybe_match=""
-		while IFS= read -r rust_file; do
-			if grep -Fq -- "${marker}" "${rust_file}"; then
-				maybe_match="${rust_file}"
-				break
-			fi
-		done < <(find "${rust_dir}" -path "${rust_dir}/target" -prune -o -type f -print)
-		if [[ -n "${maybe_match}" ]]; then
-			error "packages/slic3r-rust: forbidden Phase 45 Rust G-code summary marker ${marker} in ${maybe_match}"
-		fi
-	done
-}
-
 verify_readme() {
 	require_text "${readme_file}" "README.md" \
 		"\`packages/prusa-gcode-output-scope\` owns the Phase 45 reviewed scope gate for \`prusaslicer.gcode-output\`."
@@ -315,7 +287,6 @@ reject_overclaiming_text() {
 reject_later_phase_artifacts() {
 	reject_status_row "fork.prusaslicer.gcode-output" "${status_file}"
 	reject_parity_target
-	reject_rust_implementation_markers
 }
 
 for required_file in \

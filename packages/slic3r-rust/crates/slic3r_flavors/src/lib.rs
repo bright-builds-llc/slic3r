@@ -1,10 +1,18 @@
 #![forbid(unsafe_code)]
 //! Pure metadata registry for Slic3r-family flavor planning boundaries.
 
+pub mod prusa_gcode_output;
 pub mod prusa_profile;
 pub mod prusa_project_file;
 pub mod registry;
 
+pub use prusa_gcode_output::{
+    PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue, PrusaGcodeOutputMetadata,
+    PrusaGcodeOutputMetadataKey, PrusaGcodeOutputMetadataValue, PrusaGcodeOutputNote,
+    PrusaGcodeOutputParseError, PrusaGcodeOutputParseResult, PrusaGcodeOutputSummary,
+    PrusaGcodeOutputSummaryRow, parse_prusa_gcode_output_summary, prusa_gcode_output_metadata,
+    prusa_gcode_output_summary_lines,
+};
 pub use prusa_profile::{
     PrusaProfileBundle, PrusaProfileEntry, PrusaProfileKey, PrusaProfileParseError,
     PrusaProfileParseResult, PrusaProfileSchemaMetadata, PrusaProfileSection,
