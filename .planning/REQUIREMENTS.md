@@ -57,12 +57,12 @@ Requirements for the v1.12 milestone. Each maps to one roadmap phase.
 
 ### Executable Prusa G-code Evidence
 
-- [ ] **PGEV-01**: Maintainer can run a repo-owned Bazel parity command for
+- [x] **PGEV-01**: Maintainer can run a repo-owned Bazel parity command for
   the selected summary-only Prusa G-code output evidence slice.
-- [ ] **PGEV-02**: Maintainer can see the Prusa G-code evidence command fail
+- [x] **PGEV-02**: Maintainer can see the Prusa G-code evidence command fail
   when the Rust-backed summary or checked-in expected summary artifact diverges
   from fixture expectations.
-- [ ] **PGEV-03**: Maintainer can inspect docs and parity status updates that
+- [x] **PGEV-03**: Maintainer can inspect docs and parity status updates that
   name the exact verified Prusa G-code evidence slice and keep byte-for-byte
   G-code parity, full generated-output parity, toolpath geometry, extrusion,
   timing, support generation, wall seam behavior, arc fitting, STEP import,
@@ -144,9 +144,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PGSUM-01 | Phase 47 | Complete |
 | PGSUM-02 | Phase 47 | Complete |
 | PGSUM-03 | Phase 47 | Complete |
-| PGEV-01 | Phase 48 | Pending |
-| PGEV-02 | Phase 48 | Pending |
-| PGEV-03 | Phase 48 | Pending |
+| PGEV-01 | Phase 48 | Complete |
+| PGEV-02 | Phase 48 | Complete |
+| PGEV-03 | Phase 48 | Complete |
 
 **Coverage:**
 
@@ -157,4 +157,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ______________________________________________________________________
 
 *Requirements defined: 2026-06-06*
-*Last updated: 2026-06-06 after v1.12 roadmap creation*
+*Last updated: 2026-06-14 after Phase 48 verification*
