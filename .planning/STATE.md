@@ -1,11 +1,11 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.12
-milestone_name: milestone
-status: complete
-stopped_at: Phase 48 verified and completed
-last_updated: "2026-06-14T21:16:29.888Z"
-last_activity: 2026-06-14 -- Phase 48 verified and completed
+milestone_name: PrusaSlicer G-code Output Evidence Foundation
+status: archived
+stopped_at: v1.12 archived; ready for next milestone planning
+last_updated: "2026-06-15T19:05:00Z"
+last_activity: 2026-06-15 -- v1.12 archived
 progress:
   total_phases: 4
   completed_phases: 4
@@ -18,22 +18,22 @@ progress:
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-14)
+See: `.planning/PROJECT.md` (updated 2026-06-15)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** v1.12 complete — Executable Prusa G-code Evidence
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 48 (Executable Prusa G-code Evidence) — COMPLETE
-Plan: 3 of 3 complete
+Phase: none active
+Plan: none active
 Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
-Status: Complete
-Last activity: 2026-06-14 -- Phase 48 verified and completed
+Status: Archived
+Last activity: 2026-06-15 -- v1.12 archived
 
 Progress: [##########] 100%
 
@@ -52,6 +52,10 @@ Progress: [##########] 100%
 - Phase 46 Plan 03 completed 3 tasks across 5 files in 10 min on 2026-06-13.
 - Phase 47 completed 3 plans on 2026-06-14 with the Rust G-code summary
   boundary, registry metadata, and verifier reconciliation.
+- Phase 48 completed 3 plans on 2026-06-14 with the public G-code parity
+  command, mutation guard, exact status row, docs, and final verification.
+- v1.12 archived on 2026-06-15 with 4 phases, 12 plans, 29 tasks, and a passed
+  milestone audit.
 
 ## Accumulated Context
 
@@ -101,6 +105,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-14T18:54:07.054Z
-Stopped at: Phase 48 context gathered
-Resume file: .planning/phases/48-executable-prusa-g-code-evidence/48-CONTEXT.md
+Last session: 2026-06-15T19:05:00Z
+Stopped at: v1.12 archived
+Resume file: .planning/milestones/v1.12-phases/48-executable-prusa-g-code-evidence/48-CONTEXT.md

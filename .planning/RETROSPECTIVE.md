@@ -2,6 +2,81 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.12 — PrusaSlicer G-code Output Evidence Foundation
+
+**Shipped:** 2026-06-15\
+**Phases:** 4 | **Plans:** 12 | **Sessions:** yolo phase execution plus
+milestone audit, integration check, archive closeout, and requirements reset
+
+### What Was Built
+
+- Reviewed `prusaslicer.gcode-output` scope gate with accepted source identity,
+  expected-summary contract, planned command/status token, and explicit
+  generated-output deferrals
+- Source-pinned Prusa G-code fixture namespace with provenance, update rules,
+  byte/hash checks, and a summary-only expected marker artifact
+- Pure Rust G-code summary parser, metadata boundary, registry row, and tests
+  over the Phase 46 expected-summary TSV
+- Public `//packages/parity:prusaslicer_gcode_output_parity` command backed by
+  the Rust summary boundary and checked-in expected artifact
+- `line_4` expected-summary mutation guard, exact
+  `fork.prusaslicer.gcode-output` status row, publication-aware scope/fixture
+  verifiers, and non-overclaiming package/port docs
+
+### What Worked
+
+- The v1.10 and v1.11 evidence ladder scaled cleanly to the first generated
+  output slice: scope gate, fixture, typed Rust boundary, parity command,
+  mutation guard, status row, docs, and audit.
+- Keeping the expected artifact summary-only avoided byte-for-byte G-code,
+  geometry, extrusion, timing, runtime, and printability claims while still
+  proving an executable evidence path.
+- Earlier verifiers evolved from absence guards to exact publication checks,
+  which kept the handoff between phases explicit instead of letting stale
+  guards linger.
+- The integration checker found no broken flows; the maintainer command passed
+  during audit with `rows: 5`.
+
+### What Was Inefficient
+
+- Planning closeout still required manual roadmap collapse, project evolution,
+  state cleanup, retrospective writing, phase directory archival, and
+  requirements reset after the archive CLI ran.
+- `mdformat` again rewrote YAML frontmatter in a milestone audit file, so
+  frontmatter-bearing planning artifacts need targeted integrity checks.
+- STATE metadata used an unexpected shape for one field, causing the archive
+  helper to warn and leaving some closeout text for manual cleanup.
+
+### Patterns Established
+
+- Generated-output parity should start with one reviewed summary-only slice
+  before broad generated-output or byte parity is considered.
+- G-code expected artifacts can use stable metadata and marker rows as a
+  defensible first executable evidence contract.
+- Scope and fixture verifiers should be updated at each phase boundary to
+  reject only still-forbidden future artifacts.
+- Public docs should name the exact verified fork slice and the deferred broad
+  surfaces together.
+
+### Key Lessons
+
+1. First generated-output milestones should prove evidence plumbing and
+   non-overclaiming status before semantic output parity.
+1. Phase-boundary verifiers need deliberate reconciliation as planned future
+   artifacts become real.
+1. Frontmatter-bearing planning files need direct delimiter/field validation
+   and `git diff --check`, not blanket Markdown formatting.
+
+### Cost Observations
+
+- Model mix: balanced GSD profile with Codex-led audit and archive closeout
+- Sessions: yolo discuss/plan/execute phases plus milestone audit, integration
+  checker, archive closeout, retrospective, and requirements reset
+- Notable: implementation evidence passed cleanly; closeout work was mostly
+  governance, archive hygiene, and current-state alignment
+
+______________________________________________________________________
+
 ## Milestone: v1.11 — PrusaSlicer Broader Parity Port
 
 **Shipped:** 2026-06-06\

@@ -1,5 +1,49 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.12 PrusaSlicer G-code Output Evidence Foundation (Shipped: 2026-06-15)
+
+**Delivered:** Proved the first narrow PrusaSlicer G-code output evidence
+slice, from reviewed scope gate and source-pinned fixture through typed Rust
+summary boundary, public parity command, exact status row, mutation guard, and
+non-overclaiming docs.
+
+**Phases completed:** 45-48 (12 plans total, 29 plan tasks)
+
+**Key accomplishments:**
+
+- Source-observed Prusa G-code output inventory row with exact-once category mapping and no status publication
+- Metadata-only `prusaslicer.gcode-output` scope package with fail-closed verification and Phase 46-48 absence guards
+- Port docs route maintainers to the Phase 45 Prusa G-code output scope gate while final checks prove evidence remains unpublished
+- Source-pinned Prusa G-code fixture namespace with provenance and a summary-only expected marker artifact
+- Fail-closed Prusa G-code fixture verification through Bazel, Bash exact checks, and mutation tests
+- Maintainer docs and final validation for the Phase 46 Prusa G-code fixture surface with Rust/parity/status still deferred
+- Typed Rust summary parser for the Phase 46 Prusa G-code expected-summary TSV, with metadata traceability and fail-closed row validation
+- Prusa G-code output capability registered as shared-downstream future-candidate metadata backed by the Rust summary boundary
+- Phase 45/46 G-code guards now allow the Phase 47 Rust summary boundary while still blocking Phase 48 status and parity publication
+- Rust-backed Bazel parity command for the narrow Prusa G-code expected-summary slice, with a `line_4` mutation guard and no status publication yet
+- Exact verified Prusa G-code status row with fixture and scope verifiers requiring Phase 48 publication
+- Package and port docs now expose the exact summary-only Prusa G-code evidence slice, with final Phase 48 verification passing
+
+**Stats:**
+
+- 4 phases, 12 plans, 29 plan tasks
+- Requirements: 10/10 complete
+- Milestone audit: passed
+- Git range: `135fd91af` -> `a2e147763`
+- Timeline: 2026-06-06 -> 2026-06-14
+- Work range: 77 files changed, 12268 insertions, 93 deletions
+- Rust source size after milestone: 6431 lines
+- Milestone archive: [v1.12-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.12-ROADMAP.md)
+- Requirements archive: [v1.12-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.12-REQUIREMENTS.md)
+- Audit: [v1.12-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.12-MILESTONE-AUDIT.md)
+- Phase archive: [v1.12-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.12-phases/)
+
+**What's next:** start the next milestone with fresh requirements before new
+phase work, likely choosing another deliberately narrow PrusaSlicer evidence
+slice if the current project direction remains valid.
+
+______________________________________________________________________
+
 ## v1.11 PrusaSlicer Broader Parity Port (Shipped: 2026-06-06)
 
 **Delivered:** Proved a narrow executable PrusaSlicer project-file evidence
