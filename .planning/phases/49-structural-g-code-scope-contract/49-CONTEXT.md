@@ -1,6 +1,9 @@
-______________________________________________________________________
-
-## generated_by: gsd-discuss-phase lifecycle_mode: yolo phase_lifecycle_id: 49-2026-06-16T14-43-39 generated_at: 2026-06-16T14:43:39.375Z
+---
+generated_by: gsd-discuss-phase
+lifecycle_mode: yolo
+phase_lifecycle_id: 49-2026-06-16T14-43-39
+generated_at: 2026-06-16T14:43:39.375Z
+---
 
 # Phase 49: Structural G-code Scope Contract - Context
 
