@@ -448,6 +448,23 @@ test_duplicate_status_row_fails() {
 	assert_contains "${tmp_dir}/duplicate-status.err" 'duplicate rows: 2'
 }
 
+test_promoted_generated_outputs_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/promoted-generated-outputs-row"
+	local status_file="${dir}/packages/parity/status.tsv"
+	write_valid_fixture "${dir}"
+	printf '%s\n' $'generated-outputs\tverified\t//packages/parity:unsupported_broad_generated_outputs\tUnsupported broad generated-output promotion that must fail closed.' >>"${status_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/promoted-generated-outputs.out" "${tmp_dir}/promoted-generated-outputs.err"; then
+		fail "promoted generated-outputs row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/promoted-generated-outputs.err" '^error:'
+	assert_contains "${tmp_dir}/promoted-generated-outputs.err" 'generated-outputs must be exactly one in progress row'
+}
+
 test_missing_parity_target_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-parity-target"
@@ -613,6 +630,7 @@ test_phase46_fixture_namespace_is_allowed
 test_phase46_expected_summary_artifact_is_allowed
 test_wrong_status_evidence_fails
 test_duplicate_status_row_fails
+test_promoted_generated_outputs_row_fails
 test_missing_parity_target_fails
 test_phase47_rust_summary_boundary_is_allowed
 test_missing_allowed_structural_field_fails

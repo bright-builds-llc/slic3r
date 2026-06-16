@@ -376,10 +376,13 @@ verify_structural_traceability() {
 }
 
 verify_generated_outputs_in_progress() {
-	local count
-	count="$(awk -F '\t' '$1 == "generated-outputs" && $2 == "in progress" { count++ } END { print count + 0 }' "${status_file}")"
-	if [[ "${count}" != "1" ]]; then
-		error "packages/parity/status.tsv: generated-outputs must remain exactly one in progress row, found ${count}"
+	local total_count
+	local in_progress_count
+	total_count="$(awk -F '\t' '$1 == "generated-outputs" { count++ } END { print count + 0 }' "${status_file}")"
+	in_progress_count="$(awk -F '\t' '$1 == "generated-outputs" && $2 == "in progress" { count++ } END { print count + 0 }' "${status_file}")"
+
+	if [[ "${total_count}" != "1" || "${in_progress_count}" != "1" ]]; then
+		error "packages/parity/status.tsv: generated-outputs must be exactly one in progress row, found ${total_count} total and ${in_progress_count} in progress"
 	fi
 }
 
