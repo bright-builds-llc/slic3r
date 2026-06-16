@@ -525,7 +525,7 @@ test_unsupported_structural_field_fails() {
 	insert_line_before \
 		"${dir}/gcode-output-scope.md" \
 		"## v1.13 Structural Traceability" \
-		"| geometry_count | unsupported generated-output semantics | Unsupported field that must fail closed. |"
+		"| geometry-count | unsupported generated-output semantics | Unsupported field that must fail closed. |"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/unsupported-structural.out" "${tmp_dir}/unsupported-structural.err"; then
