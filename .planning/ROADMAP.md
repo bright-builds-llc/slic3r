@@ -2,6 +2,8 @@
 
 ## Milestones
 
+- Active: **v1.13 PrusaSlicer G-code Structural Evidence Expansion** - Phases
+  49-52 (planned)
 - Shipped: **v1.12 PrusaSlicer G-code Output Evidence Foundation** - Phases
   45-48 (shipped 2026-06-15)
   Archive: [.planning/milestones/v1.12-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.12-ROADMAP.md)
@@ -51,22 +53,173 @@
 
 ## Current Status
 
-No active milestone is open. v1.12 shipped the narrow PrusaSlicer G-code output
-evidence foundation: reviewed scope gate, source-pinned fixture, summary-only
-expected artifact, typed Rust summary boundary, public Bazel parity command,
-mutation guard, exact `fork.prusaslicer.gcode-output` status row, and
-non-overclaiming docs.
+v1.13 is active. The milestone starts at Phase 49 because v1.12 ended at Phase
+48, and it expands the narrow `fork.prusaslicer.gcode-output` evidence path
+from marker-level summary metadata into structural G-code evidence.
 
-The broad `generated-outputs` status row remains `in progress`, and
-byte-for-byte G-code parity, broad generated-output parity, runtime/printer
-behavior, geometry, support, seam, arc, STEP, GUI behavior, release,
-network/device behavior, Bambu Studio, OrcaSlicer, upstream source imports,
-and sync automation remain deferred.
+The broad `generated-outputs` status row remains `in progress`. This milestone
+does not claim byte-for-byte G-code parity, geometry/toolpath parity,
+printability, printer-runtime behavior, support generation, wall seam behavior,
+arc fitting, GUI export/viewer behavior, release behavior, network/device
+behavior, non-Prusa fork behavior, upstream source imports, or sync automation.
+Active downstream-fork port planning remains limited to PrusaSlicer.
 
-## Next Milestone
+## Overview
 
-Start the next milestone with `/gsd-new-milestone`. That workflow should define
-fresh requirements before new phase work begins.
+v1.13 strengthens the existing PrusaSlicer G-code evidence chain in four
+steps: a reviewed structural scope contract, a source-pinned fixture expansion,
+a typed Rust structural summary boundary, and executable structural evidence
+with public status/docs updates. Each phase preserves the v1.12 narrow
+evidence ladder while making the summary more meaningful through stable
+command/section counts, ordered markers, movement/extrusion indicators,
+temperature/tool-change markers, source identity, and fixture identity.
+
+## Phases
+
+**Phase Numbering:**
+
+- Integer phases (49, 50, 51, 52): Planned milestone work
+
+- Decimal phases (49.1, 49.2): Urgent insertions, if needed later
+
+- This milestone starts at Phase 49 because Phase 48 shipped in v1.12
+
+- [ ] **Phase 49: Structural G-code Scope Contract** - Maintainers can inspect
+  and verify the allowed structural G-code evidence contract before fixtures,
+  Rust boundaries, or executable evidence expand.
+
+- [ ] **Phase 50: Structural G-code Fixture Expansion** - Maintainers can
+  inspect and verify source-pinned Prusa structural summary fixtures with
+  fail-closed drift guards.
+
+- [ ] **Phase 51: Rust Structural G-code Summary Boundary** - Developers can
+  parse, test, and trace the structural Prusa G-code summary through a pure
+  typed Rust boundary.
+
+- [ ] **Phase 52: Executable Structural G-code Evidence** - Maintainers can
+  run public fail-closed structural evidence and inspect exact narrow
+  status/docs for the Prusa G-code slice.
+
+## Phase Details
+
+### Phase 49: Structural G-code Scope Contract
+
+**Goal**: Maintainers have a reviewed structural Prusa G-code scope contract
+that allows only the v1.13 evidence fields and keeps broader generated-output
+claims forbidden.
+**Depends on**: Phase 48
+**Requirements**: GCSCOPE-01, GCSCOPE-02, GCSCOPE-03
+**Success Criteria** (what must be TRUE):
+
+1. Maintainer can inspect the structural G-code scope contract with allowed
+   evidence fields for command counts, section counts, ordered markers,
+   movement/extrusion indicators, temperature/tool-change markers, source
+   identity, and fixture identity.
+1. Maintainer can run the scope verifier and see it fail closed when v1.13
+   artifacts claim byte-for-byte G-code parity, geometry/toolpath parity,
+   printability, printer-runtime behavior, support generation, wall seam
+   behavior, arc fitting, GUI export/viewer behavior, release behavior,
+   network/device behavior, non-Prusa fork behavior, upstream source imports,
+   or sync automation.
+1. Maintainer can trace the structural evidence scope to the accepted
+   `prusaslicer.gcode-output` inventory row and the v1.12 fixture/status path
+   while the broad `generated-outputs` status row remains in progress.
+
+**Plans**: TBD
+
+### Phase 50: Structural G-code Fixture Expansion
+
+**Goal**: Maintainers have source-pinned Prusa structural G-code fixture
+expectations that are verifiable before Rust structural parsing or parity
+commands rely on them.
+**Depends on**: Phase 49
+**Requirements**: GCFIX-01, GCFIX-02, GCFIX-03
+**Success Criteria** (what must be TRUE):
+
+1. Maintainer can inspect the expanded Prusa G-code fixture surface with a
+   checked-in expected structural summary artifact for the accepted Prusa
+   `set_speed` evidence slice.
+1. Maintainer can run a Bazel-owned fixture verifier that checks the exact
+   structural summary schema, required rows, provenance, and update rules.
+1. Maintainer can see fixture mutation tests fail closed for structural
+   summary drift, missing rows, duplicate rows, unsupported fields,
+   unsupported broad-behavior claims, and provenance mismatch.
+
+**Plans**: TBD
+
+### Phase 51: Rust Structural G-code Summary Boundary
+
+**Goal**: Developers can parse and expose the v1.13 structural Prusa G-code
+summary through a pure typed Rust boundary without side effects or premature
+status publication.
+**Depends on**: Phase 50
+**Requirements**: GCRUST-01, GCRUST-02, GCRUST-03
+**Success Criteria** (what must be TRUE):
+
+1. Developer can parse the v1.13 expected structural summary artifact through
+   a pure typed Rust boundary in `slic3r_flavors`.
+1. Developer can run Cargo and Bazel tests proving the Rust structural
+   boundary rejects invalid headers, wrong column counts, missing rows,
+   duplicate rows, out-of-order rows, unsupported structural fields,
+   unsupported claim text, wrong source refs, and wrong fixture identities.
+1. Developer can inspect registry metadata that exposes structural Prusa
+   G-code evidence readiness without filesystem discovery, Git, network,
+   process execution, release behavior, sync behavior, or premature broad
+   generated-output status publication.
+
+**Plans**: TBD
+
+### Phase 52: Executable Structural G-code Evidence
+
+**Goal**: Maintainers can run structural Prusa G-code evidence and inspect
+status/docs that publish only the exact narrow evidence slice.
+**Depends on**: Phase 51
+**Requirements**: GCEV-01, GCEV-02, GCEV-03
+**Success Criteria** (what must be TRUE):
+
+1. Maintainer can run a public Bazel parity command that validates the
+   structural Prusa G-code expected summary through the Rust boundary and
+   checked-in fixture expectations.
+1. Maintainer can see the public parity command fail closed on a
+   structural-summary mutation guard, not only the v1.12 marker-line drift
+   guard.
+1. Maintainer can inspect parity status, package docs, and port docs that
+   describe the exact narrow `fork.prusaslicer.gcode-output` structural
+   evidence slice while keeping broad `generated-outputs` in progress and all
+   deferred generated-output, runtime, and fork surfaces explicit.
+
+**Plans**: TBD
+
+## Coverage
+
+| Requirement | Phase |
+|-------------|-------|
+| GCSCOPE-01 | Phase 49 |
+| GCSCOPE-02 | Phase 49 |
+| GCSCOPE-03 | Phase 49 |
+| GCFIX-01 | Phase 50 |
+| GCFIX-02 | Phase 50 |
+| GCFIX-03 | Phase 50 |
+| GCRUST-01 | Phase 51 |
+| GCRUST-02 | Phase 51 |
+| GCRUST-03 | Phase 51 |
+| GCEV-01 | Phase 52 |
+| GCEV-02 | Phase 52 |
+| GCEV-03 | Phase 52 |
+
+Mapped: 12/12 v1.13 requirements.
+
+## Progress
+
+**Execution Order:**
+Phases execute in numeric order: 49 -> 50 -> 51 -> 52
+
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 49. Structural G-code Scope Contract | 0/TBD | Not started | - |
+| 50. Structural G-code Fixture Expansion | 0/TBD | Not started | - |
+| 51. Rust Structural G-code Summary Boundary | 0/TBD | Not started | - |
+| 52. Executable Structural G-code Evidence | 0/TBD | Not started | - |
 
 ## Future Revisit Candidates
 

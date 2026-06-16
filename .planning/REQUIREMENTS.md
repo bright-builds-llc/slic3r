@@ -112,26 +112,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GCSCOPE-01 | TBD | Pending |
-| GCSCOPE-02 | TBD | Pending |
-| GCSCOPE-03 | TBD | Pending |
-| GCFIX-01 | TBD | Pending |
-| GCFIX-02 | TBD | Pending |
-| GCFIX-03 | TBD | Pending |
-| GCRUST-01 | TBD | Pending |
-| GCRUST-02 | TBD | Pending |
-| GCRUST-03 | TBD | Pending |
-| GCEV-01 | TBD | Pending |
-| GCEV-02 | TBD | Pending |
-| GCEV-03 | TBD | Pending |
+| GCSCOPE-01 | Phase 49 | Pending |
+| GCSCOPE-02 | Phase 49 | Pending |
+| GCSCOPE-03 | Phase 49 | Pending |
+| GCFIX-01 | Phase 50 | Pending |
+| GCFIX-02 | Phase 50 | Pending |
+| GCFIX-03 | Phase 50 | Pending |
+| GCRUST-01 | Phase 51 | Pending |
+| GCRUST-02 | Phase 51 | Pending |
+| GCRUST-03 | Phase 51 | Pending |
+| GCEV-01 | Phase 52 | Pending |
+| GCEV-02 | Phase 52 | Pending |
+| GCEV-03 | Phase 52 | Pending |
 
 **Coverage:**
 
 - v1.13 requirements: 12 total
-- Mapped to phases: 0
-- Unmapped: 12
+- Mapped to phases: 12
+- Unmapped: 0
 
 ______________________________________________________________________
 
 *Requirements defined: 2026-06-16*
-*Last updated: 2026-06-16 after initial definition*
+*Last updated: 2026-06-16 after roadmap creation*

@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: PrusaSlicer G-code Structural Evidence Expansion
-status: defining_requirements
-stopped_at: v1.13 started; defining requirements
-last_updated: "2026-06-16T14:28:41Z"
-last_activity: 2026-06-16 -- v1.13 started
+status: ready_to_plan
+stopped_at: roadmap created; ready to plan Phase 49
+last_updated: "2026-06-16T14:34:41Z"
+last_activity: 2026-06-16 -- v1.13 roadmap created
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -25,16 +25,15 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Defining v1.13 PrusaSlicer G-code structural evidence
-requirements
+**Current focus:** Phase 49 - Structural G-code Scope Contract
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
+Phase: 49 of 52 (Structural G-code Scope Contract)
+Plan: TBD
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
-Status: Defining requirements
-Last activity: 2026-06-16 -- v1.13 started
+Status: Ready to plan
+Last activity: 2026-06-16 -- v1.13 roadmap created with Phases 49-52
 
 Progress: [----------] 0%
 
@@ -42,24 +41,10 @@ Progress: [----------] 0%
 
 **Prior milestone baseline:**
 
-- v1.11 completed 4 phases, 9 plans, and 21 plan tasks.
-- v1.12 begins with 4 planned phases and 10 mapped requirements.
+- v1.12 archived on 2026-06-15 with 4 phases, 12 plans, 29 tasks, and a
+  passed milestone audit.
+- v1.13 starts with 4 planned phases and 12 mapped requirements.
 - Plan counts remain TBD until `/gsd-plan-phase` decomposes each phase.
-- Phase 45 Plan 01 completed 2 tasks across 2 files in 4 min on 2026-06-06.
-- Phase 45 Plan 02 completed 2 tasks across 5 files in 9 min on 2026-06-06.
-- Phase 45 Plan 03 completed 3 tasks across 4 files in 3 min on 2026-06-06.
-- Phase 46 Plan 01 completed 2 tasks across 5 files in 13 min on 2026-06-13.
-- Phase 46 Plan 02 completed 3 tasks across 5 files in 18 min on 2026-06-13.
-- Phase 46 Plan 03 completed 3 tasks across 5 files in 10 min on 2026-06-13.
-- Phase 47 completed 3 plans on 2026-06-14 with the Rust G-code summary
-  boundary, registry metadata, and verifier reconciliation.
-- Phase 48 completed 3 plans on 2026-06-14 with the public G-code parity
-  command, mutation guard, exact status row, docs, and final verification.
-- v1.12 archived on 2026-06-15 with 4 phases, 12 plans, 29 tasks, and a passed
-  milestone audit.
-- v1.13 starts on 2026-06-16 with structural Prusa G-code evidence expansion
-  scoped as the next narrow generated-output step after the v1.12 summary-only
-  evidence path.
 
 ## Accumulated Context
 
@@ -72,9 +57,10 @@ Recent decisions affecting v1.13:
 - Continue phase numbering from Phase 49 because v1.12 ended at Phase 48.
 - Expand Prusa G-code evidence structurally before broad generated-output,
   byte-for-byte, geometry, runtime, support, seam, or arc parity is claimed.
+- Keep broad `generated-outputs` in progress and active downstream-fork port
+  planning limited to PrusaSlicer.
 - Skip external ecosystem research for v1.13 because the milestone is an
-  internal evidence-contract expansion over existing repo fixtures, Rust
-  summary boundaries, status rows, and documentation.
+  internal evidence-contract expansion over existing repo artifacts.
 
 Recent decisions affecting v1.12:
 
@@ -118,6 +104,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-16T14:28:41Z
-Stopped at: v1.13 started; defining requirements
-Resume file: .planning/STATE.md
+Last session: 2026-06-16T14:34:41Z
+Stopped at: roadmap created; ready to plan Phase 49
+Resume file: None
