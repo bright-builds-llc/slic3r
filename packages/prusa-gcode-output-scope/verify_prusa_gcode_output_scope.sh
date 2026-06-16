@@ -47,6 +47,9 @@ readonly PLANNED_PARITY_COMMAND="bazel run //packages/parity:prusaslicer""_gcode
 readonly INVENTORY_ROW=$'prusaslicer.gcode-output\tprusaslicer\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tsrc/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp\tgcode-output\tgcode-output\tshared-downstream\thigh\tgenerated-outputs\tfuture-candidate\tnone\tSource-observed G-code output planning row; parity requires reviewed source-pinned summary evidence before output behavior is claimed.'
 readonly CATEGORY_MAP_ROW=$'gcode.shared\tgcode-output\tshared-downstream\tfuture-candidate\tprusaslicer.gcode-output\tPrusa G-code output row needs reviewed source-pinned summary evidence before generated-output behavior is claimed.'
 readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow summary-only Prusa G-code evidence slice backed by the Phase 46 fixture and Phase 47 Rust summary boundary only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
+readonly STRUCTURAL_SCOPE_SECTION="## v1.13 Structural Evidence Scope"
+readonly STRUCTURAL_TRACEABILITY_SECTION="## v1.13 Structural Traceability"
+readonly STRUCTURAL_FIELD_ROW_COUNT="16"
 
 require_file() {
 	local file="$1"
@@ -70,7 +73,7 @@ reject_text() {
 	local label="$2"
 	local pattern="$3"
 	if grep -Fq -- "${pattern}" "${file}"; then
-		error "${label}: forbidden Phase 45 claim: ${pattern}"
+		error "${label}: forbidden Prusa G-code scope claim: ${pattern}"
 	fi
 }
 
@@ -89,6 +92,40 @@ require_section_table_row() {
 		END { exit found ? 0 : 1 }
 	' "${file}"; then
 		error "${label}: missing required table row in ${section}: ${row}"
+	fi
+}
+
+require_section_table_exact_row() {
+	local file="$1"
+	local label="$2"
+	local section="$3"
+	local row="$4"
+
+	if ! awk -v section="${section}" -v row="${row}" '
+		$0 == section { in_section = 1; next }
+		in_section && /^## / { exit }
+		in_section && $0 == row { found = 1; exit }
+		END { exit found ? 0 : 1 }
+	' "${file}"; then
+		error "${label}: missing required table row in ${section}: ${row}"
+	fi
+}
+
+require_section_table_body_row_count() {
+	local file="$1"
+	local label="$2"
+	local section="$3"
+	local expected_count="$4"
+	local count
+	count="$(awk -v section="${section}" '
+		$0 == section { in_section = 1; next }
+		in_section && /^## / { in_section = 0 }
+		in_section && /^\| [a-z0-9_]+ \|/ { count++ }
+		END { print count + 0 }
+	' "${file}")"
+
+	if [[ "${count}" != "${expected_count}" ]]; then
+		error "${label}: ${section}: expected exactly ${expected_count} structural field rows, found ${count}; required fields include source_ref"
 	fi
 }
 
@@ -183,7 +220,25 @@ reject_overclaiming_text() {
 			"Bambu Studio support verified" \
 			"Phase 45 verifies OrcaSlicer support" \
 			"verified OrcaSlicer support" \
-			"OrcaSlicer support verified"; do
+			"OrcaSlicer support verified" \
+			"Phase 49 structural evidence proves byte-for-byte G-code parity" \
+			"Phase 49 structural evidence proves full generated-output parity" \
+			"Phase 49 structural evidence proves broad generated-output parity" \
+			"Phase 49 structural evidence proves toolpath geometry" \
+			"Phase 49 structural evidence proves printability" \
+			"Phase 49 structural evidence proves printer-runtime behavior" \
+			"Phase 49 structural evidence proves support generation" \
+			"Phase 49 structural evidence proves wall seam behavior" \
+			"Phase 49 structural evidence proves arc fitting" \
+			"Phase 49 structural evidence proves GUI export/viewer behavior" \
+			"Phase 49 structural evidence proves release behavior" \
+			"Phase 49 structural evidence proves network/device behavior" \
+			"Phase 49 structural evidence proves non-Prusa fork behavior" \
+			"Phase 49 structural evidence proves Bambu Studio support" \
+			"Phase 49 structural evidence proves OrcaSlicer support" \
+			"Phase 49 structural evidence proves upstream source imports" \
+			"Phase 49 structural evidence proves sync automation" \
+			"Phase 49 verifies printer-runtime behavior"; do
 			reject_text "${checked_file}" "${checked_label}" "${forbidden_claim}"
 		done
 	done
@@ -191,9 +246,13 @@ reject_overclaiming_text() {
 
 verify_readme() {
 	require_text "${readme_file}" "README.md" \
-		"\`packages/prusa-gcode-output-scope\` owns the Phase 45 reviewed scope gate for \`prusaslicer.gcode-output\`."
+		"\`packages/prusa-gcode-output-scope\` owns the Phase 45 reviewed scope gate and the Phase 49 structural evidence scope contract for \`prusaslicer.gcode-output\`."
 	require_text "${readme_file}" "README.md" \
 		"bazel run //packages/prusa-gcode-output-scope:verify"
+	require_text "${readme_file}" "README.md" \
+		"Phase 49 structural verification allows only command counts, section counts, ordered markers, movement/extrusion indicators, temperature/tool-change markers, source identity, and fixture identity for the narrow Prusa G-code evidence chain."
+	require_text "${readme_file}" "README.md" \
+		"Phase 49 structural verification keeps broad generated-outputs in progress and does not prove byte-for-byte G-code parity, toolpath geometry, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation."
 	require_text "${readme_file}" "README.md" \
 		"Phase 45 verification does not prove executable Prusa G-code output parity."
 	require_text "${readme_file}" "README.md" \
@@ -256,6 +315,74 @@ verify_source_row_details() {
 		"## Source Row Details" "Inventory note" "Source-observed G-code output planning row; parity requires reviewed source-pinned summary evidence before output behavior is claimed."
 }
 
+# Literal Markdown row strings contain backticks, not command substitutions.
+# shellcheck disable=SC2016
+verify_structural_scope_contract() {
+	require_section_table_body_row_count "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" "${STRUCTURAL_FIELD_ROW_COUNT}"
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| source_ref | source identity | Accepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| inventory_source_paths | source identity | Inventory source paths only: `src/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp`. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| fixture_source_literal | source identity | Source literal only: `tests/fff_print/test_gcodewriter.cpp#L20-L35`. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| fixture_id | fixture identity | Fixture identity only: `gcodewriter-set-speed.gcode`. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| fixture_path | fixture identity | Checked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| command_count_total | command counts | Count of G-code command rows in the selected fixture only; no generated-output behavior claimed. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| command_count_g1 | command counts | Count of `G1` command rows in the selected fixture only; no toolpath geometry claimed. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| section_count_total | section counts | Count of structural sections in the selected summary only; no GUI, print, or runtime section behavior claimed. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| ordered_marker_1 | ordered markers | First ordered marker value from the selected fixture summary only. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| ordered_marker_2 | ordered markers | Second ordered marker value from the selected fixture summary only. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| ordered_marker_3 | ordered markers | Third ordered marker value from the selected fixture summary only. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| ordered_marker_4 | ordered markers | Fourth ordered marker value from the selected fixture summary only. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| movement_axis_present | movement/extrusion indicators | Boolean structural indicator for movement-axis text presence only; no toolpath geometry, travel, or printability claim. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| extrusion_axis_present | movement/extrusion indicators | Boolean structural indicator for extrusion-axis text presence only; no extrusion amount, material, or printability claim. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| temperature_marker_count | temperature/tool-change markers | Count of temperature marker commands in the selected fixture only; no printer-runtime behavior claimed. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_SCOPE_SECTION}" '| tool_change_marker_count | temperature/tool-change markers | Count of tool-change marker commands in the selected fixture only; no multi-tool runtime behavior claimed. |'
+}
+
+verify_structural_traceability() {
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Inventory row" "\`prusaslicer.gcode-output\` in \`packages/fork-inventories/prusaslicer.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Category-map row" "\`gcode.shared\` in \`packages/fork-inventories/category-map.tsv\` references \`prusaslicer.gcode-output\` exactly once"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Accepted source identity" "\`${ACCEPTED_SOURCE_IDENTITY}\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Fixture namespace" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Current expected summary" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Fixture provenance" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Published narrow status row" "\`fork.prusaslicer.gcode-output\` stays verified only for the narrow summary-only Prusa G-code evidence slice in \`packages/parity/status.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Broad status row" "\`generated-outputs\` stays \`in progress\` in \`packages/parity/status.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Structural reviewer signoff" "Peter Ryszkiewicz, 2026-06-16 UTC"
+}
+
+verify_generated_outputs_in_progress() {
+	local count
+	count="$(awk -F '\t' '$1 == "generated-outputs" && $2 == "in progress" { count++ } END { print count + 0 }' "${status_file}")"
+	if [[ "${count}" != "1" ]]; then
+		error "packages/parity/status.tsv: generated-outputs must remain exactly one in progress row, found ${count}"
+	fi
+}
+
 verify_deferred_scope_terms() {
 	local scope_term
 	for scope_term in \
@@ -306,6 +433,9 @@ done
 verify_readme
 verify_scope_record
 verify_source_row_details
+verify_structural_scope_contract
+verify_structural_traceability
+verify_generated_outputs_in_progress
 verify_deferred_scope_terms
 verify_inventory_inputs
 reject_overclaiming_text

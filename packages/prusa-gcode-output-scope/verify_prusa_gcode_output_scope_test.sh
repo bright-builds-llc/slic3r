@@ -93,8 +93,10 @@ write_valid_fixture() {
 	cat >"${dir}/README.md" <<'EOF'
 # Prusa G-code Output Scope Gate
 
-`packages/prusa-gcode-output-scope` owns the Phase 45 reviewed scope gate for `prusaslicer.gcode-output`.
+`packages/prusa-gcode-output-scope` owns the Phase 45 reviewed scope gate and the Phase 49 structural evidence scope contract for `prusaslicer.gcode-output`.
 Run `bazel run //packages/prusa-gcode-output-scope:verify` to check the reviewed Phase 45 scope gate.
+Phase 49 structural verification allows only command counts, section counts, ordered markers, movement/extrusion indicators, temperature/tool-change markers, source identity, and fixture identity for the narrow Prusa G-code evidence chain.
+Phase 49 structural verification keeps broad generated-outputs in progress and does not prove byte-for-byte G-code parity, toolpath geometry, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation.
 Phase 45 verification does not prove executable Prusa G-code output parity.
 Phase 45 verification does not prove byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, or sync automation.
 This package creates no fixture bytes, expected-gcode-summary.tsv, Rust G-code summary implementation, parity command, status row, upstream source import, vendored fork source tree, Git/network/vendor sync behavior, printer-runtime behavior, host upload, profile auto-update execution, network/device integration, credential handling, Bambu Studio support, OrcaSlicer support, or fork release build.
@@ -356,7 +358,7 @@ test_readme_overclaim_fails() {
 
 	# Assert
 	assert_contains "${tmp_dir}/overclaim.err" '^error:'
-	assert_contains "${tmp_dir}/overclaim.err" 'forbidden Phase 45 claim'
+	assert_contains "${tmp_dir}/overclaim.err" 'forbidden Prusa G-code scope claim'
 }
 
 test_missing_status_row_fails() {
