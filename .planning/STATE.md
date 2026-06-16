@@ -4,8 +4,8 @@ milestone: v1.13
 milestone_name: PrusaSlicer G-code Structural Evidence Expansion
 status: executing
 stopped_at: Phase 49 context gathered
-last_updated: "2026-06-16T15:14:51.841Z"
-last_activity: 2026-06-16 -- Phase 49 planning complete
+last_updated: "2026-06-16T15:54:28.506Z"
+last_activity: 2026-06-16 -- Phase 49 execution started
 progress:
   total_phases: 4
   completed_phases: 0
@@ -29,11 +29,11 @@ depend on.
 
 ## Current Position
 
-Phase: 49 of 52 (Structural G-code Scope Contract)
-Plan: 0 of 2 (ready to execute)
+Phase: 49 (Structural G-code Scope Contract) - EXECUTING
+Plan: 1 of 2
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
-Status: Ready to execute
-Last activity: 2026-06-16 -- Phase 49 planning complete
+Status: Executing Phase 49
+Last activity: 2026-06-16 -- Phase 49 execution started
 
 Progress: [----------] 0%
 
@@ -58,8 +58,10 @@ Recent decisions affecting v1.13:
 - Continue phase numbering from Phase 49 because v1.12 ended at Phase 48.
 - Expand Prusa G-code evidence structurally before broad generated-output,
   byte-for-byte, geometry, runtime, support, seam, or arc parity is claimed.
+
 - Keep broad `generated-outputs` in progress and active downstream-fork port
   planning limited to PrusaSlicer.
+
 - Skip external ecosystem research for v1.13 because the milestone is an
   internal evidence-contract expansion over existing repo artifacts.
 
