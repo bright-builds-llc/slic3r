@@ -38,8 +38,43 @@ prove executable Prusa G-code output parity.
 | Caution flags | `none` |
 | Inventory note | Source-observed G-code output planning row; parity requires reviewed source-pinned summary evidence before output behavior is claimed. |
 
+## v1.13 Structural Evidence Scope
+
+This section is an additive structural contract for the existing narrow `prusaslicer.gcode-output` evidence chain. It allows only the fields listed below for Phase 50 structural fixture expectations and Phase 51 typed parsing. It does not promote broad `generated-outputs` status and does not prove byte-for-byte G-code parity, toolpath geometry, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, non-Prusa fork behavior, upstream source imports, or sync automation.
+
+| Structural Field | Category | Evidence Boundary |
+| --- | --- | --- |
+| source_ref | source identity | Accepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`. |
+| inventory_source_paths | source identity | Inventory source paths only: `src/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp`. |
+| fixture_source_literal | source identity | Source literal only: `tests/fff_print/test_gcodewriter.cpp#L20-L35`. |
+| fixture_id | fixture identity | Fixture identity only: `gcodewriter-set-speed.gcode`. |
+| fixture_path | fixture identity | Checked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`. |
+| command_count_total | command counts | Count of G-code command rows in the selected fixture only; no generated-output behavior claimed. |
+| command_count_g1 | command counts | Count of `G1` command rows in the selected fixture only; no toolpath geometry claimed. |
+| section_count_total | section counts | Count of structural sections in the selected summary only; no GUI, print, or runtime section behavior claimed. |
+| ordered_marker_1 | ordered markers | First ordered marker value from the selected fixture summary only. |
+| ordered_marker_2 | ordered markers | Second ordered marker value from the selected fixture summary only. |
+| ordered_marker_3 | ordered markers | Third ordered marker value from the selected fixture summary only. |
+| ordered_marker_4 | ordered markers | Fourth ordered marker value from the selected fixture summary only. |
+| movement_axis_present | movement/extrusion indicators | Boolean structural indicator for movement-axis text presence only; no toolpath geometry, travel, or printability claim. |
+| extrusion_axis_present | movement/extrusion indicators | Boolean structural indicator for extrusion-axis text presence only; no extrusion amount, material, or printability claim. |
+| temperature_marker_count | temperature/tool-change markers | Count of temperature marker commands in the selected fixture only; no printer-runtime behavior claimed. |
+| tool_change_marker_count | temperature/tool-change markers | Count of tool-change marker commands in the selected fixture only; no multi-tool runtime behavior claimed. |
+
+## v1.13 Structural Traceability
+
+| Required Link | Exact Target |
+| --- | --- |
+| Inventory row | `prusaslicer.gcode-output` in `packages/fork-inventories/prusaslicer.tsv` |
+| Category-map row | `gcode.shared` in `packages/fork-inventories/category-map.tsv` references `prusaslicer.gcode-output` exactly once |
+| Accepted source identity | `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` |
+| Fixture namespace | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` |
+| Current expected summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv` |
+| Fixture provenance | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv` |
+| Published narrow status row | `fork.prusaslicer.gcode-output` stays verified only for the narrow summary-only Prusa G-code evidence slice in `packages/parity/status.tsv` |
+| Broad status row | `generated-outputs` stays `in progress` in `packages/parity/status.tsv` |
+| Structural reviewer signoff | Peter Ryszkiewicz, 2026-06-16 UTC |
+
 ## Boundary
 
-This record is a Phase 45 metadata-only scope gate. It must not be treated as
-fixture evidence, Rust summary readiness, status publication, executable
-parity, or broad generated-output parity.
+This record is a metadata-only scope gate plus structural evidence contract. It must not be treated as fixture expansion, Rust structural parser readiness, executable structural evidence, byte-for-byte G-code parity, broad generated-output parity, or generated-output status promotion.
