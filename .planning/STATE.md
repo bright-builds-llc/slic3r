@@ -1,41 +1,42 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.12
-milestone_name: PrusaSlicer G-code Output Evidence Foundation
-status: archived
-stopped_at: v1.12 archived; ready for next milestone planning
-last_updated: "2026-06-15T19:05:00Z"
-last_activity: 2026-06-15 -- v1.12 archived
+milestone: v1.13
+milestone_name: PrusaSlicer G-code Structural Evidence Expansion
+status: defining_requirements
+stopped_at: v1.13 started; defining requirements
+last_updated: "2026-06-16T14:28:41Z"
+last_activity: 2026-06-16 -- v1.13 started
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 12
-  completed_plans: 12
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-15)
+See: `.planning/PROJECT.md` (updated 2026-06-16)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Planning next milestone
+**Current focus:** Defining v1.13 PrusaSlicer G-code structural evidence
+requirements
 
 ## Current Position
 
-Phase: none active
-Plan: none active
-Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
-Status: Archived
-Last activity: 2026-06-15 -- v1.12 archived
+Phase: Not started (defining requirements)
+Plan: —
+Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
+Status: Defining requirements
+Last activity: 2026-06-16 -- v1.13 started
 
-Progress: [##########] 100%
+Progress: [----------] 0%
 
 ## Performance Metrics
 
@@ -56,12 +57,24 @@ Progress: [##########] 100%
   command, mutation guard, exact status row, docs, and final verification.
 - v1.12 archived on 2026-06-15 with 4 phases, 12 plans, 29 tasks, and a passed
   milestone audit.
+- v1.13 starts on 2026-06-16 with structural Prusa G-code evidence expansion
+  scoped as the next narrow generated-output step after the v1.12 summary-only
+  evidence path.
 
 ## Accumulated Context
 
 ### Decisions
 
 Decisions are logged in `PROJECT.md` Key Decisions table.
+
+Recent decisions affecting v1.13:
+
+- Continue phase numbering from Phase 49 because v1.12 ended at Phase 48.
+- Expand Prusa G-code evidence structurally before broad generated-output,
+  byte-for-byte, geometry, runtime, support, seam, or arc parity is claimed.
+- Skip external ecosystem research for v1.13 because the milestone is an
+  internal evidence-contract expansion over existing repo fixtures, Rust
+  summary boundaries, status rows, and documentation.
 
 Recent decisions affecting v1.12:
 
@@ -105,6 +118,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-15T19:05:00Z
-Stopped at: v1.12 archived
-Resume file: .planning/milestones/v1.12-phases/48-executable-prusa-g-code-evidence/48-CONTEXT.md
+Last session: 2026-06-16T14:28:41Z
+Stopped at: v1.13 started; defining requirements
+Resume file: .planning/STATE.md

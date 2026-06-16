@@ -10,10 +10,22 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone: None
+## Current Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
 
-v1.12 is shipped and archived. Start the next milestone with
-`/gsd-new-milestone` so fresh requirements are defined before new phase work.
+**Goal:** Expand the narrow PrusaSlicer G-code evidence path from
+summary-only marker metadata into structural G-code evidence while avoiding
+byte-for-byte, geometry, printability, runtime, GUI, and non-Prusa fork claims.
+
+**Target features:**
+
+- Reviewed structural G-code scope contract that names allowed evidence fields
+  and still-forbidden generated-output claims.
+- Source-pinned Prusa G-code fixture expansion with checked-in structural
+  summaries and fail-closed drift guards.
+- Typed Rust structural summary boundary for the expanded Prusa G-code fixture
+  surface.
+- Public parity/status/docs update that keeps `fork.prusaslicer.gcode-output`
+  evidence narrow but more meaningful.
 
 ## Last Shipped Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
 
@@ -24,6 +36,17 @@ without claiming broad generated-output, printer-runtime, geometry, or GUI
 parity.
 
 ## Current State
+
+v1.13 is open. It builds directly on v1.12 by strengthening the
+`fork.prusaslicer.gcode-output` evidence contract from marker-level summary
+metadata to structural G-code summaries: stable command/section counts,
+ordered markers, movement/extrusion indicators, temperature/tool-change
+markers, and fail-closed drift checks. The milestone must keep the broad
+`generated-outputs` status row in progress and must not claim byte-for-byte
+G-code parity, geometry/toolpath parity, printer-runtime behavior, support
+generation, wall seam behavior, arc fitting, GUI export/viewer behavior,
+release behavior, Bambu Studio, OrcaSlicer, upstream imports, or sync
+automation.
 
 v1.12 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, see the
@@ -469,6 +492,7 @@ The audience for this work is broad:
 | Publish project-file parity only as a narrow expected-summary evidence slice | Phase 44 proves command/status wiring without claiming full 3MF import/export, GUI project behavior, runtime semantics, or generated-output parity | ✓ Shipped in Phase 44 |
 | Start generated-output work with summary-only G-code evidence | G-code is closer to real port value than another static input slice, but byte-for-byte output parity and printer-runtime claims are too broad for the first generated-output milestone | ✓ Shipped in v1.12 Phase 48 |
 | Limit active downstream-fork porting consideration to PrusaSlicer for now | Non-Prusa Slicer-family ports need an explicit new planning decision before moving from parking lot into the roadmap | ✓ Adopted 2026-06-03 |
+| Expand Prusa G-code evidence structurally before broad generated-output parity | v1.12 proved the evidence path, but support, seam, arc, geometry, runtime, and byte parity should wait until structural G-code summaries can fail closed on meaningful drift | — Pending in v1.13 |
 
 ## Evolution
 
@@ -491,4 +515,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-15 after archiving v1.12*
+*Last updated: 2026-06-16 after starting v1.13*
