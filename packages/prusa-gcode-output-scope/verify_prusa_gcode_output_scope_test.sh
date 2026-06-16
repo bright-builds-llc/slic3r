@@ -537,6 +537,25 @@ test_unsupported_structural_field_fails() {
 	assert_contains "${tmp_dir}/unsupported-structural.err" 'expected exactly 16 structural field rows'
 }
 
+test_compact_unsupported_structural_field_fails() {
+	# Arrange
+	local dir="${tmp_dir}/compact-unsupported-structural-field"
+	write_valid_fixture "${dir}"
+	insert_line_before \
+		"${dir}/gcode-output-scope.md" \
+		"## v1.13 Structural Traceability" \
+		"|geometry-count|unsupported generated-output semantics|Unsupported field that must fail closed.|"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/compact-unsupported-structural.out" "${tmp_dir}/compact-unsupported-structural.err"; then
+		fail "compact unsupported structural field fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/compact-unsupported-structural.err" '^error:'
+	assert_contains "${tmp_dir}/compact-unsupported-structural.err" 'expected exactly 16 structural field rows'
+}
+
 test_missing_structural_traceability_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-structural-traceability"
@@ -667,6 +686,7 @@ test_missing_parity_target_fails
 test_phase47_rust_summary_boundary_is_allowed
 test_missing_allowed_structural_field_fails
 test_unsupported_structural_field_fails
+test_compact_unsupported_structural_field_fails
 test_missing_structural_traceability_fails
 test_missing_structural_reviewer_signoff_fails
 test_scope_structural_overclaim_fails

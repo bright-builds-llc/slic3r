@@ -120,9 +120,9 @@ require_section_table_body_row_count() {
 	count="$(awk -v section="${section}" '
 		$0 == section { in_section = 1; next }
 		in_section && /^## / { exit }
-		in_section && /^\| Structural Field \|/ { next }
-		in_section && /^\| --- \|/ { next }
-		in_section && /^\| / { count++ }
+		in_section && /^[[:space:]]*\|[[:space:]]*Structural Field[[:space:]]*\|/ { next }
+		in_section && /^[[:space:]]*\|[[:space:]]*---[[:space:]]*\|/ { next }
+		in_section && /^[[:space:]]*\|/ { count++ }
 		END { print count + 0 }
 	' "${file}")"
 
