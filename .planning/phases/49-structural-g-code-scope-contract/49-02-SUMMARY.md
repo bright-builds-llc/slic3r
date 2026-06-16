@@ -117,8 +117,6 @@ Commands run successfully:
 - **Verification:** `bash packages/prusa-gcode-output-scope/verify_prusa_gcode_output_scope_test.sh` passed.
 - **Committed in:** `e7ea1976a`
 
----
-
 **Total deviations:** 1 auto-fixed (1 bug)
 **Impact on plan:** The verifier remains fail-closed and satisfies both required row-count enforcement and the planned diagnostic assertion.
 
