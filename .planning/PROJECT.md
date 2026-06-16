@@ -48,6 +48,15 @@ generation, wall seam behavior, arc fitting, GUI export/viewer behavior,
 release behavior, Bambu Studio, OrcaSlicer, upstream imports, or sync
 automation.
 
+v1.13 Phase 49 is complete. Maintainers can inspect the reviewed
+`packages/prusa-gcode-output-scope` structural scope contract, run
+`bazel run //packages/prusa-gcode-output-scope:verify`, and rely on
+fail-closed mutation coverage for structural field drift, traceability drift,
+Phase 49 overclaims, compact unsupported table rows, and broad
+`generated-outputs` status promotion. The contract completes GCSCOPE-01,
+GCSCOPE-02, and GCSCOPE-03 while keeping fixture expansion, Rust parsing, and
+executable structural evidence publication deferred to later v1.13 phases.
+
 v1.12 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, see the
 `line_4` mutation guard fail closed on expected-summary drift, inspect the
