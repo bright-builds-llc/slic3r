@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: PrusaSlicer G-code Structural Evidence Expansion
-status: executing
-stopped_at: Completed 49-01-PLAN.md
-last_updated: "2026-06-16T16:07:08.168Z"
+status: verifying
+stopped_at: Completed 49-02-PLAN.md
+last_updated: "2026-06-16T16:27:54.466Z"
 last_activity: 2026-06-16
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
-  percent: 50
+  completed_plans: 2
+  percent: 100
 ---
 
 # Project State
@@ -32,7 +32,7 @@ depend on.
 Phase: 49 (Structural G-code Scope Contract) - EXECUTING
 Plan: 2 of 2
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-16
 
 Progress: [----------] 0%
@@ -99,6 +99,9 @@ Recent decisions affecting v1.12:
 - [Phase 49]: Kept the v1.13 structural contract inside the existing prusa-gcode-output-scope package.
 - [Phase 49]: Used a closed sixteen-row Markdown field table as the inspectable source for Phase 50 and Phase 51.
 - [Phase 49]: Kept broad generated-outputs in progress and deferred verifier enforcement to 49-02 as planned.
+- [Phase 49]: Kept structural enforcement in the existing prusa-gcode-output-scope verifier package. — This preserves the Phase 45-49 reviewed evidence chain and avoids creating a new package boundary.
+- [Phase 49]: Enforced the structural field table with exact required rows plus an exact sixteen-row body count. — This makes unsupported structural fields fail closed instead of passing through presence-only checks.
+- [Phase 49]: Kept generated-outputs fail-closed as exactly one in-progress status row while preserving the narrow verified fork row. — This completes GCSCOPE-03 without promoting broad generated-output parity.
 
 ### Pending Todos
 
@@ -110,6 +113,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-16T16:06:15.875Z
-Stopped at: Completed 49-01-PLAN.md
+Last session: 2026-06-16T16:26:29.554Z
+Stopped at: Completed 49-02-PLAN.md
 Resume file: None

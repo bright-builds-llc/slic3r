@@ -84,7 +84,7 @@ temperature/tool-change markers, source identity, and fixture identity.
 
 - This milestone starts at Phase 49 because Phase 48 shipped in v1.12
 
-- [ ] **Phase 49: Structural G-code Scope Contract** - Maintainers can inspect
+- [x] **Phase 49: Structural G-code Scope Contract** - Maintainers can inspect (completed 2026-06-16)
   and verify the allowed structural G-code evidence contract before fixtures,
   Rust boundaries, or executable evidence expand.
 
@@ -130,7 +130,7 @@ claims forbidden.
 Plans:
 
 - [x] 49-01-PLAN.md — Add the reviewed structural field contract and traceability surface.
-- [ ] 49-02-PLAN.md — Enforce the structural scope contract through fail-closed verifier and mutation coverage.
+- [x] 49-02-PLAN.md — Enforce the structural scope contract through fail-closed verifier and mutation coverage.
 
 ### Phase 50: Structural G-code Fixture Expansion
 
@@ -221,7 +221,7 @@ Phases execute in numeric order: 49 -> 50 -> 51 -> 52
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 49. Structural G-code Scope Contract | 1/2 | In Progress|  |
+| 49. Structural G-code Scope Contract | 2/2 | Complete   | 2026-06-16 |
 | 50. Structural G-code Fixture Expansion | 0/TBD | Not started | - |
 | 51. Rust Structural G-code Summary Boundary | 0/TBD | Not started | - |
 | 52. Executable Structural G-code Evidence | 0/TBD | Not started | - |

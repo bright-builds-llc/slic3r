@@ -15,7 +15,7 @@ depend on.
   contract that enumerates the allowed evidence fields for command counts,
   section counts, ordered markers, movement/extrusion indicators,
   temperature/tool-change markers, source identity, and fixture identity.
-- [ ] **GCSCOPE-02**: Maintainer can run a scope verifier that fails closed when
+- [x] **GCSCOPE-02**: Maintainer can run a scope verifier that fails closed when
   v1.13 artifacts claim byte-for-byte G-code parity, geometry/toolpath parity,
   printability, printer-runtime behavior, support generation, wall seam
   behavior, arc fitting, GUI export/viewer behavior, release behavior,
@@ -113,7 +113,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | GCSCOPE-01 | Phase 49 | Complete |
-| GCSCOPE-02 | Phase 49 | Pending |
+| GCSCOPE-02 | Phase 49 | Complete |
 | GCSCOPE-03 | Phase 49 | Complete |
 | GCFIX-01 | Phase 50 | Pending |
 | GCFIX-02 | Phase 50 | Pending |
