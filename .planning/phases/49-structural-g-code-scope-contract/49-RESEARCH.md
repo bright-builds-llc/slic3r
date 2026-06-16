@@ -343,23 +343,23 @@ This follows the existing Arrange/Act/Assert mutation-test style. [VERIFIED: ver
 
 | # | Claim | Section | Risk if Wrong |
 |---|-------|---------|---------------|
-| A1 | The recommended exact field names in the v1.13 allowed-field table are a research recommendation, not a pre-existing contract. | Architecture Patterns | Phase 50/51 may need field renames if maintainers prefer different stable TSV names. |
+| A1 | The structural field names recommended in this research are accepted as the Phase 49 contract target. | Architecture Patterns | Phase 50/51 may only consume this closed set; unsupported field additions require updating this scope contract first. |
 | A2 | Adding a dedicated exact-row-counted section is the cleanest way to satisfy D-05. | Summary, Architecture Patterns | Planner could instead extend existing rows, but must still add an exclusivity check. |
-| A3 | The final reviewer signoff value should follow existing scope-record style but is not locked in CONTEXT.md. | Open Questions | Implementation may need maintainer confirmation before finalizing reviewer/date text. |
+| A3 | Reviewer signoff for Phase 49 follows the existing maintainer identity/date pattern from the scope package. | Open Questions (RESOLVED) | Execution chooses the concrete date/time when editing the contract; no user input is blocked. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **What exact reviewer signoff should the v1.13 scope section carry?**
 
    - What we know: Existing scope records use maintainer/date signoff rows. [VERIFIED: gcode-output-scope.md, project-file-scope.md]
-   - What's unclear: CONTEXT.md does not lock the Phase 49 reviewer/date text. [VERIFIED: 49-CONTEXT.md]
-   - Recommendation: Preserve the existing reviewer signoff row and add a v1.13 structural review row only when the maintainer-approved value is known. [ASSUMED: recommended planning step]
+   - RESOLVED: Reviewer signoff for Phase 49 uses the existing maintainer identity/date pattern from the scope package, with the concrete date/time chosen by execution when editing the contract; no user input is blocked. [VERIFIED: checker revision decision]
+   - Planning effect: Preserve the existing reviewer signoff style and do not add a human decision checkpoint for reviewer/date text. [VERIFIED: checker revision decision]
 
 1. **Should Phase 49 lock artifact column names or only allowed evidence-field names?**
 
    - What we know: Phase 50 owns the checked-in structural fixture artifact. [VERIFIED: 49-CONTEXT.md]
-   - What's unclear: The future TSV schema is not already present in the repo. [VERIFIED: expected-gcode-summary.tsv, prusa_gcode_output.rs]
-   - Recommendation: Phase 49 should lock allowed evidence-field names, not implement the Phase 50 artifact schema. [ASSUMED: recommended boundary]
+   - RESOLVED: The structural field names in this research are accepted as the Phase 49 contract target, but Phase 50 may only consume the closed set and cannot invent unsupported fields without updating this scope contract. [VERIFIED: checker revision decision]
+   - Planning effect: Phase 49 locks allowed evidence-field names without creating the Phase 50 artifact schema. [VERIFIED: checker revision decision]
 
 ## Environment Availability
 
@@ -423,7 +423,7 @@ This table uses the GSD planning taxonomy while noting that OWASP ASVS 5.0.0 is 
 
 ### Tertiary (LOW confidence)
 
-- Recommended exact field names are not yet repo-verified because Phase 49 owns creating the contract. [ASSUMED: researcher recommendation]
+- Accepted exact field names are the Phase 49 contract target once Phase 49 creates and verifies the contract. [VERIFIED: checker revision decision]
 
 ## Metadata
 
