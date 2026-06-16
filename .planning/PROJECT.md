@@ -411,7 +411,15 @@ high-risk generated-output or network/cloud surfaces.
 
 ### Active
 
-None. v1.12 planned requirements are validated.
+- [ ] Define a reviewed structural Prusa G-code scope contract that keeps the
+  evidence slice narrow and forbids broad generated-output claims.
+- [ ] Expand the source-pinned Prusa G-code fixture surface with checked-in
+  structural expected summaries and fail-closed drift guards.
+- [ ] Add a pure typed Rust structural summary boundary for the expanded
+  fixture evidence.
+- [ ] Publish a stronger executable parity/status/docs path for
+  `fork.prusaslicer.gcode-output` without claiming byte-for-byte, geometry,
+  runtime, GUI, or non-Prusa fork parity.
 
 ### Out of Scope
 
