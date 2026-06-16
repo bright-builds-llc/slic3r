@@ -11,7 +11,7 @@ depend on.
 
 ### Structural Scope
 
-- [ ] **GCSCOPE-01**: Maintainer can inspect a reviewed structural G-code scope
+- [x] **GCSCOPE-01**: Maintainer can inspect a reviewed structural G-code scope
   contract that enumerates the allowed evidence fields for command counts,
   section counts, ordered markers, movement/extrusion indicators,
   temperature/tool-change markers, source identity, and fixture identity.
@@ -21,7 +21,7 @@ depend on.
   behavior, arc fitting, GUI export/viewer behavior, release behavior,
   network/device behavior, non-Prusa fork behavior, upstream source imports, or
   sync automation.
-- [ ] **GCSCOPE-03**: Maintainer can trace the structural G-code evidence scope
+- [x] **GCSCOPE-03**: Maintainer can trace the structural G-code evidence scope
   to the accepted `prusaslicer.gcode-output` inventory row and the v1.12 fixture
   and status path without promoting the broad `generated-outputs` status row to
   verified.
@@ -112,9 +112,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GCSCOPE-01 | Phase 49 | Pending |
+| GCSCOPE-01 | Phase 49 | Complete |
 | GCSCOPE-02 | Phase 49 | Pending |
-| GCSCOPE-03 | Phase 49 | Pending |
+| GCSCOPE-03 | Phase 49 | Complete |
 | GCFIX-01 | Phase 50 | Pending |
 | GCFIX-02 | Phase 50 | Pending |
 | GCFIX-03 | Phase 50 | Pending |

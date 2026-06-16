@@ -129,7 +129,7 @@ claims forbidden.
 
 Plans:
 
-- [ ] 49-01-PLAN.md — Add the reviewed structural field contract and traceability surface.
+- [x] 49-01-PLAN.md — Add the reviewed structural field contract and traceability surface.
 - [ ] 49-02-PLAN.md — Enforce the structural scope contract through fail-closed verifier and mutation coverage.
 
 ### Phase 50: Structural G-code Fixture Expansion
@@ -221,7 +221,7 @@ Phases execute in numeric order: 49 -> 50 -> 51 -> 52
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 49. Structural G-code Scope Contract | 0/2 | Not started | - |
+| 49. Structural G-code Scope Contract | 1/2 | In Progress|  |
 | 50. Structural G-code Fixture Expansion | 0/TBD | Not started | - |
 | 51. Rust Structural G-code Summary Boundary | 0/TBD | Not started | - |
 | 52. Executable Structural G-code Evidence | 0/TBD | Not started | - |

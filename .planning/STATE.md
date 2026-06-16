@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: PrusaSlicer G-code Structural Evidence Expansion
 status: executing
-stopped_at: Phase 49 context gathered
-last_updated: "2026-06-16T15:54:28.506Z"
-last_activity: 2026-06-16 -- Phase 49 execution started
+stopped_at: Completed 49-01-PLAN.md
+last_updated: "2026-06-16T16:07:08.168Z"
+last_activity: 2026-06-16
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 2
-  completed_plans: 0
-  percent: 0
+  completed_plans: 1
+  percent: 50
 ---
 
 # Project State
@@ -30,10 +30,10 @@ depend on.
 ## Current Position
 
 Phase: 49 (Structural G-code Scope Contract) - EXECUTING
-Plan: 1 of 2
+Plan: 2 of 2
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
-Status: Executing Phase 49
-Last activity: 2026-06-16 -- Phase 49 execution started
+Status: Ready to execute
+Last activity: 2026-06-16
 
 Progress: [----------] 0%
 
@@ -96,6 +96,9 @@ Recent decisions affecting v1.12:
 - [Phase 46-prusa-g-code-fixture-surface]: Published the Phase 46 fixture surface through package and port docs without adding a Phase 47 Rust summary boundary, Phase 48 parity command, or status row.
 - [Phase 46-prusa-g-code-fixture-surface]: Kept fork.prusaslicer.gcode-output absent from packages/parity/status.tsv while documenting the reserved Phase 48 command and publication gate.
 - [Phase 46-prusa-g-code-fixture-surface]: Recorded the final validation task as an empty test(46-03) commit because the task was verification-only and produced no file changes.
+- [Phase 49]: Kept the v1.13 structural contract inside the existing prusa-gcode-output-scope package.
+- [Phase 49]: Used a closed sixteen-row Markdown field table as the inspectable source for Phase 50 and Phase 51.
+- [Phase 49]: Kept broad generated-outputs in progress and deferred verifier enforcement to 49-02 as planned.
 
 ### Pending Todos
 
@@ -107,6 +110,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-16T14:45:41.903Z
-Stopped at: Phase 49 context gathered
-Resume file: .planning/phases/49-structural-g-code-scope-contract/49-CONTEXT.md
+Last session: 2026-06-16T16:06:15.875Z
+Stopped at: Completed 49-01-PLAN.md
+Resume file: None
