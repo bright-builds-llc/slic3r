@@ -209,6 +209,11 @@ reject_overclaiming_text() {
 	local checked_file
 	local checked_label
 	local forbidden_claim
+	local overclaim_pattern
+	local overclaim_terms
+
+	overclaim_terms='byte-for-byte G-code parity|full generated-output parity|broad generated-output parity|toolpath geometry|printability|printer-runtime behavior|support generation|wall seam behavior|arc fitting|GUI export/viewer behavior|release behavior|network/device behavior|non-Prusa fork behavior|non-Prusa forks? support|Bambu Studio support|OrcaSlicer support|upstream source imports|sync automation'
+	overclaim_pattern="Phase 49[^.]*[^[:alnum:]_](proves|verified|verifies)[^[:alnum:]_][^.]*(${overclaim_terms})"
 
 	for checked_file in "${readme_file}" "${scope_file}"; do
 		checked_label="$(basename "${checked_file}")"
@@ -243,6 +248,9 @@ reject_overclaiming_text() {
 			"Phase 49 verifies printer-runtime behavior"; do
 			reject_text "${checked_file}" "${checked_label}" "${forbidden_claim}"
 		done
+		if grep -Eiq -- "${overclaim_pattern}" "${checked_file}"; then
+			error "${checked_label}: forbidden Prusa G-code scope overclaim"
+		fi
 	done
 }
 

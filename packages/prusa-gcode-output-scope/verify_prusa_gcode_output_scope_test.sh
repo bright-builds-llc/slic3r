@@ -617,6 +617,38 @@ test_readme_structural_overclaim_fails() {
 	assert_contains "${tmp_dir}/readme-structural-overclaim.err" 'forbidden Prusa G-code scope claim'
 }
 
+test_readme_structural_verification_parity_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/readme-structural-verification-parity-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 49 structural verification proves byte-for-byte G-code parity.\n' >>"${dir}/README.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/readme-structural-verification-parity-overclaim.out" "${tmp_dir}/readme-structural-verification-parity-overclaim.err"; then
+		fail "README structural verification parity overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/readme-structural-verification-parity-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/readme-structural-verification-parity-overclaim.err" 'forbidden Prusa G-code scope overclaim'
+}
+
+test_scope_non_prusa_fork_support_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/scope-non-prusa-fork-support-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 49 structural verification verifies non-Prusa fork support.\n' >>"${dir}/gcode-output-scope.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/scope-non-prusa-fork-support-overclaim.out" "${tmp_dir}/scope-non-prusa-fork-support-overclaim.err"; then
+		fail "scope non-Prusa fork support overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/scope-non-prusa-fork-support-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/scope-non-prusa-fork-support-overclaim.err" 'forbidden Prusa G-code scope overclaim'
+}
+
 test_complete_fixture_passes
 test_wrong_inventory_row_id_fails
 test_wrong_source_identity_fails
@@ -640,5 +672,7 @@ test_missing_structural_reviewer_signoff_fails
 test_scope_structural_overclaim_fails
 test_scope_full_generated_output_parity_overclaim_fails
 test_readme_structural_overclaim_fails
+test_readme_structural_verification_parity_overclaim_fails
+test_scope_non_prusa_fork_support_overclaim_fails
 
 printf 'ok: verify_prusa_gcode_output_scope_test\n'
