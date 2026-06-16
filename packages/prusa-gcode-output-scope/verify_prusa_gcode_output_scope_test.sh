@@ -68,6 +68,20 @@ replace_text() {
 	mv "${tmp_file}" "${file}"
 }
 
+insert_line_before() {
+	local file="$1"
+	local pattern="$2"
+	local inserted_line="$3"
+	local tmp_file
+	tmp_file="${file}.tmp"
+	awk -v pattern="${pattern}" -v inserted_line="${inserted_line}" '
+		!inserted && index($0, pattern) { print inserted_line; inserted = 1 }
+		{ print }
+		END { exit inserted ? 0 : 1 }
+	' "${file}" >"${tmp_file}"
+	mv "${tmp_file}" "${file}"
+}
+
 write_valid_fixture() {
 	local dir="$1"
 	local planned_command
@@ -126,6 +140,43 @@ prove executable Prusa G-code output parity.
 | Inventory decision | `future-candidate` |
 | Caution flags | `none` |
 | Inventory note | Source-observed G-code output planning row; parity requires reviewed source-pinned summary evidence before output behavior is claimed. |
+
+## v1.13 Structural Evidence Scope
+
+This section is an additive structural contract for the existing narrow `prusaslicer.gcode-output` evidence chain. It allows only the fields listed below for Phase 50 structural fixture expectations and Phase 51 typed parsing. It does not promote broad `generated-outputs` status and does not prove byte-for-byte G-code parity, toolpath geometry, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, non-Prusa fork behavior, upstream source imports, or sync automation.
+
+| Structural Field | Category | Evidence Boundary |
+| --- | --- | --- |
+| source_ref | source identity | Accepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`. |
+| inventory_source_paths | source identity | Inventory source paths only: `src/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp`. |
+| fixture_source_literal | source identity | Source literal only: `tests/fff_print/test_gcodewriter.cpp#L20-L35`. |
+| fixture_id | fixture identity | Fixture identity only: `gcodewriter-set-speed.gcode`. |
+| fixture_path | fixture identity | Checked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`. |
+| command_count_total | command counts | Count of G-code command rows in the selected fixture only; no generated-output behavior claimed. |
+| command_count_g1 | command counts | Count of `G1` command rows in the selected fixture only; no toolpath geometry claimed. |
+| section_count_total | section counts | Count of structural sections in the selected summary only; no GUI, print, or runtime section behavior claimed. |
+| ordered_marker_1 | ordered markers | First ordered marker value from the selected fixture summary only. |
+| ordered_marker_2 | ordered markers | Second ordered marker value from the selected fixture summary only. |
+| ordered_marker_3 | ordered markers | Third ordered marker value from the selected fixture summary only. |
+| ordered_marker_4 | ordered markers | Fourth ordered marker value from the selected fixture summary only. |
+| movement_axis_present | movement/extrusion indicators | Boolean structural indicator for movement-axis text presence only; no toolpath geometry, travel, or printability claim. |
+| extrusion_axis_present | movement/extrusion indicators | Boolean structural indicator for extrusion-axis text presence only; no extrusion amount, material, or printability claim. |
+| temperature_marker_count | temperature/tool-change markers | Count of temperature marker commands in the selected fixture only; no printer-runtime behavior claimed. |
+| tool_change_marker_count | temperature/tool-change markers | Count of tool-change marker commands in the selected fixture only; no multi-tool runtime behavior claimed. |
+
+## v1.13 Structural Traceability
+
+| Required Link | Exact Target |
+| --- | --- |
+| Inventory row | `prusaslicer.gcode-output` in `packages/fork-inventories/prusaslicer.tsv` |
+| Category-map row | `gcode.shared` in `packages/fork-inventories/category-map.tsv` references `prusaslicer.gcode-output` exactly once |
+| Accepted source identity | `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` |
+| Fixture namespace | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` |
+| Current expected summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv` |
+| Fixture provenance | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv` |
+| Published narrow status row | `fork.prusaslicer.gcode-output` stays verified only for the narrow summary-only Prusa G-code evidence slice in `packages/parity/status.tsv` |
+| Broad status row | `generated-outputs` stays `in progress` in `packages/parity/status.tsv` |
+| Structural reviewer signoff | Peter Ryszkiewicz, 2026-06-16 UTC |
 EOF
 
 	replace_text "${dir}/gcode-output-scope.md" "__PLANNED_COMMAND__" "${planned_command}"
@@ -432,6 +483,121 @@ test_phase47_rust_summary_boundary_is_allowed() {
 	assert_contains "${tmp_dir}/phase47-rust-boundary.out" '^ok: Prusa G-code output scope verification passed$'
 }
 
+test_missing_allowed_structural_field_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-allowed-structural-field"
+	write_valid_fixture "${dir}"
+	remove_line_containing "${dir}/gcode-output-scope.md" "| source_ref |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-allowed-structural.out" "${tmp_dir}/missing-allowed-structural.err"; then
+		fail "missing allowed structural field fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-allowed-structural.err" '^error:'
+	assert_contains "${tmp_dir}/missing-allowed-structural.err" 'source_ref'
+}
+
+test_unsupported_structural_field_fails() {
+	# Arrange
+	local dir="${tmp_dir}/unsupported-structural-field"
+	write_valid_fixture "${dir}"
+	insert_line_before \
+		"${dir}/gcode-output-scope.md" \
+		"## v1.13 Structural Traceability" \
+		"| geometry_count | unsupported generated-output semantics | Unsupported field that must fail closed. |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/unsupported-structural.out" "${tmp_dir}/unsupported-structural.err"; then
+		fail "unsupported structural field fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/unsupported-structural.err" '^error:'
+	assert_contains "${tmp_dir}/unsupported-structural.err" 'expected exactly 16 structural field rows'
+}
+
+test_missing_structural_traceability_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-structural-traceability"
+	write_valid_fixture "${dir}"
+	remove_line_containing "${dir}/gcode-output-scope.md" "| Broad status row |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-structural-traceability.out" "${tmp_dir}/missing-structural-traceability.err"; then
+		fail "missing structural traceability fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-structural-traceability.err" '^error:'
+	assert_contains "${tmp_dir}/missing-structural-traceability.err" 'Broad status row'
+}
+
+test_missing_structural_reviewer_signoff_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-structural-reviewer-signoff"
+	write_valid_fixture "${dir}"
+	remove_line_containing "${dir}/gcode-output-scope.md" "| Structural reviewer signoff |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-structural-reviewer-signoff.out" "${tmp_dir}/missing-structural-reviewer-signoff.err"; then
+		fail "missing structural reviewer signoff fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-structural-reviewer-signoff.err" '^error:'
+	assert_contains "${tmp_dir}/missing-structural-reviewer-signoff.err" 'Structural reviewer signoff'
+}
+
+test_scope_structural_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/scope-structural-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 49 structural evidence proves toolpath geometry.\n' >>"${dir}/gcode-output-scope.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/scope-structural-overclaim.out" "${tmp_dir}/scope-structural-overclaim.err"; then
+		fail "scope structural overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/scope-structural-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/scope-structural-overclaim.err" 'forbidden Prusa G-code scope claim'
+}
+
+test_scope_full_generated_output_parity_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/scope-full-generated-output-parity-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 49 structural evidence proves full generated-output parity.\n' >>"${dir}/gcode-output-scope.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/scope-full-generated-output-parity-overclaim.out" "${tmp_dir}/scope-full-generated-output-parity-overclaim.err"; then
+		fail "scope full generated-output parity overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/scope-full-generated-output-parity-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/scope-full-generated-output-parity-overclaim.err" 'forbidden Prusa G-code scope claim'
+}
+
+test_readme_structural_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/readme-structural-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 49 verifies printer-runtime behavior.\n' >>"${dir}/README.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/readme-structural-overclaim.out" "${tmp_dir}/readme-structural-overclaim.err"; then
+		fail "README structural overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/readme-structural-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/readme-structural-overclaim.err" 'forbidden Prusa G-code scope claim'
+}
+
 test_complete_fixture_passes
 test_wrong_inventory_row_id_fails
 test_wrong_source_identity_fails
@@ -447,5 +613,12 @@ test_wrong_status_evidence_fails
 test_duplicate_status_row_fails
 test_missing_parity_target_fails
 test_phase47_rust_summary_boundary_is_allowed
+test_missing_allowed_structural_field_fails
+test_unsupported_structural_field_fails
+test_missing_structural_traceability_fails
+test_missing_structural_reviewer_signoff_fails
+test_scope_structural_overclaim_fails
+test_scope_full_generated_output_parity_overclaim_fails
+test_readme_structural_overclaim_fails
 
 printf 'ok: verify_prusa_gcode_output_scope_test\n'
