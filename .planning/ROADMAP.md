@@ -177,7 +177,12 @@ status publication.
    process execution, release behavior, sync behavior, or premature broad
    generated-output status publication.
 
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 51-01-PLAN.md — Add the pure typed structural summary parser and Cargo/Bazel rejection coverage.
+- [ ] 51-02-PLAN.md — Expose structural readiness metadata through the existing registry boundary without status publication.
 
 ### Phase 52: Executable Structural G-code Evidence
 
