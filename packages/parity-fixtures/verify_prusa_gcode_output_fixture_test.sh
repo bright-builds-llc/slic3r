@@ -77,6 +77,7 @@ write_valid_fixture_copy() {
 	cp "${source_fixture_dir}/.gitattributes" "${fixture_dir}/.gitattributes"
 	cp "${source_fixture_dir}/README.md" "${fixture_dir}/README.md"
 	cp "${source_fixture_dir}/expected-gcode-summary.tsv" "${fixture_dir}/expected-gcode-summary.tsv"
+	cp "${source_fixture_dir}/expected-gcode-structural-summary.tsv" "${fixture_dir}/expected-gcode-structural-summary.tsv"
 	cp "${source_fixture_dir}/fixture-provenance.tsv" "${fixture_dir}/fixture-provenance.tsv"
 	cp "${source_fixture_dir}/gcodewriter-set-speed.gcode" "${fixture_dir}/gcodewriter-set-speed.gcode"
 	cp "${source_status_file}" "${dir}/packages/parity/status.tsv"
@@ -256,6 +257,113 @@ test_extra_expected_summary_row_fails() {
 	assert_contains "${tmp_dir}/extra-expected-row.err" "expected-gcode-summary.tsv: expected 6 rows"
 }
 
+test_structural_value_drift_fails() {
+	# Arrange
+	local dir="${tmp_dir}/structural-value-drift"
+	local structural_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${structural_file}" \
+		$'\tcommand_count_g1\tcommand counts\t4\t' \
+		$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tcommand_count_g1\tcommand counts\t3\tCount of `G1` command rows in the selected fixture only; no toolpath geometry claimed.'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/structural-value-drift.out" "${tmp_dir}/structural-value-drift.err"; then
+		fail "structural value drift fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/structural-value-drift.err" "expected-gcode-structural-summary.tsv|command_count_g1"
+}
+
+test_missing_structural_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-structural-row"
+	local structural_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	remove_line_containing "${structural_file}" $'\tordered_marker_3\tordered markers\tG1 F203.2\t'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-structural-row.out" "${tmp_dir}/missing-structural-row.err"; then
+		fail "missing structural row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-structural-row.err" "ordered_marker_3|expected-gcode-structural-summary.tsv"
+}
+
+test_duplicate_structural_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-structural-row"
+	local structural_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+	local duplicate_row
+	write_valid_fixture_copy "${dir}"
+	duplicate_row="$(awk -F '\t' '$3 == "command_count_total" { print; exit }' "${structural_file}")"
+	printf '%s\n' "${duplicate_row}" >>"${structural_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/duplicate-structural-row.out" "${tmp_dir}/duplicate-structural-row.err"; then
+		fail "duplicate structural row fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/duplicate-structural-row.err" "command_count_total|duplicate|expected-gcode-structural-summary.tsv"
+}
+
+test_unsupported_structural_field_fails() {
+	# Arrange
+	local dir="${tmp_dir}/unsupported-structural-field"
+	local structural_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	printf '%s\n' $'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tgeometry_count\tunsupported generated-output semantics\t999\tUnsupported generated-output field that must fail closed.' >>"${structural_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/unsupported-structural-field.out" "${tmp_dir}/unsupported-structural-field.err"; then
+		fail "unsupported structural field fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/unsupported-structural-field.err" "unsupported structural field|geometry_count|expected-gcode-structural-summary.tsv"
+}
+
+test_structural_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/structural-overclaim"
+	local structural_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${structural_file}" \
+		$'\tcommand_count_total\tcommand counts\t4\t' \
+		$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tcommand_count_total\tcommand counts\t4\tverified Prusa G-code output parity'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/structural-overclaim.out" "${tmp_dir}/structural-overclaim.err"; then
+		fail "structural overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/structural-overclaim.err" "forbidden|verified Prusa G-code output parity|expected-gcode-structural-summary.tsv"
+}
+
+test_structural_provenance_mismatch_fails() {
+	# Arrange
+	local dir="${tmp_dir}/structural-provenance-mismatch"
+	local structural_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${structural_file}" \
+		$'\tsource_ref\tsource identity\t' \
+		$'prusaslicer:version_2.9.4@0000000000000000000000000000000000000000\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tsource_ref\tsource identity\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tAccepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/structural-provenance-mismatch.out" "${tmp_dir}/structural-provenance-mismatch.err"; then
+		fail "structural provenance mismatch fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/structural-provenance-mismatch.err" "provenance mismatch|source_ref|expected-gcode-structural-summary.tsv"
+}
+
 test_missing_update_route_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-update-route"
@@ -421,6 +529,12 @@ test_wrong_provenance_row_fails
 test_missing_expected_header_fails
 test_missing_expected_marker_row_fails
 test_extra_expected_summary_row_fails
+test_structural_value_drift_fails
+test_missing_structural_row_fails
+test_duplicate_structural_row_fails
+test_unsupported_structural_field_fails
+test_structural_overclaim_fails
+test_structural_provenance_mismatch_fails
 test_missing_update_route_fails
 test_missing_privacy_exclusions_fails
 test_readme_overclaim_fails
