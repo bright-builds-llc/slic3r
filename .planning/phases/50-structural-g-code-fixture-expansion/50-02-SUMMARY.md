@@ -84,7 +84,7 @@ Each task was committed atomically:
 - **RED:** `bash packages/parity-fixtures/verify_prusa_gcode_output_fixture_test.sh` exited `1` before verifier implementation and wrote `FAIL: structural value drift fixture passed` to `/tmp/phase50-structural-red.err`.
 - **GREEN:** The same Bash mutation suite prints `ok: verify_prusa_gcode_output_fixture_test` after structural verifier enforcement was added.
 
-## Verification
+## Validation Commands
 
 - `rg -n 'structural_summary_file|STRUCTURAL_SUMMARY_HEADER|STRUCTURAL_SUMMARY_ROW_COUNT|verify_structural_summary|expected-gcode-structural-summary.tsv|unsupported structural field|provenance mismatch' packages/parity-fixtures/verify_prusa_gcode_output_fixture.sh packages/parity-fixtures/verify_prusa_gcode_output_fixture_test.sh`
 - `bash -n packages/parity-fixtures/verify_prusa_gcode_output_fixture.sh packages/parity-fixtures/verify_prusa_gcode_output_fixture_test.sh`
