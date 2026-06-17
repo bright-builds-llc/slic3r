@@ -97,6 +97,7 @@ run_verifier() {
 		"${fixture_dir}/README.md" \
 		"${fixture_dir}/fixture-provenance.tsv" \
 		"${fixture_dir}/expected-gcode-summary.tsv" \
+		"${fixture_dir}/expected-gcode-structural-summary.tsv" \
 		"${fixture_dir}/gcodewriter-set-speed.gcode" \
 		"${dir}/packages/parity/status.tsv" \
 		"${dir}/packages/parity/BUILD.bazel" \
