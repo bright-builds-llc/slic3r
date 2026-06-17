@@ -88,7 +88,7 @@ temperature/tool-change markers, source identity, and fixture identity.
   and verify the allowed structural G-code evidence contract before fixtures,
   Rust boundaries, or executable evidence expand.
 
-- [ ] **Phase 50: Structural G-code Fixture Expansion** - Maintainers can
+- [x] **Phase 50: Structural G-code Fixture Expansion** - Maintainers can (completed 2026-06-17)
   inspect and verify source-pinned Prusa structural summary fixtures with
   fail-closed drift guards.
 
@@ -154,8 +154,8 @@ commands rely on them.
 
 Plans:
 
-- [ ] 50-01-PLAN.md — Add and wire the structural sidecar artifact with narrow fixture docs.
-- [ ] 50-02-PLAN.md — Extend the fixture verifier and mutation coverage for structural drift.
+- [x] 50-01-PLAN.md — Add and wire the structural sidecar artifact with narrow fixture docs.
+- [x] 50-02-PLAN.md — Extend the fixture verifier and mutation coverage for structural drift.
 
 ### Phase 51: Rust Structural G-code Summary Boundary
 
@@ -227,7 +227,7 @@ Phases execute in numeric order: 49 -> 50 -> 51 -> 52
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 49. Structural G-code Scope Contract | 2/2 | Complete    | 2026-06-16 |
-| 50. Structural G-code Fixture Expansion | 0/2 | Not started | - |
+| 50. Structural G-code Fixture Expansion | 2/2 | Complete   | 2026-06-17 |
 | 51. Rust Structural G-code Summary Boundary | 0/TBD | Not started | - |
 | 52. Executable Structural G-code Evidence | 0/TBD | Not started | - |
 

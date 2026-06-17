@@ -137,7 +137,6 @@ None - no external service configuration required.
 
 Phase 51 can consume `expected-gcode-structural-summary.tsv` through a typed Rust boundary with fail-closed fixture evidence already enforced by the existing Bazel-owned fixture verifier. Phase 52 remains responsible for public structural parity/status publication.
 
----
 *Phase: 50-structural-g-code-fixture-expansion*
 *Completed: 2026-06-17*
 
