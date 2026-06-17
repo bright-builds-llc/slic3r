@@ -1,12 +1,17 @@
 use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface};
 use slic3r_flavors::prusa_gcode_output::{
     PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue, PrusaGcodeOutputMetadataKey,
-    PrusaGcodeOutputMetadataValue, PrusaGcodeOutputParseError, parse_prusa_gcode_output_summary,
-    prusa_gcode_output_metadata, prusa_gcode_output_summary_lines,
+    PrusaGcodeOutputMetadataValue, PrusaGcodeOutputParseError, PrusaGcodeOutputStructuralField,
+    PrusaGcodeOutputStructuralParseError, parse_prusa_gcode_output_structural_summary,
+    parse_prusa_gcode_output_summary, prusa_gcode_output_metadata,
+    prusa_gcode_output_summary_lines,
 };
 
 const EXPECTED_GCODE_SUMMARY: &str = include_str!(
     "../../../../parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv"
+);
+const EXPECTED_GCODE_STRUCTURAL_SUMMARY: &str = include_str!(
+    "../../../../parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
 );
 const PRUSA_GCODE_OUTPUT_SOURCE: &str = include_str!("../src/prusa_gcode_output.rs");
 
@@ -42,6 +47,250 @@ fn parses_expected_gcode_summary_rows_in_fixture_order() {
         summary.rows[4].marker_value,
         PrusaGcodeOutputMarkerValue::FeedrateThreeDecimalRounded
     );
+}
+
+#[test]
+fn parses_expected_gcode_structural_summary_rows_and_facts() {
+    // Arrange
+    let input = EXPECTED_GCODE_STRUCTURAL_SUMMARY;
+
+    // Act
+    let summary = parse_prusa_gcode_output_structural_summary(input)
+        .expect("expected structural G-code summary should parse");
+    let facts = summary.facts();
+    let fields: Vec<PrusaGcodeOutputStructuralField> = summary
+        .rows
+        .iter()
+        .map(|row| row.structural_field)
+        .collect();
+
+    // Assert
+    assert_eq!(summary.rows.len(), 16);
+    assert_eq!(fields.as_slice(), expected_structural_fields().as_slice());
+    assert_eq!(
+        summary.rows[0].structural_field,
+        PrusaGcodeOutputStructuralField::SourceRef
+    );
+    assert_eq!(
+        summary.rows[15].structural_field,
+        PrusaGcodeOutputStructuralField::ToolChangeMarkerCount
+    );
+    assert_eq!(facts.source_ref.as_str(), expected_source_ref());
+    assert_eq!(
+        facts.inventory_source_paths,
+        "src/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp"
+    );
+    assert_eq!(
+        facts.fixture_source_literal,
+        "tests/fff_print/test_gcodewriter.cpp#L20-L35"
+    );
+    assert_eq!(facts.fixture_id, expected_fixture_id());
+    assert_eq!(facts.fixture_path, expected_fixture_path());
+    assert_eq!(facts.command_count_total, 4);
+    assert_eq!(facts.command_count_g1, 4);
+    assert_eq!(facts.section_count_total, 1);
+    assert_eq!(
+        facts.ordered_markers,
+        [
+            PrusaGcodeOutputMarkerValue::FeedrateFixedPoint,
+            PrusaGcodeOutputMarkerValue::FeedrateInteger,
+            PrusaGcodeOutputMarkerValue::FeedrateOneDecimal,
+            PrusaGcodeOutputMarkerValue::FeedrateThreeDecimalRounded,
+        ]
+    );
+    assert!(!facts.movement_axis_present);
+    assert!(!facts.extrusion_axis_present);
+    assert_eq!(facts.temperature_marker_count, 0);
+    assert_eq!(facts.tool_change_marker_count, 0);
+}
+
+#[test]
+fn rejects_structural_invalid_header() {
+    // Arrange
+    let input = EXPECTED_GCODE_STRUCTURAL_SUMMARY.replacen("source_ref", "wrong_source_ref", 1);
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputStructuralParseError::InvalidHeader { .. })
+    ));
+}
+
+#[test]
+fn rejects_structural_wrong_column_count() {
+    // Arrange
+    let input = replace_first_structural_data_row("only\tfive\tcolumns\tin\trow");
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputStructuralParseError::WrongColumnCount {
+            line_number: 2,
+            expected: 6,
+            actual: 5,
+        })
+    ));
+}
+
+#[test]
+fn rejects_structural_missing_row() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_GCODE_STRUCTURAL_SUMMARY.lines().collect();
+    lines.pop();
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputStructuralParseError::MissingRow {
+            structural_field: PrusaGcodeOutputStructuralField::ToolChangeMarkerCount,
+        })
+    ));
+}
+
+#[test]
+fn rejects_structural_duplicate_row() {
+    // Arrange
+    let first_row = EXPECTED_GCODE_STRUCTURAL_SUMMARY
+        .lines()
+        .nth(1)
+        .expect("structural fixture should contain a first data row");
+    let input = format!("{EXPECTED_GCODE_STRUCTURAL_SUMMARY}{first_row}\n");
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputStructuralParseError::DuplicateRow {
+            line_number: 18,
+            structural_field: PrusaGcodeOutputStructuralField::SourceRef,
+        })
+    ));
+}
+
+#[test]
+fn rejects_structural_out_of_order_rows() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_GCODE_STRUCTURAL_SUMMARY.lines().collect();
+    lines.swap(1, 2);
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputStructuralParseError::UnexpectedRowOrder {
+            line_number: 2,
+            expected_structural_field: PrusaGcodeOutputStructuralField::SourceRef,
+            actual_structural_field: PrusaGcodeOutputStructuralField::InventorySourcePaths,
+        })
+    ));
+}
+
+#[test]
+fn rejects_unsupported_structural_field() {
+    // Arrange
+    let input = replace_structural_cell(0, 2, "unsupported_structural_field");
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(
+            PrusaGcodeOutputStructuralParseError::UnsupportedStructuralField { line_number: 2, .. }
+        )
+    ));
+}
+
+#[test]
+fn rejects_structural_unsupported_boundary_claim() {
+    // Arrange
+    let input = replace_structural_cell(0, 5, "full generated-output parity verified");
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(
+            PrusaGcodeOutputStructuralParseError::UnexpectedEvidenceBoundary {
+                line_number: 2,
+                structural_field: PrusaGcodeOutputStructuralField::SourceRef,
+                ..
+            }
+        )
+    ));
+}
+
+#[test]
+fn rejects_structural_unexpected_source_ref() {
+    // Arrange
+    let input = replace_structural_cell(
+        0,
+        0,
+        "bambustudio:v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6",
+    );
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputStructuralParseError::UnexpectedSourceRef { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_structural_unexpected_fixture_path() {
+    // Arrange
+    let input = replace_structural_cell(0, 1, "fixtures/unreviewed.gcode");
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputStructuralParseError::UnexpectedFixturePath { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_structural_unexpected_fixture_id() {
+    // Arrange
+    let input = replace_structural_cell(3, 4, "unreviewed-speed.gcode");
+
+    // Act
+    let result = parse_prusa_gcode_output_structural_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(
+            PrusaGcodeOutputStructuralParseError::UnexpectedStructuralValue {
+                line_number: 5,
+                structural_field: PrusaGcodeOutputStructuralField::FixtureId,
+                ..
+            }
+        )
+    ));
 }
 
 #[test]
@@ -446,6 +695,55 @@ fn rejects_extra_row() {
     ));
 }
 
+fn expected_structural_fields() -> [PrusaGcodeOutputStructuralField; 16] {
+    [
+        PrusaGcodeOutputStructuralField::SourceRef,
+        PrusaGcodeOutputStructuralField::InventorySourcePaths,
+        PrusaGcodeOutputStructuralField::FixtureSourceLiteral,
+        PrusaGcodeOutputStructuralField::FixtureId,
+        PrusaGcodeOutputStructuralField::FixturePath,
+        PrusaGcodeOutputStructuralField::CommandCountTotal,
+        PrusaGcodeOutputStructuralField::CommandCountG1,
+        PrusaGcodeOutputStructuralField::SectionCountTotal,
+        PrusaGcodeOutputStructuralField::OrderedMarker1,
+        PrusaGcodeOutputStructuralField::OrderedMarker2,
+        PrusaGcodeOutputStructuralField::OrderedMarker3,
+        PrusaGcodeOutputStructuralField::OrderedMarker4,
+        PrusaGcodeOutputStructuralField::MovementAxisPresent,
+        PrusaGcodeOutputStructuralField::ExtrusionAxisPresent,
+        PrusaGcodeOutputStructuralField::TemperatureMarkerCount,
+        PrusaGcodeOutputStructuralField::ToolChangeMarkerCount,
+    ]
+}
+
+fn replace_first_structural_data_row(replacement: &str) -> String {
+    let mut lines: Vec<&str> = EXPECTED_GCODE_STRUCTURAL_SUMMARY.lines().collect();
+    lines[1] = replacement;
+    format!("{}\n", lines.join("\n"))
+}
+
+fn replace_structural_cell(
+    data_row_index: usize,
+    column_index: usize,
+    replacement: &str,
+) -> String {
+    let mut lines: Vec<String> = EXPECTED_GCODE_STRUCTURAL_SUMMARY
+        .lines()
+        .map(str::to_owned)
+        .collect();
+    let line_index = data_row_index + 1;
+    let line = lines
+        .get_mut(line_index)
+        .expect("structural fixture should contain requested data row");
+    let mut columns: Vec<String> = line.split('\t').map(str::to_owned).collect();
+    let column = columns
+        .get_mut(column_index)
+        .expect("structural fixture row should contain requested column");
+    *column = replacement.to_owned();
+    *line = columns.join("\t");
+    format!("{}\n", lines.join("\n"))
+}
+
 fn replace_first_data_row(replacement: &str) -> String {
     let mut lines: Vec<&str> = EXPECTED_GCODE_SUMMARY.lines().collect();
     lines[1] = replacement;
@@ -479,6 +777,10 @@ fn expected_source_ref() -> &'static str {
 
 fn expected_fixture_path() -> &'static str {
     "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode"
+}
+
+fn expected_fixture_id() -> &'static str {
+    "gcodewriter-set-speed.gcode"
 }
 
 fn joined_word(prefix: &str, suffix: &str) -> String {
