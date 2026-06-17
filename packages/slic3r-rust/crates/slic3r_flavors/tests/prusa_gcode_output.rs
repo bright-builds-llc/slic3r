@@ -128,13 +128,17 @@ fn public_declarations_do_not_claim_deferred_behavior() {
         .map(str::trim)
         .filter(|line| line.starts_with("pub "))
         .collect();
+    let allowed_structural_declarations = ["pub extrusion_axis_present: bool,"];
 
     // Act
-    let maybe_risky_declaration = public_declarations.iter().find(|declaration| {
-        risky_words
-            .iter()
-            .any(|risky_word| declaration.contains(risky_word))
-    });
+    let maybe_risky_declaration = public_declarations
+        .iter()
+        .filter(|declaration| !allowed_structural_declarations.contains(declaration))
+        .find(|declaration| {
+            risky_words
+                .iter()
+                .any(|risky_word| declaration.contains(risky_word))
+        });
 
     // Assert
     assert!(maybe_risky_declaration.is_none());

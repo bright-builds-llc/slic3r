@@ -7,10 +7,15 @@ pub mod prusa_project_file;
 pub mod registry;
 
 pub use prusa_gcode_output::{
-    PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue, PrusaGcodeOutputMetadata,
-    PrusaGcodeOutputMetadataKey, PrusaGcodeOutputMetadataValue, PrusaGcodeOutputNote,
-    PrusaGcodeOutputParseError, PrusaGcodeOutputParseResult, PrusaGcodeOutputSummary,
-    PrusaGcodeOutputSummaryRow, parse_prusa_gcode_output_summary, prusa_gcode_output_metadata,
+    PrusaGcodeOutputEvidenceBoundary, PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue,
+    PrusaGcodeOutputMetadata, PrusaGcodeOutputMetadataKey, PrusaGcodeOutputMetadataValue,
+    PrusaGcodeOutputNote, PrusaGcodeOutputParseError, PrusaGcodeOutputParseResult,
+    PrusaGcodeOutputStructuralCategory, PrusaGcodeOutputStructuralFacts,
+    PrusaGcodeOutputStructuralField, PrusaGcodeOutputStructuralParseError,
+    PrusaGcodeOutputStructuralParseResult, PrusaGcodeOutputStructuralSummary,
+    PrusaGcodeOutputStructuralSummaryRow, PrusaGcodeOutputStructuralValue, PrusaGcodeOutputSummary,
+    PrusaGcodeOutputSummaryRow, parse_prusa_gcode_output_structural_summary,
+    parse_prusa_gcode_output_summary, prusa_gcode_output_metadata,
     prusa_gcode_output_summary_lines,
 };
 pub use prusa_profile::{
