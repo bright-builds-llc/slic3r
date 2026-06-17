@@ -57,6 +57,16 @@ Phase 49 overclaims, compact unsupported table rows, and broad
 GCSCOPE-02, and GCSCOPE-03 while keeping fixture expansion, Rust parsing, and
 executable structural evidence publication deferred to later v1.13 phases.
 
+v1.13 Phase 50 is complete. Maintainers can inspect the checked-in
+`expected-gcode-structural-summary.tsv` sidecar for the selected Prusa
+`set_speed` G-code fixture, run
+`bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`, and
+rely on fail-closed mutation coverage for structural value drift, missing rows,
+duplicate rows, unsupported fields, overclaims, and provenance mismatches. The
+fixture expansion completes GCFIX-01, GCFIX-02, and GCFIX-03 while keeping Rust
+structural parsing and public structural parity/status publication deferred to
+Phase 51 and Phase 52.
+
 v1.12 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, see the
 `line_4` mutation guard fail closed on expected-summary drift, inspect the
@@ -417,12 +427,18 @@ high-risk generated-output or network/cloud surfaces.
   claims — Phase 47
 - ✓ v1.12 publishes a fail-closed parity command, mutation guard, exact status
   row, and docs for the narrow G-code evidence slice — Phase 48
+- ✓ v1.13 defines a reviewed structural Prusa G-code scope contract that keeps
+  the evidence slice narrow and forbids broad generated-output claims — Phase
+  49
+- ✓ v1.13 expands the source-pinned Prusa G-code fixture surface with a
+  checked-in structural expected summary and fail-closed drift guards — Phase
+  50
 
 ### Active
 
-- [ ] Define a reviewed structural Prusa G-code scope contract that keeps the
+- [x] Define a reviewed structural Prusa G-code scope contract that keeps the
   evidence slice narrow and forbids broad generated-output claims.
-- [ ] Expand the source-pinned Prusa G-code fixture surface with checked-in
+- [x] Expand the source-pinned Prusa G-code fixture surface with checked-in
   structural expected summaries and fail-closed drift guards.
 - [ ] Add a pure typed Rust structural summary boundary for the expanded
   fixture evidence.
