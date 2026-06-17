@@ -412,9 +412,9 @@ Structural rejection tests should follow this one-concern Arrange/Act/Assert pat
 
 All claims in this research were verified against repo files, command execution, or pinned Bright Builds standards during this session; no `[ASSUMED]` claims are intentionally present. [VERIFIED: Sources section]
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Exact structural type/projection names are implementation discretion.** [VERIFIED: 51-CONTEXT.md]
+1. **RESOLVED: Exact structural type/projection names are implementation discretion.** [VERIFIED: 51-CONTEXT.md]
    - What we know: The parser must be pure, typed, dependency-free, row-first, and easy to test. [VERIFIED: 51-CONTEXT.md]
    - What's unclear: The final enum/helper names are not locked. [VERIFIED: 51-CONTEXT.md]
    - Recommendation: Use `PrusaGcodeOutputStructural*` names and a small projection method or function only after the row contract is parsed. [VERIFIED: existing naming pattern in prusa_gcode_output.rs; 51-CONTEXT.md]
@@ -441,9 +441,11 @@ No blocking open questions were found for planning. [VERIFIED: codebase inspecti
 
 ```bash
 cargo +1.94.1 test -p slic3r_flavors --test prusa_gcode_output --manifest-path packages/slic3r-rust/Cargo.toml
-cargo +1.94.1 test -p slic3r_flavors --test flavor_registry prusa_gcode_output --manifest-path packages/slic3r-rust/Cargo.toml
-cargo +1.94.1 fmt --manifest-path packages/slic3r-rust/Cargo.toml --all --check
-cargo +1.94.1 clippy -p slic3r_flavors --all-targets --manifest-path packages/slic3r-rust/Cargo.toml -- -D warnings
+cargo +1.94.1 test -p slic3r_flavors --test flavor_registry --manifest-path packages/slic3r-rust/Cargo.toml
+cargo +1.94.1 fmt --manifest-path packages/slic3r-rust/Cargo.toml --all -- --check
+cargo +1.94.1 clippy --manifest-path packages/slic3r-rust/Cargo.toml --workspace --all-targets --all-features -- -D warnings
+cargo +1.94.1 build --manifest-path packages/slic3r-rust/Cargo.toml --workspace --all-targets --all-features
+cargo +1.94.1 test --manifest-path packages/slic3r-rust/Cargo.toml --workspace --all-features
 bazel test //packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_test
 bazel test //packages/slic3r-rust/crates/slic3r_flavors:flavor_registry_test
 bazel test //packages/slic3r-rust/crates/slic3r_flavors:rustfmt_check
