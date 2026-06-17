@@ -60,6 +60,7 @@ Rust parser/metadata boundary, and the Phase 47 Rust summary output feeds
 Phase 48. Phase 48 now publishes
 `bazel run //packages/parity:prusaslicer_gcode_output_parity` plus the exact
 `fork.prusaslicer.gcode-output` row for the narrow summary-only evidence slice.
+Phase 50 adds `expected-gcode-structural-summary.tsv` to the same fixture namespace and bundle as the source-pinned structural handoff artifact for Phase 51. The structural sidecar remains fixture-owned and does not update `packages/parity/status.tsv`, `packages/parity/BUILD.bazel`, or Rust structural parsing.
 
 The G-code fixture namespace itself does not prove byte-for-byte G-code
 parity, full generated-output parity, toolpath geometry, extrusion, timing,

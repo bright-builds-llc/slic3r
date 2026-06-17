@@ -69,6 +69,7 @@ exports_files([
     "forks/prusaslicer/prusaslicer.gcode-output/.gitattributes",
     "forks/prusaslicer/prusaslicer.gcode-output/README.md",
     "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv",
+    "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv",
     "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
     "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
 ])
@@ -424,6 +425,11 @@ alias(
 )
 
 alias(
+    name = "prusa_gcode_output_expected_gcode_structural_summary",
+    actual = "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv",
+)
+
+alias(
     name = "prusa_gcode_output_gcodewriter_set_speed",
     actual = "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
 )
@@ -434,6 +440,7 @@ filegroup(
         "forks/prusaslicer/prusaslicer.gcode-output/.gitattributes",
         "forks/prusaslicer/prusaslicer.gcode-output/README.md",
         "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv",
+        "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv",
         "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
         "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
     ],
@@ -589,6 +596,7 @@ filegroup(
         "forks/prusaslicer/prusaslicer.gcode-output/.gitattributes",
         "forks/prusaslicer/prusaslicer.gcode-output/README.md",
         "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv",
+        "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv",
         "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
         "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
         "verify_prusa_profile_schema_fixture.sh",

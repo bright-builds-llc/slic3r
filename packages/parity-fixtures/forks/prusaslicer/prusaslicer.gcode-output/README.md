@@ -15,6 +15,7 @@ artifact.
 - Source path: `tests/fff_print/test_gcodewriter.cpp#L20-L35`
 - Fixture: `gcodewriter-set-speed.gcode`
 - Expected artifact: `expected-gcode-summary.tsv`
+- Structural expected artifact: `expected-gcode-structural-summary.tsv`
 - Byte count: `42`
 - SHA-256:
   `dc1bb725fb2d81b986356bcdd0b160877dce48b086b3cf71867abc0ecf4467cb`
@@ -23,6 +24,7 @@ artifact.
 
 The accepted upstream tree has no checked-in `.gcode` blob.
 This fixture is derived from source-controlled `GCodeWriter::set_speed` expected-output literals under the accepted commit.
+Phase 50 adds `expected-gcode-structural-summary.tsv` as a structural sidecar for the same selected fixture. It records only source identity, fixture identity, command counts, section counts, ordered markers, movement/extrusion indicators, and temperature/tool-change marker counts.
 
 ## Update Route
 
@@ -35,6 +37,7 @@ Branch-head observations remain drift-only and do not update this fixture.
 
 Rust summary parsing remains Phase 47-owned; executable parity and
 `fork.prusaslicer.gcode-output` status publication remain Phase 48-owned.
+Structural Rust parsing remains Phase 51-owned; public structural parity/status publication remains Phase 52-owned.
 
 No base export fixture reuse, live generation, upstream fetching/importing,
 binary G-code, thumbnails, post-processing, host upload, printer-runtime
