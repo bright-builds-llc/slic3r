@@ -33,6 +33,15 @@ assert_contains() {
 	fi
 }
 
+assert_contains_all() {
+	local file="$1"
+	shift
+	local pattern
+	for pattern in "$@"; do
+		assert_contains "${file}" "${pattern}"
+	done
+}
+
 assert_file_equals() {
 	local file="$1"
 	local expected="$2"
@@ -274,7 +283,10 @@ test_structural_value_drift_fails() {
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/structural-value-drift.err" "expected-gcode-structural-summary.tsv|command_count_g1"
+	assert_contains_all \
+		"${tmp_dir}/structural-value-drift.err" \
+		"expected-gcode-structural-summary.tsv" \
+		"command_count_g1"
 }
 
 test_missing_structural_row_fails() {
@@ -290,7 +302,10 @@ test_missing_structural_row_fails() {
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/missing-structural-row.err" "ordered_marker_3|expected-gcode-structural-summary.tsv"
+	assert_contains_all \
+		"${tmp_dir}/missing-structural-row.err" \
+		"ordered_marker_3" \
+		"expected-gcode-structural-summary.tsv"
 }
 
 test_duplicate_structural_row_fails() {
@@ -308,7 +323,11 @@ test_duplicate_structural_row_fails() {
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/duplicate-structural-row.err" "command_count_total|duplicate|expected-gcode-structural-summary.tsv"
+	assert_contains_all \
+		"${tmp_dir}/duplicate-structural-row.err" \
+		"command_count_total" \
+		"duplicate" \
+		"expected-gcode-structural-summary.tsv"
 }
 
 test_unsupported_structural_field_fails() {
@@ -324,7 +343,11 @@ test_unsupported_structural_field_fails() {
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/unsupported-structural-field.err" "unsupported structural field|geometry_count|expected-gcode-structural-summary.tsv"
+	assert_contains_all \
+		"${tmp_dir}/unsupported-structural-field.err" \
+		"unsupported structural field" \
+		"geometry_count" \
+		"expected-gcode-structural-summary.tsv"
 }
 
 test_structural_overclaim_fails() {
@@ -343,7 +366,11 @@ test_structural_overclaim_fails() {
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/structural-overclaim.err" "forbidden|verified Prusa G-code output parity|expected-gcode-structural-summary.tsv"
+	assert_contains_all \
+		"${tmp_dir}/structural-overclaim.err" \
+		"forbidden" \
+		"verified Prusa G-code output parity" \
+		"expected-gcode-structural-summary.tsv"
 }
 
 test_structural_provenance_mismatch_fails() {
@@ -362,7 +389,11 @@ test_structural_provenance_mismatch_fails() {
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/structural-provenance-mismatch.err" "provenance mismatch|source_ref|expected-gcode-structural-summary.tsv"
+	assert_contains_all \
+		"${tmp_dir}/structural-provenance-mismatch.err" \
+		"provenance mismatch" \
+		"source_ref" \
+		"expected-gcode-structural-summary.tsv"
 }
 
 test_missing_update_route_fails() {
