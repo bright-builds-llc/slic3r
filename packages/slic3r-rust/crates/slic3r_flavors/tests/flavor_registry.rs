@@ -4,8 +4,11 @@ use slic3r_contracts::{
 use slic3r_flavors::{
     FlavorCapability, FlavorProvenance, FlavorRegistryEntry, all_capabilities, all_flavors,
     capabilities_by_checklist_status, capabilities_by_origin, maybe_flavor,
-    prusa_gcode_output_metadata, prusa_profile_schema_metadata, prusa_project_file_metadata,
+    prusa_gcode_output_metadata, prusa_gcode_output_structural_readiness,
+    prusa_profile_schema_metadata, prusa_project_file_metadata,
 };
+
+const PRUSA_GCODE_OUTPUT_STRUCTURAL_READINESS_NOTES: &str = "Source-observed G-code output planning row; structural summary readiness is parser metadata only, and public structural evidence plus status publication remain Phase 52 work before generated-output behavior is claimed.";
 
 #[test]
 fn registry_api_reexports_contract_typed_helpers() {
@@ -375,6 +378,14 @@ fn prusa_gcode_output_registry_row_traces_to_source_and_generated_output_depende
         FeatureOrigin::SharedDownstream
     );
     assert!(gcode_output.caution_flags.is_empty());
+    assert_eq!(
+        gcode_output.future_parity_notes,
+        PRUSA_GCODE_OUTPUT_STRUCTURAL_READINESS_NOTES
+    );
+    assert!(
+        capabilities_by_checklist_status(ChecklistStatus::FutureCandidate)
+            .any(|capability| capability.capability_id == gcode_output.capability_id)
+    );
 }
 
 #[test]
@@ -406,11 +417,53 @@ fn prusa_gcode_output_metadata_exposes_fixture_scope_expected_summary_and_reserv
         "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv"
     );
     assert_eq!(
+        metadata.expected_structural_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+    );
+    assert_eq!(
         metadata.scope_record_path,
         "packages/prusa-gcode-output-scope/gcode-output-scope.md"
     );
     assert_eq!(
         metadata.reserved_future_status_token,
+        "fork.prusaslicer.gcode-output"
+    );
+}
+
+#[test]
+fn prusa_gcode_output_structural_readiness_exposes_parser_metadata_without_status_publication() {
+    // Arrange
+    let expected_source_paths: &[&str] = &["src/libslic3r/GCode.cpp", "src/libslic3r/GCode.hpp"];
+
+    // Act
+    let readiness = prusa_gcode_output_structural_readiness();
+
+    // Assert
+    assert_eq!(readiness.inventory_id, "prusaslicer.gcode-output");
+    assert_eq!(
+        readiness.source_ref,
+        VendorSourceRef::prusa_slicer_version_2_9_5()
+    );
+    assert_eq!(readiness.inventory_source_paths, expected_source_paths);
+    assert_eq!(
+        readiness.fixture_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode"
+    );
+    assert_eq!(
+        readiness.expected_structural_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+    );
+    assert_eq!(
+        readiness.parser_boundary,
+        "slic3r_flavors::prusa_gcode_output::parse_prusa_gcode_output_structural_summary"
+    );
+    assert_eq!(
+        readiness.parity_dependency,
+        ParitySurface::generated_outputs()
+    );
+    assert_eq!(readiness.checklist_status, ChecklistStatus::FutureCandidate);
+    assert_eq!(
+        readiness.reserved_future_status_token,
         "fork.prusaslicer.gcode-output"
     );
 }
@@ -564,6 +617,7 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
     let profile_schema_metadata = prusa_profile_schema_metadata();
     let project_file_metadata = prusa_project_file_metadata();
     let gcode_output_metadata = prusa_gcode_output_metadata();
+    let gcode_output_readiness = prusa_gcode_output_structural_readiness();
     let public_helper_names = [
         "all_flavors",
         "maybe_flavor",
@@ -573,6 +627,7 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         "prusa_profile_schema_metadata",
         "prusa_project_file_metadata",
         "prusa_gcode_output_metadata",
+        "prusa_gcode_output_structural_readiness",
         "parse_prusa_gcode_output_summary",
         "prusa_gcode_output_summary_lines",
     ];
@@ -606,8 +661,17 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         gcode_output_metadata.source_path,
         gcode_output_metadata.fixture_path,
         gcode_output_metadata.expected_summary_path,
+        gcode_output_metadata.expected_structural_summary_path,
         gcode_output_metadata.scope_record_path,
         gcode_output_metadata.reserved_future_status_token,
+        gcode_output_readiness.inventory_id,
+        gcode_output_readiness.source_ref.as_str(),
+        gcode_output_readiness.fixture_path,
+        gcode_output_readiness.expected_structural_summary_path,
+        gcode_output_readiness.parser_boundary,
+        gcode_output_readiness.parity_dependency.as_str(),
+        gcode_output_readiness.checklist_status.as_str(),
+        gcode_output_readiness.reserved_future_status_token,
     ];
 
     // Act

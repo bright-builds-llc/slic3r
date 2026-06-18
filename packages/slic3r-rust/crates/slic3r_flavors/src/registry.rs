@@ -131,7 +131,7 @@ static PRUSA_CAPABILITIES: [FlavorCapability; 3] = [
         checklist_status: ChecklistStatus::FutureCandidate,
         provenance: &PRUSA_GCODE_OUTPUT_PROVENANCE,
         caution_flags: &[],
-        future_parity_notes: "Source-observed G-code output planning row; summary-only parity requires fixture-backed Rust summary evidence and the Phase 48 executable command before output behavior is claimed.",
+        future_parity_notes: "Source-observed G-code output planning row; structural summary readiness is parser metadata only, and public structural evidence plus status publication remain Phase 52 work before generated-output behavior is claimed.",
     },
     FlavorCapability {
         flavor_id: FlavorId::PrusaSlicer,
