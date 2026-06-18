@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: milestone
 status: executing
-stopped_at: Completed 52-03-PLAN.md
-last_updated: "2026-06-18T02:34:25.597Z"
+stopped_at: Completed 52-04-PLAN.md
+last_updated: "2026-06-18T02:45:56.821Z"
 last_activity: 2026-06-18
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 12
-  completed_plans: 9
-  percent: 75
+  completed_plans: 10
+  percent: 83
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 52 (Executable Structural G-code Evidence) — EXECUTING
-Plan: 4 of 6
+Plan: 5 of 6
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
 Status: Ready to execute
 Last activity: 2026-06-18
 
-Progress: [████████░░] 75%
+Progress: [████████░░] 83%
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Progress: [████████░░] 75%
 - Phase 52 plan 01 completed on 2026-06-18: 6min, 2 tasks, 4 files.
 - Phase 52 plan 02 completed on 2026-06-18: 8min, 2 tasks, 3 files.
 - Phase 52 plan 03 completed on 2026-06-18: 3 min, 2 tasks, 3 files.
+- Phase 52 plan 04 completed on 2026-06-18: 5 min, 2 tasks, 4 files.
 
 ## Accumulated Context
 
@@ -113,6 +114,9 @@ Recent decisions affecting v1.12:
 - [Phase 52-03]: Published the existing `fork.prusaslicer.gcode-output` row as narrow structural evidence without changing its status token or public parity command.
 - [Phase 52-03]: Kept the broad `generated-outputs` row exactly `in progress`.
 - [Phase 52-03]: Preserved the verifier's split literal around `host upload` so forbidden-term self-scanning remains fail-closed.
+- [Phase 52]: Kept Phase 52 scope publication inside the existing prusa-gcode-output-scope package instead of adding a new scope boundary.
+- [Phase 52]: Used the exact Plan 52-03 structural status row text as the verifier contract.
+- [Phase 52]: Preserved generated-outputs as exactly one in-progress row.
 
 ### Pending Todos
 
@@ -124,6 +128,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-18T02:34:25.595Z
-Stopped at: Completed 52-03-PLAN.md
+Last session: 2026-06-18T02:45:56.818Z
+Stopped at: Completed 52-04-PLAN.md
 Resume file: None
