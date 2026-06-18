@@ -46,7 +46,7 @@ readonly ACCEPTED_SOURCE_IDENTITY="prusaslicer:version_2.9.5@9a583bd438b195856f3
 readonly PLANNED_PARITY_COMMAND="bazel run //packages/parity:prusaslicer""_gcode_output_parity"
 readonly INVENTORY_ROW=$'prusaslicer.gcode-output\tprusaslicer\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tsrc/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp\tgcode-output\tgcode-output\tshared-downstream\thigh\tgenerated-outputs\tfuture-candidate\tnone\tSource-observed G-code output planning row; parity requires reviewed source-pinned summary evidence before output behavior is claimed.'
 readonly CATEGORY_MAP_ROW=$'gcode.shared\tgcode-output\tshared-downstream\tfuture-candidate\tprusaslicer.gcode-output\tPrusa G-code output row needs reviewed source-pinned summary evidence before generated-output behavior is claimed.'
-readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow summary-only Prusa G-code evidence slice backed by the Phase 46 fixture and Phase 47 Rust summary boundary only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
+readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow structural Prusa G-code evidence slice backed by the Phase 49 closed structural scope contract, Phase 50 structural fixture summary, Phase 51 Rust structural parser/readiness boundary, and Phase 52 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
 readonly STRUCTURAL_SCOPE_SECTION="## v1.13 Structural Evidence Scope"
 readonly STRUCTURAL_TRACEABILITY_SECTION="## v1.13 Structural Traceability"
 readonly STRUCTURAL_FIELD_ROW_COUNT="16"
@@ -264,6 +264,8 @@ verify_readme() {
 	require_text "${readme_file}" "README.md" \
 		"Phase 49 structural verification keeps broad generated-outputs in progress and does not prove byte-for-byte G-code parity, toolpath geometry, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation."
 	require_text "${readme_file}" "README.md" \
+		"Phase 52 public evidence consumes this Phase 49 closed structural scope contract for the narrow structural Prusa G-code evidence slice while keeping broad generated-outputs in progress."
+	require_text "${readme_file}" "README.md" \
 		"Phase 45 verification does not prove executable Prusa G-code output parity."
 	require_text "${readme_file}" "README.md" \
 		"Phase 45 verification does not prove byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, or sync automation."
@@ -378,7 +380,7 @@ verify_structural_traceability() {
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
 		"${STRUCTURAL_TRACEABILITY_SECTION}" "Fixture provenance" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv\`"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
-		"${STRUCTURAL_TRACEABILITY_SECTION}" "Published narrow status row" "\`fork.prusaslicer.gcode-output\` stays verified only for the narrow summary-only Prusa G-code evidence slice in \`packages/parity/status.tsv\`"
+		"${STRUCTURAL_TRACEABILITY_SECTION}" "Published narrow status row" "\`fork.prusaslicer.gcode-output\` stays verified only for the narrow structural Prusa G-code evidence slice in \`packages/parity/status.tsv\`, backed by the Phase 49 closed structural scope contract, Phase 50 structural fixture summary, Phase 51 Rust structural parser/readiness boundary, and Phase 52 public parity command"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
 		"${STRUCTURAL_TRACEABILITY_SECTION}" "Broad status row" "\`generated-outputs\` stays \`in progress\` in \`packages/parity/status.tsv\`"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
