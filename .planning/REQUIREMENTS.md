@@ -56,7 +56,7 @@ depend on.
 - [x] **GCEV-01**: Maintainer can run a public Bazel parity command that
   validates the structural Prusa G-code expected summary through the Rust
   boundary and checked-in fixture expectations.
-- [ ] **GCEV-02**: Maintainer can see the public parity command fail closed on a
+- [x] **GCEV-02**: Maintainer can see the public parity command fail closed on a
   structural-summary mutation guard, not only the v1.12 marker-line drift guard.
 - [ ] **GCEV-03**: Maintainer can inspect parity status, package docs, and port
   docs that describe the exact narrow `fork.prusaslicer.gcode-output`
@@ -122,7 +122,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GCRUST-02 | Phase 51 | Complete |
 | GCRUST-03 | Phase 51 | Complete |
 | GCEV-01 | Phase 52 | Complete |
-| GCEV-02 | Phase 52 | Pending |
+| GCEV-02 | Phase 52 | Complete |
 | GCEV-03 | Phase 52 | Pending |
 
 **Coverage:**

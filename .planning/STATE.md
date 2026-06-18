@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: milestone
 status: executing
-stopped_at: Completed 52-01-PLAN.md
-last_updated: "2026-06-18T02:11:04.936Z"
+stopped_at: Completed 52-02-PLAN.md
+last_updated: "2026-06-18T02:25:57.039Z"
 last_activity: 2026-06-18
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 12
-  completed_plans: 7
-  percent: 58
+  completed_plans: 8
+  percent: 67
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 52 (Executable Structural G-code Evidence) — EXECUTING
-Plan: 2 of 6
+Plan: 3 of 6
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
 Status: Ready to execute
 Last activity: 2026-06-18
 
-Progress: [██████░░░░] 58%
+Progress: [███████░░░] 67%
 
 ## Performance Metrics
 
@@ -47,6 +47,7 @@ Progress: [██████░░░░] 58%
 - v1.13 starts with 4 planned phases and 12 mapped requirements.
 - Phase 49 has 2 plans ready for execution.
 - Phase 52 plan 01 completed on 2026-06-18: 6min, 2 tasks, 4 files.
+- Phase 52 plan 02 completed on 2026-06-18: 8min, 2 tasks, 3 files.
 
 ## Accumulated Context
 
@@ -105,6 +106,9 @@ Recent decisions affecting v1.12:
 - [Phase 49]: Kept generated-outputs fail-closed as exactly one in-progress status row while preserving the narrow verified fork row. — This completes GCSCOPE-03 without promoting broad generated-output parity.
 - [Phase 52-01]: Extended the existing G-code summary binary with explicit --structural mode instead of adding a second binary.
 - [Phase 52-01]: Kept structural CLI behavior limited to caller-supplied local file reads through the Rust parser boundary.
+- [Phase 52-02]: Kept the existing public Prusa G-code parity target while adding structural sidecar validation.
+- [Phase 52-02]: Used the existing Rust summary binary's --structural mode for public structural validation instead of adding a new comparator binary.
+- [Phase 52-02]: Added exactly one command-level structural mutation guard for command_count_g1 drift.
 
 ### Pending Todos
 
@@ -116,6 +120,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-18T02:11:04.933Z
-Stopped at: Completed 52-01-PLAN.md
+Last session: 2026-06-18T02:25:57.013Z
+Stopped at: Completed 52-02-PLAN.md
 Resume file: None
