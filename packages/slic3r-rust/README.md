@@ -16,7 +16,11 @@ executable Prusa profile-schema parser/config evidence. Phase 43 adds the
 `slic3r_flavors::prusa_project_file` parser/metadata boundary, and Phase 44
 adds the Rust summary helper plus
 `bazel run //packages/parity:prusaslicer_project_file_parity` as narrow
-executable Prusa project-file expected-summary evidence.
+executable Prusa project-file expected-summary evidence. Phase 51 adds the
+Prusa G-code structural parser/readiness boundary for the Phase 49 closed
+structural scope contract and Phase 50 structural sidecar, and Phase 52
+publishes it through the public parity command for the narrow structural Prusa
+G-code evidence slice.
 
 ## Layout
 
@@ -73,6 +77,8 @@ executable Prusa project-file expected-summary evidence.
   - `bazel run //packages/parity:prusaslicer_project_file_parity`
 - Run the Prusa G-code output summary helper:
   - `//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary`
+  - summary mode reads `expected-gcode-summary.tsv`
+  - structural mode reads `--structural expected-gcode-structural-summary.tsv`
 - Run the narrow Prusa G-code output parity command:
   - `bazel run //packages/parity:prusaslicer_gcode_output_parity`
 - Run write-mode formatting with the pinned Rust toolchain:
@@ -142,14 +148,20 @@ executable Prusa project-file expected-summary evidence.
   release, or sync surfaces.
 - Phase 47 exposes `slic3r_flavors::prusa_gcode_output` and the typed
   `prusa_gcode_output_summary_lines` boundary for the
-  `prusaslicer.gcode-output` parser/metadata slice. Phase 48 adds
+  `prusaslicer.gcode-output` parser/metadata slice. Phase 51 adds the
+  Phase 49 closed structural scope contract through the Phase 50 structural
+  sidecar as the Phase 51 Rust structural parser/readiness boundary. Phase 52
+  publishes that boundary through the Phase 52 public parity command for the
+  narrow structural Prusa G-code evidence slice. Phase 48 adds
   `//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary`
   and verifies `fork.prusaslicer.gcode-output` through
-  `bazel run //packages/parity:prusaslicer_gcode_output_parity` for the narrow
-  summary-only Prusa G-code evidence slice only. The Rust adapter reads only
-  the caller-supplied `expected-gcode-summary.tsv`; it does not inspect Git,
-  network, process, raw G-code generation, printer-runtime, profile-update,
-  release, upstream import, or sync surfaces.
+  `bazel run //packages/parity:prusaslicer_gcode_output_parity`.
+  `prusa_gcode_output_summary` supports existing summary mode over
+  `expected-gcode-summary.tsv` and explicit
+  `--structural expected-gcode-structural-summary.tsv` mode, both over
+  caller-supplied checked-in TSV artifacts. The Rust adapter does not inspect
+  Git, access the network, spawn PrusaSlicer, generate fresh G-code, upload,
+  release, import upstream source, or sync.
 - Byte-for-byte G-code parity, full generated-output parity, full 3MF
   import/export, full PrusaSlicer runtime support, GUI project behavior,
   generated-output parity, STEP import, support generation, arc fitting, wall
