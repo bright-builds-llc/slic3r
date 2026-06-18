@@ -92,7 +92,7 @@ temperature/tool-change markers, source identity, and fixture identity.
   inspect and verify source-pinned Prusa structural summary fixtures with
   fail-closed drift guards.
 
-- [ ] **Phase 51: Rust Structural G-code Summary Boundary** - Developers can
+- [x] **Phase 51: Rust Structural G-code Summary Boundary** - Developers can (completed 2026-06-18)
   parse, test, and trace the structural Prusa G-code summary through a pure
   typed Rust boundary.
 
@@ -182,7 +182,7 @@ status publication.
 Plans:
 
 - [x] 51-01-PLAN.md — Add the pure typed structural summary parser and Cargo/Bazel rejection coverage.
-- [ ] 51-02-PLAN.md — Expose structural readiness metadata through the existing registry boundary without status publication.
+- [x] 51-02-PLAN.md — Expose structural readiness metadata through the existing registry boundary without status publication.
 
 ### Phase 52: Executable Structural G-code Evidence
 
@@ -233,7 +233,7 @@ Phases execute in numeric order: 49 -> 50 -> 51 -> 52
 |-------|----------------|--------|-----------|
 | 49. Structural G-code Scope Contract | 2/2 | Complete    | 2026-06-16 |
 | 50. Structural G-code Fixture Expansion | 2/2 | Complete    | 2026-06-17 |
-| 51. Rust Structural G-code Summary Boundary | 1/2 | In Progress|  |
+| 51. Rust Structural G-code Summary Boundary | 2/2 | Complete   | 2026-06-18 |
 | 52. Executable Structural G-code Evidence | 0/TBD | Not started | - |
 
 ## Future Revisit Candidates
