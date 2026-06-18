@@ -271,7 +271,8 @@ pub struct PrusaGcodeOutputNote(String);
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PrusaGcodeOutputStructuralSummary {
-    pub rows: Vec<PrusaGcodeOutputStructuralSummaryRow>,
+    rows: Vec<PrusaGcodeOutputStructuralSummaryRow>,
+    facts: PrusaGcodeOutputStructuralFacts,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -699,7 +700,7 @@ pub fn parse_prusa_gcode_output_structural_summary(
 
     validate_missing_structural_rows(&row_keys)?;
 
-    Ok(PrusaGcodeOutputStructuralSummary { rows })
+    Ok(PrusaGcodeOutputStructuralSummary::from_validated_rows(rows))
 }
 
 pub fn prusa_gcode_output_summary_lines(
@@ -807,10 +808,25 @@ impl PrusaGcodeOutputNote {
 }
 
 impl PrusaGcodeOutputStructuralSummary {
+    fn from_validated_rows(rows: Vec<PrusaGcodeOutputStructuralSummaryRow>) -> Self {
+        let facts = PrusaGcodeOutputStructuralFacts::from_validated_rows(&rows);
+        Self { rows, facts }
+    }
+
+    pub fn rows(&self) -> &[PrusaGcodeOutputStructuralSummaryRow] {
+        &self.rows
+    }
+
     pub fn facts(&self) -> PrusaGcodeOutputStructuralFacts {
+        self.facts
+    }
+}
+
+impl PrusaGcodeOutputStructuralFacts {
+    fn from_validated_rows(rows: &[PrusaGcodeOutputStructuralSummaryRow]) -> Self {
         let mut facts = PrusaGcodeOutputStructuralFacts::expected();
 
-        for row in &self.rows {
+        for row in rows {
             match (row.structural_field, row.structural_value) {
                 (
                     PrusaGcodeOutputStructuralField::SourceRef,
@@ -876,15 +892,13 @@ impl PrusaGcodeOutputStructuralSummary {
                     PrusaGcodeOutputStructuralField::ToolChangeMarkerCount,
                     PrusaGcodeOutputStructuralValue::Count(count),
                 ) => facts.tool_change_marker_count = count,
-                _ => {}
+                _ => unreachable!("validated structural summary row value must match its field"),
             }
         }
 
         facts
     }
-}
 
-impl PrusaGcodeOutputStructuralFacts {
     const fn expected() -> Self {
         Self {
             source_ref: PRUSA_GCODE_OUTPUT_SOURCE_REF,

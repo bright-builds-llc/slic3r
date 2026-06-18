@@ -58,21 +58,19 @@ fn parses_expected_gcode_structural_summary_rows_and_facts() {
     let summary = parse_prusa_gcode_output_structural_summary(input)
         .expect("expected structural G-code summary should parse");
     let facts = summary.facts();
-    let fields: Vec<PrusaGcodeOutputStructuralField> = summary
-        .rows
-        .iter()
-        .map(|row| row.structural_field)
-        .collect();
+    let rows = summary.rows();
+    let fields: Vec<PrusaGcodeOutputStructuralField> =
+        rows.iter().map(|row| row.structural_field).collect();
 
     // Assert
-    assert_eq!(summary.rows.len(), 16);
+    assert_eq!(rows.len(), 16);
     assert_eq!(fields.as_slice(), expected_structural_fields().as_slice());
     assert_eq!(
-        summary.rows[0].structural_field,
+        rows[0].structural_field,
         PrusaGcodeOutputStructuralField::SourceRef
     );
     assert_eq!(
-        summary.rows[15].structural_field,
+        rows[15].structural_field,
         PrusaGcodeOutputStructuralField::ToolChangeMarkerCount
     );
     assert_eq!(facts.source_ref.as_str(), expected_source_ref());
