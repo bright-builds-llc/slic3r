@@ -11,7 +11,9 @@ pub const PRUSA_GCODE_OUTPUT_EXPECTED_STRUCTURAL_SUMMARY_PATH: &str = "packages/
 pub(crate) const PRUSA_GCODE_OUTPUT_SCOPE_RECORD_PATH: &str =
     "packages/prusa-gcode-output-scope/gcode-output-scope.md";
 pub(crate) const PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN: &str = "fork.prusaslicer.gcode-output";
-const PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS: &str =
+static PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS: [&str; 2] =
+    ["src/libslic3r/GCode.cpp", "src/libslic3r/GCode.hpp"];
+const PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS_VALUE: &str =
     "src/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp";
 const PRUSA_GCODE_OUTPUT_FIXTURE_SOURCE_LITERAL: &str =
     "tests/fff_print/test_gcodewriter.cpp#L20-L35";
@@ -116,7 +118,7 @@ const EXPECTED_STRUCTURAL_ROWS: [ExpectedGcodeOutputStructuralRow; 16] = [
         structural_field: PrusaGcodeOutputStructuralField::InventorySourcePaths,
         structural_category: PrusaGcodeOutputStructuralCategory::SourceIdentity,
         structural_value: PrusaGcodeOutputStructuralValue::InventorySourcePaths(
-            PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS,
+            PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS_VALUE,
         ),
         evidence_boundary: STRUCTURAL_INVENTORY_SOURCE_PATHS_BOUNDARY,
     },
@@ -495,7 +497,21 @@ pub struct PrusaGcodeOutputMetadata {
     pub source_path: &'static str,
     pub fixture_path: &'static str,
     pub expected_summary_path: &'static str,
+    pub expected_structural_summary_path: &'static str,
     pub scope_record_path: &'static str,
+    pub reserved_future_status_token: &'static str,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaGcodeOutputStructuralReadiness {
+    pub inventory_id: &'static str,
+    pub source_ref: VendorSourceRef,
+    pub inventory_source_paths: &'static [&'static str],
+    pub fixture_path: &'static str,
+    pub expected_structural_summary_path: &'static str,
+    pub parser_boundary: &'static str,
+    pub parity_dependency: ParitySurface,
+    pub checklist_status: ChecklistStatus,
     pub reserved_future_status_token: &'static str,
 }
 
@@ -545,7 +561,22 @@ pub const fn prusa_gcode_output_metadata() -> PrusaGcodeOutputMetadata {
         source_path: PRUSA_GCODE_OUTPUT_SOURCE_PATH,
         fixture_path: PRUSA_GCODE_OUTPUT_FIXTURE_PATH,
         expected_summary_path: PRUSA_GCODE_OUTPUT_EXPECTED_SUMMARY_PATH,
+        expected_structural_summary_path: PRUSA_GCODE_OUTPUT_EXPECTED_STRUCTURAL_SUMMARY_PATH,
         scope_record_path: PRUSA_GCODE_OUTPUT_SCOPE_RECORD_PATH,
+        reserved_future_status_token: PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN,
+    }
+}
+
+pub const fn prusa_gcode_output_structural_readiness() -> PrusaGcodeOutputStructuralReadiness {
+    PrusaGcodeOutputStructuralReadiness {
+        inventory_id: PRUSA_GCODE_OUTPUT_INVENTORY_ID,
+        source_ref: PRUSA_GCODE_OUTPUT_SOURCE_REF,
+        inventory_source_paths: &PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS,
+        fixture_path: PRUSA_GCODE_OUTPUT_FIXTURE_PATH,
+        expected_structural_summary_path: PRUSA_GCODE_OUTPUT_EXPECTED_STRUCTURAL_SUMMARY_PATH,
+        parser_boundary: "slic3r_flavors::prusa_gcode_output::parse_prusa_gcode_output_structural_summary",
+        parity_dependency: ParitySurface::generated_outputs(),
+        checklist_status: ChecklistStatus::FutureCandidate,
         reserved_future_status_token: PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN,
     }
 }
@@ -857,7 +888,7 @@ impl PrusaGcodeOutputStructuralFacts {
     const fn expected() -> Self {
         Self {
             source_ref: PRUSA_GCODE_OUTPUT_SOURCE_REF,
-            inventory_source_paths: PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS,
+            inventory_source_paths: PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS_VALUE,
             fixture_source_literal: PRUSA_GCODE_OUTPUT_FIXTURE_SOURCE_LITERAL,
             fixture_id: PRUSA_GCODE_OUTPUT_FIXTURE_ID,
             fixture_path: PRUSA_GCODE_OUTPUT_FIXTURE_PATH,
@@ -1353,7 +1384,7 @@ fn parse_structural_value(
             parse_expected_structural_string_value(
                 value,
                 structural_field,
-                PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS,
+                PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS_VALUE,
                 PrusaGcodeOutputStructuralValue::InventorySourcePaths,
                 line_number,
             )
