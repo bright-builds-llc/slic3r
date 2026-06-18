@@ -40,13 +40,13 @@ depend on.
 
 ### Rust Structural Boundary
 
-- [ ] **GCRUST-01**: Developer can parse the v1.13 expected structural summary
+- [x] **GCRUST-01**: Developer can parse the v1.13 expected structural summary
   artifact through a pure typed Rust boundary in `slic3r_flavors`.
-- [ ] **GCRUST-02**: Developer can run Cargo and Bazel tests proving the Rust
+- [x] **GCRUST-02**: Developer can run Cargo and Bazel tests proving the Rust
   structural boundary rejects invalid headers, wrong column counts, missing
   rows, duplicate rows, out-of-order rows, unsupported structural fields,
   unsupported claim text, wrong source refs, and wrong fixture identities.
-- [ ] **GCRUST-03**: Developer can inspect registry metadata that exposes
+- [x] **GCRUST-03**: Developer can inspect registry metadata that exposes
   structural Prusa G-code evidence readiness without filesystem discovery, Git,
   network, process execution, release behavior, sync behavior, or premature
   broad generated-output status publication.
@@ -118,9 +118,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GCFIX-01 | Phase 50 | Pending |
 | GCFIX-02 | Phase 50 | Pending |
 | GCFIX-03 | Phase 50 | Pending |
-| GCRUST-01 | Phase 51 | Pending |
-| GCRUST-02 | Phase 51 | Pending |
-| GCRUST-03 | Phase 51 | Pending |
+| GCRUST-01 | Phase 51 | Complete |
+| GCRUST-02 | Phase 51 | Complete |
+| GCRUST-03 | Phase 51 | Complete |
 | GCEV-01 | Phase 52 | Pending |
 | GCEV-02 | Phase 52 | Pending |
 | GCEV-03 | Phase 52 | Pending |
