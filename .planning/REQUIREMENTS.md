@@ -53,7 +53,7 @@ depend on.
 
 ### Executable Evidence
 
-- [ ] **GCEV-01**: Maintainer can run a public Bazel parity command that
+- [x] **GCEV-01**: Maintainer can run a public Bazel parity command that
   validates the structural Prusa G-code expected summary through the Rust
   boundary and checked-in fixture expectations.
 - [ ] **GCEV-02**: Maintainer can see the public parity command fail closed on a
@@ -121,7 +121,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GCRUST-01 | Phase 51 | Complete |
 | GCRUST-02 | Phase 51 | Complete |
 | GCRUST-03 | Phase 51 | Complete |
-| GCEV-01 | Phase 52 | Pending |
+| GCEV-01 | Phase 52 | Complete |
 | GCEV-02 | Phase 52 | Pending |
 | GCEV-03 | Phase 52 | Pending |
 

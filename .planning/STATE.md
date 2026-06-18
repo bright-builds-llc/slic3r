@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: milestone
 status: executing
-stopped_at: Phase 52 context gathered
-last_updated: "2026-06-18T02:00:33.529Z"
-last_activity: 2026-06-18 -- Phase 52 execution started
+stopped_at: Completed 52-01-PLAN.md
+last_updated: "2026-06-18T02:11:04.936Z"
+last_activity: 2026-06-18
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 12
-  completed_plans: 6
-  percent: 50
+  completed_plans: 7
+  percent: 58
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 52 (Executable Structural G-code Evidence) — EXECUTING
-Plan: 1 of 6
+Plan: 2 of 6
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
-Status: Executing Phase 52
-Last activity: 2026-06-18 -- Phase 52 execution started
+Status: Ready to execute
+Last activity: 2026-06-18
 
-Progress: [██████████] 100%
+Progress: [██████░░░░] 58%
 
 ## Performance Metrics
 
@@ -46,6 +46,7 @@ Progress: [██████████] 100%
 
 - v1.13 starts with 4 planned phases and 12 mapped requirements.
 - Phase 49 has 2 plans ready for execution.
+- Phase 52 plan 01 completed on 2026-06-18: 6min, 2 tasks, 4 files.
 
 ## Accumulated Context
 
@@ -102,6 +103,8 @@ Recent decisions affecting v1.12:
 - [Phase 49]: Kept structural enforcement in the existing prusa-gcode-output-scope verifier package. — This preserves the Phase 45-49 reviewed evidence chain and avoids creating a new package boundary.
 - [Phase 49]: Enforced the structural field table with exact required rows plus an exact sixteen-row body count. — This makes unsupported structural fields fail closed instead of passing through presence-only checks.
 - [Phase 49]: Kept generated-outputs fail-closed as exactly one in-progress status row while preserving the narrow verified fork row. — This completes GCSCOPE-03 without promoting broad generated-output parity.
+- [Phase 52-01]: Extended the existing G-code summary binary with explicit --structural mode instead of adding a second binary.
+- [Phase 52-01]: Kept structural CLI behavior limited to caller-supplied local file reads through the Rust parser boundary.
 
 ### Pending Todos
 
@@ -113,6 +116,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-18T01:13:36.736Z
-Stopped at: Phase 52 context gathered
-Resume file: .planning/phases/52-executable-structural-g-code-evidence/52-CONTEXT.md
+Last session: 2026-06-18T02:11:04.933Z
+Stopped at: Completed 52-01-PLAN.md
+Resume file: None
