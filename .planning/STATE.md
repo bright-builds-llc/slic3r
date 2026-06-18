@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: milestone
-status: executing
-stopped_at: Completed 52-05-PLAN.md
-last_updated: "2026-06-18T02:56:54.269Z"
+status: verifying
+stopped_at: Completed 52-06-PLAN.md
+last_updated: "2026-06-18T03:10:13.686Z"
 last_activity: 2026-06-18
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 12
-  completed_plans: 11
-  percent: 92
+  completed_plans: 12
+  percent: 100
 ---
 
 # Project State
@@ -29,13 +29,13 @@ depend on.
 
 ## Current Position
 
-Phase: 52 (Executable Structural G-code Evidence) — EXECUTING
+Phase: 52 (Executable Structural G-code Evidence) — VERIFYING
 Plan: 6 of 6
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-18
 
-Progress: [█████████░] 92%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -51,6 +51,7 @@ Progress: [█████████░] 92%
 - Phase 52 plan 03 completed on 2026-06-18: 3 min, 2 tasks, 3 files.
 - Phase 52 plan 04 completed on 2026-06-18: 5 min, 2 tasks, 4 files.
 - Phase 52 plan 05 completed on 2026-06-18: 4 min, 2 tasks, 4 files.
+- Phase 52 plan 06 completed on 2026-06-18: 5 min, 2 tasks, 5 files.
 
 ## Accumulated Context
 
@@ -121,6 +122,9 @@ Recent decisions affecting v1.12:
 - [Phase 52]: Kept the public fork.prusaslicer.gcode-output status token and public Prusa G-code parity command unchanged while updating package docs to structural evidence wording.
 - [Phase 52]: Documented Rust summary and --structural modes as caller-supplied checked-in TSV parsing only.
 - [Phase 52]: Preserved fixture provenance values and deferred generated-output/runtime/fork boundaries.
+- [Phase 52-06]: Published fork.prusaslicer.gcode-output in public port docs as narrow structural evidence only, not broad generated-output parity.
+- [Phase 52-06]: Kept the Phase 49 -> Phase 50 -> Phase 51 -> Phase 52 evidence chain explicit across parity matrix, migration guidance, README, and package map docs.
+- [Phase 52-06]: Preserved the broad generated-outputs status as in progress and kept all D-11 deferred generated-output, runtime, fork, upstream import, release, and sync surfaces explicit.
 
 ### Pending Todos
 
@@ -132,6 +136,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-18T02:56:31.806Z
-Stopped at: Completed 52-05-PLAN.md
+Last session: 2026-06-18T03:10:13.683Z
+Stopped at: Completed 52-06-PLAN.md
 Resume file: None

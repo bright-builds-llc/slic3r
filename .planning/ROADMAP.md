@@ -96,7 +96,7 @@ temperature/tool-change markers, source identity, and fixture identity.
   parse, test, and trace the structural Prusa G-code summary through a pure
   typed Rust boundary.
 
-- [ ] **Phase 52: Executable Structural G-code Evidence** - Maintainers can
+- [x] **Phase 52: Executable Structural G-code Evidence** - Maintainers can (completed 2026-06-18)
   run public fail-closed structural evidence and inspect exact narrow
   status/docs for the Prusa G-code slice.
 
@@ -212,7 +212,7 @@ Plans:
 - [x] 52-03-PLAN.md — Publish structural status wording and reconcile fixture verifier enforcement.
 - [x] 52-04-PLAN.md — Update scope traceability and scope verifier structural publication checks.
 - [x] 52-05-PLAN.md — Update package docs for the structural evidence chain.
-- [ ] 52-06-PLAN.md — Update port docs while keeping broad generated outputs in progress.
+- [x] 52-06-PLAN.md — Update port docs while keeping broad generated outputs in progress.
 
 ## Coverage
 
@@ -243,7 +243,7 @@ Phases execute in numeric order: 49 -> 50 -> 51 -> 52
 | 49. Structural G-code Scope Contract | 2/2 | Complete    | 2026-06-16 |
 | 50. Structural G-code Fixture Expansion | 2/2 | Complete    | 2026-06-17 |
 | 51. Rust Structural G-code Summary Boundary | 2/2 | Complete    | 2026-06-18 |
-| 52. Executable Structural G-code Evidence | 5/6 | In Progress | - |
+| 52. Executable Structural G-code Evidence | 6/6 | Complete   | 2026-06-18 |
 
 ## Future Revisit Candidates
 
