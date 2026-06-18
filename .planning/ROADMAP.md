@@ -203,7 +203,16 @@ status/docs that publish only the exact narrow evidence slice.
    evidence slice while keeping broad `generated-outputs` in progress and all
    deferred generated-output, runtime, and fork surfaces explicit.
 
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+
+- [ ] 52-01-PLAN.md — Add the Rust structural summary adapter and explicit `--structural` binary mode.
+- [ ] 52-02-PLAN.md — Extend the public parity command and add the `command_count_g1` mutation guard.
+- [ ] 52-03-PLAN.md — Publish structural status wording and reconcile fixture verifier enforcement.
+- [ ] 52-04-PLAN.md — Update scope traceability and scope verifier structural publication checks.
+- [ ] 52-05-PLAN.md — Update package docs for the structural evidence chain.
+- [ ] 52-06-PLAN.md — Update port docs while keeping broad generated outputs in progress.
 
 ## Coverage
 
@@ -234,7 +243,7 @@ Phases execute in numeric order: 49 -> 50 -> 51 -> 52
 | 49. Structural G-code Scope Contract | 2/2 | Complete    | 2026-06-16 |
 | 50. Structural G-code Fixture Expansion | 2/2 | Complete    | 2026-06-17 |
 | 51. Rust Structural G-code Summary Boundary | 2/2 | Complete    | 2026-06-18 |
-| 52. Executable Structural G-code Evidence | 0/TBD | Not started | - |
+| 52. Executable Structural G-code Evidence | 0/6 | Not started | - |
 
 ## Future Revisit Candidates
 
