@@ -36,8 +36,9 @@ Branch-head observations remain drift-only and do not update this fixture.
 ## Status Boundary
 
 Rust summary parsing remains Phase 47-owned; executable parity and
-`fork.prusaslicer.gcode-output` status publication remain Phase 48-owned.
-Structural Rust parsing remains Phase 51-owned; public structural parity/status publication remains Phase 52-owned.
+`fork.prusaslicer.gcode-output` status publication remain Phase 48-owned for
+the Phase 48 summary evidence path.
+Phase 52 public structural parity/status publication consumes the Phase 49 closed structural scope contract and Phase 50 structural sidecar through the Phase 51 Rust structural parser/readiness boundary.
 
 No base export fixture reuse, live generation, upstream fetching/importing,
 binary G-code, thumbnails, post-processing, host upload, printer-runtime

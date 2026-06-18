@@ -55,12 +55,9 @@ The selected fixture is derived from source-controlled
 `GCodeWriter::set_speed` expected-output literals at
 `tests/fff_print/test_gcodewriter.cpp#L20-L35` under
 `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` because
-the accepted upstream tree has no checked-in `.gcode` blob. Phase 47 owns the
-Rust parser/metadata boundary, and the Phase 47 Rust summary output feeds
-Phase 48. Phase 48 now publishes
+the accepted upstream tree has no checked-in `.gcode` blob. The Phase 49 closed structural scope contract defines the allowed structural field set. Phase 50 adds `expected-gcode-structural-summary.tsv` to the same fixture namespace and bundle as the source-pinned structural sidecar. Phase 51 consumes that sidecar through the Rust structural parser/readiness boundary. Phase 52 verifies the narrow structural evidence slice through
 `bazel run //packages/parity:prusaslicer_gcode_output_parity` plus the exact
-`fork.prusaslicer.gcode-output` row for the narrow summary-only evidence slice.
-Phase 50 adds `expected-gcode-structural-summary.tsv` to the same fixture namespace and bundle as the source-pinned structural handoff artifact for Phase 51. The structural sidecar remains fixture-owned and does not update `packages/parity/status.tsv`, `packages/parity/BUILD.bazel`, or Rust structural parsing.
+`fork.prusaslicer.gcode-output` status row.
 
 The G-code fixture namespace itself does not prove byte-for-byte G-code
 parity, full generated-output parity, toolpath geometry, extrusion, timing,
@@ -129,8 +126,9 @@ additional fixture files by themselves.
   exported as `//packages/parity-fixtures:prusa_gcode_output_bundle` and
   checked by
   `bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`.
-  Phase 47 consumes the checked-in `expected-gcode-summary.tsv` through the
-  Rust parser/metadata boundary, and Phase 48 verifies the narrow summary-only
-  evidence slice through
+  Phase 49 closes the structural field contract, Phase 50 adds the checked-in
+  `expected-gcode-structural-summary.tsv` sidecar, Phase 51 consumes the
+  structural sidecar through the Rust parser/readiness boundary, and Phase 52
+  verifies the narrow structural evidence slice through
   `bazel run //packages/parity:prusaslicer_gcode_output_parity` plus the exact
   `fork.prusaslicer.gcode-output` status row.
