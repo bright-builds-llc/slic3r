@@ -116,7 +116,7 @@ run_comparator() {
 		"${expected_gcode_summary}" \
 		"${expected_artifact}" \
 		"${expected_gcode_structural_summary}" \
-		"${expected_gcode_structural_summary}" \
+		"${expected_structural_artifact}" \
 		"${fixture_provenance}" >"${stdout_file}" 2>"${stderr_file}"
 	local status="$?"
 	set -e
