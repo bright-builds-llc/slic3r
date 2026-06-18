@@ -415,7 +415,9 @@ No assumption-tagged claims are used in this research; all recommendations are b
 |---|-------|---------|---------------|
 | None | All claims are verified or cited. | All | No user confirmation needed before planning. |
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+RESOLVED: Do not split `prusa_gcode_output.rs` during Phase 52; record future cleanup only if implementation changes make reviewability worse.
 
 1. **Should Phase 52 split `prusa_gcode_output.rs` while touching Rust?** [VERIFIED: packages/slic3r-rust/crates/slic3r_flavors/src/prusa_gcode_output.rs; .planning/phases/51-rust-structural-g-code-summary-boundary/51-VERIFICATION.md]
    - What we know: The file is 1,628 lines and Phase 51 verification recorded that as an info-level Bright Builds split trigger. [VERIFIED: .planning/phases/51-rust-structural-g-code-summary-boundary/51-VERIFICATION.md]
