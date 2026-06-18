@@ -37,7 +37,8 @@ parity.
 
 ## Current State
 
-v1.13 is open. It builds directly on v1.12 by strengthening the
+v1.13 phase work is complete and ready for milestone audit/archival. It builds
+directly on v1.12 by strengthening the
 `fork.prusaslicer.gcode-output` evidence contract from marker-level summary
 metadata to structural G-code summaries: stable command/section counts,
 ordered markers, movement/extrusion indicators, temperature/tool-change
@@ -66,6 +67,24 @@ duplicate rows, unsupported fields, overclaims, and provenance mismatches. The
 fixture expansion completes GCFIX-01, GCFIX-02, and GCFIX-03 while keeping Rust
 structural parsing and public structural parity/status publication deferred to
 Phase 51 and Phase 52.
+
+v1.13 Phase 51 is complete. Developers can parse the Phase 50 structural
+summary sidecar through the pure typed `slic3r_flavors` Rust boundary, run
+Cargo and Bazel rejection coverage for header, column, ordering, duplicate,
+missing-row, unsupported-field, overclaim, source-ref, and fixture-identity
+drift, and inspect registry readiness metadata without status publication or
+runtime side effects. The Rust boundary completes GCRUST-01, GCRUST-02, and
+GCRUST-03 while preserving the Phase 52 public-evidence handoff.
+
+v1.13 Phase 52 is verified. Maintainers can run
+`bazel run //packages/parity:prusaslicer_gcode_output_parity`, see the
+structural `command_count_g1` mutation guard fail closed, inspect the exact
+verified `fork.prusaslicer.gcode-output` status row, and read package/port
+docs that publish only the narrow structural Prusa G-code evidence slice. The
+public evidence completes GCEV-01, GCEV-02, and GCEV-03 while keeping broad
+`generated-outputs` in progress and byte-for-byte G-code, geometry/toolpath,
+printability, runtime, GUI, release, non-Prusa fork, upstream import, and sync
+surfaces deferred.
 
 v1.12 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, see the
@@ -433,6 +452,11 @@ high-risk generated-output or network/cloud surfaces.
 - ✓ v1.13 expands the source-pinned Prusa G-code fixture surface with a
   checked-in structural expected summary and fail-closed drift guards — Phase
   50
+- ✓ v1.13 adds a pure typed Rust structural summary boundary for the expanded
+  Prusa G-code fixture evidence — Phase 51
+- ✓ v1.13 publishes a stronger executable parity/status/docs path for
+  `fork.prusaslicer.gcode-output` without claiming byte-for-byte, geometry,
+  runtime, GUI, or non-Prusa fork parity — Phase 52
 
 ### Active
 
@@ -440,9 +464,9 @@ high-risk generated-output or network/cloud surfaces.
   evidence slice narrow and forbids broad generated-output claims.
 - [x] Expand the source-pinned Prusa G-code fixture surface with checked-in
   structural expected summaries and fail-closed drift guards.
-- [ ] Add a pure typed Rust structural summary boundary for the expanded
+- [x] Add a pure typed Rust structural summary boundary for the expanded
   fixture evidence.
-- [ ] Publish a stronger executable parity/status/docs path for
+- [x] Publish a stronger executable parity/status/docs path for
   `fork.prusaslicer.gcode-output` without claiming byte-for-byte, geometry,
   runtime, GUI, or non-Prusa fork parity.
 
@@ -525,7 +549,7 @@ The audience for this work is broad:
 | Publish project-file parity only as a narrow expected-summary evidence slice | Phase 44 proves command/status wiring without claiming full 3MF import/export, GUI project behavior, runtime semantics, or generated-output parity | ✓ Shipped in Phase 44 |
 | Start generated-output work with summary-only G-code evidence | G-code is closer to real port value than another static input slice, but byte-for-byte output parity and printer-runtime claims are too broad for the first generated-output milestone | ✓ Shipped in v1.12 Phase 48 |
 | Limit active downstream-fork porting consideration to PrusaSlicer for now | Non-Prusa Slicer-family ports need an explicit new planning decision before moving from parking lot into the roadmap | ✓ Adopted 2026-06-03 |
-| Expand Prusa G-code evidence structurally before broad generated-output parity | v1.12 proved the evidence path, but support, seam, arc, geometry, runtime, and byte parity should wait until structural G-code summaries can fail closed on meaningful drift | — Pending in v1.13 |
+| Expand Prusa G-code evidence structurally before broad generated-output parity | v1.12 proved the evidence path, but support, seam, arc, geometry, runtime, and byte parity should wait until structural G-code summaries can fail closed on meaningful drift | ✓ Shipped in v1.13 Phase 52 |
 
 ## Evolution
 
@@ -548,4 +572,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-16 after starting v1.13*
+*Last updated: 2026-06-18 after verifying v1.13 Phase 52*
