@@ -16,16 +16,16 @@
 | Package | Role |
 |---------|------|
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
-| `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface; `slic3r_flavors` owns the Prusa profile parser/summary helper, the Phase 43 `prusa_project_file` parser/metadata boundary, the Phase 47 `prusa_gcode_output` parser/metadata boundary, and the Phase 48 `prusa_gcode_output_summary` adapter |
+| `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface; `slic3r_flavors` owns the Prusa profile parser/summary helper, the Phase 43 `prusa_project_file` parser/metadata boundary, the Phase 47 `prusa_gcode_output` parser/metadata boundary, the Phase 51 Rust structural parser/readiness boundary, and the `prusa_gcode_output_summary` summary/structural adapter |
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, the scoped Windows packaged launcher tree, and the scoped macOS packaged launcher/startup surface |
-| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, Windows packaged launcher, narrow Prusa profile-schema, narrow Prusa project-file, and narrow Prusa G-code output slices |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, `windows-packaged-launcher`, Prusa profile-schema, Phase 42 Prusa project-file, and Phase 46 Prusa G-code output fixture slices, including checked-in expected artifacts such as `expected-summary.tsv`, `expected-project-summary.tsv`, and `expected-gcode-summary.tsv` |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, Windows packaged launcher, narrow Prusa profile-schema, narrow Prusa project-file, and narrow structural Prusa G-code output slices; Phase 52 owns public structural evidence while the broad generated-outputs status remains in progress |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, `windows-packaged-launcher`, Prusa profile-schema, Phase 42 Prusa project-file, Phase 46 Prusa G-code output fixture, and Phase 50 `expected-gcode-structural-summary.tsv` structural sidecar slices, including checked-in expected artifacts such as `expected-summary.tsv`, `expected-project-summary.tsv`, `expected-gcode-summary.tsv`, and `expected-gcode-structural-summary.tsv` |
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
 | `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
 | `packages/prusa-baseline` | Phase 37 PrusaSlicer baseline and checklist gate package for the narrow v1.10 profile schema/config evidence slice |
 | `packages/prusa-project-file-scope` | Phase 41 checked-in scope record and verifier package for the narrow `prusaslicer.project-file` evidence contract only |
-| `packages/prusa-gcode-output-scope` | Phase 45 checked-in scope record and verifier package for the narrow `prusaslicer.gcode-output` summary-only evidence contract only |
+| `packages/prusa-gcode-output-scope` | Phase 49 owns the closed structural scope contract and verifier package for the narrow `prusaslicer.gcode-output` structural evidence contract only |
 
 ## Notes
 
@@ -148,7 +148,12 @@
   and the fixture artifact, and
   `packages/slic3r-rust/crates/slic3r_flavors` owns Rust summary logic for the
   narrow expected-summary evidence slice.
-- Phase 45 adds `packages/prusa-gcode-output-scope`, which owns the checked-in `prusaslicer.gcode-output` scope record and verifier only. It does not create fixture bytes, `expected-gcode-summary.tsv`, Rust G-code summary implementation, parity targets, status rows, upstream source imports, Bambu Studio scope, OrcaSlicer scope, printer-runtime behavior, host upload, profile auto-update execution, or sync automation.
+- Phase 45 adds `packages/prusa-gcode-output-scope`, which owns the initial
+  checked-in `prusaslicer.gcode-output` scope record and verifier only. It does
+  not create fixture bytes, `expected-gcode-summary.tsv`, Rust G-code summary
+  implementation, parity targets, status rows, upstream source imports, Bambu
+  Studio scope, OrcaSlicer scope, printer-runtime behavior, host upload,
+  profile auto-update execution, or sync automation.
 - Phase 46 adds the G-code fixture namespace at
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`, with
   `gcodewriter-set-speed.gcode`, `fixture-provenance.tsv`,
@@ -156,7 +161,7 @@
   `//packages/parity-fixtures:prusa_gcode_output_bundle` bundle, and
   `bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`.
   Phase 46 proves fixture surface integrity. Phase 47 proves typed summary
-  parsing. Phase 48 proves executable summary-only evidence/status wiring.
+  parsing. Phase 48 proves initial executable G-code evidence/status wiring.
 - Phase 48 makes the Prusa G-code output package boundaries discoverable:
   `packages/parity` owns
   `bazel run //packages/parity:prusaslicer_gcode_output_parity` and the
@@ -165,19 +170,32 @@
   and the fixture artifact, and
   `packages/slic3r-rust/crates/slic3r_flavors` owns summary logic for the
   narrow evidence slice.
-- The Phase 48 Prusa G-code output evidence slice does not prove byte-for-byte
-  G-code parity, full generated-output parity, toolpath geometry, extrusion,
-  timing, support generation, wall seam behavior, arc fitting, STEP import,
-  full 3MF import/export, printer-runtime behavior, firmware or printability
-  behavior, GUI export or viewer behavior, binary G-code, thumbnails,
-  post-processing, host upload, network/device integration, profile auto-update
-  execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source
-  imports, release behavior, or sync automation.
-- Deferred Phase 48 G-code terms: byte-for-byte G-code parity, full
-  generated-output parity, toolpath geometry, extrusion, timing, support
+- Phase 49 owns the closed structural scope contract in
+  `packages/prusa-gcode-output-scope`, including the allowed structural field
+  set and no-overclaiming boundary.
+- Phase 50 owns
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv`
+  as the checked-in structural sidecar.
+- Phase 51 owns Rust structural parser/readiness through
+  `slic3r_flavors::prusa_gcode_output`,
+  `prusa_gcode_output_summary_lines`, and
+  `prusa_gcode_output_structural_summary_lines`.
+- Phase 52 owns public structural evidence through
+  `bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
+  `fork.prusaslicer.gcode-output` status row. The broad generated-outputs
+  status remains in progress.
+- The Phase 52 Prusa G-code output evidence slice does not prove
+  byte-for-byte G-code parity, full generated-output parity,
+  geometry/toolpath parity, printability, printer-runtime behavior, support
   generation, wall seam behavior, arc fitting, STEP import, full 3MF
-  import/export, printer-runtime behavior, firmware or printability behavior,
-  GUI export or viewer behavior, binary G-code, thumbnails, post-processing,
-  host upload, network/device integration, profile auto-update execution, fork
+  import/export, GUI behavior, binary G-code, thumbnails, post-processing, host
+  upload, network/device integration, profile auto-update execution, fork
   release builds, Bambu Studio, OrcaSlicer, upstream source imports, release
-  behavior, sync automation.
+  behavior, or sync automation.
+- Deferred Phase 52 G-code terms: byte-for-byte G-code parity, full
+  generated-output parity, geometry/toolpath parity, printability,
+  printer-runtime behavior, support generation, wall seam behavior, arc
+  fitting, STEP import, full 3MF import/export, GUI behavior, binary G-code,
+  thumbnails, post-processing, host upload, network/device integration, profile
+  auto-update execution, fork release builds, Bambu Studio, OrcaSlicer,
+  upstream source imports, release behavior, sync automation.
