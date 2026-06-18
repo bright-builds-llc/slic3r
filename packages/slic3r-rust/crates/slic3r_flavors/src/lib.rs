@@ -17,7 +17,7 @@ pub use prusa_gcode_output::{
     PrusaGcodeOutputStructuralValue, PrusaGcodeOutputSummary, PrusaGcodeOutputSummaryRow,
     parse_prusa_gcode_output_structural_summary, parse_prusa_gcode_output_summary,
     prusa_gcode_output_metadata, prusa_gcode_output_structural_readiness,
-    prusa_gcode_output_summary_lines,
+    prusa_gcode_output_structural_summary_lines, prusa_gcode_output_summary_lines,
 };
 pub use prusa_profile::{
     PrusaProfileBundle, PrusaProfileEntry, PrusaProfileKey, PrusaProfileParseError,

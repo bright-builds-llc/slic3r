@@ -108,8 +108,8 @@ fn summarizes_expected_gcode_structural_summary_lines() {
     let input = EXPECTED_GCODE_STRUCTURAL_SUMMARY;
 
     // Act
-    let summary =
-        prusa_gcode_output_structural_summary_lines(input).expect("structural summary should parse");
+    let summary = prusa_gcode_output_structural_summary_lines(input)
+        .expect("structural summary should parse");
 
     // Assert
     assert_eq!(

@@ -757,6 +757,44 @@ pub fn prusa_gcode_output_summary_lines(
     Ok(lines)
 }
 
+pub fn prusa_gcode_output_structural_summary_lines(
+    input: &str,
+) -> Result<Vec<String>, PrusaGcodeOutputStructuralParseError> {
+    let summary = parse_prusa_gcode_output_structural_summary(input)?;
+    let readiness = prusa_gcode_output_structural_readiness();
+    let facts = summary.facts();
+
+    Ok(vec![
+        summary_line(
+            "structural_summary_path",
+            readiness.expected_structural_summary_path,
+        ),
+        format!("structural_row_count\t{}", summary.rows().len()),
+        summary_line("source_ref", facts.source_ref.as_str()),
+        summary_line("inventory_source_paths", facts.inventory_source_paths),
+        summary_line("fixture_source_literal", facts.fixture_source_literal),
+        summary_line("fixture_id", facts.fixture_id),
+        summary_line("fixture_path", facts.fixture_path),
+        format!("command_count_total\t{}", facts.command_count_total),
+        format!("command_count_g1\t{}", facts.command_count_g1),
+        format!("section_count_total\t{}", facts.section_count_total),
+        summary_line("ordered_marker_1", facts.ordered_markers[0].as_str()),
+        summary_line("ordered_marker_2", facts.ordered_markers[1].as_str()),
+        summary_line("ordered_marker_3", facts.ordered_markers[2].as_str()),
+        summary_line("ordered_marker_4", facts.ordered_markers[3].as_str()),
+        format!("movement_axis_present\t{}", facts.movement_axis_present),
+        format!("extrusion_axis_present\t{}", facts.extrusion_axis_present),
+        format!(
+            "temperature_marker_count\t{}",
+            facts.temperature_marker_count
+        ),
+        format!(
+            "tool_change_marker_count\t{}",
+            facts.tool_change_marker_count
+        ),
+    ])
+}
+
 impl PrusaGcodeOutputMetadataKey {
     pub const fn as_str(self) -> &'static str {
         match self {
