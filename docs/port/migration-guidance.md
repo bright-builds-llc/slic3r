@@ -70,38 +70,45 @@ boundaries.
   `src/libslic3r/Format/3mf.cpp`.
 - `prusaslicer.gcode-output` fixture work starts from
   [`packages/prusa-gcode-output-scope`](../../packages/prusa-gcode-output-scope)
-  and its reviewed Phase 45 scope record. Phase 46 has created
+  and its Phase 49 closed structural scope contract. Phase 46 created
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`,
-  `gcodewriter-set-speed.gcode`, and `expected-gcode-summary.tsv`; updates
-  require reviewed intake changes to `packages/fork-vendors/forks.tsv`,
+  `gcodewriter-set-speed.gcode`, and `expected-gcode-summary.tsv`; Phase 50
+  adds `expected-gcode-structural-summary.tsv`. Updates require reviewed intake
+  changes to `packages/fork-vendors/forks.tsv`,
   `packages/fork-inventories/prusaslicer.tsv`, and
   `packages/prusa-gcode-output-scope/gcode-output-scope.md`. The accepted
   source identity remains
   `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` from
   `src/libslic3r/GCode.cpp`, with fixture bytes derived from
   `tests/fff_print/test_gcodewriter.cpp#L20-L35`.
-- Phase 46 proves fixture surface integrity. Phase 47 proves typed summary
-  parsing. Phase 48 proves executable summary-only evidence/status wiring.
-- The Phase 48 summary-only Prusa G-code evidence slice is verified through
+- Phase 49 closed structural scope contract defines the structural field set.
+  Phase 50 adds the structural sidecar. Phase 51 proves typed structural
+  parsing/readiness through `prusa_gcode_output_summary_lines` and
+  `prusa_gcode_output_structural_summary_lines`. Phase 52 proves executable
+  structural evidence/status wiring.
+- The narrow structural Prusa G-code evidence slice is verified through
   `bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
-  `fork.prusaslicer.gcode-output` status row. Fixture updates still route
-  through `packages/prusa-gcode-output-scope` and its reviewed scope record.
+  `fork.prusaslicer.gcode-output` status row, backed by
+  `expected-gcode-summary.tsv`, `expected-gcode-structural-summary.tsv`,
+  `prusa_gcode_output_summary_lines`, and
+  `prusa_gcode_output_structural_summary_lines`. Fixture updates still route
+  through `packages/prusa-gcode-output-scope` and its Phase 49 closed
+  structural scope contract.
 - The verified `prusaslicer.gcode-output` evidence slice does not prove
-  byte-for-byte G-code parity, full generated-output parity, toolpath geometry,
-  extrusion, timing, support generation, wall seam behavior, arc fitting, STEP
-  import, full 3MF import/export, printer-runtime behavior, firmware or
-  printability behavior, GUI export or viewer behavior, binary G-code,
+  byte-for-byte G-code parity, full generated-output parity,
+  geometry/toolpath parity, printability, printer-runtime behavior, support
+  generation, wall seam behavior, arc fitting, STEP import, full 3MF
+  import/export, GUI behavior, binary G-code, thumbnails, post-processing, host
+  upload, network/device integration, profile auto-update execution, fork
+  release builds, Bambu Studio, OrcaSlicer, upstream source imports, release
+  behavior, or sync automation.
+- Deferred Phase 52 G-code terms: byte-for-byte G-code parity, full
+  generated-output parity, geometry/toolpath parity, printability,
+  printer-runtime behavior, support generation, wall seam behavior, arc
+  fitting, STEP import, full 3MF import/export, GUI behavior, binary G-code,
   thumbnails, post-processing, host upload, network/device integration, profile
   auto-update execution, fork release builds, Bambu Studio, OrcaSlicer,
-  upstream source imports, release behavior, or sync automation.
-- Deferred Phase 48 G-code terms: byte-for-byte G-code parity, full
-  generated-output parity, toolpath geometry, extrusion, timing, support
-  generation, wall seam behavior, arc fitting, STEP import, full 3MF
-  import/export, printer-runtime behavior, firmware or printability behavior,
-  GUI export or viewer behavior, binary G-code, thumbnails, post-processing,
-  host upload, network/device integration, profile auto-update execution, fork
-  release builds, Bambu Studio, OrcaSlicer, upstream source imports, release
-  behavior, sync automation.
+  upstream source imports, release behavior, sync automation.
 - The Phase 38 Prusa fixture namespace update route is: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
   Branch-head observations remain drift-only.
 - When a change adds, removes, or materially alters a fixture-backed parity
@@ -131,13 +138,18 @@ boundaries.
   `slic3r_flavors::prusa_project_file`,
   `parse_prusa_project_file_summary`, `prusa_project_file_metadata`, and
   `prusa_project_file_summary_lines`.
-- `fork.prusaslicer.gcode-output` is verified for the narrow summary-only
-  Prusa G-code evidence slice only. Its executable evidence is
+- `fork.prusaslicer.gcode-output` is verified for the narrow structural Prusa
+  G-code evidence slice only. Its executable evidence is
   `bazel run //packages/parity:prusaslicer_gcode_output_parity`, backed by
-  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv`.
-  The evidence chain includes the Phase 46 fixture and the Phase 47 Rust summary
-  boundary through `slic3r_flavors::prusa_gcode_output` and
-  `prusa_gcode_output_summary_lines`.
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv`
+  and
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv`.
+  The evidence chain includes the Phase 49 closed structural scope contract,
+  the Phase 50 structural sidecar, the Phase 51 Rust structural parser/readiness
+  boundary through `slic3r_flavors::prusa_gcode_output`,
+  `prusa_gcode_output_summary_lines`, and
+  `prusa_gcode_output_structural_summary_lines`, and the Phase 52 public
+  command/status wiring.
 - Phase 39 creates parser/metadata readiness only through
   `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
   `prusa_profile_schema_metadata`. It traces `prusaslicer.profile-schema` to
