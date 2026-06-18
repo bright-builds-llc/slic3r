@@ -4,7 +4,7 @@ use slic3r_flavors::prusa_gcode_output::{
     PrusaGcodeOutputMetadataValue, PrusaGcodeOutputParseError, PrusaGcodeOutputStructuralField,
     PrusaGcodeOutputStructuralParseError, parse_prusa_gcode_output_structural_summary,
     parse_prusa_gcode_output_summary, prusa_gcode_output_metadata,
-    prusa_gcode_output_summary_lines,
+    prusa_gcode_output_structural_summary_lines, prusa_gcode_output_summary_lines,
 };
 
 const EXPECTED_GCODE_SUMMARY: &str = include_str!(
@@ -100,6 +100,62 @@ fn parses_expected_gcode_structural_summary_rows_and_facts() {
     assert!(!facts.extrusion_axis_present);
     assert_eq!(facts.temperature_marker_count, 0);
     assert_eq!(facts.tool_change_marker_count, 0);
+}
+
+#[test]
+fn summarizes_expected_gcode_structural_summary_lines() {
+    // Arrange
+    let input = EXPECTED_GCODE_STRUCTURAL_SUMMARY;
+
+    // Act
+    let summary =
+        prusa_gcode_output_structural_summary_lines(input).expect("structural summary should parse");
+
+    // Assert
+    assert_eq!(
+        summary,
+        vec![
+            "structural_summary_path\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv",
+            "structural_row_count\t16",
+            "source_ref\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961",
+            "inventory_source_paths\tsrc/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp",
+            "fixture_source_literal\ttests/fff_print/test_gcodewriter.cpp#L20-L35",
+            "fixture_id\tgcodewriter-set-speed.gcode",
+            "fixture_path\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
+            "command_count_total\t4",
+            "command_count_g1\t4",
+            "section_count_total\t1",
+            "ordered_marker_1\tG1 F99999.123",
+            "ordered_marker_2\tG1 F1",
+            "ordered_marker_3\tG1 F203.2",
+            "ordered_marker_4\tG1 F203.201",
+            "movement_axis_present\tfalse",
+            "extrusion_axis_present\tfalse",
+            "temperature_marker_count\t0",
+            "tool_change_marker_count\t0",
+        ]
+    );
+}
+
+#[test]
+fn rejects_malformed_gcode_structural_summary_lines() {
+    // Arrange
+    let input = replace_structural_cell(6, 4, "3");
+
+    // Act
+    let result = prusa_gcode_output_structural_summary_lines(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(
+            PrusaGcodeOutputStructuralParseError::UnexpectedStructuralValue {
+                line_number: 8,
+                structural_field: PrusaGcodeOutputStructuralField::CommandCountG1,
+                ..
+            }
+        )
+    ));
 }
 
 #[test]
