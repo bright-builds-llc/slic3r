@@ -1,8 +1,9 @@
 # Prusa G-code Output Scope Gate
 
-This Phase 45 scope record prepares the narrow summary-only
-`prusaslicer.gcode-output` evidence contract. Completing this record does not
-prove executable Prusa G-code output parity.
+This Phase 45 scope record prepares the narrow Prusa G-code evidence contract
+that starts with the Phase 49 closed structural scope contract and is extended
+by v1.13 structural evidence. Completing this record does not prove executable
+Prusa G-code output parity.
 
 ## Scope Record
 
@@ -71,10 +72,15 @@ This section is an additive structural contract for the existing narrow `prusasl
 | Fixture namespace | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` |
 | Current expected summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv` |
 | Fixture provenance | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv` |
-| Published narrow status row | `fork.prusaslicer.gcode-output` stays verified only for the narrow summary-only Prusa G-code evidence slice in `packages/parity/status.tsv` |
+| Published narrow status row | `fork.prusaslicer.gcode-output` stays verified only for the narrow structural Prusa G-code evidence slice in `packages/parity/status.tsv`, backed by the Phase 49 closed structural scope contract, Phase 50 structural fixture summary, Phase 51 Rust structural parser/readiness boundary, and Phase 52 public parity command |
 | Broad status row | `generated-outputs` stays `in progress` in `packages/parity/status.tsv` |
 | Structural reviewer signoff | Peter Ryszkiewicz, 2026-06-16 UTC |
 
 ## Boundary
 
-This record is a metadata-only scope gate plus structural evidence contract. It must not be treated as fixture expansion, Rust structural parser readiness, executable structural evidence, byte-for-byte G-code parity, broad generated-output parity, or generated-output status promotion.
+This scope record is consumed by Phase 49 closed structural scope enforcement,
+Phase 50 fixture expansion, Phase 51 Rust structural parser/readiness, and
+Phase 52 public structural evidence, while still not proving byte-for-byte
+G-code parity, broad generated-output parity, generated-output status
+promotion, runtime behavior, release behavior, network/device behavior,
+non-Prusa fork behavior, upstream imports, or sync automation.
