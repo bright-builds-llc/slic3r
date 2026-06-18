@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: milestone
 status: executing
-stopped_at: Completed 52-02-PLAN.md
-last_updated: "2026-06-18T02:25:57.039Z"
+stopped_at: Completed 52-03-PLAN.md
+last_updated: "2026-06-18T02:34:25.597Z"
 last_activity: 2026-06-18
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 12
-  completed_plans: 8
-  percent: 67
+  completed_plans: 9
+  percent: 75
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 52 (Executable Structural G-code Evidence) — EXECUTING
-Plan: 3 of 6
+Plan: 4 of 6
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
 Status: Ready to execute
 Last activity: 2026-06-18
 
-Progress: [███████░░░] 67%
+Progress: [████████░░] 75%
 
 ## Performance Metrics
 
@@ -48,6 +48,7 @@ Progress: [███████░░░] 67%
 - Phase 49 has 2 plans ready for execution.
 - Phase 52 plan 01 completed on 2026-06-18: 6min, 2 tasks, 4 files.
 - Phase 52 plan 02 completed on 2026-06-18: 8min, 2 tasks, 3 files.
+- Phase 52 plan 03 completed on 2026-06-18: 3 min, 2 tasks, 3 files.
 
 ## Accumulated Context
 
@@ -109,6 +110,9 @@ Recent decisions affecting v1.12:
 - [Phase 52-02]: Kept the existing public Prusa G-code parity target while adding structural sidecar validation.
 - [Phase 52-02]: Used the existing Rust summary binary's --structural mode for public structural validation instead of adding a new comparator binary.
 - [Phase 52-02]: Added exactly one command-level structural mutation guard for command_count_g1 drift.
+- [Phase 52-03]: Published the existing `fork.prusaslicer.gcode-output` row as narrow structural evidence without changing its status token or public parity command.
+- [Phase 52-03]: Kept the broad `generated-outputs` row exactly `in progress`.
+- [Phase 52-03]: Preserved the verifier's split literal around `host upload` so forbidden-term self-scanning remains fail-closed.
 
 ### Pending Todos
 
@@ -120,6 +124,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-18T02:25:57.013Z
-Stopped at: Completed 52-02-PLAN.md
+Last session: 2026-06-18T02:34:25.595Z
+Stopped at: Completed 52-03-PLAN.md
 Resume file: None

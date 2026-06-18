@@ -58,7 +58,7 @@ depend on.
   boundary and checked-in fixture expectations.
 - [x] **GCEV-02**: Maintainer can see the public parity command fail closed on a
   structural-summary mutation guard, not only the v1.12 marker-line drift guard.
-- [ ] **GCEV-03**: Maintainer can inspect parity status, package docs, and port
+- [x] **GCEV-03**: Maintainer can inspect parity status, package docs, and port
   docs that describe the exact narrow `fork.prusaslicer.gcode-output`
   structural evidence slice while keeping broad `generated-outputs` in
   progress and all deferred generated-output/runtime/fork surfaces explicit.
@@ -123,7 +123,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GCRUST-03 | Phase 51 | Complete |
 | GCEV-01 | Phase 52 | Complete |
 | GCEV-02 | Phase 52 | Complete |
-| GCEV-03 | Phase 52 | Pending |
+| GCEV-03 | Phase 52 | Complete |
 
 **Coverage:**
 
