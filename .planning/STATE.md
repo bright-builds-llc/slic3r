@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: milestone
 status: executing
-stopped_at: Completed 52-04-PLAN.md
-last_updated: "2026-06-18T02:45:56.821Z"
+stopped_at: Completed 52-05-PLAN.md
+last_updated: "2026-06-18T02:56:54.269Z"
 last_activity: 2026-06-18
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 12
-  completed_plans: 10
-  percent: 83
+  completed_plans: 11
+  percent: 92
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 52 (Executable Structural G-code Evidence) — EXECUTING
-Plan: 5 of 6
+Plan: 6 of 6
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
 Status: Ready to execute
 Last activity: 2026-06-18
 
-Progress: [████████░░] 83%
+Progress: [█████████░] 92%
 
 ## Performance Metrics
 
@@ -50,6 +50,7 @@ Progress: [████████░░] 83%
 - Phase 52 plan 02 completed on 2026-06-18: 8min, 2 tasks, 3 files.
 - Phase 52 plan 03 completed on 2026-06-18: 3 min, 2 tasks, 3 files.
 - Phase 52 plan 04 completed on 2026-06-18: 5 min, 2 tasks, 4 files.
+- Phase 52 plan 05 completed on 2026-06-18: 4 min, 2 tasks, 4 files.
 
 ## Accumulated Context
 
@@ -117,6 +118,9 @@ Recent decisions affecting v1.12:
 - [Phase 52]: Kept Phase 52 scope publication inside the existing prusa-gcode-output-scope package instead of adding a new scope boundary.
 - [Phase 52]: Used the exact Plan 52-03 structural status row text as the verifier contract.
 - [Phase 52]: Preserved generated-outputs as exactly one in-progress row.
+- [Phase 52]: Kept the public fork.prusaslicer.gcode-output status token and public Prusa G-code parity command unchanged while updating package docs to structural evidence wording.
+- [Phase 52]: Documented Rust summary and --structural modes as caller-supplied checked-in TSV parsing only.
+- [Phase 52]: Preserved fixture provenance values and deferred generated-output/runtime/fork boundaries.
 
 ### Pending Todos
 
@@ -128,6 +132,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-18T02:45:56.818Z
-Stopped at: Completed 52-04-PLAN.md
+Last session: 2026-06-18T02:56:31.806Z
+Stopped at: Completed 52-05-PLAN.md
 Resume file: None
