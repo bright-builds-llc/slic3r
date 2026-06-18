@@ -1,8 +1,9 @@
 # PrusaSlicer G-code Output Fixture
 
-Phase 46 supplies fixture bytes and summary-only expected artifacts only. This
-namespace publishes only the Phase 46 fixture surface and summary-only expected
-artifact.
+Phase 46 supplies fixture bytes and the original summary expected artifact.
+Phase 50 adds `expected-gcode-structural-summary.tsv` as a structural sidecar
+for the same source-pinned fixture. Phase 52 publishes only the narrow
+structural Prusa G-code evidence slice.
 
 ## Provenance
 

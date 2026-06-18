@@ -393,7 +393,10 @@ verify_readme_scope() {
 	package_no_network_text="Fixture verification does not fet""ch upstream source"
 
 	require_text "${fixture_readme}" "fixture README" "# PrusaSlicer G-code Output Fixture"
-	require_text "${fixture_readme}" "fixture README" "Phase 46 supplies fixture bytes and summary-only expected artifacts only."
+	require_text "${fixture_readme}" "fixture README" "Phase 46 supplies fixture bytes and the original summary expected artifact."
+	require_text "${fixture_readme}" "fixture README" "Phase 50 adds \`expected-gcode-structural-summary.tsv\` as a structural sidecar"
+	require_text "${fixture_readme}" "fixture README" "Phase 52 publishes only the narrow"
+	require_text "${fixture_readme}" "fixture README" "structural Prusa G-code evidence slice."
 	require_text "${fixture_readme}" "fixture README" "The accepted upstream tree has no checked-in \`.gcode\` blob"
 	require_text "${fixture_readme}" "fixture README" "Source ref:"
 	require_text "${fixture_readme}" "fixture README" "${SOURCE_REF}"
