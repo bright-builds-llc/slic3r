@@ -1,3 +1,10 @@
+use std::{
+    fs,
+    path::{Path, PathBuf},
+    process::Command,
+    time::{SystemTime, UNIX_EPOCH},
+};
+
 use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface};
 use slic3r_flavors::prusa_gcode_output::{
     PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue, PrusaGcodeOutputMetadataKey,
@@ -155,6 +162,86 @@ fn rejects_malformed_gcode_structural_summary_lines() {
                 ..
             }
         )
+    ));
+}
+
+#[test]
+fn summary_binary_keeps_one_path_summary_mode() {
+    // Arrange
+    let Some(binary_path) = maybe_prusa_gcode_output_summary_binary() else {
+        return;
+    };
+    let fixture_path = write_temp_fixture("expected-gcode-summary.tsv", EXPECTED_GCODE_SUMMARY);
+
+    // Act
+    let output = Command::new(binary_path)
+        .arg(&fixture_path)
+        .output()
+        .expect("summary binary should run");
+    remove_temp_fixture(&fixture_path);
+    let stdout = String::from_utf8(output.stdout).expect("stdout should be valid UTF-8");
+
+    // Assert
+    assert!(
+        output.status.success(),
+        "summary binary should succeed: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    assert!(stdout.contains("row_count\t5"));
+    assert!(!stdout.contains("structural_row_count\t"));
+}
+
+#[test]
+fn summary_binary_prints_structural_mode_lines() {
+    // Arrange
+    let Some(binary_path) = maybe_prusa_gcode_output_summary_binary() else {
+        return;
+    };
+    let fixture_path = write_temp_fixture(
+        "expected-gcode-structural-summary.tsv",
+        EXPECTED_GCODE_STRUCTURAL_SUMMARY,
+    );
+
+    // Act
+    let output = Command::new(binary_path)
+        .arg("--structural")
+        .arg(&fixture_path)
+        .output()
+        .expect("summary binary should run");
+    remove_temp_fixture(&fixture_path);
+    let stdout = String::from_utf8(output.stdout).expect("stdout should be valid UTF-8");
+
+    // Assert
+    assert!(
+        output.status.success(),
+        "structural summary mode should succeed: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    assert!(stdout.contains("structural_row_count\t16"));
+    assert!(stdout.contains("command_count_g1\t4"));
+}
+
+#[test]
+fn summary_binary_rejects_invalid_args_with_structural_usage() {
+    // Arrange
+    let Some(binary_path) = maybe_prusa_gcode_output_summary_binary() else {
+        return;
+    };
+    let fixture_path = write_temp_fixture("expected-gcode-summary.tsv", EXPECTED_GCODE_SUMMARY);
+
+    // Act
+    let output = Command::new(binary_path)
+        .arg("--wrong-mode")
+        .arg(&fixture_path)
+        .output()
+        .expect("summary binary should run");
+    remove_temp_fixture(&fixture_path);
+    let stderr = String::from_utf8(output.stderr).expect("stderr should be valid UTF-8");
+
+    // Assert
+    assert!(!output.status.success());
+    assert!(stderr.contains(
+        "error: expected expected-gcode-summary.tsv or --structural expected-gcode-structural-summary.tsv"
     ));
 }
 
@@ -839,4 +926,26 @@ fn expected_fixture_id() -> &'static str {
 
 fn joined_word(prefix: &str, suffix: &str) -> String {
     [prefix, suffix].concat()
+}
+
+fn maybe_prusa_gcode_output_summary_binary() -> Option<&'static str> {
+    option_env!("CARGO_BIN_EXE_prusa_gcode_output_summary")
+}
+
+fn write_temp_fixture(name: &str, contents: &str) -> PathBuf {
+    let mut path = std::env::temp_dir();
+    let timestamp = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("system time should be after Unix epoch")
+        .as_nanos();
+    path.push(format!(
+        "slic3r-flavors-{}-{timestamp}-{name}",
+        std::process::id()
+    ));
+    fs::write(&path, contents).expect("test fixture should be writable");
+    path
+}
+
+fn remove_temp_fixture(path: &Path) {
+    fs::remove_file(path).expect("test fixture should be removable");
 }
