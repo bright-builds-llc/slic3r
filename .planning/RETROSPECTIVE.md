@@ -2,6 +2,86 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.13 — PrusaSlicer G-code Structural Evidence Expansion
+
+**Shipped:** 2026-06-19\
+**Phases:** 4 | **Plans:** 12 | **Sessions:** yolo phase execution plus
+milestone audit, integration check, archive closeout, phase archival, and
+requirements reset
+
+### What Was Built
+
+- Closed 16-field Prusa G-code structural scope contract with traceability to
+  inventory, fixture, expected summary, provenance, narrow status, and broad
+  generated-output status boundaries
+- Source-pinned structural G-code sidecar for the selected Prusa `set_speed`
+  fixture, with Bazel fixture ownership and fail-closed structural verifier
+  mutation coverage
+- Pure typed Rust parser and readiness metadata for the structural sidecar,
+  keeping parsing caller-supplied and side-effect free
+- Public `//packages/parity:prusaslicer_gcode_output_parity` structural
+  evidence path that validates both summary and structural TSV artifacts
+  through Rust
+- `command_count_g1` mutation guard, exact narrow structural
+  `fork.prusaslicer.gcode-output` status wording, and package/port docs that
+  keep broad generated-output/runtime/fork surfaces deferred
+
+### What Worked
+
+- The v1.12 evidence ladder extended cleanly from marker-level summaries to
+  structural summaries without widening the public claim.
+- Keeping Phase 50 fixture data, Phase 51 Rust parsing, and Phase 52 public
+  command/status publication separate made the handoffs easy to audit.
+- Exact row-count, row-order, source/fixture identity, status-row, and
+  overclaim checks gave maintainers concrete failure modes for structural
+  drift.
+- The milestone audit caught stale Phase 50 requirement metadata before
+  archival, and the integration checker found no broken scope -> fixture ->
+  Rust -> parity -> docs flow.
+
+### What Was Inefficient
+
+- Closeout still required manual roadmap collapse, project-state evolution,
+  retrospective writing, phase directory archival, and requirements deletion
+  after the archive helper finished.
+- The archive helper warned on one STATE.md field shape and left current focus
+  text needing manual cleanup.
+- The interactive confirmation tool was unavailable in Default mode, so the
+  skill adapter fallback had to select the recommended proceed path after the
+  passed audit/readiness checks.
+
+### Patterns Established
+
+- Generated-output evidence can become more meaningful through structural
+  summaries before byte-for-byte or semantic output parity is attempted.
+- Structural sidecars should mirror a reviewed closed field contract and be
+  verifier-owned before Rust or public parity commands depend on them.
+- Public parity commands should validate checked-in expected artifacts through
+  the same Rust boundary that tests consume.
+- Broad `generated-outputs` should remain in progress until several narrow
+  executable slices justify a broader status change.
+
+### Key Lessons
+
+1. Structural evidence is the right intermediate step between marker-level
+   summaries and byte-for-byte G-code parity.
+1. Requirement checkboxes and traceability rows need the same three-source
+   cross-check as code: requirements file, summary frontmatter, and phase
+   verification tables.
+1. Milestone closeout remains a separate engineering workflow; archive helpers
+   reduce the mechanical work but do not replace project judgment.
+
+### Cost Observations
+
+- Model mix: balanced GSD profile with Codex-led audit and archive closeout
+- Sessions: yolo discuss/plan/execute phases plus milestone audit,
+  integration checker, archive closeout, phase archival, retrospective, and
+  requirements reset
+- Notable: implementation verification was clean; closeout effort centered on
+  planning metadata, archival hygiene, and current-state alignment
+
+______________________________________________________________________
+
 ## Milestone: v1.12 — PrusaSlicer G-code Output Evidence Foundation
 
 **Shipped:** 2026-06-15\
@@ -764,6 +844,8 @@ ______________________________________________________________________
 
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
+| v1.13 | yolo plus audit/integration/closeout | 4 | Strengthened the Prusa G-code evidence path from marker-level summaries to structural summaries without broad generated-output claims |
+| v1.12 | yolo plus audit/integration/closeout | 4 | Established the first executable Prusa G-code output evidence slice while keeping it summary-only and narrow |
 | v1.11 | yolo plus audit/integration/closeout | 4 | Reused the first Prusa trust chain for a broader project-file evidence slice without claiming full runtime or GUI support |
 | v1.10 | yolo plus audit/signoff/closeout | 4 | Established the first executable Prusa profile/config evidence chain with exact status publication and non-overclaiming docs |
 | v1.9 | yolo plus audit/closeout | 5 | Established fork intake and metadata architecture for downstream Slic3r-family work without claiming runtime fork support |
@@ -777,6 +859,8 @@ ______________________________________________________________________
 
 | Milestone | Tests | Coverage | Zero-Dep Additions |
 |-----------|-------|----------|-------------------|
+| v1.13 | Verified structural scope, fixture sidecar, Rust parser/readiness, public parity command, mutation guard, exact status row, docs, and milestone audit | milestone-scoped | kept byte-for-byte G-code, geometry/toolpath, printability, runtime, GUI, non-Prusa forks, upstream imports, release, and sync out of scope |
+| v1.12 | Verified G-code scope, fixture, Rust summary parser, public parity command, mutation guard, exact status row, docs, and milestone audit | milestone-scoped | kept broad generated-output, byte-for-byte G-code, geometry/toolpath, runtime/printer, GUI, release, network, and sync out of scope |
 | v1.11 | Verified project-file scope, fixture, Rust parser, parity command, mutation guard, exact status row, and milestone audit | milestone-scoped | kept full 3MF import/export, GUI behavior, generated-output parity, runtime support, release, network/device, and sync surfaces out of scope |
 | v1.10 | Verified Prusa profile/config baseline, fixtures, Rust parser, parity command, mutation guard, status row, UAT, and security report | milestone-scoped | kept Prusa evidence narrow and avoided upstream source imports, runtime fork support, and profile auto-update execution |
 | v1.9 | Verified fork vendor refs, fork inventory TSVs, fork template contracts, Rust flavor contracts, and pure flavor registry metadata | milestone-scoped | kept fork source trees, runtime fork support, sync automation, and vendor-specific Rust workspaces out of scope |

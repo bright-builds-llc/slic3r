@@ -10,81 +10,39 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
+## Current Milestone: None
 
-**Goal:** Expand the narrow PrusaSlicer G-code evidence path from
-summary-only marker metadata into structural G-code evidence while avoiding
-byte-for-byte, geometry, printability, runtime, GUI, and non-Prusa fork claims.
+Fresh requirements must be defined with `/gsd-new-milestone` before opening
+new phase work.
 
-**Target features:**
+## Last Shipped Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
 
-- Reviewed structural G-code scope contract that names allowed evidence fields
-  and still-forbidden generated-output claims.
-- Source-pinned Prusa G-code fixture expansion with checked-in structural
-  summaries and fail-closed drift guards.
-- Typed Rust structural summary boundary for the expanded Prusa G-code fixture
-  surface.
-- Public parity/status/docs update that keeps `fork.prusaslicer.gcode-output`
-  evidence narrow but more meaningful.
+**Shipped:** 2026-06-19
 
-## Last Shipped Milestone: v1.12 PrusaSlicer G-code Output Evidence Foundation
-
-**Shipped:** 2026-06-15
-
-**Goal achieved:** Proved one narrow PrusaSlicer G-code output evidence path
-without claiming broad generated-output, printer-runtime, geometry, or GUI
-parity.
+**Goal achieved:** Expanded the narrow PrusaSlicer G-code evidence path from
+summary-only marker metadata into structural G-code evidence without claiming
+byte-for-byte, geometry, printability, runtime, GUI, or non-Prusa fork parity.
 
 ## Current State
 
-v1.13 phase work is complete and ready for milestone audit/archival. It builds
-directly on v1.12 by strengthening the
-`fork.prusaslicer.gcode-output` evidence contract from marker-level summary
-metadata to structural G-code summaries: stable command/section counts,
-ordered markers, movement/extrusion indicators, temperature/tool-change
-markers, and fail-closed drift checks. The milestone must keep the broad
-`generated-outputs` status row in progress and must not claim byte-for-byte
-G-code parity, geometry/toolpath parity, printer-runtime behavior, support
-generation, wall seam behavior, arc fitting, GUI export/viewer behavior,
-release behavior, Bambu Studio, OrcaSlicer, upstream imports, or sync
-automation.
+v1.13 is archived. Maintainers can run
+`bazel run //packages/parity:prusaslicer_gcode_output_parity`, inspect the
+exact verified `fork.prusaslicer.gcode-output` status row, and read package
+and port docs that publish only the narrow structural Prusa G-code evidence
+slice. The milestone strengthens the v1.12 marker-level evidence path with a
+closed structural scope contract, source-pinned structural sidecar,
+fail-closed fixture and scope verifiers, pure typed Rust structural parser and
+readiness metadata, public structural parity output, and a
+`command_count_g1` mutation guard.
 
-v1.13 Phase 49 is complete. Maintainers can inspect the reviewed
-`packages/prusa-gcode-output-scope` structural scope contract, run
-`bazel run //packages/prusa-gcode-output-scope:verify`, and rely on
-fail-closed mutation coverage for structural field drift, traceability drift,
-Phase 49 overclaims, compact unsupported table rows, and broad
-`generated-outputs` status promotion. The contract completes GCSCOPE-01,
-GCSCOPE-02, and GCSCOPE-03 while keeping fixture expansion, Rust parsing, and
-executable structural evidence publication deferred to later v1.13 phases.
+The broad `generated-outputs` status row remains `in progress`, and
+byte-for-byte G-code parity, geometry/toolpath parity, printability,
+printer-runtime behavior, support generation, wall seam behavior, arc fitting,
+GUI export/viewer behavior, release behavior, Bambu Studio, OrcaSlicer,
+upstream imports, and sync automation remain deferred.
 
-v1.13 Phase 50 is complete. Maintainers can inspect the checked-in
-`expected-gcode-structural-summary.tsv` sidecar for the selected Prusa
-`set_speed` G-code fixture, run
-`bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`, and
-rely on fail-closed mutation coverage for structural value drift, missing rows,
-duplicate rows, unsupported fields, overclaims, and provenance mismatches. The
-fixture expansion completes GCFIX-01, GCFIX-02, and GCFIX-03 while keeping Rust
-structural parsing and public structural parity/status publication deferred to
-Phase 51 and Phase 52.
-
-v1.13 Phase 51 is complete. Developers can parse the Phase 50 structural
-summary sidecar through the pure typed `slic3r_flavors` Rust boundary, run
-Cargo and Bazel rejection coverage for header, column, ordering, duplicate,
-missing-row, unsupported-field, overclaim, source-ref, and fixture-identity
-drift, and inspect registry readiness metadata without status publication or
-runtime side effects. The Rust boundary completes GCRUST-01, GCRUST-02, and
-GCRUST-03 while preserving the Phase 52 public-evidence handoff.
-
-v1.13 Phase 52 is verified. Maintainers can run
-`bazel run //packages/parity:prusaslicer_gcode_output_parity`, see the
-structural `command_count_g1` mutation guard fail closed, inspect the exact
-verified `fork.prusaslicer.gcode-output` status row, and read package/port
-docs that publish only the narrow structural Prusa G-code evidence slice. The
-public evidence completes GCEV-01, GCEV-02, and GCEV-03 while keeping broad
-`generated-outputs` in progress and byte-for-byte G-code, geometry/toolpath,
-printability, runtime, GUI, release, non-Prusa fork, upstream import, and sync
-surfaces deferred.
+No active milestone is open. Start the next milestone by defining fresh
+requirements through `/gsd-new-milestone`.
 
 v1.12 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, see the
@@ -460,15 +418,8 @@ high-risk generated-output or network/cloud surfaces.
 
 ### Active
 
-- [x] Define a reviewed structural Prusa G-code scope contract that keeps the
-  evidence slice narrow and forbids broad generated-output claims.
-- [x] Expand the source-pinned Prusa G-code fixture surface with checked-in
-  structural expected summaries and fail-closed drift guards.
-- [x] Add a pure typed Rust structural summary boundary for the expanded
-  fixture evidence.
-- [x] Publish a stronger executable parity/status/docs path for
-  `fork.prusaslicer.gcode-output` without claiming byte-for-byte, geometry,
-  runtime, GUI, or non-Prusa fork parity.
+- None. Define fresh requirements with `/gsd-new-milestone` before starting
+  the next phase sequence.
 
 ### Out of Scope
 
@@ -572,4 +523,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-18 after verifying v1.13 Phase 52*
+*Last updated: 2026-06-19 after archiving v1.13*

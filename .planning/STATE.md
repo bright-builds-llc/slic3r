@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.13
 milestone_name: milestone
-status: ready_for_milestone_completion
-stopped_at: Phase 52 verified; milestone ready for completion
-last_updated: "2026-06-18T03:36:40.374Z"
-last_activity: 2026-06-18 -- Phase 52 verified
+status: ready_for_new_milestone
+stopped_at: v1.13 archived; ready for /gsd-new-milestone
+last_updated: "2026-06-19T13:59:02Z"
+last_activity: 2026-06-19 -- v1.13 archived
 progress:
   total_phases: 4
   completed_phases: 4
@@ -18,34 +18,33 @@ progress:
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-16)
+See: `.planning/PROJECT.md` (updated 2026-06-19)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Phase 52 — Executable Structural G-code Evidence
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 52 (Executable Structural G-code Evidence) — VERIFIED
-Plan: 6 of 6
+Phase: none
+Plan: none
 Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
-Status: Phase 52 verified; milestone ready for completion
-Last activity: 2026-06-18 -- Phase 52 verified
+Status: v1.13 archived; fresh requirements needed for the next milestone
+Last activity: 2026-06-19 -- v1.13 archived
 
 Progress: [██████████] 100%
 
 ## Performance Metrics
 
-**Prior milestone baseline:**
+**Latest milestone baseline:**
 
+- v1.13 archived on 2026-06-19 with 4 phases, 12 plans, 24 tasks, 12 mapped
+  requirements, and a passed milestone audit.
 - v1.12 archived on 2026-06-15 with 4 phases, 12 plans, 29 tasks, and a
   passed milestone audit.
-
-- v1.13 starts with 4 planned phases and 12 mapped requirements.
-- Phase 49 has 2 plans ready for execution.
 - Phase 52 plan 01 completed on 2026-06-18: 6min, 2 tasks, 4 files.
 - Phase 52 plan 02 completed on 2026-06-18: 8min, 2 tasks, 3 files.
 - Phase 52 plan 03 completed on 2026-06-18: 3 min, 2 tasks, 3 files.
