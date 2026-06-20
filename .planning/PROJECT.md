@@ -10,10 +10,26 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone: None
+## Current Milestone: v1.14 PrusaSlicer G-code Semantic Evidence Foundation
 
-Fresh requirements must be defined with `/gsd-new-milestone` before opening
-new phase work.
+**Goal:** Deepen the verified narrow `fork.prusaslicer.gcode-output` path from
+structural G-code facts into semantic toolpath evidence without claiming
+byte-for-byte parity, printability, printer-runtime behavior, broad
+generated-output verification, support generation, wall seam behavior, arc
+fitting, GUI behavior, non-Prusa fork behavior, release behavior, upstream
+source imports, or sync automation.
+
+**Target features:**
+
+- Reviewed semantic Prusa G-code scope contract that defines the allowed
+  toolpath evidence fields and keeps broad generated-output claims forbidden.
+- Source-pinned Prusa G-code fixture corpus with checked-in semantic expected
+  summaries and fail-closed fixture drift guards.
+- Pure typed Rust semantic G-code parser/readiness boundary that parses
+  caller-supplied checked-in artifacts without generator, runtime, network, or
+  sync side effects.
+- Public executable parity evidence, mutation guards, exact status wording,
+  and docs that publish only the narrow semantic Prusa G-code evidence slice.
 
 ## Last Shipped Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
 
@@ -24,6 +40,13 @@ summary-only marker metadata into structural G-code evidence without claiming
 byte-for-byte, geometry, printability, runtime, GUI, or non-Prusa fork parity.
 
 ## Current State
+
+v1.14 is active. The milestone extends the v1.12 and v1.13 Prusa G-code
+evidence ladder from marker summaries and structural facts into semantic
+toolpath evidence. It should create a reviewed semantic field contract,
+source-pinned fixture corpus, typed Rust parser/readiness boundary, public
+parity validation, mutation guards, and docs that keep broad
+`generated-outputs` in progress.
 
 v1.13 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, inspect the
@@ -40,9 +63,6 @@ byte-for-byte G-code parity, geometry/toolpath parity, printability,
 printer-runtime behavior, support generation, wall seam behavior, arc fitting,
 GUI export/viewer behavior, release behavior, Bambu Studio, OrcaSlicer,
 upstream imports, and sync automation remain deferred.
-
-No active milestone is open. Start the next milestone by defining fresh
-requirements through `/gsd-new-milestone`.
 
 v1.12 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, see the
@@ -271,14 +291,19 @@ high-risk generated-output or network/cloud surfaces.
 
 </details>
 
-## Next Milestone Goals
+## Current Milestone Goals
 
-- Define fresh requirements before opening new phase work.
-- Prefer another deliberately narrow PrusaSlicer evidence slice if the current
-  direction remains valid.
+- Define a semantic Prusa G-code evidence contract that builds on the v1.13
+  structural contract without widening public parity claims.
+- Expand the checked-in Prusa G-code fixture surface from one structural
+  sidecar into a small reviewed semantic corpus.
+- Add pure typed Rust semantic parsing/readiness metadata that stays side
+  effect free and caller supplied.
+- Publish executable semantic parity evidence only after fail-closed mutation
+  guards and exact status/docs wording exist.
 - Keep support generation, arc fitting, wall seam behavior, STEP import, full
   3MF import/export, printer runtime behavior, and other generated-output
-  evidence slices as future Prusa candidates.
+  feature slices as future Prusa candidates.
 - Limit active downstream-fork porting consideration to PrusaSlicer for now;
   Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly vendor
   sync are paused and may be revisited only after an explicit new planning
@@ -418,8 +443,15 @@ high-risk generated-output or network/cloud surfaces.
 
 ### Active
 
-- None. Define fresh requirements with `/gsd-new-milestone` before starting
-  the next phase sequence.
+- [ ] v1.14 defines a reviewed semantic Prusa G-code scope contract that keeps
+  the evidence slice narrow and forbids broad generated-output claims.
+- [ ] v1.14 expands the source-pinned Prusa G-code fixture surface with
+  checked-in semantic expected summaries and fail-closed drift guards.
+- [ ] v1.14 adds a pure typed Rust semantic G-code summary boundary for the
+  expanded Prusa G-code fixture evidence.
+- [ ] v1.14 publishes executable semantic parity/status/docs evidence for
+  `fork.prusaslicer.gcode-output` without claiming byte-for-byte, printability,
+  runtime, GUI, or non-Prusa fork parity.
 
 ### Out of Scope
 
@@ -444,6 +476,11 @@ high-risk generated-output or network/cloud surfaces.
 - Nightly vendor sync and Codex-assisted merge automation are paused
   parking-lot candidates until stable fork modules, executable evidence, and
   review-gated refresh policy exist.
+- Byte-for-byte Prusa G-code parity remains deferred until a larger reviewed
+  fixture corpus and stricter output-generation oracle exist.
+- Printability, firmware/runtime behavior, host upload, post-processing,
+  thumbnails, support generation, wall seam behavior, and arc fitting remain
+  deferred beyond v1.14.
 
 ## Context
 
@@ -501,6 +538,7 @@ The audience for this work is broad:
 | Start generated-output work with summary-only G-code evidence | G-code is closer to real port value than another static input slice, but byte-for-byte output parity and printer-runtime claims are too broad for the first generated-output milestone | ✓ Shipped in v1.12 Phase 48 |
 | Limit active downstream-fork porting consideration to PrusaSlicer for now | Non-Prusa Slicer-family ports need an explicit new planning decision before moving from parking lot into the roadmap | ✓ Adopted 2026-06-03 |
 | Expand Prusa G-code evidence structurally before broad generated-output parity | v1.12 proved the evidence path, but support, seam, arc, geometry, runtime, and byte parity should wait until structural G-code summaries can fail closed on meaningful drift | ✓ Shipped in v1.13 Phase 52 |
+| Deepen Prusa G-code evidence semantically before feature-specific generated-output slices | Support, seam, arc, and broad generated-output status need semantic toolpath comparison machinery before their own evidence can be credible | — Pending v1.14 |
 
 ## Evolution
 
@@ -523,4 +561,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-19 after archiving v1.13*
+*Last updated: 2026-06-20 after starting v1.14*

@@ -1,46 +1,48 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.13
-milestone_name: milestone
-status: ready_for_new_milestone
-stopped_at: v1.13 archived; ready for /gsd-new-milestone
-last_updated: "2026-06-19T13:59:02Z"
-last_activity: 2026-06-19 -- v1.13 archived
+milestone: v1.14
+milestone_name: PrusaSlicer G-code Semantic Evidence Foundation
+status: defining_requirements
+stopped_at: v1.14 started; defining requirements and roadmap
+last_updated: "2026-06-20T14:36:03Z"
+last_activity: 2026-06-20 -- v1.14 started
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 12
-  completed_plans: 12
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-19)
+See: `.planning/PROJECT.md` (updated 2026-06-20)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Planning next milestone
+**Current focus:** Defining v1.14 semantic Prusa G-code evidence requirements
 
 ## Current Position
 
-Phase: none
-Plan: none
-Milestone: v1.13 PrusaSlicer G-code Structural Evidence Expansion
-Status: v1.13 archived; fresh requirements needed for the next milestone
-Last activity: 2026-06-19 -- v1.13 archived
+Phase: Not started (defining requirements)
+Plan: —
+Milestone: v1.14 PrusaSlicer G-code Semantic Evidence Foundation
+Status: Defining requirements
+Last activity: 2026-06-20 -- v1.14 started
 
-Progress: [██████████] 100%
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
 **Latest milestone baseline:**
 
+- v1.14 started on 2026-06-20 to deepen the verified narrow Prusa G-code path
+  from structural facts into semantic toolpath evidence.
 - v1.13 archived on 2026-06-19 with 4 phases, 12 plans, 24 tasks, 12 mapped
   requirements, and a passed milestone audit.
 - v1.12 archived on 2026-06-15 with 4 phases, 12 plans, 29 tasks, and a
@@ -57,6 +59,14 @@ Progress: [██████████] 100%
 ### Decisions
 
 Decisions are logged in `PROJECT.md` Key Decisions table.
+
+Recent decisions affecting v1.14:
+
+- Continue phase numbering from Phase 53 because v1.13 ended at Phase 52.
+- Deepen the existing Prusa G-code evidence path semantically before planning
+  support, seam, arc, broad generated-output, or non-Prusa fork milestones.
+- Skip external ecosystem research for v1.14 because the milestone is an
+  internal evidence-contract expansion over existing repo artifacts.
 
 Recent decisions affecting v1.13:
 
