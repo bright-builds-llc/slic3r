@@ -3,11 +3,11 @@
 use std::{env, ffi::OsStr, fs, path::Path, process::ExitCode};
 
 use slic3r_flavors::{
-    prusa_gcode_output_structural_summary_lines, prusa_gcode_output_summary_lines,
+    prusa_gcode_output_semantic_summary_lines, prusa_gcode_output_structural_summary_lines,
+    prusa_gcode_output_summary_lines,
 };
 
-const USAGE_ERROR: &str =
-    "expected expected-gcode-summary.tsv or --structural expected-gcode-structural-summary.tsv";
+const USAGE_ERROR: &str = "expected expected-gcode-summary.tsv, --structural expected-gcode-structural-summary.tsv, or --semantic expected-gcode-semantic-summary.tsv";
 
 fn main() -> ExitCode {
     let args: Vec<_> = env::args_os().collect();
@@ -15,6 +15,9 @@ fn main() -> ExitCode {
         [_, fixture_path] => run_summary(fixture_path),
         [_, mode, fixture_path] if mode == OsStr::new("--structural") => {
             run_structural_summary(fixture_path)
+        }
+        [_, mode, fixture_path] if mode == OsStr::new("--semantic") => {
+            run_semantic_summary(fixture_path)
         }
         _ => Err(USAGE_ERROR.to_owned()),
     };
@@ -47,6 +50,16 @@ fn run_structural_summary(fixture_path: &OsStr) -> Result<(), String> {
             path.display()
         )
     })?;
+    print_lines(lines);
+
+    Ok(())
+}
+
+fn run_semantic_summary(fixture_path: &OsStr) -> Result<(), String> {
+    let path = Path::new(fixture_path);
+    let input = read_input(path)?;
+    let lines = prusa_gcode_output_semantic_summary_lines(&input)
+        .map_err(|error| format!("failed to summarize semantic {}: {error:?}", path.display()))?;
     print_lines(lines);
 
     Ok(())

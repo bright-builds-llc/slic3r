@@ -1129,6 +1129,34 @@ pub fn prusa_gcode_output_structural_summary_lines(
     ])
 }
 
+pub fn prusa_gcode_output_semantic_summary_lines(
+    input: &str,
+) -> Result<Vec<String>, PrusaGcodeOutputSemanticParseError> {
+    let summary = parse_prusa_gcode_output_semantic_summary(input)?;
+    let readiness = prusa_gcode_output_semantic_readiness();
+    let facts = summary.facts();
+
+    Ok(vec![
+        summary_line(
+            "semantic_summary_path",
+            readiness.expected_semantic_summary_path,
+        ),
+        format!("semantic_row_count\t{}", summary.rows().len()),
+        summary_line("source_ref", facts.source_ref.as_str()),
+        summary_line("fixture_id", facts.fixture_id),
+        summary_line("fixture_path", facts.fixture_path),
+        summary_line("command_class_counts", facts.command_class_counts),
+        summary_line("movement_class_counts", facts.movement_class_counts),
+        summary_line("coordinate_bounds", facts.coordinate_bounds),
+        summary_line("extrusion_total", facts.extrusion_total),
+        summary_line("feedrate_observations", facts.feedrate_observations),
+        summary_line(
+            "layer_marker_relationships",
+            facts.layer_marker_relationships,
+        ),
+    ])
+}
+
 impl PrusaGcodeOutputMetadataKey {
     pub const fn as_str(self) -> &'static str {
         match self {

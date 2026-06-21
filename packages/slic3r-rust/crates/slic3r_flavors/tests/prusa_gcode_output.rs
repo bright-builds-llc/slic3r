@@ -12,8 +12,8 @@ use slic3r_flavors::prusa_gcode_output::{
     PrusaGcodeOutputSemanticParseError, PrusaGcodeOutputStructuralField,
     PrusaGcodeOutputStructuralParseError, parse_prusa_gcode_output_semantic_summary,
     parse_prusa_gcode_output_structural_summary, parse_prusa_gcode_output_summary,
-    prusa_gcode_output_metadata, prusa_gcode_output_structural_summary_lines,
-    prusa_gcode_output_summary_lines,
+    prusa_gcode_output_metadata, prusa_gcode_output_semantic_summary_lines,
+    prusa_gcode_output_structural_summary_lines, prusa_gcode_output_summary_lines,
 };
 
 const EXPECTED_GCODE_SUMMARY: &str = include_str!(
@@ -194,6 +194,34 @@ fn summarizes_expected_gcode_structural_summary_lines() {
 }
 
 #[test]
+fn summarizes_expected_gcode_semantic_summary_lines() {
+    // Arrange
+    let input = EXPECTED_GCODE_SEMANTIC_SUMMARY;
+
+    // Act
+    let summary =
+        prusa_gcode_output_semantic_summary_lines(input).expect("semantic summary should parse");
+
+    // Assert
+    assert_eq!(
+        summary,
+        vec![
+            "semantic_summary_path\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv",
+            "semantic_row_count\t9",
+            "source_ref\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961",
+            "fixture_id\tgcodewriter-set-speed.gcode",
+            "fixture_path\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
+            "command_class_counts\tG1:4;feedrate_only:4",
+            "movement_class_counts\ttravel:0;extrusion:0;coordinate_motion:0;feedrate_only:4",
+            "coordinate_bounds\tx:none;y:none;z:none",
+            "extrusion_total\te_axis_observed:false;extrusion_total:not_observed",
+            "feedrate_observations\tF99999.123;F1;F203.2;F203.201",
+            "layer_marker_relationships\tlayer_markers:0;marker_relationships:none",
+        ]
+    );
+}
+
+#[test]
 fn rejects_malformed_gcode_structural_summary_lines() {
     // Arrange
     let input = replace_structural_cell(6, 4, "3");
@@ -271,7 +299,37 @@ fn summary_binary_prints_structural_mode_lines() {
 }
 
 #[test]
-fn summary_binary_rejects_invalid_args_with_structural_usage() {
+fn summary_binary_prints_semantic_mode_lines() {
+    // Arrange
+    let Some(binary_path) = maybe_prusa_gcode_output_summary_binary() else {
+        return;
+    };
+    let fixture_path = write_temp_fixture(
+        "expected-gcode-semantic-summary.tsv",
+        EXPECTED_GCODE_SEMANTIC_SUMMARY,
+    );
+
+    // Act
+    let output = Command::new(binary_path)
+        .arg("--semantic")
+        .arg(&fixture_path)
+        .output()
+        .expect("summary binary should run");
+    remove_temp_fixture(&fixture_path);
+    let stdout = String::from_utf8(output.stdout).expect("stdout should be valid UTF-8");
+
+    // Assert
+    assert!(
+        output.status.success(),
+        "semantic summary mode should succeed: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    assert!(stdout.contains("semantic_row_count\t9"));
+    assert!(stdout.contains("feedrate_observations\tF99999.123;F1;F203.2;F203.201"));
+}
+
+#[test]
+fn summary_binary_rejects_invalid_args_with_all_modes_usage() {
     // Arrange
     let Some(binary_path) = maybe_prusa_gcode_output_summary_binary() else {
         return;
@@ -290,7 +348,7 @@ fn summary_binary_rejects_invalid_args_with_structural_usage() {
     // Assert
     assert!(!output.status.success());
     assert!(stderr.contains(
-        "error: expected expected-gcode-summary.tsv or --structural expected-gcode-structural-summary.tsv"
+        "error: expected expected-gcode-summary.tsv, --structural expected-gcode-structural-summary.tsv, or --semantic expected-gcode-semantic-summary.tsv"
     ));
 }
 
