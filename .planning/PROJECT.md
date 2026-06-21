@@ -48,6 +48,14 @@ source-pinned fixture corpus, typed Rust parser/readiness boundary, public
 parity validation, mutation guards, and docs that keep broad
 `generated-outputs` in progress.
 
+v1.14 Phase 53 is complete. Maintainers can inspect the Phase 53 semantic
+Prusa G-code scope contract, run
+`bazel run //packages/prusa-gcode-output-scope:verify`, and rely on mutation
+guards that keep semantic evidence narrow while generated-output parity,
+printability, runtime behavior, support generation, seam behavior, arc
+fitting, GUI behavior, release behavior, upstream imports, and sync automation
+remain deferred. Phase 54 is the next planned fixture-corpus step.
+
 v1.13 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, inspect the
 exact verified `fork.prusaslicer.gcode-output` status row, and read package
@@ -443,7 +451,7 @@ high-risk generated-output or network/cloud surfaces.
 
 ### Active
 
-- [ ] v1.14 defines a reviewed semantic Prusa G-code scope contract that keeps
+- [x] v1.14 defines a reviewed semantic Prusa G-code scope contract that keeps
   the evidence slice narrow and forbids broad generated-output claims.
 - [ ] v1.14 expands the source-pinned Prusa G-code fixture surface with
   checked-in semantic expected summaries and fail-closed drift guards.
@@ -561,4 +569,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-20 after starting v1.14*
+*Last updated: 2026-06-21 after verifying Phase 53*
