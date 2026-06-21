@@ -132,10 +132,11 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
 - `bazel run //packages/parity:windows_packaged_launcher_parity` is the shared
   parity command for the verified scoped Windows packaged launcher tree
 - `bazel run //packages/parity:prusaslicer_gcode_output_parity` is the shared
-  parity command for the narrow structural Prusa G-code evidence slice backed
-  by the Phase 49 closed structural scope contract, Phase 50 structural fixture,
-  Phase 51 Rust structural parser/readiness, and Phase 52 public executable
-  evidence. The broad generated-outputs status remains in progress.
+  public command for the narrow semantic Prusa G-code evidence slice backed by
+  the Phase 53 closed semantic scope contract, Phase 54 semantic fixture
+  summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56
+  public parity command/status wiring. The broad generated-outputs status
+  remains in progress.
 - `linux.packaged-launcher` and `windows.packaged-launcher` are checked-in
   status rows in `packages/parity/status.tsv`
 - `packages/parity/status.tsv` is the checked-in status data source
@@ -321,41 +322,43 @@ automation remain deferred.
 
 ## Current Prusa G-code Output Evidence State
 
-- `packages/prusa-gcode-output-scope` owns the Phase 49 closed structural scope
-  contract for `prusaslicer.gcode-output`; run
-  `bazel run //packages/prusa-gcode-output-scope:verify` to check the reviewed
-  structural contract and no-overclaiming boundary.
+- `packages/prusa-gcode-output-scope` owns the Phase 49 structural history and
+  the Phase 53 closed semantic scope contract for `prusaslicer.gcode-output`;
+  run `bazel run //packages/prusa-gcode-output-scope:verify` to check the
+  reviewed semantic contract and no-overclaiming boundary.
 - The accepted source identity is
   `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, with
   source path `src/libslic3r/GCode.cpp` and companion API evidence
   `src/libslic3r/GCode.hpp`.
-- Phase 49 closed structural scope contract defines the allowed structural
-  fields. Phase 50 owns the checked-in structural fixture sidecar
-  `expected-gcode-structural-summary.tsv`. Phase 51 owns the Rust structural
-  parser/readiness boundary. Phase 52 owns public structural evidence through
-  command/status wiring.
+- Phase 49 through Phase 52 remain the historical structural evidence rungs.
+  The current published evidence chain is Phase 53 closed semantic scope
+  contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic
+  parser/readiness boundary, and Phase 56 public parity command.
 - The fixture namespace is
   `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`, with
   the source-pinned `gcodewriter-set-speed.gcode` fixture,
   `fixture-provenance.tsv`, `expected-gcode-summary.tsv`, and
-  `expected-gcode-structural-summary.tsv`.
+  `expected-gcode-structural-summary.tsv`, plus the Phase 54
+  `expected-gcode-semantic-summary.tsv`.
 - The Rust boundary is `slic3r_flavors::prusa_gcode_output` in
   `packages/slic3r-rust/crates/slic3r_flavors/src/prusa_gcode_output.rs`, with
   `prusa_gcode_output_summary_lines` and
-  `prusa_gcode_output_structural_summary_lines` over caller-supplied checked-in
+  `prusa_gcode_output_structural_summary_lines` and
+  `prusa_gcode_output_semantic_summary_lines` over caller-supplied checked-in
   TSV artifacts.
-- Phase 52 publishes
+- Phase 56 publishes
   `bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
   `fork.prusaslicer.gcode-output` row in `packages/parity/status.tsv` for the
-  narrow structural Prusa G-code evidence slice. The broad generated-outputs
+  narrow semantic Prusa G-code evidence slice. The broad generated-outputs
   status remains in progress.
-- Byte-for-byte G-code parity, full generated-output parity,
-  geometry/toolpath parity, printability, printer-runtime behavior, support
-  generation, wall seam behavior, arc fitting, STEP import, full 3MF
-  import/export, GUI behavior, binary G-code, thumbnails, post-processing, host
-  upload, network/device integration, profile auto-update execution, fork
-  release builds, Bambu Studio, OrcaSlicer, upstream source imports, release
-  behavior, and sync automation remain outside the Phase 52 evidence slice.
+- The semantic evidence does not prove byte-for-byte G-code parity, broad
+  generated-output verification, toolpath geometry, printability,
+  printer-runtime behavior, support generation, wall seam behavior, arc
+  fitting, GUI behavior, release behavior, sync automation, or non-Prusa fork
+  behavior. STEP import, full 3MF import/export, binary G-code, thumbnails,
+  post-processing, host upload, network/device integration, profile
+  auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, and
+  upstream source imports remain outside the Phase 56 evidence slice.
 
 ## v1.9 Fork Parity Deferrals
 
