@@ -408,12 +408,11 @@ fn rejects_structural_wrong_column_count() {
 
 **This table is empty:** all claims in this research were verified in the repo, by local command probes, or cited from official/current standards sources. [VERIFIED: full research session sources]
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Should the planner standardize on `cargo +1.94.1` for Phase 55, or add a task to make Rust 1.94.1 the default local toolchain?** [VERIFIED: rustup toolchain list; cargo default failure probe]
+1. **RESOLVED: Use explicit `cargo +1.94.1` commands in Phase 55 plans and do not add checked-in toolchain config in this phase.** [VERIFIED: rustup toolchain list; cargo default failure probe; 55-01-PLAN.md; 55-02-PLAN.md]
    - What we know: `cargo +1.94.1 test --manifest-path packages/slic3r-rust/Cargo.toml -p slic3r_flavors --test prusa_gcode_output` passed. [VERIFIED: cargo +1.94.1 test probe]
-   - What's unclear: Whether this repo wants a checked-in `rust-toolchain.toml` or local default update for future phases. [VERIFIED: rg --files rust-toolchain probe]
-   - Recommendation: Use explicit `+1.94.1` commands in Phase 55 plans and avoid adding toolchain config unless the implementation phase is explicitly widened. [VERIFIED: packages/slic3r-rust/Cargo.toml; MODULE.bazel]
+   - Decision: Phase 55 will standardize on explicit `+1.94.1` Cargo commands and avoid adding `rust-toolchain.toml` or changing the local default toolchain because the phase scope is the semantic parser/readiness boundary, not repository toolchain policy. [VERIFIED: packages/slic3r-rust/Cargo.toml; MODULE.bazel; 55-01-PLAN.md; 55-02-PLAN.md]
 
 ## Environment Availability
 
