@@ -514,19 +514,25 @@ All claims in this research are sourced from current repo files, local command o
 |---|-------|---------|---------------|
 | None | No assumed claims recorded. [VERIFIED: source tags throughout] | All sections | None. [VERIFIED: source tags throughout] |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Exact final status note wording**
 
    - What we know: The status row may remain `verified`, the evidence target must remain `//packages/parity:prusaslicer_gcode_output_parity`, and the note must name Phase 53, Phase 54, Phase 55, and Phase 56 while retaining deferrals. [VERIFIED: .planning/phases/56-executable-semantic-g-code-evidence/56-CONTEXT.md]
    - What's unclear: The exact sentence is left to implementation discretion. [VERIFIED: .planning/phases/56-executable-semantic-g-code-evidence/56-CONTEXT.md]
    - Recommendation: Use a single exact note shared by `status.tsv`, fixture verifier constants, scope verifier constants, and tests. [VERIFIED: existing exact-row verifier pattern in package verifier scripts]
+   - RESOLVED: Plan 56-03 chooses this exact status note for `packages/parity/status.tsv`, fixture verifier constants, scope verifier constants, and tests:
+
+     ```text
+     Shared fixture comparison proves the narrow semantic Prusa G-code evidence slice backed by the Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion behavior, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred
+     ```
 
 1. **Whether to update `docs/port/README.md` in Plan 56-05**
 
    - What we know: The context especially names `package-map.md`, `parity-matrix.md`, and `migration-guidance.md`, and `docs/port/README.md` currently contains structural-only G-code evidence wording. [VERIFIED: .planning/phases/56-executable-semantic-g-code-evidence/56-CONTEXT.md; docs/port/README.md]
    - What's unclear: The roadmap plan title says "port docs" rather than an exhaustive file list. [VERIFIED: .planning/ROADMAP.md]
    - Recommendation: Include `docs/port/README.md` in the Plan 56-05 drift scan and update it if semantic publication makes it stale. [VERIFIED: docs/port/README.md]
+   - RESOLVED: Plan 56-05 includes `docs/port/README.md` in `files_modified`, `<context>`, Task 2 `<files>` and `<read_first>`, Task 2 action/acceptance criteria, and final verification so the stale structural-only README wording is closed with the rest of the public port docs.
 
 ## Environment Availability
 
