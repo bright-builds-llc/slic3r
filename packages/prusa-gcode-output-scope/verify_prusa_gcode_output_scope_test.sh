@@ -748,6 +748,38 @@ test_readme_semantic_overclaim_fails() {
 	assert_contains "${tmp_dir}/readme-semantic-overclaim.err" 'forbidden Prusa G-code scope claim'
 }
 
+test_scope_semantic_validates_printability_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/scope-semantic-validates-printability-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 53 semantic evidence validates printability.\n' >>"${dir}/gcode-output-scope.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/scope-semantic-validates-printability-overclaim.out" "${tmp_dir}/scope-semantic-validates-printability-overclaim.err"; then
+		fail "scope semantic validates printability overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/scope-semantic-validates-printability-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/scope-semantic-validates-printability-overclaim.err" 'forbidden Prusa G-code scope overclaim'
+}
+
+test_readme_semantic_validates_printability_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/readme-semantic-validates-printability-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 53 semantic evidence validates printability.\n' >>"${dir}/README.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/readme-semantic-validates-printability-overclaim.out" "${tmp_dir}/readme-semantic-validates-printability-overclaim.err"; then
+		fail "README semantic validates printability overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/readme-semantic-validates-printability-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/readme-semantic-validates-printability-overclaim.err" 'forbidden Prusa G-code scope overclaim'
+}
+
 test_scope_structural_overclaim_fails() {
 	# Arrange
 	local dir="${tmp_dir}/scope-structural-overclaim"
@@ -856,6 +888,8 @@ test_missing_semantic_traceability_fails
 test_missing_semantic_reviewer_signoff_fails
 test_scope_semantic_overclaim_fails
 test_readme_semantic_overclaim_fails
+test_scope_semantic_validates_printability_overclaim_fails
+test_readme_semantic_validates_printability_overclaim_fails
 test_scope_structural_overclaim_fails
 test_scope_full_generated_output_parity_overclaim_fails
 test_readme_structural_overclaim_fails

@@ -218,9 +218,11 @@ reject_overclaiming_text() {
 	local forbidden_claim
 	local overclaim_pattern
 	local overclaim_terms
+	local overclaim_verbs
 
 	overclaim_terms='byte-for-byte G-code parity|full generated-output parity|broad generated-output parity|broad generated-output verification|toolpath geometry|toolpath geometry parity|printability|printer-runtime behavior|support generation|wall seam behavior|arc fitting|GUI export/viewer behavior|release behavior|network/device behavior|non-Prusa fork behavior|non-Prusa forks? support|Bambu Studio support|OrcaSlicer support|upstream source imports|sync automation'
-	overclaim_pattern="Phase (49|53)[^.]*[^[:alnum:]_](proves|verified|verifies)[^[:alnum:]_][^.]*(${overclaim_terms})"
+	overclaim_verbs='proves|verified|verifies|validates?|confirms?|claims?|establishes?|demonstrates?|certifies?'
+	overclaim_pattern="Phase (49|53)[^.]*[^[:alnum:]_](${overclaim_verbs})[^[:alnum:]_][^.]*(${overclaim_terms})"
 
 	for checked_file in "${readme_file}" "${scope_file}"; do
 		checked_label="$(basename "${checked_file}")"
