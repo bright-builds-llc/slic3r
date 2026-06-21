@@ -94,10 +94,14 @@ write_valid_fixture() {
 # Prusa G-code Output Scope Gate
 
 `packages/prusa-gcode-output-scope` owns the Phase 45 reviewed scope gate and the Phase 49 structural evidence scope contract for `prusaslicer.gcode-output`.
+It also owns the Phase 53 semantic evidence scope contract for `prusaslicer.gcode-output`.
 Run `bazel run //packages/prusa-gcode-output-scope:verify` to check the reviewed Phase 45 scope gate.
 Phase 49 structural verification allows only command counts, section counts, ordered markers, movement/extrusion indicators, temperature/tool-change markers, source identity, and fixture identity for the narrow Prusa G-code evidence chain.
 Phase 49 structural verification keeps broad generated-outputs in progress and does not prove byte-for-byte G-code parity, toolpath geometry, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation.
 Phase 52 public evidence consumes this Phase 49 closed structural scope contract for the narrow structural Prusa G-code evidence slice while keeping broad generated-outputs in progress.
+Phase 53 semantic verification allows only source identity, fixture identity, command class counts, movement class counts, coordinate bounds, extrusion totals, feedrate observations, and layer/marker relationships for the planned v1.14 semantic Prusa G-code evidence chain.
+Phase 53 semantic verification keeps generated-outputs exactly in progress and does not prove byte-for-byte G-code parity, broad generated-output verification, toolpath geometry parity, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation.
+Phase 53 only records the planned semantic summary artifact `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv`, the planned Phase 55 `slic3r_flavors::prusa_gcode_output` semantic boundary, and the planned Phase 56 `bazel run //packages/parity:prusaslicer_gcode_output_parity` evidence command; it does not create semantic fixture artifacts, Rust semantic parsing, public semantic parity evidence, or status publication.
 Phase 45 verification does not prove executable Prusa G-code output parity.
 Phase 45 verification does not prove byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, or sync automation.
 This package creates no fixture bytes, expected-gcode-summary.tsv, Rust G-code summary implementation, parity command, status row, upstream source import, vendored fork source tree, Git/network/vendor sync behavior, printer-runtime behavior, host upload, profile auto-update execution, network/device integration, credential handling, Bambu Studio support, OrcaSlicer support, or fork release build.
@@ -181,6 +185,42 @@ This section is an additive structural contract for the existing narrow `prusasl
 | Published narrow status row | `fork.prusaslicer.gcode-output` stays verified only for the narrow structural Prusa G-code evidence slice in `packages/parity/status.tsv`, backed by the Phase 49 closed structural scope contract, Phase 50 structural fixture summary, Phase 51 Rust structural parser/readiness boundary, and Phase 52 public parity command |
 | Broad status row | `generated-outputs` stays `in progress` in `packages/parity/status.tsv` |
 | Structural reviewer signoff | Peter Ryszkiewicz, 2026-06-16 UTC |
+
+## v1.14 Semantic Evidence Scope
+
+This section is an additive semantic contract for the existing narrow `prusaslicer.gcode-output` evidence chain. It allows only the fields listed below for Phase 54 semantic fixture expectations and Phase 55 typed parsing. It does not create semantic fixture artifacts, Rust semantic parsing, public semantic parity evidence, or status publication, and it does not promote broad `generated-outputs` status.
+
+| Semantic Field | Category | Evidence Boundary |
+| --- | --- | --- |
+| source_ref | source identity | Accepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`. |
+| fixture_id | fixture identity | Fixture identity only: `gcodewriter-set-speed.gcode`. |
+| fixture_path | fixture identity | Checked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`. |
+| command_class_counts | command classes | Counts of approved command classes in the selected fixture summary only; no byte-for-byte G-code parity or generator parity. |
+| movement_class_counts | movement classes | Counts of approved movement classes in the selected fixture summary only; no toolpath geometry, travel, or printability claim. |
+| coordinate_bounds | coordinate bounds | Bounded coordinate observations only; no toolpath geometry or printability claim. |
+| extrusion_total | extrusion total | Summary totals only; no material-use, runtime, or printability claim. |
+| feedrate_observations | feedrate observations | Feedrate metadata only; no timing, firmware, or printer-runtime behavior claim. |
+| layer_marker_relationships | layer or marker relationships | Fixture-summary relationships only; no GUI, viewer, runtime, support, seam, or arc behavior claim. |
+
+## v1.14 Semantic Traceability
+
+| Required Link | Exact Target |
+| --- | --- |
+| Inventory row | `prusaslicer.gcode-output` in `packages/fork-inventories/prusaslicer.tsv` |
+| Category-map row | `gcode.shared` in `packages/fork-inventories/category-map.tsv` references `prusaslicer.gcode-output` exactly once |
+| Accepted source identity | `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` |
+| Fixture namespace | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` |
+| Current expected summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv` |
+| Current structural summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv` |
+| Fixture provenance | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv` |
+| Planned semantic summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv` |
+| Planned Rust semantic boundary | `slic3r_flavors::prusa_gcode_output` |
+| Planned public evidence command | `bazel run //packages/parity:prusaslicer_gcode_output_parity` |
+| Deferred status boundary | `generated-outputs` stays `in progress` in `packages/parity/status.tsv`; no semantic status publication happens before Phase 56 public evidence. |
+| Docs touched | `packages/prusa-gcode-output-scope/gcode-output-scope.md`; `packages/prusa-gcode-output-scope/README.md` |
+| Security note | No secrets, credentials, private data, runtime file discovery, Git, network, device, host upload, release, or sync surface is introduced by the Phase 53 semantic scope contract. |
+| Deferred semantic scope | Byte-for-byte G-code parity; broad generated-output verification; toolpath geometry parity; printability; printer-runtime behavior; support generation; wall seam behavior; arc fitting; GUI export/viewer behavior; release behavior; network/device behavior; non-Prusa fork behavior; upstream source imports; sync automation. |
+| Semantic reviewer signoff | Peter Ryszkiewicz, 2026-06-21 UTC |
 EOF
 
 	replace_text "${dir}/gcode-output-scope.md" "__PLANNED_COMMAND__" "${planned_command}"
@@ -590,6 +630,124 @@ test_missing_structural_reviewer_signoff_fails() {
 	assert_contains "${tmp_dir}/missing-structural-reviewer-signoff.err" 'Structural reviewer signoff'
 }
 
+test_missing_allowed_semantic_field_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-allowed-semantic-field"
+	write_valid_fixture "${dir}"
+	remove_line_containing "${dir}/gcode-output-scope.md" "| command_class_counts |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-allowed-semantic.out" "${tmp_dir}/missing-allowed-semantic.err"; then
+		fail "missing allowed semantic field fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-allowed-semantic.err" '^error:'
+	assert_contains "${tmp_dir}/missing-allowed-semantic.err" 'command_class_counts'
+}
+
+test_unsupported_semantic_field_fails() {
+	# Arrange
+	local dir="${tmp_dir}/unsupported-semantic-field"
+	write_valid_fixture "${dir}"
+	insert_line_before \
+		"${dir}/gcode-output-scope.md" \
+		"## v1.14 Semantic Traceability" \
+		"| toolpath_geometry | unsupported generated-output semantics | Unsupported semantic field that must fail closed. |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/unsupported-semantic.out" "${tmp_dir}/unsupported-semantic.err"; then
+		fail "unsupported semantic field fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/unsupported-semantic.err" '^error:'
+	assert_contains "${tmp_dir}/unsupported-semantic.err" 'expected exactly 9 semantic field rows'
+}
+
+test_duplicate_semantic_field_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-semantic-field"
+	write_valid_fixture "${dir}"
+	insert_line_before \
+		"${dir}/gcode-output-scope.md" \
+		"## v1.14 Semantic Traceability" \
+		"| movement_class_counts | movement classes | Counts of approved movement classes in the selected fixture summary only; no toolpath geometry, travel, or printability claim. |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/duplicate-semantic.out" "${tmp_dir}/duplicate-semantic.err"; then
+		fail "duplicate semantic field fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/duplicate-semantic.err" '^error:'
+	assert_contains "${tmp_dir}/duplicate-semantic.err" 'expected exactly 9 semantic field rows'
+}
+
+test_missing_semantic_traceability_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-semantic-traceability"
+	write_valid_fixture "${dir}"
+	remove_line_containing "${dir}/gcode-output-scope.md" "| Planned semantic summary |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-semantic-traceability.out" "${tmp_dir}/missing-semantic-traceability.err"; then
+		fail "missing semantic traceability fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-semantic-traceability.err" '^error:'
+	assert_contains "${tmp_dir}/missing-semantic-traceability.err" 'Planned semantic summary'
+}
+
+test_missing_semantic_reviewer_signoff_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-semantic-reviewer-signoff"
+	write_valid_fixture "${dir}"
+	remove_line_containing "${dir}/gcode-output-scope.md" "| Semantic reviewer signoff |"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-semantic-reviewer-signoff.out" "${tmp_dir}/missing-semantic-reviewer-signoff.err"; then
+		fail "missing semantic reviewer signoff fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/missing-semantic-reviewer-signoff.err" '^error:'
+	assert_contains "${tmp_dir}/missing-semantic-reviewer-signoff.err" 'Semantic reviewer signoff'
+}
+
+test_scope_semantic_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/scope-semantic-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 53 semantic evidence proves printability.\n' >>"${dir}/gcode-output-scope.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/scope-semantic-overclaim.out" "${tmp_dir}/scope-semantic-overclaim.err"; then
+		fail "semantic overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/scope-semantic-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/scope-semantic-overclaim.err" 'forbidden Prusa G-code scope claim'
+}
+
+test_readme_semantic_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/readme-semantic-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nPhase 53 semantic evidence proves printability.\n' >>"${dir}/README.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/readme-semantic-overclaim.out" "${tmp_dir}/readme-semantic-overclaim.err"; then
+		fail "README semantic overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/readme-semantic-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/readme-semantic-overclaim.err" 'forbidden Prusa G-code scope claim'
+}
+
 test_scope_structural_overclaim_fails() {
 	# Arrange
 	local dir="${tmp_dir}/scope-structural-overclaim"
@@ -691,6 +849,13 @@ test_unsupported_structural_field_fails
 test_compact_unsupported_structural_field_fails
 test_missing_structural_traceability_fails
 test_missing_structural_reviewer_signoff_fails
+test_missing_allowed_semantic_field_fails
+test_unsupported_semantic_field_fails
+test_duplicate_semantic_field_fails
+test_missing_semantic_traceability_fails
+test_missing_semantic_reviewer_signoff_fails
+test_scope_semantic_overclaim_fails
+test_readme_semantic_overclaim_fails
 test_scope_structural_overclaim_fails
 test_scope_full_generated_output_parity_overclaim_fails
 test_readme_structural_overclaim_fails
