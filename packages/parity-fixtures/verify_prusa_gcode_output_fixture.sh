@@ -494,7 +494,7 @@ require_semantic_exact_rows() {
 verify_semantic_summary() {
 	local package_checked_artifacts_text
 
-	package_checked_artifacts_text="Fixture verification checks checked-in artifacts only; it does not fet""ch upstream source"
+	package_checked_artifacts_text="Fixture verification checks checked-in artifacts only; it does not fet""ch upstream source, generate fixtures, upload G-code, run slicer runtime behavior, execute printer behavior, sync sources, or publish public status."
 
 	require_exact_header "${semantic_summary_file}" "expected-gcode-semantic-summary.tsv" "${SEMANTIC_SUMMARY_HEADER}"
 	require_semantic_column_count
@@ -564,7 +564,7 @@ reject_overclaiming_text() {
 	local checked_label
 	local forbidden_claim
 
-	for checked_file in "${fixture_readme}" "${expected_summary_file}" "${structural_summary_file}" "${semantic_summary_file}"; do
+	for checked_file in "${package_readme}" "${fixture_readme}" "${expected_summary_file}" "${structural_summary_file}" "${semantic_summary_file}"; do
 		checked_label="$(basename "${checked_file}")"
 		for forbidden_claim in \
 			"verified Prusa G-code output parity" \

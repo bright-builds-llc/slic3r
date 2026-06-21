@@ -614,6 +614,28 @@ test_missing_package_semantic_boundary_fails() {
 		"packages/parity-fixtures/README.md"
 }
 
+test_truncated_package_semantic_boundary_fails() {
+	# Arrange
+	local dir="${tmp_dir}/truncated-package-semantic-boundary"
+	local package_readme="${dir}/packages/parity-fixtures/README.md"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${package_readme}" \
+		"Fixture verification checks checked-in artifacts only" \
+		"Fixture verification checks checked-in artifacts only; it does not fetch upstream source"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/truncated-package-semantic-boundary.out" "${tmp_dir}/truncated-package-semantic-boundary.err"; then
+		fail "truncated package semantic boundary fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/truncated-package-semantic-boundary.err" \
+		"Fixture verification checks checked-in artifacts only" \
+		"packages/parity-fixtures/README.md"
+}
+
 test_missing_update_route_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-update-route"
@@ -660,6 +682,22 @@ test_readme_overclaim_fails() {
 
 	# Assert
 	assert_contains "${tmp_dir}/readme-overclaim.err" "forbidden"
+}
+
+test_package_readme_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/package-readme-overclaim"
+	local package_readme="${dir}/packages/parity-fixtures/README.md"
+	write_valid_fixture_copy "${dir}"
+	printf '\nverified Prusa G-code output parity\n' >>"${package_readme}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/package-readme-overclaim.out" "${tmp_dir}/package-readme-overclaim.err"; then
+		fail "package README overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/package-readme-overclaim.err" "forbidden"
 }
 
 test_missing_status_row_fails() {
@@ -794,9 +832,11 @@ test_semantic_provenance_mismatch_fails
 test_semantic_fixture_identity_mismatch_fails
 test_missing_semantic_readme_reference_fails
 test_missing_package_semantic_boundary_fails
+test_truncated_package_semantic_boundary_fails
 test_missing_update_route_fails
 test_missing_privacy_exclusions_fails
 test_readme_overclaim_fails
+test_package_readme_overclaim_fails
 test_missing_status_row_fails
 test_wrong_status_evidence_fails
 test_duplicate_status_row_fails
