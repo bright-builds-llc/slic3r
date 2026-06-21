@@ -131,6 +131,32 @@ mutate_semantic_value() {
 	mv "${tmp_file}" "${path}"
 }
 
+mutate_semantic_boundary() {
+	local path="${1}"
+	local semantic_field="${2}"
+	local replacement="${3}"
+	local tmp_file="${path}.tmp"
+
+	awk -v semantic_field="${semantic_field}" -v replacement="${replacement}" '
+		BEGIN {
+			FS = OFS = "\t"
+		}
+		$3 == semantic_field {
+			$6 = replacement
+			changed++
+		}
+		{
+			print
+		}
+		END {
+			if (changed != 1) {
+				exit 1
+			}
+		}
+	' "${path}" >"${tmp_file}"
+	mv "${tmp_file}" "${path}"
+}
+
 run_comparator() {
 	local expected_artifact="${1}"
 	local expected_structural_artifact="${2}"
@@ -172,6 +198,28 @@ assert_semantic_value_mutation_fails() {
 
 	assert_contains "${stderr_file}" "expected-gcode-semantic-summary.tsv"
 	assert_contains "${stderr_file}" "${semantic_field}"
+}
+
+assert_semantic_boundary_mutation_fails() {
+	local semantic_field="${1}"
+	local replacement="${2}"
+	local required_diagnostic="${3}"
+	local case_dir="${tmp_dir}/${semantic_field}-boundary"
+	local mutated_semantic_expected="${case_dir}/expected-gcode-semantic-summary.tsv"
+	local stdout_file="${case_dir}/mutated-semantic.out"
+	local stderr_file="${case_dir}/mutated-semantic.err"
+
+	mkdir -p "${case_dir}"
+	cp "${expected_gcode_semantic_summary}" "${mutated_semantic_expected}"
+	mutate_semantic_boundary "${mutated_semantic_expected}" "${semantic_field}" "${replacement}"
+
+	if run_comparator "${expected_gcode_summary}" "${expected_gcode_structural_summary}" "${mutated_semantic_expected}" "${stdout_file}" "${stderr_file}"; then
+		fail "mutated expected-gcode-semantic-summary.tsv boundary passed for ${semantic_field}"
+	fi
+
+	assert_contains "${stderr_file}" "expected-gcode-semantic-summary.tsv"
+	assert_contains "${stderr_file}" "${semantic_field}"
+	assert_contains "${stderr_file}" "${required_diagnostic}"
 }
 
 assert_executable "comparator" "${comparator}"
@@ -219,5 +267,15 @@ assert_semantic_value_mutation_fails \
 assert_semantic_value_mutation_fails \
 	"feedrate_observations" \
 	"F99999.123;F1;F203.2;F203.200"
+assert_semantic_value_mutation_fails \
+	"fixture_id" \
+	"unreviewed-speed.gcode"
+assert_semantic_boundary_mutation_fails \
+	"movement_class_counts" \
+	"full generated-output parity verified" \
+	"full generated-output parity"
+
+assert_contains "${expected_gcode_semantic_summary}" $'movement_class_counts\tmovement classes\ttravel:0;extrusion:0;coordinate_motion:0;feedrate_only:4'
+assert_contains "${expected_gcode_semantic_summary}" $'fixture_id\tfixture identity\tgcodewriter-set-speed.gcode'
 
 printf 'ok: prusaslicer_gcode_output_parity_failure_test\n'
