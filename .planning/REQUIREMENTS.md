@@ -46,7 +46,7 @@ roadmap phase and must be verified before milestone archive.
 
 ### Rust Semantic Boundary
 
-- [ ] **GSRUST-01**: Developer can use a pure typed Rust semantic G-code
+- [x] **GSRUST-01**: Developer can use a pure typed Rust semantic G-code
   summary boundary that parses caller-supplied checked-in semantic artifacts
   into domain values without Git, network, filesystem discovery, process,
   generator, printer-runtime, release, or sync side effects.
@@ -54,7 +54,7 @@ roadmap phase and must be verified before milestone archive.
   metadata that traces the semantic G-code boundary to the accepted Prusa
   source identity, fixture corpus, expected semantic summaries, planned
   command, planned status wording, and deferred generated-output surfaces.
-- [ ] **GSRUST-03**: Developer can run Cargo and Bazel coverage that proves the
+- [x] **GSRUST-03**: Developer can run Cargo and Bazel coverage that proves the
   valid semantic fixture rows parse, invalid rows fail closed, optional or
   nullable Rust internals are named clearly, and no public helper names claim
   byte parity, printability, runtime, support, seam, arc, GUI, or non-Prusa
@@ -134,9 +134,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GSFIX-01 | Phase 54 | Complete |
 | GSFIX-02 | Phase 54 | Complete |
 | GSFIX-03 | Phase 54 | Complete |
-| GSRUST-01 | Phase 55 | Pending |
+| GSRUST-01 | Phase 55 | Complete |
 | GSRUST-02 | Phase 55 | Pending |
-| GSRUST-03 | Phase 55 | Pending |
+| GSRUST-03 | Phase 55 | Complete |
 | GSEV-01 | Phase 56 | Pending |
 | GSEV-02 | Phase 56 | Pending |
 | GSEV-03 | Phase 56 | Pending |

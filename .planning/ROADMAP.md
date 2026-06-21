@@ -191,7 +191,7 @@ status publication.
 
 Plans:
 
-- [ ] 55-01-PLAN.md - Add the pure typed semantic summary parser and
+- [x] 55-01-PLAN.md - Add the pure typed semantic summary parser and
   Cargo/Bazel rejection coverage.
 - [ ] 55-02-PLAN.md - Expose semantic readiness metadata through the existing
   registry boundary without status publication.
@@ -260,7 +260,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 |-------|----------------|--------|-----------|
 | 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
 | 54. Semantic G-code Fixture Corpus | 2/2 | Complete    | 2026-06-21 |
-| 55. Rust Semantic G-code Summary Boundary | 0/2 | Planned | — |
+| 55. Rust Semantic G-code Summary Boundary | 1/2 | In Progress|  |
 | 56. Executable Semantic G-code Evidence | 0/5 | Planned | — |
 
 ## Future Revisit Candidates
