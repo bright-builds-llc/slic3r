@@ -1,10 +1,10 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.14
-milestone_name: PrusaSlicer G-code Semantic Evidence Foundation
-status: ready_for_phase_discussion
-stopped_at: v1.14 roadmap created; ready for Phase 53 discussion
-last_updated: "2026-06-20T14:40:07Z"
+milestone_name: milestone
+status: planning
+stopped_at: Phase 53 context gathered
+last_updated: "2026-06-21T00:19:15.288Z"
 last_activity: 2026-06-20 -- v1.14 roadmap created
 progress:
   total_phases: 4
@@ -43,12 +43,16 @@ Progress: [░░░░░░░░░░] 0%
 
 - v1.14 started on 2026-06-20 to deepen the verified narrow Prusa G-code path
   from structural facts into semantic toolpath evidence.
+
 - v1.14 roadmap maps 12 requirements across 4 planned phases: scope contract,
   fixture corpus, Rust semantic boundary, and executable semantic evidence.
+
 - v1.13 archived on 2026-06-19 with 4 phases, 12 plans, 24 tasks, 12 mapped
   requirements, and a passed milestone audit.
+
 - v1.12 archived on 2026-06-15 with 4 phases, 12 plans, 29 tasks, and a
   passed milestone audit.
+
 - Phase 52 plan 01 completed on 2026-06-18: 6min, 2 tasks, 4 files.
 - Phase 52 plan 02 completed on 2026-06-18: 8min, 2 tasks, 3 files.
 - Phase 52 plan 03 completed on 2026-06-18: 3 min, 2 tasks, 3 files.
@@ -67,8 +71,10 @@ Recent decisions affecting v1.14:
 - Continue phase numbering from Phase 53 because v1.13 ended at Phase 52.
 - Deepen the existing Prusa G-code evidence path semantically before planning
   support, seam, arc, broad generated-output, or non-Prusa fork milestones.
+
 - Skip external ecosystem research for v1.14 because the milestone is an
   internal evidence-contract expansion over existing repo artifacts.
+
 - Map v1.14 to the established evidence ladder: scope contract, fixture
   corpus, Rust boundary, executable evidence/status/docs.
 
@@ -149,6 +155,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-18T03:10:13.683Z
-Stopped at: Completed 52-06-PLAN.md
-Resume file: None
+Last session: 2026-06-21T00:19:15.285Z
+Stopped at: Phase 53 context gathered
+Resume file: .planning/phases/53-semantic-g-code-scope-contract/53-CONTEXT.md
