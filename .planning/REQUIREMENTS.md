@@ -70,7 +70,7 @@ roadmap phase and must be verified before milestone archive.
   drift classes such as movement class changes, coordinate-bound changes,
   extrusion-total changes, feedrate observation changes, fixture identity
   drift, and unsupported deferred-behavior claims.
-- [ ] **GSEV-03**: Maintainer can inspect parity status, package docs, and port
+- [x] **GSEV-03**: Maintainer can inspect parity status, package docs, and port
   docs that describe the exact narrow `fork.prusaslicer.gcode-output` semantic
   evidence slice while keeping broad `generated-outputs` in progress and all
   deferred generated-output, runtime, GUI, release, sync, and non-Prusa fork
@@ -139,7 +139,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GSRUST-03 | Phase 55 | Complete |
 | GSEV-01 | Phase 56 | Complete |
 | GSEV-02 | Phase 56 | Complete |
-| GSEV-03 | Phase 56 | Pending |
+| GSEV-03 | Phase 56 | Complete |
 
 **Coverage:**
 

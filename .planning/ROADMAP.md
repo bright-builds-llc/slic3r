@@ -225,7 +225,7 @@ Plans:
   validation through Rust.
 - [x] 56-02-PLAN.md - Add focused semantic mutation guards for public evidence
   drift.
-- [ ] 56-03-PLAN.md - Publish semantic status wording and reconcile fixture
+- [x] 56-03-PLAN.md - Publish semantic status wording and reconcile fixture
   verifier enforcement.
 - [ ] 56-04-PLAN.md - Update scope and package docs for the semantic evidence
   chain.
@@ -261,7 +261,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 | 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
 | 54. Semantic G-code Fixture Corpus | 2/2 | Complete    | 2026-06-21 |
 | 55. Rust Semantic G-code Summary Boundary | 2/2 | Complete    | 2026-06-21 |
-| 56. Executable Semantic G-code Evidence | 2/5 | In Progress | — |
+| 56. Executable Semantic G-code Evidence | 3/5 | In Progress | — |
 
 ## Future Revisit Candidates
 

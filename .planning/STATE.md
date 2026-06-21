@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.14
 milestone_name: milestone
 status: executing
-stopped_at: Completed 56-02-PLAN.md
-last_updated: "2026-06-21T18:02:49.916Z"
-last_activity: 2026-06-21 -- Phase 56 plan 02 completed
+stopped_at: Completed 56-03-PLAN.md
+last_updated: "2026-06-21T18:19:50.223Z"
+last_activity: 2026-06-21 -- Phase 56 plan 03 completed
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 11
-  completed_plans: 8
-  percent: 73
+  completed_plans: 9
+  percent: 82
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 56
-Plan: 56-03 pending
+Plan: 56-04 pending
 Milestone: v1.14 PrusaSlicer G-code Semantic Evidence Foundation
 Status: In progress
-Last activity: 2026-06-21 -- Phase 56 plan 02 completed
+Last activity: 2026-06-21 -- Phase 56 plan 03 completed
 
-Progress: [███████░░░] 73%
+Progress: [████████░░] 82%
 
 ## Performance Metrics
 
@@ -65,6 +65,7 @@ Progress: [███████░░░] 73%
 - Phase 55 plan 02 completed on 2026-06-21: 7 min, 2 tasks, 4 files.
 - Phase 56 plan 01 completed on 2026-06-21: 12 min, 2 tasks, 7 files.
 - Phase 56 plan 02 completed on 2026-06-21: 4 min, 2 tasks, 1 file.
+- Phase 56 plan 03 completed on 2026-06-21: 15 min, 2 tasks, 5 files.
 
 ## Accumulated Context
 
@@ -168,6 +169,10 @@ Recent decisions affecting v1.12:
 - [Phase 56]: Kept semantic drift coverage inside the existing public parity failure test instead of adding a companion target.
 - [Phase 56]: Mutated only temp copies of expected-gcode-semantic-summary.tsv and asserted field-specific diagnostics.
 - [Phase 56]: Used the existing Rust-backed comparator as the failure authority instead of parsing semantic validity in Bash.
+- [Phase 56]: Published the existing fork.prusaslicer.gcode-output row as narrow semantic evidence without changing its status token or public parity target.
+- [Phase 56]: Kept generated-outputs exactly one in-progress row.
+- [Phase 56]: Used one exact semantic status row across status.tsv, fixture verifier enforcement, scope verifier enforcement, and mutation tests.
+- [Phase 56]: Kept verifier self-scan literals split where needed while preserving their runtime text.
 
 ### Pending Todos
 
@@ -179,6 +184,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-21T18:02:49.914Z
-Stopped at: Completed 56-02-PLAN.md
+Last session: 2026-06-21T18:19:50.221Z
+Stopped at: Completed 56-03-PLAN.md
 Resume file: None
