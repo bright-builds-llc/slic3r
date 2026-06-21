@@ -752,10 +752,10 @@ pub struct PrusaGcodeOutputSemanticReadiness {
     pub fixture_path: &'static str,
     pub expected_semantic_summary_path: &'static str,
     pub parser_boundary: &'static str,
-    pub planned_public_command: &'static str,
-    pub planned_status_token: &'static str,
+    pub public_command: &'static str,
+    pub status_token: &'static str,
     pub generated_outputs_status: &'static str,
-    pub pre_publication_boundary: &'static str,
+    pub publication_boundary: &'static str,
     pub deferred_surfaces: &'static [&'static str],
 }
 
@@ -850,10 +850,10 @@ pub const fn prusa_gcode_output_semantic_readiness() -> PrusaGcodeOutputSemantic
         fixture_path: PRUSA_GCODE_OUTPUT_FIXTURE_PATH,
         expected_semantic_summary_path: PRUSA_GCODE_OUTPUT_EXPECTED_SEMANTIC_SUMMARY_PATH,
         parser_boundary: "slic3r_flavors::prusa_gcode_output::parse_prusa_gcode_output_semantic_summary",
-        planned_public_command: "//packages/parity:prusaslicer_gcode_output_parity",
-        planned_status_token: PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN,
+        public_command: "//packages/parity:prusaslicer_gcode_output_parity",
+        status_token: PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN,
         generated_outputs_status: "in progress",
-        pre_publication_boundary: "Phase 55 exposes semantic parser/readiness metadata only; Phase 56 owns public semantic parity evidence and status/docs publication.",
+        publication_boundary: "Phase 56 publishes the narrow semantic Prusa G-code evidence slice through //packages/parity:prusaslicer_gcode_output_parity and fork.prusaslicer.gcode-output; broad generated-outputs remains in progress.",
         deferred_surfaces: &PRUSA_GCODE_OUTPUT_DEFERRED_SEMANTIC_SURFACES,
     }
 }

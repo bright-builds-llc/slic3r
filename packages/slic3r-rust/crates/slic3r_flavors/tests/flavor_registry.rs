@@ -436,8 +436,7 @@ fn prusa_gcode_output_metadata_exposes_fixture_scope_expected_summary_and_reserv
 }
 
 #[test]
-fn prusa_gcode_output_semantic_readiness_exposes_pre_publication_metadata_without_status_publication()
- {
+fn prusa_gcode_output_semantic_readiness_exposes_published_semantic_boundary() {
     // Arrange
     let expected_source_paths: &[&str] = &["src/libslic3r/GCode.cpp", "src/libslic3r/GCode.hpp"];
     let expected_deferred_surfaces = [
@@ -484,17 +483,14 @@ fn prusa_gcode_output_semantic_readiness_exposes_pre_publication_metadata_withou
         "slic3r_flavors::prusa_gcode_output::parse_prusa_gcode_output_semantic_summary"
     );
     assert_eq!(
-        readiness.planned_public_command,
+        readiness.public_command,
         "//packages/parity:prusaslicer_gcode_output_parity"
     );
-    assert_eq!(
-        readiness.planned_status_token,
-        "fork.prusaslicer.gcode-output"
-    );
+    assert_eq!(readiness.status_token, "fork.prusaslicer.gcode-output");
     assert_eq!(readiness.generated_outputs_status, "in progress");
     assert_eq!(
-        readiness.pre_publication_boundary,
-        "Phase 55 exposes semantic parser/readiness metadata only; Phase 56 owns public semantic parity evidence and status/docs publication."
+        readiness.publication_boundary,
+        "Phase 56 publishes the narrow semantic Prusa G-code evidence slice through //packages/parity:prusaslicer_gcode_output_parity and fork.prusaslicer.gcode-output; broad generated-outputs remains in progress."
     );
     assert_eq!(readiness.deferred_surfaces, expected_deferred_surfaces);
 }
