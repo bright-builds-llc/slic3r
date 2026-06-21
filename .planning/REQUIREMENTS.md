@@ -14,7 +14,7 @@ roadmap phase and must be verified before milestone archive.
 
 ### Semantic Scope Contract
 
-- [ ] **GSSCOPE-01**: Maintainer can inspect a reviewed Prusa G-code semantic
+- [x] **GSSCOPE-01**: Maintainer can inspect a reviewed Prusa G-code semantic
   evidence scope contract that names the accepted source identity, inventory
   row, fixture namespace, expected semantic summary artifacts, Rust boundary,
   public evidence command, planned status wording, docs touched, security
@@ -23,7 +23,7 @@ roadmap phase and must be verified before milestone archive.
   that rejects unsupported semantic fields, duplicate or missing field rows,
   traceability drift, unsupported generated-output claims, unsupported runtime
   or printability claims, and missing deferred-scope language.
-- [ ] **GSSCOPE-03**: Maintainer can confirm the broad `generated-outputs`
+- [x] **GSSCOPE-03**: Maintainer can confirm the broad `generated-outputs`
   status row remains `in progress` and the narrow
   `fork.prusaslicer.gcode-output` status remains limited to the exact semantic
   evidence slice planned by this milestone.
@@ -128,9 +128,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GSSCOPE-01 | Phase 53 | Pending |
+| GSSCOPE-01 | Phase 53 | Complete |
 | GSSCOPE-02 | Phase 53 | Pending |
-| GSSCOPE-03 | Phase 53 | Pending |
+| GSSCOPE-03 | Phase 53 | Complete |
 | GSFIX-01 | Phase 54 | Pending |
 | GSFIX-02 | Phase 54 | Pending |
 | GSFIX-03 | Phase 54 | Pending |

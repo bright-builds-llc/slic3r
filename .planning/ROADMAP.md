@@ -134,7 +134,7 @@ claims forbidden.
 
 Plans:
 
-- [ ] 53-01-PLAN.md - Add the reviewed semantic field contract and
+- [x] 53-01-PLAN.md - Add the reviewed semantic field contract and
   traceability surface.
 - [ ] 53-02-PLAN.md - Enforce the semantic scope contract through fail-closed
   verifier and mutation coverage.
@@ -258,7 +258,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 53. Semantic G-code Scope Contract | 0/2 | Planned | — |
+| 53. Semantic G-code Scope Contract | 1/2 | In Progress | — |
 | 54. Semantic G-code Fixture Corpus | 0/2 | Planned | — |
 | 55. Rust Semantic G-code Summary Boundary | 0/2 | Planned | — |
 | 56. Executable Semantic G-code Evidence | 0/5 | Planned | — |
