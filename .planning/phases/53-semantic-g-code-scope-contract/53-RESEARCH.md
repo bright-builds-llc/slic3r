@@ -365,12 +365,12 @@ Planner note: add semantic rows to `write_valid_fixture` first so each semantic 
 |---|-------|---------|---------------|
 | none | No assumptions were needed; recommendations are based on locked phase context, local code, executed Bazel checks, local tool availability, or cited official docs. [VERIFIED: local research protocol] | none | none |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Exact semantic reviewer signoff value**
    - What we know: Phase 53 requires reviewer signoff and existing structural signoff uses `Peter Ryszkiewicz, 2026-06-16 UTC`. [VERIFIED: packages/prusa-gcode-output-scope/gcode-output-scope.md:77]
-   - What's unclear: The exact v1.14 semantic signoff date should match the actual review/implementation date. [VERIFIED: .planning/phases/53-semantic-g-code-scope-contract/53-CONTEXT.md]
-   - Recommendation: Planner should require a `Semantic reviewer signoff` row and let implementation use the actual UTC review date. [VERIFIED: .planning/REQUIREMENTS.md]
+   - Resolution: Use `Peter Ryszkiewicz, 2026-06-21 UTC` for the Phase 53 `Semantic reviewer signoff` row. [VERIFIED: .planning/phases/53-semantic-g-code-scope-contract/53-01-PLAN.md]
+   - Recommendation: Planner should require a `Semantic reviewer signoff` row with `Peter Ryszkiewicz, 2026-06-21 UTC`. [VERIFIED: .planning/REQUIREMENTS.md]
 
 ## Environment Availability
 
