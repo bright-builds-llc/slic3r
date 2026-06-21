@@ -105,6 +105,32 @@ mutate_command_count_g1_value() {
 	mv "${tmp_file}" "${path}"
 }
 
+mutate_semantic_value() {
+	local path="${1}"
+	local semantic_field="${2}"
+	local replacement="${3}"
+	local tmp_file="${path}.tmp"
+
+	awk -v semantic_field="${semantic_field}" -v replacement="${replacement}" '
+		BEGIN {
+			FS = OFS = "\t"
+		}
+		$3 == semantic_field {
+			$5 = replacement
+			changed++
+		}
+		{
+			print
+		}
+		END {
+			if (changed != 1) {
+				exit 1
+			}
+		}
+	' "${path}" >"${tmp_file}"
+	mv "${tmp_file}" "${path}"
+}
+
 run_comparator() {
 	local expected_artifact="${1}"
 	local expected_structural_artifact="${2}"
@@ -126,6 +152,26 @@ run_comparator() {
 	set -e
 
 	return "${status}"
+}
+
+assert_semantic_value_mutation_fails() {
+	local semantic_field="${1}"
+	local replacement="${2}"
+	local case_dir="${tmp_dir}/${semantic_field}"
+	local mutated_semantic_expected="${case_dir}/expected-gcode-semantic-summary.tsv"
+	local stdout_file="${case_dir}/mutated-semantic.out"
+	local stderr_file="${case_dir}/mutated-semantic.err"
+
+	mkdir -p "${case_dir}"
+	cp "${expected_gcode_semantic_summary}" "${mutated_semantic_expected}"
+	mutate_semantic_value "${mutated_semantic_expected}" "${semantic_field}" "${replacement}"
+
+	if run_comparator "${expected_gcode_summary}" "${expected_gcode_structural_summary}" "${mutated_semantic_expected}" "${stdout_file}" "${stderr_file}"; then
+		fail "mutated expected-gcode-semantic-summary.tsv passed for ${semantic_field}"
+	fi
+
+	assert_contains "${stderr_file}" "expected-gcode-semantic-summary.tsv"
+	assert_contains "${stderr_file}" "${semantic_field}"
 }
 
 assert_executable "comparator" "${comparator}"
@@ -160,5 +206,18 @@ fi
 
 assert_contains "${tmp_dir}/mutated-structural.err" "expected-gcode-structural-summary.tsv"
 assert_contains "${tmp_dir}/mutated-structural.err" "command_count_g1"
+
+assert_semantic_value_mutation_fails \
+	"movement_class_counts" \
+	"travel:1;extrusion:0;coordinate_motion:0;feedrate_only:3"
+assert_semantic_value_mutation_fails \
+	"coordinate_bounds" \
+	"x:0..10;y:none;z:none"
+assert_semantic_value_mutation_fails \
+	"extrusion_total" \
+	"e_axis_observed:true;extrusion_total:1.0"
+assert_semantic_value_mutation_fails \
+	"feedrate_observations" \
+	"F99999.123;F1;F203.2;F203.200"
 
 printf 'ok: prusaslicer_gcode_output_parity_failure_test\n'
