@@ -75,6 +75,26 @@ replace_first_line_containing() {
 	mv "${tmp_file}" "${file}"
 }
 
+move_semantic_row_before() {
+	local file="$1"
+	local moved_field="$2"
+	local before_field="$3"
+	local tmp_file
+	tmp_file="${file}.tmp"
+	awk -F '\t' -v moved_field="${moved_field}" -v before_field="${before_field}" '
+		NR == 1 { print; next }
+		$3 == moved_field { moved_row = $0; next }
+		$3 == before_field && moved_row != "" { print moved_row; moved_row = ""; print; next }
+		{ print }
+		END {
+			if (moved_row != "") {
+				print moved_row
+			}
+		}
+	' "${file}" >"${tmp_file}"
+	mv "${tmp_file}" "${file}"
+}
+
 write_valid_fixture_copy() {
 	local dir="$1"
 	local fixture_dir="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output"
@@ -87,6 +107,7 @@ write_valid_fixture_copy() {
 	cp "${source_fixture_dir}/README.md" "${fixture_dir}/README.md"
 	cp "${source_fixture_dir}/expected-gcode-summary.tsv" "${fixture_dir}/expected-gcode-summary.tsv"
 	cp "${source_fixture_dir}/expected-gcode-structural-summary.tsv" "${fixture_dir}/expected-gcode-structural-summary.tsv"
+	cp "${source_fixture_dir}/expected-gcode-semantic-summary.tsv" "${fixture_dir}/expected-gcode-semantic-summary.tsv"
 	cp "${source_fixture_dir}/fixture-provenance.tsv" "${fixture_dir}/fixture-provenance.tsv"
 	cp "${source_fixture_dir}/gcodewriter-set-speed.gcode" "${fixture_dir}/gcodewriter-set-speed.gcode"
 	cp "${source_status_file}" "${dir}/packages/parity/status.tsv"
@@ -396,6 +417,195 @@ test_structural_provenance_mismatch_fails() {
 		"expected-gcode-structural-summary.tsv"
 }
 
+test_missing_semantic_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-semantic-row"
+	local semantic_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	remove_line_containing "${semantic_file}" $'\tcoordinate_bounds\t'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-semantic-row.out" "${tmp_dir}/missing-semantic-row.err"; then
+		fail "missing semantic row fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/missing-semantic-row.err" \
+		"missing semantic field" \
+		"coordinate_bounds" \
+		"expected-gcode-semantic-summary.tsv"
+}
+
+test_duplicate_semantic_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-semantic-row"
+	local semantic_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+	local duplicate_row
+	write_valid_fixture_copy "${dir}"
+	duplicate_row="$(awk -F '\t' '$3 == "feedrate_observations" { print; exit }' "${semantic_file}")"
+	printf '%s\n' "${duplicate_row}" >>"${semantic_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/duplicate-semantic-row.out" "${tmp_dir}/duplicate-semantic-row.err"; then
+		fail "duplicate semantic row fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/duplicate-semantic-row.err" \
+		"duplicate semantic field" \
+		"feedrate_observations" \
+		"expected-gcode-semantic-summary.tsv"
+}
+
+test_out_of_order_semantic_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/out-of-order-semantic-row"
+	local semantic_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	move_semantic_row_before "${semantic_file}" "feedrate_observations" "extrusion_total"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/out-of-order-semantic-row.out" "${tmp_dir}/out-of-order-semantic-row.err"; then
+		fail "out-of-order semantic row fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/out-of-order-semantic-row.err" \
+		"semantic rows out of order" \
+		"feedrate_observations" \
+		"expected-gcode-semantic-summary.tsv"
+}
+
+test_unsupported_semantic_field_fails() {
+	# Arrange
+	local dir="${tmp_dir}/unsupported-semantic-field"
+	local semantic_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	printf '%s\n' $'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\ttoolpath_geometry\tunsupported generated-output semantics\tverified\tUnsupported semantic field that must fail closed.' >>"${semantic_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/unsupported-semantic-field.out" "${tmp_dir}/unsupported-semantic-field.err"; then
+		fail "unsupported semantic field fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/unsupported-semantic-field.err" \
+		"unsupported semantic field" \
+		"toolpath_geometry" \
+		"expected-gcode-semantic-summary.tsv"
+}
+
+test_semantic_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/semantic-overclaim"
+	local semantic_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${semantic_file}" \
+		$'\tcommand_class_counts\tcommand classes\tG1:4;feedrate_only:4\t' \
+		$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tcommand_class_counts\tcommand classes\tG1:4;feedrate_only:4\tverified Prusa G-code output parity'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/semantic-overclaim.out" "${tmp_dir}/semantic-overclaim.err"; then
+		fail "semantic overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/semantic-overclaim.err" \
+		"forbidden" \
+		"verified Prusa G-code output parity" \
+		"expected-gcode-semantic-summary.tsv"
+}
+
+test_semantic_provenance_mismatch_fails() {
+	# Arrange
+	local dir="${tmp_dir}/semantic-provenance-mismatch"
+	local semantic_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${semantic_file}" \
+		$'\tfeedrate_observations\tfeedrate observations\t' \
+		$'prusaslicer:version_2.9.4@0000000000000000000000000000000000000000\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfeedrate_observations\tfeedrate observations\tF99999.123;F1;F203.2;F203.201\tFeedrate metadata only from the selected fixture summary; no timing, firmware, or printer-runtime behavior claim.'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/semantic-provenance-mismatch.out" "${tmp_dir}/semantic-provenance-mismatch.err"; then
+		fail "semantic provenance mismatch fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/semantic-provenance-mismatch.err" \
+		"provenance mismatch" \
+		"feedrate_observations" \
+		"expected-gcode-semantic-summary.tsv"
+}
+
+test_semantic_fixture_identity_mismatch_fails() {
+	# Arrange
+	local dir="${tmp_dir}/semantic-fixture-identity-mismatch"
+	local semantic_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${semantic_file}" \
+		$'\tfixture_id\tfixture identity\tgcodewriter-set-speed.gcode\t' \
+		$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_id\tfixture identity\tother-fixture.gcode\tFixture identity only: `other-fixture.gcode`.'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/semantic-fixture-identity-mismatch.out" "${tmp_dir}/semantic-fixture-identity-mismatch.err"; then
+		fail "semantic fixture identity mismatch fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/semantic-fixture-identity-mismatch.err" \
+		"fixture_id" \
+		"other-fixture.gcode" \
+		"expected-gcode-semantic-summary.tsv"
+}
+
+test_missing_semantic_readme_reference_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-semantic-readme-reference"
+	local readme_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/README.md"
+	write_valid_fixture_copy "${dir}"
+	remove_line_containing "${readme_file}" "Semantic expected artifact"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-semantic-readme-reference.out" "${tmp_dir}/missing-semantic-readme-reference.err"; then
+		fail "missing semantic README reference fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/missing-semantic-readme-reference.err" \
+		"Semantic expected artifact" \
+		"fixture README"
+}
+
+test_missing_package_semantic_boundary_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-package-semantic-boundary"
+	local package_readme="${dir}/packages/parity-fixtures/README.md"
+	write_valid_fixture_copy "${dir}"
+	remove_line_containing "${package_readme}" "Fixture verification checks checked-in artifacts only"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-package-semantic-boundary.out" "${tmp_dir}/missing-package-semantic-boundary.err"; then
+		fail "missing package semantic boundary fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/missing-package-semantic-boundary.err" \
+		"Fixture verification checks checked-in artifacts only" \
+		"packages/parity-fixtures/README.md"
+}
+
 test_missing_update_route_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-update-route"
@@ -567,6 +777,15 @@ test_duplicate_structural_row_fails
 test_unsupported_structural_field_fails
 test_structural_overclaim_fails
 test_structural_provenance_mismatch_fails
+test_missing_semantic_row_fails
+test_duplicate_semantic_row_fails
+test_out_of_order_semantic_row_fails
+test_unsupported_semantic_field_fails
+test_semantic_overclaim_fails
+test_semantic_provenance_mismatch_fails
+test_semantic_fixture_identity_mismatch_fails
+test_missing_semantic_readme_reference_fails
+test_missing_package_semantic_boundary_fails
 test_missing_update_route_fails
 test_missing_privacy_exclusions_fails
 test_readme_overclaim_fails
