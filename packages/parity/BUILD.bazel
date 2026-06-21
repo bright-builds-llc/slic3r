@@ -145,6 +145,7 @@ sh_binary(
         "//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary",
         "//packages/parity-fixtures:prusa_gcode_output_expected_gcode_summary",
         "//packages/parity-fixtures:prusa_gcode_output_expected_gcode_structural_summary",
+        "//packages/parity-fixtures:prusa_gcode_output_expected_gcode_semantic_summary",
         "//packages/parity-fixtures:prusa_gcode_output_provenance",
     ],
     args = [
@@ -153,6 +154,8 @@ sh_binary(
         "$(location //packages/parity-fixtures:prusa_gcode_output_expected_gcode_summary)",
         "$(location //packages/parity-fixtures:prusa_gcode_output_expected_gcode_structural_summary)",
         "$(location //packages/parity-fixtures:prusa_gcode_output_expected_gcode_structural_summary)",
+        "$(location //packages/parity-fixtures:prusa_gcode_output_expected_gcode_semantic_summary)",
+        "$(location //packages/parity-fixtures:prusa_gcode_output_expected_gcode_semantic_summary)",
         "$(location //packages/parity-fixtures:prusa_gcode_output_provenance)",
     ],
 )
@@ -188,6 +191,7 @@ sh_test(
         "//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary",
         "//packages/parity-fixtures:prusa_gcode_output_expected_gcode_summary",
         "//packages/parity-fixtures:prusa_gcode_output_expected_gcode_structural_summary",
+        "//packages/parity-fixtures:prusa_gcode_output_expected_gcode_semantic_summary",
         "//packages/parity-fixtures:prusa_gcode_output_provenance",
     ],
 )

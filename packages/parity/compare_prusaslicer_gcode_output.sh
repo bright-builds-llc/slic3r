@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ "$#" -ne 6 ]]; then
-	printf 'error: expected summary_binary rust-summary-input.tsv expected-gcode-summary.tsv rust-structural-input.tsv expected-gcode-structural-summary.tsv fixture-provenance.tsv\n' >&2
+if [[ "$#" -ne 8 ]]; then
+	printf 'error: expected summary_binary rust-summary-input.tsv expected-gcode-summary.tsv rust-structural-input.tsv expected-gcode-structural-summary.tsv rust-semantic-input.tsv expected-gcode-semantic-summary.tsv fixture-provenance.tsv\n' >&2
 	exit 2
 fi
 
@@ -11,7 +11,9 @@ rust_summary_input="${2}"
 expected_artifact="${3}"
 rust_structural_input="${4}"
 expected_structural_artifact="${5}"
-fixture_provenance="${6}"
+rust_semantic_input="${6}"
+expected_semantic_artifact="${7}"
+fixture_provenance="${8}"
 
 assert_file() {
 	local label="${1}"
@@ -32,6 +34,8 @@ assert_file "rust-summary-input.tsv" "${rust_summary_input}"
 assert_file "expected-gcode-summary.tsv" "${expected_artifact}"
 assert_file "rust-structural-input.tsv" "${rust_structural_input}"
 assert_file "expected-gcode-structural-summary.tsv" "${expected_structural_artifact}"
+assert_file "rust-semantic-input.tsv" "${rust_semantic_input}"
+assert_file "expected-gcode-semantic-summary.tsv" "${expected_semantic_artifact}"
 assert_file "fixture-provenance.tsv" "${fixture_provenance}"
 
 first_raw_mismatch_label() {
@@ -149,6 +153,45 @@ first_structural_raw_mismatch_label() {
 	' "${expected_file}" "${actual_file}"
 }
 
+first_semantic_raw_mismatch_label() {
+	local expected_file="${1}"
+	local actual_file="${2}"
+
+	awk -F '\t' '
+		NR == FNR {
+			expected[FNR] = $0
+			expected_count = FNR
+			next
+		}
+		{
+			actual_count = FNR
+			if (!found && expected[FNR] != $0) {
+				if (expected[FNR] != "") {
+					split(expected[FNR], fields, "\t")
+					if (fields[3] != "") {
+						print fields[3]
+					} else {
+						print fields[1]
+					}
+				} else if ($3 != "") {
+					print $3
+				} else if ($1 != "") {
+					print $1
+				} else {
+					print "line"
+				}
+				found = 1
+				exit
+			}
+		}
+		END {
+			if (!found && expected_count != actual_count) {
+				print "line_count"
+			}
+		}
+	' "${expected_file}" "${actual_file}"
+}
+
 field_value() {
 	local key="${1}"
 	local path="${2}"
@@ -199,6 +242,8 @@ actual_summary="${temp_root}/actual-summary.tsv"
 expected_summary_lines="${temp_root}/expected-summary-lines.tsv"
 actual_structural_summary="${temp_root}/actual-structural-summary.tsv"
 expected_structural_summary_lines="${temp_root}/expected-structural-summary-lines.tsv"
+actual_semantic_summary="${temp_root}/actual-semantic-summary.tsv"
+expected_semantic_summary_lines="${temp_root}/expected-semantic-summary-lines.tsv"
 
 if ! "${summary_binary}" "${rust_summary_input}" >"${actual_summary}"; then
 	printf 'error: rust-summary-input.tsv failed Rust summary validation for %s\n' \
@@ -252,6 +297,32 @@ if ! diff_output="$(diff -u "${expected_structural_summary_lines}" "${actual_str
 	exit 1
 fi
 
+if ! "${summary_binary}" --semantic "${rust_semantic_input}" >"${actual_semantic_summary}"; then
+	printf 'error: rust-semantic-input.tsv failed Rust semantic validation for %s\n' \
+		"${rust_semantic_input}" >&2
+	exit 1
+fi
+
+if ! "${summary_binary}" --semantic "${expected_semantic_artifact}" >"${expected_semantic_summary_lines}"; then
+	mismatch_label="$(first_semantic_raw_mismatch_label "${rust_semantic_input}" "${expected_semantic_artifact}")"
+	printf 'error: expected-gcode-semantic-summary.tsv failed Rust semantic validation at %s in %s\n' \
+		"${mismatch_label}" "${expected_semantic_artifact}" >&2
+	if ! diff_output="$(diff -u "${rust_semantic_input}" "${expected_semantic_artifact}")"; then
+		printf 'diff -u %s %s\n' "${rust_semantic_input}" "${expected_semantic_artifact}" >&2
+		printf '%s\n' "${diff_output}" >&2
+	fi
+	exit 1
+fi
+
+if ! diff_output="$(diff -u "${expected_semantic_summary_lines}" "${actual_semantic_summary}")"; then
+	mismatch_label="$(first_summary_mismatch_label "${expected_semantic_summary_lines}" "${actual_semantic_summary}")"
+	printf 'error: expected-gcode-semantic-summary.tsv mismatch at %s in %s\n' \
+		"${mismatch_label}" "${expected_semantic_artifact}" >&2
+	printf 'diff -u %s %s\n' "${expected_semantic_summary_lines}" "${actual_semantic_summary}" >&2
+	printf '%s\n' "${diff_output}" >&2
+	exit 1
+fi
+
 assert_field "surface" "fork.prusaslicer.gcode-output" "${actual_summary}"
 assert_field "inventory_id" "prusaslicer.gcode-output" "${actual_summary}"
 assert_field "vendor_id" "prusaslicer" "${actual_summary}"
@@ -277,14 +348,34 @@ assert_field "extrusion_axis_present" "false" "${actual_structural_summary}"
 assert_field "temperature_marker_count" "0" "${actual_structural_summary}"
 assert_field "tool_change_marker_count" "0" "${actual_structural_summary}"
 
-printf 'ok: fork.prusaslicer.gcode-output structural parity passed\n'
+assert_field "semantic_summary_path" "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv" "${actual_semantic_summary}"
+assert_field "semantic_row_count" "9" "${actual_semantic_summary}"
+assert_field "source_ref" "prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961" "${actual_semantic_summary}"
+assert_field "fixture_id" "gcodewriter-set-speed.gcode" "${actual_semantic_summary}"
+assert_field "fixture_path" "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode" "${actual_semantic_summary}"
+assert_field "command_class_counts" "G1:4;feedrate_only:4" "${actual_semantic_summary}"
+assert_field "movement_class_counts" "travel:0;extrusion:0;coordinate_motion:0;feedrate_only:4" "${actual_semantic_summary}"
+assert_field "coordinate_bounds" "x:none;y:none;z:none" "${actual_semantic_summary}"
+assert_field "extrusion_total" "e_axis_observed:false;extrusion_total:not_observed" "${actual_semantic_summary}"
+assert_field "feedrate_observations" "F99999.123;F1;F203.2;F203.201" "${actual_semantic_summary}"
+assert_field "layer_marker_relationships" "layer_markers:0;marker_relationships:none" "${actual_semantic_summary}"
+
+printf 'ok: fork.prusaslicer.gcode-output semantic evidence passed\n'
 printf 'source_ref: prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\n'
 printf 'fixture: packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\n'
 printf 'expected: packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv\n'
 printf 'structural_expected: packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv\n'
+printf 'semantic_expected: packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv\n'
 printf 'summary_rows: 5\n'
 printf 'structural_rows: 16\n'
 printf 'command_counts: total=4 g1=4\n'
 printf 'ordered_markers: G1 F99999.123 | G1 F1 | G1 F203.2 | G1 F203.201\n'
 printf 'movement_extrusion: movement_axis_present=false extrusion_axis_present=false\n'
 printf 'temperature_tool_change_markers: temperature_marker_count=0 tool_change_marker_count=0\n'
+printf 'semantic_rows: 9\n'
+printf 'semantic_command_classes: G1:4;feedrate_only:4\n'
+printf 'semantic_movement_classes: travel:0;extrusion:0;coordinate_motion:0;feedrate_only:4\n'
+printf 'semantic_coordinate_bounds: x:none;y:none;z:none\n'
+printf 'semantic_extrusion_total: e_axis_observed:false;extrusion_total:not_observed\n'
+printf 'semantic_feedrates: F99999.123;F1;F203.2;F203.201\n'
+printf 'semantic_layer_markers: layer_markers:0;marker_relationships:none\n'

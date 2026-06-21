@@ -16,6 +16,7 @@ fi
 fixture_dir="${workspace_root}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output"
 expected_gcode_summary="${fixture_dir}/expected-gcode-summary.tsv"
 expected_gcode_structural_summary="${fixture_dir}/expected-gcode-structural-summary.tsv"
+expected_gcode_semantic_summary="${fixture_dir}/expected-gcode-semantic-summary.tsv"
 fixture_provenance="${fixture_dir}/fixture-provenance.tsv"
 
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/compare-prusaslicer-gcode-output-test.XXXXXX")"
@@ -107,8 +108,9 @@ mutate_command_count_g1_value() {
 run_comparator() {
 	local expected_artifact="${1}"
 	local expected_structural_artifact="${2}"
-	local stdout_file="${3}"
-	local stderr_file="${4}"
+	local expected_semantic_artifact="${3}"
+	local stdout_file="${4}"
+	local stderr_file="${5}"
 
 	set +e
 	"${comparator}" \
@@ -117,6 +119,8 @@ run_comparator() {
 		"${expected_artifact}" \
 		"${expected_gcode_structural_summary}" \
 		"${expected_structural_artifact}" \
+		"${expected_gcode_semantic_summary}" \
+		"${expected_semantic_artifact}" \
 		"${fixture_provenance}" >"${stdout_file}" 2>"${stderr_file}"
 	local status="$?"
 	set -e
@@ -128,13 +132,14 @@ assert_executable "comparator" "${comparator}"
 assert_executable "summary binary" "${summary_binary}"
 assert_file "expected-gcode-summary.tsv" "${expected_gcode_summary}"
 assert_file "expected-gcode-structural-summary.tsv" "${expected_gcode_structural_summary}"
+assert_file "expected-gcode-semantic-summary.tsv" "${expected_gcode_semantic_summary}"
 assert_file "fixture-provenance.tsv" "${fixture_provenance}"
 
 mutated_expected="${tmp_dir}/expected-gcode-summary.tsv"
 cp "${expected_gcode_summary}" "${mutated_expected}"
 mutate_line_4_marker_value "${mutated_expected}"
 
-if run_comparator "${mutated_expected}" "${expected_gcode_structural_summary}" "${tmp_dir}/mutated.out" "${tmp_dir}/mutated.err"; then
+if run_comparator "${mutated_expected}" "${expected_gcode_structural_summary}" "${expected_gcode_semantic_summary}" "${tmp_dir}/mutated.out" "${tmp_dir}/mutated.err"; then
 	fail "mutated expected-gcode-summary.tsv passed"
 fi
 
@@ -149,7 +154,7 @@ mutated_structural_expected="${tmp_dir}/expected-gcode-structural-summary.tsv"
 cp "${expected_gcode_structural_summary}" "${mutated_structural_expected}"
 mutate_command_count_g1_value "${mutated_structural_expected}"
 
-if run_comparator "${expected_gcode_summary}" "${mutated_structural_expected}" "${tmp_dir}/mutated-structural.out" "${tmp_dir}/mutated-structural.err"; then
+if run_comparator "${expected_gcode_summary}" "${mutated_structural_expected}" "${expected_gcode_semantic_summary}" "${tmp_dir}/mutated-structural.out" "${tmp_dir}/mutated-structural.err"; then
 	fail "mutated expected-gcode-structural-summary.tsv passed"
 fi
 
