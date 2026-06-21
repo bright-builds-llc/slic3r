@@ -9,7 +9,7 @@ use slic3r_flavors::{
     prusa_project_file_metadata,
 };
 
-const PRUSA_GCODE_OUTPUT_STRUCTURAL_READINESS_NOTES: &str = "Source-observed G-code output planning row; structural summary readiness is parser metadata only, and public structural evidence plus status publication remain Phase 52 work before generated-output behavior is claimed.";
+const PRUSA_GCODE_OUTPUT_SEMANTIC_READINESS_NOTES: &str = "Source-observed G-code output planning row; semantic summary parser/readiness metadata is available for Phase 55 developers, while public semantic parity evidence and status/docs publication remain Phase 56-owned before broader generated-output behavior is claimed. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, printability, printer-runtime, support, seam, arc, GUI, release, sync, or non-Prusa fork behavior is claimed.";
 
 #[test]
 fn registry_api_reexports_contract_typed_helpers() {
@@ -381,7 +381,7 @@ fn prusa_gcode_output_registry_row_traces_to_source_and_generated_output_depende
     assert!(gcode_output.caution_flags.is_empty());
     assert_eq!(
         gcode_output.future_parity_notes,
-        PRUSA_GCODE_OUTPUT_STRUCTURAL_READINESS_NOTES
+        PRUSA_GCODE_OUTPUT_SEMANTIC_READINESS_NOTES
     );
     assert!(
         capabilities_by_checklist_status(ChecklistStatus::FutureCandidate)
@@ -696,6 +696,7 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         "prusa_profile_schema_metadata",
         "prusa_project_file_metadata",
         "prusa_gcode_output_metadata",
+        "prusa_gcode_output_semantic_readiness",
         "prusa_gcode_output_structural_readiness",
         "parse_prusa_gcode_output_summary",
         "prusa_gcode_output_summary_lines",
@@ -754,6 +755,34 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
     // Assert
     assert!(maybe_risky_helper.is_none());
     assert!(maybe_risky_metadata_value.is_none());
+}
+
+#[test]
+fn prusa_gcode_output_registry_notes_negate_deferred_semantic_surfaces() {
+    // Arrange
+    let note = PRUSA_GCODE_OUTPUT_SEMANTIC_READINESS_NOTES;
+    let required_deferrals = [
+        "no byte-for-byte G-code parity",
+        "printability",
+        "printer-runtime",
+        "support",
+        "seam",
+        "arc",
+        "GUI",
+        "release",
+        "sync",
+        "non-Prusa fork behavior",
+    ];
+
+    // Act
+    let maybe_missing_deferral = required_deferrals
+        .iter()
+        .find(|deferral| !note.contains(*deferral));
+
+    // Assert
+    assert!(maybe_missing_deferral.is_none());
+    assert!(note.contains("broad generated-outputs surface stays in progress"));
+    assert!(note.contains("status/docs publication remain Phase 56-owned"));
 }
 
 fn maybe_capability(capability_id: &str) -> Option<&'static FlavorCapability> {

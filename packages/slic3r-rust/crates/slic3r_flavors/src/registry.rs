@@ -131,7 +131,7 @@ static PRUSA_CAPABILITIES: [FlavorCapability; 3] = [
         checklist_status: ChecklistStatus::FutureCandidate,
         provenance: &PRUSA_GCODE_OUTPUT_PROVENANCE,
         caution_flags: &[],
-        future_parity_notes: "Source-observed G-code output planning row; structural summary readiness is parser metadata only, and public structural evidence plus status publication remain Phase 52 work before generated-output behavior is claimed.",
+        future_parity_notes: "Source-observed G-code output planning row; semantic summary parser/readiness metadata is available for Phase 55 developers, while public semantic parity evidence and status/docs publication remain Phase 56-owned before broader generated-output behavior is claimed. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, printability, printer-runtime, support, seam, arc, GUI, release, sync, or non-Prusa fork behavior is claimed.",
     },
     FlavorCapability {
         flavor_id: FlavorId::PrusaSlicer,
