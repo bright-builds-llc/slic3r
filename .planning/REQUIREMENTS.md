@@ -39,7 +39,7 @@ roadmap phase and must be verified before milestone archive.
   summaries that cover only the Phase 53 approved fields, such as command
   classes, movement classes, coordinate bounds, extrusion totals, feedrate
   observations, layer or marker relationships, and fixture/source identities.
-- [ ] **GSFIX-03**: Maintainer can run fail-closed fixture verification that
+- [x] **GSFIX-03**: Maintainer can run fail-closed fixture verification that
   rejects missing rows, duplicate rows, out-of-order rows, unsupported
   semantic fields, unsupported claim text, wrong source refs, wrong fixture
   identities, and stale documentation references.
@@ -133,7 +133,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GSSCOPE-03 | Phase 53 | Complete |
 | GSFIX-01 | Phase 54 | Complete |
 | GSFIX-02 | Phase 54 | Complete |
-| GSFIX-03 | Phase 54 | Pending |
+| GSFIX-03 | Phase 54 | Complete |
 | GSRUST-01 | Phase 55 | Pending |
 | GSRUST-02 | Phase 55 | Pending |
 | GSRUST-03 | Phase 55 | Pending |
@@ -150,4 +150,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ---
 
 *Requirements defined: 2026-06-20*
-*Last updated: 2026-06-20 after roadmap creation*
+*Last updated: 2026-06-21 after Phase 54 fixture-verifier completion*

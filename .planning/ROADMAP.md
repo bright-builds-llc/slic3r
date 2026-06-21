@@ -92,7 +92,7 @@ and fixture identity.
   and verify the allowed semantic G-code evidence contract before the fixture
   corpus, Rust semantic parser, or executable semantic evidence expands.
 
-- [ ] **Phase 54: Semantic G-code Fixture Corpus** - Maintainers can inspect
+- [x] **Phase 54: Semantic G-code Fixture Corpus** - Maintainers can inspect (completed 2026-06-21)
   and verify source-pinned Prusa semantic summary fixtures with fail-closed
   drift guards.
 
@@ -164,7 +164,7 @@ Plans:
 
 - [x] 54-01-PLAN.md - Add the semantic fixture corpus and expected-summary
   artifacts with narrow fixture docs.
-- [ ] 54-02-PLAN.md - Extend fixture verification and mutation coverage for
+- [x] 54-02-PLAN.md - Extend fixture verification and mutation coverage for
   semantic drift.
 
 ### Phase 55: Rust Semantic G-code Summary Boundary
@@ -259,7 +259,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
-| 54. Semantic G-code Fixture Corpus | 1/2 | In Progress|  |
+| 54. Semantic G-code Fixture Corpus | 2/2 | Complete | 2026-06-21 |
 | 55. Rust Semantic G-code Summary Boundary | 0/2 | Planned | — |
 | 56. Executable Semantic G-code Evidence | 0/5 | Planned | — |
 
