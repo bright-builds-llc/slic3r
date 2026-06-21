@@ -50,6 +50,9 @@ readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//pa
 readonly STRUCTURAL_SCOPE_SECTION="## v1.13 Structural Evidence Scope"
 readonly STRUCTURAL_TRACEABILITY_SECTION="## v1.13 Structural Traceability"
 readonly STRUCTURAL_FIELD_ROW_COUNT="16"
+readonly SEMANTIC_SCOPE_SECTION="## v1.14 Semantic Evidence Scope"
+readonly SEMANTIC_TRACEABILITY_SECTION="## v1.14 Semantic Traceability"
+readonly SEMANTIC_FIELD_ROW_COUNT="9"
 
 require_file() {
 	local file="$1"
@@ -117,16 +120,20 @@ require_section_table_body_row_count() {
 	local section="$3"
 	local expected_count="$4"
 	local count
+
 	count="$(awk -v section="${section}" '
 		$0 == section { in_section = 1; next }
 		in_section && /^## / { exit }
-		in_section && /^[[:space:]]*\|[[:space:]]*Structural Field[[:space:]]*\|/ { next }
+		in_section && /^[[:space:]]*\|[[:space:]]*(Structural|Semantic) Field[[:space:]]*\|/ { next }
 		in_section && /^[[:space:]]*\|[[:space:]]*---[[:space:]]*\|/ { next }
 		in_section && /^[[:space:]]*\|/ { count++ }
 		END { print count + 0 }
 	' "${file}")"
 
 	if [[ "${count}" != "${expected_count}" ]]; then
+		if [[ "${section}" == "${SEMANTIC_SCOPE_SECTION}" ]]; then
+			error "${label}: ${section}: expected exactly 9 semantic field rows, found ${count}; required fields include command_class_counts"
+		fi
 		error "${label}: ${section}: expected exactly ${expected_count} structural field rows, found ${count}; required fields include source_ref"
 	fi
 }
@@ -212,8 +219,8 @@ reject_overclaiming_text() {
 	local overclaim_pattern
 	local overclaim_terms
 
-	overclaim_terms='byte-for-byte G-code parity|full generated-output parity|broad generated-output parity|toolpath geometry|printability|printer-runtime behavior|support generation|wall seam behavior|arc fitting|GUI export/viewer behavior|release behavior|network/device behavior|non-Prusa fork behavior|non-Prusa forks? support|Bambu Studio support|OrcaSlicer support|upstream source imports|sync automation'
-	overclaim_pattern="Phase 49[^.]*[^[:alnum:]_](proves|verified|verifies)[^[:alnum:]_][^.]*(${overclaim_terms})"
+	overclaim_terms='byte-for-byte G-code parity|full generated-output parity|broad generated-output parity|broad generated-output verification|toolpath geometry|toolpath geometry parity|printability|printer-runtime behavior|support generation|wall seam behavior|arc fitting|GUI export/viewer behavior|release behavior|network/device behavior|non-Prusa fork behavior|non-Prusa forks? support|Bambu Studio support|OrcaSlicer support|upstream source imports|sync automation'
+	overclaim_pattern="Phase (49|53)[^.]*[^[:alnum:]_](proves|verified|verifies)[^[:alnum:]_][^.]*(${overclaim_terms})"
 
 	for checked_file in "${readme_file}" "${scope_file}"; do
 		checked_label="$(basename "${checked_file}")"
@@ -245,7 +252,21 @@ reject_overclaiming_text() {
 			"Phase 49 structural evidence proves OrcaSlicer support" \
 			"Phase 49 structural evidence proves upstream source imports" \
 			"Phase 49 structural evidence proves sync automation" \
-			"Phase 49 verifies printer-runtime behavior"; do
+			"Phase 49 verifies printer-runtime behavior" \
+			"Phase 53 semantic evidence proves printability" \
+			"Phase 53 semantic verification proves byte-for-byte G-code parity" \
+			"Phase 53 semantic evidence verifies printer-runtime behavior" \
+			"Phase 53 semantic evidence proves support generation" \
+			"Phase 53 semantic evidence proves wall seam behavior" \
+			"Phase 53 semantic evidence proves arc fitting" \
+			"Phase 53 semantic evidence proves GUI export/viewer behavior" \
+			"Phase 53 semantic evidence proves release behavior" \
+			"Phase 53 semantic evidence proves network/device behavior" \
+			"Phase 53 semantic evidence proves non-Prusa fork behavior" \
+			"Phase 53 semantic evidence proves Bambu Studio support" \
+			"Phase 53 semantic evidence proves OrcaSlicer support" \
+			"Phase 53 semantic evidence proves upstream source imports" \
+			"Phase 53 semantic evidence proves sync automation"; do
 			reject_text "${checked_file}" "${checked_label}" "${forbidden_claim}"
 		done
 		if grep -Eiq -- "${overclaim_pattern}" "${checked_file}"; then
@@ -258,6 +279,8 @@ verify_readme() {
 	require_text "${readme_file}" "README.md" \
 		"\`packages/prusa-gcode-output-scope\` owns the Phase 45 reviewed scope gate and the Phase 49 structural evidence scope contract for \`prusaslicer.gcode-output\`."
 	require_text "${readme_file}" "README.md" \
+		"It also owns the Phase 53 semantic evidence scope contract for \`prusaslicer.gcode-output\`."
+	require_text "${readme_file}" "README.md" \
 		"bazel run //packages/prusa-gcode-output-scope:verify"
 	require_text "${readme_file}" "README.md" \
 		"Phase 49 structural verification allows only command counts, section counts, ordered markers, movement/extrusion indicators, temperature/tool-change markers, source identity, and fixture identity for the narrow Prusa G-code evidence chain."
@@ -265,6 +288,12 @@ verify_readme() {
 		"Phase 49 structural verification keeps broad generated-outputs in progress and does not prove byte-for-byte G-code parity, toolpath geometry, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation."
 	require_text "${readme_file}" "README.md" \
 		"Phase 52 public evidence consumes this Phase 49 closed structural scope contract for the narrow structural Prusa G-code evidence slice while keeping broad generated-outputs in progress."
+	require_text "${readme_file}" "README.md" \
+		"Phase 53 semantic verification allows only source identity, fixture identity, command class counts, movement class counts, coordinate bounds, extrusion totals, feedrate observations, and layer/marker relationships for the planned v1.14 semantic Prusa G-code evidence chain."
+	require_text "${readme_file}" "README.md" \
+		"Phase 53 semantic verification keeps generated-outputs exactly in progress and does not prove byte-for-byte G-code parity, broad generated-output verification, toolpath geometry parity, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation."
+	require_text "${readme_file}" "README.md" \
+		"Phase 53 only records the planned semantic summary artifact \`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv\`, the planned Phase 55 \`slic3r_flavors::prusa_gcode_output\` semantic boundary, and the planned Phase 56 \`bazel run //packages/parity:prusaslicer_gcode_output_parity\` evidence command; it does not create semantic fixture artifacts, Rust semantic parsing, public semantic parity evidence, or status publication."
 	require_text "${readme_file}" "README.md" \
 		"Phase 45 verification does not prove executable Prusa G-code output parity."
 	require_text "${readme_file}" "README.md" \
@@ -387,6 +416,64 @@ verify_structural_traceability() {
 		"${STRUCTURAL_TRACEABILITY_SECTION}" "Structural reviewer signoff" "Peter Ryszkiewicz, 2026-06-16 UTC"
 }
 
+# Literal Markdown row strings contain backticks, not command substitutions.
+# shellcheck disable=SC2016
+verify_semantic_scope_contract() {
+	require_section_table_body_row_count "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" "${SEMANTIC_FIELD_ROW_COUNT}"
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| source_ref | source identity | Accepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| fixture_id | fixture identity | Fixture identity only: `gcodewriter-set-speed.gcode`. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| fixture_path | fixture identity | Checked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| command_class_counts | command classes | Counts of approved command classes in the selected fixture summary only; no byte-for-byte G-code parity or generator parity. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| movement_class_counts | movement classes | Counts of approved movement classes in the selected fixture summary only; no toolpath geometry, travel, or printability claim. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| coordinate_bounds | coordinate bounds | Bounded coordinate observations only; no toolpath geometry or printability claim. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| extrusion_total | extrusion total | Summary totals only; no material-use, runtime, or printability claim. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| feedrate_observations | feedrate observations | Feedrate metadata only; no timing, firmware, or printer-runtime behavior claim. |'
+	require_section_table_exact_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_SCOPE_SECTION}" '| layer_marker_relationships | layer or marker relationships | Fixture-summary relationships only; no GUI, viewer, runtime, support, seam, or arc behavior claim. |'
+}
+
+verify_semantic_traceability() {
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Inventory row" "\`prusaslicer.gcode-output\` in \`packages/fork-inventories/prusaslicer.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Category-map row" "\`gcode.shared\` in \`packages/fork-inventories/category-map.tsv\` references \`prusaslicer.gcode-output\` exactly once"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Accepted source identity" "\`${ACCEPTED_SOURCE_IDENTITY}\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Fixture namespace" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Current expected summary" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Current structural summary" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Fixture provenance" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Planned semantic summary" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Planned Rust semantic boundary" "\`slic3r_flavors::prusa_gcode_output\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Planned public evidence command" "\`${PLANNED_PARITY_COMMAND}\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Deferred status boundary" "\`generated-outputs\` stays \`in progress\` in \`packages/parity/status.tsv\`; no semantic status publication happens before Phase 56 public evidence."
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Docs touched" "\`packages/prusa-gcode-output-scope/gcode-output-scope.md\`; \`packages/prusa-gcode-output-scope/README.md\`"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Security note" "No secrets, credentials, private data, runtime file discovery, Git, network, device, host upload, release, or sync surface is introduced by the Phase 53 semantic scope contract."
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Deferred semantic scope" "Byte-for-byte G-code parity; broad generated-output verification; toolpath geometry parity; printability; printer-runtime behavior; support generation; wall seam behavior; arc fitting; GUI export/viewer behavior; release behavior; network/device behavior; non-Prusa fork behavior; upstream source imports; sync automation."
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Semantic reviewer signoff" "Peter Ryszkiewicz, 2026-06-21 UTC"
+}
+
 verify_generated_outputs_in_progress() {
 	local total_count
 	local in_progress_count
@@ -450,6 +537,8 @@ verify_scope_record
 verify_source_row_details
 verify_structural_scope_contract
 verify_structural_traceability
+verify_semantic_scope_contract
+verify_semantic_traceability
 verify_generated_outputs_in_progress
 verify_deferred_scope_terms
 verify_inventory_inputs
