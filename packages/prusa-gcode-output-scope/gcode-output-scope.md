@@ -76,6 +76,42 @@ This section is an additive structural contract for the existing narrow `prusasl
 | Broad status row | `generated-outputs` stays `in progress` in `packages/parity/status.tsv` |
 | Structural reviewer signoff | Peter Ryszkiewicz, 2026-06-16 UTC |
 
+## v1.14 Semantic Evidence Scope
+
+This section is an additive semantic contract for the existing narrow `prusaslicer.gcode-output` evidence chain. It allows only the fields listed below for Phase 54 semantic fixture expectations and Phase 55 typed parsing. It does not create semantic fixture artifacts, Rust semantic parsing, public semantic parity evidence, or status publication, and it does not promote broad `generated-outputs` status.
+
+| Semantic Field | Category | Evidence Boundary |
+| --- | --- | --- |
+| source_ref | source identity | Accepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`. |
+| fixture_id | fixture identity | Fixture identity only: `gcodewriter-set-speed.gcode`. |
+| fixture_path | fixture identity | Checked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`. |
+| command_class_counts | command classes | Counts of approved command classes in the selected fixture summary only; no byte-for-byte G-code parity or generator parity. |
+| movement_class_counts | movement classes | Counts of approved movement classes in the selected fixture summary only; no toolpath geometry, travel, or printability claim. |
+| coordinate_bounds | coordinate bounds | Bounded coordinate observations only; no toolpath geometry or printability claim. |
+| extrusion_total | extrusion total | Summary totals only; no material-use, runtime, or printability claim. |
+| feedrate_observations | feedrate observations | Feedrate metadata only; no timing, firmware, or printer-runtime behavior claim. |
+| layer_marker_relationships | layer or marker relationships | Fixture-summary relationships only; no GUI, viewer, runtime, support, seam, or arc behavior claim. |
+
+## v1.14 Semantic Traceability
+
+| Required Link | Exact Target |
+| --- | --- |
+| Inventory row | `prusaslicer.gcode-output` in `packages/fork-inventories/prusaslicer.tsv` |
+| Category-map row | `gcode.shared` in `packages/fork-inventories/category-map.tsv` references `prusaslicer.gcode-output` exactly once |
+| Accepted source identity | `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` |
+| Fixture namespace | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` |
+| Current expected summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv` |
+| Current structural summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv` |
+| Fixture provenance | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv` |
+| Planned semantic summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv` |
+| Planned Rust semantic boundary | `slic3r_flavors::prusa_gcode_output` |
+| Planned public evidence command | `bazel run //packages/parity:prusaslicer_gcode_output_parity` |
+| Deferred status boundary | `generated-outputs` stays `in progress` in `packages/parity/status.tsv`; no semantic status publication happens before Phase 56 public evidence. |
+| Docs touched | `packages/prusa-gcode-output-scope/gcode-output-scope.md`; `packages/prusa-gcode-output-scope/README.md` |
+| Security note | No secrets, credentials, private data, runtime file discovery, Git, network, device, host upload, release, or sync surface is introduced by the Phase 53 semantic scope contract. |
+| Deferred semantic scope | Byte-for-byte G-code parity; broad generated-output verification; toolpath geometry parity; printability; printer-runtime behavior; support generation; wall seam behavior; arc fitting; GUI export/viewer behavior; release behavior; network/device behavior; non-Prusa fork behavior; upstream source imports; sync automation. |
+| Semantic reviewer signoff | Peter Ryszkiewicz, 2026-06-21 UTC |
+
 ## Boundary
 
 This scope record is consumed by Phase 49 closed structural scope enforcement,
