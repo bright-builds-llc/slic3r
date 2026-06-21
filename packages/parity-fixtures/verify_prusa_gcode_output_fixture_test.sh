@@ -13,6 +13,8 @@ source_fixture_dir="${workspace_root}/packages/parity-fixtures/forks/prusaslicer
 source_status_file="${workspace_root}/packages/parity/status.tsv"
 source_parity_build="${workspace_root}/packages/parity/BUILD.bazel"
 source_package_readme="${workspace_root}/packages/parity-fixtures/README.md"
+readonly WRONG_GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:wrong_gcode_output_parity\tShared fixture comparison proves the narrow semantic Prusa G-code evidence slice backed by the Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion behavior, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
+readonly STALE_STRUCTURAL_GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow structural Prusa G-code evidence slice backed by the Phase 49 closed structural scope contract, Phase 50 structural fixture summary, Phase 51 Rust structural parser/readiness boundary, and Phase 52 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
 
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/verify-prusa-gcode-output-fixture-test.XXXXXX")"
 trap 'rm -rf "${tmp_dir}"' EXIT
@@ -724,7 +726,7 @@ test_wrong_status_evidence_fails() {
 	replace_first_line_containing \
 		"${status_file}" \
 		"fork.prusaslicer.gcode-output" \
-		$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:wrong_gcode_output_parity\tShared fixture comparison proves the narrow structural Prusa G-code evidence slice backed by the Phase 49 closed structural scope contract, Phase 50 structural fixture summary, Phase 51 Rust structural parser/readiness boundary, and Phase 52 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
+		"${WRONG_GCODE_OUTPUT_STATUS_ROW}"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/wrong-evidence.out" "${tmp_dir}/wrong-evidence.err"; then
@@ -733,6 +735,28 @@ test_wrong_status_evidence_fails() {
 
 	# Assert
 	assert_contains "${tmp_dir}/wrong-evidence.err" "fork\\.prusaslicer\\.gcode-output"
+}
+
+test_stale_structural_status_notes_fail() {
+	# Arrange
+	local dir="${tmp_dir}/stale-structural-status-notes"
+	local status_file="${dir}/packages/parity/status.tsv"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${status_file}" \
+		"fork.prusaslicer.gcode-output" \
+		"${STALE_STRUCTURAL_GCODE_OUTPUT_STATUS_ROW}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/stale-structural-status.out" "${tmp_dir}/stale-structural-status.err"; then
+		fail "stale structural status notes fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all \
+		"${tmp_dir}/stale-structural-status.err" \
+		"fork\\.prusaslicer\\.gcode-output" \
+		"status/evidence/notes"
 }
 
 test_duplicate_status_row_fails() {
@@ -839,6 +863,7 @@ test_readme_overclaim_fails
 test_package_readme_overclaim_fails
 test_missing_status_row_fails
 test_wrong_status_evidence_fails
+test_stale_structural_status_notes_fail
 test_duplicate_status_row_fails
 test_missing_parity_target_fails
 test_phase47_rust_summary_boundary_is_allowed
