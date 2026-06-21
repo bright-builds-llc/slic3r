@@ -55,18 +55,31 @@ The selected fixture is derived from source-controlled
 `GCodeWriter::set_speed` expected-output literals at
 `tests/fff_print/test_gcodewriter.cpp#L20-L35` under
 `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` because
-the accepted upstream tree has no checked-in `.gcode` blob. The Phase 49 closed structural scope contract defines the allowed structural field set. Phase 50 adds `expected-gcode-structural-summary.tsv` to the same fixture namespace and bundle as the source-pinned structural sidecar. Phase 51 consumes that sidecar through the Rust structural parser/readiness boundary. Phase 52 verifies the narrow structural evidence slice through
+the accepted upstream tree has no checked-in `.gcode` blob. The Phase 49 closed
+structural scope contract defines the allowed structural field set. Phase 50
+adds `expected-gcode-structural-summary.tsv` to the same fixture namespace and
+bundle as the source-pinned structural sidecar. Phase 51 consumes that sidecar
+through the Rust structural parser/readiness boundary. Phase 52 verifies the
+narrow structural evidence slice through
 `bazel run //packages/parity:prusaslicer_gcode_output_parity` plus the exact
-`fork.prusaslicer.gcode-output` status row. Phase 53 closes the semantic field contract. Phase 54 adds `expected-gcode-semantic-summary.tsv` to the same fixture namespace and `//packages/parity-fixtures:prusa_gcode_output_bundle`.
+`fork.prusaslicer.gcode-output` status row. Phase 53 closes the semantic field
+contract. Phase 54 adds `expected-gcode-semantic-summary.tsv` to the same
+fixture namespace and `//packages/parity-fixtures:prusa_gcode_output_bundle`.
+Phase 56 consumes `expected-gcode-semantic-summary.tsv` through
+`bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
+`fork.prusaslicer.gcode-output` status row; the artifact remains checked-in
+fixture evidence only, and the broad `generated-outputs` row remains
+`in progress`.
 
 The G-code fixture namespace itself does not prove byte-for-byte G-code
-parity, full generated-output parity, toolpath geometry, extrusion, timing,
-support generation, wall seam behavior, arc fitting, STEP import, full 3MF
-import/export, printer-runtime behavior, firmware or printability behavior, GUI
-export or viewer behavior, binary G-code, thumbnails, post-processing, host
-upload, network/device integration, profile auto-update execution, fork release
-builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, or
-sync automation remain deferred.
+parity, broad generated-output verification, full generated-output parity,
+toolpath geometry, extrusion, timing, support generation, wall seam behavior,
+arc fitting, STEP import, full 3MF import/export, printer-runtime behavior,
+firmware or printability behavior, GUI behavior, GUI export or viewer behavior,
+binary G-code, thumbnails, post-processing, host upload, network/device
+integration, profile auto-update execution, fork release builds, Bambu Studio,
+OrcaSlicer, non-Prusa fork behavior, upstream source imports, release behavior,
+or sync automation remain deferred.
 
 Update route: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
 Branch-head observations remain drift-only.
@@ -136,3 +149,7 @@ additional fixture files by themselves.
   Phase 53 closes the semantic field contract, and Phase 54 adds
   `expected-gcode-semantic-summary.tsv` to the same fixture namespace and
   `//packages/parity-fixtures:prusa_gcode_output_bundle`.
+  Phase 56 consumes `expected-gcode-semantic-summary.tsv` through
+  `bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
+  `fork.prusaslicer.gcode-output` status row while keeping the artifact as
+  checked-in fixture evidence only.

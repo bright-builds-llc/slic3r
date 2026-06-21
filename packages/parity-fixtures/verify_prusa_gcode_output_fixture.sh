@@ -508,7 +508,9 @@ verify_semantic_summary() {
 	require_line_count "${semantic_summary_file}" "expected-gcode-semantic-summary.tsv" "${SEMANTIC_SUMMARY_ROW_COUNT}"
 	require_text "${fixture_readme}" "fixture README" "Semantic expected artifact: \`expected-gcode-semantic-summary.tsv\`"
 	require_text "${fixture_readme}" "fixture README" "Phase 54 adds \`expected-gcode-semantic-summary.tsv\` as a semantic sidecar"
-	require_text "${fixture_readme}" "fixture README" "Phase 55 owns Rust semantic parsing/readiness, and Phase 56 owns public semantic parity/status/docs publication."
+	require_text "${fixture_readme}" "fixture README" "Phase 55 owns Rust semantic parsing/readiness."
+	require_text "${fixture_readme}" "fixture README" "Phase 56 consumes \`expected-gcode-semantic-summary.tsv\` through"
+	require_text "${fixture_readme}" "fixture README" "\`fork.prusaslicer.gcode-output\` status row; the artifact remains checked-in"
 	require_text "${package_readme}" "packages/parity-fixtures/README.md" "${package_checked_artifacts_text}"
 }
 
@@ -521,8 +523,8 @@ verify_readme_scope() {
 
 	no_behavior_intro="No base export fixture reuse, live generation, upstream fet""ching/importing,"
 	no_behavior_middle="binary G-code, thumbnails, post-processing, host ""upload, printer-runtime"
-	broad_deferral_intro="Byte-for-byte G-code parity, full generated-output parity, toolpath geometry,"
-	broad_deferral_middle="or viewer behavior, fork release builds, and broad PrusaSlicer runtime support"
+	broad_deferral_intro="Byte-for-byte G-code parity, broad generated-output verification,"
+	broad_deferral_middle="behavior, GUI export or viewer behavior, network/device behavior, fork release"
 	package_no_network_text="Fixture verification does not fet""ch upstream source"
 
 	require_text "${fixture_readme}" "fixture README" "# PrusaSlicer G-code Output Fixture"
@@ -553,8 +555,9 @@ verify_readme_scope() {
 	require_text "${fixture_readme}" "fixture README" "behavior, network/device behavior, credential handling, Bambu Studio support,"
 	require_text "${fixture_readme}" "fixture README" "OrcaSlicer support, upstream source imports, or sync automation is introduced"
 	require_text "${fixture_readme}" "fixture README" "${broad_deferral_intro}"
-	require_text "${fixture_readme}" "fixture README" "extrusion, timing, support generation, wall seam behavior, arc fitting, STEP"
-	require_text "${fixture_readme}" "fixture README" "import, full 3MF import/export, firmware or printability behavior, GUI export"
+	require_text "${fixture_readme}" "fixture README" "full generated-output parity, toolpath geometry, extrusion, timing, support"
+	require_text "${fixture_readme}" "fixture README" "generation, wall seam behavior, arc fitting, STEP import, full 3MF"
+	require_text "${fixture_readme}" "fixture README" "import/export, printer-runtime behavior, firmware or printability behavior, GUI"
 	require_text "${fixture_readme}" "fixture README" "${broad_deferral_middle}"
 	require_text "${package_readme}" "packages/parity-fixtures/README.md" "${package_no_network_text}"
 }

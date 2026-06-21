@@ -5,6 +5,11 @@ Phase 50 adds `expected-gcode-structural-summary.tsv` as a structural sidecar
 for the same source-pinned fixture. Phase 52 publishes only the narrow
 structural Prusa G-code evidence slice.
 Phase 54 adds `expected-gcode-semantic-summary.tsv` as a semantic sidecar for the same source-pinned fixture.
+Phase 56 consumes `expected-gcode-semantic-summary.tsv` through
+`bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
+`fork.prusaslicer.gcode-output` status row; the artifact remains checked-in
+fixture evidence only, and the broad `generated-outputs` row remains
+`in progress`.
 
 ## Provenance
 
@@ -43,7 +48,11 @@ Rust summary parsing remains Phase 47-owned; executable parity and
 `fork.prusaslicer.gcode-output` status publication remain Phase 48-owned for
 the Phase 48 summary evidence path.
 Phase 52 public structural parity/status publication consumes the Phase 49 closed structural scope contract and Phase 50 structural sidecar through the Phase 51 Rust structural parser/readiness boundary.
-Phase 55 owns Rust semantic parsing/readiness, and Phase 56 owns public semantic parity/status/docs publication.
+Phase 55 owns Rust semantic parsing/readiness. Phase 56 publishes the narrow
+semantic Prusa G-code evidence slice through
+`bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
+`fork.prusaslicer.gcode-output` status row while preserving the checked-in
+artifact boundary.
 Phase 54 does not update `packages/parity/status.tsv`, public parity command behavior, Rust parser crates, or public `docs/port/*` files.
 
 No base export fixture reuse, live generation, upstream fetching/importing,
@@ -54,8 +63,10 @@ by this namespace.
 
 ## Deferred Scope
 
-Byte-for-byte G-code parity, full generated-output parity, toolpath geometry,
-extrusion, timing, support generation, wall seam behavior, arc fitting, STEP
-import, full 3MF import/export, firmware or printability behavior, GUI export
-or viewer behavior, fork release builds, and broad PrusaSlicer runtime support
-remain deferred.
+Byte-for-byte G-code parity, broad generated-output verification,
+full generated-output parity, toolpath geometry, extrusion, timing, support
+generation, wall seam behavior, arc fitting, STEP import, full 3MF
+import/export, printer-runtime behavior, firmware or printability behavior, GUI
+behavior, GUI export or viewer behavior, network/device behavior, fork release
+builds, non-Prusa fork behavior, upstream source imports, sync automation, and
+broad PrusaSlicer runtime support remain deferred.

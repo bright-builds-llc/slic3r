@@ -33,9 +33,12 @@
   shared fixture comparison for the narrow Prusa project-file expected-summary
   evidence slice backed by `expected-project-summary.tsv`.
 - `bazel run //packages/parity:prusaslicer_gcode_output_parity` runs the
-  shared fixture comparison for the narrow structural Prusa G-code evidence
-  slice backed by `expected-gcode-summary.tsv` and
-  `expected-gcode-structural-summary.tsv`.
+  shared fixture comparison for marker, structural, and semantic
+  expected-summary evidence through the existing Rust summary binary. It is
+  backed by `expected-gcode-summary.tsv`,
+  `expected-gcode-structural-summary.tsv`, and
+  `expected-gcode-semantic-summary.tsv`.
+  Public proof: marker, structural, and semantic expected-summary evidence.
 - `status.tsv` is the checked-in data source for those commands and status
   rows.
 
@@ -82,18 +85,23 @@ path `src/libslic3r/Format/3mf.cpp`, fixture path
 `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/seam_test_object.3mf`,
 and status row `fork.prusaslicer.project-file`.
 
-`fork.prusaslicer.gcode-output` is verified only for the narrow structural
+`fork.prusaslicer.gcode-output` is verified only for the narrow semantic
 `prusaslicer.gcode-output` evidence slice. The evidence command is
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, backed by
-`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv`
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv`,
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv`,
 and
-`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv`.
-That evidence follows the Phase 49 closed structural scope contract, the
-Phase 50 structural sidecar, the Phase 51 Rust structural parser/readiness
-boundary, and the Phase 52 public parity command:
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv`.
+That command validates marker, structural, and semantic expected-summary
+evidence through the existing Rust summary binary while publishing only the
+narrow semantic Prusa G-code evidence slice. The evidence follows the Phase 53
+closed semantic scope contract, the Phase 54 semantic fixture summary, the
+Phase 55 Rust semantic parser/readiness boundary, and the Phase 56 public
+parity command:
 `//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_summary`.
-The Phase 52 public parity command proves executable structural evidence/status
-wiring through status row `fork.prusaslicer.gcode-output`. It traces
+The Phase 56 public parity command proves executable semantic evidence/status
+wiring through status row `fork.prusaslicer.gcode-output`. The broad
+`generated-outputs` row remains `in progress`. It traces
 `prusaslicer.gcode-output` to
 `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, fixture
 path `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/`,
@@ -101,6 +109,8 @@ expected summary path
 `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv`,
 expected structural summary path
 `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv`,
+expected semantic summary path
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv`,
 and Rust boundary
 `packages/slic3r-rust/crates/slic3r_flavors/src/prusa_gcode_output.rs`.
 
