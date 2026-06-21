@@ -88,7 +88,7 @@ and fixture identity.
 - Decimal phases (53.1, 53.2): Urgent insertions, if needed later
 - This milestone starts at Phase 53 because Phase 52 shipped in v1.13
 
-- [ ] **Phase 53: Semantic G-code Scope Contract** - Maintainers can inspect
+- [x] **Phase 53: Semantic G-code Scope Contract** - Maintainers can inspect (completed 2026-06-21)
   and verify the allowed semantic G-code evidence contract before the fixture
   corpus, Rust semantic parser, or executable semantic evidence expands.
 
@@ -136,7 +136,7 @@ Plans:
 
 - [x] 53-01-PLAN.md - Add the reviewed semantic field contract and
   traceability surface.
-- [ ] 53-02-PLAN.md - Enforce the semantic scope contract through fail-closed
+- [x] 53-02-PLAN.md - Enforce the semantic scope contract through fail-closed
   verifier and mutation coverage.
 
 ### Phase 54: Semantic G-code Fixture Corpus
@@ -258,7 +258,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 53. Semantic G-code Scope Contract | 1/2 | In Progress|  |
+| 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
 | 54. Semantic G-code Fixture Corpus | 0/2 | Planned | — |
 | 55. Rust Semantic G-code Summary Boundary | 0/2 | Planned | — |
 | 56. Executable Semantic G-code Evidence | 0/5 | Planned | — |

@@ -19,7 +19,7 @@ roadmap phase and must be verified before milestone archive.
   row, fixture namespace, expected semantic summary artifacts, Rust boundary,
   public evidence command, planned status wording, docs touched, security
   note, deferred scope, and reviewer signoff.
-- [ ] **GSSCOPE-02**: Maintainer can run a fail-closed semantic scope verifier
+- [x] **GSSCOPE-02**: Maintainer can run a fail-closed semantic scope verifier
   that rejects unsupported semantic fields, duplicate or missing field rows,
   traceability drift, unsupported generated-output claims, unsupported runtime
   or printability claims, and missing deferred-scope language.
@@ -129,7 +129,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | GSSCOPE-01 | Phase 53 | Complete |
-| GSSCOPE-02 | Phase 53 | Pending |
+| GSSCOPE-02 | Phase 53 | Complete |
 | GSSCOPE-03 | Phase 53 | Complete |
 | GSFIX-01 | Phase 54 | Pending |
 | GSFIX-02 | Phase 54 | Pending |
