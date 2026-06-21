@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.14
 milestone_name: milestone
 status: executing
-stopped_at: Completed 56-03-PLAN.md
-last_updated: "2026-06-21T18:19:50.223Z"
-last_activity: 2026-06-21 -- Phase 56 plan 03 completed
+stopped_at: Completed 56-04-PLAN.md
+last_updated: "2026-06-21T18:35:13.806Z"
+last_activity: 2026-06-21 -- Phase 56 plan 04 completed
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 11
-  completed_plans: 9
-  percent: 82
+  completed_plans: 10
+  percent: 91
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 56
-Plan: 56-04 pending
+Plan: 56-05 pending
 Milestone: v1.14 PrusaSlicer G-code Semantic Evidence Foundation
 Status: In progress
-Last activity: 2026-06-21 -- Phase 56 plan 03 completed
+Last activity: 2026-06-21 -- Phase 56 plan 04 completed
 
-Progress: [████████░░] 82%
+Progress: [█████████░] 91%
 
 ## Performance Metrics
 
@@ -66,6 +66,7 @@ Progress: [████████░░] 82%
 - Phase 56 plan 01 completed on 2026-06-21: 12 min, 2 tasks, 7 files.
 - Phase 56 plan 02 completed on 2026-06-21: 4 min, 2 tasks, 1 file.
 - Phase 56 plan 03 completed on 2026-06-21: 15 min, 2 tasks, 5 files.
+- Phase 56 plan 04 completed on 2026-06-21: 10 min, 2 tasks, 9 files.
 
 ## Accumulated Context
 
@@ -173,6 +174,9 @@ Recent decisions affecting v1.12:
 - [Phase 56]: Kept generated-outputs exactly one in-progress row.
 - [Phase 56]: Used one exact semantic status row across status.tsv, fixture verifier enforcement, scope verifier enforcement, and mutation tests.
 - [Phase 56]: Kept verifier self-scan literals split where needed while preserving their runtime text.
+- [Phase 56]: Published package, fixture, and scope docs against the existing public Prusa G-code parity command instead of adding a companion docs surface.
+- [Phase 56]: Kept Phase 54 fixture provenance and semantic TSV values unchanged while documenting Phase 56 consumption.
+- [Phase 56]: Updated verifier exact-text contracts when stale planned wording blocked the required package and scope verification.
 
 ### Pending Todos
 
@@ -184,6 +188,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-21T18:19:50.221Z
-Stopped at: Completed 56-03-PLAN.md
+Last session: 2026-06-21T18:35:13.801Z
+Stopped at: Completed 56-04-PLAN.md
 Resume file: None
