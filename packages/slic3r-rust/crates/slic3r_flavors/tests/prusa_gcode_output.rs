@@ -9,10 +9,11 @@ use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface};
 use slic3r_flavors::prusa_gcode_output::{
     PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue, PrusaGcodeOutputMetadataKey,
     PrusaGcodeOutputMetadataValue, PrusaGcodeOutputParseError, PrusaGcodeOutputSemanticField,
-    PrusaGcodeOutputStructuralField, PrusaGcodeOutputStructuralParseError,
-    parse_prusa_gcode_output_semantic_summary, parse_prusa_gcode_output_structural_summary,
-    parse_prusa_gcode_output_summary, prusa_gcode_output_metadata,
-    prusa_gcode_output_structural_summary_lines, prusa_gcode_output_summary_lines,
+    PrusaGcodeOutputSemanticParseError, PrusaGcodeOutputStructuralField,
+    PrusaGcodeOutputStructuralParseError, parse_prusa_gcode_output_semantic_summary,
+    parse_prusa_gcode_output_structural_summary, parse_prusa_gcode_output_summary,
+    prusa_gcode_output_metadata, prusa_gcode_output_structural_summary_lines,
+    prusa_gcode_output_summary_lines,
 };
 
 const EXPECTED_GCODE_SUMMARY: &str = include_str!(
@@ -483,6 +484,195 @@ fn rejects_structural_unexpected_fixture_id() {
 }
 
 #[test]
+fn rejects_semantic_invalid_header() {
+    // Arrange
+    let input = EXPECTED_GCODE_SEMANTIC_SUMMARY.replacen("source_ref", "wrong_source_ref", 1);
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputSemanticParseError::InvalidHeader { .. })
+    ));
+}
+
+#[test]
+fn rejects_semantic_wrong_column_count() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_GCODE_SEMANTIC_SUMMARY.lines().collect();
+    lines[1] = "only\tfive\tcolumns\tin\trow";
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputSemanticParseError::WrongColumnCount {
+            line_number: 2,
+            expected: 6,
+            actual: 5,
+        })
+    ));
+}
+
+#[test]
+fn rejects_semantic_missing_row() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_GCODE_SEMANTIC_SUMMARY.lines().collect();
+    lines.pop();
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputSemanticParseError::MissingRow {
+            semantic_field: PrusaGcodeOutputSemanticField::LayerMarkerRelationships,
+        })
+    ));
+}
+
+#[test]
+fn rejects_semantic_duplicate_row() {
+    // Arrange
+    let first_row = EXPECTED_GCODE_SEMANTIC_SUMMARY
+        .lines()
+        .nth(1)
+        .expect("semantic fixture should contain a first data row");
+    let input = format!("{EXPECTED_GCODE_SEMANTIC_SUMMARY}{first_row}\n");
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputSemanticParseError::DuplicateRow {
+            line_number: 11,
+            semantic_field: PrusaGcodeOutputSemanticField::SourceRef,
+        })
+    ));
+}
+
+#[test]
+fn rejects_semantic_out_of_order_rows() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_GCODE_SEMANTIC_SUMMARY.lines().collect();
+    lines.swap(1, 2);
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputSemanticParseError::UnexpectedRowOrder {
+            line_number: 2,
+            expected_semantic_field: PrusaGcodeOutputSemanticField::SourceRef,
+            actual_semantic_field: PrusaGcodeOutputSemanticField::FixtureId,
+        })
+    ));
+}
+
+#[test]
+fn rejects_unsupported_semantic_field() {
+    // Arrange
+    let input = replace_semantic_cell(0, 2, "toolpath_geometry");
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputSemanticParseError::UnsupportedSemanticField { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_semantic_unsupported_boundary_claim() {
+    // Arrange
+    let input = replace_semantic_cell(0, 5, "full generated-output parity verified");
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(
+            PrusaGcodeOutputSemanticParseError::UnexpectedEvidenceBoundary {
+                line_number: 2,
+                semantic_field: PrusaGcodeOutputSemanticField::SourceRef,
+                ..
+            }
+        )
+    ));
+}
+
+#[test]
+fn rejects_semantic_unexpected_source_ref() {
+    // Arrange
+    let input = replace_semantic_cell(
+        0,
+        0,
+        "bambustudio:v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6",
+    );
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputSemanticParseError::UnexpectedSourceRef { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_semantic_unexpected_fixture_path() {
+    // Arrange
+    let input = replace_semantic_cell(0, 1, "fixtures/unreviewed.gcode");
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaGcodeOutputSemanticParseError::UnexpectedFixturePath { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_semantic_unexpected_fixture_id() {
+    // Arrange
+    let input = replace_semantic_cell(1, 4, "unreviewed-speed.gcode");
+
+    // Act
+    let result = parse_prusa_gcode_output_semantic_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(
+            PrusaGcodeOutputSemanticParseError::UnexpectedSemanticValue {
+                line_number: 3,
+                semantic_field: PrusaGcodeOutputSemanticField::FixtureId,
+                ..
+            }
+        )
+    ));
+}
+
+#[test]
 fn exposes_exact_gcode_output_metadata() {
     // Arrange / Act
     let metadata = prusa_gcode_output_metadata();
@@ -945,6 +1135,24 @@ fn replace_structural_cell(
     let column = columns
         .get_mut(column_index)
         .expect("structural fixture row should contain requested column");
+    *column = replacement.to_owned();
+    *line = columns.join("\t");
+    format!("{}\n", lines.join("\n"))
+}
+
+fn replace_semantic_cell(data_row_index: usize, column_index: usize, replacement: &str) -> String {
+    let mut lines: Vec<String> = EXPECTED_GCODE_SEMANTIC_SUMMARY
+        .lines()
+        .map(str::to_owned)
+        .collect();
+    let line_index = data_row_index + 1;
+    let line = lines
+        .get_mut(line_index)
+        .expect("semantic fixture should contain requested data row");
+    let mut columns: Vec<String> = line.split('\t').map(str::to_owned).collect();
+    let column = columns
+        .get_mut(column_index)
+        .expect("semantic fixture row should contain requested column");
     *column = replacement.to_owned();
     *line = columns.join("\t");
     format!("{}\n", lines.join("\n"))
