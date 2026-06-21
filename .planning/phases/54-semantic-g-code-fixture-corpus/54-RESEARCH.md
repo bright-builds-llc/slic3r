@@ -438,12 +438,12 @@ The exact README wording can differ, but the verifier must require semantic arti
 |---|-------|---------|---------------|
 | None | All substantive claims in this research were verified from repo files, command output, or pinned Bright Builds standards. [VERIFIED: Sources section] | N/A | N/A |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Exact semantic value wording**
    - What we know: The field set, artifact name, fixture source, and no-overclaiming boundaries are locked. [VERIFIED: .planning/phases/54-semantic-g-code-fixture-corpus/54-CONTEXT.md]
-   - What's unclear: The exact `semantic_value` and `evidence_boundary` prose is intentionally left to the agent's discretion. [VERIFIED: .planning/phases/54-semantic-g-code-fixture-corpus/54-CONTEXT.md]
-   - Recommendation: Use the structural sidecar's six-column schema and keep values narrow: `G1:4;feedrate_only:4`, no movement classes, no coordinate axes, no extrusion axis, feedrates `F99999.123;F1;F203.2;F203.201`, and no layer markers. [VERIFIED: packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode; packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv; .planning/phases/54-semantic-g-code-fixture-corpus/54-CONTEXT.md]
+   - Resolution: Plan 54-01 resolves the exact `semantic_value` and `evidence_boundary` wording by requiring the nine-row TSV in `.planning/phases/54-semantic-g-code-fixture-corpus/54-01-PLAN.md`. [VERIFIED: .planning/phases/54-semantic-g-code-fixture-corpus/54-01-PLAN.md]
+   - Chosen wording route: Use the structural sidecar's six-column schema and keep values narrow: `G1:4;feedrate_only:4`, no movement classes, no coordinate axes, no extrusion axis, feedrates `F99999.123;F1;F203.2;F203.201`, and no layer markers. [VERIFIED: packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode; packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv; .planning/phases/54-semantic-g-code-fixture-corpus/54-CONTEXT.md; .planning/phases/54-semantic-g-code-fixture-corpus/54-01-PLAN.md]
 
 ## Environment Availability
 
