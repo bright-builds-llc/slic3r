@@ -221,7 +221,7 @@ status/docs that publish only the exact narrow evidence slice.
 
 Plans:
 
-- [ ] 56-01-PLAN.md - Extend public parity evidence with semantic summary
+- [x] 56-01-PLAN.md - Extend public parity evidence with semantic summary
   validation through Rust.
 - [ ] 56-02-PLAN.md - Add focused semantic mutation guards for public evidence
   drift.
@@ -261,7 +261,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 | 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
 | 54. Semantic G-code Fixture Corpus | 2/2 | Complete    | 2026-06-21 |
 | 55. Rust Semantic G-code Summary Boundary | 2/2 | Complete    | 2026-06-21 |
-| 56. Executable Semantic G-code Evidence | 0/5 | Planned | — |
+| 56. Executable Semantic G-code Evidence | 1/5 | In Progress | — |
 
 ## Future Revisit Candidates
 

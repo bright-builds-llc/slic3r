@@ -62,7 +62,7 @@ roadmap phase and must be verified before milestone archive.
 
 ### Executable Semantic Evidence
 
-- [ ] **GSEV-01**: Maintainer can run public Prusa G-code parity evidence that
+- [x] **GSEV-01**: Maintainer can run public Prusa G-code parity evidence that
   validates marker summary, structural summary, and semantic summary artifacts
   through the Rust boundary while preserving the existing public command
   contract unless a deliberate roadmap decision introduces a companion command.
@@ -137,7 +137,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GSRUST-01 | Phase 55 | Complete |
 | GSRUST-02 | Phase 55 | Complete |
 | GSRUST-03 | Phase 55 | Complete |
-| GSEV-01 | Phase 56 | Pending |
+| GSEV-01 | Phase 56 | Complete |
 | GSEV-02 | Phase 56 | Pending |
 | GSEV-03 | Phase 56 | Pending |
 
