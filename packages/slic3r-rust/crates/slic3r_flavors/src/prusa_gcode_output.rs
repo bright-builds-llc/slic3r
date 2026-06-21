@@ -5,6 +5,8 @@ pub(crate) const PRUSA_GCODE_OUTPUT_VENDOR_ID: &str = "prusaslicer";
 pub(crate) const PRUSA_GCODE_OUTPUT_SOURCE_REF: VendorSourceRef =
     VendorSourceRef::prusa_slicer_version_2_9_5();
 pub(crate) const PRUSA_GCODE_OUTPUT_SOURCE_PATH: &str = "tests/fff_print/test_gcodewriter.cpp";
+pub(crate) const PRUSA_GCODE_OUTPUT_FIXTURE_CORPUS_PATH: &str =
+    "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output";
 pub(crate) const PRUSA_GCODE_OUTPUT_FIXTURE_PATH: &str = "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode";
 pub(crate) const PRUSA_GCODE_OUTPUT_EXPECTED_SUMMARY_PATH: &str = "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv";
 pub const PRUSA_GCODE_OUTPUT_EXPECTED_STRUCTURAL_SUMMARY_PATH: &str = "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv";
@@ -14,6 +16,22 @@ pub(crate) const PRUSA_GCODE_OUTPUT_SCOPE_RECORD_PATH: &str =
 pub(crate) const PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN: &str = "fork.prusaslicer.gcode-output";
 static PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS: [&str; 2] =
     ["src/libslic3r/GCode.cpp", "src/libslic3r/GCode.hpp"];
+static PRUSA_GCODE_OUTPUT_DEFERRED_SEMANTIC_SURFACES: [&str; 14] = [
+    "byte-for-byte G-code parity",
+    "broad generated-output verification",
+    "toolpath geometry parity",
+    "printability",
+    "printer-runtime behavior",
+    "support generation",
+    "wall seam behavior",
+    "arc fitting",
+    "GUI export/viewer behavior",
+    "release behavior",
+    "network/device behavior",
+    "non-Prusa fork behavior",
+    "upstream source imports",
+    "sync automation",
+];
 const PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS_VALUE: &str =
     "src/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp";
 const PRUSA_GCODE_OUTPUT_FIXTURE_SOURCE_LITERAL: &str =
@@ -707,6 +725,7 @@ pub struct PrusaGcodeOutputMetadata {
     pub fixture_path: &'static str,
     pub expected_summary_path: &'static str,
     pub expected_structural_summary_path: &'static str,
+    pub expected_semantic_summary_path: &'static str,
     pub scope_record_path: &'static str,
     pub reserved_future_status_token: &'static str,
 }
@@ -722,6 +741,22 @@ pub struct PrusaGcodeOutputStructuralReadiness {
     pub parity_dependency: ParitySurface,
     pub checklist_status: ChecklistStatus,
     pub reserved_future_status_token: &'static str,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaGcodeOutputSemanticReadiness {
+    pub inventory_id: &'static str,
+    pub source_ref: VendorSourceRef,
+    pub inventory_source_paths: &'static [&'static str],
+    pub fixture_corpus_path: &'static str,
+    pub fixture_path: &'static str,
+    pub expected_semantic_summary_path: &'static str,
+    pub parser_boundary: &'static str,
+    pub planned_public_command: &'static str,
+    pub planned_status_token: &'static str,
+    pub generated_outputs_status: &'static str,
+    pub pre_publication_boundary: &'static str,
+    pub deferred_surfaces: &'static [&'static str],
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -786,6 +821,7 @@ pub const fn prusa_gcode_output_metadata() -> PrusaGcodeOutputMetadata {
         fixture_path: PRUSA_GCODE_OUTPUT_FIXTURE_PATH,
         expected_summary_path: PRUSA_GCODE_OUTPUT_EXPECTED_SUMMARY_PATH,
         expected_structural_summary_path: PRUSA_GCODE_OUTPUT_EXPECTED_STRUCTURAL_SUMMARY_PATH,
+        expected_semantic_summary_path: PRUSA_GCODE_OUTPUT_EXPECTED_SEMANTIC_SUMMARY_PATH,
         scope_record_path: PRUSA_GCODE_OUTPUT_SCOPE_RECORD_PATH,
         reserved_future_status_token: PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN,
     }
@@ -802,6 +838,23 @@ pub const fn prusa_gcode_output_structural_readiness() -> PrusaGcodeOutputStruct
         parity_dependency: ParitySurface::generated_outputs(),
         checklist_status: ChecklistStatus::FutureCandidate,
         reserved_future_status_token: PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN,
+    }
+}
+
+pub const fn prusa_gcode_output_semantic_readiness() -> PrusaGcodeOutputSemanticReadiness {
+    PrusaGcodeOutputSemanticReadiness {
+        inventory_id: PRUSA_GCODE_OUTPUT_INVENTORY_ID,
+        source_ref: PRUSA_GCODE_OUTPUT_SOURCE_REF,
+        inventory_source_paths: &PRUSA_GCODE_OUTPUT_INVENTORY_SOURCE_PATHS,
+        fixture_corpus_path: PRUSA_GCODE_OUTPUT_FIXTURE_CORPUS_PATH,
+        fixture_path: PRUSA_GCODE_OUTPUT_FIXTURE_PATH,
+        expected_semantic_summary_path: PRUSA_GCODE_OUTPUT_EXPECTED_SEMANTIC_SUMMARY_PATH,
+        parser_boundary: "slic3r_flavors::prusa_gcode_output::parse_prusa_gcode_output_semantic_summary",
+        planned_public_command: "//packages/parity:prusaslicer_gcode_output_parity",
+        planned_status_token: PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN,
+        generated_outputs_status: "in progress",
+        pre_publication_boundary: "Phase 55 exposes semantic parser/readiness metadata only; Phase 56 owns public semantic parity evidence and status/docs publication.",
+        deferred_surfaces: &PRUSA_GCODE_OUTPUT_DEFERRED_SEMANTIC_SURFACES,
     }
 }
 

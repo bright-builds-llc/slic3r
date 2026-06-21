@@ -2,10 +2,11 @@ use slic3r_contracts::{
     ChecklistStatus, DownstreamFork, FeatureOrigin, FlavorId, ParitySurface, VendorSourceRef,
 };
 use slic3r_flavors::{
-    FlavorCapability, FlavorProvenance, FlavorRegistryEntry, all_capabilities, all_flavors,
-    capabilities_by_checklist_status, capabilities_by_origin, maybe_flavor,
-    prusa_gcode_output_metadata, prusa_gcode_output_structural_readiness,
-    prusa_profile_schema_metadata, prusa_project_file_metadata,
+    FlavorCapability, FlavorProvenance, FlavorRegistryEntry, PrusaGcodeOutputSemanticReadiness,
+    all_capabilities, all_flavors, capabilities_by_checklist_status, capabilities_by_origin,
+    maybe_flavor, prusa_gcode_output_metadata, prusa_gcode_output_semantic_readiness,
+    prusa_gcode_output_structural_readiness, prusa_profile_schema_metadata,
+    prusa_project_file_metadata,
 };
 
 const PRUSA_GCODE_OUTPUT_STRUCTURAL_READINESS_NOTES: &str = "Source-observed G-code output planning row; structural summary readiness is parser metadata only, and public structural evidence plus status publication remain Phase 52 work before generated-output behavior is claimed.";
@@ -421,6 +422,10 @@ fn prusa_gcode_output_metadata_exposes_fixture_scope_expected_summary_and_reserv
         "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
     );
     assert_eq!(
+        metadata.expected_semantic_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+    );
+    assert_eq!(
         metadata.scope_record_path,
         "packages/prusa-gcode-output-scope/gcode-output-scope.md"
     );
@@ -428,6 +433,70 @@ fn prusa_gcode_output_metadata_exposes_fixture_scope_expected_summary_and_reserv
         metadata.reserved_future_status_token,
         "fork.prusaslicer.gcode-output"
     );
+}
+
+#[test]
+fn prusa_gcode_output_semantic_readiness_exposes_pre_publication_metadata_without_status_publication()
+ {
+    // Arrange
+    let expected_source_paths: &[&str] = &["src/libslic3r/GCode.cpp", "src/libslic3r/GCode.hpp"];
+    let expected_deferred_surfaces = [
+        "byte-for-byte G-code parity",
+        "broad generated-output verification",
+        "toolpath geometry parity",
+        "printability",
+        "printer-runtime behavior",
+        "support generation",
+        "wall seam behavior",
+        "arc fitting",
+        "GUI export/viewer behavior",
+        "release behavior",
+        "network/device behavior",
+        "non-Prusa fork behavior",
+        "upstream source imports",
+        "sync automation",
+    ];
+
+    // Act
+    let readiness: PrusaGcodeOutputSemanticReadiness = prusa_gcode_output_semantic_readiness();
+
+    // Assert
+    assert_eq!(readiness.inventory_id, "prusaslicer.gcode-output");
+    assert_eq!(
+        readiness.source_ref,
+        VendorSourceRef::prusa_slicer_version_2_9_5()
+    );
+    assert_eq!(readiness.inventory_source_paths, expected_source_paths);
+    assert_eq!(
+        readiness.fixture_corpus_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output"
+    );
+    assert_eq!(
+        readiness.fixture_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode"
+    );
+    assert_eq!(
+        readiness.expected_semantic_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
+    );
+    assert_eq!(
+        readiness.parser_boundary,
+        "slic3r_flavors::prusa_gcode_output::parse_prusa_gcode_output_semantic_summary"
+    );
+    assert_eq!(
+        readiness.planned_public_command,
+        "//packages/parity:prusaslicer_gcode_output_parity"
+    );
+    assert_eq!(
+        readiness.planned_status_token,
+        "fork.prusaslicer.gcode-output"
+    );
+    assert_eq!(readiness.generated_outputs_status, "in progress");
+    assert_eq!(
+        readiness.pre_publication_boundary,
+        "Phase 55 exposes semantic parser/readiness metadata only; Phase 56 owns public semantic parity evidence and status/docs publication."
+    );
+    assert_eq!(readiness.deferred_surfaces, expected_deferred_surfaces);
 }
 
 #[test]
