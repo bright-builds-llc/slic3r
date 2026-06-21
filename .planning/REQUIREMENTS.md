@@ -30,12 +30,12 @@ roadmap phase and must be verified before milestone archive.
 
 ### Semantic Fixture Corpus
 
-- [ ] **GSFIX-01**: Maintainer can inspect a small reviewed Prusa G-code
+- [x] **GSFIX-01**: Maintainer can inspect a small reviewed Prusa G-code
   semantic fixture corpus with source-pinned provenance, update rules, fixture
   identity, expected semantic summary paths, and explicit exclusion of
   generator, runtime, network, sync, host-upload, post-processing, thumbnail,
   printability, and GUI behavior.
-- [ ] **GSFIX-02**: Maintainer can inspect checked-in semantic expected
+- [x] **GSFIX-02**: Maintainer can inspect checked-in semantic expected
   summaries that cover only the Phase 53 approved fields, such as command
   classes, movement classes, coordinate bounds, extrusion totals, feedrate
   observations, layer or marker relationships, and fixture/source identities.
@@ -131,8 +131,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GSSCOPE-01 | Phase 53 | Complete |
 | GSSCOPE-02 | Phase 53 | Complete |
 | GSSCOPE-03 | Phase 53 | Complete |
-| GSFIX-01 | Phase 54 | Pending |
-| GSFIX-02 | Phase 54 | Pending |
+| GSFIX-01 | Phase 54 | Complete |
+| GSFIX-02 | Phase 54 | Complete |
 | GSFIX-03 | Phase 54 | Pending |
 | GSRUST-01 | Phase 55 | Pending |
 | GSRUST-02 | Phase 55 | Pending |

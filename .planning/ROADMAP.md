@@ -162,7 +162,7 @@ commands rely on them.
 
 Plans:
 
-- [ ] 54-01-PLAN.md - Add the semantic fixture corpus and expected-summary
+- [x] 54-01-PLAN.md - Add the semantic fixture corpus and expected-summary
   artifacts with narrow fixture docs.
 - [ ] 54-02-PLAN.md - Extend fixture verification and mutation coverage for
   semantic drift.
@@ -259,7 +259,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
-| 54. Semantic G-code Fixture Corpus | 0/2 | Planned | — |
+| 54. Semantic G-code Fixture Corpus | 1/2 | In Progress|  |
 | 55. Rust Semantic G-code Summary Boundary | 0/2 | Planned | — |
 | 56. Executable Semantic G-code Evidence | 0/5 | Planned | — |
 
