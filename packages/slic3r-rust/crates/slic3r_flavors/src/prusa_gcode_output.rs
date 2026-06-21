@@ -8,6 +8,7 @@ pub(crate) const PRUSA_GCODE_OUTPUT_SOURCE_PATH: &str = "tests/fff_print/test_gc
 pub(crate) const PRUSA_GCODE_OUTPUT_FIXTURE_PATH: &str = "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode";
 pub(crate) const PRUSA_GCODE_OUTPUT_EXPECTED_SUMMARY_PATH: &str = "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv";
 pub const PRUSA_GCODE_OUTPUT_EXPECTED_STRUCTURAL_SUMMARY_PATH: &str = "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv";
+pub const PRUSA_GCODE_OUTPUT_EXPECTED_SEMANTIC_SUMMARY_PATH: &str = "packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv";
 pub(crate) const PRUSA_GCODE_OUTPUT_SCOPE_RECORD_PATH: &str =
     "packages/prusa-gcode-output-scope/gcode-output-scope.md";
 pub(crate) const PRUSA_GCODE_OUTPUT_RESERVED_STATUS_TOKEN: &str = "fork.prusaslicer.gcode-output";
@@ -70,6 +71,32 @@ const STRUCTURAL_MOVEMENT_AXIS_PRESENT_BOUNDARY: &str = "Boolean structural indi
 const STRUCTURAL_EXTRUSION_AXIS_PRESENT_BOUNDARY: &str = "Boolean structural indicator for extrusion-axis text presence only; no extrusion amount, material, or printability claim.";
 const STRUCTURAL_TEMPERATURE_MARKER_COUNT_BOUNDARY: &str = "Count of temperature marker commands in the selected fixture only; no printer-runtime behavior claimed.";
 const STRUCTURAL_TOOL_CHANGE_MARKER_COUNT_BOUNDARY: &str = "Count of tool-change marker commands in the selected fixture only; no multi-tool runtime behavior claimed.";
+const SEMANTIC_EXPECTED_HEADER: &str = "source_ref\tfixture_path\tsemantic_field\tsemantic_category\tsemantic_value\tevidence_boundary";
+const SEMANTIC_EXPECTED_COLUMN_COUNT: usize = 6;
+const SEMANTIC_COLUMNS: [&str; SEMANTIC_EXPECTED_COLUMN_COUNT] = [
+    "source_ref",
+    "fixture_path",
+    "semantic_field",
+    "semantic_category",
+    "semantic_value",
+    "evidence_boundary",
+];
+const SEMANTIC_SOURCE_REF_BOUNDARY: &str = "Accepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.";
+const SEMANTIC_FIXTURE_ID_BOUNDARY: &str = "Fixture identity only: `gcodewriter-set-speed.gcode`.";
+const SEMANTIC_FIXTURE_PATH_BOUNDARY: &str = "Checked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`.";
+const SEMANTIC_COMMAND_CLASS_COUNTS_VALUE: &str = "G1:4;feedrate_only:4";
+const SEMANTIC_COMMAND_CLASS_COUNTS_BOUNDARY: &str = "Counts of command classes in the selected fixture summary only; no byte-for-byte G-code parity or generator parity.";
+const SEMANTIC_MOVEMENT_CLASS_COUNTS_VALUE: &str =
+    "travel:0;extrusion:0;coordinate_motion:0;feedrate_only:4";
+const SEMANTIC_MOVEMENT_CLASS_COUNTS_BOUNDARY: &str = "Counts of movement classes in the selected fixture summary only; no toolpath geometry, travel, or printability claim.";
+const SEMANTIC_COORDINATE_BOUNDS_VALUE: &str = "x:none;y:none;z:none";
+const SEMANTIC_COORDINATE_BOUNDS_BOUNDARY: &str = "No coordinate axes observed in the selected fixture summary; no toolpath geometry or printability claim.";
+const SEMANTIC_EXTRUSION_TOTAL_VALUE: &str = "e_axis_observed:false;extrusion_total:not_observed";
+const SEMANTIC_EXTRUSION_TOTAL_BOUNDARY: &str = "No extrusion axis observed in the selected fixture summary; no material-use, runtime, or printability claim.";
+const SEMANTIC_FEEDRATE_OBSERVATIONS_VALUE: &str = "F99999.123;F1;F203.2;F203.201";
+const SEMANTIC_FEEDRATE_OBSERVATIONS_BOUNDARY: &str = "Feedrate metadata only from the selected fixture summary; no timing, firmware, or printer-runtime behavior claim.";
+const SEMANTIC_LAYER_MARKER_RELATIONSHIPS_VALUE: &str = "layer_markers:0;marker_relationships:none";
+const SEMANTIC_LAYER_MARKER_RELATIONSHIPS_BOUNDARY: &str = "No layer markers observed in the selected fixture summary; no GUI, viewer, runtime, support, seam, or arc behavior claim.";
 const EXPECTED_ROWS: [ExpectedGcodeOutputRow; 5] = [
     ExpectedGcodeOutputRow {
         metadata_key: PrusaGcodeOutputMetadataKey::SourceIdentity,
@@ -219,6 +246,64 @@ const EXPECTED_STRUCTURAL_ROWS: [ExpectedGcodeOutputStructuralRow; 16] = [
         evidence_boundary: STRUCTURAL_TOOL_CHANGE_MARKER_COUNT_BOUNDARY,
     },
 ];
+const EXPECTED_SEMANTIC_ROWS: [ExpectedGcodeOutputSemanticRow; 9] = [
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::SourceRef,
+        semantic_category: PrusaGcodeOutputSemanticCategory::SourceIdentity,
+        semantic_value: PrusaGcodeOutputSemanticValue::SourceRef(PRUSA_GCODE_OUTPUT_SOURCE_REF),
+        evidence_boundary: SEMANTIC_SOURCE_REF_BOUNDARY,
+    },
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::FixtureId,
+        semantic_category: PrusaGcodeOutputSemanticCategory::FixtureIdentity,
+        semantic_value: PrusaGcodeOutputSemanticValue::Text(PRUSA_GCODE_OUTPUT_FIXTURE_ID),
+        evidence_boundary: SEMANTIC_FIXTURE_ID_BOUNDARY,
+    },
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::FixturePath,
+        semantic_category: PrusaGcodeOutputSemanticCategory::FixtureIdentity,
+        semantic_value: PrusaGcodeOutputSemanticValue::Text(PRUSA_GCODE_OUTPUT_FIXTURE_PATH),
+        evidence_boundary: SEMANTIC_FIXTURE_PATH_BOUNDARY,
+    },
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::CommandClassCounts,
+        semantic_category: PrusaGcodeOutputSemanticCategory::CommandClasses,
+        semantic_value: PrusaGcodeOutputSemanticValue::Text(SEMANTIC_COMMAND_CLASS_COUNTS_VALUE),
+        evidence_boundary: SEMANTIC_COMMAND_CLASS_COUNTS_BOUNDARY,
+    },
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::MovementClassCounts,
+        semantic_category: PrusaGcodeOutputSemanticCategory::MovementClasses,
+        semantic_value: PrusaGcodeOutputSemanticValue::Text(SEMANTIC_MOVEMENT_CLASS_COUNTS_VALUE),
+        evidence_boundary: SEMANTIC_MOVEMENT_CLASS_COUNTS_BOUNDARY,
+    },
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::CoordinateBounds,
+        semantic_category: PrusaGcodeOutputSemanticCategory::CoordinateBounds,
+        semantic_value: PrusaGcodeOutputSemanticValue::Text(SEMANTIC_COORDINATE_BOUNDS_VALUE),
+        evidence_boundary: SEMANTIC_COORDINATE_BOUNDS_BOUNDARY,
+    },
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::ExtrusionTotal,
+        semantic_category: PrusaGcodeOutputSemanticCategory::ExtrusionTotal,
+        semantic_value: PrusaGcodeOutputSemanticValue::Text(SEMANTIC_EXTRUSION_TOTAL_VALUE),
+        evidence_boundary: SEMANTIC_EXTRUSION_TOTAL_BOUNDARY,
+    },
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::FeedrateObservations,
+        semantic_category: PrusaGcodeOutputSemanticCategory::FeedrateObservations,
+        semantic_value: PrusaGcodeOutputSemanticValue::Text(SEMANTIC_FEEDRATE_OBSERVATIONS_VALUE),
+        evidence_boundary: SEMANTIC_FEEDRATE_OBSERVATIONS_BOUNDARY,
+    },
+    ExpectedGcodeOutputSemanticRow {
+        semantic_field: PrusaGcodeOutputSemanticField::LayerMarkerRelationships,
+        semantic_category: PrusaGcodeOutputSemanticCategory::LayerMarkerRelationships,
+        semantic_value: PrusaGcodeOutputSemanticValue::Text(
+            SEMANTIC_LAYER_MARKER_RELATIONSHIPS_VALUE,
+        ),
+        evidence_boundary: SEMANTIC_LAYER_MARKER_RELATIONSHIPS_BOUNDARY,
+    },
+];
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct PrusaGcodeOutputSummary {
@@ -275,6 +360,12 @@ pub struct PrusaGcodeOutputStructuralSummary {
     facts: PrusaGcodeOutputStructuralFacts,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PrusaGcodeOutputSemanticSummary {
+    rows: Vec<PrusaGcodeOutputSemanticSummaryRow>,
+    facts: PrusaGcodeOutputSemanticFacts,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct PrusaGcodeOutputStructuralSummaryRow {
     pub source_ref: VendorSourceRef,
@@ -282,6 +373,16 @@ pub struct PrusaGcodeOutputStructuralSummaryRow {
     pub structural_field: PrusaGcodeOutputStructuralField,
     pub structural_category: PrusaGcodeOutputStructuralCategory,
     pub structural_value: PrusaGcodeOutputStructuralValue,
+    pub evidence_boundary: PrusaGcodeOutputEvidenceBoundary,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaGcodeOutputSemanticSummaryRow {
+    pub source_ref: VendorSourceRef,
+    pub fixture_path: &'static str,
+    pub semantic_field: PrusaGcodeOutputSemanticField,
+    pub semantic_category: PrusaGcodeOutputSemanticCategory,
+    pub semantic_value: PrusaGcodeOutputSemanticValue,
     pub evidence_boundary: PrusaGcodeOutputEvidenceBoundary,
 }
 
@@ -300,6 +401,19 @@ pub struct PrusaGcodeOutputStructuralFacts {
     pub extrusion_axis_present: bool,
     pub temperature_marker_count: u32,
     pub tool_change_marker_count: u32,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaGcodeOutputSemanticFacts {
+    pub source_ref: VendorSourceRef,
+    pub fixture_id: &'static str,
+    pub fixture_path: &'static str,
+    pub command_class_counts: &'static str,
+    pub movement_class_counts: &'static str,
+    pub coordinate_bounds: &'static str,
+    pub extrusion_total: &'static str,
+    pub feedrate_observations: &'static str,
+    pub layer_marker_relationships: &'static str,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -323,6 +437,19 @@ pub enum PrusaGcodeOutputStructuralField {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PrusaGcodeOutputSemanticField {
+    SourceRef,
+    FixtureId,
+    FixturePath,
+    CommandClassCounts,
+    MovementClassCounts,
+    CoordinateBounds,
+    ExtrusionTotal,
+    FeedrateObservations,
+    LayerMarkerRelationships,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PrusaGcodeOutputStructuralCategory {
     SourceIdentity,
     FixtureIdentity,
@@ -331,6 +458,18 @@ pub enum PrusaGcodeOutputStructuralCategory {
     OrderedMarkers,
     MovementExtrusionIndicators,
     TemperatureToolChangeMarkers,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PrusaGcodeOutputSemanticCategory {
+    SourceIdentity,
+    FixtureIdentity,
+    CommandClasses,
+    MovementClasses,
+    CoordinateBounds,
+    ExtrusionTotal,
+    FeedrateObservations,
+    LayerMarkerRelationships,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -343,6 +482,12 @@ pub enum PrusaGcodeOutputStructuralValue {
     Count(u32),
     Indicator(bool),
     OrderedMarker(PrusaGcodeOutputMarkerValue),
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PrusaGcodeOutputSemanticValue {
+    SourceRef(VendorSourceRef),
+    Text(&'static str),
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -486,6 +631,69 @@ pub enum PrusaGcodeOutputStructuralParseError {
     },
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum PrusaGcodeOutputSemanticParseError {
+    InvalidHeader {
+        line: String,
+    },
+    WrongColumnCount {
+        line_number: usize,
+        expected: usize,
+        actual: usize,
+    },
+    EmptyRequiredValue {
+        line_number: usize,
+        column: &'static str,
+    },
+    UnexpectedSourceRef {
+        line_number: usize,
+        value: String,
+    },
+    UnexpectedFixturePath {
+        line_number: usize,
+        value: String,
+    },
+    UnsupportedSemanticField {
+        line_number: usize,
+        value: String,
+    },
+    UnsupportedSemanticCategory {
+        line_number: usize,
+        value: String,
+    },
+    UnexpectedSemanticCategory {
+        line_number: usize,
+        semantic_field: PrusaGcodeOutputSemanticField,
+        value: String,
+    },
+    UnexpectedSemanticValue {
+        line_number: usize,
+        semantic_field: PrusaGcodeOutputSemanticField,
+        value: String,
+    },
+    UnexpectedEvidenceBoundary {
+        line_number: usize,
+        semantic_field: PrusaGcodeOutputSemanticField,
+        value: String,
+    },
+    DuplicateRow {
+        line_number: usize,
+        semantic_field: PrusaGcodeOutputSemanticField,
+    },
+    UnexpectedRowOrder {
+        line_number: usize,
+        expected_semantic_field: PrusaGcodeOutputSemanticField,
+        actual_semantic_field: PrusaGcodeOutputSemanticField,
+    },
+    MissingRow {
+        semantic_field: PrusaGcodeOutputSemanticField,
+    },
+    ExtraRow {
+        line_number: usize,
+        semantic_field: PrusaGcodeOutputSemanticField,
+    },
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct PrusaGcodeOutputMetadata {
     pub inventory_id: &'static str,
@@ -534,6 +742,14 @@ struct ExpectedGcodeOutputStructuralRow {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct ExpectedGcodeOutputSemanticRow {
+    semantic_field: PrusaGcodeOutputSemanticField,
+    semantic_category: PrusaGcodeOutputSemanticCategory,
+    semantic_value: PrusaGcodeOutputSemanticValue,
+    evidence_boundary: &'static str,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 struct PrusaGcodeOutputRowKey {
     metadata_key: PrusaGcodeOutputMetadataKey,
     metadata_value: PrusaGcodeOutputMetadataValue,
@@ -546,9 +762,16 @@ struct PrusaGcodeOutputStructuralRowKey {
     structural_field: PrusaGcodeOutputStructuralField,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+struct PrusaGcodeOutputSemanticRowKey {
+    semantic_field: PrusaGcodeOutputSemanticField,
+}
+
 pub type PrusaGcodeOutputParseResult = Result<PrusaGcodeOutputSummary, PrusaGcodeOutputParseError>;
 pub type PrusaGcodeOutputStructuralParseResult =
     Result<PrusaGcodeOutputStructuralSummary, PrusaGcodeOutputStructuralParseError>;
+pub type PrusaGcodeOutputSemanticParseResult =
+    Result<PrusaGcodeOutputSemanticSummary, PrusaGcodeOutputSemanticParseError>;
 
 pub const fn prusa_gcode_output_metadata() -> PrusaGcodeOutputMetadata {
     PrusaGcodeOutputMetadata {
@@ -701,6 +924,64 @@ pub fn parse_prusa_gcode_output_structural_summary(
     validate_missing_structural_rows(&row_keys)?;
 
     Ok(PrusaGcodeOutputStructuralSummary::from_validated_rows(rows))
+}
+
+pub fn parse_prusa_gcode_output_semantic_summary(
+    input: &str,
+) -> PrusaGcodeOutputSemanticParseResult {
+    let mut lines = input.lines();
+    let Some(header) = lines.next() else {
+        return Err(PrusaGcodeOutputSemanticParseError::InvalidHeader {
+            line: String::new(),
+        });
+    };
+    validate_semantic_header(header)?;
+
+    let mut rows = Vec::new();
+    let mut row_keys = Vec::new();
+
+    for (line_offset, line) in lines.enumerate() {
+        let line_number = line_offset + 2;
+        let row = parse_semantic_summary_row(line, line_number)?;
+        let row_key = PrusaGcodeOutputSemanticRowKey::from_row(&row);
+
+        if row_keys.contains(&row_key) {
+            return Err(PrusaGcodeOutputSemanticParseError::DuplicateRow {
+                line_number,
+                semantic_field: row.semantic_field,
+            });
+        }
+
+        if !is_expected_semantic_row_key(row_key) {
+            return Err(PrusaGcodeOutputSemanticParseError::ExtraRow {
+                line_number,
+                semantic_field: row.semantic_field,
+            });
+        }
+
+        if let Some(expected_row) = EXPECTED_SEMANTIC_ROWS.get(line_offset).copied() {
+            let expected_key = PrusaGcodeOutputSemanticRowKey::from_expected(expected_row);
+            if row_key != expected_key {
+                return Err(PrusaGcodeOutputSemanticParseError::UnexpectedRowOrder {
+                    line_number,
+                    expected_semantic_field: expected_row.semantic_field,
+                    actual_semantic_field: row.semantic_field,
+                });
+            }
+        } else {
+            return Err(PrusaGcodeOutputSemanticParseError::ExtraRow {
+                line_number,
+                semantic_field: row.semantic_field,
+            });
+        }
+
+        row_keys.push(row_key);
+        rows.push(row);
+    }
+
+    validate_missing_semantic_rows(&row_keys)?;
+
+    Ok(PrusaGcodeOutputSemanticSummary::from_validated_rows(rows))
 }
 
 pub fn prusa_gcode_output_summary_lines(
@@ -961,6 +1242,85 @@ impl PrusaGcodeOutputStructuralFacts {
     }
 }
 
+impl PrusaGcodeOutputSemanticSummary {
+    fn from_validated_rows(rows: Vec<PrusaGcodeOutputSemanticSummaryRow>) -> Self {
+        let facts = PrusaGcodeOutputSemanticFacts::from_validated_rows(&rows);
+        Self { rows, facts }
+    }
+
+    pub fn rows(&self) -> &[PrusaGcodeOutputSemanticSummaryRow] {
+        &self.rows
+    }
+
+    pub fn facts(&self) -> PrusaGcodeOutputSemanticFacts {
+        self.facts
+    }
+}
+
+impl PrusaGcodeOutputSemanticFacts {
+    fn from_validated_rows(rows: &[PrusaGcodeOutputSemanticSummaryRow]) -> Self {
+        let mut facts = PrusaGcodeOutputSemanticFacts::expected();
+
+        for row in rows {
+            match (row.semantic_field, row.semantic_value) {
+                (
+                    PrusaGcodeOutputSemanticField::SourceRef,
+                    PrusaGcodeOutputSemanticValue::SourceRef(source_ref),
+                ) => facts.source_ref = source_ref,
+                (
+                    PrusaGcodeOutputSemanticField::FixtureId,
+                    PrusaGcodeOutputSemanticValue::Text(fixture_id),
+                ) => facts.fixture_id = fixture_id,
+                (
+                    PrusaGcodeOutputSemanticField::FixturePath,
+                    PrusaGcodeOutputSemanticValue::Text(fixture_path),
+                ) => facts.fixture_path = fixture_path,
+                (
+                    PrusaGcodeOutputSemanticField::CommandClassCounts,
+                    PrusaGcodeOutputSemanticValue::Text(command_class_counts),
+                ) => facts.command_class_counts = command_class_counts,
+                (
+                    PrusaGcodeOutputSemanticField::MovementClassCounts,
+                    PrusaGcodeOutputSemanticValue::Text(movement_class_counts),
+                ) => facts.movement_class_counts = movement_class_counts,
+                (
+                    PrusaGcodeOutputSemanticField::CoordinateBounds,
+                    PrusaGcodeOutputSemanticValue::Text(coordinate_bounds),
+                ) => facts.coordinate_bounds = coordinate_bounds,
+                (
+                    PrusaGcodeOutputSemanticField::ExtrusionTotal,
+                    PrusaGcodeOutputSemanticValue::Text(extrusion_total),
+                ) => facts.extrusion_total = extrusion_total,
+                (
+                    PrusaGcodeOutputSemanticField::FeedrateObservations,
+                    PrusaGcodeOutputSemanticValue::Text(feedrate_observations),
+                ) => facts.feedrate_observations = feedrate_observations,
+                (
+                    PrusaGcodeOutputSemanticField::LayerMarkerRelationships,
+                    PrusaGcodeOutputSemanticValue::Text(layer_marker_relationships),
+                ) => facts.layer_marker_relationships = layer_marker_relationships,
+                _ => unreachable!("validated semantic summary row value must match its field"),
+            }
+        }
+
+        facts
+    }
+
+    const fn expected() -> Self {
+        Self {
+            source_ref: PRUSA_GCODE_OUTPUT_SOURCE_REF,
+            fixture_id: PRUSA_GCODE_OUTPUT_FIXTURE_ID,
+            fixture_path: PRUSA_GCODE_OUTPUT_FIXTURE_PATH,
+            command_class_counts: SEMANTIC_COMMAND_CLASS_COUNTS_VALUE,
+            movement_class_counts: SEMANTIC_MOVEMENT_CLASS_COUNTS_VALUE,
+            coordinate_bounds: SEMANTIC_COORDINATE_BOUNDS_VALUE,
+            extrusion_total: SEMANTIC_EXTRUSION_TOTAL_VALUE,
+            feedrate_observations: SEMANTIC_FEEDRATE_OBSERVATIONS_VALUE,
+            layer_marker_relationships: SEMANTIC_LAYER_MARKER_RELATIONSHIPS_VALUE,
+        }
+    }
+}
+
 impl PrusaGcodeOutputStructuralField {
     pub const fn as_str(self) -> &'static str {
         match self {
@@ -984,6 +1344,22 @@ impl PrusaGcodeOutputStructuralField {
     }
 }
 
+impl PrusaGcodeOutputSemanticField {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::SourceRef => "source_ref",
+            Self::FixtureId => "fixture_id",
+            Self::FixturePath => "fixture_path",
+            Self::CommandClassCounts => "command_class_counts",
+            Self::MovementClassCounts => "movement_class_counts",
+            Self::CoordinateBounds => "coordinate_bounds",
+            Self::ExtrusionTotal => "extrusion_total",
+            Self::FeedrateObservations => "feedrate_observations",
+            Self::LayerMarkerRelationships => "layer_marker_relationships",
+        }
+    }
+}
+
 impl PrusaGcodeOutputStructuralCategory {
     pub const fn as_str(self) -> &'static str {
         match self {
@@ -994,6 +1370,30 @@ impl PrusaGcodeOutputStructuralCategory {
             Self::OrderedMarkers => "ordered markers",
             Self::MovementExtrusionIndicators => "movement/extrusion indicators",
             Self::TemperatureToolChangeMarkers => "temperature/tool-change markers",
+        }
+    }
+}
+
+impl PrusaGcodeOutputSemanticCategory {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::SourceIdentity => "source identity",
+            Self::FixtureIdentity => "fixture identity",
+            Self::CommandClasses => "command classes",
+            Self::MovementClasses => "movement classes",
+            Self::CoordinateBounds => "coordinate bounds",
+            Self::ExtrusionTotal => "extrusion total",
+            Self::FeedrateObservations => "feedrate observations",
+            Self::LayerMarkerRelationships => "layer or marker relationships",
+        }
+    }
+}
+
+impl PrusaGcodeOutputSemanticValue {
+    pub const fn as_str(self) -> &'static str {
+        match self {
+            Self::SourceRef(source_ref) => source_ref.as_str(),
+            Self::Text(value) => value,
         }
     }
 }
@@ -1034,6 +1434,20 @@ impl PrusaGcodeOutputStructuralRowKey {
     fn from_row(row: &PrusaGcodeOutputStructuralSummaryRow) -> Self {
         Self {
             structural_field: row.structural_field,
+        }
+    }
+}
+
+impl PrusaGcodeOutputSemanticRowKey {
+    fn from_expected(row: ExpectedGcodeOutputSemanticRow) -> Self {
+        Self {
+            semantic_field: row.semantic_field,
+        }
+    }
+
+    fn from_row(row: &PrusaGcodeOutputSemanticSummaryRow) -> Self {
+        Self {
+            semantic_field: row.semantic_field,
         }
     }
 }
@@ -1654,6 +2068,328 @@ fn validate_missing_structural_rows(
         if !row_keys.contains(&row_key) {
             return Err(PrusaGcodeOutputStructuralParseError::MissingRow {
                 structural_field: expected_row.structural_field,
+            });
+        }
+    }
+
+    Ok(())
+}
+
+fn validate_semantic_header(line: &str) -> Result<(), PrusaGcodeOutputSemanticParseError> {
+    if line != SEMANTIC_EXPECTED_HEADER {
+        return Err(PrusaGcodeOutputSemanticParseError::InvalidHeader {
+            line: line.to_owned(),
+        });
+    }
+
+    Ok(())
+}
+
+fn parse_semantic_summary_row(
+    line: &str,
+    line_number: usize,
+) -> Result<PrusaGcodeOutputSemanticSummaryRow, PrusaGcodeOutputSemanticParseError> {
+    let columns: Vec<&str> = line.split('\t').collect();
+    validate_semantic_column_count(&columns, line_number)?;
+    validate_semantic_required_values(&columns, line_number)?;
+
+    let source_ref = parse_semantic_source_ref(columns[0], line_number)?;
+    let fixture_path = parse_semantic_fixture_path(columns[1], line_number)?;
+    let semantic_field = parse_semantic_field(columns[2], line_number)?;
+    let semantic_category = parse_semantic_category(columns[3], line_number)?;
+    let Some(expected_row) = expected_semantic_row_for_field(semantic_field) else {
+        return Err(PrusaGcodeOutputSemanticParseError::ExtraRow {
+            line_number,
+            semantic_field,
+        });
+    };
+
+    if semantic_category != expected_row.semantic_category {
+        return Err(
+            PrusaGcodeOutputSemanticParseError::UnexpectedSemanticCategory {
+                line_number,
+                semantic_field,
+                value: columns[3].to_owned(),
+            },
+        );
+    }
+
+    let semantic_value = parse_semantic_value(columns[4], semantic_field, line_number)?;
+    let evidence_boundary =
+        parse_semantic_evidence_boundary(columns[5], expected_row, line_number)?;
+
+    Ok(PrusaGcodeOutputSemanticSummaryRow {
+        source_ref,
+        fixture_path,
+        semantic_field,
+        semantic_category,
+        semantic_value,
+        evidence_boundary,
+    })
+}
+
+fn validate_semantic_column_count(
+    columns: &[&str],
+    line_number: usize,
+) -> Result<(), PrusaGcodeOutputSemanticParseError> {
+    if columns.len() != SEMANTIC_EXPECTED_COLUMN_COUNT {
+        return Err(PrusaGcodeOutputSemanticParseError::WrongColumnCount {
+            line_number,
+            expected: SEMANTIC_EXPECTED_COLUMN_COUNT,
+            actual: columns.len(),
+        });
+    }
+
+    Ok(())
+}
+
+fn validate_semantic_required_values(
+    columns: &[&str],
+    line_number: usize,
+) -> Result<(), PrusaGcodeOutputSemanticParseError> {
+    for (index, value) in columns.iter().enumerate() {
+        if value.is_empty() {
+            return Err(PrusaGcodeOutputSemanticParseError::EmptyRequiredValue {
+                line_number,
+                column: SEMANTIC_COLUMNS[index],
+            });
+        }
+    }
+
+    Ok(())
+}
+
+fn parse_semantic_source_ref(
+    value: &str,
+    line_number: usize,
+) -> Result<VendorSourceRef, PrusaGcodeOutputSemanticParseError> {
+    if value != PRUSA_GCODE_OUTPUT_SOURCE_REF.as_str() {
+        return Err(PrusaGcodeOutputSemanticParseError::UnexpectedSourceRef {
+            line_number,
+            value: value.to_owned(),
+        });
+    }
+
+    Ok(PRUSA_GCODE_OUTPUT_SOURCE_REF)
+}
+
+fn parse_semantic_fixture_path(
+    value: &str,
+    line_number: usize,
+) -> Result<&'static str, PrusaGcodeOutputSemanticParseError> {
+    if value != PRUSA_GCODE_OUTPUT_FIXTURE_PATH {
+        return Err(PrusaGcodeOutputSemanticParseError::UnexpectedFixturePath {
+            line_number,
+            value: value.to_owned(),
+        });
+    }
+
+    Ok(PRUSA_GCODE_OUTPUT_FIXTURE_PATH)
+}
+
+fn parse_semantic_field(
+    value: &str,
+    line_number: usize,
+) -> Result<PrusaGcodeOutputSemanticField, PrusaGcodeOutputSemanticParseError> {
+    match value {
+        "source_ref" => Ok(PrusaGcodeOutputSemanticField::SourceRef),
+        "fixture_id" => Ok(PrusaGcodeOutputSemanticField::FixtureId),
+        "fixture_path" => Ok(PrusaGcodeOutputSemanticField::FixturePath),
+        "command_class_counts" => Ok(PrusaGcodeOutputSemanticField::CommandClassCounts),
+        "movement_class_counts" => Ok(PrusaGcodeOutputSemanticField::MovementClassCounts),
+        "coordinate_bounds" => Ok(PrusaGcodeOutputSemanticField::CoordinateBounds),
+        "extrusion_total" => Ok(PrusaGcodeOutputSemanticField::ExtrusionTotal),
+        "feedrate_observations" => Ok(PrusaGcodeOutputSemanticField::FeedrateObservations),
+        "layer_marker_relationships" => Ok(PrusaGcodeOutputSemanticField::LayerMarkerRelationships),
+        _ => Err(
+            PrusaGcodeOutputSemanticParseError::UnsupportedSemanticField {
+                line_number,
+                value: value.to_owned(),
+            },
+        ),
+    }
+}
+
+fn parse_semantic_category(
+    value: &str,
+    line_number: usize,
+) -> Result<PrusaGcodeOutputSemanticCategory, PrusaGcodeOutputSemanticParseError> {
+    match value {
+        "source identity" => Ok(PrusaGcodeOutputSemanticCategory::SourceIdentity),
+        "fixture identity" => Ok(PrusaGcodeOutputSemanticCategory::FixtureIdentity),
+        "command classes" => Ok(PrusaGcodeOutputSemanticCategory::CommandClasses),
+        "movement classes" => Ok(PrusaGcodeOutputSemanticCategory::MovementClasses),
+        "coordinate bounds" => Ok(PrusaGcodeOutputSemanticCategory::CoordinateBounds),
+        "extrusion total" => Ok(PrusaGcodeOutputSemanticCategory::ExtrusionTotal),
+        "feedrate observations" => Ok(PrusaGcodeOutputSemanticCategory::FeedrateObservations),
+        "layer or marker relationships" => {
+            Ok(PrusaGcodeOutputSemanticCategory::LayerMarkerRelationships)
+        }
+        _ => Err(
+            PrusaGcodeOutputSemanticParseError::UnsupportedSemanticCategory {
+                line_number,
+                value: value.to_owned(),
+            },
+        ),
+    }
+}
+
+fn parse_semantic_value(
+    value: &str,
+    semantic_field: PrusaGcodeOutputSemanticField,
+    line_number: usize,
+) -> Result<PrusaGcodeOutputSemanticValue, PrusaGcodeOutputSemanticParseError> {
+    match semantic_field {
+        PrusaGcodeOutputSemanticField::SourceRef => {
+            parse_expected_semantic_source_ref_value(value, semantic_field, line_number)
+        }
+        PrusaGcodeOutputSemanticField::FixtureId => parse_expected_semantic_text_value(
+            value,
+            semantic_field,
+            PRUSA_GCODE_OUTPUT_FIXTURE_ID,
+            line_number,
+        ),
+        PrusaGcodeOutputSemanticField::FixturePath => parse_expected_semantic_text_value(
+            value,
+            semantic_field,
+            PRUSA_GCODE_OUTPUT_FIXTURE_PATH,
+            line_number,
+        ),
+        PrusaGcodeOutputSemanticField::CommandClassCounts => parse_expected_semantic_text_value(
+            value,
+            semantic_field,
+            SEMANTIC_COMMAND_CLASS_COUNTS_VALUE,
+            line_number,
+        ),
+        PrusaGcodeOutputSemanticField::MovementClassCounts => parse_expected_semantic_text_value(
+            value,
+            semantic_field,
+            SEMANTIC_MOVEMENT_CLASS_COUNTS_VALUE,
+            line_number,
+        ),
+        PrusaGcodeOutputSemanticField::CoordinateBounds => parse_expected_semantic_text_value(
+            value,
+            semantic_field,
+            SEMANTIC_COORDINATE_BOUNDS_VALUE,
+            line_number,
+        ),
+        PrusaGcodeOutputSemanticField::ExtrusionTotal => parse_expected_semantic_text_value(
+            value,
+            semantic_field,
+            SEMANTIC_EXTRUSION_TOTAL_VALUE,
+            line_number,
+        ),
+        PrusaGcodeOutputSemanticField::FeedrateObservations => parse_expected_semantic_text_value(
+            value,
+            semantic_field,
+            SEMANTIC_FEEDRATE_OBSERVATIONS_VALUE,
+            line_number,
+        ),
+        PrusaGcodeOutputSemanticField::LayerMarkerRelationships => {
+            parse_expected_semantic_text_value(
+                value,
+                semantic_field,
+                SEMANTIC_LAYER_MARKER_RELATIONSHIPS_VALUE,
+                line_number,
+            )
+        }
+    }
+}
+
+fn parse_expected_semantic_source_ref_value(
+    value: &str,
+    semantic_field: PrusaGcodeOutputSemanticField,
+    line_number: usize,
+) -> Result<PrusaGcodeOutputSemanticValue, PrusaGcodeOutputSemanticParseError> {
+    if value != PRUSA_GCODE_OUTPUT_SOURCE_REF.as_str() {
+        return Err(unexpected_semantic_value_error(
+            value,
+            semantic_field,
+            line_number,
+        ));
+    }
+
+    Ok(PrusaGcodeOutputSemanticValue::SourceRef(
+        PRUSA_GCODE_OUTPUT_SOURCE_REF,
+    ))
+}
+
+fn parse_expected_semantic_text_value(
+    value: &str,
+    semantic_field: PrusaGcodeOutputSemanticField,
+    expected_value: &'static str,
+    line_number: usize,
+) -> Result<PrusaGcodeOutputSemanticValue, PrusaGcodeOutputSemanticParseError> {
+    if value != expected_value {
+        return Err(unexpected_semantic_value_error(
+            value,
+            semantic_field,
+            line_number,
+        ));
+    }
+
+    Ok(PrusaGcodeOutputSemanticValue::Text(expected_value))
+}
+
+fn parse_semantic_evidence_boundary(
+    value: &str,
+    expected_row: ExpectedGcodeOutputSemanticRow,
+    line_number: usize,
+) -> Result<PrusaGcodeOutputEvidenceBoundary, PrusaGcodeOutputSemanticParseError> {
+    if value != expected_row.evidence_boundary {
+        return Err(
+            PrusaGcodeOutputSemanticParseError::UnexpectedEvidenceBoundary {
+                line_number,
+                semantic_field: expected_row.semantic_field,
+                value: value.to_owned(),
+            },
+        );
+    }
+
+    Ok(PrusaGcodeOutputEvidenceBoundary(
+        expected_row.evidence_boundary,
+    ))
+}
+
+fn unexpected_semantic_value_error(
+    value: &str,
+    semantic_field: PrusaGcodeOutputSemanticField,
+    line_number: usize,
+) -> PrusaGcodeOutputSemanticParseError {
+    PrusaGcodeOutputSemanticParseError::UnexpectedSemanticValue {
+        line_number,
+        semantic_field,
+        value: value.to_owned(),
+    }
+}
+
+fn expected_semantic_row_for_field(
+    semantic_field: PrusaGcodeOutputSemanticField,
+) -> Option<ExpectedGcodeOutputSemanticRow> {
+    EXPECTED_SEMANTIC_ROWS
+        .iter()
+        .copied()
+        .find(|row| row.semantic_field == semantic_field)
+}
+
+fn expected_semantic_row_for_key(
+    row_key: PrusaGcodeOutputSemanticRowKey,
+) -> Option<ExpectedGcodeOutputSemanticRow> {
+    expected_semantic_row_for_field(row_key.semantic_field)
+}
+
+fn is_expected_semantic_row_key(row_key: PrusaGcodeOutputSemanticRowKey) -> bool {
+    expected_semantic_row_for_key(row_key).is_some()
+}
+
+fn validate_missing_semantic_rows(
+    row_keys: &[PrusaGcodeOutputSemanticRowKey],
+) -> Result<(), PrusaGcodeOutputSemanticParseError> {
+    for expected_row in EXPECTED_SEMANTIC_ROWS {
+        let row_key = PrusaGcodeOutputSemanticRowKey::from_expected(expected_row);
+        if !row_keys.contains(&row_key) {
+            return Err(PrusaGcodeOutputSemanticParseError::MissingRow {
+                semantic_field: expected_row.semantic_field,
             });
         }
     }

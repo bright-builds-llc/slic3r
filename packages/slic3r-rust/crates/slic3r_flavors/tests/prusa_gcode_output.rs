@@ -8,8 +8,9 @@ use std::{
 use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface};
 use slic3r_flavors::prusa_gcode_output::{
     PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue, PrusaGcodeOutputMetadataKey,
-    PrusaGcodeOutputMetadataValue, PrusaGcodeOutputParseError, PrusaGcodeOutputStructuralField,
-    PrusaGcodeOutputStructuralParseError, parse_prusa_gcode_output_structural_summary,
+    PrusaGcodeOutputMetadataValue, PrusaGcodeOutputParseError, PrusaGcodeOutputSemanticField,
+    PrusaGcodeOutputStructuralField, PrusaGcodeOutputStructuralParseError,
+    parse_prusa_gcode_output_semantic_summary, parse_prusa_gcode_output_structural_summary,
     parse_prusa_gcode_output_summary, prusa_gcode_output_metadata,
     prusa_gcode_output_structural_summary_lines, prusa_gcode_output_summary_lines,
 };
@@ -19,6 +20,9 @@ const EXPECTED_GCODE_SUMMARY: &str = include_str!(
 );
 const EXPECTED_GCODE_STRUCTURAL_SUMMARY: &str = include_str!(
     "../../../../parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv"
+);
+const EXPECTED_GCODE_SEMANTIC_SUMMARY: &str = include_str!(
+    "../../../../parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv"
 );
 const PRUSA_GCODE_OUTPUT_SOURCE: &str = include_str!("../src/prusa_gcode_output.rs");
 
@@ -107,6 +111,50 @@ fn parses_expected_gcode_structural_summary_rows_and_facts() {
     assert!(!facts.extrusion_axis_present);
     assert_eq!(facts.temperature_marker_count, 0);
     assert_eq!(facts.tool_change_marker_count, 0);
+}
+
+#[test]
+fn parses_expected_gcode_semantic_summary_rows_and_facts() {
+    // Arrange
+    let input = EXPECTED_GCODE_SEMANTIC_SUMMARY;
+
+    // Act
+    let summary = parse_prusa_gcode_output_semantic_summary(input)
+        .expect("expected semantic G-code summary should parse");
+    let facts = summary.facts();
+    let rows = summary.rows();
+    let fields: Vec<PrusaGcodeOutputSemanticField> =
+        rows.iter().map(|row| row.semantic_field).collect();
+
+    // Assert
+    assert_eq!(rows.len(), 9);
+    assert_eq!(fields.as_slice(), expected_semantic_fields().as_slice());
+    assert_eq!(
+        rows[0].semantic_field,
+        PrusaGcodeOutputSemanticField::SourceRef
+    );
+    assert_eq!(
+        rows[8].semantic_field,
+        PrusaGcodeOutputSemanticField::LayerMarkerRelationships
+    );
+    assert_eq!(facts.source_ref.as_str(), expected_source_ref());
+    assert_eq!(facts.fixture_id, expected_fixture_id());
+    assert_eq!(facts.fixture_path, expected_fixture_path());
+    assert_eq!(facts.command_class_counts, "G1:4;feedrate_only:4");
+    assert_eq!(
+        facts.movement_class_counts,
+        "travel:0;extrusion:0;coordinate_motion:0;feedrate_only:4"
+    );
+    assert_eq!(facts.coordinate_bounds, "x:none;y:none;z:none");
+    assert_eq!(
+        facts.extrusion_total,
+        "e_axis_observed:false;extrusion_total:not_observed"
+    );
+    assert_eq!(facts.feedrate_observations, "F99999.123;F1;F203.2;F203.201");
+    assert_eq!(
+        facts.layer_marker_relationships,
+        "layer_markers:0;marker_relationships:none"
+    );
 }
 
 #[test]
@@ -518,7 +566,10 @@ fn public_declarations_do_not_claim_deferred_behavior() {
         .map(str::trim)
         .filter(|line| line.starts_with("pub "))
         .collect();
-    let allowed_structural_declarations = ["pub extrusion_axis_present: bool,"];
+    let allowed_structural_declarations = [
+        "pub extrusion_axis_present: bool,",
+        "pub extrusion_total: &'static str,",
+    ];
 
     // Act
     let maybe_risky_declaration = public_declarations
@@ -854,6 +905,20 @@ fn expected_structural_fields() -> [PrusaGcodeOutputStructuralField; 16] {
         PrusaGcodeOutputStructuralField::ExtrusionAxisPresent,
         PrusaGcodeOutputStructuralField::TemperatureMarkerCount,
         PrusaGcodeOutputStructuralField::ToolChangeMarkerCount,
+    ]
+}
+
+fn expected_semantic_fields() -> [PrusaGcodeOutputSemanticField; 9] {
+    [
+        PrusaGcodeOutputSemanticField::SourceRef,
+        PrusaGcodeOutputSemanticField::FixtureId,
+        PrusaGcodeOutputSemanticField::FixturePath,
+        PrusaGcodeOutputSemanticField::CommandClassCounts,
+        PrusaGcodeOutputSemanticField::MovementClassCounts,
+        PrusaGcodeOutputSemanticField::CoordinateBounds,
+        PrusaGcodeOutputSemanticField::ExtrusionTotal,
+        PrusaGcodeOutputSemanticField::FeedrateObservations,
+        PrusaGcodeOutputSemanticField::LayerMarkerRelationships,
     ]
 }
 
