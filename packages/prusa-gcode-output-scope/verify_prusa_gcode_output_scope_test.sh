@@ -101,12 +101,22 @@ Run `bazel run //packages/prusa-gcode-output-scope:verify` to check the reviewed
 Phase 49 structural verification allows only command counts, section counts, ordered markers, movement/extrusion indicators, temperature/tool-change markers, source identity, and fixture identity for the narrow Prusa G-code evidence chain.
 Phase 49 structural verification keeps broad generated-outputs in progress and does not prove byte-for-byte G-code parity, toolpath geometry, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation.
 Phase 52 public evidence consumes this Phase 49 closed structural scope contract for the narrow structural Prusa G-code evidence slice while keeping broad generated-outputs in progress.
-Phase 53 semantic verification allows only source identity, fixture identity, command class counts, movement class counts, coordinate bounds, extrusion totals, feedrate observations, and layer/marker relationships for the planned v1.14 semantic Prusa G-code evidence chain.
+Phase 53 semantic verification allows only source identity, fixture identity, command class counts, movement class counts, coordinate bounds, extrusion totals, feedrate observations, and layer/marker relationships for the v1.14 semantic Prusa G-code evidence chain.
 Phase 53 semantic verification keeps generated-outputs exactly in progress and does not prove byte-for-byte G-code parity, broad generated-output verification, toolpath geometry parity, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation.
-Phase 53 only records the planned semantic summary artifact `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv`, the planned Phase 55 `slic3r_flavors::prusa_gcode_output` semantic boundary, and the planned Phase 56 `bazel run //packages/parity:prusaslicer_gcode_output_parity` evidence command; it does not create semantic fixture artifacts, Rust semantic parsing, public semantic parity evidence, or status publication.
+Phase 56 now publishes executable semantic evidence/status for the same narrow
+semantic Prusa G-code evidence slice through
+`bazel run //packages/parity:prusaslicer_gcode_output_parity`, backed by the
+Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, and
+Phase 55 Rust semantic parser/readiness boundary.
 Phase 45 verification does not prove executable Prusa G-code output parity.
 Phase 45 verification does not prove byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, or sync automation.
-This package creates no fixture bytes, expected-gcode-summary.tsv, Rust G-code summary implementation, parity command, status row, upstream source import, vendored fork source tree, Git/network/vendor sync behavior, printer-runtime behavior, host upload, profile auto-update execution, network/device integration, credential handling, Bambu Studio support, OrcaSlicer support, or fork release build.
+This package remains metadata and verifier owned. It creates no fixture bytes,
+expected-gcode-summary.tsv, Rust G-code summary implementation, parity command,
+upstream source import, vendored fork source tree, Git/network/vendor sync
+behavior, printability, printer-runtime behavior, host upload, profile
+auto-update execution, network/device integration, credential handling, Bambu
+Studio support, OrcaSlicer support, non-Prusa fork behavior, or fork release
+build.
 EOF
 
 	cat >"${dir}/gcode-output-scope.md" <<'EOF'
@@ -190,7 +200,7 @@ This section is an additive structural contract for the existing narrow `prusasl
 
 ## v1.14 Semantic Evidence Scope
 
-This section is an additive semantic contract for the existing narrow `prusaslicer.gcode-output` evidence chain. It allows only the fields listed below for Phase 54 semantic fixture expectations and Phase 55 typed parsing. It does not create semantic fixture artifacts, Rust semantic parsing, public semantic parity evidence, or status publication, and it does not promote broad `generated-outputs` status.
+This section is an additive semantic contract for the existing narrow `prusaslicer.gcode-output` evidence chain. It allows only the fields listed below for Phase 54 semantic fixture expectations and Phase 55 typed parsing. Phase 56 publishes the narrow semantic Prusa G-code evidence slice through `bazel run //packages/parity:prusaslicer_gcode_output_parity` after the Phase 54 semantic fixture summary and Phase 55 Rust semantic parser/readiness boundary. That publication remains limited to the Phase 53 closed semantic scope contract and does not promote broad `generated-outputs` status.
 
 | Semantic Field | Category | Evidence Boundary |
 | --- | --- | --- |
@@ -215,10 +225,11 @@ This section is an additive semantic contract for the existing narrow `prusaslic
 | Current expected summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-summary.tsv` |
 | Current structural summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-structural-summary.tsv` |
 | Fixture provenance | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv` |
-| Planned semantic summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv` |
-| Planned Rust semantic boundary | `slic3r_flavors::prusa_gcode_output` |
-| Planned public evidence command | `bazel run //packages/parity:prusaslicer_gcode_output_parity` |
-| Deferred status boundary | `generated-outputs` stays `in progress` in `packages/parity/status.tsv`; no semantic status publication happens before Phase 56 public evidence. |
+| Semantic summary | `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv` |
+| Rust semantic boundary | `slic3r_flavors::prusa_gcode_output` |
+| Public evidence command | `bazel run //packages/parity:prusaslicer_gcode_output_parity` |
+| Published narrow status row | `fork.prusaslicer.gcode-output` stays verified only for the narrow semantic Prusa G-code evidence slice backed by the Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56 public parity command |
+| Broad status row | `generated-outputs` stays `in progress` in `packages/parity/status.tsv` |
 | Docs touched | `packages/prusa-gcode-output-scope/gcode-output-scope.md`; `packages/prusa-gcode-output-scope/README.md` |
 | Security note | No secrets, credentials, private data, runtime file discovery, Git, network, device, host upload, release, or sync surface is introduced by the Phase 53 semantic scope contract. |
 | Deferred semantic scope | Byte-for-byte G-code parity; broad generated-output verification; toolpath geometry parity; printability; printer-runtime behavior; support generation; wall seam behavior; arc fitting; GUI export/viewer behavior; release behavior; network/device behavior; non-Prusa fork behavior; upstream source imports; sync automation. |
@@ -709,7 +720,7 @@ test_missing_semantic_traceability_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-semantic-traceability"
 	write_valid_fixture "${dir}"
-	remove_line_containing "${dir}/gcode-output-scope.md" "| Planned semantic summary |"
+	remove_line_containing "${dir}/gcode-output-scope.md" "| Semantic summary |"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/missing-semantic-traceability.out" "${tmp_dir}/missing-semantic-traceability.err"; then
@@ -718,7 +729,7 @@ test_missing_semantic_traceability_fails() {
 
 	# Assert
 	assert_contains "${tmp_dir}/missing-semantic-traceability.err" '^error:'
-	assert_contains "${tmp_dir}/missing-semantic-traceability.err" 'Planned semantic summary'
+	assert_contains "${tmp_dir}/missing-semantic-traceability.err" 'Semantic summary'
 }
 
 test_missing_semantic_reviewer_signoff_fails() {

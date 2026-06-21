@@ -293,17 +293,21 @@ verify_readme() {
 	require_text "${readme_file}" "README.md" \
 		"Phase 52 public evidence consumes this Phase 49 closed structural scope contract for the narrow ""structural Prusa G-code evidence slice while keeping broad generated-outputs in progress."
 	require_text "${readme_file}" "README.md" \
-		"Phase 53 semantic verification allows only source identity, fixture identity, command class counts, movement class counts, coordinate bounds, extrusion totals, feedrate observations, and layer/marker relationships for the planned v1.14 semantic Prusa G-code evidence chain."
+		"Phase 53 semantic verification allows only source identity, fixture identity, command class counts, movement class counts, coordinate bounds, extrusion totals, feedrate observations, and layer/marker relationships for the v1.14 semantic Prusa G-code evidence chain."
 	require_text "${readme_file}" "README.md" \
 		"Phase 53 semantic verification keeps generated-outputs exactly in progress and does not prove byte-for-byte G-code parity, broad generated-output verification, toolpath geometry parity, printability, printer-runtime behavior, support generation, wall seam behavior, arc fitting, GUI export/viewer behavior, release behavior, network/device behavior, Bambu Studio support, OrcaSlicer support, upstream source imports, or sync automation."
 	require_text "${readme_file}" "README.md" \
-		"Phase 53 only records the planned semantic summary artifact \`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv\`, the planned Phase 55 \`slic3r_flavors::prusa_gcode_output\` semantic boundary, and the planned Phase 56 \`bazel run //packages/parity:prusaslicer_gcode_output_parity\` evidence command; it does not create semantic fixture artifacts, Rust semantic parsing, public semantic parity evidence, or status publication."
+		"Phase 56 now publishes executable semantic evidence/status for the same narrow"
+	require_text "${readme_file}" "README.md" \
+		"Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, and"
 	require_text "${readme_file}" "README.md" \
 		"Phase 45 verification does not prove executable Prusa G-code output parity."
 	require_text "${readme_file}" "README.md" \
 		"Phase 45 verification does not prove byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability behavior, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, or sync automation."
 	require_text "${readme_file}" "README.md" \
-		"This package creates no fixture bytes, expected-gcode-summary.tsv, Rust G-code summary implementation, parity command, status row, upstream source import, vendored fork source tree, Git/network/vendor sync behavior, printer-runtime behavior, host upload, profile auto-update execution, network/device integration, credential handling, Bambu Studio support, OrcaSlicer support, or fork release build."
+		"This package remains metadata and verifier owned. It creates no fixture bytes,"
+	require_text "${readme_file}" "README.md" \
+		"behavior, printability, printer-runtime behavior, host upload, profile"
 }
 
 verify_scope_record() {
@@ -461,13 +465,15 @@ verify_semantic_traceability() {
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
 		"${SEMANTIC_TRACEABILITY_SECTION}" "Fixture provenance" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv\`"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
-		"${SEMANTIC_TRACEABILITY_SECTION}" "Planned semantic summary" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv\`"
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Semantic summary" "\`packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv\`"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
-		"${SEMANTIC_TRACEABILITY_SECTION}" "Planned Rust semantic boundary" "\`slic3r_flavors::prusa_gcode_output\`"
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Rust semantic boundary" "\`slic3r_flavors::prusa_gcode_output\`"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
-		"${SEMANTIC_TRACEABILITY_SECTION}" "Planned public evidence command" "\`${PLANNED_PARITY_COMMAND}\`"
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Public evidence command" "\`${PLANNED_PARITY_COMMAND}\`"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
-		"${SEMANTIC_TRACEABILITY_SECTION}" "Deferred status boundary" "\`generated-outputs\` stays \`in progress\` in \`packages/parity/status.tsv\`; no semantic status publication happens before Phase 56 public evidence."
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Published narrow status row" "\`fork.prusaslicer.gcode-output\` stays verified only for the narrow semantic Prusa G-code evidence slice backed by the Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56 public parity command"
+	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
+		"${SEMANTIC_TRACEABILITY_SECTION}" "Broad status row" "\`generated-outputs\` stays \`in progress\` in \`packages/parity/status.tsv\`"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
 		"${SEMANTIC_TRACEABILITY_SECTION}" "Docs touched" "\`packages/prusa-gcode-output-scope/gcode-output-scope.md\`; \`packages/prusa-gcode-output-scope/README.md\`"
 	require_section_table_row "${scope_file}" "gcode-output-scope.md" \
@@ -493,6 +499,7 @@ verify_deferred_scope_terms() {
 	local scope_term
 	for scope_term in \
 		"Byte-for-byte G-code parity" \
+		"broad generated-output verification" \
 		"full generated-output parity" \
 		"toolpath geometry" \
 		"extrusion" \
@@ -510,6 +517,7 @@ verify_deferred_scope_terms() {
 		"post-processing" \
 		"host upload" \
 		"network/device integration" \
+		"non-Prusa fork behavior" \
 		"profile auto-update execution" \
 		"fork release builds" \
 		"Bambu Studio" \
