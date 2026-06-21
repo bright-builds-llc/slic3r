@@ -260,7 +260,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 |-------|----------------|--------|-----------|
 | 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
 | 54. Semantic G-code Fixture Corpus | 2/2 | Complete    | 2026-06-21 |
-| 55. Rust Semantic G-code Summary Boundary | 2/2 | Complete   | 2026-06-21 |
+| 55. Rust Semantic G-code Summary Boundary | 2/2 | Complete    | 2026-06-21 |
 | 56. Executable Semantic G-code Evidence | 0/5 | Planned | — |
 
 ## Future Revisit Candidates
