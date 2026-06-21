@@ -54,7 +54,21 @@ Prusa G-code scope contract, run
 guards that keep semantic evidence narrow while generated-output parity,
 printability, runtime behavior, support generation, seam behavior, arc
 fitting, GUI behavior, release behavior, upstream imports, and sync automation
-remain deferred. Phase 54 is the next planned fixture-corpus step.
+remain deferred.
+
+v1.14 Phase 54 is complete. Maintainers can inspect the source-pinned
+semantic Prusa G-code fixture corpus, run
+`bazel run //packages/parity-fixtures:verify_prusa_gcode_output_fixture`, and
+rely on mutation guards for semantic summary drift, missing rows, duplicate
+rows, out-of-order rows, unsupported fields, unsupported broad-behavior
+claims, provenance mismatch, and stale package documentation references.
+
+v1.14 Phase 55 is complete. Developers can parse the Phase 54 semantic summary
+artifact through the pure `slic3r_flavors::prusa_gcode_output` Rust boundary,
+inspect static semantic readiness metadata through the existing registry
+surface, and run Cargo/Bazel coverage proving invalid semantic summaries fail
+closed without publishing public semantic parity status. Phase 56 is the next
+planned executable semantic evidence and public status/docs step.
 
 v1.13 is archived. Maintainers can run
 `bazel run //packages/parity:prusaslicer_gcode_output_parity`, inspect the
@@ -569,4 +583,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-21 after verifying Phase 53*
+*Last updated: 2026-06-21 after verifying Phase 55*
