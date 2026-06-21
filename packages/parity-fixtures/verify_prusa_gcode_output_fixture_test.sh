@@ -82,14 +82,21 @@ move_semantic_row_before() {
 	local tmp_file
 	tmp_file="${file}.tmp"
 	awk -F '\t' -v moved_field="${moved_field}" -v before_field="${before_field}" '
-		NR == 1 { print; next }
+		NR == 1 { header = $0; next }
 		$3 == moved_field { moved_row = $0; next }
-		$3 == before_field && moved_row != "" { print moved_row; moved_row = ""; print; next }
-		{ print }
+		$3 == before_field { before_row = $0; before_seen = 1; next }
+		!before_seen { prefix = prefix $0 "\n"; next }
+		{ suffix = suffix $0 "\n" }
 		END {
+			print header
+			printf "%s", prefix
 			if (moved_row != "") {
 				print moved_row
 			}
+			if (before_row != "") {
+				print before_row
+			}
+			printf "%s", suffix
 		}
 	' "${file}" >"${tmp_file}"
 	mv "${tmp_file}" "${file}"
@@ -128,6 +135,7 @@ run_verifier() {
 		"${fixture_dir}/fixture-provenance.tsv" \
 		"${fixture_dir}/expected-gcode-summary.tsv" \
 		"${fixture_dir}/expected-gcode-structural-summary.tsv" \
+		"${fixture_dir}/expected-gcode-semantic-summary.tsv" \
 		"${fixture_dir}/gcodewriter-set-speed.gcode" \
 		"${dir}/packages/parity/status.tsv" \
 		"${dir}/packages/parity/BUILD.bazel" \

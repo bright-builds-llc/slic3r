@@ -26,24 +26,26 @@ if [[ "$#" -eq 0 ]]; then
 	provenance_file="${fixture_dir}/fixture-provenance.tsv"
 	expected_summary_file="${fixture_dir}/expected-gcode-summary.tsv"
 	structural_summary_file="${fixture_dir}/expected-gcode-structural-summary.tsv"
+	semantic_summary_file="${fixture_dir}/expected-gcode-semantic-summary.tsv"
 	gcode_file="${fixture_dir}/gcodewriter-set-speed.gcode"
 	status_file="${checkout_root}/packages/parity/status.tsv"
 	parity_build_file="${checkout_root}/packages/parity/BUILD.bazel"
 	package_readme="${package_dir}/README.md"
-elif [[ "$#" -eq 8 || "$#" -eq 9 ]]; then
+elif [[ "$#" -eq 9 || "$#" -eq 10 ]]; then
 	fixture_readme="$1"
 	provenance_file="$2"
 	expected_summary_file="$3"
 	structural_summary_file="$4"
-	gcode_file="$5"
-	status_file="$6"
-	parity_build_file="$7"
-	package_readme="$8"
-	if [[ "$#" -eq 9 ]]; then
-		checkout_root="$9"
+	semantic_summary_file="$5"
+	gcode_file="$6"
+	status_file="$7"
+	parity_build_file="$8"
+	package_readme="$9"
+	if [[ "$#" -eq 10 ]]; then
+		checkout_root="${10}"
 	fi
 else
-	error "usage: verify_prusa_gcode_output_fixture.sh [fixture-README fixture-provenance expected-gcode-summary expected-gcode-structural-summary gcode-file parity-status parity-BUILD parity-fixtures-README [checkout-root]]"
+	error "usage: verify_prusa_gcode_output_fixture.sh [fixture-README fixture-provenance expected-gcode-summary expected-gcode-structural-summary expected-gcode-semantic-summary gcode-file parity-status parity-BUILD parity-fixtures-README [checkout-root]]"
 fi
 
 readonly SOURCE_REF="prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
@@ -59,6 +61,8 @@ readonly PHASE45_SCOPE_RECORD="packages/prusa-gcode-output-scope/gcode-output-sc
 readonly EXPECTED_SUMMARY_HEADER=$'source_ref\tfixture_path\tmetadata_key\tmetadata_value\tmarker_key\tmarker_value\tnotes'
 readonly STRUCTURAL_SUMMARY_HEADER=$'source_ref\tfixture_path\tstructural_field\tstructural_category\tstructural_value\tevidence_boundary'
 readonly STRUCTURAL_SUMMARY_ROW_COUNT="17"
+readonly SEMANTIC_SUMMARY_HEADER=$'source_ref\tfixture_path\tsemantic_field\tsemantic_category\tsemantic_value\tevidence_boundary'
+readonly SEMANTIC_SUMMARY_ROW_COUNT="10"
 readonly PROVENANCE_HEADER=$'fixture_id\tvendor_id\tinventory_id\tsource_ref\taccepted_tag\tpeeled_commit\tsource_path\tupstream_url\tbytes\tsha256\tline_endings_encoding\trole\tphase45_scope_record\tupdate_route\tstatus_scope\tprivacy_post_processing_exclusions\tbroad_deferrals'
 readonly PROVENANCE_ROW=$'gcodewriter-set-speed.gcode\tprusaslicer\tprusaslicer.gcode-output\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tversion_2.9.5\t9a583bd438b195856f3bcf7ea99b69ba4003a961\ttests/fff_print/test_gcodewriter.cpp\thttps://github.com/prusa3d/PrusaSlicer/blob/9a583bd438b195856f3bcf7ea99b69ba4003a961/tests/fff_print/test_gcodewriter.cpp#L20-L35\t42\tdc1bb725fb2d81b986356bcdd0b160877dce48b086b3cf71867abc0ecf4467cb\tascii-lf\tsource-controlled-gcodewriter-set-speed-expected-output\tpackages/prusa-gcode-output-scope/gcode-output-scope.md\treviewed-intake-change-updates-packages/fork-vendors/forks.tsv-packages/fork-inventories/prusaslicer.tsv-and-packages/prusa-gcode-output-scope/gcode-output-scope.md\tPhase-46-fixture-surface-only-no-parity-status\tno-post-processing-no-host-upload-no-credential-no-network-device-no-printer-runtime\tno-byte-for-byte-gcode-parity-no-full-generated-output-parity-no-toolpath-geometry-no-extrusion-no-timing-no-support-no-wall-seam-no-arc-no-step-no-full-3mf-no-runtime-no-firmware-no-printability-no-gui-no-binary-gcode-no-thumbnails-no-post-processing-no-host-upload-no-network-device-no-profile-auto-update-no-release-no-bambu-no-orca-no-upstream-source-import-no-sync'
 readonly EXPECTED_SOURCE_ROW=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tsource_identity\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tsource_literal\ttests/fff_print/test_gcodewriter.cpp#L20-L35\tAccepted PrusaSlicer source identity and upstream test literal trace only; no generated-output behavior claimed.'
@@ -68,6 +72,8 @@ readonly EXPECTED_LINE_3_ROW=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7
 readonly EXPECTED_LINE_4_ROW=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_role\tsource-controlled-gcodewriter-set-speed-expected-output\tline_4\tG1 F203.201\tRepresentative three-decimal rounded feedrate command marker; no motion, extrusion, timing, or printability semantics claimed.'
 readonly STRUCTURAL_REQUIRED_FIELDS="source_ref inventory_source_paths fixture_source_literal fixture_id fixture_path command_count_total command_count_g1 section_count_total ordered_marker_1 ordered_marker_2 ordered_marker_3 ordered_marker_4 movement_axis_present extrusion_axis_present temperature_marker_count tool_change_marker_count"
 readonly STRUCTURAL_EXPECTED_ROWS=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tsource_ref\tsource identity\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tAccepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tinventory_source_paths\tsource identity\tsrc/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp\tInventory source paths only: `src/libslic3r/GCode.cpp;src/libslic3r/GCode.hpp`.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_source_literal\tsource identity\ttests/fff_print/test_gcodewriter.cpp#L20-L35\tSource literal only: `tests/fff_print/test_gcodewriter.cpp#L20-L35`.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_id\tfixture identity\tgcodewriter-set-speed.gcode\tFixture identity only: `gcodewriter-set-speed.gcode`.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_path\tfixture identity\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tChecked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tcommand_count_total\tcommand counts\t4\tCount of G-code command rows in the selected fixture only; no generated-output behavior claimed.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tcommand_count_g1\tcommand counts\t4\tCount of `G1` command rows in the selected fixture only; no toolpath geometry claimed.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tsection_count_total\tsection counts\t1\tCount of structural sections in the selected summary only; no GUI, print, or runtime section behavior claimed.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tordered_marker_1\tordered markers\tG1 F99999.123\tFirst ordered marker value from the selected fixture summary only.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tordered_marker_2\tordered markers\tG1 F1\tSecond ordered marker value from the selected fixture summary only.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tordered_marker_3\tordered markers\tG1 F203.2\tThird ordered marker value from the selected fixture summary only.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tordered_marker_4\tordered markers\tG1 F203.201\tFourth ordered marker value from the selected fixture summary only.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tmovement_axis_present\tmovement/extrusion indicators\tfalse\tBoolean structural indicator for movement-axis text presence only; no toolpath geometry, travel, or printability claim.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\textrusion_axis_present\tmovement/extrusion indicators\tfalse\tBoolean structural indicator for extrusion-axis text presence only; no extrusion amount, material, or printability claim.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\ttemperature_marker_count\ttemperature/tool-change markers\t0\tCount of temperature marker commands in the selected fixture only; no printer-runtime behavior claimed.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\ttool_change_marker_count\ttemperature/tool-change markers\t0\tCount of tool-change marker commands in the selected fixture only; no multi-tool runtime behavior claimed.'
+readonly SEMANTIC_REQUIRED_FIELDS="source_ref fixture_id fixture_path command_class_counts movement_class_counts coordinate_bounds extrusion_total feedrate_observations layer_marker_relationships"
+readonly SEMANTIC_EXPECTED_ROWS=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tsource_ref\tsource identity\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tAccepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_id\tfixture identity\tgcodewriter-set-speed.gcode\tFixture identity only: `gcodewriter-set-speed.gcode`.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfixture_path\tfixture identity\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tChecked-in fixture path only: `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode`.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tcommand_class_counts\tcommand classes\tG1:4;feedrate_only:4\tCounts of command classes in the selected fixture summary only; no byte-for-byte G-code parity or generator parity.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tmovement_class_counts\tmovement classes\ttravel:0;extrusion:0;coordinate_motion:0;feedrate_only:4\tCounts of movement classes in the selected fixture summary only; no toolpath geometry, travel, or printability claim.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tcoordinate_bounds\tcoordinate bounds\tx:none;y:none;z:none\tNo coordinate axes observed in the selected fixture summary; no toolpath geometry or printability claim.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\textrusion_total\textrusion total\te_axis_observed:false;extrusion_total:not_observed\tNo extrusion axis observed in the selected fixture summary; no material-use, runtime, or printability claim.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tfeedrate_observations\tfeedrate observations\tF99999.123;F1;F203.2;F203.201\tFeedrate metadata only from the selected fixture summary; no timing, firmware, or printer-runtime behavior claim.\nprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode\tlayer_marker_relationships\tlayer or marker relationships\tlayer_markers:0;marker_relationships:none\tNo layer markers observed in the selected fixture summary; no GUI, viewer, runtime, support, seam, or arc behavior claim.'
 readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow structural Prusa G-code evidence slice backed by the Phase 49 closed structural scope contract, Phase 50 structural fixture summary, Phase 51 Rust structural parser/readiness boundary, and Phase 52 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host '"upload"$', network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
 
 require_file() {
@@ -379,6 +385,133 @@ verify_structural_summary() {
 	require_text "${fixture_readme}" "fixture README" "Update route: update this fixture only after a reviewed intake change updates"
 }
 
+require_semantic_column_count() {
+	awk -F '\t' -v label="expected-gcode-semantic-summary.tsv" '
+		NR == 1 { next }
+		NF != 6 {
+			printf "error: %s: expected 6 columns on line %d, got %d\n", label, NR, NF > "/dev/stderr"
+			exit 1
+		}
+	' "${semantic_summary_file}"
+}
+
+require_semantic_allowed_fields() {
+	awk -F '\t' -v label="expected-gcode-semantic-summary.tsv" '
+		NR == 1 { next }
+		$3 != "source_ref" &&
+			$3 != "fixture_id" &&
+			$3 != "fixture_path" &&
+			$3 != "command_class_counts" &&
+			$3 != "movement_class_counts" &&
+			$3 != "coordinate_bounds" &&
+			$3 != "extrusion_total" &&
+			$3 != "feedrate_observations" &&
+			$3 != "layer_marker_relationships" {
+			printf "error: %s: unsupported semantic field: %s\n", label, $3 > "/dev/stderr"
+			exit 1
+		}
+	' "${semantic_summary_file}"
+}
+
+require_semantic_field_counts() {
+	awk -F '\t' \
+		-v label="expected-gcode-semantic-summary.tsv" \
+		-v required_fields="${SEMANTIC_REQUIRED_FIELDS}" '
+		BEGIN {
+			required_count = split(required_fields, required, " ")
+		}
+		NR == 1 { next }
+		{
+			counts[$3]++
+		}
+		END {
+			failed = 0
+			for (i = 1; i <= required_count; i++) {
+				field = required[i]
+				actual = counts[field] + 0
+				if (actual == 1) {
+					continue
+				}
+				if (actual > 1) {
+					printf "error: %s: duplicate semantic field: %s count %d, expected 1\n", label, field, actual > "/dev/stderr"
+				} else {
+					printf "error: %s: missing semantic field: %s count %d, expected 1\n", label, field, actual > "/dev/stderr"
+				}
+				failed = 1
+			}
+			exit failed
+		}
+	' "${semantic_summary_file}"
+}
+
+require_semantic_provenance_alignment() {
+	awk -F '\t' \
+		-v label="expected-gcode-semantic-summary.tsv" \
+		-v source_ref="${SOURCE_REF}" \
+		-v fixture_path="${FIXTURE_PATH}" '
+		NR == 1 { next }
+		$1 != source_ref || $2 != fixture_path {
+			printf "error: %s: provenance mismatch for %s\n", label, $3 > "/dev/stderr"
+			exit 1
+		}
+	' "${semantic_summary_file}"
+}
+
+require_semantic_value() {
+	local field="$1"
+	local expected_value="$2"
+	local actual_value
+	actual_value="$(awk -F '\t' -v field="${field}" '$3 == field { print $5; exit }' "${semantic_summary_file}")"
+	if [[ "${actual_value}" != "${expected_value}" ]]; then
+		error "expected-gcode-semantic-summary.tsv: semantic value mismatch for ${field}: expected ${expected_value}, got ${actual_value}"
+	fi
+}
+
+require_semantic_exact_rows() {
+	local actual_row
+	local expected_field
+	local expected_row
+	local actual_field
+	local row_number
+
+	row_number=2
+	while IFS= read -r expected_row; do
+		actual_row="$(awk -v row_number="${row_number}" 'NR == row_number { print; exit }' "${semantic_summary_file}")"
+		if [[ "${actual_row}" == "${expected_row}" ]]; then
+			row_number=$((row_number + 1))
+			continue
+		fi
+
+		expected_field="$(printf '%s\n' "${expected_row}" | awk -F '\t' '{ print $3 }')"
+		actual_field="$(printf '%s\n' "${actual_row}" | awk -F '\t' '{ print $3 }')"
+		if [[ -n "${actual_field}" && "${actual_field}" != "${expected_field}" ]]; then
+			error "expected-gcode-semantic-summary.tsv: semantic rows out of order near ${actual_field}"
+		fi
+		error "expected-gcode-semantic-summary.tsv: missing required row for ${expected_field}"
+	done <<<"${SEMANTIC_EXPECTED_ROWS}"
+}
+
+verify_semantic_summary() {
+	local package_checked_artifacts_text
+
+	package_checked_artifacts_text="Fixture verification checks checked-in artifacts only; it does not fet""ch upstream source"
+
+	require_exact_header "${semantic_summary_file}" "expected-gcode-semantic-summary.tsv" "${SEMANTIC_SUMMARY_HEADER}"
+	require_semantic_column_count
+	require_semantic_allowed_fields
+	require_semantic_field_counts
+	require_semantic_provenance_alignment
+	require_semantic_value "source_ref" "${SOURCE_REF}"
+	require_semantic_value "fixture_id" "${FIXTURE_ID}"
+	require_semantic_value "fixture_path" "${FIXTURE_PATH}"
+	require_semantic_exact_rows
+	require_line_count "${semantic_summary_file}" "expected-gcode-semantic-summary.tsv" "${SEMANTIC_SUMMARY_ROW_COUNT}"
+	require_text "${fixture_readme}" "fixture README" "Semantic expected artifact: \`expected-gcode-semantic-summary.tsv\`"
+	require_text "${fixture_readme}" "fixture README" "Phase 54 adds \`expected-gcode-semantic-summary.tsv\` as a semantic sidecar"
+	require_text "${fixture_readme}" "fixture README" "Phase 55 owns Rust semantic parsing/readiness, and Phase 56 owns public semantic parity/status/docs publication."
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "${package_checked_artifacts_text}"
+}
+
 verify_readme_scope() {
 	local no_behavior_intro
 	local no_behavior_middle
@@ -431,7 +564,7 @@ reject_overclaiming_text() {
 	local checked_label
 	local forbidden_claim
 
-	for checked_file in "${fixture_readme}" "${expected_summary_file}" "${structural_summary_file}"; do
+	for checked_file in "${fixture_readme}" "${expected_summary_file}" "${structural_summary_file}" "${semantic_summary_file}"; do
 		checked_label="$(basename "${checked_file}")"
 		for forbidden_claim in \
 			"verified Prusa G-code output parity" \
@@ -439,6 +572,7 @@ reject_overclaiming_text() {
 			"full generated-output parity verified" \
 			"toolpath correctness verified" \
 			"printability verified" \
+			"printer-runtime behavior verified" \
 			"host ""upload verified" \
 			"Bambu Studio support verified" \
 			"OrcaSlicer support verified"; do
@@ -452,6 +586,7 @@ for required_file in \
 	"${provenance_file}" \
 	"${expected_summary_file}" \
 	"${structural_summary_file}" \
+	"${semantic_summary_file}" \
 	"${gcode_file}" \
 	"${status_file}" \
 	"${parity_build_file}" \
@@ -465,6 +600,7 @@ verify_provenance
 verify_expected_summary
 reject_overclaiming_text
 verify_structural_summary
+verify_semantic_summary
 verify_readme_scope
 verify_status_published
 verify_parity_target_published
