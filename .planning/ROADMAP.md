@@ -100,7 +100,7 @@ and fixture identity.
   parse, test, and trace semantic Prusa G-code summaries through a pure typed
   Rust boundary.
 
-- [ ] **Phase 56: Executable Semantic G-code Evidence** - Maintainers can run
+- [x] **Phase 56: Executable Semantic G-code Evidence** - Maintainers can run (completed 2026-06-21)
   public fail-closed semantic evidence and inspect exact narrow status/docs
   for the Prusa G-code slice.
 
@@ -229,7 +229,7 @@ Plans:
   verifier enforcement.
 - [x] 56-04-PLAN.md - Update scope and package docs for the semantic evidence
   chain.
-- [ ] 56-05-PLAN.md - Update port docs while keeping broad generated outputs
+- [x] 56-05-PLAN.md - Update port docs while keeping broad generated outputs
   in progress.
 
 ## Coverage
@@ -261,7 +261,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 | 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
 | 54. Semantic G-code Fixture Corpus | 2/2 | Complete    | 2026-06-21 |
 | 55. Rust Semantic G-code Summary Boundary | 2/2 | Complete    | 2026-06-21 |
-| 56. Executable Semantic G-code Evidence | 4/5 | In Progress | — |
+| 56. Executable Semantic G-code Evidence | 5/5 | Complete   | 2026-06-21 |
 
 ## Future Revisit Candidates
 
