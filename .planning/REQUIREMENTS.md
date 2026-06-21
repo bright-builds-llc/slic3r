@@ -50,7 +50,7 @@ roadmap phase and must be verified before milestone archive.
   summary boundary that parses caller-supplied checked-in semantic artifacts
   into domain values without Git, network, filesystem discovery, process,
   generator, printer-runtime, release, or sync side effects.
-- [ ] **GSRUST-02**: Developer can inspect static readiness or registry
+- [x] **GSRUST-02**: Developer can inspect static readiness or registry
   metadata that traces the semantic G-code boundary to the accepted Prusa
   source identity, fixture corpus, expected semantic summaries, planned
   command, planned status wording, and deferred generated-output surfaces.
@@ -135,7 +135,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GSFIX-02 | Phase 54 | Complete |
 | GSFIX-03 | Phase 54 | Complete |
 | GSRUST-01 | Phase 55 | Complete |
-| GSRUST-02 | Phase 55 | Pending |
+| GSRUST-02 | Phase 55 | Complete |
 | GSRUST-03 | Phase 55 | Complete |
 | GSEV-01 | Phase 56 | Pending |
 | GSEV-02 | Phase 56 | Pending |

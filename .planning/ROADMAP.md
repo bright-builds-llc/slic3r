@@ -96,7 +96,7 @@ and fixture identity.
   and verify source-pinned Prusa semantic summary fixtures with fail-closed
   drift guards.
 
-- [ ] **Phase 55: Rust Semantic G-code Summary Boundary** - Developers can
+- [x] **Phase 55: Rust Semantic G-code Summary Boundary** - Developers can (completed 2026-06-21)
   parse, test, and trace semantic Prusa G-code summaries through a pure typed
   Rust boundary.
 
@@ -193,7 +193,7 @@ Plans:
 
 - [x] 55-01-PLAN.md - Add the pure typed semantic summary parser and
   Cargo/Bazel rejection coverage.
-- [ ] 55-02-PLAN.md - Expose semantic readiness metadata through the existing
+- [x] 55-02-PLAN.md - Expose semantic readiness metadata through the existing
   registry boundary without status publication.
 
 ### Phase 56: Executable Semantic G-code Evidence
@@ -260,7 +260,7 @@ Phases execute in numeric order: 53 -> 54 -> 55 -> 56
 |-------|----------------|--------|-----------|
 | 53. Semantic G-code Scope Contract | 2/2 | Complete   | 2026-06-21 |
 | 54. Semantic G-code Fixture Corpus | 2/2 | Complete    | 2026-06-21 |
-| 55. Rust Semantic G-code Summary Boundary | 1/2 | In Progress|  |
+| 55. Rust Semantic G-code Summary Boundary | 2/2 | Complete   | 2026-06-21 |
 | 56. Executable Semantic G-code Evidence | 0/5 | Planned | — |
 
 ## Future Revisit Candidates
