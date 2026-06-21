@@ -66,7 +66,7 @@ roadmap phase and must be verified before milestone archive.
   validates marker summary, structural summary, and semantic summary artifacts
   through the Rust boundary while preserving the existing public command
   contract unless a deliberate roadmap decision introduces a companion command.
-- [ ] **GSEV-02**: Maintainer can see fail-closed mutation guards for semantic
+- [x] **GSEV-02**: Maintainer can see fail-closed mutation guards for semantic
   drift classes such as movement class changes, coordinate-bound changes,
   extrusion-total changes, feedrate observation changes, fixture identity
   drift, and unsupported deferred-behavior claims.
@@ -138,7 +138,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | GSRUST-02 | Phase 55 | Complete |
 | GSRUST-03 | Phase 55 | Complete |
 | GSEV-01 | Phase 56 | Complete |
-| GSEV-02 | Phase 56 | Pending |
+| GSEV-02 | Phase 56 | Complete |
 | GSEV-03 | Phase 56 | Pending |
 
 **Coverage:**
