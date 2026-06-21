@@ -57,7 +57,7 @@ The selected fixture is derived from source-controlled
 `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961` because
 the accepted upstream tree has no checked-in `.gcode` blob. The Phase 49 closed structural scope contract defines the allowed structural field set. Phase 50 adds `expected-gcode-structural-summary.tsv` to the same fixture namespace and bundle as the source-pinned structural sidecar. Phase 51 consumes that sidecar through the Rust structural parser/readiness boundary. Phase 52 verifies the narrow structural evidence slice through
 `bazel run //packages/parity:prusaslicer_gcode_output_parity` plus the exact
-`fork.prusaslicer.gcode-output` status row.
+`fork.prusaslicer.gcode-output` status row. Phase 53 closes the semantic field contract. Phase 54 adds `expected-gcode-semantic-summary.tsv` to the same fixture namespace and `//packages/parity-fixtures:prusa_gcode_output_bundle`.
 
 The G-code fixture namespace itself does not prove byte-for-byte G-code
 parity, full generated-output parity, toolpath geometry, extrusion, timing,
@@ -71,6 +71,7 @@ sync automation remain deferred.
 Update route: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
 Branch-head observations remain drift-only.
 Fixture verification does not fetch upstream source, run profile auto-update execution, or ingest plugins.
+Fixture verification checks checked-in artifacts only; it does not fetch upstream source, generate fixtures, upload G-code, run slicer runtime behavior, execute printer behavior, sync sources, or publish public status.
 
 This fixture package does not introduce Bambu Studio fixtures, OrcaSlicer fixtures, network/device integration, cloud behavior, credentials, profile auto-update execution, non-free plugin ingestion, full PrusaSlicer runtime support, GUI support, sync automation, or fork release packaging. The narrow parser/config evidence is verified, and full PrusaSlicer runtime support remains deferred.
 
@@ -132,3 +133,6 @@ additional fixture files by themselves.
   verifies the narrow structural evidence slice through
   `bazel run //packages/parity:prusaslicer_gcode_output_parity` plus the exact
   `fork.prusaslicer.gcode-output` status row.
+  Phase 53 closes the semantic field contract, and Phase 54 adds
+  `expected-gcode-semantic-summary.tsv` to the same fixture namespace and
+  `//packages/parity-fixtures:prusa_gcode_output_bundle`.
