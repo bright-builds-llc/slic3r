@@ -2,6 +2,90 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.14 — PrusaSlicer G-code Semantic Evidence Foundation
+
+**Shipped:** 2026-06-22\
+**Phases:** 4 | **Plans:** 11 | **Sessions:** yolo phase execution plus
+milestone audit, integration check, archive closeout, phase archival, and
+requirements reset
+
+### What Was Built
+
+- Closed nine-field semantic Prusa G-code evidence contract with traceability
+  to fixture, Rust boundary, public command, status, docs, security, deferred
+  scope, and reviewer boundaries
+- Source-pinned semantic G-code sidecar for the selected Prusa `set_speed`
+  fixture, with Bazel fixture ownership and fail-closed semantic verifier
+  mutation coverage
+- Pure typed Rust parser, typed facts projection, and readiness metadata for
+  the semantic sidecar, keeping parsing caller-supplied and side-effect free
+- Public `//packages/parity:prusaslicer_gcode_output_parity` semantic evidence
+  path that validates marker, structural, and semantic TSV artifacts through
+  Rust
+- Semantic value, fixture identity, and deferred-claim mutation guards; exact
+  narrow semantic `fork.prusaslicer.gcode-output` status wording; and
+  package/scope/fixture/port docs that keep broad generated-output/runtime/fork
+  surfaces deferred
+
+### What Worked
+
+- The v1.12 and v1.13 evidence ladder extended cleanly from marker and
+  structural summaries into semantic summaries without widening the public
+  generated-output claim.
+- Keeping Phase 54 fixture data, Phase 55 Rust parsing/readiness, and Phase 56
+  public command/status/docs publication separate made cross-phase wiring easy
+  to audit.
+- Exact field-order, source/fixture identity, row-value, evidence-boundary,
+  status-row, and overclaim checks gave maintainers concrete failure modes for
+  semantic drift.
+- The milestone audit and integration checker found no orphaned requirements,
+  broken maintainer flows, or broad generated-output overclaims.
+
+### What Was Inefficient
+
+- Closeout still required manual roadmap collapse, project-state evolution,
+  richer milestone-entry editing, retrospective writing, and requirements
+  deletion after the archive helper finished.
+- The archive helper still warned on the STATE.md `Last Activity Description`
+  shape and briefly moved status text backward to `verifying`, so STATE needed
+  manual normalization.
+- Phase 55 kept marker, structural, and semantic Prusa G-code code in one Rust
+  module; this preserved the evidence boundary but left a future refactor
+  trigger.
+
+### Patterns Established
+
+- Semantic generated-output evidence can be proven as a narrow executable slice
+  without claiming byte-for-byte G-code parity, printability, or runtime
+  behavior.
+- Semantic sidecars should mirror a reviewed closed field contract and be
+  verifier-owned before Rust or public parity commands consume them.
+- Public parity commands can grow by adding checked-in expected artifacts to an
+  existing target when the command contract is already established.
+- Broad `generated-outputs` should remain in progress until multiple narrow
+  executable slices justify a broader status change.
+
+### Key Lessons
+
+1. Semantic G-code evidence is the right next step after structural summaries,
+   but it still needs explicit deferred-surface wording everywhere it appears.
+1. Exact status-row constants reused across fixture and scope verifiers reduce
+   stale-publication drift.
+1. Milestone closeout should treat helper output as a draft and still review
+   STATE, PROJECT, ROADMAP, and MILESTONES for semantic accuracy.
+
+### Cost Observations
+
+- Model mix: balanced GSD profile with Codex-led audit and archive closeout
+- Sessions: yolo discuss/plan/execute phases plus milestone audit,
+  integration checker, archive closeout, phase archival, retrospective, and
+  requirements reset
+- Notable: implementation verification was clean; closeout effort centered on
+  archival hygiene, current-state alignment, and preserving narrow claim
+  language
+
+______________________________________________________________________
+
 ## Milestone: v1.13 — PrusaSlicer G-code Structural Evidence Expansion
 
 **Shipped:** 2026-06-19\
@@ -844,6 +928,7 @@ ______________________________________________________________________
 
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
+| v1.14 | yolo plus audit/integration/closeout | 4 | Deepened the Prusa G-code evidence path from structural summaries to semantic summaries without broad generated-output claims |
 | v1.13 | yolo plus audit/integration/closeout | 4 | Strengthened the Prusa G-code evidence path from marker-level summaries to structural summaries without broad generated-output claims |
 | v1.12 | yolo plus audit/integration/closeout | 4 | Established the first executable Prusa G-code output evidence slice while keeping it summary-only and narrow |
 | v1.11 | yolo plus audit/integration/closeout | 4 | Reused the first Prusa trust chain for a broader project-file evidence slice without claiming full runtime or GUI support |
@@ -859,6 +944,7 @@ ______________________________________________________________________
 
 | Milestone | Tests | Coverage | Zero-Dep Additions |
 |-----------|-------|----------|-------------------|
+| v1.14 | Verified semantic scope, fixture sidecar, Rust parser/readiness, public parity command, semantic mutation guards, exact status row, docs, and milestone audit | milestone-scoped | kept byte-for-byte G-code, printability, runtime behavior, GUI behavior, non-Prusa forks, upstream imports, release, and sync out of scope |
 | v1.13 | Verified structural scope, fixture sidecar, Rust parser/readiness, public parity command, mutation guard, exact status row, docs, and milestone audit | milestone-scoped | kept byte-for-byte G-code, geometry/toolpath, printability, runtime, GUI, non-Prusa forks, upstream imports, release, and sync out of scope |
 | v1.12 | Verified G-code scope, fixture, Rust summary parser, public parity command, mutation guard, exact status row, docs, and milestone audit | milestone-scoped | kept broad generated-output, byte-for-byte G-code, geometry/toolpath, runtime/printer, GUI, release, network, and sync out of scope |
 | v1.11 | Verified project-file scope, fixture, Rust parser, parity command, mutation guard, exact status row, and milestone audit | milestone-scoped | kept full 3MF import/export, GUI behavior, generated-output parity, runtime support, release, network/device, and sync surfaces out of scope |

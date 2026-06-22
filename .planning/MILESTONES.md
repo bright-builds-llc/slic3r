@@ -1,5 +1,49 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.14 PrusaSlicer G-code Semantic Evidence Foundation (Shipped: 2026-06-22)
+
+**Delivered:** Deepened the narrow PrusaSlicer G-code output evidence slice
+from structural facts into semantic toolpath evidence, with a reviewed
+semantic scope contract, source-pinned semantic fixture sidecar, pure typed
+Rust parser/readiness boundary, public parity command, semantic mutation
+guards, exact status row, and non-overclaiming docs.
+
+**Phases completed:** 53-56 (11 plans total, 22 plan tasks)
+
+**Key accomplishments:**
+
+- Closed nine-field semantic Prusa G-code contract with traceability to planned fixture, Rust, command, status, security, and reviewer boundaries.
+- Fail-closed Phase 53 semantic Prusa G-code scope verifier with mutation coverage for field drift, traceability drift, status promotion, and semantic overclaims.
+- Source-pinned semantic G-code sidecar with Bazel fixture ownership and narrow README boundaries
+- Fail-closed semantic Prusa G-code sidecar verification with focused mutation guards
+- Pure semantic Prusa G-code TSV parser with typed facts and fail-closed Cargo/Bazel coverage
+- Static semantic Prusa G-code readiness metadata and registry wording that keep public status/docs publication deferred
+- Existing public Prusa G-code parity command now validates marker, structural, and semantic expected-summary artifacts through Rust
+- Public Prusa G-code parity failure tests now reject semantic value, identity, and deferred-claim drift through temp artifact mutations
+- Public Prusa G-code status and verifier gates now publish only the narrow semantic evidence chain while rejecting stale structural wording
+- Package, fixture, and scope docs now publish the narrow semantic Prusa G-code evidence chain through the existing public parity command
+- Public port docs now publish the narrow semantic Prusa G-code evidence slice while keeping broad generated outputs in progress
+
+**Stats:**
+
+- 4 phases, 11 plans, 22 plan tasks
+- Requirements: 12/12 complete
+- Milestone audit: passed
+- Git range: `596d217c8` -> `177911fdf`
+- Timeline: 2026-06-20 -> 2026-06-21
+- Work range: 72 files changed, 11505 insertions, 254 deletions
+- Rust source size after milestone: 9274 lines
+- Milestone archive: [v1.14-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.14-ROADMAP.md)
+- Requirements archive: [v1.14-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.14-REQUIREMENTS.md)
+- Audit: [v1.14-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.14-MILESTONE-AUDIT.md)
+- Phase archive: [v1.14-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.14-phases/)
+
+**What's next:** start the next milestone with fresh requirements before new
+phase work, likely choosing another deliberately narrow PrusaSlicer
+generated-output feature slice if the current project direction remains valid.
+
+---
+
 ## v1.13 PrusaSlicer G-code Structural Evidence Expansion (Shipped: 2026-06-19)
 
 **Delivered:** Expanded the narrow PrusaSlicer G-code output evidence slice

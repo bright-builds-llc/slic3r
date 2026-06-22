@@ -1,11 +1,11 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.14
-milestone_name: milestone
+milestone_name: PrusaSlicer G-code Semantic Evidence Foundation
 status: complete
-stopped_at: Phase 56 verification passed
-last_updated: "2026-06-21T19:14:37Z"
-last_activity: 2026-06-21 -- Phase 56 verification passed
+stopped_at: v1.14 milestone completed and archived
+last_updated: "2026-06-22T15:45:33Z"
+last_activity: 2026-06-22 -- v1.14 milestone completed and archived
 progress:
   total_phases: 4
   completed_phases: 4
@@ -18,22 +18,22 @@ progress:
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-20)
+See: `.planning/PROJECT.md` (updated 2026-06-22)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** v1.14 PrusaSlicer G-code Semantic Evidence Foundation complete
+**Current focus:** Planning next milestone after v1.14 archive
 
 ## Current Position
 
-Phase: 56
-Plan: 56 verified
+Phase: none active
+Plan: none active
 Milestone: v1.14 PrusaSlicer G-code Semantic Evidence Foundation
-Status: Phase complete - verification passed
-Last activity: 2026-06-21 -- Phase 56 verification passed
+Status: Milestone complete - archived
+Last activity: 2026-06-22 -- v1.14 milestone completed and archived
 
 Progress: [██████████] 100%
 
@@ -46,6 +46,9 @@ Progress: [██████████] 100%
 
 - v1.14 roadmap maps 12 requirements across 4 planned phases: scope contract,
   fixture corpus, Rust semantic boundary, and executable semantic evidence.
+
+- v1.14 archived on 2026-06-22 with 4 phases, 11 plans, 22 tasks, 12 mapped
+  requirements, and a passed milestone audit.
 
 - v1.13 archived on 2026-06-19 with 4 phases, 12 plans, 24 tasks, 12 mapped
   requirements, and a passed milestone audit.
