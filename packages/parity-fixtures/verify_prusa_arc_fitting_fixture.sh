@@ -154,7 +154,20 @@ require_exact_line() {
 require_ascii_lf() {
 	local file="$1"
 	local label="$2"
-	if ! LC_ALL=C awk 'index($0, "\r") || $0 !~ /^[ -~]*$/ { exit 1 }' "${file}"; then
+	if ! LC_ALL=C awk '
+		index($0, "\r") { exit 1 }
+		{
+			for (i = 1; i <= length($0); i++) {
+				character = substr($0, i, 1)
+				if (character == "\t") {
+					continue
+				}
+				if (character < " " || character > "~") {
+					exit 1
+				}
+			}
+		}
+	' "${file}"; then
 		error "${label}: expected US-ASCII text with LF line endings"
 	fi
 }
@@ -212,7 +225,7 @@ reject_overclaiming_text() {
 	for checked_file in "${fixture_readme}" "${package_readme}" "${provenance_file}" "${arc_summary_file}" "${BASH_SOURCE[0]}"; do
 		checked_label="$(basename "${checked_file}")"
 		for forbidden_claim in \
-			"verified Prusa arc-fitting parity" \
+			"verified Prusa arc-fitting ""parity" \
 			"byte-for-byte G-code parity ""verified" \
 			"full ArcWelder algorithm equivalence ""verified" \
 			"tolerance or geometry parity ""verified" \

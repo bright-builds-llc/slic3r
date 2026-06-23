@@ -71,6 +71,18 @@ Phase 56 consumes `expected-gcode-semantic-summary.tsv` through
 fixture evidence only, and the broad `generated-outputs` row remains
 `in progress`.
 
+Phase 58 adds the Prusa arc-fitting fixture namespace at
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/`. It
+contains the checked-in `arc-fitting-observations.gcode` fixture,
+`fixture-provenance.tsv`, and `expected-arc-summary.tsv` for the fixture
+surface only. The fixture bundle target is
+`//packages/parity-fixtures:prusa_arc_fitting_bundle`, and maintainers can
+verify the fixture corpus with
+`bazel run //packages/parity-fixtures:verify_prusa_arc_fitting_fixture`.
+The source ref is
+`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, and
+the source path is `src/libslic3r/Geometry/ArcWelder.cpp`. Phase 59 owns `slic3r_flavors::prusa_arc_fitting`, and Phase 60 owns `bazel run //packages/parity:prusaslicer_arc_fitting_parity` and the future `fork.prusaslicer.arc-fitting` status row. Phase 58 does not update `packages/parity/status.tsv`, public parity behavior, Rust crates, or `docs/port/*`; broad `generated-outputs` remains `in progress`, and the existing `fork.prusaslicer.gcode-output` row remains limited to the Phase 53 through Phase 56 semantic evidence slice.
+
 The G-code fixture namespace itself does not prove byte-for-byte G-code
 parity, broad generated-output verification, full generated-output parity,
 toolpath geometry, extrusion, timing, support generation, wall seam behavior,
@@ -153,3 +165,17 @@ additional fixture files by themselves.
   `bazel run //packages/parity:prusaslicer_gcode_output_parity` and the exact
   `fork.prusaslicer.gcode-output` status row while keeping the artifact as
   checked-in fixture evidence only.
+- Phase 58 adds the Prusa arc-fitting fixture namespace under
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/`,
+  with `arc-fitting-observations.gcode`, `fixture-provenance.tsv`, and
+  `expected-arc-summary.tsv` exported as
+  `//packages/parity-fixtures:prusa_arc_fitting_bundle` and checked by
+  `bazel run //packages/parity-fixtures:verify_prusa_arc_fitting_fixture`.
+  The source ref is
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, and
+  the source path is `src/libslic3r/Geometry/ArcWelder.cpp`. Phase 59 owns
+  `slic3r_flavors::prusa_arc_fitting`, Phase 60 owns
+  `bazel run //packages/parity:prusaslicer_arc_fitting_parity` plus the future
+  `fork.prusaslicer.arc-fitting` status row, and Phase 58 does not update
+  `packages/parity/status.tsv`, public parity behavior, Rust crates, or
+  `docs/port/*`.
