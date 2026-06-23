@@ -24,11 +24,18 @@ sh_binary(
     ],
 )
 
+sh_test(
+    name = "verify_prusa_arc_fitting_scope_test",
+    srcs = ["verify_prusa_arc_fitting_scope_test.sh"],
+    data = ["verify_prusa_arc_fitting_scope.sh"],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
         "README.md",
         "arc-fitting-scope.md",
         "verify_prusa_arc_fitting_scope.sh",
+        "verify_prusa_arc_fitting_scope_test.sh",
     ],
 )
