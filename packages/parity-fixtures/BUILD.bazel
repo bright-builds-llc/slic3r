@@ -73,6 +73,11 @@ exports_files([
     "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv",
     "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
     "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
+    "forks/prusaslicer/prusaslicer.arc-fitting/.gitattributes",
+    "forks/prusaslicer/prusaslicer.arc-fitting/README.md",
+    "forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode",
+    "forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv",
+    "forks/prusaslicer/prusaslicer.arc-fitting/fixture-provenance.tsv",
 ])
 
 alias(
@@ -453,6 +458,37 @@ filegroup(
     ],
 )
 
+alias(
+    name = "prusa_arc_fitting_readme",
+    actual = "forks/prusaslicer/prusaslicer.arc-fitting/README.md",
+)
+
+alias(
+    name = "prusa_arc_fitting_provenance",
+    actual = "forks/prusaslicer/prusaslicer.arc-fitting/fixture-provenance.tsv",
+)
+
+alias(
+    name = "prusa_arc_fitting_expected_arc_summary",
+    actual = "forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv",
+)
+
+alias(
+    name = "prusa_arc_fitting_arc_observations",
+    actual = "forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode",
+)
+
+filegroup(
+    name = "prusa_arc_fitting_bundle",
+    srcs = [
+        "forks/prusaslicer/prusaslicer.arc-fitting/.gitattributes",
+        "forks/prusaslicer/prusaslicer.arc-fitting/README.md",
+        "forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv",
+        "forks/prusaslicer/prusaslicer.arc-fitting/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode",
+    ],
+)
+
 sh_binary(
     name = "verify_prusa_profile_schema_fixture",
     srcs = ["verify_prusa_profile_schema_fixture.sh"],
@@ -607,6 +643,11 @@ filegroup(
         "forks/prusaslicer/prusaslicer.gcode-output/expected-gcode-semantic-summary.tsv",
         "forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv",
         "forks/prusaslicer/prusaslicer.gcode-output/gcodewriter-set-speed.gcode",
+        "forks/prusaslicer/prusaslicer.arc-fitting/.gitattributes",
+        "forks/prusaslicer/prusaslicer.arc-fitting/README.md",
+        "forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode",
+        "forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv",
+        "forks/prusaslicer/prusaslicer.arc-fitting/fixture-provenance.tsv",
         "verify_prusa_profile_schema_fixture.sh",
         "verify_prusa_profile_schema_fixture_test.sh",
         "verify_prusa_project_file_fixture.sh",
