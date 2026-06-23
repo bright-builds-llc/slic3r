@@ -74,7 +74,7 @@ and non-Prusa fork behavior deferred.
 - [x] **Phase 57: Arc-Fitting Scope Contract** - Close the reviewed (completed 2026-06-23)
   `prusaslicer.arc-fitting` scope and fail-closed verifier before any evidence
   artifacts are published.
-- [ ] **Phase 58: Arc-Fitting Fixture Corpus** - Add the source-pinned fixture
+- [x] **Phase 58: Arc-Fitting Fixture Corpus** - Add the source-pinned fixture (completed 2026-06-23)
   namespace, expected arc summaries, provenance, and fixture drift guards.
 - [ ] **Phase 59: Rust Arc-Fitting Evidence Boundary** - Parse checked-in arc
   summaries through a pure typed Rust boundary with static readiness metadata.
@@ -130,7 +130,7 @@ checked-in expected summaries constrained to the Phase 57 approved fields.
 Plans:
 - [x] 58-01-PLAN.md — Create source-pinned arc-fitting fixture namespace,
       expected summary, provenance, and Bazel bundle.
-- [ ] 58-02-PLAN.md — Add fail-closed arc-fitting fixture verifier, mutation
+- [x] 58-02-PLAN.md — Add fail-closed arc-fitting fixture verifier, mutation
       coverage, and package-level command docs.
 
 ### Phase 59: Rust Arc-Fitting Evidence Boundary
@@ -205,7 +205,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
-| 58. Arc-Fitting Fixture Corpus | 1/2 | In Progress|  |
+| 58. Arc-Fitting Fixture Corpus | 2/2 | Complete   | 2026-06-23 |
 | 59. Rust Arc-Fitting Evidence Boundary | 0/TBD | Not started | - |
 | 60. Executable Arc-Fitting Evidence | 0/TBD | Not started | - |
 
