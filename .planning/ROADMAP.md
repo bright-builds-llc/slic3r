@@ -71,7 +71,7 @@ and non-Prusa fork behavior deferred.
 - Integer phases (57, 58, 59, 60): Planned milestone work
 - Decimal phases (57.1, 57.2): Urgent insertions after planning
 
-- [ ] **Phase 57: Arc-Fitting Scope Contract** - Close the reviewed
+- [x] **Phase 57: Arc-Fitting Scope Contract** - Close the reviewed (completed 2026-06-23)
   `prusaslicer.arc-fitting` scope and fail-closed verifier before any evidence
   artifacts are published.
 - [ ] **Phase 58: Arc-Fitting Fixture Corpus** - Add the source-pinned fixture
@@ -198,7 +198,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 57. Arc-Fitting Scope Contract | 3/3 | In Verification |  |
+| 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
 | 58. Arc-Fitting Fixture Corpus | 0/TBD | Not started | - |
 | 59. Rust Arc-Fitting Evidence Boundary | 0/TBD | Not started | - |
 | 60. Executable Arc-Fitting Evidence | 0/TBD | Not started | - |
