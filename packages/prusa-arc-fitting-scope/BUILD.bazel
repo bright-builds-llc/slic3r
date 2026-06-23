@@ -1,0 +1,34 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "README.md",
+    "arc-fitting-scope.md",
+])
+
+sh_binary(
+    name = "verify",
+    srcs = ["verify_prusa_arc_fitting_scope.sh"],
+    data = [
+        "README.md",
+        "arc-fitting-scope.md",
+        "//packages/fork-inventories:prusaslicer.tsv",
+        "//packages/fork-inventories:category-map.tsv",
+        "//packages/parity:status.tsv",
+    ],
+    args = [
+        "$(location README.md)",
+        "$(location arc-fitting-scope.md)",
+        "$(location //packages/fork-inventories:prusaslicer.tsv)",
+        "$(location //packages/fork-inventories:category-map.tsv)",
+        "$(location //packages/parity:status.tsv)",
+    ],
+)
+
+filegroup(
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "arc-fitting-scope.md",
+        "verify_prusa_arc_fitting_scope.sh",
+    ],
+)
