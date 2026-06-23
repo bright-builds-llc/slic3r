@@ -1,45 +1,50 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.14
-milestone_name: PrusaSlicer G-code Semantic Evidence Foundation
-status: complete
-stopped_at: v1.14 milestone completed and archived
-last_updated: "2026-06-22T15:45:33Z"
-last_activity: 2026-06-22 -- v1.14 milestone completed and archived
+milestone: v1.15
+milestone_name: PrusaSlicer Arc-Fitting G-code Evidence Slice
+status: defining-requirements
+stopped_at: v1.15 milestone started
+last_updated: "2026-06-23T00:00:00Z"
+last_activity: 2026-06-23 -- Milestone v1.15 started
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 11
-  completed_plans: 11
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-22)
+See: `.planning/PROJECT.md` (updated 2026-06-23)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Planning next milestone after v1.14 archive
+**Current focus:** Defining requirements for v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
 
 ## Current Position
 
-Phase: none active
-Plan: none active
-Milestone: v1.14 PrusaSlicer G-code Semantic Evidence Foundation
-Status: Milestone complete - archived
-Last activity: 2026-06-22 -- v1.14 milestone completed and archived
+Phase: Not started (defining requirements)
+Plan: -
+Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
+Status: Defining requirements
+Last activity: 2026-06-23 -- Milestone v1.15 started
 
-Progress: [██████████] 100%
+Progress: [----------] 0%
 
 ## Performance Metrics
 
 **Latest milestone baseline:**
+
+- v1.15 started on 2026-06-23 to prove a narrow PrusaSlicer arc-fitting
+  G-code evidence slice using the v1.12-v1.14 G-code evidence ladder while
+  keeping broad generated-output, byte parity, printability, runtime, GUI,
+  non-Prusa fork, release, upstream import, and sync behavior deferred.
 
 - v1.14 started on 2026-06-20 to deepen the verified narrow Prusa G-code path
   from structural facts into semantic toolpath evidence.
@@ -77,6 +82,19 @@ Progress: [██████████] 100%
 ### Decisions
 
 Decisions are logged in `PROJECT.md` Key Decisions table.
+
+Recent decisions affecting v1.15:
+
+- Continue phase numbering from Phase 57 because v1.14 ended at Phase 56.
+- Use arc fitting as the next Prusa generated-output feature slice because it
+  is a medium-complexity candidate that can reuse the v1.12-v1.14 G-code
+  evidence ladder.
+- Keep broad `generated-outputs`, byte-for-byte G-code parity, printability,
+  printer-runtime behavior, GUI behavior, support generation, wall seam
+  behavior, STEP import, non-Prusa fork behavior, release behavior, upstream
+  imports, and sync automation deferred.
+- Run milestone research before finalizing requirements because v1.15 opens a
+  new generated-output feature slice.
 
 Recent decisions affecting v1.14:
 
