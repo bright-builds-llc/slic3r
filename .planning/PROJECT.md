@@ -43,11 +43,19 @@ automation.
 
 ## Current State
 
-v1.15 is being defined as the next deliberately narrow PrusaSlicer
-generated-output feature slice. It should reuse the v1.12-v1.14 G-code evidence
-ladder, focus on `prusaslicer.arc-fitting`, and avoid promoting broad
-`generated-outputs` or claiming byte-for-byte, printability, runtime, GUI,
-non-Prusa fork, release, upstream import, or sync behavior.
+v1.15 is the active deliberately narrow PrusaSlicer generated-output feature
+slice. It reuses the v1.12-v1.14 G-code evidence ladder, focuses on
+`prusaslicer.arc-fitting`, and avoids promoting broad `generated-outputs` or
+claiming byte-for-byte, printability, runtime, GUI, non-Prusa fork, release,
+upstream import, or sync behavior.
+
+v1.15 Phase 58 is complete. Maintainers can inspect the source-pinned
+`prusaslicer.arc-fitting` fixture namespace, run
+`bazel run //packages/parity-fixtures:verify_prusa_arc_fitting_fixture`, and
+rely on fail-closed mutation guards for checked-in G2/G3 observations,
+provenance, expected arc-summary order, documentation boundaries, checksum
+drift, overclaiming text, and absent public `fork.prusaslicer.arc-fitting`
+status publication before Phase 60.
 
 v1.14 is archived. The milestone extends the v1.12 and v1.13 Prusa G-code
 evidence ladder from marker summaries and structural facts into semantic
@@ -612,4 +620,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-23 after starting v1.15*
+*Last updated: 2026-06-23 after completing v1.15 Phase 58*
