@@ -305,6 +305,7 @@ verify_status_boundaries() {
 	if [[ "${generated_count}" != "1" ]]; then
 		error "packages/parity/status.tsv: expected generated-outputs to remain in progress"
 	fi
+	require_first_field_count "${status_file}" "packages/parity/status.tsv" "generated-outputs" "1"
 
 	require_exact_tsv_row_once "${status_file}" "packages/parity/status.tsv" "${GCODE_OUTPUT_STATUS_ROW}"
 	require_first_field_count "${status_file}" "packages/parity/status.tsv" "fork.prusaslicer.gcode-output" "1"

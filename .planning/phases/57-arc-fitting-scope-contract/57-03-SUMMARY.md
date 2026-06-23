@@ -35,7 +35,7 @@ key-decisions:
   - "Closed ARCSCOPE-02 and ARCSCOPE-03 only after direct and Bazel mutation coverage passed."
 patterns-established:
   - "Arc-fitting scope mutation tests create temporary valid fixtures and mutate only fixture copies."
-  - "Status-boundary tests cover generated-output promotion, existing G-code row drift, and premature arc status publication."
+  - "Status-boundary tests cover generated-output promotion, duplicate broad generated-output rows, existing G-code row drift, and premature arc status publication."
 requirements-completed:
   - ARCSCOPE-02
   - ARCSCOPE-03
@@ -62,7 +62,7 @@ completed: 2026-06-23
 ## Accomplishments
 
 - Added `verify_prusa_arc_fitting_scope_test.sh` with self-contained temp fixtures and direct verifier invocation.
-- Covered valid fixture success plus fail-closed cases for missing required rows, missing/unsupported/duplicate arc fields, inventory drift, duplicate inventory rows, category-map drift, generated-output promotion, G-code status drift, premature arc status publication, missing deferred-scope wording, and runtime/printability/algorithm-equivalence overclaims.
+- Covered valid fixture success plus fail-closed cases for missing required rows, missing/unsupported/duplicate arc fields, inventory drift, duplicate inventory rows, category-map drift, generated-output promotion, duplicate broad generated-output rows, G-code status drift, premature arc status publication, missing deferred-scope wording, and runtime/printability/algorithm-equivalence overclaims.
 - Wired `//packages/prusa-arc-fitting-scope:verify_prusa_arc_fitting_scope_test` into Bazel and included the test in the package boundary.
 
 ## Task Commits

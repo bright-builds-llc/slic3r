@@ -381,6 +381,22 @@ test_generated_outputs_promotion_fails() {
 	assert_contains "${tmp_dir}/generated-promotion.err" 'expected generated-outputs to remain in progress'
 }
 
+test_duplicate_generated_outputs_status_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-generated-outputs-status"
+	write_valid_fixture "${dir}"
+	printf '%s\n' $'generated-outputs\tverified\t//packages/parity:generated_outputs_parity\tDuplicate broad status row.' >>"${dir}/packages/parity/status.tsv"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/duplicate-generated-status.out" "${tmp_dir}/duplicate-generated-status.err"; then
+		fail "duplicate generated-outputs status fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/duplicate-generated-status.err" '^error:'
+	assert_contains "${tmp_dir}/duplicate-generated-status.err" 'expected 1 row\(s\) with first field generated-outputs'
+}
+
 test_gcode_output_status_drift_fails() {
 	# Arrange
 	local dir="${tmp_dir}/gcode-output-status-drift"
@@ -486,6 +502,7 @@ test_inventory_row_drift_fails
 test_duplicate_inventory_row_fails
 test_missing_arc_category_reference_fails
 test_generated_outputs_promotion_fails
+test_duplicate_generated_outputs_status_fails
 test_gcode_output_status_drift_fails
 test_premature_arc_status_publication_fails
 test_missing_deferred_scope_term_fails
