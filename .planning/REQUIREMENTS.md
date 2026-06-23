@@ -132,26 +132,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ARCSCOPE-01 | TBD | Pending |
-| ARCSCOPE-02 | TBD | Pending |
-| ARCSCOPE-03 | TBD | Pending |
-| ARCFIX-01 | TBD | Pending |
-| ARCFIX-02 | TBD | Pending |
-| ARCFIX-03 | TBD | Pending |
-| ARCRUST-01 | TBD | Pending |
-| ARCRUST-02 | TBD | Pending |
-| ARCRUST-03 | TBD | Pending |
-| ARCEV-01 | TBD | Pending |
-| ARCEV-02 | TBD | Pending |
-| ARCEV-03 | TBD | Pending |
+| ARCSCOPE-01 | Phase 57 | Pending |
+| ARCSCOPE-02 | Phase 57 | Pending |
+| ARCSCOPE-03 | Phase 57 | Pending |
+| ARCFIX-01 | Phase 58 | Pending |
+| ARCFIX-02 | Phase 58 | Pending |
+| ARCFIX-03 | Phase 58 | Pending |
+| ARCRUST-01 | Phase 59 | Pending |
+| ARCRUST-02 | Phase 59 | Pending |
+| ARCRUST-03 | Phase 59 | Pending |
+| ARCEV-01 | Phase 60 | Pending |
+| ARCEV-02 | Phase 60 | Pending |
+| ARCEV-03 | Phase 60 | Pending |
 
 **Coverage:**
 
 - v1.15 requirements: 12 total
-- Mapped to phases: 0
-- Unmapped: 12
+- Mapped to phases: 12
+- Unmapped: 0
 
 ---
 
 *Requirements defined: 2026-06-23*
-*Last updated: 2026-06-23 after initial definition*
+*Last updated: 2026-06-23 after roadmap creation*
