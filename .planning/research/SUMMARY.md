@@ -1,255 +1,383 @@
-# v1.12 Research Summary: PrusaSlicer G-code Output Evidence Foundation
+# Project Research Summary
 
 **Project:** Slic3r Rust Port
-**Milestone:** v1.12 PrusaSlicer G-code Output Evidence Foundation
-**Researched:** 2026-06-06
+**Domain:** v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
+**Researched:** 2026-06-23
 **Confidence:** HIGH for roadmap shape and stack; MEDIUM for exact fixture
-details until Phase 45 selects the reviewed G-code fixture.
+bytes and final summary fields until Phase 57 closes the scope contract.
 
 ## Executive Summary
 
-v1.12 should prove one narrow PrusaSlicer G-code output evidence path without
-claiming broad generated-output, printer-runtime, geometry, or GUI parity. The
-recommended approach is the same evidence ladder that worked in v1.10 and
-v1.11: reviewed scope gate, source-pinned fixture, summary-only expected
-artifact, pure Rust boundary, public Bazel parity command, mutation failure
-guard, exact status row, and non-overclaiming docs.
+v1.15 should prove one narrow, source-pinned PrusaSlicer arc-fitting G-code
+evidence slice. Expert implementation in this repo means reusing the
+v1.12-v1.14 evidence ladder: reviewed scope contract, checked-in fixture
+corpus, pure Rust parser/readiness boundary, public Bazel parity command,
+fail-closed mutation guards, exact status/docs wording, and no broad runtime
+claim. The product is not a slicer runtime feature yet; it is executable
+evidence that the port can observe and protect a specific downstream
+PrusaSlicer generated-output feature.
 
-The slice should use a dedicated `prusaslicer.gcode-output` fixture namespace
-and status token, not the existing base `export-workflows` G-code fixture. The
-expected artifact should be `expected-gcode-summary.tsv`, comparing stable
-metadata and marker evidence only. Full G-code bytes, toolpath geometry,
-support generation, seam placement, arc fitting, printer runtime behavior,
-GUI/export UX, binary G-code, thumbnails, post-processing, and host upload
-behavior remain out of scope.
+Use the existing Bazel/Rust/TSV/shell stack. Add no third-party G-code parser,
+geometry crate, database, PrusaSlicer runtime invocation, upstream source
+import, network fetch, or sync automation. The recommended architecture is a
+modified-package milestone: extend `packages/prusa-gcode-output-scope` with a
+v1.15 arc-fitting contract, add a new fixture namespace under
+`packages/parity-fixtures`, add `slic3r_flavors::prusa_arc_fitting`, and publish
+`//packages/parity:prusaslicer_arc_fitting_parity` only after executable
+evidence passes.
 
-No new dependency stack is needed. Use the Rust standard library, existing
-`slic3r_flavors` and `slic3r_contracts` crates, existing Bazel/rules_rust
-wiring, shell verifiers, `packages/parity-fixtures`, `packages/parity`, and
-port docs.
+The main risk is overclaiming. G2/G3 arc commands can show narrow command-shape
+evidence, but they do not prove byte-for-byte G-code parity, broad
+generated-output verification, toolpath geometry, printability, firmware or
+runtime behavior, GUI behavior, non-Prusa fork behavior, release behavior,
+upstream imports, or sync behavior. Phase 57 must define the allowed evidence
+fields and forbidden wording before fixture, Rust, parity, status, or docs work
+can publish anything.
 
 ## Key Findings
 
 ### Recommended Stack
 
-Use existing repo-owned surfaces only:
+Do not add a new external stack. v1.15 should stay inside the repo-owned
+evidence tooling already used for Prusa G-code marker, structural, and semantic
+evidence.
 
-- `packages/prusa-gcode-output-scope` for the reviewed scope gate.
-- `packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/` for
-  one small reviewed ASCII `.gcode` fixture, provenance, update rules, and
-  `expected-gcode-summary.tsv`.
-- `packages/slic3r-rust/crates/slic3r_flavors` for
-  `slic3r_flavors::prusa_gcode_output`, a std-only typed summary boundary,
-  tests, and a thin summary binary.
-- `packages/parity` for
-  `bazel run //packages/parity:prusaslicer_gcode_output_parity`, mutation
-  failure guard, and exact `fork.prusaslicer.gcode-output` status row.
-- `docs/port` and package READMEs for exact scope and deferred-surface
-  publication.
+**Core technologies:**
 
-Do not add third-party G-code parsers, geometry libraries, printer simulators,
-PrusaSlicer source imports, live generation in Bazel, or new package
-architecture.
+- Bazel/Bazelisk 8.6.0: top-level build, test, run, verifier, and public
+  evidence command surface.
+- `rules_rust` 0.69.0: existing Rust target, clippy, rustfmt, binary, and test
+  wiring for `slic3r_flavors`.
+- Rust 1.94.1, edition 2024: typed, std-only parser/readiness code for checked
+  TSV data.
+- Bash `sh_binary`/`sh_test`: thin scope, fixture, parity, and mutation
+  adapters around checked-in files and Rust binaries.
+- TSV expected artifacts: closed schema for reviewed arc evidence facts.
+- `slic3r_contracts` and `slic3r_flavors`: reuse existing source/flavor/parity
+  metadata and add only the arc-fitting boundary needed by this slice.
+
+**Stack additions:**
+
+- Add `expected-arc-fitting-summary.tsv` under
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/`.
+- Add `slic3r_flavors::prusa_arc_fitting` plus a thin
+  `prusa_arc_fitting_summary` binary.
+- Add a public parity comparator and status row for
+  `fork.prusaslicer.arc-fitting` after evidence passes.
+- Keep `generated-outputs` `in progress`; do not add live PrusaSlicer
+  generation, byte parity, geometry, firmware, GUI, release, upstream import,
+  or sync tooling.
 
 ### Expected Features
 
-**Must have for v1.12:**
+v1.15 is table-stakes complete only if it creates a source-pinned evidence
+chain for `prusaslicer.arc-fitting` that is separate from the existing
+`fork.prusaslicer.gcode-output` row.
 
-- Reviewed `prusaslicer.gcode-output` scope record with accepted source
-  identity, fixture decision, expected-summary contract, candidate Rust
-  boundary, planned parity command, planned status token, docs touched,
-  license/security note, deferred scope, and reviewer signoff.
-- One checked-in small Prusa-generated ASCII `.gcode` fixture with provenance,
-  byte count, SHA-256, line-ending/encoding policy, update route, and no
-  post-processing or host-upload scope.
-- Summary-only expected artifact with stable metadata and marker evidence,
-  plus explicit deferred semantics on every row.
-- Pure Rust G-code summary boundary that parses caller-supplied text into typed
-  values and rejects unsupported evidence kinds, overclaiming notes, wrong
-  source refs, wrong fixture paths, missing rows, duplicate rows, extra rows,
-  and wrong ordering.
-- Public Bazel parity command and mutation failure test proving summary drift
-  fails closed.
-- Exact status/docs publication that keeps broad `generated-outputs` and
-  adjacent Prusa rows such as support generation, wall seam, and arc fitting
-  deferred.
+**Must have (table stakes):**
 
-**Defer:**
+- Reviewed `prusaslicer.arc-fitting` scope contract with accepted source ref
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`,
+  inventory/category-map traceability, allowed fields, planned fixture/Rust/
+  parity paths, exact deferrals, and verifier coverage.
+- Source anchors for arc fitting and command emission:
+  `src/libslic3r/Geometry/ArcWelder.cpp`, `ArcWelder.hpp`, relevant `GCode.cpp`
+  emission points, `PrintConfig.cpp` config values when used, and optionally
+  `tests/libslic3r/test_arc_welder.cpp`.
+- Arc-specific fixture namespace with ASCII/LF checked-in `.gcode` evidence,
+  provenance, SHA/size/line-ending guards, update route, and broad-scope
+  exclusions.
+- Closed `expected-arc-fitting-summary.tsv` schema. Recommended columns:
+  `source_ref`, `fixture_path`, `arc_field`, `arc_category`, `arc_value`,
+  `evidence_boundary`.
+- Pure Rust parser/readiness boundary that rejects invalid headers, unknown
+  fields, duplicates, missing rows, row-order drift, wrong source/fixture
+  identity, and unsupported claim text.
+- Public `bazel run //packages/parity:prusaslicer_arc_fitting_parity` command
+  with arc-specific mutation guards and field-specific diagnostics.
+- Exact `fork.prusaslicer.arc-fitting` status/docs wording that preserves the
+  existing `fork.prusaslicer.gcode-output` meaning and keeps broad
+  `generated-outputs` in progress.
 
-- Full G-code byte parity, toolpath geometry, extrusion, timing, support,
-  seam, arc, STEP, printer-runtime, firmware, printability, GUI export,
-  G-code viewer, binary G-code, thumbnails, post-processing, host upload,
-  network/device, profile-update, release, sync, Bambu Studio, and OrcaSlicer
-  behavior.
+**Should have (differentiators):**
+
+- Separate arc status token, not a widened `fork.prusaslicer.gcode-output`
+  claim.
+- Source-to-command traceability across ArcWelder, config, and G-code emission.
+- I/J center-offset evidence for Prusa's `emit_center` shape, if approved by
+  scope.
+- G2 versus G3 direction counts rather than a generic "contains arc" check.
+- Positive fixture evidence plus a negative/control case if it stays narrow and
+  source-pinned.
+- Reuse of v1.14 semantic G-code parser lessons without turning the parser into
+  a generic unbounded key-value map.
+
+**Defer (v2+ or separate milestones):**
+
+- Broad `generated-outputs` verification.
+- Byte-for-byte G-code parity.
+- Full ArcWelder algorithm equivalence, tolerance, or geometry proof.
+- Printability, printer firmware, printer runtime, host upload, timing, or
+  material-use correctness.
+- GUI setting/export behavior.
+- Support generation, wall seam behavior, STEP import, full 3MF behavior,
+  binary G-code, thumbnails, and post-processing.
+- Bambu Studio, OrcaSlicer, fork release builds, upstream source imports,
+  automated vendor refresh, and sync behavior.
 
 ### Architecture Approach
 
-Keep the architecture fixture-first and functional-core/imperative-shell:
+Use the existing G-code evidence ladder with a new feature-specific evidence
+row. The research disagrees on whether to create a new
+`packages/prusa-arc-fitting-scope` package; the roadmap should prefer the
+architecture recommendation and extend `packages/prusa-gcode-output-scope`
+because arc fitting is a G-code-shaped generated-output slice and the existing
+scope package already owns the deferral vocabulary. A new top-level scope
+package should require an explicit Phase 57 decision.
 
-1. Scope package locks the evidence contract before fixture bytes, Rust code,
-   parity command, or status rows exist.
-1. Fixture package owns static bytes, provenance, expected summary, update
-   rules, and fail-closed fixture verification.
-1. Rust core in `slic3r_flavors::prusa_gcode_output` owns marker and metadata
-   interpretation as pure data-in/data-out logic.
-1. Thin shell/Bazel adapters own file reads, diffing, process execution, and
-   status publication.
-1. Docs publish exact scope and deferrals.
+**Major components:**
 
-The broad `generated-outputs` status row should remain `in progress`; v1.12
-adds only the narrow `fork.prusaslicer.gcode-output` row after executable
-evidence passes.
+1. `packages/prusa-gcode-output-scope` - owns the v1.15 arc-fitting scope
+   section, source/category traceability, allowed fields, planned paths, and
+   forbidden broad claims.
+2. `packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/` - owns
+   static fixture bytes, provenance, `expected-arc-fitting-summary.tsv`, update
+   rules, fixture verifier, and mutation guards.
+3. `slic3r_flavors::prusa_arc_fitting` - parses caller-supplied TSV text into
+   closed Rust domain types and renders deterministic summary lines with no
+   filesystem discovery, Git, network, process execution, runtime generation,
+   release, or sync side effects.
+4. `packages/parity` - owns public executable evidence, arc mutation guards,
+   `fork.prusaslicer.arc-fitting` status publication, and regression coverage
+   for the existing `prusaslicer_gcode_output_parity` command.
+5. `docs/port` and package READMEs - publish the exact narrow evidence
+   boundary and keep deferred surfaces explicit.
+
+**Key patterns:**
+
+- Scope first, fixture second, Rust third, public status/docs last.
+- Closed TSV schema plus typed Rust enums/newtypes.
+- Functional core, imperative shell: Rust owns parsing and domain validation;
+  shell/Bazel owns paths, command invocation, temp files, and diffs.
+- Verified status only after executable evidence and mutation guards pass.
+- Existing G-code parity remains a regression check, not a container for arc
+  overclaims.
 
 ### Critical Pitfalls
 
-1. **Byte-for-byte G-code parity overclaim** - use summary-only TSV rows and
-   reject status/docs wording that implies broad generated-output parity.
-1. **Unreviewed fixture provenance** - require source identity, generator
-   version/build context, fixture role, byte count, SHA-256, line endings,
-   update route, and reviewer signoff.
-1. **Binary G-code or thumbnail leakage** - choose an ASCII `.gcode` fixture;
-   reject `.bgcode`, NUL bytes, thumbnail decoding, and image behavior unless a
-   future milestone scopes them explicitly.
-1. **Post-processing or host upload effects** - require
-   `post_processing=none`; reject `SLIC3R_PP_`, OctoPrint, PrusaLink, host
-   URLs, and local absolute paths unless deliberately scoped later.
-1. **Semantic drift in expected summaries** - keep a closed vocabulary such as
-   file metadata, comment marker, section marker, and command presence only;
-   reject geometry, runtime, support, seam, arc, or printability evidence
-   kinds.
-1. **Reusing base export fixtures as Prusa proof** - create a dedicated Prusa
-   fixture namespace; do not reinterpret
-   `packages/parity-fixtures/export-workflows/expected-gcode.txt`.
+1. **Promoting narrow arc evidence into broad generated-output parity** - keep
+   `generated-outputs` `in progress`; make verifiers reject byte parity,
+   printability, runtime, GUI, release, sync, and non-Prusa claims.
+2. **Using the wrong inventory row or source anchor** - trace the feature to
+   `prusaslicer.arc-fitting` and `ArcWelder.cpp`; treat
+   `fork.prusaslicer.gcode-output` only as the prerequisite evidence ladder.
+3. **Selecting a fixture that does not exercise arc fitting** - require
+   approved positive arc evidence such as G2/G3 commands, I/J center-offset
+   shape when scoped, config/source provenance, and checksum/line-ending guards.
+4. **Treating G2/G3 presence as geometry or runtime correctness** - classify
+   command counts, direction, offsets, coordinates, extrusion, and feedrate as
+   fixture observations only.
+5. **Loose arc summary parsing** - reject unknown fields, missing/duplicate
+   rows, row-order drift, wrong source or fixture identity, and broad claim
+   text in Rust and shell tests.
+6. **Missing arc-specific mutation guards** - mutate G2/G3 counts, direction,
+   I/J mode, source identity, fixture identity, row order, and forbidden wording
+   in public evidence tests.
+7. **Introducing live generation or upstream fetching** - verifiers must not
+   run PrusaSlicer, clone/fetch upstream, generate fresh G-code, upload to a
+   host, or probe printer/runtime behavior.
 
 ## Implications for Roadmap
 
-### Phase 45: Prusa G-code Output Scope Gate
+Based on the combined research, keep v1.15 as four phases: scope contract,
+fixture corpus, Rust boundary, and executable evidence.
 
-**Rationale:** G-code output is close enough to broad runtime/generated-output
-claims that the exact evidence contract must be reviewed before fixtures or
-status rows exist.
+### Phase 57: Arc-Fitting Scope Contract
 
-**Delivers:** Scope package, verifier, accepted source identity, fixture
-decision, expected-summary contract, planned Rust boundary, planned parity
-command, planned status token, docs route, license/security note, deferred
-scope, and signoff.
+**Rationale:** The highest-risk failure mode is overclaiming before the
+evidence contract is closed. Scope must define the exact inventory row, source
+anchors, field set, package paths, public command name, planned status token,
+deferrals, and verifier rules before any fixture, parser, parity, or docs work
+can claim evidence.
 
-**Avoids:** Premature fixture bytes, parser work, status rows, broad
-generated-output claims, and byte parity.
+**Delivers:** v1.15 scope section in `packages/prusa-gcode-output-scope`,
+source/category/status traceability, allowed arc fields, forbidden claim list,
+fixture/Rust/parity path contract, reviewer signoff, and fail-closed scope
+verification.
 
-### Phase 46: Prusa G-code Fixture Surface
+**Addresses:** Reviewed scope contract, source identity, companion source
+anchors, generated-output restraint, and exact deferral vocabulary.
 
-**Rationale:** Rust and parity work need a reviewed raw fixture and expected
-summary before they can encode a contract.
+**Avoids:** Wrong inventory row, premature status publication, broad
+generated-output wording, ambiguous config mode, and fixture/parser work based
+on an unapproved schema.
 
-**Delivers:** Dedicated Prusa fixture namespace, one small ASCII `.gcode`
-fixture, `.gitattributes`, provenance TSV, update rules, expected summary TSV,
-fixture verifier, and verifier failure tests.
+### Phase 58: Arc-Fitting Fixture Corpus
 
-**Avoids:** Base export fixture reuse, live generation, upstream source fetches,
-binary G-code, thumbnails, post-processing, host upload, and missing
-provenance.
+**Rationale:** Rust parsing and parity comparison need a reviewed static input
+and expected-summary artifact. The fixture must be source-pinned and
+arc-specific; reusing the feedrate-only G-code fixture would mechanically pass
+while proving the wrong feature.
 
-### Phase 47: Rust Prusa G-code Summary Boundary
+**Delivers:** `prusaslicer.arc-fitting` fixture namespace, `.gitattributes`,
+README/update route, source-pinned `.gcode` evidence, `fixture-provenance.tsv`,
+`expected-arc-fitting-summary.tsv`, Bazel aliases/bundles, fixture verifier,
+and fail-closed fixture mutation tests.
 
-**Rationale:** Marker interpretation belongs in a typed pure Rust boundary
-before shell/Bazel parity commands publish evidence.
+**Addresses:** Checked-in fixture evidence, provenance manifest, arc expected
+summary, ASCII/LF and checksum guards, fixture identity, arc command counts,
+I/J or syntax-mode bounds when approved, and explicit deferred scope.
 
-**Delivers:** `slic3r_flavors::prusa_gcode_output`, metadata API, summary
-binary, focused Rust tests, registry traceability, and public surface names
-that avoid runtime/geometry/support/seam/arc claims.
+**Avoids:** Fixture with no positive arc evidence, live generation, upstream
+fetch/import, binary G-code, thumbnails, post-processing, host upload, stale
+docs, duplicate rows, and unsupported fields.
 
-**Avoids:** Shell-owned parsing, new parser dependencies, filesystem discovery,
-process execution, network access, vendor sync, and broad semantics.
+### Phase 59: Rust Arc-Fitting Evidence Boundary
 
-### Phase 48: Executable Prusa G-code Evidence
+**Rationale:** The evidence contract should be parsed into typed Rust domain
+values before public parity shell code consumes it. This phase keeps the
+functional core pure and prevents arbitrary TSV strings from becoming evidence
+by accident.
 
-**Rationale:** Status publication should happen only after fixture verification,
-Rust summary logic, public parity command, and mutation guard pass.
+**Delivers:** `src/prusa_arc_fitting.rs`,
+`src/bin/prusa_arc_fitting_summary.rs`, `lib.rs` exports, registry/readiness
+metadata, Rust tests, Bazel target wiring, clippy coverage, and rustfmt
+coverage.
 
-**Delivers:** `//packages/parity:prusaslicer_gcode_output_parity`, comparator
-script, mutation failure test, exact `fork.prusaslicer.gcode-output` status
-row, fixture/status verifier updates, package docs, and port docs.
+**Uses:** Rust 1.94.1, edition 2024, std-only parsing,
+`slic3r_contracts` metadata types where useful, and existing
+`slic3r_flavors` target patterns.
 
-**Avoids:** Marking broad `generated-outputs` verified or completing adjacent
-Prusa support/seam/arc/STEP/runtime surfaces.
+**Implements:** Closed parser/readiness component for
+`slic3r_flavors::prusa_arc_fitting`.
+
+**Avoids:** Generic key-value maps, unchecked primitive leakage, filesystem or
+Git discovery in core logic, process execution, network access, runtime
+generation, broad generated-output semantics, and monolithic G-code parser
+growth without a reviewable boundary.
+
+### Phase 60: Executable Arc-Fitting Evidence
+
+**Rationale:** Publication belongs last. The status row and docs are credible
+only after scope, fixture, Rust parsing, public comparator, mutation guards, and
+the existing G-code parity regression all pass.
+
+**Delivers:** `compare_prusaslicer_arc_fitting.sh`, public
+`//packages/parity:prusaslicer_arc_fitting_parity`, arc-specific failure test,
+exact `fork.prusaslicer.arc-fitting` status row, package README updates,
+`docs/port` updates, and regression verification for
+`//packages/parity:prusaslicer_gcode_output_parity`.
+
+**Addresses:** Executable public evidence, mutation guards, status/docs
+publication, traceability, and non-overclaiming public language.
+
+**Avoids:** Publishing verified status before executable evidence, weakening
+the existing `fork.prusaslicer.gcode-output` row, contradictory deferral docs,
+and public command output that omits remaining byte parity, printability,
+runtime, GUI, release, sync, upstream import, and non-Prusa deferrals.
 
 ### Phase Ordering Rationale
 
-- Scope first prevents overclaiming before any evidence surfaces exist.
-- Fixture second gives Rust code a reviewed input/output contract.
-- Rust third keeps domain interpretation pure and testable.
-- Parity/status/docs last ensures publication follows executable evidence.
+- Scope first prevents implementation from selecting fixture fields or public
+  wording before the source and evidence contract are reviewed.
+- Fixture second gives the Rust boundary a concrete, reviewed input/output
+  artifact instead of letting code invent the schema.
+- Rust third keeps parsing and validation pure, typed, and unit-testable before
+  shell/Bazel publication.
+- Executable evidence last makes public status a consequence of passing
+  verifiers and mutation guards.
+- The four-phase split maps directly to the existing v1.12-v1.14 ladder, so the
+  roadmap can move quickly while keeping the new feature-specific status row
+  separate from broad generated-output parity.
 
 ### Research Flags
 
-- **Phase 45:** confirm the exact G-code fixture candidate and stable marker
-  vocabulary during scope planning.
-- **Phase 46:** verify fixture provenance, checksum, line endings, privacy, and
-  post-processing exclusions carefully.
-- **Phase 47:** keep expected-summary semantics closed and typed.
-- **Phase 48:** check status/docs wording against all deferred surfaces.
+Phases likely needing deeper `/gsd-research-phase` or extra planning research:
+
+- **Phase 57:** Needs focused resolution of exact fixture derivation route,
+  minimal allowed field set, config-mode evidence, whether a negative/control
+  fixture is required, and the final package-boundary decision if maintainers
+  want a new scope package instead of extending the existing one.
+- **Phase 58:** Needs careful provenance validation for the selected fixture
+  bytes and confirmation that the checked-in G-code exercises the approved arc
+  fields without live generation or runtime claims.
+
+Phases with standard patterns where extra research should usually be skipped:
+
+- **Phase 59:** Existing `slic3r_flavors` parser/readiness patterns are well
+  documented from v1.12-v1.14; planning should focus on exact enum/fact shape.
+- **Phase 60:** Existing `packages/parity` command, status, docs, and mutation
+  guard patterns are well documented; planning should focus on arc-specific
+  mutations and exact wording.
 
 ## Confidence Assessment
 
 | Area | Confidence | Notes |
-| --- | --- | --- |
-| Stack | HIGH | Existing v1.10/v1.11 Rust/Bazel/parity stack fits without new dependencies. |
-| Features | HIGH | The required evidence chain is clear from shipped Prusa slices. |
-| Architecture | HIGH | Component boundaries map directly onto existing packages. |
-| Pitfalls | HIGH | Major risks are known from prior milestone audits and G-code adjacency. |
-| Fixture details | MEDIUM | The exact fixture and marker vocabulary remain Phase 45 decisions. |
+|------|------------|-------|
+| Stack | HIGH | Existing Bazel, `rules_rust`, Rust, shell, TSV, fixture, parity, and docs surfaces fit the milestone without new dependencies. |
+| Features | HIGH | Table stakes and deferrals are consistent across research files and `.planning/PROJECT.md`. Exact fixture fields remain Phase 57 work. |
+| Architecture | HIGH | Existing v1.12-v1.14 ladder provides direct scope -> fixture -> Rust -> parity/status/docs sequencing. Package-boundary conflict is resolved here in favor of extending the existing G-code scope package. |
+| Pitfalls | HIGH | Major failure modes repeat across research: overclaims, wrong source row, bad fixture, loose parser, missing mutations, and live generation. |
+| Fixture Details | MEDIUM | Research did not prove final fixture bytes, final expected rows, or whether a positive-only corpus is enough. |
 
-**Overall confidence:** HIGH for planning the milestone shape; MEDIUM for
-fixture specifics until Phase 45.
+**Overall confidence:** HIGH for roadmap structure; MEDIUM for fixture-specific
+details until Phase 57.
 
 ### Gaps to Address
 
-- Exact `.gcode` fixture source and stable marker set: resolve in Phase 45.
-- Whether to add a new inventory row or keep the stable slug only in the scope
-  record: resolve in Phase 45 with docs/status implications.
-- Expected summary column names and evidence-kind vocabulary: define in Phase
-  45 and enforce in Phase 46/47.
+- Exact checked-in arc fixture source and bytes: resolve in Phase 57, enforce in
+  Phase 58 with provenance, checksum, and ASCII/LF rules.
+- Final expected-summary field set: choose the smallest closed set that
+  distinguishes arc fitting from existing semantic G-code evidence.
+- Arc syntax bounds: decide whether v1.15 is limited to I/J center-offset
+  `emit_center` evidence and explicitly defer radius `R` or other encodings.
+- Derived checks: avoid geometry/tolerance checks unless Phase 57 defines exact
+  tolerances and failure messages; default to syntactic fixture observations.
+- Documentation placement: update existing G-code-output docs only to point to
+  the separate arc row; do not rewrite the old row as arc evidence.
 
 ## Sources
 
-### Local Project Evidence
+### Primary (HIGH confidence)
 
-- `.planning/PROJECT.md`
-- `.planning/MILESTONES.md`
-- `.planning/RETROSPECTIVE.md`
-- `.planning/milestones/v1.10-REQUIREMENTS.md`
-- `.planning/milestones/v1.10-ROADMAP.md`
-- `.planning/milestones/v1.10-MILESTONE-AUDIT.md`
-- `.planning/milestones/v1.11-REQUIREMENTS.md`
-- `.planning/milestones/v1.11-ROADMAP.md`
-- `.planning/milestones/v1.11-MILESTONE-AUDIT.md`
-- `packages/fork-vendors/forks.tsv`
-- `packages/fork-inventories/prusaslicer.tsv`
-- `packages/fork-inventories/category-map.tsv`
-- `packages/prusa-project-file-scope/project-file-scope.md`
-- `packages/parity-fixtures/README.md`
-- `packages/parity-fixtures/forks/prusaslicer/prusaslicer.project-file/`
-- `packages/parity/README.md`
-- `packages/parity/BUILD.bazel`
-- `packages/parity/status.tsv`
-- `packages/slic3r-rust/crates/slic3r_flavors/`
-- `docs/port/README.md`
-- `docs/port/package-map.md`
-- `docs/port/migration-guidance.md`
-- `docs/port/parity-matrix.md`
-- `docs/port/contract-inventory.md`
+- `.planning/PROJECT.md` - v1.15 goal, active requirements, deferrals, and
+  prior Prusa G-code evidence ladder.
+- `.planning/research/STACK.md` - stack recommendation, versions, repo-owned
+  additions, expected artifact shape, and verification targets.
+- `.planning/research/FEATURES.md` - table stakes, differentiators,
+  anti-features, dependencies, suggested requirements, and phase shape.
+- `.planning/research/ARCHITECTURE.md` - component boundaries, data flow,
+  modified package recommendation, build order, and patterns.
+- `.planning/research/PITFALLS.md` - critical/moderate/minor pitfalls,
+  phase-specific warnings, and detection strategies.
+- `packages/fork-inventories/prusaslicer.tsv` and
+  `packages/fork-inventories/category-map.tsv` as cited by research - existing
+  `prusaslicer.arc-fitting` and `arc.shared` planning rows.
+- `packages/parity/status.tsv` and `docs/port/parity-matrix.md` as cited by
+  research - current narrow `fork.prusaslicer.gcode-output` meaning and broad
+  `generated-outputs` in-progress state.
+- Pinned PrusaSlicer source at
+  `9a583bd438b195856f3bcf7ea99b69ba4003a961`: `ArcWelder.cpp`,
+  `ArcWelder.hpp`, `GCode.cpp`, `PrintConfig.cpp`, `PrintConfig.hpp`, and
+  `tests/libslic3r/test_arc_welder.cpp` as cited by research.
 
-### Standards
+### Standards and Process (HIGH confidence)
 
-- `AGENTS.md`
-- `AGENTS.bright-builds.md`
-- `standards-overrides.md`
+- `AGENTS.md`, `AGENTS.bright-builds.md`, and `standards-overrides.md`.
 - Bright Builds pinned standards at
-  `05f8d7a6c9c2e157ec4f922a05273e72dab97676`: index, architecture,
-  verification, testing, and Rust guidance.
+  `05f8d7a6c9c2e157ec4f922a05273e72dab97676`: `standards/index.md`,
+  `standards/core/architecture.md`, `standards/core/code-shape.md`,
+  `standards/core/verification.md`, `standards/core/testing.md`, and
+  `standards/languages/rust.md`.
 
-______________________________________________________________________
+### Secondary (MEDIUM confidence)
 
-*Research completed: 2026-06-06*
+- Recommended final fixture bytes, optional negative/control fixture, and exact
+  row values in `expected-arc-fitting-summary.tsv` - consistent research
+  recommendations, but they need Phase 57 review and Phase 58 checked-in
+  evidence before becoming implementation facts.
+
+---
+
+*Research completed: 2026-06-23*
 *Ready for roadmap: yes*
