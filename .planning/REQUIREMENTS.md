@@ -19,11 +19,11 @@ roadmap phase and must be verified before milestone archive.
   row, source anchors, fixture namespace, expected arc summary artifact, Rust
   boundary, public evidence command, planned status wording, docs touched,
   security note, deferred scope, and reviewer signoff.
-- [ ] **ARCSCOPE-02**: Maintainer can run a fail-closed arc-fitting scope
+- [x] **ARCSCOPE-02**: Maintainer can run a fail-closed arc-fitting scope
   verifier that rejects unsupported arc fields, duplicate or missing field
   rows, traceability drift, unsupported generated-output claims, unsupported
   runtime or printability claims, and missing deferred-scope language.
-- [ ] **ARCSCOPE-03**: Maintainer can confirm the broad `generated-outputs`
+- [x] **ARCSCOPE-03**: Maintainer can confirm the broad `generated-outputs`
   status row remains `in progress`, the existing
   `fork.prusaslicer.gcode-output` status row is not widened, and the planned
   `fork.prusaslicer.arc-fitting` status row remains limited to the exact narrow
@@ -133,8 +133,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | ARCSCOPE-01 | Phase 57 | Complete |
-| ARCSCOPE-02 | Phase 57 | Pending |
-| ARCSCOPE-03 | Phase 57 | Pending |
+| ARCSCOPE-02 | Phase 57 | Complete |
+| ARCSCOPE-03 | Phase 57 | Complete |
 | ARCFIX-01 | Phase 58 | Pending |
 | ARCFIX-02 | Phase 58 | Pending |
 | ARCFIX-03 | Phase 58 | Pending |
