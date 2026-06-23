@@ -569,6 +569,27 @@ sh_test(
     ],
 )
 
+sh_binary(
+    name = "verify_prusa_arc_fitting_fixture",
+    srcs = ["verify_prusa_arc_fitting_fixture.sh"],
+    data = [
+        ":prusa_arc_fitting_bundle",
+        "README.md",
+        "//packages/parity:status.tsv",
+    ],
+)
+
+sh_test(
+    name = "verify_prusa_arc_fitting_fixture_test",
+    srcs = ["verify_prusa_arc_fitting_fixture_test.sh"],
+    data = [
+        "verify_prusa_arc_fitting_fixture.sh",
+        ":prusa_arc_fitting_bundle",
+        "README.md",
+        "//packages/parity:status.tsv",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
@@ -654,5 +675,7 @@ filegroup(
         "verify_prusa_project_file_fixture_test.sh",
         "verify_prusa_gcode_output_fixture.sh",
         "verify_prusa_gcode_output_fixture_test.sh",
+        "verify_prusa_arc_fitting_fixture.sh",
+        "verify_prusa_arc_fitting_fixture_test.sh",
     ],
 )
