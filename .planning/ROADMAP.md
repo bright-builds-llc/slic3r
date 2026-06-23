@@ -128,7 +128,7 @@ checked-in expected summaries constrained to the Phase 57 approved fields.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 58-01-PLAN.md — Create source-pinned arc-fitting fixture namespace,
+- [x] 58-01-PLAN.md — Create source-pinned arc-fitting fixture namespace,
       expected summary, provenance, and Bazel bundle.
 - [ ] 58-02-PLAN.md — Add fail-closed arc-fitting fixture verifier, mutation
       coverage, and package-level command docs.
@@ -205,7 +205,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
-| 58. Arc-Fitting Fixture Corpus | 0/2 | Not started | - |
+| 58. Arc-Fitting Fixture Corpus | 1/2 | In Progress|  |
 | 59. Rust Arc-Fitting Evidence Boundary | 0/TBD | Not started | - |
 | 60. Executable Arc-Fitting Evidence | 0/TBD | Not started | - |
 
