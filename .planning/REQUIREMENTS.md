@@ -14,7 +14,7 @@ roadmap phase and must be verified before milestone archive.
 
 ### Arc-Fitting Scope Contract
 
-- [ ] **ARCSCOPE-01**: Maintainer can inspect a reviewed Prusa arc-fitting
+- [x] **ARCSCOPE-01**: Maintainer can inspect a reviewed Prusa arc-fitting
   evidence scope contract that names the accepted source identity, inventory
   row, source anchors, fixture namespace, expected arc summary artifact, Rust
   boundary, public evidence command, planned status wording, docs touched,
@@ -132,7 +132,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ARCSCOPE-01 | Phase 57 | Pending |
+| ARCSCOPE-01 | Phase 57 | Complete |
 | ARCSCOPE-02 | Phase 57 | Pending |
 | ARCSCOPE-03 | Phase 57 | Pending |
 | ARCFIX-01 | Phase 58 | Pending |
