@@ -198,7 +198,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 57. Arc-Fitting Scope Contract | 1/3 | In Progress|  |
+| 57. Arc-Fitting Scope Contract | 2/3 | In Progress|  |
 | 58. Arc-Fitting Fixture Corpus | 0/TBD | Not started | - |
 | 59. Rust Arc-Fitting Evidence Boundary | 0/TBD | Not started | - |
 | 60. Executable Arc-Fitting Evidence | 0/TBD | Not started | - |
