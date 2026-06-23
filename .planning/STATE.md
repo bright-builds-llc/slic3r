@@ -1,18 +1,16 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.15
-milestone_name: PrusaSlicer Arc-Fitting G-code Evidence Slice
-status: ready-to-plan
-stopped_at: v1.15 roadmap created
-last_updated: "2026-06-23T00:00:00Z"
+milestone_name: milestone
+status: planning
+stopped_at: Phase 57 context gathered
+last_updated: "2026-06-23T18:47:58.622Z"
 last_activity: 2026-06-23 -- Roadmap created for v1.15 Phases 57-60
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
-  total_requirements: 12
-  mapped_requirements: 12
   percent: 0
 ---
 
@@ -46,12 +44,15 @@ Progress: [----------] 0%
 - v1.15 maps 12 requirements across 4 planned phases: scope contract, fixture
   corpus, Rust arc-fitting evidence boundary, and executable arc-fitting
   evidence.
+
 - Granularity is `fine`; the natural four-phase evidence ladder is preserved
   because it matches the requirement categories and existing v1.12-v1.14
   delivery boundary.
+
 - v1.15 keeps broad `generated-outputs`, byte-for-byte G-code parity,
   printability, printer-runtime behavior, GUI behavior, non-Prusa fork
   behavior, release behavior, upstream import, and sync behavior deferred.
+
 - v1.14 archived on 2026-06-22 with 4 phases, 11 plans, 22 tasks, 12 mapped
   requirements, and a passed milestone audit.
 
@@ -67,16 +68,21 @@ Recent decisions affecting v1.15:
 - Use arc fitting as the next Prusa generated-output feature slice because it
   is a medium-complexity candidate that can reuse the v1.12-v1.14 G-code
   evidence ladder.
+
 - Keep broad `generated-outputs`, byte-for-byte G-code parity, printability,
   printer-runtime behavior, GUI behavior, support generation, wall seam
   behavior, STEP import, non-Prusa fork behavior, release behavior, upstream
   imports, and sync automation deferred.
+
 - Run milestone research before finalizing requirements because v1.15 opens a
   new generated-output feature slice.
+
 - Map ARCSCOPE-01..03 to Phase 57, ARCFIX-01..03 to Phase 58,
   ARCRUST-01..03 to Phase 59, and ARCEV-01..03 to Phase 60.
+
 - Preserve the four-step evidence ladder for v1.15: scope contract, fixture
   corpus, Rust boundary, executable evidence/status/docs.
+
 - Keep the arc-fitting slice narrow and separate from broad
   `generated-outputs` and the existing `fork.prusaslicer.gcode-output` row.
 
@@ -197,6 +203,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-23T00:00:00Z
-Stopped at: v1.15 roadmap created; next step is `/gsd-plan-phase 57`
-Resume file: None
+Last session: 2026-06-23T18:47:58.618Z
+Stopped at: Phase 57 context gathered
+Resume file: .planning/phases/57-arc-fitting-scope-contract/57-CONTEXT.md
