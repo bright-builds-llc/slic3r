@@ -497,17 +497,17 @@ The existing semantic verifier uses this same source/fixture path alignment patt
 |---|-------|---------|---------------|
 | A1 | A two-line reviewed `arc-fitting-observations.gcode` fixture with one `G2` row and one `G3` row is sufficient for ARCFIX-01/02 when paired with source-pinned provenance and strict no-runtime boundaries. | Architecture Patterns / Pattern 3 | Maintainers may require the fixture artifact to be derived from a source-controlled upstream test or source excerpt instead of a hand-reviewed observation sample; planner should either confirm this strategy or choose a stricter source-excerpt artifact while keeping the same summary/verifier design. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Should the fixture artifact be hand-authored or source-excerpt-derived?**
+1. **RESOLVED: Use the two-line reviewed observation fixture.**
    - What we know: Phase 58 gives the agent discretion to choose fixture ID and fixture bytes/source excerpt strategy, and the artifact must be source-pinned, small, reviewable, and constrained to Phase 57 fields. [VERIFIED: .planning/phases/58-arc-fitting-fixture-corpus/58-CONTEXT.md]
-   - What's unclear: The upstream `ArcWelder.cpp` source path has source anchors for arc behavior, but it does not contain checked-in G-code fixture lines; the upstream tree also contains `tests/libslic3r/test_arc_welder.cpp`, which is not the locked Phase 58 source path. [VERIFIED: GitHub raw/source tree queries 2026-06-23; VERIFIED: packages/prusa-arc-fitting-scope/arc-fitting-scope.md]
-   - Recommendation: Plan with the two-line reviewed observation fixture unless the planner wants zero assumption risk; in that case, add a source-excerpt artifact from `ArcWelder.cpp` plus the same `expected-arc-summary.tsv` observations. [ASSUMED]
+   - Resolution basis: The upstream `ArcWelder.cpp` source path has source anchors for arc behavior, but it does not contain checked-in G-code fixture lines; the upstream tree also contains `tests/libslic3r/test_arc_welder.cpp`, which is not the locked Phase 58 source path. [VERIFIED: GitHub raw/source tree queries 2026-06-23; VERIFIED: packages/prusa-arc-fitting-scope/arc-fitting-scope.md]
+   - Resolution: Plan 58-01 uses the two-line reviewed `arc-fitting-observations.gcode` fixture embodied by the existing plan, paired with source-pinned provenance and `expected-arc-summary.tsv`; no source-excerpt artifact is added. [RESOLVED]
 
-2. **Should `fixture-provenance.tsv` include an explicit source file SHA?**
+2. **RESOLVED: Do not include an explicit source file SHA.**
    - What we know: Existing G-code fixture provenance records fixture byte count/SHA and upstream URL, not source-file SHA. [VERIFIED: packages/parity-fixtures/forks/prusaslicer/prusaslicer.gcode-output/fixture-provenance.tsv]
-   - What's unclear: Arc-fitting provenance could benefit from recording `ArcWelder.cpp` SHA-256 `cfab5acd9ea364086a42a3aa62a226b278d8779d00479c573547ffb42daf7443`, which was verified from the pinned raw source. [VERIFIED: local `curl | shasum -a 256` probe]
-   - Recommendation: Include the source SHA only if it does not make the provenance row too noisy; the mandatory checks are accepted source identity, inventory ID, source path, source anchor, fixture bytes, update route, and exclusions. [VERIFIED: .planning/phases/58-arc-fitting-fixture-corpus/58-CONTEXT.md]
+   - Resolution basis: Arc-fitting provenance could record `ArcWelder.cpp` SHA-256 `cfab5acd9ea364086a42a3aa62a226b278d8779d00479c573547ffb42daf7443`, which was verified from the pinned raw source, but the existing plan does not add that column or value. [VERIFIED: local `curl | shasum -a 256` probe]
+   - Resolution: Keep Plan 58-01 aligned with existing fixture provenance precedent: pin accepted source identity, inventory ID, source path, source anchors, fixture bytes, update route, and exclusions; do not add a source-file SHA unless a future reviewed plan explicitly expands the provenance schema. [RESOLVED]
 
 ## Environment Availability
 
