@@ -103,7 +103,14 @@ generated-output claims.
      the existing `fork.prusaslicer.gcode-output` wording is preserved, and
      the planned `fork.prusaslicer.arc-fitting` wording stays limited to the
      narrow v1.15 evidence slice.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [x] 57-01-PLAN.md — Create the package-local arc-fitting scope contract and
+      package boundary.
+- [x] 57-02-PLAN.md — Implement the fail-closed verifier for the scope
+      contract.
+- [x] 57-03-PLAN.md — Add mutation coverage and final Bazel verification
+      wiring.
 
 ### Phase 58: Arc-Fitting Fixture Corpus
 **Goal**: Maintainers have a source-pinned arc-fitting fixture corpus and
@@ -181,7 +188,14 @@ inspect exact public status/docs for the narrow PrusaSlicer arc-fitting slice.
      deferrals remain explicit.
   4. Maintainer can confirm the existing `fork.prusaslicer.gcode-output`
      meaning is not widened by arc-fitting evidence publication.
-**Plans**: TBD
+**Plans**: 6 plans
+Plans:
+- [ ] 60-01-PLAN.md — Add Rust-backed public arc-fitting evidence command.
+- [ ] 60-02-PLAN.md — Add fail-closed public arc-fitting mutation guards.
+- [ ] 60-03-PLAN.md — Publish exact arc-fitting status row and verifier guards.
+- [ ] 60-04-PLAN.md — Publish package and fixture docs with fixture verifier checks.
+- [ ] 60-05-PLAN.md — Publish arc-fitting scope docs with scope verifier checks.
+- [ ] 60-06-PLAN.md — Publish public port docs for the narrow arc-fitting slice.
 
 ## Coverage
 
@@ -214,7 +228,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 | 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
 | 58. Arc-Fitting Fixture Corpus | 2/2 | Complete    | 2026-06-23 |
 | 59. Rust Arc-Fitting Evidence Boundary | 2/2 | Complete    | 2026-06-24 |
-| 60. Executable Arc-Fitting Evidence | 0/TBD | Not started | - |
+| 60. Executable Arc-Fitting Evidence | 0/6 | Not started | - |
 
 ## Planning Notes
 
