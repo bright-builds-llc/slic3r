@@ -454,12 +454,13 @@ rust_test(
 |---|-------|---------|---------------|
 | A1 | The research should be considered fresh for 7 days because local toolchain state and Phase 60 boundaries may change quickly during the active milestone. [ASSUMED] | Metadata | Planner may rely on stale environment or publication-boundary facts if Phase 60 or toolchain defaults change before execution. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Should Phase 59 add `prusa_arc_fitting_summary_lines`?**
    - What we know: The context leaves this to the agent's discretion, and existing parser modules expose pure summary-line helpers. [VERIFIED: 59-CONTEXT.md; prusa_gcode_output.rs; prusa_project_file.rs]
    - What's unclear: Phase 60 could consume facts directly or use summary lines for public command output. [VERIFIED: 59-CONTEXT.md]
    - Recommendation: Add the pure crate-local helper now because it has no side effects and gives Phase 60 a stable developer-facing output surface without adding a binary. [VERIFIED: prusa_gcode_output.rs; 59-CONTEXT.md]
+   - Resolution: RESOLVED by `59-01-PLAN.md`, which adds the pure crate-local `prusa_arc_fitting_summary_lines` helper without adding a binary, public parity target, status row, or public docs.
 
 ## Environment Availability
 
