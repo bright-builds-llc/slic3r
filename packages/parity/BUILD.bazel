@@ -160,6 +160,23 @@ sh_binary(
     ],
 )
 
+sh_binary(
+    name = "prusaslicer_arc_fitting_parity",
+    srcs = ["compare_prusaslicer_arc_fitting.sh"],
+    data = [
+        "status.tsv",
+        "//packages/slic3r-rust/crates/slic3r_flavors:prusa_arc_fitting_summary",
+        "//packages/parity-fixtures:prusa_arc_fitting_expected_arc_summary",
+        "//packages/parity-fixtures:prusa_arc_fitting_provenance",
+    ],
+    args = [
+        "$(location //packages/slic3r-rust/crates/slic3r_flavors:prusa_arc_fitting_summary)",
+        "$(location //packages/parity-fixtures:prusa_arc_fitting_expected_arc_summary)",
+        "$(location //packages/parity-fixtures:prusa_arc_fitting_expected_arc_summary)",
+        "$(location //packages/parity-fixtures:prusa_arc_fitting_provenance)",
+    ],
+)
+
 sh_test(
     name = "prusaslicer_profile_schema_parity_failure_test",
     srcs = ["compare_prusaslicer_profile_schema_test.sh"],
