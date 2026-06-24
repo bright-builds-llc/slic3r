@@ -81,7 +81,11 @@ verify the fixture corpus with
 `bazel run //packages/parity-fixtures:verify_prusa_arc_fitting_fixture`.
 The source ref is
 `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, and
-the source path is `src/libslic3r/Geometry/ArcWelder.cpp`. Phase 59 owns `slic3r_flavors::prusa_arc_fitting`, and Phase 60 owns `bazel run //packages/parity:prusaslicer_arc_fitting_parity` and the future `fork.prusaslicer.arc-fitting` status row. Phase 58 does not update `packages/parity/status.tsv`, public parity behavior, Rust crates, or `docs/port/*`; broad `generated-outputs` remains `in progress`, and the existing `fork.prusaslicer.gcode-output` row remains limited to the Phase 53 through Phase 56 semantic evidence slice.
+the source path is `src/libslic3r/Geometry/ArcWelder.cpp`. Phase 59 owns
+`slic3r_flavors::prusa_arc_fitting`. Phase 60 publishes bazel run //packages/parity:prusaslicer_arc_fitting_parity and the fork.prusaslicer.arc-fitting status row for checked-in arc summary evidence only. Phase 58 does not update public port docs, broad
+`generated-outputs` remains `in progress`, and the existing
+`fork.prusaslicer.gcode-output` row remains limited to the Phase 53 through
+Phase 56 semantic evidence slice.
 
 The G-code fixture namespace itself does not prove byte-for-byte G-code
 parity, broad generated-output verification, full generated-output parity,
@@ -174,8 +178,4 @@ additional fixture files by themselves.
   The source ref is
   `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, and
   the source path is `src/libslic3r/Geometry/ArcWelder.cpp`. Phase 59 owns
-  `slic3r_flavors::prusa_arc_fitting`, Phase 60 owns
-  `bazel run //packages/parity:prusaslicer_arc_fitting_parity` plus the future
-  `fork.prusaslicer.arc-fitting` status row, and Phase 58 does not update
-  `packages/parity/status.tsv`, public parity behavior, Rust crates, or
-  `docs/port/*`.
+  `slic3r_flavors::prusa_arc_fitting`. Phase 60 publishes bazel run //packages/parity:prusaslicer_arc_fitting_parity and the fork.prusaslicer.arc-fitting status row for checked-in arc summary evidence only.

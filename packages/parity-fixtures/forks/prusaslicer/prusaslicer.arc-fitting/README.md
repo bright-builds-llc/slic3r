@@ -28,14 +28,16 @@ sync behavior do not update these checked-in fixture bytes or summary rows.
 ## Phase Boundary
 
 Phase 58 owns only the checked-in `prusaslicer.arc-fitting` fixture namespace,
-provenance, and expected summary. Phase 59 owns future
-`slic3r_flavors::prusa_arc_fitting` Rust parser/readiness work. Phase 60 owns
-future `bazel run //packages/parity:prusaslicer_arc_fitting_parity` evidence
-and the future `fork.prusaslicer.arc-fitting` status row.
+provenance, and expected summary. Phase 59 owns
+`slic3r_flavors::prusa_arc_fitting` Rust parser/readiness work. Phase 60 publishes bazel run //packages/parity:prusaslicer_arc_fitting_parity and the fork.prusaslicer.arc-fitting status row for checked-in arc summary evidence only.
 
-This namespace does not add public status rows, public docs, Rust parser files,
-live generation, network behavior, host upload, post-processing, thumbnails,
-printability, GUI behavior, printer-runtime behavior, Bambu Studio behavior,
-OrcaSlicer behavior, release behavior, upstream source import, or sync
+This namespace does not add byte-for-byte G-code parity, full generated-output
+parity, broad generated-output verification, full ArcWelder algorithm
+equivalence, tolerance or geometry parity, printability, firmware behavior,
+printer-runtime behavior, GUI behavior, support generation, wall seam behavior,
+STEP import, full 3MF import/export, binary G-code, thumbnails,
+post-processing, host upload, network/device behavior, profile auto-update
+execution, fork release builds, Bambu Studio behavior, OrcaSlicer behavior,
+upstream source import, release behavior, sync automation, or non-Prusa fork
 behavior. The generated-output status promotion boundary remains outside this
 checked-in fixture corpus.
