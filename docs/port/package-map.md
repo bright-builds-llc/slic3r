@@ -16,16 +16,17 @@
 | Package | Role |
 |---------|------|
 | `packages/legacy-slic3r` | Retained legacy reference package, behavioral oracle, and Bazel-wrapped macOS legacy build/smoke surface |
-| `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface; `slic3r_flavors` owns the Prusa profile parser/summary helper, the Phase 43 `prusa_project_file` parser/metadata boundary, the Phase 47 `prusa_gcode_output` parser/metadata boundary, the Phase 51 Rust structural parser/readiness boundary, the Phase 55 Rust semantic parser/readiness boundary, and the `prusa_gcode_output_summary` summary/structural/semantic adapter |
+| `packages/slic3r-rust` | Bright Builds-compliant Rust workspace package with separate implementation, contract, CLI, and flavor-registry crate boundaries plus a Bazel-native verification surface; `slic3r_flavors` owns the Prusa profile parser/summary helper, the Phase 43 `prusa_project_file` parser/metadata boundary, the Phase 47 `prusa_gcode_output` parser/metadata boundary, the Phase 51 Rust structural parser/readiness boundary, the Phase 55 Rust semantic parser/readiness boundary, the `prusa_gcode_output_summary` summary/structural/semantic adapter, the Phase 59 `slic3r_flavors::prusa_arc_fitting` parser/readiness boundary, and the Phase 60 `prusa_arc_fitting_summary` summary adapter |
 | `packages/launcher` | Entry-point package boundary that points at the Rust CLI and now owns the preferred Linux runtime shim, the scoped Linux packaged launcher tree, the preferred Windows runtime target, the scoped Windows packaged launcher tree, and the scoped macOS packaged launcher/startup surface |
-| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, Windows packaged launcher, narrow Prusa profile-schema, narrow Prusa project-file, and narrow public semantic Prusa G-code command/status wiring; Phase 56 owns `bazel run //packages/parity:prusaslicer_gcode_output_parity` for the semantic G-code evidence slice while broad generated-outputs remains in progress |
-| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, `windows-packaged-launcher`, Prusa profile-schema, Phase 42 Prusa project-file, Phase 46 Prusa G-code output fixture, and marker/structural/semantic checked-in summaries for the Prusa G-code evidence slice, including checked-in expected artifacts such as `expected-summary.tsv`, `expected-project-summary.tsv`, `expected-gcode-summary.tsv`, `expected-gcode-structural-summary.tsv`, and `expected-gcode-semantic-summary.tsv` |
+| `packages/parity` | Parity visibility package with the checked-in status data source, the status command, and shared comparison commands for the verified CLI, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, Linux packaged launcher, Windows packaged launcher, narrow Prusa profile-schema, narrow Prusa project-file, narrow public semantic Prusa G-code command/status wiring, and narrow public Prusa arc-fitting command/status wiring; Phase 56 owns `bazel run //packages/parity:prusaslicer_gcode_output_parity` for the semantic G-code evidence slice while broad generated-outputs remains in progress, and Phase 60 owns `bazel run //packages/parity:prusaslicer_arc_fitting_parity` plus the `fork.prusaslicer.arc-fitting` status row |
+| `packages/parity-fixtures` | Fixture package boundary with contributor-facing provenance rules, shared corpora for the verified help/version/config, Linux runtime, Windows runtime, export, transform, scoped macOS packaged launcher, `linux-packaged-launcher`, `windows-packaged-launcher`, Prusa profile-schema, Phase 42 Prusa project-file, Phase 46 Prusa G-code output fixture, marker/structural/semantic checked-in summaries for the Prusa G-code evidence slice, and the Phase 58 Prusa arc-fitting fixture namespace with `expected-arc-summary.tsv`, including checked-in expected artifacts such as `expected-summary.tsv`, `expected-project-summary.tsv`, `expected-gcode-summary.tsv`, `expected-gcode-structural-summary.tsv`, `expected-gcode-semantic-summary.tsv`, and `expected-arc-summary.tsv` |
 | `packages/fork-vendors` | Vendor-source intake metadata, release-pin verification, and license/provenance cautions for downstream Slic3r-family fork planning |
 | `packages/fork-inventories` | Owns feature inventory templates, PrusaSlicer/Bambu Studio/OrcaSlicer source-pinned inventory TSVs, the cross-fork category map, and inventory verification |
 | `packages/fork-templates` | Owns Phase 36 maintainer templates for future fork parity checklists, launcher-shape planning, and manual drift-refresh review without proving runtime fork parity |
 | `packages/prusa-baseline` | Phase 37 PrusaSlicer baseline and checklist gate package for the narrow v1.10 profile schema/config evidence slice |
 | `packages/prusa-project-file-scope` | Phase 41 checked-in scope record and verifier package for the narrow `prusaslicer.project-file` evidence contract only |
 | `packages/prusa-gcode-output-scope` | Phase 49 owns the structural history and Phase 53 owns the closed semantic scope contract and verifier package for the narrow `prusaslicer.gcode-output` semantic evidence contract only |
+| `packages/prusa-arc-fitting-scope` | Phase 57 owns the scope contract and verifier package for the narrow `prusaslicer.arc-fitting` checked-in summary evidence contract only |
 
 ## Notes
 
@@ -215,3 +216,22 @@
   post-processing, host upload, network/device integration, profile
   auto-update execution, fork release builds, Bambu Studio, OrcaSlicer,
   upstream source imports.
+- Phase 57 adds `packages/prusa-arc-fitting-scope`, which owns the reviewed
+  `prusaslicer.arc-fitting` scope contract and verifier only.
+- Phase 58 adds the arc-fitting fixture namespace at
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/`, with
+  `arc-fitting-observations.gcode`, `fixture-provenance.tsv`, and
+  `expected-arc-summary.tsv`.
+- Phase 59 owns Rust parser/readiness through
+  `slic3r_flavors::prusa_arc_fitting` and
+  `prusa_arc_fitting_summary_lines`.
+- Phase 60 owns public Prusa arc-fitting command/status wiring through `bazel run //packages/parity:prusaslicer_arc_fitting_parity` and the exact `fork.prusaslicer.arc-fitting` status row. Evidence chain: Phase 57 scope contract, Phase 58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public command/status/docs. The existing `fork.prusaslicer.gcode-output` row remains separate, and broad `generated-outputs` remains in progress.
+- The Phase 60 Prusa arc-fitting evidence slice does not prove byte-for-byte
+  G-code parity, full generated-output parity, broad generated-output
+  verification, full ArcWelder algorithm equivalence, tolerance or geometry
+  parity, printability, firmware behavior, printer-runtime behavior, GUI
+  behavior, support generation, wall seam behavior, STEP import, full 3MF
+  import/export, binary G-code, thumbnails, post-processing, host upload,
+  network/device behavior, profile auto-update execution, fork release builds,
+  Bambu Studio, OrcaSlicer, upstream source imports, release behavior, sync
+  automation, or non-Prusa fork behavior.

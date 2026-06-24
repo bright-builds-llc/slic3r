@@ -137,6 +137,7 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56
   public parity command/status wiring. The broad generated-outputs status
   remains in progress.
+- `bazel run //packages/parity:prusaslicer_arc_fitting_parity` is the shared public command for the narrow Prusa arc-fitting checked-in summary evidence slice backed by the Phase 57 scope contract, Phase 58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public command/status/docs.
 - `linux.packaged-launcher` and `windows.packaged-launcher` are checked-in
   status rows in `packages/parity/status.tsv`
 - `packages/parity/status.tsv` is the checked-in status data source
@@ -152,6 +153,7 @@ Phase 3 changes the Rust workspace/tooling surface only. User-facing parity surf
   - `launcher-packaging`
   - `linux.packaged-launcher`
   - `windows.packaged-launcher`
+  - `prusaslicer.arc-fitting`
 
 ## Current Fork Vendor Intake State
 
@@ -359,6 +361,35 @@ automation remain deferred.
   post-processing, host upload, network/device integration, profile
   auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, and
   upstream source imports remain outside the Phase 56 evidence slice.
+
+## Current Prusa Arc-Fitting Evidence State
+
+- `packages/prusa-arc-fitting-scope` owns the Phase 57 scope contract and
+  verifier for `prusaslicer.arc-fitting`.
+- The accepted source identity is
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, with
+  source path `src/libslic3r/Geometry/ArcWelder.cpp`.
+- The fixture namespace is
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/`, and the
+  expected artifact is `expected-arc-summary.tsv`.
+- The Rust boundary is `slic3r_flavors::prusa_arc_fitting`, with helper
+  `prusa_arc_fitting_summary_lines` over caller-supplied checked-in TSV
+  artifacts.
+- Phase 60 publishes
+  `bazel run //packages/parity:prusaslicer_arc_fitting_parity` and the exact
+  `fork.prusaslicer.arc-fitting` row in `packages/parity/status.tsv` for the
+  narrow Prusa arc-fitting checked-in summary evidence slice.
+- Evidence chain: Phase 57 scope contract, Phase 58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public command/status/docs.
+- The existing `fork.prusaslicer.gcode-output` row remains separate, and broad
+  `generated-outputs` remains `in progress`.
+- The arc-fitting evidence does not prove byte-for-byte G-code parity, full
+  generated-output parity, broad generated-output verification, full ArcWelder
+  algorithm equivalence, tolerance or geometry parity, printability, firmware
+  behavior, printer-runtime behavior, GUI behavior, support generation, wall
+  seam behavior, STEP import, full 3MF import/export, binary G-code, thumbnails,
+  post-processing, host upload, network/device behavior, profile auto-update
+  execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source
+  imports, release behavior, sync automation, or non-Prusa fork behavior.
 
 ## v1.9 Fork Parity Deferrals
 
