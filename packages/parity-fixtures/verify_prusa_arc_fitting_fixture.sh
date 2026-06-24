@@ -149,7 +149,7 @@ require_exact_line() {
 	local expected_line="$3"
 	local description="$4"
 	if ! grep -Fxq -- "${expected_line}" "${file}"; then
-		error "${label}: missing required row for ${description}"
+		error "${label}: missing required row for ${description}: ${expected_line}"
 	fi
 }
 

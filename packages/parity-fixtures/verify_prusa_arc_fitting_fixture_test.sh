@@ -74,6 +74,13 @@ replace_first_line_containing() {
 	mv "${tmp_file}" "${file}"
 }
 
+status_row_for_surface() {
+	local file="$1"
+	local surface="$2"
+
+	awk -F '\t' -v surface="${surface}" '$1 == surface { print; exit }' "${file}"
+}
+
 move_arc_row_before() {
 	local file="$1"
 	local moved_field="$2"
@@ -156,6 +163,97 @@ test_valid_fixture_passes() {
 
 	# Assert
 	assert_file_equals "${tmp_dir}/valid.out" "ok: Prusa arc-fitting fixture verification passed"
+}
+
+test_missing_arc_status_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/missing-arc-status-row"
+	local status_file="${dir}/packages/parity/status.tsv"
+	write_valid_fixture_copy "${dir}"
+	remove_line_containing "${status_file}" "fork.prusaslicer.arc-fitting"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/missing-arc-status.out" "${tmp_dir}/missing-arc-status.err"; then
+		fail "missing fork.prusaslicer.arc-fitting status row passed"
+	fi
+
+	# Assert
+	assert_contains_all "${tmp_dir}/missing-arc-status.err" "packages/parity/status.tsv" "fork.prusaslicer.arc-fitting"
+}
+
+test_duplicate_arc_status_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-arc-status-row"
+	local status_file="${dir}/packages/parity/status.tsv"
+	local arc_status_row
+	write_valid_fixture_copy "${dir}"
+	arc_status_row="$(status_row_for_surface "${status_file}" "fork.prusaslicer.arc-fitting")"
+	printf '%s\n' "${arc_status_row}" >>"${status_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/duplicate-arc-status.out" "${tmp_dir}/duplicate-arc-status.err"; then
+		fail "duplicate fork.prusaslicer.arc-fitting status row passed"
+	fi
+
+	# Assert
+	assert_contains_all "${tmp_dir}/duplicate-arc-status.err" "packages/parity/status.tsv" "fork.prusaslicer.arc-fitting"
+}
+
+test_wrong_arc_status_target_fails() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-arc-status-target"
+	local status_file="${dir}/packages/parity/status.tsv"
+	local wrong_status_row
+	write_valid_fixture_copy "${dir}"
+	wrong_status_row="$(status_row_for_surface "${status_file}" "fork.prusaslicer.arc-fitting")"
+	wrong_status_row="${wrong_status_row//\/\/packages\/parity:prusaslicer_arc_fitting_parity/\/\/packages\/parity:prusaslicer_gcode_output_parity}"
+	replace_first_line_containing "${status_file}" "fork.prusaslicer.arc-fitting" "${wrong_status_row}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/wrong-arc-status-target.out" "${tmp_dir}/wrong-arc-status-target.err"; then
+		fail "wrong fork.prusaslicer.arc-fitting evidence target passed"
+	fi
+
+	# Assert
+	assert_contains_all "${tmp_dir}/wrong-arc-status-target.err" "fork.prusaslicer.arc-fitting" "//packages/parity:prusaslicer_arc_fitting_parity"
+}
+
+test_generated_outputs_status_promotion_fails() {
+	# Arrange
+	local dir="${tmp_dir}/generated-outputs-status-promotion"
+	local status_file="${dir}/packages/parity/status.tsv"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${status_file}" \
+		"generated-outputs" \
+		$'generated-outputs\tverified\t//packages/parity:generated_outputs_parity\tOverbroad generated-output promotion.'
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/generated-outputs-status-promotion.out" "${tmp_dir}/generated-outputs-status-promotion.err"; then
+		fail "generated-outputs status promotion passed"
+	fi
+
+	# Assert
+	assert_contains_all "${tmp_dir}/generated-outputs-status-promotion.err" "packages/parity/status.tsv" "generated-outputs"
+}
+
+test_gcode_output_status_widening_fails() {
+	# Arrange
+	local dir="${tmp_dir}/gcode-output-status-widening"
+	local status_file="${dir}/packages/parity/status.tsv"
+	local wrong_status_row
+	write_valid_fixture_copy "${dir}"
+	wrong_status_row="$(status_row_for_surface "${status_file}" "fork.prusaslicer.gcode-output")"
+	wrong_status_row="${wrong_status_row//narrow semantic Prusa G-code evidence slice/narrow semantic and arc-fitting Prusa G-code evidence slice}"
+	replace_first_line_containing "${status_file}" "fork.prusaslicer.gcode-output" "${wrong_status_row}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/gcode-output-status-widening.out" "${tmp_dir}/gcode-output-status-widening.err"; then
+		fail "widened fork.prusaslicer.gcode-output status row passed"
+	fi
+
+	# Assert
+	assert_contains_all "${tmp_dir}/gcode-output-status-widening.err" "packages/parity/status.tsv" "fork.prusaslicer.gcode-output"
 }
 
 test_missing_arc_row_fails() {
@@ -381,6 +479,11 @@ test_forbidden_verifier_behavior_fails() {
 
 for test_name in \
 	test_valid_fixture_passes \
+	test_missing_arc_status_row_fails \
+	test_duplicate_arc_status_row_fails \
+	test_wrong_arc_status_target_fails \
+	test_generated_outputs_status_promotion_fails \
+	test_gcode_output_status_widening_fails \
 	test_missing_arc_row_fails \
 	test_duplicate_arc_row_fails \
 	test_out_of_order_arc_row_fails \

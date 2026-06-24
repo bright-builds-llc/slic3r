@@ -18,6 +18,7 @@ trap 'rm -rf "${tmp_dir}"' EXIT
 
 readonly ARC_FITTING_INVENTORY_ROW=$'prusaslicer.arc-fitting\tprusaslicer\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tsrc/libslic3r/Geometry/ArcWelder.cpp\tarc-fitting\tarc-fitting\tshared-downstream\tmedium\tgenerated-outputs\tfuture-candidate\tnone\tArc fitting planning row; future parity requires G-code output comparison evidence.'
 readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow semantic Prusa G-code evidence slice backed by the Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion behavior, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
+readonly ARC_FITTING_STATUS_ROW=$'fork.prusaslicer.arc-fitting\tverified\t//packages/parity:prusaslicer_arc_fitting_parity\tShared fixture comparison proves the narrow Prusa arc-fitting checked-in summary evidence slice backed by the Phase 57 scope contract, Phase 58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public parity command only; byte-for-byte G-code parity, full generated-output parity, broad generated-output verification, full ArcWelder algorithm equivalence, tolerance or geometry parity, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, wall seam behavior, STEP import, full 3MF import/export, binary G-code, thumbnails, post-processing, host upload, network/device behavior, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, sync automation, and non-Prusa fork behavior remain deferred'
 
 fail() {
 	printf 'FAIL: %s\n' "$1" >&2
@@ -207,6 +208,7 @@ EOF
 # surface	status	evidence	notes
 generated-outputs	in progress	docs/port/cli-slice.md	Scoped export plus repair/split artifact naming are fixture-verified; geometry and output-content parity are deferred
 ${GCODE_OUTPUT_STATUS_ROW}
+${ARC_FITTING_STATUS_ROW}
 EOF
 }
 
@@ -401,7 +403,10 @@ test_gcode_output_status_drift_fails() {
 	# Arrange
 	local dir="${tmp_dir}/gcode-output-status-drift"
 	write_valid_fixture "${dir}"
-	replace_text "${dir}/packages/parity/status.tsv" "//packages/parity:prusaslicer_gcode_output_parity" "//packages/parity:wrong_gcode_output_parity"
+	replace_text \
+		"${dir}/packages/parity/status.tsv" \
+		"narrow semantic Prusa G-code evidence slice" \
+		"narrow semantic and arc-fitting Prusa G-code evidence slice"
 
 	# Act
 	if run_verifier "${dir}" "${tmp_dir}/gcode-status-drift.out" "${tmp_dir}/gcode-status-drift.err"; then
@@ -413,20 +418,55 @@ test_gcode_output_status_drift_fails() {
 	assert_contains "${tmp_dir}/gcode-status-drift.err" 'fork\.prusaslicer\.gcode-output'
 }
 
-test_premature_arc_status_publication_fails() {
+test_missing_arc_status_row_fails() {
 	# Arrange
-	local dir="${tmp_dir}/premature-arc-status"
+	local dir="${tmp_dir}/missing-arc-status"
 	write_valid_fixture "${dir}"
-	printf '%s\n' $'fork.prusaslicer.arc-fitting\tverified\t//packages/parity:prusaslicer_arc_fitting_parity\tPremature arc status.' >>"${dir}/packages/parity/status.tsv"
+	remove_line_containing "${dir}/packages/parity/status.tsv" "fork.prusaslicer.arc-fitting"
 
 	# Act
-	if run_verifier "${dir}" "${tmp_dir}/premature-arc-status.out" "${tmp_dir}/premature-arc-status.err"; then
-		fail "premature arc status fixture passed"
+	if run_verifier "${dir}" "${tmp_dir}/missing-arc-status.out" "${tmp_dir}/missing-arc-status.err"; then
+		fail "missing fork.prusaslicer.arc-fitting status row passed"
 	fi
 
 	# Assert
-	assert_contains "${tmp_dir}/premature-arc-status.err" '^error:'
-	assert_contains "${tmp_dir}/premature-arc-status.err" 'no verified fork\.prusaslicer\.arc-fitting status row may be published in Phase 57'
+	assert_contains "${tmp_dir}/missing-arc-status.err" '^error:'
+	assert_contains "${tmp_dir}/missing-arc-status.err" 'fork\.prusaslicer\.arc-fitting'
+}
+
+test_duplicate_arc_status_row_fails() {
+	# Arrange
+	local dir="${tmp_dir}/duplicate-arc-status"
+	write_valid_fixture "${dir}"
+	printf '%s\n' "${ARC_FITTING_STATUS_ROW}" >>"${dir}/packages/parity/status.tsv"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/duplicate-arc-status.out" "${tmp_dir}/duplicate-arc-status.err"; then
+		fail "duplicate fork.prusaslicer.arc-fitting status row passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/duplicate-arc-status.err" '^error:'
+	assert_contains "${tmp_dir}/duplicate-arc-status.err" 'fork\.prusaslicer\.arc-fitting'
+}
+
+test_wrong_arc_status_target_fails() {
+	# Arrange
+	local dir="${tmp_dir}/wrong-arc-status-target"
+	write_valid_fixture "${dir}"
+	replace_text \
+		"${dir}/packages/parity/status.tsv" \
+		"//packages/parity:prusaslicer_arc_fitting_parity" \
+		"//packages/parity:prusaslicer_gcode_output_parity"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/wrong-arc-status-target.out" "${tmp_dir}/wrong-arc-status-target.err"; then
+		fail "wrong fork.prusaslicer.arc-fitting evidence target passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/wrong-arc-status-target.err" '^error:'
+	assert_contains "${tmp_dir}/wrong-arc-status-target.err" '//packages/parity:prusaslicer_arc_fitting_parity'
 }
 
 test_missing_deferred_scope_term_fails() {
@@ -504,7 +544,9 @@ test_missing_arc_category_reference_fails
 test_generated_outputs_promotion_fails
 test_duplicate_generated_outputs_status_fails
 test_gcode_output_status_drift_fails
-test_premature_arc_status_publication_fails
+test_missing_arc_status_row_fails
+test_duplicate_arc_status_row_fails
+test_wrong_arc_status_target_fails
 test_missing_deferred_scope_term_fails
 test_runtime_overclaim_fails
 test_printability_overclaim_fails
