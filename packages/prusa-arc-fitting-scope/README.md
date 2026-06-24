@@ -7,9 +7,12 @@ reviewed Phase 57 arc-fitting scope contract.
 
 Phase 57 records the accepted source identity, inventory row, source anchors,
 planned fixture namespace, planned expected arc summary, planned Rust boundary,
-planned public evidence command, planned status wording, security note,
-deferred generated-output scope, and reviewer signoff for the narrow
-`prusaslicer.arc-fitting` evidence slice.
+security note, deferred generated-output scope, and reviewer signoff for the
+narrow `prusaslicer.arc-fitting` evidence slice.
+
+Phase 60 publishes
+`bazel run //packages/parity:prusaslicer_arc_fitting_parity` and
+`fork.prusaslicer.arc-fitting` for checked-in arc summary evidence only.
 
 Phase 57 creates no fixture bytes, expected arc summary, Rust parser, public
 parity command, verified `fork.prusaslicer.arc-fitting` status row, upstream
@@ -24,12 +27,11 @@ Phase 53 through Phase 56 semantic Prusa G-code evidence slice. Broad
 
 - [`arc-fitting-scope.md`](arc-fitting-scope.md) records the Phase 57
   maintainer scope contract, approved arc evidence field list, traceability,
-  planned status wording, security note, and deferred scope for
+  published Phase 60 command/status wording, security note, and deferred scope for
   `prusaslicer.arc-fitting`.
 
 ## Boundary
 
 This package is metadata and verifier owned. It creates no generated-output
-fixture corpus, executable Rust parser, public parity target, status
-publication, runtime behavior, printability evidence, upstream source import,
-or external integration.
+fixture corpus, executable Rust parser, runtime behavior, printability
+evidence, upstream source import, or external integration.

@@ -197,9 +197,9 @@ verify_scope_record() {
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
 		"${SCOPE_RECORD_SECTION}" "Candidate Rust boundary" "Phase 59 planned \`slic3r_flavors::prusa_arc_fitting\` pure data-in/data-out boundary over caller-supplied checked-in arc summaries; no Rust parser implementation is created in Phase 57."
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
-		"${SCOPE_RECORD_SECTION}" "Planned evidence command" "Phase 60 planned \`bazel run //packages/parity:prusaslicer_arc_fitting_parity\`; the target is not created in Phase 57."
+		"${SCOPE_RECORD_SECTION}" "Public evidence command" "Phase 60 published \`bazel run //packages/parity:prusaslicer_arc_fitting_parity\`; Phase 57 only planned the target and did not create it."
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
-		"${SCOPE_RECORD_SECTION}" "Planned status token" "Phase 60 planned \`fork.prusaslicer.arc-fitting\` after executable evidence passes; no verified \`packages/parity/status.tsv\` row is published in Phase 57."
+		"${SCOPE_RECORD_SECTION}" "Published narrow status row" "Phase 60 published \`fork.prusaslicer.arc-fitting\` after executable evidence passed; Phase 57 only planned the row and did not publish it."
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
 		"${SCOPE_RECORD_SECTION}" "Docs touched" "\`packages/prusa-arc-fitting-scope/README.md\`; \`packages/prusa-arc-fitting-scope/arc-fitting-scope.md\`"
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
@@ -275,9 +275,9 @@ verify_traceability_record() {
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
 		"${TRACEABILITY_SECTION}" "Planned Rust boundary" "\`slic3r_flavors::prusa_arc_fitting\`"
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
-		"${TRACEABILITY_SECTION}" "Planned public evidence command" "\`bazel run //packages/parity:prusaslicer_arc_fitting_parity\`"
+		"${TRACEABILITY_SECTION}" "Public evidence command" "\`bazel run //packages/parity:prusaslicer_arc_fitting_parity\`"
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
-		"${TRACEABILITY_SECTION}" "Planned narrow status row" "Phase 60 planned \`fork.prusaslicer.arc-fitting\` remains limited to the narrow v1.15 checked-in arc summary evidence slice backed by the Phase 57 scope contract, Phase 58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public parity command"
+		"${TRACEABILITY_SECTION}" "Published narrow status row" "Phase 60 published \`fork.prusaslicer.arc-fitting\` as the narrow v1.15 checked-in arc summary evidence slice backed by the Phase 57 scope contract, Phase 58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public parity command."
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
 		"${TRACEABILITY_SECTION}" "Existing G-code status row" "\`fork.prusaslicer.gcode-output\` stays limited to the existing semantic Prusa G-code evidence slice backed by Phase 53 through Phase 56"
 	require_section_table_row "${scope_file}" "arc-fitting-scope.md" \
