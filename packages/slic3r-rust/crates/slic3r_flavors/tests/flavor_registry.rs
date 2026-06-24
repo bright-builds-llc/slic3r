@@ -2,11 +2,12 @@ use slic3r_contracts::{
     ChecklistStatus, DownstreamFork, FeatureOrigin, FlavorId, ParitySurface, VendorSourceRef,
 };
 use slic3r_flavors::{
-    FlavorCapability, FlavorProvenance, FlavorRegistryEntry, PrusaGcodeOutputSemanticReadiness,
-    all_capabilities, all_flavors, capabilities_by_checklist_status, capabilities_by_origin,
-    maybe_flavor, prusa_gcode_output_metadata, prusa_gcode_output_semantic_readiness,
-    prusa_gcode_output_structural_readiness, prusa_profile_schema_metadata,
-    prusa_project_file_metadata,
+    FlavorCapability, FlavorProvenance, FlavorRegistryEntry, PrusaArcFittingReadiness,
+    PrusaGcodeOutputSemanticReadiness, all_capabilities, all_flavors,
+    capabilities_by_checklist_status, capabilities_by_origin, maybe_flavor,
+    prusa_arc_fitting_metadata, prusa_arc_fitting_readiness, prusa_gcode_output_metadata,
+    prusa_gcode_output_semantic_readiness, prusa_gcode_output_structural_readiness,
+    prusa_profile_schema_metadata, prusa_project_file_metadata,
 };
 
 const PRUSA_GCODE_OUTPUT_SEMANTIC_READINESS_NOTES: &str = "Source-observed G-code output planning row; semantic summary parser/readiness metadata is available for Phase 55 developers, while public semantic parity evidence and status/docs publication remain Phase 56-owned before broader generated-output behavior is claimed. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, printability, printer-runtime, support, seam, arc, GUI, release, sync, or non-Prusa fork behavior is claimed.";
@@ -496,6 +497,128 @@ fn prusa_gcode_output_semantic_readiness_exposes_published_semantic_boundary() {
 }
 
 #[test]
+fn prusa_arc_fitting_metadata_exposes_fixture_scope_expected_summary_and_reserved_status() {
+    // Arrange
+    let metadata = prusa_arc_fitting_metadata();
+
+    // Act
+    let source_ref = metadata.source_ref;
+
+    // Assert
+    assert_eq!(metadata.inventory_id, "prusaslicer.arc-fitting");
+    assert_eq!(metadata.vendor_id, "prusaslicer");
+    assert_eq!(metadata.flavor_id, FlavorId::PrusaSlicer);
+    assert_eq!(metadata.origin, FeatureOrigin::SharedDownstream);
+    assert_eq!(
+        metadata.parity_dependency,
+        ParitySurface::generated_outputs()
+    );
+    assert_eq!(metadata.checklist_status, ChecklistStatus::FutureCandidate);
+    assert_eq!(source_ref, VendorSourceRef::prusa_slicer_version_2_9_5());
+    assert_eq!(metadata.source_path, "src/libslic3r/Geometry/ArcWelder.cpp");
+    assert_eq!(
+        metadata.fixture_corpus_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting"
+    );
+    assert_eq!(
+        metadata.fixture_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode"
+    );
+    assert_eq!(
+        metadata.expected_arc_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv"
+    );
+    assert_eq!(
+        metadata.scope_record_path,
+        "packages/prusa-arc-fitting-scope/arc-fitting-scope.md"
+    );
+    assert_eq!(
+        metadata.reserved_future_status_token,
+        "fork.prusaslicer.arc-fitting"
+    );
+}
+
+#[test]
+fn prusa_arc_fitting_readiness_exposes_pre_publication_boundary() {
+    // Arrange
+    let expected_source_paths: &[&str] = &[
+        "packages/fork-inventories/prusaslicer.tsv",
+        "src/libslic3r/Geometry/ArcWelder.cpp",
+    ];
+    let expected_source_anchors: &[&str] = &[
+        "ArcWelder.cpp#L4-L7",
+        "ArcWelder.cpp#L400-L404",
+        "ArcWelder.cpp#L630-L634",
+    ];
+    let expected_deferred_surfaces = [
+        "byte-for-byte G-code parity",
+        "broad generated-output verification",
+        "ArcWelder algorithm equivalence",
+        "tolerance or geometry parity",
+        "printability",
+        "firmware behavior",
+        "printer-runtime behavior",
+        "GUI behavior",
+        "support generation",
+        "wall seam behavior",
+        "release behavior",
+        "host upload",
+        "network/device behavior",
+        "upstream source imports",
+        "sync automation",
+        "Bambu Studio",
+        "OrcaSlicer",
+        "non-Prusa fork behavior",
+    ];
+
+    // Act
+    let readiness: PrusaArcFittingReadiness = prusa_arc_fitting_readiness();
+
+    // Assert
+    assert_eq!(readiness.inventory_id, "prusaslicer.arc-fitting");
+    assert_eq!(
+        readiness.source_ref,
+        VendorSourceRef::prusa_slicer_version_2_9_5()
+    );
+    assert_eq!(readiness.inventory_source_paths, expected_source_paths);
+    assert_eq!(readiness.source_anchors, expected_source_anchors);
+    assert_eq!(
+        readiness.fixture_corpus_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting"
+    );
+    assert_eq!(
+        readiness.fixture_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode"
+    );
+    assert_eq!(
+        readiness.expected_arc_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv"
+    );
+    assert_eq!(
+        readiness.scope_record_path,
+        "packages/prusa-arc-fitting-scope/arc-fitting-scope.md"
+    );
+    assert_eq!(
+        readiness.parser_boundary,
+        "slic3r_flavors::prusa_arc_fitting::parse_prusa_arc_fitting_summary"
+    );
+    assert_eq!(
+        readiness.planned_public_command,
+        "//packages/parity:prusaslicer_arc_fitting_parity"
+    );
+    assert_eq!(
+        readiness.planned_status_token,
+        "fork.prusaslicer.arc-fitting"
+    );
+    assert_eq!(readiness.generated_outputs_status, "in progress");
+    assert_eq!(
+        readiness.publication_boundary,
+        "Phase 59 parser/readiness only; Phase 60 owns public executable evidence and status/docs publication."
+    );
+    assert_eq!(readiness.deferred_surfaces, expected_deferred_surfaces);
+}
+
+#[test]
 fn prusa_gcode_output_structural_readiness_exposes_parser_metadata_without_status_publication() {
     // Arrange
     let expected_source_paths: &[&str] = &["src/libslic3r/GCode.cpp", "src/libslic3r/GCode.hpp"];
@@ -683,6 +806,8 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
     let project_file_metadata = prusa_project_file_metadata();
     let gcode_output_metadata = prusa_gcode_output_metadata();
     let gcode_output_readiness = prusa_gcode_output_structural_readiness();
+    let arc_fitting_metadata = prusa_arc_fitting_metadata();
+    let arc_fitting_readiness = prusa_arc_fitting_readiness();
     let public_helper_names = [
         "all_flavors",
         "maybe_flavor",
@@ -696,6 +821,10 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         "prusa_gcode_output_structural_readiness",
         "parse_prusa_gcode_output_summary",
         "prusa_gcode_output_summary_lines",
+        "prusa_arc_fitting_metadata",
+        "prusa_arc_fitting_readiness",
+        "parse_prusa_arc_fitting_summary",
+        "prusa_arc_fitting_summary_lines",
     ];
     let metadata_values = [
         profile_schema_metadata.inventory_id,
@@ -738,6 +867,28 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         gcode_output_readiness.parity_dependency.as_str(),
         gcode_output_readiness.checklist_status.as_str(),
         gcode_output_readiness.reserved_future_status_token,
+        arc_fitting_metadata.inventory_id,
+        arc_fitting_metadata.vendor_id,
+        arc_fitting_metadata.flavor_id.as_str(),
+        arc_fitting_metadata.origin.as_str(),
+        arc_fitting_metadata.parity_dependency.as_str(),
+        arc_fitting_metadata.checklist_status.as_str(),
+        arc_fitting_metadata.source_ref.as_str(),
+        arc_fitting_metadata.source_path,
+        arc_fitting_metadata.fixture_corpus_path,
+        arc_fitting_metadata.fixture_path,
+        arc_fitting_metadata.expected_arc_summary_path,
+        arc_fitting_metadata.scope_record_path,
+        arc_fitting_metadata.reserved_future_status_token,
+        arc_fitting_readiness.inventory_id,
+        arc_fitting_readiness.source_ref.as_str(),
+        arc_fitting_readiness.fixture_corpus_path,
+        arc_fitting_readiness.fixture_path,
+        arc_fitting_readiness.expected_arc_summary_path,
+        arc_fitting_readiness.scope_record_path,
+        arc_fitting_readiness.parser_boundary,
+        arc_fitting_readiness.planned_status_token,
+        arc_fitting_readiness.generated_outputs_status,
     ];
 
     // Act

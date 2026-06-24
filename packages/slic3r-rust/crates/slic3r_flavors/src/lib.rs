@@ -9,9 +9,10 @@ pub mod registry;
 
 pub use prusa_arc_fitting::{
     PrusaArcFittingCategory, PrusaArcFittingEvidenceBoundary, PrusaArcFittingFacts,
-    PrusaArcFittingField, PrusaArcFittingParseError, PrusaArcFittingParseResult,
-    PrusaArcFittingSummary, PrusaArcFittingSummaryRow, PrusaArcFittingValue,
-    parse_prusa_arc_fitting_summary, prusa_arc_fitting_summary_lines,
+    PrusaArcFittingField, PrusaArcFittingMetadata, PrusaArcFittingParseError,
+    PrusaArcFittingParseResult, PrusaArcFittingReadiness, PrusaArcFittingSummary,
+    PrusaArcFittingSummaryRow, PrusaArcFittingValue, parse_prusa_arc_fitting_summary,
+    prusa_arc_fitting_metadata, prusa_arc_fitting_readiness, prusa_arc_fitting_summary_lines,
 };
 pub use prusa_gcode_output::{
     PrusaGcodeOutputEvidenceBoundary, PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue,

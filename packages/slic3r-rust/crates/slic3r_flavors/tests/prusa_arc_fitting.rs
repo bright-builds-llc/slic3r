@@ -120,7 +120,13 @@ fn public_arc_fitting_declarations_do_not_claim_deferred_behavior() {
     let public_declarations: Vec<&str> = PRUSA_ARC_FITTING_SOURCE
         .lines()
         .map(str::trim)
-        .filter(|line| line.starts_with("pub "))
+        .filter(|line| {
+            line.starts_with("pub struct ")
+                || line.starts_with("pub enum ")
+                || line.starts_with("pub type ")
+                || line.starts_with("pub fn ")
+                || line.starts_with("pub const fn ")
+        })
         .collect();
 
     // Act

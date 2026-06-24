@@ -1,4 +1,4 @@
-use slic3r_contracts::VendorSourceRef;
+use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface, VendorSourceRef};
 
 pub(crate) const PRUSA_ARC_FITTING_INVENTORY_ID: &str = "prusaslicer.arc-fitting";
 pub(crate) const PRUSA_ARC_FITTING_VENDOR_ID: &str = "prusaslicer";
@@ -13,6 +13,35 @@ pub(crate) const PRUSA_ARC_FITTING_EXPECTED_SUMMARY_PATH: &str =
 pub(crate) const PRUSA_ARC_FITTING_SCOPE_RECORD_PATH: &str =
     "packages/prusa-arc-fitting-scope/arc-fitting-scope.md";
 pub(crate) const PRUSA_ARC_FITTING_RESERVED_STATUS_TOKEN: &str = "fork.prusaslicer.arc-fitting";
+static PRUSA_ARC_FITTING_INVENTORY_SOURCE_PATHS: [&str; 2] = [
+    "packages/fork-inventories/prusaslicer.tsv",
+    PRUSA_ARC_FITTING_SOURCE_PATH,
+];
+static PRUSA_ARC_FITTING_SOURCE_ANCHORS: [&str; 3] = [
+    "ArcWelder.cpp#L4-L7",
+    "ArcWelder.cpp#L400-L404",
+    "ArcWelder.cpp#L630-L634",
+];
+static PRUSA_ARC_FITTING_DEFERRED_SURFACES: [&str; 18] = [
+    "byte-for-byte G-code parity",
+    "broad generated-output verification",
+    "ArcWelder algorithm equivalence",
+    "tolerance or geometry parity",
+    "printability",
+    "firmware behavior",
+    "printer-runtime behavior",
+    "GUI behavior",
+    "support generation",
+    "wall seam behavior",
+    "release behavior",
+    "host upload",
+    "network/device behavior",
+    "upstream source imports",
+    "sync automation",
+    "Bambu Studio",
+    "OrcaSlicer",
+    "non-Prusa fork behavior",
+];
 
 const _: [&str; 6] = [
     PRUSA_ARC_FITTING_INVENTORY_ID,
@@ -226,6 +255,41 @@ pub enum PrusaArcFittingValue {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct PrusaArcFittingEvidenceBoundary(&'static str);
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaArcFittingMetadata {
+    pub inventory_id: &'static str,
+    pub vendor_id: &'static str,
+    pub flavor_id: FlavorId,
+    pub origin: FeatureOrigin,
+    pub parity_dependency: ParitySurface,
+    pub checklist_status: ChecklistStatus,
+    pub source_ref: VendorSourceRef,
+    pub source_path: &'static str,
+    pub fixture_corpus_path: &'static str,
+    pub fixture_path: &'static str,
+    pub expected_arc_summary_path: &'static str,
+    pub scope_record_path: &'static str,
+    pub reserved_future_status_token: &'static str,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaArcFittingReadiness {
+    pub inventory_id: &'static str,
+    pub source_ref: VendorSourceRef,
+    pub inventory_source_paths: &'static [&'static str],
+    pub source_anchors: &'static [&'static str],
+    pub fixture_corpus_path: &'static str,
+    pub fixture_path: &'static str,
+    pub expected_arc_summary_path: &'static str,
+    pub scope_record_path: &'static str,
+    pub parser_boundary: &'static str,
+    pub planned_public_command: &'static str,
+    pub planned_status_token: &'static str,
+    pub generated_outputs_status: &'static str,
+    pub publication_boundary: &'static str,
+    pub deferred_surfaces: &'static [&'static str],
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PrusaArcFittingParseError {
     InvalidHeader {
@@ -303,6 +367,43 @@ struct ArcRowKey {
 }
 
 pub type PrusaArcFittingParseResult = Result<PrusaArcFittingSummary, PrusaArcFittingParseError>;
+
+pub const fn prusa_arc_fitting_metadata() -> PrusaArcFittingMetadata {
+    PrusaArcFittingMetadata {
+        inventory_id: PRUSA_ARC_FITTING_INVENTORY_ID,
+        vendor_id: PRUSA_ARC_FITTING_VENDOR_ID,
+        flavor_id: FlavorId::PrusaSlicer,
+        origin: FeatureOrigin::SharedDownstream,
+        parity_dependency: ParitySurface::generated_outputs(),
+        checklist_status: ChecklistStatus::FutureCandidate,
+        source_ref: PRUSA_ARC_FITTING_SOURCE_REF,
+        source_path: PRUSA_ARC_FITTING_SOURCE_PATH,
+        fixture_corpus_path: PRUSA_ARC_FITTING_FIXTURE_CORPUS_PATH,
+        fixture_path: PRUSA_ARC_FITTING_FIXTURE_PATH,
+        expected_arc_summary_path: PRUSA_ARC_FITTING_EXPECTED_SUMMARY_PATH,
+        scope_record_path: PRUSA_ARC_FITTING_SCOPE_RECORD_PATH,
+        reserved_future_status_token: PRUSA_ARC_FITTING_RESERVED_STATUS_TOKEN,
+    }
+}
+
+pub const fn prusa_arc_fitting_readiness() -> PrusaArcFittingReadiness {
+    PrusaArcFittingReadiness {
+        inventory_id: PRUSA_ARC_FITTING_INVENTORY_ID,
+        source_ref: PRUSA_ARC_FITTING_SOURCE_REF,
+        inventory_source_paths: &PRUSA_ARC_FITTING_INVENTORY_SOURCE_PATHS,
+        source_anchors: &PRUSA_ARC_FITTING_SOURCE_ANCHORS,
+        fixture_corpus_path: PRUSA_ARC_FITTING_FIXTURE_CORPUS_PATH,
+        fixture_path: PRUSA_ARC_FITTING_FIXTURE_PATH,
+        expected_arc_summary_path: PRUSA_ARC_FITTING_EXPECTED_SUMMARY_PATH,
+        scope_record_path: PRUSA_ARC_FITTING_SCOPE_RECORD_PATH,
+        parser_boundary: "slic3r_flavors::prusa_arc_fitting::parse_prusa_arc_fitting_summary",
+        planned_public_command: "//packages/parity:prusaslicer_arc_fitting_parity",
+        planned_status_token: PRUSA_ARC_FITTING_RESERVED_STATUS_TOKEN,
+        generated_outputs_status: "in progress",
+        publication_boundary: "Phase 59 parser/readiness only; Phase 60 owns public executable evidence and status/docs publication.",
+        deferred_surfaces: &PRUSA_ARC_FITTING_DEFERRED_SURFACES,
+    }
+}
 
 pub fn parse_prusa_arc_fitting_summary(input: &str) -> PrusaArcFittingParseResult {
     let mut lines = input.lines();
