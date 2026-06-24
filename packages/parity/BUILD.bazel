@@ -213,6 +213,17 @@ sh_test(
     ],
 )
 
+sh_test(
+    name = "prusaslicer_arc_fitting_parity_failure_test",
+    srcs = ["compare_prusaslicer_arc_fitting_test.sh"],
+    data = [
+        "compare_prusaslicer_arc_fitting.sh",
+        "//packages/slic3r-rust/crates/slic3r_flavors:prusa_arc_fitting_summary",
+        "//packages/parity-fixtures:prusa_arc_fitting_expected_arc_summary",
+        "//packages/parity-fixtures:prusa_arc_fitting_provenance",
+    ],
+)
+
 sh_binary(
     name = "linux_runtime_parity",
     srcs = ["compare_linux_runtime.sh"],
