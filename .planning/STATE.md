@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
-status: executing
-stopped_at: Completed 60-05-PLAN.md
-last_updated: "2026-06-24T16:58:18.113Z"
+status: verifying
+stopped_at: Completed 60-06-PLAN.md
+last_updated: "2026-06-24T17:11:06.722Z"
 last_activity: 2026-06-24
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 13
-  completed_plans: 12
-  percent: 92
+  completed_plans: 13
+  percent: 100
 ---
 
 # Project State
@@ -29,13 +29,13 @@ depend on.
 
 ## Current Position
 
-Phase: 60 (Executable Arc-Fitting Evidence) — EXECUTING
+Phase: 60 (Executable Arc-Fitting Evidence) — VERIFYING
 Plan: 6 of 6
 Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-24
 
-Progress: [█████████░] 92%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -63,6 +63,7 @@ Progress: [█████████░] 92%
 - 60-03 completed in 8 min with 2 tasks and 5 implementation files changed.
 - 60-04 completed in 7 min with 2 tasks and 5 implementation files changed.
 - 60-05 completed in 7 min with 2 tasks and 4 implementation files changed.
+- 60-06 completed in 7 min with 2 tasks and 4 documentation files changed.
 
 ## Accumulated Context
 
@@ -217,6 +218,9 @@ Recent decisions affecting v1.12:
 - [Phase 60-05]: Kept Phase 57 as the historical scope-contract boundary while documenting that Phase 60 published only checked-in arc summary evidence.
 - [Phase 60-05]: Preserved broad generated-outputs as in progress and kept the existing semantic fork.prusaslicer.gcode-output evidence separate.
 - [Phase 60-05]: Used split Bash literals for stale planned wording rejection so source scans do not contain the forbidden stale strings contiguously.
+- [Phase 60-executable-arc-fitting-evidence]: Published fork.prusaslicer.arc-fitting in public port docs as narrow checked-in arc summary evidence only. — Plan 60-06 public docs publish only the checked-in arc summary evidence slice and keep broad generated-output claims deferred.
+- [Phase 60-executable-arc-fitting-evidence]: Kept broad generated-outputs as in progress and kept existing fork.prusaslicer.gcode-output evidence separate. — The arc-fitting row is a feature-specific fork evidence slice, not broad generated-output graduation or a widening of the semantic G-code output row.
+- [Phase 60-executable-arc-fitting-evidence]: Mapped arc-fitting ownership across scope, fixture, Rust, parity, and public docs packages. — Future maintainers can route changes to packages/prusa-arc-fitting-scope, packages/parity-fixtures, packages/slic3r-rust, or packages/parity without inferring ownership from status text alone.
 
 ### Pending Todos
 
@@ -228,6 +232,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-24T16:58:18.111Z
-Stopped at: Completed 60-05-PLAN.md
+Last session: 2026-06-24T17:10:28.246Z
+Stopped at: Completed 60-06-PLAN.md
 Resume file: None
