@@ -49,15 +49,15 @@ slice. It reuses the v1.12-v1.14 G-code evidence ladder, focuses on
 claiming byte-for-byte, printability, runtime, GUI, non-Prusa fork, release,
 upstream import, or sync behavior.
 
-v1.15 Phase 59 is complete. Developers can parse checked-in
-`prusaslicer.arc-fitting` expected summaries through the pure
-`slic3r_flavors::prusa_arc_fitting` Rust boundary, inspect registry/readiness
-metadata for source identity, fixture corpus, expected summaries, Phase 60
-deferrals, and generated-output publication boundaries, and run Cargo/Bazel
-coverage proving valid rows parse while invalid rows fail closed. Public
-`fork.prusaslicer.arc-fitting` status publication, public parity command, docs
-publication, printer-runtime behavior, and source import remain deferred until
-Phase 60.
+v1.15 Phase 60 is complete and verified. Maintainers can run
+`bazel run //packages/parity:prusaslicer_arc_fitting_parity`, inspect the
+separate `fork.prusaslicer.arc-fitting` status row, and rely on fixture, scope,
+and public parity mutation guards that keep the slice limited to checked-in
+PrusaSlicer arc summary evidence. The existing
+`fork.prusaslicer.gcode-output` evidence remains separate, while broad
+`generated-outputs`, byte-for-byte G-code parity, printability,
+printer-runtime behavior, GUI behavior, non-Prusa fork behavior, release
+behavior, upstream imports, and sync automation remain deferred.
 
 v1.15 Phase 58 is complete. Maintainers can inspect the source-pinned
 `prusaslicer.arc-fitting` fixture namespace, run
@@ -505,21 +505,22 @@ high-risk generated-output or network/cloud surfaces.
 - ✓ v1.14 publishes executable semantic parity/status/docs evidence for
   `fork.prusaslicer.gcode-output` without claiming byte-for-byte, printability,
   runtime, GUI, or non-Prusa fork parity — Phase 56
+- ✓ v1.15 proves a reviewed `prusaslicer.arc-fitting` scope contract before
+  fixture, Rust, parity, status, or docs work can claim evidence — Phase 57
+- ✓ v1.15 adds source-pinned arc-fitting fixture evidence and expected
+  summaries without importing upstream source trees or generating broad G-code
+  parity claims — Phase 58
+- ✓ v1.15 adds a pure Rust arc-fitting evidence boundary that parses checked-in
+  caller-supplied artifacts without Git, network, filesystem discovery,
+  process, release, sync, or runtime side effects — Phase 59
+- ✓ v1.15 publishes executable arc-fitting parity/status/docs evidence only for
+  the narrow PrusaSlicer arc-fitting slice, keeping broad generated-output,
+  byte-for-byte, printability, runtime, GUI, non-Prusa fork, release, upstream
+  import, and sync behavior deferred — Phase 60
 
 ### Active
 
-- [ ] v1.15 proves a reviewed `prusaslicer.arc-fitting` scope contract before
-  fixture, Rust, parity, status, or docs work can claim evidence.
-- [ ] v1.15 adds source-pinned arc-fitting fixture evidence and expected
-  summaries without importing upstream source trees or generating broad G-code
-  parity claims.
-- [ ] v1.15 adds a pure Rust arc-fitting evidence boundary that parses checked-in
-  caller-supplied artifacts without Git, network, filesystem discovery, process,
-  release, sync, or runtime side effects.
-- [ ] v1.15 publishes executable arc-fitting parity/status/docs evidence only for
-  the narrow PrusaSlicer arc-fitting slice, keeping broad generated-output,
-  byte-for-byte, printability, runtime, GUI, non-Prusa fork, release, upstream
-  import, and sync behavior deferred.
+None. v1.15 phase requirements are complete and ready for milestone audit.
 
 ### Out of Scope
 
@@ -607,7 +608,7 @@ The audience for this work is broad:
 | Limit active downstream-fork porting consideration to PrusaSlicer for now | Non-Prusa Slicer-family ports need an explicit new planning decision before moving from parking lot into the roadmap | ✓ Adopted 2026-06-03 |
 | Expand Prusa G-code evidence structurally before broad generated-output parity | v1.12 proved the evidence path, but support, seam, arc, geometry, runtime, and byte parity should wait until structural G-code summaries can fail closed on meaningful drift | ✓ Shipped in v1.13 Phase 52 |
 | Deepen Prusa G-code evidence semantically before feature-specific generated-output slices | Support, seam, arc, and broad generated-output status need semantic toolpath comparison machinery before their own evidence can be credible | ✓ Shipped in v1.14 Phase 56 |
-| Use arc fitting as the next Prusa generated-output feature slice | Arc fitting is a medium-complexity generated-output candidate that can reuse the v1.12-v1.14 G-code evidence ladder without jumping to support generation, broad generated-output parity, or non-Prusa fork work | — Pending in v1.15 |
+| Use arc fitting as the next Prusa generated-output feature slice | Arc fitting is a medium-complexity generated-output candidate that can reuse the v1.12-v1.14 G-code evidence ladder without jumping to support generation, broad generated-output parity, or non-Prusa fork work | ✓ Shipped in v1.15 Phase 60 |
 
 ## Evolution
 
@@ -630,4 +631,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-24 after completing v1.15 Phase 59*
+*Last updated: 2026-06-24 after completing v1.15 Phase 60*

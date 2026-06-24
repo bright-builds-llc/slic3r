@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 60-06-PLAN.md
-last_updated: "2026-06-24T17:11:06.722Z"
+status: complete
+stopped_at: Phase 60 verified and complete
+last_updated: "2026-06-24T17:40:32.392Z"
 last_activity: 2026-06-24
 progress:
   total_phases: 4
@@ -25,14 +25,14 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Phase 60 — Executable Arc-Fitting Evidence
+**Current focus:** v1.15 complete — ready for milestone audit
 
 ## Current Position
 
-Phase: 60 (Executable Arc-Fitting Evidence) — VERIFYING
+Phase: 60 (Executable Arc-Fitting Evidence) — COMPLETE
 Plan: 6 of 6
 Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
-Status: Phase complete — ready for verification
+Status: Phase verified and complete; milestone ready for completion/audit
 Last activity: 2026-06-24
 
 Progress: [██████████] 100%
