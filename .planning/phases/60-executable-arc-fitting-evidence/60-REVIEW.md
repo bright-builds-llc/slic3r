@@ -25,10 +25,11 @@ files_reviewed_list:
   - packages/slic3r-rust/crates/slic3r_flavors/src/bin/prusa_arc_fitting_summary.rs
 findings:
   critical: 0
-  warning: 1
+  warning: 0
   info: 0
-  total: 1
-status: issues_found
+  total: 0
+resolved_findings: 1
+status: clean
 ---
 
 # Phase 60: Code Review Report
@@ -36,7 +37,7 @@ status: issues_found
 **Reviewed:** 2026-06-24T17:18:13Z
 **Depth:** standard
 **Files Reviewed:** 19
-**Status:** issues_found
+**Status:** clean
 
 ## Summary
 
@@ -50,7 +51,7 @@ bazel test //packages/parity:prusaslicer_arc_fitting_parity_failure_test //packa
 
 `git diff --check` over the reviewed file set also passed.
 
-## Warnings
+## Resolved Warnings
 
 ### WR-01: Arc-Fitting Overclaim Checks Miss Full Generated-Output Parity
 
@@ -60,6 +61,12 @@ bazel test //packages/parity:prusaslicer_arc_fitting_parity_failure_test //packa
 **Issue:** The no-overclaiming scanners reject several deferred claims, but they do not reject the exact deferred claim `full generated-output parity`. Public docs and `packages/parity/status.tsv` explicitly state that full generated-output parity remains deferred for `fork.prusaslicer.arc-fitting`, so a future edit such as `full generated-output parity verified` could pass these verifier gates unless it happens to violate some unrelated exact-text requirement.
 
 **Fix:** Add `full generated-output parity` to both verifier deny lists and cover it with mutation tests in `verify_prusa_arc_fitting_fixture_test.sh` and `verify_prusa_arc_fitting_scope_test.sh`.
+
+**Resolution:** Fixed in commit `f40925aca`. The fixture verifier now rejects
+`full generated-output parity verified` through a split deny-list phrase, the
+scope verifier includes `full generated-output parity` in its overclaim terms,
+and both mutation suites cover the exact overclaim. Phase re-verification passed
+with 4/4 must-haves verified in `60-VERIFICATION.md`.
 
 ```bash
 overclaim_terms='byte-for-byte G-code parity|full generated-output parity|broad generated-output parity|broad generated-output verification|full ArcWelder algorithm equivalence|...'
