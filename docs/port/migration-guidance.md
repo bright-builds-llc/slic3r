@@ -111,6 +111,29 @@ boundaries.
   post-processing, host upload, network/device integration, profile
   auto-update execution, fork release builds, Bambu Studio, OrcaSlicer,
   upstream source imports.
+- `prusaslicer.arc-fitting` fixture work starts from
+  [`packages/prusa-arc-fitting-scope`](../../packages/prusa-arc-fitting-scope)
+  and its Phase 57 scope contract. Phase 58 created
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/`,
+  `arc-fitting-observations.gcode`, `fixture-provenance.tsv`, and
+  `expected-arc-summary.tsv`; Phase 59 owns
+  `slic3r_flavors::prusa_arc_fitting` and
+  `prusa_arc_fitting_summary_lines`; Phase 60 publishes
+  `bazel run //packages/parity:prusaslicer_arc_fitting_parity` and
+  `fork.prusaslicer.arc-fitting` for the narrow Prusa arc-fitting checked-in
+  summary evidence slice. The evidence chain is Phase 57 scope contract, Phase
+  58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60
+  public command/status/docs. Broad `generated-outputs` remains `in progress`,
+  and the existing `fork.prusaslicer.gcode-output` row remains separate.
+- The verified `prusaslicer.arc-fitting` evidence slice does not prove
+  byte-for-byte G-code parity, full generated-output parity, broad
+  generated-output verification, full ArcWelder algorithm equivalence,
+  tolerance or geometry parity, printability, firmware behavior,
+  printer-runtime behavior, GUI behavior, support generation, wall seam
+  behavior, STEP import, full 3MF import/export, binary G-code, thumbnails,
+  post-processing, host upload, network/device behavior, profile auto-update
+  execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source
+  imports, release behavior, sync automation, or non-Prusa fork behavior.
 - The Phase 38 Prusa fixture namespace update route is: update only after a reviewed intake change updates packages/fork-vendors/forks.tsv and the Prusa checklist/baseline gate.
   Branch-head observations remain drift-only.
 - When a change adds, removes, or materially alters a fixture-backed parity
@@ -155,6 +178,25 @@ boundaries.
   `prusa_gcode_output_structural_summary_lines`, and
   `prusa_gcode_output_semantic_summary_lines`, and the Phase 56 public parity
   command/status wiring.
+- `fork.prusaslicer.arc-fitting` is verified for the narrow Prusa arc-fitting
+  checked-in summary evidence slice only. Its executable evidence is
+  `bazel run //packages/parity:prusaslicer_arc_fitting_parity`, backed by
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv`,
+  `slic3r_flavors::prusa_arc_fitting`,
+  `prusa_arc_fitting_summary_lines`, the Phase 57 scope contract, Phase 58
+  fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public
+  command/status/docs. Broad `generated-outputs` remains `in progress`, and
+  existing semantic Prusa G-code output evidence remains separate under
+  `fork.prusaslicer.gcode-output`.
+- The verified `fork.prusaslicer.arc-fitting` evidence slice does not prove
+  byte-for-byte G-code parity, full generated-output parity, broad
+  generated-output verification, full ArcWelder algorithm equivalence,
+  tolerance or geometry parity, printability, firmware behavior,
+  printer-runtime behavior, GUI behavior, support generation, wall seam
+  behavior, STEP import, full 3MF import/export, binary G-code, thumbnails,
+  post-processing, host upload, network/device behavior, profile auto-update
+  execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source
+  imports, release behavior, sync automation, or non-Prusa fork behavior.
 - Phase 39 creates parser/metadata readiness only through
   `slic3r_flavors::prusa_profile`, `parse_prusa_profile_bundle`, and
   `prusa_profile_schema_metadata`. It traces `prusaslicer.profile-schema` to
