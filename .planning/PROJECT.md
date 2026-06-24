@@ -49,6 +49,16 @@ slice. It reuses the v1.12-v1.14 G-code evidence ladder, focuses on
 claiming byte-for-byte, printability, runtime, GUI, non-Prusa fork, release,
 upstream import, or sync behavior.
 
+v1.15 Phase 59 is complete. Developers can parse checked-in
+`prusaslicer.arc-fitting` expected summaries through the pure
+`slic3r_flavors::prusa_arc_fitting` Rust boundary, inspect registry/readiness
+metadata for source identity, fixture corpus, expected summaries, Phase 60
+deferrals, and generated-output publication boundaries, and run Cargo/Bazel
+coverage proving valid rows parse while invalid rows fail closed. Public
+`fork.prusaslicer.arc-fitting` status publication, public parity command, docs
+publication, printer-runtime behavior, and source import remain deferred until
+Phase 60.
+
 v1.15 Phase 58 is complete. Maintainers can inspect the source-pinned
 `prusaslicer.arc-fitting` fixture namespace, run
 `bazel run //packages/parity-fixtures:verify_prusa_arc_fitting_fixture`, and
@@ -620,4 +630,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-23 after completing v1.15 Phase 58*
+*Last updated: 2026-06-24 after completing v1.15 Phase 59*

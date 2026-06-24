@@ -213,7 +213,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 |-------|----------------|--------|-----------|
 | 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
 | 58. Arc-Fitting Fixture Corpus | 2/2 | Complete    | 2026-06-23 |
-| 59. Rust Arc-Fitting Evidence Boundary | 2/2 | Complete   | 2026-06-24 |
+| 59. Rust Arc-Fitting Evidence Boundary | 2/2 | Complete    | 2026-06-24 |
 | 60. Executable Arc-Fitting Evidence | 0/TBD | Not started | - |
 
 ## Planning Notes

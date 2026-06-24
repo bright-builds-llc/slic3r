@@ -48,15 +48,15 @@ roadmap phase and must be verified before milestone archive.
 
 ### Rust Arc-Fitting Boundary
 
-- [ ] **ARCRUST-01**: Developer can use a pure typed Rust arc-fitting summary
+- [x] **ARCRUST-01**: Developer can use a pure typed Rust arc-fitting summary
   boundary that parses caller-supplied checked-in arc summary artifacts into
   domain values without Git, network, filesystem discovery, process, generator,
   printer-runtime, release, or sync side effects.
-- [ ] **ARCRUST-02**: Developer can inspect static readiness or registry
+- [x] **ARCRUST-02**: Developer can inspect static readiness or registry
   metadata that traces the arc-fitting boundary to the accepted Prusa source
   identity, fixture corpus, expected arc summaries, planned command, planned
   status wording, and deferred generated-output surfaces.
-- [ ] **ARCRUST-03**: Developer can run Cargo and Bazel coverage that proves the
+- [x] **ARCRUST-03**: Developer can run Cargo and Bazel coverage that proves the
   valid arc fixture rows parse, invalid rows fail closed, optional or nullable
   Rust internals are named clearly, and no public helper names claim byte
   parity, printability, runtime, support, seam, GUI, or non-Prusa fork behavior.
@@ -138,9 +138,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ARCFIX-01 | Phase 58 | Pending |
 | ARCFIX-02 | Phase 58 | Pending |
 | ARCFIX-03 | Phase 58 | Pending |
-| ARCRUST-01 | Phase 59 | Pending |
-| ARCRUST-02 | Phase 59 | Pending |
-| ARCRUST-03 | Phase 59 | Pending |
+| ARCRUST-01 | Phase 59 | Complete |
+| ARCRUST-02 | Phase 59 | Complete |
+| ARCRUST-03 | Phase 59 | Complete |
 | ARCEV-01 | Phase 60 | Pending |
 | ARCEV-02 | Phase 60 | Pending |
 | ARCEV-03 | Phase 60 | Pending |
