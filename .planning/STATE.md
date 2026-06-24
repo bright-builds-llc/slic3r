@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
 status: executing
-stopped_at: Completed 60-02-PLAN.md
-last_updated: "2026-06-24T16:16:07.867Z"
+stopped_at: Completed 60-03-PLAN.md
+last_updated: "2026-06-24T16:32:00.953Z"
 last_activity: 2026-06-24
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 13
-  completed_plans: 9
-  percent: 69
+  completed_plans: 10
+  percent: 77
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 60 (Executable Arc-Fitting Evidence) — EXECUTING
-Plan: 3 of 6
+Plan: 4 of 6
 Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
 Status: Ready to execute
 Last activity: 2026-06-24
 
-Progress: [███████░░░] 69%
+Progress: [████████░░] 77%
 
 ## Performance Metrics
 
@@ -60,6 +60,7 @@ Progress: [███████░░░] 69%
 
 - 60-01 completed in 7 min with 2 tasks and 4 implementation files changed.
 - 60-02 completed in 4 min with 2 tasks and 2 implementation files changed.
+- 60-03 completed in 8 min with 2 tasks and 5 implementation files changed.
 
 ## Accumulated Context
 
@@ -203,6 +204,10 @@ Recent decisions affecting v1.12:
 - [Phase 60-02]: Kept ARCEV-02 drift coverage in a dedicated public Bazel sh_test target beside the existing Prusa parity failure tests.
 - [Phase 60-02]: Mutated only temp copies of expected-arc-summary.tsv and preserved that basename for public comparator diagnostics.
 - [Phase 60-02]: Used the public Rust-backed comparator as the failure authority instead of reimplementing arc summary validation in Bash.
+- [Phase 60-03]: Published `fork.prusaslicer.arc-fitting` as a separate narrow status row instead of widening `fork.prusaslicer.gcode-output`. — Keeps arc-fitting evidence separate from the existing semantic Prusa G-code output contract.
+- [Phase 60-03]: Kept `generated-outputs` exactly one `in progress` row while publishing the arc-fitting feature slice. — One feature-specific evidence slice is not broad generated-output parity.
+- [Phase 60-03]: Used exact status-row constants in both fixture and scope verifiers so public row drift fails locally. — Exact verifier contracts make missing rows, wrong targets, duplicate rows, and widened wording observable before docs publication.
+- [Phase 60-03]: Covered status publication drift with isolated temp status fixtures in both verifier mutation suites. — Temp fixtures prove fail-closed behavior without mutating checked-in status artifacts.
 
 ### Pending Todos
 
@@ -214,6 +219,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-24T16:15:47.142Z
-Stopped at: Completed 60-02-PLAN.md
+Last session: 2026-06-24T16:31:21.213Z
+Stopped at: Completed 60-03-PLAN.md
 Resume file: None

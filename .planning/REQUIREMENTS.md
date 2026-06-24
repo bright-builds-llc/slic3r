@@ -71,7 +71,7 @@ roadmap phase and must be verified before milestone archive.
   center-offset changes, coordinate-bound changes, extrusion or feedrate
   observation changes, source identity drift, fixture identity drift, and
   unsupported deferred-behavior claims.
-- [ ] **ARCEV-03**: Maintainer can inspect parity status, package docs, and port
+- [x] **ARCEV-03**: Maintainer can inspect parity status, package docs, and port
   docs that describe the exact narrow `fork.prusaslicer.arc-fitting` evidence
   slice while keeping broad `generated-outputs` in progress, preserving the
   existing `fork.prusaslicer.gcode-output` meaning, and keeping all deferred
@@ -143,7 +143,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ARCRUST-03 | Phase 59 | Complete |
 | ARCEV-01 | Phase 60 | Complete |
 | ARCEV-02 | Phase 60 | Complete |
-| ARCEV-03 | Phase 60 | Pending |
+| ARCEV-03 | Phase 60 | Complete |
 
 **Coverage:**
 
