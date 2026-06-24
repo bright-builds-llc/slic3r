@@ -51,6 +51,7 @@ test_suite(
         "//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts_test",
         "//packages/slic3r-rust/crates/slic3r_core:slic3r_core_smoke_test",
         "//packages/slic3r-rust/crates/slic3r_flavors:flavor_registry_test",
+        "//packages/slic3r-rust/crates/slic3r_flavors:prusa_arc_fitting_test",
         "//packages/slic3r-rust/crates/slic3r_flavors:prusa_gcode_output_test",
         "//packages/slic3r-rust/crates/slic3r_flavors:prusa_profile_test",
         "//packages/slic3r-rust/crates/slic3r_flavors:prusa_project_file_test",

@@ -11,6 +11,7 @@ use slic3r_flavors::{
 };
 
 const PRUSA_GCODE_OUTPUT_SEMANTIC_READINESS_NOTES: &str = "Source-observed G-code output planning row; semantic summary parser/readiness metadata is available for Phase 55 developers, while public semantic parity evidence and status/docs publication remain Phase 56-owned before broader generated-output behavior is claimed. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, printability, printer-runtime, support, seam, arc, GUI, release, sync, or non-Prusa fork behavior is claimed.";
+const PRUSA_ARC_FITTING_READINESS_NOTES: &str = "Source-observed arc-fitting planning row; Phase 59 parser/readiness metadata is developer-facing only, while public executable evidence and status/docs publication remain Phase 60-owned. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, broad generated-output verification, ArcWelder algorithm equivalence, tolerance or geometry parity, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, wall seam behavior, release behavior, sync behavior, upstream import, host upload, network/device behavior, Bambu Studio, OrcaSlicer, or non-Prusa fork behavior is claimed.";
 
 #[test]
 fn registry_api_reexports_contract_typed_helpers() {
@@ -236,7 +237,11 @@ fn shared_downstream_filter_returns_source_observed_prusa_rows() {
     // Assert
     assert_eq!(
         shared_capability_ids,
-        ["prusaslicer.project-file", "prusaslicer.gcode-output"]
+        [
+            "prusaslicer.project-file",
+            "prusaslicer.gcode-output",
+            "prusaslicer.arc-fitting"
+        ]
     );
 }
 
@@ -619,6 +624,57 @@ fn prusa_arc_fitting_readiness_exposes_pre_publication_boundary() {
 }
 
 #[test]
+fn prusa_arc_fitting_registry_row_traces_to_source_and_generated_output_dependency() {
+    // Arrange
+    let metadata = prusa_arc_fitting_metadata();
+    let maybe_arc_fitting = maybe_capability(metadata.inventory_id);
+    let expected_dependencies = [metadata.parity_dependency];
+
+    // Act
+    let arc_fitting = match maybe_arc_fitting {
+        Some(capability) => capability,
+        None => {
+            assert!(
+                maybe_arc_fitting.is_some(),
+                "prusaslicer.arc-fitting capability missing"
+            );
+            return;
+        }
+    };
+
+    // Assert
+    assert_eq!(arc_fitting.flavor_id, FlavorId::PrusaSlicer);
+    assert_eq!(arc_fitting.capability_id, metadata.inventory_id);
+    assert_eq!(arc_fitting.feature_surface, "arc-fitting");
+    assert_eq!(arc_fitting.feature_category, "arc-fitting");
+    assert_eq!(arc_fitting.origin, FeatureOrigin::SharedDownstream);
+    assert_eq!(
+        arc_fitting.checklist_status,
+        ChecklistStatus::FutureCandidate
+    );
+    assert_eq!(arc_fitting.parity_dependencies, expected_dependencies);
+    assert_eq!(arc_fitting.provenance.len(), 1);
+    assert_eq!(
+        arc_fitting.provenance[0].inventory_id,
+        metadata.inventory_id
+    );
+    assert_eq!(arc_fitting.provenance[0].vendor_source, metadata.source_ref);
+    assert_eq!(
+        arc_fitting.provenance[0].source_paths,
+        [metadata.source_path]
+    );
+    assert_eq!(
+        arc_fitting.provenance[0].ownership,
+        FeatureOrigin::SharedDownstream
+    );
+    assert!(arc_fitting.caution_flags.is_empty());
+    assert_eq!(
+        arc_fitting.future_parity_notes,
+        PRUSA_ARC_FITTING_READINESS_NOTES
+    );
+}
+
+#[test]
 fn prusa_gcode_output_structural_readiness_exposes_parser_metadata_without_status_publication() {
     // Arrange
     let expected_source_paths: &[&str] = &["src/libslic3r/GCode.cpp", "src/libslic3r/GCode.hpp"];
@@ -792,6 +848,27 @@ fn future_candidate_filter_includes_prusa_gcode_output_boundary_row() {
 }
 
 #[test]
+fn future_candidate_filter_includes_prusa_arc_fitting_boundary_row() {
+    // Arrange
+    let status = ChecklistStatus::FutureCandidate;
+
+    // Act
+    let future_candidate_ids: Vec<&'static str> = capabilities_by_checklist_status(status)
+        .map(|capability| capability.capability_id)
+        .collect();
+
+    // Assert
+    assert!(
+        future_candidate_ids.contains(&"prusaslicer.gcode-output"),
+        "FutureCandidate filter should retain the Prusa G-code summary boundary row"
+    );
+    assert!(
+        future_candidate_ids.contains(&"prusaslicer.arc-fitting"),
+        "FutureCandidate filter should include the Phase 59 Prusa arc-fitting boundary row"
+    );
+}
+
+#[test]
 fn runtime_claim_words_do_not_become_public_helper_names() {
     // Arrange
     let risky_words = [
@@ -930,6 +1007,43 @@ fn prusa_gcode_output_registry_notes_negate_deferred_semantic_surfaces() {
     assert!(maybe_missing_deferral.is_none());
     assert!(note.contains("broad generated-outputs surface stays in progress"));
     assert!(note.contains("status/docs publication remain Phase 56-owned"));
+}
+
+#[test]
+fn prusa_arc_fitting_registry_notes_negate_deferred_surfaces() {
+    // Arrange
+    let note = PRUSA_ARC_FITTING_READINESS_NOTES;
+    let required_deferrals = [
+        "public executable evidence and status/docs publication remain Phase 60-owned",
+        "broad generated-outputs surface stays in progress",
+        "no byte-for-byte G-code parity",
+        "broad generated-output verification",
+        "ArcWelder algorithm equivalence",
+        "tolerance or geometry parity",
+        "printability",
+        "firmware behavior",
+        "printer-runtime behavior",
+        "GUI behavior",
+        "support generation",
+        "wall seam behavior",
+        "release behavior",
+        "sync behavior",
+        "upstream import",
+        "host upload",
+        "network/device behavior",
+        "Bambu Studio",
+        "OrcaSlicer",
+        "non-Prusa fork behavior",
+    ];
+
+    // Act
+    let maybe_missing_deferral = required_deferrals
+        .iter()
+        .find(|deferral| !note.contains(*deferral));
+
+    // Assert
+    assert!(maybe_missing_deferral.is_none());
+    assert!(note.contains("Phase 59 parser/readiness metadata is developer-facing only"));
 }
 
 fn maybe_capability(capability_id: &str) -> Option<&'static FlavorCapability> {

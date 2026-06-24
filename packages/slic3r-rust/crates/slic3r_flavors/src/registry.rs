@@ -1,3 +1,6 @@
+use crate::prusa_arc_fitting::{
+    PRUSA_ARC_FITTING_INVENTORY_ID, PRUSA_ARC_FITTING_SOURCE_PATH, PRUSA_ARC_FITTING_SOURCE_REF,
+};
 use crate::prusa_gcode_output::{
     PRUSA_GCODE_OUTPUT_INVENTORY_ID, PRUSA_GCODE_OUTPUT_SOURCE_PATH, PRUSA_GCODE_OUTPUT_SOURCE_REF,
 };
@@ -100,6 +103,14 @@ static PRUSA_GCODE_OUTPUT_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance 
     ownership: FeatureOrigin::SharedDownstream,
 }];
 
+static PRUSA_ARC_FITTING_PATHS: [&str; 1] = [PRUSA_ARC_FITTING_SOURCE_PATH];
+static PRUSA_ARC_FITTING_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
+    inventory_id: PRUSA_ARC_FITTING_INVENTORY_ID,
+    vendor_source: PRUSA_ARC_FITTING_SOURCE_REF,
+    source_paths: &PRUSA_ARC_FITTING_PATHS,
+    ownership: FeatureOrigin::SharedDownstream,
+}];
+
 static PRUSA_PROFILE_SCHEMA_PATHS: [&str; 1] = [PRUSA_PROFILE_SCHEMA_SOURCE_PATH];
 static PRUSA_PROFILE_SCHEMA_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
     inventory_id: PRUSA_PROFILE_SCHEMA_INVENTORY_ID,
@@ -108,7 +119,7 @@ static PRUSA_PROFILE_SCHEMA_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenanc
     ownership: FeatureOrigin::ForkSpecific,
 }];
 
-static PRUSA_CAPABILITIES: [FlavorCapability; 3] = [
+static PRUSA_CAPABILITIES: [FlavorCapability; 4] = [
     FlavorCapability {
         flavor_id: FlavorId::PrusaSlicer,
         capability_id: "prusaslicer.project-file",
@@ -132,6 +143,18 @@ static PRUSA_CAPABILITIES: [FlavorCapability; 3] = [
         provenance: &PRUSA_GCODE_OUTPUT_PROVENANCE,
         caution_flags: &[],
         future_parity_notes: "Source-observed G-code output planning row; semantic summary parser/readiness metadata is available for Phase 55 developers, while public semantic parity evidence and status/docs publication remain Phase 56-owned before broader generated-output behavior is claimed. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, printability, printer-runtime, support, seam, arc, GUI, release, sync, or non-Prusa fork behavior is claimed.",
+    },
+    FlavorCapability {
+        flavor_id: FlavorId::PrusaSlicer,
+        capability_id: "prusaslicer.arc-fitting",
+        feature_surface: "arc-fitting",
+        feature_category: "arc-fitting",
+        origin: FeatureOrigin::SharedDownstream,
+        parity_dependencies: &GENERATED_OUTPUTS_PARITY,
+        checklist_status: ChecklistStatus::FutureCandidate,
+        provenance: &PRUSA_ARC_FITTING_PROVENANCE,
+        caution_flags: &[],
+        future_parity_notes: "Source-observed arc-fitting planning row; Phase 59 parser/readiness metadata is developer-facing only, while public executable evidence and status/docs publication remain Phase 60-owned. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, broad generated-output verification, ArcWelder algorithm equivalence, tolerance or geometry parity, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, wall seam behavior, release behavior, sync behavior, upstream import, host upload, network/device behavior, Bambu Studio, OrcaSlicer, or non-Prusa fork behavior is claimed.",
     },
     FlavorCapability {
         flavor_id: FlavorId::PrusaSlicer,
