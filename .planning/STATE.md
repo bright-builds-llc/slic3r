@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
 status: executing
-stopped_at: Completed 60-03-PLAN.md
-last_updated: "2026-06-24T16:32:00.953Z"
+stopped_at: Completed 60-04-PLAN.md
+last_updated: "2026-06-24T16:44:57.133Z"
 last_activity: 2026-06-24
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 13
-  completed_plans: 10
-  percent: 77
+  completed_plans: 11
+  percent: 85
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 60 (Executable Arc-Fitting Evidence) — EXECUTING
-Plan: 4 of 6
+Plan: 5 of 6
 Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
 Status: Ready to execute
 Last activity: 2026-06-24
 
-Progress: [████████░░] 77%
+Progress: [█████████░] 85%
 
 ## Performance Metrics
 
@@ -61,6 +61,7 @@ Progress: [████████░░] 77%
 - 60-01 completed in 7 min with 2 tasks and 4 implementation files changed.
 - 60-02 completed in 4 min with 2 tasks and 2 implementation files changed.
 - 60-03 completed in 8 min with 2 tasks and 5 implementation files changed.
+- 60-04 completed in 7 min with 2 tasks and 5 implementation files changed.
 
 ## Accumulated Context
 
@@ -208,6 +209,9 @@ Recent decisions affecting v1.12:
 - [Phase 60-03]: Kept `generated-outputs` exactly one `in progress` row while publishing the arc-fitting feature slice. — One feature-specific evidence slice is not broad generated-output parity.
 - [Phase 60-03]: Used exact status-row constants in both fixture and scope verifiers so public row drift fails locally. — Exact verifier contracts make missing rows, wrong targets, duplicate rows, and widened wording observable before docs publication.
 - [Phase 60-03]: Covered status publication drift with isolated temp status fixtures in both verifier mutation suites. — Temp fixtures prove fail-closed behavior without mutating checked-in status artifacts.
+- [Phase 60-04]: Published package and fixture docs against the new public arc-fitting command and exact `fork.prusaslicer.arc-fitting` status row.
+- [Phase 60-04]: Kept the existing semantic `fork.prusaslicer.gcode-output` evidence explicitly separate from the arc-fitting evidence slice.
+- [Phase 60-04]: Updated fixture verifier exact-text checks to require Phase 60 publication wording and reject stale future-status wording.
 
 ### Pending Todos
 
@@ -219,6 +223,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-24T16:31:21.213Z
-Stopped at: Completed 60-03-PLAN.md
+Last session: 2026-06-24T16:44:57.131Z
+Stopped at: Completed 60-04-PLAN.md
 Resume file: None
