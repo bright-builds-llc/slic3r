@@ -66,7 +66,7 @@ roadmap phase and must be verified before milestone archive.
 - [x] **ARCEV-01**: Maintainer can run public Prusa arc-fitting parity evidence
   that validates the checked-in arc summary artifact through the Rust boundary
   while preserving the existing public Prusa G-code output command contract.
-- [ ] **ARCEV-02**: Maintainer can see fail-closed mutation guards for arc drift
+- [x] **ARCEV-02**: Maintainer can see fail-closed mutation guards for arc drift
   classes such as G2/G3 command-count changes, arc direction changes,
   center-offset changes, coordinate-bound changes, extrusion or feedrate
   observation changes, source identity drift, fixture identity drift, and
@@ -142,7 +142,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ARCRUST-02 | Phase 59 | Complete |
 | ARCRUST-03 | Phase 59 | Complete |
 | ARCEV-01 | Phase 60 | Complete |
-| ARCEV-02 | Phase 60 | Pending |
+| ARCEV-02 | Phase 60 | Complete |
 | ARCEV-03 | Phase 60 | Pending |
 
 **Coverage:**

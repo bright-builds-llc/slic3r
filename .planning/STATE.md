@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
 status: executing
-stopped_at: Completed 60-01-PLAN.md
-last_updated: "2026-06-24T16:04:26.315Z"
+stopped_at: Completed 60-02-PLAN.md
+last_updated: "2026-06-24T16:16:07.867Z"
 last_activity: 2026-06-24
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 13
-  completed_plans: 8
-  percent: 62
+  completed_plans: 9
+  percent: 69
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 60 (Executable Arc-Fitting Evidence) — EXECUTING
-Plan: 2 of 6
+Plan: 3 of 6
 Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
 Status: Ready to execute
 Last activity: 2026-06-24
 
-Progress: [██████░░░░] 62%
+Progress: [███████░░░] 69%
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ Progress: [██████░░░░] 62%
 **Recent execution:**
 
 - 60-01 completed in 7 min with 2 tasks and 4 implementation files changed.
+- 60-02 completed in 4 min with 2 tasks and 2 implementation files changed.
 
 ## Accumulated Context
 
@@ -199,6 +200,9 @@ Recent decisions affecting v1.12:
 - [Phase 60-01]: Added a new arc-specific Rust summary binary instead of widening the existing Prusa G-code output summary binary.
 - [Phase 60-01]: Kept public arc-fitting validation inside the Rust slic3r_flavors boundary and used Bash only for runfile orchestration, diffs, field assertions, and approved output text.
 - [Phase 60-01]: Published a separate public arc-fitting parity command while preserving the existing Prusa G-code output parity contract.
+- [Phase 60-02]: Kept ARCEV-02 drift coverage in a dedicated public Bazel sh_test target beside the existing Prusa parity failure tests.
+- [Phase 60-02]: Mutated only temp copies of expected-arc-summary.tsv and preserved that basename for public comparator diagnostics.
+- [Phase 60-02]: Used the public Rust-backed comparator as the failure authority instead of reimplementing arc summary validation in Bash.
 
 ### Pending Todos
 
@@ -210,6 +214,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-24T16:04:26.311Z
-Stopped at: Completed 60-01-PLAN.md
+Last session: 2026-06-24T16:15:47.142Z
+Stopped at: Completed 60-02-PLAN.md
 Resume file: None

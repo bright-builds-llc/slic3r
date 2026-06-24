@@ -191,7 +191,7 @@ inspect exact public status/docs for the narrow PrusaSlicer arc-fitting slice.
 **Plans**: 6 plans
 Plans:
 - [x] 60-01-PLAN.md — Add Rust-backed public arc-fitting evidence command.
-- [ ] 60-02-PLAN.md — Add fail-closed public arc-fitting mutation guards.
+- [x] 60-02-PLAN.md — Add fail-closed public arc-fitting mutation guards.
 - [ ] 60-03-PLAN.md — Publish exact arc-fitting status row and verifier guards.
 - [ ] 60-04-PLAN.md — Publish package and fixture docs with fixture verifier checks.
 - [ ] 60-05-PLAN.md — Publish arc-fitting scope docs with scope verifier checks.
@@ -228,7 +228,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 | 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
 | 58. Arc-Fitting Fixture Corpus | 2/2 | Complete    | 2026-06-23 |
 | 59. Rust Arc-Fitting Evidence Boundary | 2/2 | Complete    | 2026-06-24 |
-| 60. Executable Arc-Fitting Evidence | 1/6 | In Progress | - |
+| 60. Executable Arc-Fitting Evidence | 2/6 | In Progress | - |
 
 ## Planning Notes
 
