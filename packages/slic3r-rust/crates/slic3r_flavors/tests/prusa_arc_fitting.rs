@@ -1,5 +1,6 @@
 use slic3r_flavors::{
-    PrusaArcFittingField, parse_prusa_arc_fitting_summary, prusa_arc_fitting_summary_lines,
+    PrusaArcFittingField, PrusaArcFittingParseError, parse_prusa_arc_fitting_summary,
+    prusa_arc_fitting_summary_lines,
 };
 
 const EXPECTED_ARC_SUMMARY: &str = include_str!(
@@ -133,6 +134,195 @@ fn public_arc_fitting_declarations_do_not_claim_deferred_behavior() {
     assert!(maybe_risky_declaration.is_none());
 }
 
+#[test]
+fn rejects_arc_invalid_header() {
+    // Arrange
+    let input = EXPECTED_ARC_SUMMARY.replacen("source_ref", "wrong_source_ref", 1);
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::InvalidHeader { .. })
+    ));
+}
+
+#[test]
+fn rejects_arc_wrong_column_count() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_ARC_SUMMARY.lines().collect();
+    lines[1] = "only\tfive\tcolumns\tin\trow";
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::WrongColumnCount {
+            line_number: 2,
+            expected: 6,
+            actual: 5,
+        })
+    ));
+}
+
+#[test]
+fn rejects_arc_missing_row() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_ARC_SUMMARY.lines().collect();
+    lines.pop();
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::MissingRow {
+            arc_field: PrusaArcFittingField::EvidenceBoundary,
+        })
+    ));
+}
+
+#[test]
+fn rejects_arc_duplicate_row() {
+    // Arrange
+    let first_row = EXPECTED_ARC_SUMMARY
+        .lines()
+        .nth(1)
+        .expect("arc fixture should contain a first data row");
+    let input = format!("{EXPECTED_ARC_SUMMARY}{first_row}\n");
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::DuplicateRow {
+            line_number: 14,
+            arc_field: PrusaArcFittingField::SourceRef,
+        })
+    ));
+}
+
+#[test]
+fn rejects_arc_out_of_order_rows() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_ARC_SUMMARY.lines().collect();
+    lines.swap(1, 2);
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::UnexpectedRowOrder {
+            line_number: 2,
+            expected_arc_field: PrusaArcFittingField::SourceRef,
+            actual_arc_field: PrusaArcFittingField::InventorySourcePaths,
+        })
+    ));
+}
+
+#[test]
+fn rejects_unsupported_arc_field() {
+    // Arrange
+    let input = replace_arc_cell(0, 2, "unsupported_arc_field");
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::UnsupportedArcField { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_arc_unsupported_claim_text() {
+    // Arrange
+    let input = replace_arc_cell(
+        0,
+        5,
+        "This proves byte-for-byte G-code parity and printer-runtime behavior.",
+    );
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::UnexpectedEvidenceBoundary {
+            line_number: 2,
+            arc_field: PrusaArcFittingField::SourceRef,
+            ..
+        })
+    ));
+}
+
+#[test]
+fn rejects_arc_wrong_source_ref() {
+    // Arrange
+    let input = replace_arc_cell(
+        0,
+        0,
+        "bambustudio:v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6",
+    );
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::UnexpectedSourceRef { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_arc_wrong_fixture_path() {
+    // Arrange
+    let input = replace_arc_cell(0, 1, "fixtures/unreviewed.gcode");
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::UnexpectedFixturePath { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_arc_wrong_value() {
+    // Arrange
+    let input = replace_arc_cell(3, 4, "other.gcode");
+
+    // Act
+    let result = parse_prusa_arc_fitting_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaArcFittingParseError::UnexpectedArcValue {
+            line_number: 5,
+            arc_field: PrusaArcFittingField::FixtureId,
+            ..
+        })
+    ));
+}
+
 fn expected_arc_fields() -> [PrusaArcFittingField; 12] {
     [
         PrusaArcFittingField::SourceRef,
@@ -148,6 +338,21 @@ fn expected_arc_fields() -> [PrusaArcFittingField; 12] {
         PrusaArcFittingField::FeedrateObservations,
         PrusaArcFittingField::EvidenceBoundary,
     ]
+}
+
+fn replace_arc_cell(data_row_index: usize, column_index: usize, replacement: &str) -> String {
+    let mut lines: Vec<String> = EXPECTED_ARC_SUMMARY.lines().map(str::to_owned).collect();
+    let line_index = data_row_index + 1;
+    let line = lines
+        .get_mut(line_index)
+        .expect("arc fixture should contain requested data row");
+    let mut columns: Vec<String> = line.split('\t').map(str::to_owned).collect();
+    let column = columns
+        .get_mut(column_index)
+        .expect("arc fixture row should contain requested column");
+    *column = replacement.to_owned();
+    *line = columns.join("\t");
+    format!("{}\n", lines.join("\n"))
 }
 
 fn joined_word(prefix: &str, suffix: &str) -> String {
