@@ -423,6 +423,38 @@ test_gcode_output_status_drift_fails() {
 	assert_contains "${tmp_dir}/gcode-status-drift.err" 'fork\.prusaslicer\.gcode-output'
 }
 
+test_stale_scope_doc_label_fails() {
+	# Arrange
+	local dir="${tmp_dir}/stale-scope-doc-label"
+	write_valid_fixture "${dir}"
+	replace_text "${dir}/arc-fitting-scope.md" "Published narrow status row" "Planned narrow status row"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/stale-scope-doc-label.out" "${tmp_dir}/stale-scope-doc-label.err"; then
+		fail "stale published status row label passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/stale-scope-doc-label.err" '^error:'
+	assert_contains "${tmp_dir}/stale-scope-doc-label.err" 'Published narrow status row'
+}
+
+test_stale_status_section_heading_fails() {
+	# Arrange
+	local dir="${tmp_dir}/stale-status-section-heading"
+	write_valid_fixture "${dir}"
+	replace_text "${dir}/arc-fitting-scope.md" "## Published Status Wording" "## Planned Status Wording"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/stale-status-section-heading.out" "${tmp_dir}/stale-status-section-heading.err"; then
+		fail "stale published status section heading passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/stale-status-section-heading.err" '^error:'
+	assert_contains "${tmp_dir}/stale-status-section-heading.err" 'Published Status Wording'
+}
+
 test_missing_arc_status_row_fails() {
 	# Arrange
 	local dir="${tmp_dir}/missing-arc-status"
@@ -549,6 +581,8 @@ test_missing_arc_category_reference_fails
 test_generated_outputs_promotion_fails
 test_duplicate_generated_outputs_status_fails
 test_gcode_output_status_drift_fails
+test_stale_scope_doc_label_fails
+test_stale_status_section_heading_fails
 test_missing_arc_status_row_fails
 test_duplicate_arc_status_row_fails
 test_wrong_arc_status_target_fails

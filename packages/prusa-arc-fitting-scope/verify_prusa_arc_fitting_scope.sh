@@ -51,6 +51,7 @@ readonly SCOPE_RECORD_SECTION="## Scope Record"
 readonly SOURCE_ROW_SECTION="## Source Row Details"
 readonly ARC_FIELD_SECTION="## Approved Arc Evidence Fields"
 readonly TRACEABILITY_SECTION="## Arc-Fitting Traceability"
+readonly STATUS_WORDING_SECTION="## Published Status Wording"
 
 require_file() {
 	local file="$1"
@@ -286,6 +287,16 @@ verify_traceability_record() {
 		"${TRACEABILITY_SECTION}" "Docs touched" "\`packages/prusa-arc-fitting-scope/arc-fitting-scope.md\`; \`packages/prusa-arc-fitting-scope/README.md\`"
 }
 
+verify_published_status_wording() {
+	require_text "${scope_file}" "arc-fitting-scope.md" "${STATUS_WORDING_SECTION}"
+	require_text "${scope_file}" "arc-fitting-scope.md" \
+		"The Phase 60 published status token is \`fork.prusaslicer.arc-fitting\`."
+	require_text "${scope_file}" "arc-fitting-scope.md" \
+		"Phase 60 published \`fork.prusaslicer.arc-fitting\` as the narrow v1.15"
+	require_text "${scope_file}" "arc-fitting-scope.md" \
+		"public parity command."
+}
+
 verify_inventory_row() {
 	require_exact_tsv_row_once "${inventory_file}" "packages/fork-inventories/prusaslicer.tsv" "${ARC_FITTING_INVENTORY_ROW}"
 	require_first_field_count "${inventory_file}" "packages/fork-inventories/prusaslicer.tsv" "prusaslicer.arc-fitting" "1"
@@ -363,6 +374,18 @@ reject_overclaiming_text() {
 	done
 }
 
+reject_stale_publication_wording() {
+	for stale_pattern in \
+		"Planned evidence ""command" \
+		"Planned status ""token" \
+		"Planned public evidence ""command" \
+		"Planned narrow status ""row" \
+		"## Planned Status ""Wording" \
+		"Phase 60 planned \`fork.prusaslicer.""arc-fitting\`"; do
+		reject_text "${scope_file}" "arc-fitting-scope.md" "${stale_pattern}"
+	done
+}
+
 verify_deferred_scope_terms() {
 	for deferred_term in \
 		"Byte-for-byte G-code parity" \
@@ -395,9 +418,11 @@ main() {
 	verify_source_row_details
 	verify_arc_field_contract
 	verify_traceability_record
+	verify_published_status_wording
 	verify_inventory_row
 	verify_status_boundaries
 	reject_overclaiming_text
+	reject_stale_publication_wording
 	verify_deferred_scope_terms
 
 	printf 'ok: Prusa arc-fitting scope verification passed\n'
