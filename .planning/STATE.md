@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
 status: executing
-stopped_at: Completed 60-04-PLAN.md
-last_updated: "2026-06-24T16:44:57.133Z"
+stopped_at: Completed 60-05-PLAN.md
+last_updated: "2026-06-24T16:58:18.113Z"
 last_activity: 2026-06-24
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 13
-  completed_plans: 11
-  percent: 85
+  completed_plans: 12
+  percent: 92
 ---
 
 # Project State
@@ -30,12 +30,12 @@ depend on.
 ## Current Position
 
 Phase: 60 (Executable Arc-Fitting Evidence) — EXECUTING
-Plan: 5 of 6
+Plan: 6 of 6
 Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
 Status: Ready to execute
 Last activity: 2026-06-24
 
-Progress: [█████████░] 85%
+Progress: [█████████░] 92%
 
 ## Performance Metrics
 
@@ -62,6 +62,7 @@ Progress: [█████████░] 85%
 - 60-02 completed in 4 min with 2 tasks and 2 implementation files changed.
 - 60-03 completed in 8 min with 2 tasks and 5 implementation files changed.
 - 60-04 completed in 7 min with 2 tasks and 5 implementation files changed.
+- 60-05 completed in 7 min with 2 tasks and 4 implementation files changed.
 
 ## Accumulated Context
 
@@ -212,6 +213,10 @@ Recent decisions affecting v1.12:
 - [Phase 60-04]: Published package and fixture docs against the new public arc-fitting command and exact `fork.prusaslicer.arc-fitting` status row.
 - [Phase 60-04]: Kept the existing semantic `fork.prusaslicer.gcode-output` evidence explicitly separate from the arc-fitting evidence slice.
 - [Phase 60-04]: Updated fixture verifier exact-text checks to require Phase 60 publication wording and reject stale future-status wording.
+- [Phase 60-05]: Published scope documentation against the actual Phase 60 arc-fitting public command and exact fork.prusaslicer.arc-fitting status row.
+- [Phase 60-05]: Kept Phase 57 as the historical scope-contract boundary while documenting that Phase 60 published only checked-in arc summary evidence.
+- [Phase 60-05]: Preserved broad generated-outputs as in progress and kept the existing semantic fork.prusaslicer.gcode-output evidence separate.
+- [Phase 60-05]: Used split Bash literals for stale planned wording rejection so source scans do not contain the forbidden stale strings contiguously.
 
 ### Pending Todos
 
@@ -223,6 +228,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-24T16:44:57.131Z
-Stopped at: Completed 60-04-PLAN.md
+Last session: 2026-06-24T16:58:18.111Z
+Stopped at: Completed 60-05-PLAN.md
 Resume file: None

@@ -194,7 +194,7 @@ Plans:
 - [x] 60-02-PLAN.md — Add fail-closed public arc-fitting mutation guards.
 - [x] 60-03-PLAN.md — Publish exact arc-fitting status row and verifier guards.
 - [x] 60-04-PLAN.md — Publish package and fixture docs with fixture verifier checks.
-- [ ] 60-05-PLAN.md — Publish arc-fitting scope docs with scope verifier checks.
+- [x] 60-05-PLAN.md — Publish arc-fitting scope docs with scope verifier checks.
 - [ ] 60-06-PLAN.md — Publish public port docs for the narrow arc-fitting slice.
 
 ## Coverage
@@ -228,7 +228,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 | 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
 | 58. Arc-Fitting Fixture Corpus | 2/2 | Complete    | 2026-06-23 |
 | 59. Rust Arc-Fitting Evidence Boundary | 2/2 | Complete    | 2026-06-24 |
-| 60. Executable Arc-Fitting Evidence | 4/6 | In Progress | - |
+| 60. Executable Arc-Fitting Evidence | 5/6 | In Progress | - |
 
 ## Planning Notes
 
