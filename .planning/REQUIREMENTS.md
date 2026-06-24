@@ -63,7 +63,7 @@ roadmap phase and must be verified before milestone archive.
 
 ### Executable Arc-Fitting Evidence
 
-- [ ] **ARCEV-01**: Maintainer can run public Prusa arc-fitting parity evidence
+- [x] **ARCEV-01**: Maintainer can run public Prusa arc-fitting parity evidence
   that validates the checked-in arc summary artifact through the Rust boundary
   while preserving the existing public Prusa G-code output command contract.
 - [ ] **ARCEV-02**: Maintainer can see fail-closed mutation guards for arc drift
@@ -141,7 +141,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ARCRUST-01 | Phase 59 | Complete |
 | ARCRUST-02 | Phase 59 | Complete |
 | ARCRUST-03 | Phase 59 | Complete |
-| ARCEV-01 | Phase 60 | Pending |
+| ARCEV-01 | Phase 60 | Complete |
 | ARCEV-02 | Phase 60 | Pending |
 | ARCEV-03 | Phase 60 | Pending |
 

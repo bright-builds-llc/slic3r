@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
 status: executing
-stopped_at: Phase 60 planned
-last_updated: "2026-06-24T15:51:23.506Z"
-last_activity: 2026-06-24 -- Phase 60 planning complete
+stopped_at: Completed 60-01-PLAN.md
+last_updated: "2026-06-24T16:04:26.315Z"
+last_activity: 2026-06-24
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 13
-  completed_plans: 7
-  percent: 54
+  completed_plans: 8
+  percent: 62
 ---
 
 # Project State
@@ -29,13 +29,13 @@ depend on.
 
 ## Current Position
 
-Phase: 60
-Plan: Not started
+Phase: 60 (Executable Arc-Fitting Evidence) — EXECUTING
+Plan: 2 of 6
 Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
 Status: Ready to execute
-Last activity: 2026-06-24 -- Phase 60 planning complete
+Last activity: 2026-06-24
 
-Progress: [█████░░░░░] 54%
+Progress: [██████░░░░] 62%
 
 ## Performance Metrics
 
@@ -55,6 +55,10 @@ Progress: [█████░░░░░] 54%
 
 - v1.14 archived on 2026-06-22 with 4 phases, 11 plans, 22 tasks, 12 mapped
   requirements, and a passed milestone audit.
+
+**Recent execution:**
+
+- 60-01 completed in 7 min with 2 tasks and 4 implementation files changed.
 
 ## Accumulated Context
 
@@ -192,6 +196,9 @@ Recent decisions affecting v1.12:
 - [Phase 56]: Published public port docs against the existing public Prusa G-code parity command instead of adding a companion docs surface.
 - [Phase 56]: Kept broad generated-outputs in progress across public docs while publishing only the narrow semantic Prusa G-code evidence slice.
 - [Phase 56]: Kept Phase 49 through Phase 52 as historical structural rungs only; the current published state now uses the Phase 53 through Phase 56 semantic chain.
+- [Phase 60-01]: Added a new arc-specific Rust summary binary instead of widening the existing Prusa G-code output summary binary.
+- [Phase 60-01]: Kept public arc-fitting validation inside the Rust slic3r_flavors boundary and used Bash only for runfile orchestration, diffs, field assertions, and approved output text.
+- [Phase 60-01]: Published a separate public arc-fitting parity command while preserving the existing Prusa G-code output parity contract.
 
 ### Pending Todos
 
@@ -203,6 +210,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-24T15:51:23.502Z
-Stopped at: Phase 60 planned
-Resume file: .planning/phases/60-executable-arc-fitting-evidence/60-01-PLAN.md
+Last session: 2026-06-24T16:04:26.311Z
+Stopped at: Completed 60-01-PLAN.md
+Resume file: None
