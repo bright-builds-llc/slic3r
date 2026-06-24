@@ -334,7 +334,7 @@ reject_overclaiming_text() {
 	local overclaim_verbs
 	local overclaim_verb_then_term_pattern
 
-	overclaim_terms='byte-for-byte G-code parity|broad generated-output parity|broad generated-output verification|full ArcWelder algorithm equivalence|tolerance parity|geometry parity|printability|printer-runtime behavior|firmware behavior|support generation|wall seam behavior|GUI behavior|release behavior|network/device behavior|non-Prusa fork behavior|Bambu Studio support|OrcaSlicer support|upstream source imports|sync automation'
+	overclaim_terms='byte-for-byte G-code parity|full generated-output parity|broad generated-output parity|broad generated-output verification|full ArcWelder algorithm equivalence|tolerance parity|geometry parity|printability|printer-runtime behavior|firmware behavior|support generation|wall seam behavior|GUI behavior|release behavior|network/device behavior|non-Prusa fork behavior|Bambu Studio support|OrcaSlicer support|upstream source imports|sync automation'
 	overclaim_verbs='proves|verified|verifies|validates?|confirms?|claims?|establishes?|demonstrates?|certifies?'
 	overclaim_verb_then_term_pattern="Phase 57[^.]*[^[:alnum:]_](${overclaim_verbs})[^[:alnum:]_][^.]*(${overclaim_terms})"
 	overclaim_term_then_verb_pattern="Phase 57[^.]*(${overclaim_terms})[^.]*[^[:alnum:]_](${overclaim_verbs})[^[:alnum:]_]"
@@ -362,6 +362,7 @@ reject_overclaiming_text() {
 			"Phase 57 proves upstream source imports" \
 			"Phase 57 proves sync automation" \
 			"byte-for-byte G-code parity verified by Phase 57" \
+			"full generated-output parity verified" \
 			"broad generated-output parity verified by Phase 57" \
 			"full ArcWelder algorithm equivalence certified by Phase 57" \
 			"Bambu Studio support verified by Phase 57" \

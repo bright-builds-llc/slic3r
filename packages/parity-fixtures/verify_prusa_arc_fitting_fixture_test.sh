@@ -340,6 +340,22 @@ test_unsupported_broad_claim_text_fails() {
 	assert_contains_all "${tmp_dir}/unsupported-broad-claim.err" "expected-arc-summary.tsv" "forbidden"
 }
 
+test_full_generated_output_parity_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/full-generated-output-parity-overclaim"
+	local readme_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/README.md"
+	write_valid_fixture_copy "${dir}"
+	printf '\nfull generated-output parity verified\n' >>"${readme_file}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/full-generated-output-overclaim.out" "${tmp_dir}/full-generated-output-overclaim.err"; then
+		fail "full generated-output parity overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains_all "${tmp_dir}/full-generated-output-overclaim.err" "README.md" "forbidden"
+}
+
 test_wrong_source_ref_fails() {
 	# Arrange
 	local dir="${tmp_dir}/wrong-source-ref"
@@ -510,6 +526,7 @@ for test_name in \
 	test_out_of_order_arc_row_fails \
 	test_unsupported_arc_field_fails \
 	test_unsupported_broad_claim_text_fails \
+	test_full_generated_output_parity_overclaim_fails \
 	test_wrong_source_ref_fails \
 	test_wrong_fixture_identity_fails \
 	test_wrong_fixture_path_fails \

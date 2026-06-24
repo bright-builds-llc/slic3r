@@ -43,7 +43,6 @@ else
 fi
 
 readonly SOURCE_REF="prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
-readonly PEELED_COMMIT="9a583bd438b195856f3bcf7ea99b69ba4003a961"
 readonly FIXTURE_PATH="packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode"
 readonly FIXTURE_ID="arc-fitting-observations.gcode"
 readonly SOURCE_PATH="src/libslic3r/Geometry/ArcWelder.cpp"
@@ -243,6 +242,7 @@ reject_overclaiming_text() {
 		for forbidden_claim in \
 			"verified Prusa arc-fitting ""parity" \
 			"byte-for-byte G-code parity ""verified" \
+			"full generated-output parity ""verified" \
 			"full ArcWelder algorithm equivalence ""verified" \
 			"tolerance or geometry parity ""verified" \
 			"printability ""verified" \

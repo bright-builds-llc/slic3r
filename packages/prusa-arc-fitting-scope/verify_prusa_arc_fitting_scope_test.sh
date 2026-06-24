@@ -554,6 +554,22 @@ test_printability_overclaim_fails() {
 	assert_contains "${tmp_dir}/printability-overclaim.err" 'forbidden Prusa arc-fitting scope claim'
 }
 
+test_full_generated_output_parity_overclaim_fails() {
+	# Arrange
+	local dir="${tmp_dir}/full-generated-output-parity-overclaim"
+	write_valid_fixture "${dir}"
+	printf '\nfull generated-output parity verified\n' >>"${dir}/README.md"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/full-generated-output-overclaim.out" "${tmp_dir}/full-generated-output-overclaim.err"; then
+		fail "full generated-output parity overclaim fixture passed"
+	fi
+
+	# Assert
+	assert_contains "${tmp_dir}/full-generated-output-overclaim.err" '^error:'
+	assert_contains "${tmp_dir}/full-generated-output-overclaim.err" 'full generated-output parity verified'
+}
+
 test_algorithm_equivalence_overclaim_fails() {
 	# Arrange
 	local dir="${tmp_dir}/algorithm-overclaim"
@@ -589,6 +605,7 @@ test_wrong_arc_status_target_fails
 test_missing_deferred_scope_term_fails
 test_runtime_overclaim_fails
 test_printability_overclaim_fails
+test_full_generated_output_parity_overclaim_fails
 test_algorithm_equivalence_overclaim_fails
 
 printf 'ok: verify_prusa_arc_fitting_scope_test\n'
