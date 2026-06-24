@@ -76,7 +76,7 @@ and non-Prusa fork behavior deferred.
   artifacts are published.
 - [x] **Phase 58: Arc-Fitting Fixture Corpus** - Add the source-pinned fixture (completed 2026-06-23)
   namespace, expected arc summaries, provenance, and fixture drift guards.
-- [ ] **Phase 59: Rust Arc-Fitting Evidence Boundary** - Parse checked-in arc
+- [x] **Phase 59: Rust Arc-Fitting Evidence Boundary** - Parse checked-in arc (completed 2026-06-24)
   summaries through a pure typed Rust boundary with static readiness metadata.
 - [ ] **Phase 60: Executable Arc-Fitting Evidence** - Publish public
   arc-fitting parity evidence, mutation guards, exact status, and docs for the
@@ -158,7 +158,7 @@ Plans:
 - [x] 59-01-PLAN.md — Add the pure typed arc-fitting summary parser,
       developer-facing summary-line helper, and focused Cargo/Bazel parser
       coverage.
-- [ ] 59-02-PLAN.md — Add readiness metadata, registry visibility, aggregate
+- [x] 59-02-PLAN.md — Add readiness metadata, registry visibility, aggregate
       Rust verification wiring, and public-boundary guards.
 
 ### Phase 60: Executable Arc-Fitting Evidence
@@ -213,7 +213,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 |-------|----------------|--------|-----------|
 | 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
 | 58. Arc-Fitting Fixture Corpus | 2/2 | Complete    | 2026-06-23 |
-| 59. Rust Arc-Fitting Evidence Boundary | 1/2 | In Progress|  |
+| 59. Rust Arc-Fitting Evidence Boundary | 2/2 | Complete   | 2026-06-24 |
 | 60. Executable Arc-Fitting Evidence | 0/TBD | Not started | - |
 
 ## Planning Notes
