@@ -429,9 +429,9 @@ The pattern should be repeated once per ARCEV-02 drift class, with one mutation 
 |---|-------|---------|---------------|
 | - | No assumed claims are used in this research. [VERIFIED: self-audit] | All sections | None from assumptions; remaining risk is implementation/order discipline. [VERIFIED: self-audit] |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **None blocking.** The exact shell helper names and output line order are intentionally left to implementation discretion, constrained by deterministic output and the approved fact list. [VERIFIED: .planning/phases/60-executable-arc-fitting-evidence/60-CONTEXT.md]
+1. **RESOLVED - none blocking.** The exact shell helper names and output line order are intentionally left to implementation discretion, constrained by deterministic output and the approved fact list. [VERIFIED: .planning/phases/60-executable-arc-fitting-evidence/60-CONTEXT.md]
 
 ## Environment Availability
 
