@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
-status: executing
-stopped_at: Phase 60 ready for planning
-last_updated: "2026-06-24T14:55:23.983Z"
+status: Ready for Phase 60
+stopped_at: Phase 60 context gathered
+last_updated: "2026-06-24T15:11:06.957Z"
 last_activity: 2026-06-24 -- Phase 59 complete; Phase 60 ready
 progress:
   total_phases: 4
@@ -203,6 +203,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-24T14:55:48Z
-Stopped at: Phase 60 ready for planning
-Resume file: .planning/ROADMAP.md
+Last session: 2026-06-24T15:11:06.952Z
+Stopped at: Phase 60 context gathered
+Resume file: .planning/phases/60-executable-arc-fitting-evidence/60-CONTEXT.md
