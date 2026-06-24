@@ -50,6 +50,7 @@ readonly SOURCE_PATH="src/libslic3r/Geometry/ArcWelder.cpp"
 readonly SOURCE_ANCHOR="ArcWelder.cpp#L4-L7;ArcWelder.cpp#L400-L404;ArcWelder.cpp#L630-L634"
 readonly EXPECTED_SHA="b1db8e3ef28d47f045f1eec852e4f83675da920b312abeeb3f3e40a5927f796f"
 readonly EXPECTED_SIZE="94"
+readonly PHASE_60_PUBLISHED_DOC_TEXT="Phase 60 publishes bazel run //packages/parity:prusaslicer_arc_fitting_parity and the fork.prusaslicer.arc-fitting status row for checked-in arc summary evidence only."
 readonly ARC_SUMMARY_HEADER=$'source_ref\tfixture_path\tarc_field\tarc_category\tarc_value\tevidence_boundary'
 readonly ARC_SUMMARY_ROW_COUNT="13"
 readonly ARC_REQUIRED_FIELDS="source_ref inventory_source_paths source_anchor fixture_id fixture_path arc_command_counts arc_direction_counts center_offset_observations coordinate_bounds extrusion_observations feedrate_observations evidence_boundary"
@@ -413,11 +414,9 @@ verify_namespace_readme() {
 	require_text "${fixture_readme}" "fixture README" "\`packages/fork-inventories/prusaslicer.tsv\`"
 	require_text "${fixture_readme}" "fixture README" "\`packages/prusa-arc-fitting-scope/arc-fitting-scope.md\`"
 	require_text "${fixture_readme}" "fixture README" "Phase 58 owns only the checked-in \`prusaslicer.arc-fitting\` fixture namespace"
-	require_text "${fixture_readme}" "fixture README" "Phase 59 owns future"
+	require_text "${fixture_readme}" "fixture README" "Phase 59 owns"
 	require_text "${fixture_readme}" "fixture README" "\`slic3r_flavors::prusa_arc_fitting\` Rust parser/readiness work"
-	require_text "${fixture_readme}" "fixture README" "Phase 60 owns"
-	require_text "${fixture_readme}" "fixture README" "\`bazel run //packages/parity:prusaslicer_arc_fitting_parity\` evidence"
-	require_text "${fixture_readme}" "fixture README" "future \`fork.prusaslicer.arc-fitting\` status row"
+	require_text "${fixture_readme}" "fixture README" "${PHASE_60_PUBLISHED_DOC_TEXT}"
 }
 
 verify_package_readme() {
@@ -430,9 +429,13 @@ verify_package_readme() {
 	require_text "${package_readme}" "packages/parity-fixtures/README.md" "bazel run //packages/parity-fixtures:verify_prusa_arc_fitting_fixture"
 	require_text "${package_readme}" "packages/parity-fixtures/README.md" "${SOURCE_REF}"
 	require_text "${package_readme}" "packages/parity-fixtures/README.md" "${SOURCE_PATH}"
-	require_text "${package_readme}" "packages/parity-fixtures/README.md" "Phase 59 owns \`slic3r_flavors::prusa_arc_fitting\`"
-	require_text "${package_readme}" "packages/parity-fixtures/README.md" "Phase 60 owns \`bazel run //packages/parity:prusaslicer_arc_fitting_parity\`"
-	require_text "${package_readme}" "packages/parity-fixtures/README.md" "Phase 58 does not update \`packages/parity/status.tsv\`"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "Phase 59 owns"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "\`slic3r_flavors::prusa_arc_fitting\`"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "${PHASE_60_PUBLISHED_DOC_TEXT}"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "broad \`generated-outputs\`"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "remains \`in progress\`"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "existing"
+	require_text "${package_readme}" "packages/parity-fixtures/README.md" "\`fork.prusaslicer.gcode-output\` row remains limited"
 }
 
 verify_status_boundaries() {

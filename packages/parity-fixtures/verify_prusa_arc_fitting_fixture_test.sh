@@ -12,6 +12,8 @@ verifier="${workspace_root}/packages/parity-fixtures/verify_prusa_arc_fitting_fi
 source_fixture_dir="${workspace_root}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting"
 source_status_file="${workspace_root}/packages/parity/status.tsv"
 source_package_readme="${workspace_root}/packages/parity-fixtures/README.md"
+phase_60_published_doc_text="Phase 60 publishes bazel run //packages/parity:prusaslicer_arc_fitting_parity and the fork.prusaslicer.arc-fitting status row for checked-in arc summary evidence only."
+stale_phase_60_doc_text="Phase 60 owns future bazel run //packages/parity:prusaslicer_arc_fitting_parity evidence and the future fork.prusaslicer.arc-fitting status row."
 
 tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/verify-prusa-arc-fitting-fixture-test.XXXXXX")"
 trap 'rm -rf "${tmp_dir}"' EXIT
@@ -411,6 +413,25 @@ test_stale_namespace_readme_reference_fails() {
 	assert_contains_all "${tmp_dir}/stale-namespace-readme.err" "fixture README" "expected-arc-summary.tsv"
 }
 
+test_stale_phase60_publication_wording_fails() {
+	# Arrange
+	local dir="${tmp_dir}/stale-phase60-publication-wording"
+	local readme_file="${dir}/packages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/README.md"
+	write_valid_fixture_copy "${dir}"
+	replace_first_line_containing \
+		"${readme_file}" \
+		"${phase_60_published_doc_text}" \
+		"\`slic3r_flavors::prusa_arc_fitting\` Rust parser/readiness work. ${stale_phase_60_doc_text}"
+
+	# Act
+	if run_verifier "${dir}" "${tmp_dir}/stale-phase60-publication.out" "${tmp_dir}/stale-phase60-publication.err"; then
+		fail "stale Phase 60 publication wording passed"
+	fi
+
+	# Assert
+	assert_contains_all "${tmp_dir}/stale-phase60-publication.err" "fixture README" "Phase 60 publishes"
+}
+
 test_stale_package_readme_reference_fails() {
 	# Arrange
 	local dir="${tmp_dir}/stale-package-readme-reference"
@@ -493,6 +514,7 @@ for test_name in \
 	test_wrong_fixture_identity_fails \
 	test_wrong_fixture_path_fails \
 	test_stale_namespace_readme_reference_fails \
+	test_stale_phase60_publication_wording_fails \
 	test_stale_package_readme_reference_fails \
 	test_provenance_mismatch_fails \
 	test_fixture_checksum_drift_fails \
