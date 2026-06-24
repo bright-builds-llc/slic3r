@@ -40,6 +40,14 @@ rust_binary(
     edition = "2024",
 )
 
+rust_binary(
+    name = "prusa_arc_fitting_summary",
+    srcs = ["src/bin/prusa_arc_fitting_summary.rs"],
+    crate_root = "src/bin/prusa_arc_fitting_summary.rs",
+    deps = [":slic3r_flavors"],
+    edition = "2024",
+)
+
 rust_test(
     name = "flavor_registry_test",
     srcs = ["tests/flavor_registry.rs"],
@@ -108,6 +116,7 @@ rust_clippy(
     deps = [
         ":flavor_registry_test",
         ":prusa_arc_fitting_test",
+        ":prusa_arc_fitting_summary",
         ":prusa_profile_test",
         ":prusa_gcode_output_test",
         ":prusa_gcode_output_summary",
@@ -123,6 +132,7 @@ rustfmt_test(
     targets = [
         ":flavor_registry_test",
         ":prusa_arc_fitting_test",
+        ":prusa_arc_fitting_summary",
         ":prusa_profile_test",
         ":prusa_gcode_output_test",
         ":prusa_gcode_output_summary",
