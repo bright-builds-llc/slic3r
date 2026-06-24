@@ -6,6 +6,7 @@ rust_library(
     name = "slic3r_flavors",
     srcs = [
         "src/lib.rs",
+        "src/prusa_arc_fitting.rs",
         "src/prusa_gcode_output.rs",
         "src/prusa_profile.rs",
         "src/prusa_project_file.rs",
@@ -74,6 +75,20 @@ rust_test(
 )
 
 rust_test(
+    name = "prusa_arc_fitting_test",
+    srcs = ["tests/prusa_arc_fitting.rs"],
+    compile_data = [
+        "src/prusa_arc_fitting.rs",
+        "//packages/parity-fixtures:prusa_arc_fitting_expected_arc_summary",
+    ],
+    deps = [
+        ":slic3r_flavors",
+        "//packages/slic3r-rust/crates/slic3r_contracts:slic3r_contracts",
+    ],
+    edition = "2024",
+)
+
+rust_test(
     name = "prusa_project_file_test",
     srcs = ["tests/prusa_project_file.rs"],
     compile_data = [
@@ -92,6 +107,7 @@ rust_clippy(
     testonly = True,
     deps = [
         ":flavor_registry_test",
+        ":prusa_arc_fitting_test",
         ":prusa_profile_test",
         ":prusa_gcode_output_test",
         ":prusa_gcode_output_summary",
@@ -106,6 +122,7 @@ rustfmt_test(
     name = "rustfmt_check",
     targets = [
         ":flavor_registry_test",
+        ":prusa_arc_fitting_test",
         ":prusa_profile_test",
         ":prusa_gcode_output_test",
         ":prusa_gcode_output_summary",

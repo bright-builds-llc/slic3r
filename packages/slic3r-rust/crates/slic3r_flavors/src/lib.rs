@@ -1,11 +1,18 @@
 #![forbid(unsafe_code)]
 //! Pure metadata registry for Slic3r-family flavor planning boundaries.
 
+pub mod prusa_arc_fitting;
 pub mod prusa_gcode_output;
 pub mod prusa_profile;
 pub mod prusa_project_file;
 pub mod registry;
 
+pub use prusa_arc_fitting::{
+    PrusaArcFittingCategory, PrusaArcFittingEvidenceBoundary, PrusaArcFittingFacts,
+    PrusaArcFittingField, PrusaArcFittingParseError, PrusaArcFittingParseResult,
+    PrusaArcFittingSummary, PrusaArcFittingSummaryRow, PrusaArcFittingValue,
+    parse_prusa_arc_fitting_summary, prusa_arc_fitting_summary_lines,
+};
 pub use prusa_gcode_output::{
     PrusaGcodeOutputEvidenceBoundary, PrusaGcodeOutputMarkerKey, PrusaGcodeOutputMarkerValue,
     PrusaGcodeOutputMetadata, PrusaGcodeOutputMetadataKey, PrusaGcodeOutputMetadataValue,
