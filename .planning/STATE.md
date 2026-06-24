@@ -4,7 +4,7 @@ milestone: v1.15
 milestone_name: milestone
 status: executing
 stopped_at: Phase 60 planned
-last_updated: "2026-06-24T15:40:21.998Z"
+last_updated: "2026-06-24T15:51:23.506Z"
 last_activity: 2026-06-24 -- Phase 60 planning complete
 progress:
   total_phases: 4
@@ -203,6 +203,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-24T15:11:06.952Z
-Stopped at: Phase 60 context gathered
-Resume file: .planning/phases/60-executable-arc-fitting-evidence/60-CONTEXT.md
+Last session: 2026-06-24T15:51:23.502Z
+Stopped at: Phase 60 planned
+Resume file: .planning/phases/60-executable-arc-fitting-evidence/60-01-PLAN.md
