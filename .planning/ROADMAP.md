@@ -155,7 +155,7 @@ or side effects.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 59-01-PLAN.md — Add the pure typed arc-fitting summary parser,
+- [x] 59-01-PLAN.md — Add the pure typed arc-fitting summary parser,
       developer-facing summary-line helper, and focused Cargo/Bazel parser
       coverage.
 - [ ] 59-02-PLAN.md — Add readiness metadata, registry visibility, aggregate
@@ -213,7 +213,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 |-------|----------------|--------|-----------|
 | 57. Arc-Fitting Scope Contract | 3/3 | Complete    | 2026-06-23 |
 | 58. Arc-Fitting Fixture Corpus | 2/2 | Complete    | 2026-06-23 |
-| 59. Rust Arc-Fitting Evidence Boundary | 0/2 | Not started | - |
+| 59. Rust Arc-Fitting Evidence Boundary | 1/2 | In Progress|  |
 | 60. Executable Arc-Fitting Evidence | 0/TBD | Not started | - |
 
 ## Planning Notes
