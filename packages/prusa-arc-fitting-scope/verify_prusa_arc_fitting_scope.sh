@@ -45,7 +45,8 @@ fi
 readonly ACCEPTED_SOURCE_IDENTITY="prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961"
 readonly ARC_FITTING_INVENTORY_ROW=$'prusaslicer.arc-fitting\tprusaslicer\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tsrc/libslic3r/Geometry/ArcWelder.cpp\tarc-fitting\tarc-fitting\tshared-downstream\tmedium\tgenerated-outputs\tfuture-candidate\tnone\tArc fitting planning row; future parity requires G-code output comparison evidence.'
 readonly ARC_CATEGORY_MAP_ID="arc.shared"
-readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow semantic Prusa G-code evidence slice backed by the Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion behavior, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
+readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow semantic Prusa G-code evidence slice backed by the Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion behavior, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host '$'upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
+readonly ARC_FITTING_STATUS_ROW=$'fork.prusaslicer.arc-fitting\tverified\t//packages/parity:prusaslicer_arc_fitting_parity\tShared fixture comparison proves the narrow Prusa arc-fitting checked-in summary evidence slice backed by the Phase 57 scope contract, Phase 58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public parity command only; byte-for-byte G-code parity, full generated-output parity, broad generated-output verification, full ArcWelder algorithm equivalence, tolerance or geometry parity, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, wall seam behavior, STEP import, full 3MF import/export, binary G-code, thumbnails, post-processing, host '$'upload, network/device behavior, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, sync automation, and non-Prusa fork behavior remain deferred'
 readonly SCOPE_RECORD_SECTION="## Scope Record"
 readonly SOURCE_ROW_SECTION="## Source Row Details"
 readonly ARC_FIELD_SECTION="## Approved Arc Evidence Fields"
@@ -299,7 +300,6 @@ verify_inventory_row() {
 
 verify_status_boundaries() {
 	local generated_count
-	local arc_status_count
 
 	generated_count="$(awk -F '\t' '$1 == "generated-outputs" && $2 == "in progress" { count++ } END { print count + 0 }' "${status_file}")"
 	if [[ "${generated_count}" != "1" ]]; then
@@ -310,10 +310,8 @@ verify_status_boundaries() {
 	require_exact_tsv_row_once "${status_file}" "packages/parity/status.tsv" "${GCODE_OUTPUT_STATUS_ROW}"
 	require_first_field_count "${status_file}" "packages/parity/status.tsv" "fork.prusaslicer.gcode-output" "1"
 
-	arc_status_count="$(awk -F '\t' '$1 == "fork.prusaslicer.arc-fitting" { count++ } END { print count + 0 }' "${status_file}")"
-	if [[ "${arc_status_count}" != "0" ]]; then
-		error "packages/parity/status.tsv: no verified fork.prusaslicer.arc-fitting status row may be published in Phase 57"
-	fi
+	require_exact_tsv_row_once "${status_file}" "packages/parity/status.tsv" "${ARC_FITTING_STATUS_ROW}"
+	require_first_field_count "${status_file}" "packages/parity/status.tsv" "fork.prusaslicer.arc-fitting" "1"
 }
 
 reject_overclaiming_text() {

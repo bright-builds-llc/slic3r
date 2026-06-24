@@ -55,6 +55,8 @@ readonly ARC_SUMMARY_ROW_COUNT="13"
 readonly ARC_REQUIRED_FIELDS="source_ref inventory_source_paths source_anchor fixture_id fixture_path arc_command_counts arc_direction_counts center_offset_observations coordinate_bounds extrusion_observations feedrate_observations evidence_boundary"
 readonly PROVENANCE_HEADER=$'fixture_id\tvendor_id\tinventory_id\tsource_ref\taccepted_tag\tpeeled_commit\tsource_path\tsource_anchor\tbytes\tsha256\tline_endings_encoding\trole\tphase57_scope_record\tupdate_route\tstatus_scope\tprivacy_post_processing_exclusions\tbroad_deferrals'
 readonly PROVENANCE_ROW=$'arc-fitting-observations.gcode\tprusaslicer\tprusaslicer.arc-fitting\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tversion_2.9.5\t9a583bd438b195856f3bcf7ea99b69ba4003a961\tsrc/libslic3r/Geometry/ArcWelder.cpp\tArcWelder.cpp#L4-L7;ArcWelder.cpp#L400-L404;ArcWelder.cpp#L630-L634\t94\tb1db8e3ef28d47f045f1eec852e4f83675da920b312abeeb3f3e40a5927f796f\tascii-lf\treviewed-arc-command-observation-fixture\tpackages/prusa-arc-fitting-scope/arc-fitting-scope.md\treviewed-intake-change-updates-packages/fork-vendors/forks.tsv-packages/fork-inventories/prusaslicer.tsv-and-packages/prusa-arc-fitting-scope/arc-fitting-scope.md\tPhase-58-fixture-corpus-only-no-parity-status\tno-generator-no-runtime-no-network-no-sync-no-host-upload-no-post-processing-no-thumbnail-no-printability-no-gui\tno-byte-for-byte-gcode-parity-no-full-arcwelder-equivalence-no-tolerance-geometry-parity-no-generated-output-status-promotion-no-printer-runtime-no-firmware-no-support-no-wall-seam-no-release-no-bambu-no-orca-no-upstream-source-import-no-sync'
+readonly GCODE_OUTPUT_STATUS_ROW=$'fork.prusaslicer.gcode-output\tverified\t//packages/parity:prusaslicer_gcode_output_parity\tShared fixture comparison proves the narrow semantic Prusa G-code evidence slice backed by the Phase 53 closed semantic scope contract, Phase 54 semantic fixture summary, Phase 55 Rust semantic parser/readiness boundary, and Phase 56 public parity command only; byte-for-byte G-code parity, full generated-output parity, toolpath geometry, extrusion behavior, timing, support generation, wall seam behavior, arc fitting, STEP import, full 3MF import/export, printer-runtime behavior, firmware or printability, GUI export or viewer behavior, binary G-code, thumbnails, post-processing, host '$'upload, network/device integration, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, and sync automation remain deferred'
+readonly ARC_FITTING_STATUS_ROW=$'fork.prusaslicer.arc-fitting\tverified\t//packages/parity:prusaslicer_arc_fitting_parity\tShared fixture comparison proves the narrow Prusa arc-fitting checked-in summary evidence slice backed by the Phase 57 scope contract, Phase 58 fixture corpus, Phase 59 Rust parser/readiness boundary, and Phase 60 public parity command only; byte-for-byte G-code parity, full generated-output parity, broad generated-output verification, full ArcWelder algorithm equivalence, tolerance or geometry parity, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, wall seam behavior, STEP import, full 3MF import/export, binary G-code, thumbnails, post-processing, host '$'upload, network/device behavior, profile auto-update execution, fork release builds, Bambu Studio, OrcaSlicer, upstream source imports, release behavior, sync automation, and non-Prusa fork behavior remain deferred'
 readonly GCODE_LINE_1="G2 X10.000 Y0.000 I5.000 J0.000 E0.50000 F1800"
 readonly GCODE_LINE_2="G3 X0.000 Y0.000 I-5.000 J0.000 E1.00000 F1800"
 readonly ARC_SOURCE_REF_ROW=$'prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tpackages/parity-fixtures/forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode\tsource_ref\tsource identity\tprusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961\tAccepted PrusaSlicer source identity only: `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`.'
@@ -148,6 +150,19 @@ require_exact_line() {
 	local description="$4"
 	if ! grep -Fxq -- "${expected_line}" "${file}"; then
 		error "${label}: missing required row for ${description}"
+	fi
+}
+
+require_first_field_count() {
+	local file="$1"
+	local label="$2"
+	local id="$3"
+	local expected_count="$4"
+	local count
+
+	count="$(awk -F '\t' -v id="${id}" '$1 == id { count++ } END { print count + 0 }' "${file}")"
+	if [[ "${count}" != "${expected_count}" ]]; then
+		error "${label}: expected ${expected_count} row(s) with first field ${id}, found ${count}"
 	fi
 }
 
@@ -421,24 +436,19 @@ verify_package_readme() {
 }
 
 verify_status_boundaries() {
-	local arc_status_count
 	local generated_outputs_count
-	local gcode_output_count
 
-	arc_status_count="$(awk -F '\t' '$1 == "fork.prusaslicer.arc-fitting" { count++ } END { print count + 0 }' "${status_file}")"
-	if [[ "${arc_status_count}" != "0" ]]; then
-		error "packages/parity/status.tsv: fork.prusaslicer.arc-fitting rows must be absent, got ${arc_status_count}"
-	fi
+	require_exact_line "${status_file}" "packages/parity/status.tsv" "${ARC_FITTING_STATUS_ROW}" "fork.prusaslicer.arc-fitting status"
+	require_first_field_count "${status_file}" "packages/parity/status.tsv" "fork.prusaslicer.arc-fitting" "1"
 
 	generated_outputs_count="$(awk -F '\t' '$1 == "generated-outputs" && $2 == "in progress" { count++ } END { print count + 0 }' "${status_file}")"
 	if [[ "${generated_outputs_count}" != "1" ]]; then
 		error "packages/parity/status.tsv: expected one generated-outputs in progress row, got ${generated_outputs_count}"
 	fi
+	require_first_field_count "${status_file}" "packages/parity/status.tsv" "generated-outputs" "1"
 
-	gcode_output_count="$(awk -F '\t' '$1 == "fork.prusaslicer.gcode-output" { count++ } END { print count + 0 }' "${status_file}")"
-	if [[ "${gcode_output_count}" != "1" ]]; then
-		error "packages/parity/status.tsv: expected one fork.prusaslicer.gcode-output row, got ${gcode_output_count}"
-	fi
+	require_exact_line "${status_file}" "packages/parity/status.tsv" "${GCODE_OUTPUT_STATUS_ROW}" "fork.prusaslicer.gcode-output status"
+	require_first_field_count "${status_file}" "packages/parity/status.tsv" "fork.prusaslicer.gcode-output" "1"
 }
 
 for required_file in \
