@@ -3,7 +3,7 @@
 ## Milestones
 
 - Active: **v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice** -
-  Phases 57-60 (ready to plan)
+  Phases 57-61 (gap closure planning)
 - Shipped: **v1.14 PrusaSlicer G-code Semantic Evidence Foundation** -
   Phases 53-56 (shipped 2026-06-22)
   Archive: [.planning/milestones/v1.14-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.14-ROADMAP.md)
@@ -61,6 +61,11 @@ printability, printer-runtime behavior, support generation, wall seam
 behavior, GUI behavior, release behavior, upstream imports, sync automation,
 and non-Prusa fork behavior deferred.
 
+The v1.15 audit found no live implementation or integration gaps, but blocked
+archive readiness on stale Phase 58 requirements-ledger state. Phase 61 closes
+that metadata gap by reconciling ARCFIX requirement checkboxes and traceability
+against the already-passed Phase 58 verification and summary frontmatter.
+
 **Granularity:** fine
 **Coverage:** 12/12 v1.15 requirements mapped
 
@@ -81,6 +86,9 @@ and non-Prusa fork behavior deferred.
 - [x] **Phase 60: Executable Arc-Fitting Evidence** - Publish public (completed 2026-06-24)
   arc-fitting parity evidence, mutation guards, exact status, and docs for the
   narrow evidence slice.
+- [ ] **Phase 61: Requirements Ledger Reconciliation** - Reconcile the v1.15
+  requirements ledger for the verified Phase 58 ARCFIX requirements before
+  milestone archive.
 
 ## Phase Details
 
@@ -197,6 +205,27 @@ Plans:
 - [x] 60-05-PLAN.md — Publish arc-fitting scope docs with scope verifier checks.
 - [x] 60-06-PLAN.md — Publish public port docs for the narrow arc-fitting slice.
 
+### Phase 61: Requirements Ledger Reconciliation
+**Goal**: Maintainers can re-run the milestone audit and see the v1.15
+requirements ledger agree with the already-verified Phase 58 fixture evidence.
+**Depends on**: Phase 60
+**Requirements**: ARCFIX-01, ARCFIX-02, ARCFIX-03
+**Gap Closure**: Closes v1.15 audit gaps for stale ARCFIX checkboxes and
+traceability rows in `.planning/REQUIREMENTS.md`.
+**Success Criteria** (what must be TRUE):
+  1. `.planning/REQUIREMENTS.md` marks ARCFIX-01, ARCFIX-02, and ARCFIX-03
+     complete only after confirming the Phase 58 verification report and
+     summary frontmatter still list those requirements as satisfied.
+  2. The requirements traceability table no longer reports ARCFIX-01,
+     ARCFIX-02, or ARCFIX-03 as pending after the ledger correction is applied.
+  3. The milestone audit can be rerun without requirements-ledger gaps while
+     preserving the existing v1.15 evidence, status, and non-overclaiming
+     boundaries.
+**Plans**: 1 plan pending
+Plans:
+- [ ] 61-01-PLAN.md — Reconcile v1.15 ARCFIX requirements ledger metadata and
+      rerun audit-readiness checks.
+
 ## Coverage
 
 | Requirement | Phase |
@@ -204,9 +233,9 @@ Plans:
 | ARCSCOPE-01 | Phase 57 |
 | ARCSCOPE-02 | Phase 57 |
 | ARCSCOPE-03 | Phase 57 |
-| ARCFIX-01 | Phase 58 |
-| ARCFIX-02 | Phase 58 |
-| ARCFIX-03 | Phase 58 |
+| ARCFIX-01 | Phase 61 |
+| ARCFIX-02 | Phase 61 |
+| ARCFIX-03 | Phase 61 |
 | ARCRUST-01 | Phase 59 |
 | ARCRUST-02 | Phase 59 |
 | ARCRUST-03 | Phase 59 |
@@ -221,7 +250,7 @@ Duplicates: 0
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 57 -> 58 -> 59 -> 60
+Phases execute in numeric order: 57 -> 58 -> 59 -> 60 -> 61
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -229,6 +258,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 | 58. Arc-Fitting Fixture Corpus | 2/2 | Complete    | 2026-06-23 |
 | 59. Rust Arc-Fitting Evidence Boundary | 2/2 | Complete    | 2026-06-24 |
 | 60. Executable Arc-Fitting Evidence | 6/6 | Complete    | 2026-06-24 |
+| 61. Requirements Ledger Reconciliation | 0/1 | Pending | |
 
 ## Planning Notes
 
@@ -242,3 +272,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60
 - Phase 60 publishes status/docs only after scope, fixture, Rust boundary,
   public comparator, mutation guards, and existing Prusa G-code output command
   regression checks pass.
+- Phase 61 should edit only planning metadata needed to close the audit's
+  ARCFIX ledger gap; it must not change fixture artifacts, Rust evidence,
+  public parity command behavior, or public status wording except where an
+  audit rerun report is generated.

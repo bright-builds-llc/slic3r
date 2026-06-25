@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
-status: complete
-stopped_at: Phase 60 verified and complete
-last_updated: "2026-06-24T17:40:32.392Z"
-last_activity: 2026-06-24
+status: in_progress
+stopped_at: Phase 61 gap closure phase created and ready to plan
+last_updated: "2026-06-25T04:24:21Z"
+last_activity: 2026-06-25
 progress:
-  total_phases: 4
+  total_phases: 5
   completed_phases: 4
   total_plans: 13
   completed_plans: 13
-  percent: 100
+  percent: 80
 ---
 
 # Project State
@@ -25,25 +25,26 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** v1.15 complete — ready for milestone audit
+**Current focus:** v1.15 audit gap closure — Phase 61 ready to plan
 
 ## Current Position
 
-Phase: 60 (Executable Arc-Fitting Evidence) — COMPLETE
-Plan: 6 of 6
+Phase: 61 (Requirements Ledger Reconciliation) — PENDING
+Plan: 0 of 1
 Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
-Status: Phase verified and complete; milestone ready for completion/audit
-Last activity: 2026-06-24
+Status: Gap closure phase created after audit found Phase 58 requirements
+ledger drift; ready to plan
+Last activity: 2026-06-25
 
-Progress: [██████████] 100%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
 **Latest milestone baseline:**
 
-- v1.15 maps 12 requirements across 4 planned phases: scope contract, fixture
-  corpus, Rust arc-fitting evidence boundary, and executable arc-fitting
-  evidence.
+- v1.15 maps 12 requirements across 5 planned phases: scope contract, fixture
+  corpus, Rust arc-fitting evidence boundary, executable arc-fitting evidence,
+  and requirements-ledger reconciliation.
 
 - Granularity is `fine`; the natural four-phase evidence ladder is preserved
   because it matches the requirement categories and existing v1.12-v1.14
@@ -64,6 +65,10 @@ Progress: [██████████] 100%
 - 60-04 completed in 7 min with 2 tasks and 5 implementation files changed.
 - 60-05 completed in 7 min with 2 tasks and 4 implementation files changed.
 - 60-06 completed in 7 min with 2 tasks and 4 documentation files changed.
+- v1.15 milestone audit on 2026-06-25 found live wiring clean but blocked
+  archive readiness on ARCFIX requirements-ledger drift.
+- Phase 61 was added to reconcile the requirements ledger before milestone
+  archive.
 
 ## Accumulated Context
 
@@ -94,6 +99,13 @@ Recent decisions affecting v1.15:
 
 - Keep the arc-fitting slice narrow and separate from broad
   `generated-outputs` and the existing `fork.prusaslicer.gcode-output` row.
+
+- Add Phase 61 as a metadata-only gap closure phase after the v1.15 audit found
+  ARCFIX-01..03 still pending in `.planning/REQUIREMENTS.md` despite passed
+  Phase 58 verification and summary frontmatter.
+
+- Temporarily map ARCFIX-01..03 to Phase 61 in requirements traceability so the
+  pending audit gap has an explicit closure phase before milestone archive.
 
 Recent decisions affecting v1.14:
 

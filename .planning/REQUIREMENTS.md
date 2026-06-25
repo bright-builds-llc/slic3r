@@ -135,9 +135,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ARCSCOPE-01 | Phase 57 | Complete |
 | ARCSCOPE-02 | Phase 57 | Complete |
 | ARCSCOPE-03 | Phase 57 | Complete |
-| ARCFIX-01 | Phase 58 | Pending |
-| ARCFIX-02 | Phase 58 | Pending |
-| ARCFIX-03 | Phase 58 | Pending |
+| ARCFIX-01 | Phase 61 | Pending |
+| ARCFIX-02 | Phase 61 | Pending |
+| ARCFIX-03 | Phase 61 | Pending |
 | ARCRUST-01 | Phase 59 | Complete |
 | ARCRUST-02 | Phase 59 | Complete |
 | ARCRUST-03 | Phase 59 | Complete |
@@ -154,4 +154,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ---
 
 *Requirements defined: 2026-06-23*
-*Last updated: 2026-06-23 after roadmap creation*
+*Last updated: 2026-06-25 after audit gap-closure phase planning*
