@@ -49,12 +49,12 @@ slice. It reuses the v1.12-v1.14 G-code evidence ladder, focuses on
 claiming byte-for-byte, printability, runtime, GUI, non-Prusa fork, release,
 upstream import, or sync behavior.
 
-v1.15 Phase 61 is pending. It exists only to reconcile the requirements ledger
-after the v1.15 audit found ARCFIX-01, ARCFIX-02, and ARCFIX-03 still pending
-in `.planning/REQUIREMENTS.md` despite passed Phase 58 verification and
-summary frontmatter. It should not change fixture artifacts, Rust evidence,
-public parity command behavior, or public status wording except where an audit
-rerun report is generated.
+v1.15 Phase 61 is complete. It reconciled the requirements ledger after the
+v1.15 audit found ARCFIX-01, ARCFIX-02, and ARCFIX-03 still pending in
+`.planning/REQUIREMENTS.md` despite passed Phase 58 verification and summary
+frontmatter. It changed planning metadata only; fixture artifacts, Rust
+evidence, public parity command behavior, public status wording, and public port
+docs remain unchanged.
 
 v1.15 Phase 60 is complete and verified. Maintainers can run
 `bazel run //packages/parity:prusaslicer_arc_fitting_parity`, inspect the
@@ -524,13 +524,15 @@ high-risk generated-output or network/cloud surfaces.
   the narrow PrusaSlicer arc-fitting slice, keeping broad generated-output,
   byte-for-byte, printability, runtime, GUI, non-Prusa fork, release, upstream
   import, and sync behavior deferred — Phase 60
+- ✓ v1.15 reconciles the ARCFIX requirements ledger against passed Phase 58
+  verification and summary metadata, closing the audit-ledger gap without
+  product-surface changes — Phase 61
 
 ### Active
 
-v1.15 Phase 61 requirements-ledger reconciliation is pending before milestone
-archive. The live arc-fitting implementation and public evidence chain are
-verified; the remaining work is planning metadata cleanup for ARCFIX audit
-readiness.
+No active v1.15 requirements remain after Phase 61. The live arc-fitting
+implementation and public evidence chain are verified, and the ARCFIX planning
+ledger is reconciled for milestone archive readiness.
 
 ### Out of Scope
 
@@ -641,4 +643,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-25 after planning v1.15 Phase 61 gap closure*
+*Last updated: 2026-06-25 after completing v1.15 Phase 61 gap closure*

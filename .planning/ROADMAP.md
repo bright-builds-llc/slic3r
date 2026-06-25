@@ -86,7 +86,7 @@ against the already-passed Phase 58 verification and summary frontmatter.
 - [x] **Phase 60: Executable Arc-Fitting Evidence** - Publish public (completed 2026-06-24)
   arc-fitting parity evidence, mutation guards, exact status, and docs for the
   narrow evidence slice.
-- [ ] **Phase 61: Requirements Ledger Reconciliation** - Reconcile the v1.15
+- [x] **Phase 61: Requirements Ledger Reconciliation** - Reconcile the v1.15 (completed 2026-06-25)
   requirements ledger for the verified Phase 58 ARCFIX requirements before
   milestone archive.
 
@@ -221,9 +221,9 @@ traceability rows in `.planning/REQUIREMENTS.md`.
   3. The milestone audit can be rerun without requirements-ledger gaps while
      preserving the existing v1.15 evidence, status, and non-overclaiming
      boundaries.
-**Plans**: 1 plan pending
+**Plans**: 1 plan complete
 Plans:
-- [ ] 61-01-PLAN.md — Reconcile v1.15 ARCFIX requirements ledger metadata and
+- [x] 61-01-PLAN.md — Reconcile v1.15 ARCFIX requirements ledger metadata and
       rerun audit-readiness checks.
 
 ## Coverage
@@ -258,7 +258,7 @@ Phases execute in numeric order: 57 -> 58 -> 59 -> 60 -> 61
 | 58. Arc-Fitting Fixture Corpus | 2/2 | Complete    | 2026-06-23 |
 | 59. Rust Arc-Fitting Evidence Boundary | 2/2 | Complete    | 2026-06-24 |
 | 60. Executable Arc-Fitting Evidence | 6/6 | Complete    | 2026-06-24 |
-| 61. Requirements Ledger Reconciliation | 0/1 | Pending | |
+| 61. Requirements Ledger Reconciliation | 1/1 | Complete    | 2026-06-25 |
 
 ## Planning Notes
 
