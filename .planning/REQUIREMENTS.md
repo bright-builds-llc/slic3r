@@ -31,17 +31,17 @@ roadmap phase and must be verified before milestone archive.
 
 ### Arc-Fitting Fixture Corpus
 
-- [ ] **ARCFIX-01**: Maintainer can inspect a small reviewed Prusa arc-fitting
+- [x] **ARCFIX-01**: Maintainer can inspect a small reviewed Prusa arc-fitting
   fixture corpus with source-pinned provenance, update rules, fixture identity,
   expected arc summary paths, and explicit exclusion of generator, runtime,
   network, sync, host-upload, post-processing, thumbnail, printability, and GUI
   behavior.
-- [ ] **ARCFIX-02**: Maintainer can inspect checked-in arc-fitting expected
+- [x] **ARCFIX-02**: Maintainer can inspect checked-in arc-fitting expected
   summaries that cover only the Phase 57 approved fields, such as G2/G3 command
   observations, arc direction, center-offset evidence, coordinate bounds,
   extrusion or feedrate observations, source identity, fixture identity, and
   evidence-boundary text.
-- [ ] **ARCFIX-03**: Maintainer can run fail-closed fixture verification that
+- [x] **ARCFIX-03**: Maintainer can run fail-closed fixture verification that
   rejects missing rows, duplicate rows, out-of-order rows, unsupported arc
   fields, unsupported claim text, wrong source refs, wrong fixture identities,
   and stale documentation references.
@@ -135,9 +135,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ARCSCOPE-01 | Phase 57 | Complete |
 | ARCSCOPE-02 | Phase 57 | Complete |
 | ARCSCOPE-03 | Phase 57 | Complete |
-| ARCFIX-01 | Phase 61 | Pending |
-| ARCFIX-02 | Phase 61 | Pending |
-| ARCFIX-03 | Phase 61 | Pending |
+| ARCFIX-01 | Phase 61 | Complete |
+| ARCFIX-02 | Phase 61 | Complete |
+| ARCFIX-03 | Phase 61 | Complete |
 | ARCRUST-01 | Phase 59 | Complete |
 | ARCRUST-02 | Phase 59 | Complete |
 | ARCRUST-03 | Phase 59 | Complete |
@@ -154,4 +154,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 ---
 
 *Requirements defined: 2026-06-23*
-*Last updated: 2026-06-25 after audit gap-closure phase planning*
+*Last updated: 2026-06-25 after Phase 61 ledger reconciliation*
