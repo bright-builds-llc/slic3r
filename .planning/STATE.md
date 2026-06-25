@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.15
 milestone_name: milestone
-status: complete
-stopped_at: Phase 61 requirements ledger reconciliation complete; v1.15 ready for milestone archive
-last_updated: "2026-06-25T04:46:30Z"
+status: completed
+stopped_at: v1.15 milestone archived; ready to start next milestone
+last_updated: "2026-06-25T20:27:47Z"
 last_activity: 2026-06-25
 progress:
   total_phases: 5
@@ -25,15 +25,16 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** v1.15 milestone archive readiness - Phase 61 complete
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 61 (Requirements Ledger Reconciliation) - COMPLETE
-Plan: 1 of 1
-Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
-Status: All v1.15 phase work is complete; ARCFIX requirements ledger drift is
-resolved against passed Phase 58 verification and summary frontmatter.
+Phase: none active
+Plan: none active
+Milestone: none active
+Status: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice is archived under
+`.planning/milestones/`; fresh requirements are needed before the next
+milestone begins.
 Last activity: 2026-06-25
 
 Progress: [██████████] 100%
@@ -65,12 +66,17 @@ Progress: [██████████] 100%
 - 60-04 completed in 7 min with 2 tasks and 5 implementation files changed.
 - 60-05 completed in 7 min with 2 tasks and 4 implementation files changed.
 - 60-06 completed in 7 min with 2 tasks and 4 documentation files changed.
-- v1.15 milestone audit on 2026-06-25 found live wiring clean but blocked
-  archive readiness on ARCFIX requirements-ledger drift.
+- v1.15 milestone audit on 2026-06-25 found live wiring clean and no blocking
+  gaps after Phase 61 reconciled ARCFIX requirements-ledger drift.
+
 - Phase 61 was added to reconcile the requirements ledger before milestone
   archive.
+
 - 61-01 completed in 5 min with 3 metadata tasks and no product-surface files
   changed.
+
+- v1.15 was archived on 2026-06-25 with 5 phases, 14 plans, 34 plan tasks,
+  archive files, audit, and phase history moved under `.planning/milestones/`.
 
 ## Accumulated Context
 
@@ -109,6 +115,7 @@ Recent decisions affecting v1.15:
 - Map ARCFIX-01..03 to Phase 61 in requirements traceability so the audit gap
   has an explicit metadata closure phase before milestone archive while Phase
   58 remains the behavioral evidence source.
+
 - Complete Phase 61 by checking ARCFIX-01..03 and marking their traceability
   rows Complete after confirming passed Phase 58 verification and summary
   frontmatter.

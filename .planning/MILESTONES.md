@@ -1,5 +1,50 @@
 # Project Milestones: Slic3r Rust Port
 
+## v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice (Shipped: 2026-06-25)
+
+**Delivered:** Proved a narrow PrusaSlicer arc-fitting checked-in summary
+evidence slice with reviewed scope, source-pinned fixtures, pure Rust parsing,
+public parity/status/docs, fail-closed mutation guards, and reconciled
+requirements metadata.
+
+**Phases completed:** 57-61 (14 plans total, 34 plan tasks)
+
+**Key accomplishments:**
+
+- Reviewed `prusaslicer.arc-fitting` scope package with closed field contract,
+  source identity, deferred scope, and planned downstream evidence path.
+- Source-pinned Prusa arc-fitting fixture namespace with ordered
+  `expected-arc-summary.tsv`, provenance, Bazel ownership, and fail-closed
+  fixture verifier mutation coverage.
+- Pure `slic3r_flavors::prusa_arc_fitting` Rust parser/readiness boundary with
+  Cargo and Bazel coverage for valid and malformed checked-in summaries.
+- Public `//packages/parity:prusaslicer_arc_fitting_parity` evidence command
+  and mutation suite that fail closed on field, source, fixture, and
+  deferred-claim drift.
+- Exact `fork.prusaslicer.arc-fitting` status/docs publication that preserves
+  broad `generated-outputs` as `in progress` and keeps
+  `fork.prusaslicer.gcode-output` separate.
+- ARCFIX requirements ledger reconciliation against passed Phase 58
+  verification and summary metadata, closing the audit-ledger gap without
+  product-surface changes.
+
+**Stats:**
+
+- 5 phases, 14 plans, 34 plan tasks
+- Requirements: 12/12 complete
+- Milestone audit: tech_debt (stale deferred note only; no blocking gaps)
+- Work range: 87 files changed, 13837 insertions, 104 deletions
+- Phase archive: [v1.15-phases/](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.15-phases/)
+- Milestone archive: [v1.15-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.15-ROADMAP.md)
+- Requirements archive: [v1.15-REQUIREMENTS.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.15-REQUIREMENTS.md)
+- Audit: [v1.15-MILESTONE-AUDIT.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.15-MILESTONE-AUDIT.md)
+
+**What's next:** start the next milestone with fresh requirements before new
+phase work, likely choosing another deliberately narrow PrusaSlicer evidence
+slice if the current project direction remains valid.
+
+---
+
 ## v1.14 PrusaSlicer G-code Semantic Evidence Foundation (Shipped: 2026-06-22)
 
 **Delivered:** Deepened the narrow PrusaSlicer G-code output evidence slice

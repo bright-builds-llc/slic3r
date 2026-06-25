@@ -2,6 +2,85 @@
 
 *A living document updated after each milestone. Lessons feed forward into future planning.*
 
+## Milestone: v1.15 — PrusaSlicer Arc-Fitting G-code Evidence Slice
+
+**Shipped:** 2026-06-25\
+**Phases:** 5 | **Plans:** 14 | **Sessions:** yolo phase execution plus
+milestone audit, integration check, requirements-ledger gap closure, archive
+closeout, phase archival, retrospective, and requirements reset
+
+### What Was Built
+
+- Reviewed `prusaslicer.arc-fitting` scope contract with accepted source
+  identity, inventory/category traceability, approved fields, planned evidence
+  path, deferred scope, and fail-closed verifier mutation coverage
+- Source-pinned arc-fitting fixture namespace with G2/G3 observation fixture,
+  provenance, ordered `expected-arc-summary.tsv`, Bazel ownership, and
+  fail-closed fixture verification
+- Pure Rust `slic3r_flavors::prusa_arc_fitting` parser/readiness boundary over
+  caller-supplied checked-in TSV text, with Cargo/Bazel coverage for valid and
+  malformed summaries
+- Public `//packages/parity:prusaslicer_arc_fitting_parity` command and
+  mutation suite that validates checked-in arc summary evidence through Rust
+  while preserving the existing Prusa G-code output command
+- Exact narrow `fork.prusaslicer.arc-fitting` status row, package docs, scope
+  docs, fixture docs, and port docs that keep broad `generated-outputs` in
+  progress and keep `fork.prusaslicer.gcode-output` separate
+- Requirements-ledger reconciliation phase that aligned ARCFIX checkboxes and
+  traceability with passed Phase 58 verification and summary metadata
+
+### What Worked
+
+- The v1.12-v1.14 evidence ladder transferred cleanly to a feature-specific
+  arc-fitting slice without broad generated-output promotion.
+- Keeping scope, fixture, Rust boundary, public command/status/docs, and ledger
+  reconciliation in separate phases made each handoff auditable.
+- Exact status-row and overclaim guards across fixture and scope verifiers made
+  stale or widened publication wording fail closed.
+- The final audit found no implementation, integration, flow, or requirements
+  coverage blockers after Phase 61 closed the ledger drift.
+
+### What Was Inefficient
+
+- The first audit caught stale ARCFIX requirements metadata after all
+  behavioral evidence had already passed, requiring a metadata-only Phase 61.
+- Closeout still required manual ROADMAP collapse, PROJECT evolution,
+  MILESTONES cleanup, STATE normalization, retrospective writing, phase
+  archival, and requirements removal after the archive helper ran.
+- A stale deferred-items note survived after the underlying ShellCheck warning
+  no longer reproduced, so deferred notes need explicit closeout review.
+
+### Patterns Established
+
+- Feature-specific generated-output evidence can publish a narrow fork status
+  row while broad `generated-outputs` remains in progress.
+- Public parity commands should validate checked-in expected artifacts through
+  the same Rust boundary used by tests.
+- Requirements-ledger gap closure can be metadata-only when prior phase
+  verification and summary frontmatter already prove the behavioral work.
+
+### Key Lessons
+
+1. Milestone audits should run after every requirements-ledger edit, not only
+   after product-surface work, because stale metadata can block archive
+   readiness.
+1. Deferred-items files need closeout review; stale debt notes can persist even
+   after the underlying warning disappears.
+1. Narrow generated-output slices remain easier to verify when scope,
+   fixture, Rust parser, public command, status/docs, and requirements metadata
+   stay as separate ownership boundaries.
+
+### Cost Observations
+
+- Model mix: balanced GSD profile with Codex-led audit and archive closeout
+- Sessions: yolo discuss/plan/execute phases plus milestone audit,
+  integration checker, Phase 61 gap closure, archive closeout, phase archival,
+  retrospective, and requirements reset
+- Notable: implementation verification was clean; the extra cost came from
+  requirements-ledger reconciliation and closeout hygiene
+
+______________________________________________________________________
+
 ## Milestone: v1.14 — PrusaSlicer G-code Semantic Evidence Foundation
 
 **Shipped:** 2026-06-22\
@@ -928,6 +1007,7 @@ ______________________________________________________________________
 
 | Milestone | Sessions | Phases | Key Change |
 |-----------|----------|--------|------------|
+| v1.15 | yolo plus audit/integration/gap closure/closeout | 5 | Published the narrow Prusa arc-fitting evidence slice while preserving broad generated-output deferrals |
 | v1.14 | yolo plus audit/integration/closeout | 4 | Deepened the Prusa G-code evidence path from structural summaries to semantic summaries without broad generated-output claims |
 | v1.13 | yolo plus audit/integration/closeout | 4 | Strengthened the Prusa G-code evidence path from marker-level summaries to structural summaries without broad generated-output claims |
 | v1.12 | yolo plus audit/integration/closeout | 4 | Established the first executable Prusa G-code output evidence slice while keeping it summary-only and narrow |
@@ -944,6 +1024,7 @@ ______________________________________________________________________
 
 | Milestone | Tests | Coverage | Zero-Dep Additions |
 |-----------|-------|----------|-------------------|
+| v1.15 | Verified arc-fitting scope, fixture corpus, Rust parser/readiness, public parity command, mutation guards, exact status row, docs, requirements-ledger reconciliation, and milestone audit | milestone-scoped | kept broad generated-output, byte-for-byte G-code, full ArcWelder equivalence, printability, runtime behavior, GUI behavior, non-Prusa forks, upstream imports, release, and sync out of scope |
 | v1.14 | Verified semantic scope, fixture sidecar, Rust parser/readiness, public parity command, semantic mutation guards, exact status row, docs, and milestone audit | milestone-scoped | kept byte-for-byte G-code, printability, runtime behavior, GUI behavior, non-Prusa forks, upstream imports, release, and sync out of scope |
 | v1.13 | Verified structural scope, fixture sidecar, Rust parser/readiness, public parity command, mutation guard, exact status row, docs, and milestone audit | milestone-scoped | kept byte-for-byte G-code, geometry/toolpath, printability, runtime, GUI, non-Prusa forks, upstream imports, release, and sync out of scope |
 | v1.12 | Verified G-code scope, fixture, Rust summary parser, public parity command, mutation guard, exact status row, docs, and milestone audit | milestone-scoped | kept broad generated-output, byte-for-byte G-code, geometry/toolpath, runtime/printer, GUI, release, network, and sync out of scope |
@@ -966,3 +1047,5 @@ ______________________________________________________________________
 1. Broader fork parity should advance one executable evidence slice at a time,
    with exact status rows only after rerunnable commands and failure guards
    pass.
+1. Deferred-items notes need explicit closeout review during milestone archive,
+   because stale planning debt can outlive the underlying warning.
