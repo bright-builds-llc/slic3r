@@ -19,11 +19,11 @@ roadmap phase and must be verified before milestone archive.
   row, category-map row, source anchors, fixture namespace, expected wall-seam
   summary artifact, Rust boundary, public evidence command, planned status
   wording, docs touched, security note, deferred scope, and reviewer signoff.
-- [ ] **SEAMSCOPE-02**: Maintainer can run a fail-closed wall-seam scope
+- [x] **SEAMSCOPE-02**: Maintainer can run a fail-closed wall-seam scope
   verifier that rejects unsupported seam fields, duplicate or missing field
   rows, traceability drift, unsupported generated-output claims, unsupported
   runtime or printability claims, and missing deferred-scope language.
-- [ ] **SEAMSCOPE-03**: Maintainer can confirm the broad `generated-outputs`
+- [x] **SEAMSCOPE-03**: Maintainer can confirm the broad `generated-outputs`
   status row remains `in progress`, the existing
   `fork.prusaslicer.gcode-output` and `fork.prusaslicer.arc-fitting` status
   rows are not widened, and the planned `fork.prusaslicer.wall-seam` status row
@@ -138,8 +138,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | SEAMSCOPE-01 | Phase 62 | Complete |
-| SEAMSCOPE-02 | Phase 62 | Pending |
-| SEAMSCOPE-03 | Phase 62 | Pending |
+| SEAMSCOPE-02 | Phase 62 | Complete |
+| SEAMSCOPE-03 | Phase 62 | Complete |
 | SEAMFIX-01 | Phase 63 | Pending |
 | SEAMFIX-02 | Phase 63 | Pending |
 | SEAMFIX-03 | Phase 63 | Pending |

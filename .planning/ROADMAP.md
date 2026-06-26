@@ -78,7 +78,7 @@ behavior deferred.
 
 - Decimal phases (62.1, 62.2): Urgent insertions after planning
 
-- [ ] **Phase 62: Wall-Seam Scope Contract** - Close the reviewed
+- [x] **Phase 62: Wall-Seam Scope Contract** - Close the reviewed (completed 2026-06-26)
   `prusaslicer.wall-seam` scope and fail-closed verifier before any evidence
   artifacts are published.
 
@@ -127,7 +127,7 @@ Plans:
   package boundary.
 - [x] 62-02-PLAN.md - Implement the fail-closed verifier for the scope
   contract.
-- [ ] 62-03-PLAN.md - Add mutation coverage and final Bazel verification
+- [x] 62-03-PLAN.md - Add mutation coverage and final Bazel verification
   wiring.
 
 ### Phase 63: Wall-Seam Fixture Corpus
@@ -260,7 +260,7 @@ Phases execute in numeric order: 62 -> 63 -> 64 -> 65
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 62. Wall-Seam Scope Contract | 2/3 | In Progress|  |
+| 62. Wall-Seam Scope Contract | 3/3 | Complete   | 2026-06-26 |
 | 63. Wall-Seam Fixture Corpus | 0/2 | Pending | - |
 | 64. Rust Wall-Seam Evidence Boundary | 0/2 | Pending | - |
 | 65. Executable Wall-Seam Evidence | 0/6 | Pending | - |
