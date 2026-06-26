@@ -1,15 +1,15 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.16
-milestone_name: PrusaSlicer Wall-Seam G-code Evidence Slice
-status: active
-stopped_at: v1.16 roadmap created; ready to plan Phase 62
-last_updated: "2026-06-26T22:50:34Z"
-last_activity: 2026-06-26
+milestone_name: milestone
+status: planning
+stopped_at: Phase 62 context gathered
+last_updated: "2026-06-26T23:06:50.811Z"
+last_activity: 2026-06-26 — Milestone v1.16 roadmap created
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 13
+  total_plans: 0
   completed_plans: 0
   percent: 0
 ---
@@ -103,15 +103,19 @@ Recent decisions affecting v1.16:
   a medium-complexity candidate that can reuse the v1.12-v1.15 G-code evidence
   ladder without jumping to support generation, broad generated-output parity,
   or non-Prusa fork work.
+
 - Keep broad `generated-outputs`, byte-for-byte G-code parity, seam geometry
   equivalence, printability, printer-runtime behavior, GUI behavior, support
   generation, STEP import, non-Prusa fork behavior, release behavior, upstream
   imports, and sync automation deferred.
+
 - Preserve the four-step evidence ladder for v1.16: scope contract, fixture
   corpus, Rust boundary, executable evidence/status/docs.
+
 - Plan wall-seam evidence as a separate `fork.prusaslicer.wall-seam` status row
   so the existing semantic `fork.prusaslicer.gcode-output` row and arc-fitting
   row are not widened.
+
 - Map SEAMSCOPE-01..03 to Phase 62, SEAMFIX-01..03 to Phase 63,
   SEAMRUST-01..03 to Phase 64, and SEAMEV-01..03 to Phase 65.
 
@@ -288,6 +292,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-26T22:50:34Z
-Stopped at: v1.16 roadmap created; Phase 62 ready to plan
-Resume file: None
+Last session: 2026-06-26T23:06:50.808Z
+Stopped at: Phase 62 context gathered
+Resume file: .planning/phases/62-wall-seam-scope-contract/62-CONTEXT.md
