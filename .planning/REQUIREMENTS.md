@@ -14,7 +14,7 @@ roadmap phase and must be verified before milestone archive.
 
 ### Wall-Seam Scope Contract
 
-- [ ] **SEAMSCOPE-01**: Maintainer can inspect a reviewed Prusa wall-seam
+- [x] **SEAMSCOPE-01**: Maintainer can inspect a reviewed Prusa wall-seam
   evidence scope contract that names the accepted source identity, inventory
   row, category-map row, source anchors, fixture namespace, expected wall-seam
   summary artifact, Rust boundary, public evidence command, planned status
@@ -137,7 +137,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SEAMSCOPE-01 | Phase 62 | Pending |
+| SEAMSCOPE-01 | Phase 62 | Complete |
 | SEAMSCOPE-02 | Phase 62 | Pending |
 | SEAMSCOPE-03 | Phase 62 | Pending |
 | SEAMFIX-01 | Phase 63 | Pending |
