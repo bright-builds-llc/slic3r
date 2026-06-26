@@ -24,11 +24,25 @@ sh_binary(
     ],
 )
 
+sh_test(
+    name = "verify_prusa_wall_seam_scope_test",
+    srcs = ["verify_prusa_wall_seam_scope_test.sh"],
+    data = [
+        "README.md",
+        "wall-seam-scope.md",
+        "verify_prusa_wall_seam_scope.sh",
+        "//packages/fork-inventories:prusaslicer.tsv",
+        "//packages/fork-inventories:category-map.tsv",
+        "//packages/parity:status.tsv",
+    ],
+)
+
 filegroup(
     name = "package_boundary",
     srcs = [
         "README.md",
         "wall-seam-scope.md",
         "verify_prusa_wall_seam_scope.sh",
+        "verify_prusa_wall_seam_scope_test.sh",
     ],
 )
