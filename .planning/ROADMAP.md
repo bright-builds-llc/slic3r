@@ -125,7 +125,7 @@ Plans:
 
 - [x] 62-01-PLAN.md - Create the package-local wall-seam scope contract and
   package boundary.
-- [ ] 62-02-PLAN.md - Implement the fail-closed verifier for the scope
+- [x] 62-02-PLAN.md - Implement the fail-closed verifier for the scope
   contract.
 - [ ] 62-03-PLAN.md - Add mutation coverage and final Bazel verification
   wiring.
@@ -260,7 +260,7 @@ Phases execute in numeric order: 62 -> 63 -> 64 -> 65
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 62. Wall-Seam Scope Contract | 1/3 | In Progress|  |
+| 62. Wall-Seam Scope Contract | 2/3 | In Progress|  |
 | 63. Wall-Seam Fixture Corpus | 0/2 | Pending | - |
 | 64. Rust Wall-Seam Evidence Boundary | 0/2 | Pending | - |
 | 65. Executable Wall-Seam Evidence | 0/6 | Pending | - |
