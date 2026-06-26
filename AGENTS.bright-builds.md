@@ -14,7 +14,7 @@ Record recurring repo-specific workflow facts in `AGENTS.md` under `## Repo-Loca
 
 - Standards repository: `https://github.com/bright-builds-llc/bright-builds-rules`
 - Version pin: `main`
-- Exact commit: `05f8d7a6c9c2e157ec4f922a05273e72dab97676`
+- Exact commit: `7dbfb5cfe6f197f035ebc6d253505b7f865e3c86`
 - Canonical entrypoint: `https://github.com/bright-builds-llc/bright-builds-rules/blob/main/standards/index.md`
 - Audit manifest path: `bright-builds-rules.audit.md`
 
@@ -25,28 +25,32 @@ Record recurring repo-specific workflow facts in `AGENTS.md` under `## Repo-Loca
 1. Read `AGENTS.md`, especially any `## Repo-Local Guidance` section and any repo-specific instructions outside the managed Bright Builds Rules block.
 1. Read `AGENTS.bright-builds.md`.
 1. Read `standards-overrides.md` when it exists.
-1. Read the pinned canonical standards entrypoint and any canonical pages relevant to the task before plan, review, implementation, or audit work.
+1. Read the local managed standards entrypoint and any standards pages relevant to the task before plan, review, implementation, or audit work.
 1. If that reading has not happened yet, stop and load those sources before continuing.
-1. In plan, review, and audit outputs, briefly acknowledge which local guidance, sidecar, overrides, or canonical standards pages materially informed the answer.
+1. In plan, review, and audit outputs, briefly acknowledge which local guidance, sidecar, overrides, or standards pages materially informed the answer.
 
 ## Routing hints
 
 - Use the local `AGENTS.md`, especially `## Repo-Local Guidance`, for repo-specific commands, prerequisites, generated-file ownership, CI-only suites, and recurring workflow facts.
 - Use this file, `AGENTS.bright-builds.md`, for the Bright Builds Rules default workflow and high-signal cross-cutting rules that apply in most tasks.
 - Use `standards-overrides.md` for deliberate repo-specific exceptions to the Bright Builds Rules defaults.
-- Start with the pinned canonical entrypoint `standards/index.md` when you need to choose the right Bright Builds Rules standards page.
-- Use the canonical page `standards/core/architecture.md` for business-logic structure, domain modeling, and functional-core versus imperative-shell decisions.
-- Use the canonical page `standards/core/code-shape.md` for control flow, naming, function/file size, and readability rules.
-- Use the canonical page `standards/core/verification.md` for sync, bootstrap, and pre-commit verification rules.
-- Use the canonical page `standards/core/testing.md` for unit-test expectations.
-- Use the matching canonical page under `standards/languages/` for Rust or TypeScript/JavaScript-specific rules.
+- Start with the local managed entrypoint `standards/index.md` when you need to choose the right Bright Builds Rules standards page.
+- Use the managed standards page `standards/core/architecture.md` for business-logic structure, domain modeling, and functional-core versus imperative-shell decisions.
+- Use the managed standards page `standards/core/code-shape.md` for control flow, naming, function/file size, and readability rules.
+- Use the managed standards page `standards/core/frontend-ui.md` for frontend visual defaults, theme defaults, dark-mode decisions, and public open-source source/FOSS/maintainer disclosure.
+- Use the managed standards page `standards/core/verification.md` for sync, bootstrap, and pre-commit verification rules.
+- Use the managed standards page `standards/core/testing.md` for unit-test expectations.
+- Use the matching managed standards page under `standards/languages/` for Rust or TypeScript/JavaScript-specific rules.
 
 ## Highest-signal rules
 
 - Prefer functional core / imperative shell for business logic.
 - Prefer early returns over nesting.
 - Prefix internal nullable or optional names with `maybe`, including functions, bindings, and internal fields, and use `MaybeX` aliases only when they materially clarify a repeated nullable surface.
-- In user-facing, app-like websites and apps, expose version, commit, and build provenance in a normal visible product surface, show `Unavailable` for missing fields, and provide a copyable summary with the exact commit when available.
+- Frontend experiences should default to dark mode unless a documented brand, accessibility, embedding, or product constraint requires a different default.
+- New TypeScript/JavaScript web frontends should default to SolidJS unless a documented constraint makes another framework the better fit.
+- Public open-source web apps and sites must expose source repository access in stable product chrome, use truthful free/open-source copy only when the license supports it, and for Peter-owned repos mention Peter Ryszkiewicz with an OpenLinks link and logo when layout permits.
+- In user-facing, app-like websites and apps, expose version, short commit, and build provenance in normal visible product chrome, show `Unavailable` for missing fields, link public GitHub commits and CI run-backed build times when URLs are available, open external provenance links in new tabs safely, and treat copyable summaries as optional support affordances.
 - Treat functions over roughly 161 lines as refactor triggers; use `floor(100 * phi)` as the mnemonic, not a hard cap.
 - Do not hide substantial foreign-language logic inside strings; keep orchestration thin, move scripts, queries, and similar artifacts into repo-owned or language-aware files, and make checked-in scripts rerunnable when sensible with breadcrumb-heavy logs and summaries in a repo-defined gitignored location.
 - Treat files over roughly 628 lines as refactor triggers; use `floor(100 * tau)` as the mnemonic, not a hard cap.
@@ -60,7 +64,6 @@ Record recurring repo-specific workflow facts in `AGENTS.md` under `## Repo-Loca
 - Make illegal states unrepresentable when the language makes that practical.
 - Unit test pure code and business logic.
 - Structure unit tests as Arrange, Act, Assert and keep each test focused on one concern.
-
 
 ## Local overrides and exceptions
 
