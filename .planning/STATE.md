@@ -1,47 +1,60 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.15
-milestone_name: milestone
-status: completed
-stopped_at: v1.15 milestone archived; ready to start next milestone
-last_updated: "2026-06-25T20:27:47Z"
-last_activity: 2026-06-25
+milestone: v1.16
+milestone_name: PrusaSlicer Wall-Seam G-code Evidence Slice
+status: planning
+stopped_at: v1.16 milestone started; defining requirements and roadmap
+last_updated: "2026-06-26T22:45:25Z"
+last_activity: 2026-06-26
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 14
-  completed_plans: 14
-  percent: 100
+  total_phases: 4
+  completed_phases: 0
+  total_plans: 13
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: `.planning/PROJECT.md` (updated 2026-06-25)
+See: `.planning/PROJECT.md` (updated 2026-06-26)
 
 **Core value:** Deliver a trustworthy Rust successor to Slic3r that matches the
 legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Planning next milestone
+**Current focus:** Defining v1.16 PrusaSlicer wall-seam evidence requirements
 
 ## Current Position
 
-Phase: none active
-Plan: none active
-Milestone: none active
-Status: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice is archived under
-`.planning/milestones/`; fresh requirements are needed before the next
-milestone begins.
-Last activity: 2026-06-25
+Phase: Not started (defining requirements)
+Plan: —
+Milestone: v1.16 PrusaSlicer Wall-Seam G-code Evidence Slice
+Status: Defining the narrow PrusaSlicer wall-seam G-code evidence slice and
+roadmap before Phase 62 begins.
+Last activity: 2026-06-26 — Milestone v1.16 started
 
-Progress: [██████████] 100%
+Progress: [----------] 0%
 
 ## Performance Metrics
 
-**Latest milestone baseline:**
+**Current milestone baseline:**
+
+- v1.16 should map 12 requirements across 4 planned phases: scope contract,
+  fixture corpus, Rust wall-seam evidence boundary, and executable wall-seam
+  evidence.
+
+- Granularity is `fine`; the natural four-phase evidence ladder is preserved
+  because it matches the v1.12-v1.15 Prusa generated-output delivery boundary.
+
+- v1.16 keeps broad `generated-outputs`, byte-for-byte G-code parity,
+  wall-seam geometry equivalence, printability, printer-runtime behavior, GUI
+  behavior, non-Prusa fork behavior, release behavior, upstream import, and sync
+  behavior deferred.
+
+**Latest shipped milestone baseline:**
 
 - v1.15 maps 12 requirements across 5 planned phases: scope contract, fixture
   corpus, Rust arc-fitting evidence boundary, executable arc-fitting evidence,
@@ -83,6 +96,23 @@ Progress: [██████████] 100%
 ### Decisions
 
 Decisions are logged in `PROJECT.md` Key Decisions table.
+
+Recent decisions affecting v1.16:
+
+- Continue phase numbering from Phase 62 because v1.15 ended at Phase 61.
+- Use wall seam as the next Prusa generated-output feature slice because it is
+  a medium-complexity candidate that can reuse the v1.12-v1.15 G-code evidence
+  ladder without jumping to support generation, broad generated-output parity,
+  or non-Prusa fork work.
+- Keep broad `generated-outputs`, byte-for-byte G-code parity, seam geometry
+  equivalence, printability, printer-runtime behavior, GUI behavior, support
+  generation, STEP import, non-Prusa fork behavior, release behavior, upstream
+  imports, and sync automation deferred.
+- Preserve the four-step evidence ladder for v1.16: scope contract, fixture
+  corpus, Rust boundary, executable evidence/status/docs.
+- Plan wall-seam evidence as a separate `fork.prusaslicer.wall-seam` status row
+  so the existing semantic `fork.prusaslicer.gcode-output` row and arc-fitting
+  row are not widened.
 
 Recent decisions affecting v1.15:
 
@@ -257,6 +287,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-25T04:46:30Z
-Stopped at: Phase 61 requirements ledger reconciliation complete; v1.15 ready for milestone archive
+Last session: 2026-06-26T22:45:25Z
+Stopped at: v1.16 milestone started; requirements and roadmap pending
 Resume file: None

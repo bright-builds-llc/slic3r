@@ -10,10 +10,24 @@ The legacy codebase remains in the repository as the reference implementation an
 
 Deliver a trustworthy Rust successor to Slic3r that matches the legacy behavior and interfaces closely enough that the old implementation can eventually be retired without breaking the contracts users and integrators depend on.
 
-## Current Milestone
+## Current Milestone: v1.16 PrusaSlicer Wall-Seam G-code Evidence Slice
 
-No active milestone is defined. Start the next milestone with
-`/gsd-new-milestone` so fresh requirements are created before new phase work.
+**Goal:** Prove one narrow, source-pinned PrusaSlicer wall-seam G-code
+evidence slice through a reviewed scope contract, source-pinned fixture
+evidence, pure Rust parsing/readiness metadata, public parity/status/docs, and
+fail-closed mutation guards while keeping broad generated-output, byte parity,
+printability, runtime, GUI, non-Prusa fork, release, upstream import, and sync
+claims deferred.
+
+**Target features:**
+- Reviewed `prusaslicer.wall-seam` scope contract tied to the existing Prusa
+  fork inventory and generated-output deferral vocabulary.
+- Source-pinned wall-seam fixture corpus and checked-in expected summary
+  artifact constrained to approved seam observation fields.
+- Pure typed Rust wall-seam evidence boundary and readiness metadata over
+  caller-supplied checked-in summaries.
+- Public wall-seam parity command, exact `fork.prusaslicer.wall-seam` status
+  row, non-overclaiming docs, and fail-closed mutation guards.
 
 ## Last Shipped Milestone: v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice
 
@@ -28,6 +42,19 @@ printability, runtime, GUI, non-Prusa fork, release, upstream import, and sync
 claims deferred.
 
 ## Current State
+
+v1.16 is active. It intentionally follows the v1.12-v1.15 Prusa generated-output
+evidence ladder for the next medium-complexity feature slice:
+`prusaslicer.wall-seam`.
+
+The milestone starts from the source-pinned
+`prusaslicer.wall-seam` fork-inventory row and the existing Prusa G-code
+semantic plus arc-fitting evidence chain. It must keep broad
+`generated-outputs` in progress, preserve the existing
+`fork.prusaslicer.gcode-output` and `fork.prusaslicer.arc-fitting` meanings,
+and avoid claiming byte-for-byte G-code parity, seam geometry equivalence,
+printability, printer-runtime behavior, GUI behavior, non-Prusa fork behavior,
+release behavior, upstream imports, or sync automation.
 
 v1.15 is archived. It reused the v1.12-v1.14 G-code evidence ladder for the
 `prusaslicer.arc-fitting` feature slice, published the exact narrow
@@ -344,14 +371,17 @@ high-risk generated-output or network/cloud surfaces.
 
 ## Next Milestone Goals
 
-- Define fresh requirements before any new phase work; `.planning/REQUIREMENTS.md`
-  is removed during milestone closeout and recreated by `/gsd-new-milestone`.
-- Choose the next narrow PrusaSlicer evidence slice deliberately instead of
-  widening `generated-outputs` from one semantic G-code and one arc-fitting
-  path.
-- Keep support generation, wall seam behavior, STEP import, full 3MF
-  import/export, printer runtime behavior, and other generated-output feature
-  slices as future Prusa candidates until scoped by later requirements.
+- Execute v1.16 as a narrow wall-seam evidence slice, not as broad
+  generated-output parity or a full seam-algorithm port.
+- Reuse the established evidence ladder: reviewed scope contract,
+  source-pinned fixture corpus, pure Rust boundary, and public executable
+  evidence/status/docs only after fail-closed guards pass.
+- Preserve the existing semantic G-code and arc-fitting public evidence rows
+  as separate verified slices while adding wall-seam evidence under its own
+  planned status row.
+- Keep support generation, STEP import, full 3MF import/export, printer runtime
+  behavior, GUI behavior, and other generated-output feature slices as future
+  Prusa candidates until scoped by later requirements.
 - Limit active downstream-fork porting consideration to PrusaSlicer for now;
   Bambu Studio, OrcaSlicer, cross-flavor build automation, and nightly vendor
   sync remain paused until an explicit new planning decision reopens them.
@@ -516,9 +546,18 @@ high-risk generated-output or network/cloud surfaces.
 
 ### Active
 
-No active requirements are defined. The next milestone starts with
-`/gsd-new-milestone`, which creates a fresh `.planning/REQUIREMENTS.md` before
-new phase work.
+v1.16 active requirements are defined in `.planning/REQUIREMENTS.md` and are
+limited to the PrusaSlicer wall-seam G-code evidence slice:
+
+- SEAMSCOPE-01..03: reviewed wall-seam scope contract, fail-closed scope
+  verifier, and generated-output status restraint.
+- SEAMFIX-01..03: source-pinned wall-seam fixture corpus, checked-in expected
+  seam summaries, and fail-closed fixture verification.
+- SEAMRUST-01..03: pure typed Rust wall-seam summary boundary, static
+  readiness metadata, and Cargo/Bazel parser coverage.
+- SEAMEV-01..03: public wall-seam executable evidence, mutation guards, exact
+  status/docs wording, and preservation of existing Prusa generated-output
+  evidence rows.
 
 ### Out of Scope
 
@@ -546,8 +585,9 @@ new phase work.
 - Byte-for-byte Prusa G-code parity remains deferred until a larger reviewed
   fixture corpus and stricter output-generation oracle exist.
 - Printability, firmware/runtime behavior, host upload, post-processing,
-  thumbnails, support generation, and wall seam behavior remain deferred beyond
-  v1.15; arc fitting is active only for the narrow v1.15 evidence slice.
+  thumbnails, support generation, and full wall-seam behavior remain deferred
+  beyond v1.16; wall seam is active only for the narrow v1.16 checked-in
+  summary evidence slice.
 
 ## Context
 
@@ -609,6 +649,9 @@ The audience for this work is broad:
 | Use arc fitting as the next Prusa generated-output feature slice | Arc fitting is a medium-complexity generated-output candidate that can reuse the v1.12-v1.14 G-code evidence ladder without jumping to support generation, broad generated-output parity, or non-Prusa fork work | ✓ Shipped in v1.15 Phase 60 |
 | Publish arc-fitting as a separate narrow fork status row | Arc-fitting evidence should not widen the existing semantic `fork.prusaslicer.gcode-output` row or broad `generated-outputs` status | ✓ Shipped in v1.15 Phase 60 |
 | Close audit ledger drift with a metadata-only phase | The Phase 58 fixture evidence was already verified, but archive readiness needed requirements checkboxes and traceability to agree with summary frontmatter | ✓ Shipped in v1.15 Phase 61 |
+| Use wall seam as the next Prusa generated-output feature slice | Wall seam is the remaining medium-complexity generated-output candidate that can reuse the v1.12-v1.15 evidence ladder without jumping to support generation, broad generated-output parity, or non-Prusa fork work | Active in v1.16 |
+| Publish wall-seam evidence as a separate narrow fork status row | Wall-seam evidence must not widen the existing semantic `fork.prusaslicer.gcode-output` row, the arc-fitting row, or the broad `generated-outputs` status | Planned for v1.16 |
+| Keep v1.16 summary-only and fail-closed | Seam observations are evidence inputs, not proof of byte-for-byte output, seam geometry equivalence, printability, firmware/runtime behavior, or GUI behavior | Planned for v1.16 |
 
 ## Evolution
 
@@ -631,4 +674,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-25 after shipping v1.15 milestone*
+*Last updated: 2026-06-26 after starting v1.16 milestone*
