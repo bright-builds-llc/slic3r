@@ -66,9 +66,9 @@ source path `src/libslic3r/GCode/SeamAligned.cpp`. The category-map row is
 Use four phases:
 
 1. Phase 62: Wall-Seam Scope Contract.
-2. Phase 63: Wall-Seam Fixture Corpus.
-3. Phase 64: Rust Wall-Seam Evidence Boundary.
-4. Phase 65: Executable Wall-Seam Evidence.
+1. Phase 63: Wall-Seam Fixture Corpus.
+1. Phase 64: Rust Wall-Seam Evidence Boundary.
+1. Phase 65: Executable Wall-Seam Evidence.
 
 Each requirement should map to exactly one phase. The public status row and
 docs should wait until Phase 65, after scope, fixture, Rust, and mutation

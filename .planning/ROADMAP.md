@@ -2,6 +2,8 @@
 
 ## Milestones
 
+- Active: **v1.16 PrusaSlicer Wall-Seam G-code Evidence Slice** -
+  Phases 62-65 (planning complete; ready for Phase 62)
 - Shipped: **v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice** -
   Phases 57-61 (shipped 2026-06-25)
   Archive: [.planning/milestones/v1.15-ROADMAP.md](/Users/peterryszkiewicz/Repos/Slic3r/.planning/milestones/v1.15-ROADMAP.md)
@@ -54,20 +56,224 @@
 
 ## Current Status
 
-No active milestone is defined. v1.15 shipped the narrow PrusaSlicer
-arc-fitting checked-in summary evidence slice and archived its roadmap,
-requirements, audit, and phase history under `.planning/milestones/`.
+v1.16 is the active milestone. It proves one narrow, source-pinned
+PrusaSlicer wall-seam G-code evidence slice through a reviewed scope contract,
+fixture corpus, pure Rust evidence boundary, public executable evidence,
+fail-closed mutation guards, exact status wording, and non-overclaiming docs.
 
-Start the next milestone with `/gsd-new-milestone` so it can define fresh
-requirements before new phase work begins.
+The milestone keeps broad `generated-outputs`, byte-for-byte G-code parity,
+wall-seam algorithm or geometry equivalence, seam visibility, printability,
+printer-runtime behavior, support generation, STEP import, GUI behavior,
+release behavior, upstream imports, sync automation, and non-Prusa fork
+behavior deferred.
+
+**Granularity:** fine
+**Coverage:** 12/12 v1.16 requirements mapped
 
 ## Phases
 
-No active phases are planned. The next phase number should continue after
-Phase 61 when the next milestone is created.
+**Phase Numbering:**
+
+- Integer phases (62, 63, 64, 65): Planned milestone work
+
+- Decimal phases (62.1, 62.2): Urgent insertions after planning
+
+- [ ] **Phase 62: Wall-Seam Scope Contract** - Close the reviewed
+  `prusaslicer.wall-seam` scope and fail-closed verifier before any evidence
+  artifacts are published.
+
+- [ ] **Phase 63: Wall-Seam Fixture Corpus** - Add the source-pinned fixture
+  namespace, expected wall-seam summaries, provenance, and fixture drift
+  guards.
+
+- [ ] **Phase 64: Rust Wall-Seam Evidence Boundary** - Parse checked-in
+  wall-seam summaries through a pure typed Rust boundary with static readiness
+  metadata.
+
+- [ ] **Phase 65: Executable Wall-Seam Evidence** - Publish public wall-seam
+  parity evidence, mutation guards, exact status, and docs for the narrow
+  evidence slice.
+
+## Phase Details
+
+### Phase 62: Wall-Seam Scope Contract
+
+**Goal**: Maintainers have a reviewed, fail-closed wall-seam scope contract
+that authorizes fixture, Rust, parity, status, and docs work without widening
+generated-output claims.
+**Depends on**: Phase 61
+**Requirements**: SEAMSCOPE-01, SEAMSCOPE-02, SEAMSCOPE-03
+**Success Criteria** (what must be TRUE):
+
+1. Maintainer can inspect the accepted `prusaslicer.wall-seam` source
+   identity, inventory row, category-map row, source anchors, artifact paths,
+   planned status wording, deferred scope, security note, and reviewer signoff
+   in one scope contract.
+1. Maintainer can run the wall-seam scope verifier and see unsupported seam
+   fields, duplicate or missing rows, traceability drift, broad
+   generated-output claims, runtime or printability claims, and missing
+   deferred-scope wording fail closed.
+1. Maintainer can confirm broad `generated-outputs` remains `in progress`, the
+   existing `fork.prusaslicer.gcode-output` and
+   `fork.prusaslicer.arc-fitting` wording is preserved, and the planned
+   `fork.prusaslicer.wall-seam` wording stays limited to the narrow v1.16
+   evidence slice.
+
+**Plans**: 3 plans
+
+Plans:
+
+- [ ] 62-01-PLAN.md - Create the package-local wall-seam scope contract and
+  package boundary.
+- [ ] 62-02-PLAN.md - Implement the fail-closed verifier for the scope
+  contract.
+- [ ] 62-03-PLAN.md - Add mutation coverage and final Bazel verification
+  wiring.
+
+### Phase 63: Wall-Seam Fixture Corpus
+
+**Goal**: Maintainers have a source-pinned wall-seam fixture corpus and
+checked-in expected summaries constrained to the Phase 62 approved fields.
+**Depends on**: Phase 62
+**Requirements**: SEAMFIX-01, SEAMFIX-02, SEAMFIX-03
+**Success Criteria** (what must be TRUE):
+
+1. Maintainer can inspect a `prusaslicer.wall-seam` fixture namespace with
+   source-pinned provenance, update rules, fixture identity, expected wall-seam
+   summary paths, and explicit exclusions for generator, runtime, network,
+   sync, host-upload, post-processing, thumbnail, printability, and GUI
+   behavior.
+1. Maintainer can inspect checked-in expected wall-seam summaries that cover
+   only the Phase 62 approved fields, such as source identity, source anchors,
+   fixture identity, seam-transition observations, layer or travel context,
+   coordinate bounds, extrusion or retraction observations, and
+   evidence-boundary text.
+1. Maintainer can run fixture verification that rejects missing rows, duplicate
+   rows, out-of-order rows, unsupported seam fields, unsupported claim text,
+   wrong source refs, wrong fixture identities, checksum drift, and stale
+   documentation references.
+
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 63-01-PLAN.md - Create source-pinned wall-seam fixture namespace,
+  expected summary, provenance, and Bazel bundle.
+- [ ] 63-02-PLAN.md - Add fail-closed wall-seam fixture verifier, mutation
+  coverage, and package-level command docs.
+
+### Phase 64: Rust Wall-Seam Evidence Boundary
+
+**Goal**: Developers can parse checked-in wall-seam summaries through a pure
+typed Rust boundary and inspect readiness metadata without public status
+publication or side effects.
+**Depends on**: Phase 63
+**Requirements**: SEAMRUST-01, SEAMRUST-02, SEAMRUST-03
+**Success Criteria** (what must be TRUE):
+
+1. Developer can parse caller-supplied checked-in wall-seam summary artifacts
+   into typed Rust domain values without Git, network, filesystem discovery,
+   process, generator, printer-runtime, release, or sync side effects.
+1. Developer can inspect static registry or readiness metadata tracing the
+   wall-seam boundary to the accepted Prusa source identity, fixture corpus,
+   expected wall-seam summaries, planned command, planned status wording, and
+   deferred generated-output surfaces.
+1. Developer can run Cargo and Bazel coverage proving valid wall-seam fixture
+   rows parse and invalid rows fail closed.
+1. Developer can confirm public helper names and Rust internals do not claim
+   byte parity, seam geometry equivalence, printability, runtime, support, GUI,
+   arc-fitting, or non-Prusa fork behavior, and optional or nullable internals
+   are named clearly.
+
+**Plans**: 2 plans
+
+Plans:
+
+- [ ] 64-01-PLAN.md - Add the pure typed wall-seam summary parser,
+  developer-facing summary-line helper, and focused Cargo/Bazel parser
+  coverage.
+- [ ] 64-02-PLAN.md - Add readiness metadata, registry visibility, aggregate
+  Rust verification wiring, and public-boundary guards.
+
+### Phase 65: Executable Wall-Seam Evidence
+
+**Goal**: Maintainers can run public executable wall-seam evidence and inspect
+exact public status/docs for the narrow PrusaSlicer wall-seam slice.
+**Depends on**: Phase 64
+**Requirements**: SEAMEV-01, SEAMEV-02, SEAMEV-03
+**Success Criteria** (what must be TRUE):
+
+1. Maintainer can run public Prusa wall-seam parity evidence that validates the
+   checked-in wall-seam summary artifact through the Rust boundary while
+   preserving the existing public Prusa G-code output and arc-fitting command
+   contracts.
+1. Maintainer can see fail-closed mutation guards for seam-transition
+   observation changes, layer or travel context changes, coordinate-bound
+   changes, extrusion or retraction observation changes, source identity drift,
+   fixture identity drift, row-order drift, and unsupported deferred-behavior
+   claims.
+1. Maintainer can inspect parity status, package docs, and port docs that
+   describe only the exact narrow `fork.prusaslicer.wall-seam` evidence slice
+   while broad `generated-outputs` remains `in progress` and all
+   generated-output, runtime, GUI, release, sync, and non-Prusa fork deferrals
+   remain explicit.
+1. Maintainer can confirm the existing `fork.prusaslicer.gcode-output` and
+   `fork.prusaslicer.arc-fitting` meanings are not widened by wall-seam
+   evidence publication.
+
+**Plans**: 6 plans
+
+Plans:
+
+- [ ] 65-01-PLAN.md - Add Rust-backed public wall-seam evidence command.
+- [ ] 65-02-PLAN.md - Add fail-closed public wall-seam mutation guards.
+- [ ] 65-03-PLAN.md - Publish exact wall-seam status row and verifier guards.
+- [ ] 65-04-PLAN.md - Publish package and fixture docs with fixture verifier checks.
+- [ ] 65-05-PLAN.md - Publish wall-seam scope docs with scope verifier checks.
+- [ ] 65-06-PLAN.md - Publish public port docs for the narrow wall-seam slice.
+
+## Coverage
+
+| Requirement | Phase |
+|-------------|-------|
+| SEAMSCOPE-01 | Phase 62 |
+| SEAMSCOPE-02 | Phase 62 |
+| SEAMSCOPE-03 | Phase 62 |
+| SEAMFIX-01 | Phase 63 |
+| SEAMFIX-02 | Phase 63 |
+| SEAMFIX-03 | Phase 63 |
+| SEAMRUST-01 | Phase 64 |
+| SEAMRUST-02 | Phase 64 |
+| SEAMRUST-03 | Phase 64 |
+| SEAMEV-01 | Phase 65 |
+| SEAMEV-02 | Phase 65 |
+| SEAMEV-03 | Phase 65 |
+
+Mapped: 12/12 v1.16 requirements
+Orphans: 0
+Duplicates: 0
 
 ## Progress
 
-| Milestone | Phases | Plans | Status | Shipped |
-|-----------|--------|-------|--------|---------|
-| v1.15 PrusaSlicer Arc-Fitting G-code Evidence Slice | 57-61 | 14/14 | Shipped | 2026-06-25 |
+**Execution Order:**
+Phases execute in numeric order: 62 -> 63 -> 64 -> 65
+
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 62. Wall-Seam Scope Contract | 0/3 | Pending | - |
+| 63. Wall-Seam Fixture Corpus | 0/2 | Pending | - |
+| 64. Rust Wall-Seam Evidence Boundary | 0/2 | Pending | - |
+| 65. Executable Wall-Seam Evidence | 0/6 | Pending | - |
+
+## Planning Notes
+
+- Phase 62 owns final allowed wall-seam fields, source anchors, fixture
+  derivation route, status wording, and package-boundary confirmation.
+- Phase 63 must prove selected fixture bytes and expected rows are
+  source-pinned and seam-specific without live generation or broad runtime
+  claims.
+- Phase 64 should reuse the existing `slic3r_flavors` parser/readiness
+  patterns while keeping the Rust boundary pure and closed.
+- Phase 65 publishes status/docs only after scope, fixture, Rust boundary,
+  public comparator, mutation guards, and existing Prusa G-code output plus
+  arc-fitting command regression checks pass.

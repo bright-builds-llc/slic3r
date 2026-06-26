@@ -11,11 +11,11 @@ Use the established four-step Prusa evidence ladder:
 
 1. Scope contract closes allowed fields, traceability, planned paths, status
    wording, deferrals, and verifier rules.
-2. Fixture corpus adds source-pinned checked-in evidence bytes and expected
+1. Fixture corpus adds source-pinned checked-in evidence bytes and expected
    wall-seam summaries.
-3. Rust boundary parses the checked-in summary into closed domain values and
+1. Rust boundary parses the checked-in summary into closed domain values and
    exposes readiness metadata without side effects.
-4. Public evidence publishes a Bazel command, mutation guards, exact status
+1. Public evidence publishes a Bazel command, mutation guards, exact status
    row, and docs only after the previous steps pass.
 
 This keeps the functional core in Rust and the imperative shell in Bash/Bazel.

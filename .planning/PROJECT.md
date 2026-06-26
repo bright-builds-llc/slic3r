@@ -20,6 +20,7 @@ printability, runtime, GUI, non-Prusa fork, release, upstream import, and sync
 claims deferred.
 
 **Target features:**
+
 - Reviewed `prusaslicer.wall-seam` scope contract tied to the existing Prusa
   fork inventory and generated-output deferral vocabulary.
 - Source-pinned wall-seam fixture corpus and checked-in expected summary

@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.16
 milestone_name: PrusaSlicer Wall-Seam G-code Evidence Slice
-status: planning
-stopped_at: v1.16 milestone started; defining requirements and roadmap
-last_updated: "2026-06-26T22:45:25Z"
+status: active
+stopped_at: v1.16 roadmap created; ready to plan Phase 62
+last_updated: "2026-06-26T22:50:34Z"
 last_activity: 2026-06-26
 progress:
   total_phases: 4
@@ -25,16 +25,15 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Defining v1.16 PrusaSlicer wall-seam evidence requirements
+**Current focus:** Ready to plan Phase 62 Wall-Seam Scope Contract
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 62 Wall-Seam Scope Contract (not started)
 Plan: —
 Milestone: v1.16 PrusaSlicer Wall-Seam G-code Evidence Slice
-Status: Defining the narrow PrusaSlicer wall-seam G-code evidence slice and
-roadmap before Phase 62 begins.
-Last activity: 2026-06-26 — Milestone v1.16 started
+Status: Roadmap created; Phase 62 is ready for discussion and planning.
+Last activity: 2026-06-26 — Milestone v1.16 roadmap created
 
 Progress: [----------] 0%
 
@@ -113,6 +112,8 @@ Recent decisions affecting v1.16:
 - Plan wall-seam evidence as a separate `fork.prusaslicer.wall-seam` status row
   so the existing semantic `fork.prusaslicer.gcode-output` row and arc-fitting
   row are not widened.
+- Map SEAMSCOPE-01..03 to Phase 62, SEAMFIX-01..03 to Phase 63,
+  SEAMRUST-01..03 to Phase 64, and SEAMEV-01..03 to Phase 65.
 
 Recent decisions affecting v1.15:
 
@@ -287,6 +288,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-26T22:45:25Z
-Stopped at: v1.16 milestone started; requirements and roadmap pending
+Last session: 2026-06-26T22:50:34Z
+Stopped at: v1.16 roadmap created; Phase 62 ready to plan
 Resume file: None

@@ -156,7 +156,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 - Mapped to phases: 12
 - Unmapped: 0
 
----
+______________________________________________________________________
 
 *Requirements defined: 2026-06-26*
 *Last updated: 2026-06-26 during roadmap creation*
