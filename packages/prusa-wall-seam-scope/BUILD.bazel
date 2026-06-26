@@ -1,0 +1,34 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "README.md",
+    "wall-seam-scope.md",
+])
+
+sh_binary(
+    name = "verify",
+    srcs = ["verify_prusa_wall_seam_scope.sh"],
+    data = [
+        "README.md",
+        "wall-seam-scope.md",
+        "//packages/fork-inventories:prusaslicer.tsv",
+        "//packages/fork-inventories:category-map.tsv",
+        "//packages/parity:status.tsv",
+    ],
+    args = [
+        "$(location README.md)",
+        "$(location wall-seam-scope.md)",
+        "$(location //packages/fork-inventories:prusaslicer.tsv)",
+        "$(location //packages/fork-inventories:category-map.tsv)",
+        "$(location //packages/parity:status.tsv)",
+    ],
+)
+
+filegroup(
+    name = "package_boundary",
+    srcs = [
+        "README.md",
+        "wall-seam-scope.md",
+        "verify_prusa_wall_seam_scope.sh",
+    ],
+)
