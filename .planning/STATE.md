@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.16
 milestone_name: milestone
 status: executing
-stopped_at: Phase 63 context gathered
-last_updated: "2026-06-27T00:33:02.122Z"
-last_activity: 2026-06-27 -- Phase 63 planning complete
+stopped_at: Completed 63-wall-seam-fixture-corpus-01-PLAN.md
+last_updated: "2026-06-27T00:44:57.110Z"
+last_activity: 2026-06-27
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 5
-  completed_plans: 3
-  percent: 60
+  completed_plans: 4
+  percent: 80
 ---
 
 # Project State
@@ -25,17 +25,17 @@ legacy behavior and interfaces closely enough that the old implementation can
 eventually be retired without breaking the contracts users and integrators
 depend on.
 
-**Current focus:** Phase 62 Wall-Seam Scope Contract verified; ready for Phase 63 Wall-Seam Fixture Corpus
+**Current focus:** Phase 63 — Wall-Seam Fixture Corpus
 
 ## Current Position
 
-Phase: 62 Wall-Seam Scope Contract (complete)
-Plan: All Phase 62 plans complete
+Phase: 63 (Wall-Seam Fixture Corpus) — EXECUTING
+Plan: 2 of 2
 Milestone: v1.16 PrusaSlicer Wall-Seam G-code Evidence Slice
 Status: Ready to execute
-Last activity: 2026-06-27 -- Phase 63 planning complete
+Last activity: 2026-06-27
 
-Progress: [##########] 100%
+Progress: [########--] 80%
 
 ## Performance Metrics
 
@@ -101,6 +101,8 @@ Progress: [##########] 100%
 
 - Phase 62 verification passed with 3/3 must-haves verified and lifecycle
   validation clean.
+
+- 63-01 completed in 5 min with 2 tasks and 6 fixture/Bazel files changed.
 
 ## Accumulated Context
 
@@ -293,6 +295,9 @@ Recent decisions affecting v1.12:
 - [Phase 60-executable-arc-fitting-evidence]: Published fork.prusaslicer.arc-fitting in public port docs as narrow checked-in arc summary evidence only. — Plan 60-06 public docs publish only the checked-in arc summary evidence slice and keep broad generated-output claims deferred.
 - [Phase 60-executable-arc-fitting-evidence]: Kept broad generated-outputs as in progress and kept existing fork.prusaslicer.gcode-output evidence separate. — The arc-fitting row is a feature-specific fork evidence slice, not broad generated-output graduation or a widening of the semantic G-code output row.
 - [Phase 60-executable-arc-fitting-evidence]: Mapped arc-fitting ownership across scope, fixture, Rust, parity, and public docs packages. — Future maintainers can route changes to packages/prusa-arc-fitting-scope, packages/parity-fixtures, packages/slic3r-rust, or packages/parity without inferring ownership from status text alone.
+- [Phase 63-01]: Used the dedicated `prusaslicer.wall-seam` fixture namespace so wall-seam evidence stays separate from existing G-code output and arc-fitting rows.
+- [Phase 63-01]: Kept Phase 63 to checked-in fixture artifacts and Bazel ownership only; verifier, Rust parser, public parity command, status row, and public docs remain Phase 63 plan 02 or later work.
+- [Phase 63-01]: Exposed wall-seam artifacts through aliases and `prusa_wall_seam_bundle` without adding forbidden public parity or status labels.
 
 ### Pending Todos
 
@@ -304,6 +309,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-27T00:14:49.781Z
-Stopped at: Phase 63 context gathered
-Resume file: .planning/phases/63-wall-seam-fixture-corpus/63-CONTEXT.md
+Last session: 2026-06-27T00:44:57.108Z
+Stopped at: Completed 63-wall-seam-fixture-corpus-01-PLAN.md
+Resume file: None

@@ -31,12 +31,12 @@ roadmap phase and must be verified before milestone archive.
 
 ### Wall-Seam Fixture Corpus
 
-- [ ] **SEAMFIX-01**: Maintainer can inspect a small reviewed Prusa wall-seam
+- [x] **SEAMFIX-01**: Maintainer can inspect a small reviewed Prusa wall-seam
   fixture corpus with source-pinned provenance, update rules, fixture identity,
   expected wall-seam summary paths, and explicit exclusion of generator,
   runtime, network, sync, host-upload, post-processing, thumbnail,
   printability, and GUI behavior.
-- [ ] **SEAMFIX-02**: Maintainer can inspect checked-in wall-seam expected
+- [x] **SEAMFIX-02**: Maintainer can inspect checked-in wall-seam expected
   summaries that cover only the Phase 62 approved fields, such as source
   identity, inventory source paths, source anchors, fixture identity,
   seam-transition observations, layer or travel context observations,
@@ -140,8 +140,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEAMSCOPE-01 | Phase 62 | Complete |
 | SEAMSCOPE-02 | Phase 62 | Complete |
 | SEAMSCOPE-03 | Phase 62 | Complete |
-| SEAMFIX-01 | Phase 63 | Pending |
-| SEAMFIX-02 | Phase 63 | Pending |
+| SEAMFIX-01 | Phase 63 | Complete |
+| SEAMFIX-02 | Phase 63 | Complete |
 | SEAMFIX-03 | Phase 63 | Pending |
 | SEAMRUST-01 | Phase 64 | Pending |
 | SEAMRUST-02 | Phase 64 | Pending |
