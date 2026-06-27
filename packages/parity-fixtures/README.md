@@ -87,6 +87,18 @@ the source path is `src/libslic3r/Geometry/ArcWelder.cpp`. Phase 59 owns
 `fork.prusaslicer.gcode-output` row remains limited to the Phase 53 through
 Phase 56 semantic evidence slice.
 
+Phase 63 adds the Prusa wall-seam fixture namespace at
+`packages/parity-fixtures/forks/prusaslicer/prusaslicer.wall-seam/`. It
+contains the checked-in `wall-seam-observations.gcode` fixture,
+`fixture-provenance.tsv`, and `expected-wall-seam-summary.tsv` for the fixture
+surface only. The fixture bundle target is
+`//packages/parity-fixtures:prusa_wall_seam_bundle`, and maintainers can
+verify the fixture corpus with
+`bazel run //packages/parity-fixtures:verify_prusa_wall_seam_fixture`. The
+source ref is
+`prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, and
+the source path is `src/libslic3r/GCode/SeamAligned.cpp`. Phase 64 owns `slic3r_flavors::prusa_wall_seam` checked-in summary parser/readiness work. Phase 65 owns `bazel run //packages/parity:prusaslicer_wall_seam_parity` and `fork.prusaslicer.wall-seam`. Phase 63 does not update `packages/parity/status.tsv`, public parity behavior, Rust crates, or `docs/port/*`. The broad `generated-outputs` status remains `in progress`, the `fork.prusaslicer.gcode-output` row remains limited to the Phase 53 through Phase 56 semantic evidence slice, and the `fork.prusaslicer.arc-fitting` row remains limited to the Phase 57 through Phase 60 checked-in arc summary evidence slice.
+
 The G-code fixture namespace itself does not prove byte-for-byte G-code
 parity, broad generated-output verification, full generated-output parity,
 toolpath geometry, extrusion, timing, support generation, wall seam behavior,
@@ -179,3 +191,16 @@ additional fixture files by themselves.
   `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, and
   the source path is `src/libslic3r/Geometry/ArcWelder.cpp`. Phase 59 owns
   `slic3r_flavors::prusa_arc_fitting`. Phase 60 publishes bazel run //packages/parity:prusaslicer_arc_fitting_parity and the fork.prusaslicer.arc-fitting status row for checked-in arc summary evidence only.
+- Phase 63 adds the Prusa wall-seam fixture namespace under
+  `packages/parity-fixtures/forks/prusaslicer/prusaslicer.wall-seam/`, with
+  `wall-seam-observations.gcode`, `fixture-provenance.tsv`, and
+  `expected-wall-seam-summary.tsv` exported as
+  `//packages/parity-fixtures:prusa_wall_seam_bundle` and checked by
+  `bazel run //packages/parity-fixtures:verify_prusa_wall_seam_fixture`.
+  The source ref is
+  `prusaslicer:version_2.9.5@9a583bd438b195856f3bcf7ea99b69ba4003a961`, and
+  the source path is `src/libslic3r/GCode/SeamAligned.cpp`. Phase 64 owns `slic3r_flavors::prusa_wall_seam` checked-in summary parser/readiness work. Phase 65 owns `bazel run //packages/parity:prusaslicer_wall_seam_parity` and `fork.prusaslicer.wall-seam`. Phase 63 does not update `packages/parity/status.tsv`, public parity behavior, Rust crates, or `docs/port/*`.
+  The broad `generated-outputs` status remains `in progress`, the
+  `fork.prusaslicer.gcode-output` row remains limited to semantic G-code
+  evidence, and the `fork.prusaslicer.arc-fitting` row remains limited to
+  checked-in arc summary evidence.
