@@ -78,6 +78,11 @@ exports_files([
     "forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode",
     "forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv",
     "forks/prusaslicer/prusaslicer.arc-fitting/fixture-provenance.tsv",
+    "forks/prusaslicer/prusaslicer.wall-seam/.gitattributes",
+    "forks/prusaslicer/prusaslicer.wall-seam/README.md",
+    "forks/prusaslicer/prusaslicer.wall-seam/wall-seam-observations.gcode",
+    "forks/prusaslicer/prusaslicer.wall-seam/expected-wall-seam-summary.tsv",
+    "forks/prusaslicer/prusaslicer.wall-seam/fixture-provenance.tsv",
 ])
 
 alias(
@@ -489,6 +494,37 @@ filegroup(
     ],
 )
 
+alias(
+    name = "prusa_wall_seam_readme",
+    actual = "forks/prusaslicer/prusaslicer.wall-seam/README.md",
+)
+
+alias(
+    name = "prusa_wall_seam_provenance",
+    actual = "forks/prusaslicer/prusaslicer.wall-seam/fixture-provenance.tsv",
+)
+
+alias(
+    name = "prusa_wall_seam_expected_wall_seam_summary",
+    actual = "forks/prusaslicer/prusaslicer.wall-seam/expected-wall-seam-summary.tsv",
+)
+
+alias(
+    name = "prusa_wall_seam_wall_seam_observations",
+    actual = "forks/prusaslicer/prusaslicer.wall-seam/wall-seam-observations.gcode",
+)
+
+filegroup(
+    name = "prusa_wall_seam_bundle",
+    srcs = [
+        "forks/prusaslicer/prusaslicer.wall-seam/.gitattributes",
+        "forks/prusaslicer/prusaslicer.wall-seam/README.md",
+        "forks/prusaslicer/prusaslicer.wall-seam/expected-wall-seam-summary.tsv",
+        "forks/prusaslicer/prusaslicer.wall-seam/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.wall-seam/wall-seam-observations.gcode",
+    ],
+)
+
 sh_binary(
     name = "verify_prusa_profile_schema_fixture",
     srcs = ["verify_prusa_profile_schema_fixture.sh"],
@@ -669,6 +705,11 @@ filegroup(
         "forks/prusaslicer/prusaslicer.arc-fitting/arc-fitting-observations.gcode",
         "forks/prusaslicer/prusaslicer.arc-fitting/expected-arc-summary.tsv",
         "forks/prusaslicer/prusaslicer.arc-fitting/fixture-provenance.tsv",
+        "forks/prusaslicer/prusaslicer.wall-seam/.gitattributes",
+        "forks/prusaslicer/prusaslicer.wall-seam/README.md",
+        "forks/prusaslicer/prusaslicer.wall-seam/wall-seam-observations.gcode",
+        "forks/prusaslicer/prusaslicer.wall-seam/expected-wall-seam-summary.tsv",
+        "forks/prusaslicer/prusaslicer.wall-seam/fixture-provenance.tsv",
         "verify_prusa_profile_schema_fixture.sh",
         "verify_prusa_profile_schema_fixture_test.sh",
         "verify_prusa_project_file_fixture.sh",
