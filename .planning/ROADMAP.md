@@ -82,7 +82,7 @@ behavior deferred.
   `prusaslicer.wall-seam` scope and fail-closed verifier before any evidence
   artifacts are published.
 
-- [ ] **Phase 63: Wall-Seam Fixture Corpus** - Add the source-pinned fixture
+- [x] **Phase 63: Wall-Seam Fixture Corpus** - Add the source-pinned fixture (completed 2026-06-27)
   namespace, expected wall-seam summaries, provenance, and fixture drift
   guards.
 
@@ -159,7 +159,7 @@ Plans:
 
 - [x] 63-01-PLAN.md - Create source-pinned wall-seam fixture namespace,
   expected summary, provenance, and Bazel bundle.
-- [ ] 63-02-PLAN.md - Add fail-closed wall-seam fixture verifier, mutation
+- [x] 63-02-PLAN.md - Add fail-closed wall-seam fixture verifier, mutation
   coverage, and package-level command docs.
 
 ### Phase 64: Rust Wall-Seam Evidence Boundary
@@ -261,7 +261,7 @@ Phases execute in numeric order: 62 -> 63 -> 64 -> 65
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 62. Wall-Seam Scope Contract | 3/3 | Complete   | 2026-06-26 |
-| 63. Wall-Seam Fixture Corpus | 1/2 | In Progress|  |
+| 63. Wall-Seam Fixture Corpus | 2/2 | Complete   | 2026-06-27 |
 | 64. Rust Wall-Seam Evidence Boundary | 0/2 | Pending | - |
 | 65. Executable Wall-Seam Evidence | 0/6 | Pending | - |
 

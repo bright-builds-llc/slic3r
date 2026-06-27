@@ -42,7 +42,7 @@ roadmap phase and must be verified before milestone archive.
   seam-transition observations, layer or travel context observations,
   coordinate bounds, extrusion or retraction observations, and
   evidence-boundary text.
-- [ ] **SEAMFIX-03**: Maintainer can run fail-closed fixture verification that
+- [x] **SEAMFIX-03**: Maintainer can run fail-closed fixture verification that
   rejects missing rows, duplicate rows, out-of-order rows, unsupported seam
   fields, unsupported claim text, wrong source refs, wrong fixture identities,
   checksum drift, and stale documentation references.
@@ -142,7 +142,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEAMSCOPE-03 | Phase 62 | Complete |
 | SEAMFIX-01 | Phase 63 | Complete |
 | SEAMFIX-02 | Phase 63 | Complete |
-| SEAMFIX-03 | Phase 63 | Pending |
+| SEAMFIX-03 | Phase 63 | Complete |
 | SEAMRUST-01 | Phase 64 | Pending |
 | SEAMRUST-02 | Phase 64 | Pending |
 | SEAMRUST-03 | Phase 64 | Pending |
