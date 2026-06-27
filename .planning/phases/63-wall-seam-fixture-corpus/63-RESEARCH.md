@@ -461,12 +461,12 @@ All claims in this research were verified against local repo files, local comman
 |---|-------|---------|---------------|
 | None | No `[ASSUMED]` claims were used. | All sections | None. [VERIFIED: all cited sources in this file] |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Exact fixture line contents**
+1. **Exact fixture line contents (RESOLVED)**
    - What we know: The context delegates exact static G-code observation lines to the implementer as long as they are small, deterministic, ASCII/LF, checked-in observation input only, and support all 12 approved fields. [VERIFIED: .planning/phases/63-wall-seam-fixture-corpus/63-CONTEXT.md]
-   - What's unclear: The final byte count and SHA-256 cannot be known until the file is authored. [VERIFIED: packages/parity-fixtures/verify_prusa_arc_fitting_fixture.sh]
-   - Recommendation: Plan 63-01 should create the tiny fixture first, compute byte count and SHA-256, then update provenance and verifier constants in the same plan. [VERIFIED: packages/parity-fixtures/verify_prusa_arc_fitting_fixture.sh]
+   - Resolution: Plan 63-01 selected the exact `wall-seam-observations.gcode` fixture bytes, with byte count `360` and SHA-256 `9a6306f382e64365ec6e11952f360195bca37fa442f29c7c7f616e1705a6bdad`, and carries those values into provenance and verifier constants.
+   - Recommendation: Execute Plan 63-01 with those locked fixture bytes, then verify the byte count and SHA-256 before Plan 63-02 adds verifier enforcement.
 
 No blocking open questions require user input before planning. [VERIFIED: .planning/phases/63-wall-seam-fixture-corpus/63-CONTEXT.md]
 
