@@ -57,6 +57,13 @@ and avoid claiming byte-for-byte G-code parity, seam geometry equivalence,
 printability, printer-runtime behavior, GUI behavior, non-Prusa fork behavior,
 release behavior, upstream imports, or sync automation.
 
+v1.16 Phase 63 is complete. Maintainers can inspect the source-pinned
+`prusaslicer.wall-seam` fixture namespace, checked-in expected wall-seam
+summary rows, and provenance, then run
+`bazel run //packages/parity-fixtures:verify_prusa_wall_seam_fixture` to
+validate fixture bytes, row order, source identity, docs, status boundaries,
+and mutation-guarded drift classes before Rust parser or public parity work.
+
 v1.15 is archived. It reused the v1.12-v1.14 G-code evidence ladder for the
 `prusaslicer.arc-fitting` feature slice, published the exact narrow
 `fork.prusaslicer.arc-fitting` status row, and avoided promoting broad
@@ -544,6 +551,9 @@ high-risk generated-output or network/cloud surfaces.
 - ✓ v1.15 reconciles the ARCFIX requirements ledger against passed Phase 58
   verification and summary metadata, closing the audit-ledger gap without
   product-surface changes — Phase 61
+- ✓ v1.16 adds source-pinned wall-seam fixture evidence and expected summaries
+  without importing upstream source trees, promoting public wall-seam status,
+  or generating broad G-code parity claims — Phase 63
 
 ### Active
 
@@ -552,8 +562,6 @@ limited to the PrusaSlicer wall-seam G-code evidence slice:
 
 - SEAMSCOPE-01..03: reviewed wall-seam scope contract, fail-closed scope
   verifier, and generated-output status restraint.
-- SEAMFIX-01..03: source-pinned wall-seam fixture corpus, checked-in expected
-  seam summaries, and fail-closed fixture verification.
 - SEAMRUST-01..03: pure typed Rust wall-seam summary boundary, static
   readiness metadata, and Cargo/Bazel parser coverage.
 - SEAMEV-01..03: public wall-seam executable evidence, mutation guards, exact
@@ -675,4 +683,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ______________________________________________________________________
 
-*Last updated: 2026-06-26 after starting v1.16 milestone*
+*Last updated: 2026-06-27 after completing Phase 63 wall-seam fixture corpus*
