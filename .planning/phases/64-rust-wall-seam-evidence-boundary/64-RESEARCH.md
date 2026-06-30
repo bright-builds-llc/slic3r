@@ -445,17 +445,19 @@ fn rejects_wall_seam_out_of_order_rows() {
 |---|-------|---------|---------------|
 | A1 | This research is valid for 7 days because Phase 65 planning and local toolchain defaults may change quickly during the active milestone. [ASSUMED] | Metadata | Planner may rely on stale public-boundary or environment facts if Phase 65 lands before execution. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Should Phase 64 add a wall-seam summary binary?**
+1. **RESOLVED: Should Phase 64 add a wall-seam summary binary?**
    - What we know: The context allows a developer-facing binary only if it remains caller-supplied/local-file scoped and does not create the Phase 65 public parity command. [VERIFIED: .planning/phases/64-rust-wall-seam-evidence-boundary/64-CONTEXT.md]
    - What's unclear: The success criteria require parser/readiness APIs and Cargo/Bazel coverage, not a binary. [VERIFIED: .planning/ROADMAP.md; .planning/REQUIREMENTS.md]
    - Recommendation: Do not add a binary in Phase 64 unless the planner finds a direct acceptance gap; add the pure `prusa_wall_seam_summary_lines` helper so Phase 65 can build on it. [VERIFIED: packages/slic3r-rust/crates/slic3r_flavors/src/prusa_arc_fitting.rs; .planning/milestones/v1.15-phases/59-rust-arc-fitting-evidence-boundary/59-VERIFICATION.md]
+   - Resolution: Plan 64-01 chooses no Phase 64 binary. It implements the library parser and `prusa_wall_seam_summary_lines` helper only; Phase 65 remains responsible for any public executable evidence command. [VERIFIED: .planning/phases/64-rust-wall-seam-evidence-boundary/64-01-PLAN.md]
 
-2. **Should Phase 64 assert public target/status absence?**
+2. **RESOLVED: Should Phase 64 assert public target/status absence?**
    - What we know: `fork.prusaslicer.wall-seam` currently has zero public status rows, and `//packages/parity:prusaslicer_wall_seam_parity` currently has no Bazel target. [VERIFIED: `awk` status scan; `bazel query //packages/parity:prusaslicer_wall_seam_parity`]
    - What's unclear: If Phase 64 only touches Rust crate files, a Rust test does not need to read public status files. [VERIFIED: .planning/phases/64-rust-wall-seam-evidence-boundary/64-CONTEXT.md]
    - Recommendation: Use registry/readiness tests to keep planned wording developer-facing, and add explicit status/target absence checks only if the implementation touches public status or `packages/parity` files. [VERIFIED: packages/slic3r-rust/crates/slic3r_flavors/tests/flavor_registry.rs; packages/parity-fixtures/verify_prusa_wall_seam_fixture.sh]
+   - Resolution: Plan 64-02 includes explicit public-boundary guards. It keeps `fork.prusaslicer.wall-seam` as planned metadata only, asserts zero public status rows, asserts the public parity target remains undeclared, and forbids edits to public parity/docs surfaces. [VERIFIED: .planning/phases/64-rust-wall-seam-evidence-boundary/64-02-PLAN.md]
 
 ## Environment Availability
 
