@@ -1,5 +1,6 @@
 use slic3r_flavors::{
-    PrusaWallSeamField, parse_prusa_wall_seam_summary, prusa_wall_seam_summary_lines,
+    PrusaWallSeamField, PrusaWallSeamParseError, parse_prusa_wall_seam_summary,
+    prusa_wall_seam_summary_lines,
 };
 
 const EXPECTED_WALL_SEAM_SUMMARY: &str = include_str!(
@@ -150,6 +151,210 @@ fn public_wall_seam_declarations_do_not_claim_deferred_behavior() {
     assert!(maybe_risky_declaration.is_none());
 }
 
+#[test]
+fn rejects_wall_seam_invalid_header() {
+    // Arrange
+    let input = EXPECTED_WALL_SEAM_SUMMARY.replacen("source_ref", "wrong_source_ref", 1);
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::InvalidHeader { .. })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_wrong_column_count() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_WALL_SEAM_SUMMARY.lines().collect();
+    lines[1] = "only\tfive\tcolumns\tin\trow";
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::WrongColumnCount {
+            line_number: 2,
+            expected: 6,
+            actual: 5,
+        })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_missing_row() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_WALL_SEAM_SUMMARY.lines().collect();
+    lines.pop();
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::MissingRow {
+            wall_seam_field: PrusaWallSeamField::EvidenceBoundary,
+        })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_duplicate_row() {
+    // Arrange
+    let first_row = EXPECTED_WALL_SEAM_SUMMARY
+        .lines()
+        .nth(1)
+        .expect("wall-seam fixture should contain a first data row");
+    let input = format!("{EXPECTED_WALL_SEAM_SUMMARY}{first_row}\n");
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::DuplicateRow {
+            line_number: 14,
+            wall_seam_field: PrusaWallSeamField::SourceRef,
+        })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_out_of_order_rows() {
+    // Arrange
+    let mut lines: Vec<&str> = EXPECTED_WALL_SEAM_SUMMARY.lines().collect();
+    lines.swap(1, 2);
+    let input = format!("{}\n", lines.join("\n"));
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::UnexpectedRowOrder {
+            line_number: 2,
+            expected_wall_seam_field: PrusaWallSeamField::SourceRef,
+            actual_wall_seam_field: PrusaWallSeamField::InventorySourcePaths,
+        })
+    ));
+}
+
+#[test]
+fn rejects_unsupported_wall_seam_field() {
+    // Arrange
+    let input = replace_wall_seam_cell(0, 2, "unsupported_wall_seam_field");
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::UnsupportedWallSeamField { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_unsupported_wall_seam_category() {
+    // Arrange
+    let input = replace_wall_seam_cell(0, 3, "unsupported category");
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::UnsupportedWallSeamCategory { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_unsupported_claim_text() {
+    // Arrange
+    let input = replace_wall_seam_cell(
+        0,
+        5,
+        "This proves byte-for-byte G-code parity and printer-runtime behavior.",
+    );
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::UnexpectedEvidenceBoundary {
+            line_number: 2,
+            wall_seam_field: PrusaWallSeamField::SourceRef,
+            ..
+        })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_wrong_source_ref() {
+    // Arrange
+    let input = replace_wall_seam_cell(
+        0,
+        0,
+        "bambustudio:v02.06.00.51@b506005bc4ee62124e24bf00e0f58656db3646a6",
+    );
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::UnexpectedSourceRef { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_wrong_fixture_path() {
+    // Arrange
+    let input = replace_wall_seam_cell(0, 1, "fixtures/unreviewed.gcode");
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::UnexpectedFixturePath { line_number: 2, .. })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_wrong_value() {
+    // Arrange
+    let input = replace_wall_seam_cell(3, 4, "other.gcode");
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::UnexpectedWallSeamValue {
+            line_number: 5,
+            wall_seam_field: PrusaWallSeamField::FixtureId,
+            ..
+        })
+    ));
+}
+
 fn expected_wall_seam_fields() -> [PrusaWallSeamField; 12] {
     [
         PrusaWallSeamField::SourceRef,
@@ -165,6 +370,24 @@ fn expected_wall_seam_fields() -> [PrusaWallSeamField; 12] {
         PrusaWallSeamField::RetractionObservations,
         PrusaWallSeamField::EvidenceBoundary,
     ]
+}
+
+fn replace_wall_seam_cell(data_row_index: usize, column_index: usize, replacement: &str) -> String {
+    let mut lines: Vec<String> = EXPECTED_WALL_SEAM_SUMMARY
+        .lines()
+        .map(str::to_owned)
+        .collect();
+    let line_index = data_row_index + 1;
+    let line = lines
+        .get_mut(line_index)
+        .expect("wall-seam fixture should contain requested data row");
+    let mut columns: Vec<String> = line.split('\t').map(str::to_owned).collect();
+    let column = columns
+        .get_mut(column_index)
+        .expect("wall-seam fixture row should contain requested column");
+    *column = replacement.to_owned();
+    *line = columns.join("\t");
+    format!("{}\n", lines.join("\n"))
 }
 
 fn joined_word(prefix: &str, suffix: &str) -> String {
