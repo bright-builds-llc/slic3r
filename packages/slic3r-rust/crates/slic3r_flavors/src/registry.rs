@@ -11,6 +11,9 @@ use crate::prusa_profile::{
 use crate::prusa_project_file::{
     PRUSA_PROJECT_FILE_INVENTORY_ID, PRUSA_PROJECT_FILE_SOURCE_PATH, PRUSA_PROJECT_FILE_SOURCE_REF,
 };
+use crate::prusa_wall_seam::{
+    PRUSA_WALL_SEAM_INVENTORY_ID, PRUSA_WALL_SEAM_SOURCE_PATH, PRUSA_WALL_SEAM_SOURCE_REF,
+};
 use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface, VendorSourceRef};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -111,6 +114,14 @@ static PRUSA_ARC_FITTING_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
     ownership: FeatureOrigin::SharedDownstream,
 }];
 
+static PRUSA_WALL_SEAM_PATHS: [&str; 1] = [PRUSA_WALL_SEAM_SOURCE_PATH];
+static PRUSA_WALL_SEAM_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
+    inventory_id: PRUSA_WALL_SEAM_INVENTORY_ID,
+    vendor_source: PRUSA_WALL_SEAM_SOURCE_REF,
+    source_paths: &PRUSA_WALL_SEAM_PATHS,
+    ownership: FeatureOrigin::SharedDownstream,
+}];
+
 static PRUSA_PROFILE_SCHEMA_PATHS: [&str; 1] = [PRUSA_PROFILE_SCHEMA_SOURCE_PATH];
 static PRUSA_PROFILE_SCHEMA_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenance {
     inventory_id: PRUSA_PROFILE_SCHEMA_INVENTORY_ID,
@@ -119,7 +130,7 @@ static PRUSA_PROFILE_SCHEMA_PROVENANCE: [FlavorProvenance; 1] = [FlavorProvenanc
     ownership: FeatureOrigin::ForkSpecific,
 }];
 
-static PRUSA_CAPABILITIES: [FlavorCapability; 4] = [
+static PRUSA_CAPABILITIES: [FlavorCapability; 5] = [
     FlavorCapability {
         flavor_id: FlavorId::PrusaSlicer,
         capability_id: "prusaslicer.project-file",
@@ -155,6 +166,18 @@ static PRUSA_CAPABILITIES: [FlavorCapability; 4] = [
         provenance: &PRUSA_ARC_FITTING_PROVENANCE,
         caution_flags: &[],
         future_parity_notes: "Source-observed arc-fitting planning row; Phase 59 parser/readiness metadata is developer-facing only, while public executable evidence and status/docs publication remain Phase 60-owned. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, broad generated-output verification, ArcWelder algorithm equivalence, tolerance or geometry parity, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, wall seam behavior, release behavior, sync behavior, upstream import, host upload, network/device behavior, Bambu Studio, OrcaSlicer, or non-Prusa fork behavior is claimed.",
+    },
+    FlavorCapability {
+        flavor_id: FlavorId::PrusaSlicer,
+        capability_id: "prusaslicer.wall-seam",
+        feature_surface: "wall-seam",
+        feature_category: "wall-seam",
+        origin: FeatureOrigin::SharedDownstream,
+        parity_dependencies: &GENERATED_OUTPUTS_PARITY,
+        checklist_status: ChecklistStatus::FutureCandidate,
+        provenance: &PRUSA_WALL_SEAM_PROVENANCE,
+        caution_flags: &[],
+        future_parity_notes: "Source-observed wall-seam planning row; Phase 64 parser/readiness metadata is developer-facing only, while public executable evidence and status/docs publication remain Phase 65-owned. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, broad generated-output verification, full wall-seam algorithm equivalence, wall-seam geometry equivalence, seam visibility, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, arc-fitting behavior, release behavior, sync behavior, upstream import, host upload, network/device behavior, Bambu Studio, OrcaSlicer, or non-Prusa fork behavior is claimed.",
     },
     FlavorCapability {
         flavor_id: FlavorId::PrusaSlicer,

@@ -13,6 +13,7 @@ use slic3r_flavors::{
 
 const PRUSA_GCODE_OUTPUT_SEMANTIC_READINESS_NOTES: &str = "Source-observed G-code output planning row; semantic summary parser/readiness metadata is available for Phase 55 developers, while public semantic parity evidence and status/docs publication remain Phase 56-owned before broader generated-output behavior is claimed. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, printability, printer-runtime, support, seam, arc, GUI, release, sync, or non-Prusa fork behavior is claimed.";
 const PRUSA_ARC_FITTING_READINESS_NOTES: &str = "Source-observed arc-fitting planning row; Phase 59 parser/readiness metadata is developer-facing only, while public executable evidence and status/docs publication remain Phase 60-owned. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, broad generated-output verification, ArcWelder algorithm equivalence, tolerance or geometry parity, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, wall seam behavior, release behavior, sync behavior, upstream import, host upload, network/device behavior, Bambu Studio, OrcaSlicer, or non-Prusa fork behavior is claimed.";
+const PRUSA_WALL_SEAM_READINESS_NOTES: &str = "Source-observed wall-seam planning row; Phase 64 parser/readiness metadata is developer-facing only, while public executable evidence and status/docs publication remain Phase 65-owned. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, broad generated-output verification, full wall-seam algorithm equivalence, wall-seam geometry equivalence, seam visibility, printability, firmware behavior, printer-runtime behavior, GUI behavior, support generation, arc-fitting behavior, release behavior, sync behavior, upstream import, host upload, network/device behavior, Bambu Studio, OrcaSlicer, or non-Prusa fork behavior is claimed.";
 
 #[test]
 fn registry_api_reexports_contract_typed_helpers() {
@@ -241,7 +242,8 @@ fn shared_downstream_filter_returns_source_observed_prusa_rows() {
         [
             "prusaslicer.project-file",
             "prusaslicer.gcode-output",
-            "prusaslicer.arc-fitting"
+            "prusaslicer.arc-fitting",
+            "prusaslicer.wall-seam"
         ]
     );
 }
@@ -785,6 +787,48 @@ fn prusa_wall_seam_helper_names_do_not_claim_deferred_surfaces() {
 }
 
 #[test]
+fn prusa_wall_seam_registry_row_traces_to_source_and_generated_output_dependency() {
+    // Arrange
+    let metadata = prusa_wall_seam_metadata();
+    let maybe_wall_seam = maybe_capability(metadata.inventory_id);
+    let expected_dependencies = [metadata.parity_dependency];
+
+    // Act
+    let wall_seam = match maybe_wall_seam {
+        Some(capability) => capability,
+        None => {
+            assert!(
+                maybe_wall_seam.is_some(),
+                "prusaslicer.wall-seam capability missing"
+            );
+            return;
+        }
+    };
+
+    // Assert
+    assert_eq!(wall_seam.flavor_id, FlavorId::PrusaSlicer);
+    assert_eq!(wall_seam.capability_id, metadata.inventory_id);
+    assert_eq!(wall_seam.feature_surface, "wall-seam");
+    assert_eq!(wall_seam.feature_category, "wall-seam");
+    assert_eq!(wall_seam.origin, FeatureOrigin::SharedDownstream);
+    assert_eq!(wall_seam.checklist_status, ChecklistStatus::FutureCandidate);
+    assert_eq!(wall_seam.parity_dependencies, expected_dependencies);
+    assert_eq!(wall_seam.provenance.len(), 1);
+    assert_eq!(wall_seam.provenance[0].inventory_id, metadata.inventory_id);
+    assert_eq!(wall_seam.provenance[0].vendor_source, metadata.source_ref);
+    assert_eq!(wall_seam.provenance[0].source_paths, [metadata.source_path]);
+    assert_eq!(
+        wall_seam.provenance[0].ownership,
+        FeatureOrigin::SharedDownstream
+    );
+    assert!(wall_seam.caution_flags.is_empty());
+    assert_eq!(
+        wall_seam.future_parity_notes,
+        PRUSA_WALL_SEAM_READINESS_NOTES
+    );
+}
+
+#[test]
 fn prusa_arc_fitting_registry_row_traces_to_source_and_generated_output_dependency() {
     // Arrange
     let metadata = prusa_arc_fitting_metadata();
@@ -1030,6 +1074,31 @@ fn future_candidate_filter_includes_prusa_arc_fitting_boundary_row() {
 }
 
 #[test]
+fn future_candidate_filter_includes_prusa_wall_seam_boundary_row() {
+    // Arrange
+    let status = ChecklistStatus::FutureCandidate;
+
+    // Act
+    let future_candidate_ids: Vec<&'static str> = capabilities_by_checklist_status(status)
+        .map(|capability| capability.capability_id)
+        .collect();
+
+    // Assert
+    assert!(
+        future_candidate_ids.contains(&"prusaslicer.gcode-output"),
+        "FutureCandidate filter should retain the Prusa G-code summary boundary row"
+    );
+    assert!(
+        future_candidate_ids.contains(&"prusaslicer.arc-fitting"),
+        "FutureCandidate filter should retain the Prusa arc-fitting boundary row"
+    );
+    assert!(
+        future_candidate_ids.contains(&"prusaslicer.wall-seam"),
+        "FutureCandidate filter should include the Phase 64 Prusa wall-seam boundary row"
+    );
+}
+
+#[test]
 fn runtime_claim_words_do_not_become_public_helper_names() {
     // Arrange
     let risky_words = [
@@ -1046,6 +1115,8 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
     let gcode_output_readiness = prusa_gcode_output_structural_readiness();
     let arc_fitting_metadata = prusa_arc_fitting_metadata();
     let arc_fitting_readiness = prusa_arc_fitting_readiness();
+    let wall_seam_metadata = prusa_wall_seam_metadata();
+    let wall_seam_readiness = prusa_wall_seam_readiness();
     let public_helper_names = [
         "all_flavors",
         "maybe_flavor",
@@ -1063,6 +1134,10 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         "prusa_arc_fitting_readiness",
         "parse_prusa_arc_fitting_summary",
         "prusa_arc_fitting_summary_lines",
+        "prusa_wall_seam_metadata",
+        "prusa_wall_seam_readiness",
+        "parse_prusa_wall_seam_summary",
+        "prusa_wall_seam_summary_lines",
     ];
     let metadata_values = [
         profile_schema_metadata.inventory_id,
@@ -1127,6 +1202,28 @@ fn runtime_claim_words_do_not_become_public_helper_names() {
         arc_fitting_readiness.parser_boundary,
         arc_fitting_readiness.planned_status_token,
         arc_fitting_readiness.generated_outputs_status,
+        wall_seam_metadata.inventory_id,
+        wall_seam_metadata.vendor_id,
+        wall_seam_metadata.flavor_id.as_str(),
+        wall_seam_metadata.origin.as_str(),
+        wall_seam_metadata.parity_dependency.as_str(),
+        wall_seam_metadata.checklist_status.as_str(),
+        wall_seam_metadata.source_ref.as_str(),
+        wall_seam_metadata.source_path,
+        wall_seam_metadata.fixture_corpus_path,
+        wall_seam_metadata.fixture_path,
+        wall_seam_metadata.expected_wall_seam_summary_path,
+        wall_seam_metadata.scope_record_path,
+        wall_seam_metadata.reserved_future_status_token,
+        wall_seam_readiness.inventory_id,
+        wall_seam_readiness.source_ref.as_str(),
+        wall_seam_readiness.fixture_corpus_path,
+        wall_seam_readiness.fixture_path,
+        wall_seam_readiness.expected_wall_seam_summary_path,
+        wall_seam_readiness.scope_record_path,
+        wall_seam_readiness.parser_boundary,
+        wall_seam_readiness.planned_status_token,
+        wall_seam_readiness.generated_outputs_status,
     ];
 
     // Act
@@ -1205,6 +1302,44 @@ fn prusa_arc_fitting_registry_notes_negate_deferred_surfaces() {
     // Assert
     assert!(maybe_missing_deferral.is_none());
     assert!(note.contains("Phase 59 parser/readiness metadata is developer-facing only"));
+}
+
+#[test]
+fn prusa_wall_seam_registry_notes_negate_deferred_surfaces() {
+    // Arrange
+    let note = PRUSA_WALL_SEAM_READINESS_NOTES;
+    let required_deferrals = [
+        "public executable evidence and status/docs publication remain Phase 65-owned",
+        "broad generated-outputs surface stays in progress",
+        "no byte-for-byte G-code parity",
+        "broad generated-output verification",
+        "full wall-seam algorithm equivalence",
+        "wall-seam geometry equivalence",
+        "seam visibility",
+        "printability",
+        "firmware behavior",
+        "printer-runtime behavior",
+        "GUI behavior",
+        "support generation",
+        "arc-fitting behavior",
+        "release behavior",
+        "sync behavior",
+        "upstream import",
+        "host upload",
+        "network/device behavior",
+        "Bambu Studio",
+        "OrcaSlicer",
+        "non-Prusa fork behavior",
+    ];
+
+    // Act
+    let maybe_missing_deferral = required_deferrals
+        .iter()
+        .find(|deferral| !note.contains(*deferral));
+
+    // Assert
+    assert!(maybe_missing_deferral.is_none());
+    assert!(note.contains("Phase 64 parser/readiness metadata is developer-facing only"));
 }
 
 fn maybe_capability(capability_id: &str) -> Option<&'static FlavorCapability> {
