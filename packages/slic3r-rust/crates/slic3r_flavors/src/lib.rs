@@ -5,6 +5,7 @@ pub mod prusa_arc_fitting;
 pub mod prusa_gcode_output;
 pub mod prusa_profile;
 pub mod prusa_project_file;
+pub mod prusa_wall_seam;
 pub mod registry;
 
 pub use prusa_arc_fitting::{
@@ -45,6 +46,12 @@ pub use prusa_project_file::{
     PrusaProjectFileParseResult, PrusaProjectFileSummary, PrusaProjectFileSummaryRow,
     parse_prusa_project_file_summary, prusa_project_file_metadata,
     prusa_project_file_summary_lines,
+};
+pub use prusa_wall_seam::{
+    PrusaWallSeamCategory, PrusaWallSeamEvidenceBoundary, PrusaWallSeamFacts, PrusaWallSeamField,
+    PrusaWallSeamParseError, PrusaWallSeamParseResult, PrusaWallSeamSummary,
+    PrusaWallSeamSummaryRow, PrusaWallSeamValue, parse_prusa_wall_seam_summary,
+    prusa_wall_seam_summary_lines,
 };
 pub use registry::{
     FlavorCapability, FlavorProvenance, FlavorRegistryEntry, all_capabilities, all_flavors,
