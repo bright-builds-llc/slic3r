@@ -3,11 +3,12 @@ use slic3r_contracts::{
 };
 use slic3r_flavors::{
     FlavorCapability, FlavorProvenance, FlavorRegistryEntry, PrusaArcFittingReadiness,
-    PrusaGcodeOutputSemanticReadiness, all_capabilities, all_flavors,
+    PrusaGcodeOutputSemanticReadiness, PrusaWallSeamReadiness, all_capabilities, all_flavors,
     capabilities_by_checklist_status, capabilities_by_origin, maybe_flavor,
     prusa_arc_fitting_metadata, prusa_arc_fitting_readiness, prusa_gcode_output_metadata,
     prusa_gcode_output_semantic_readiness, prusa_gcode_output_structural_readiness,
-    prusa_profile_schema_metadata, prusa_project_file_metadata,
+    prusa_profile_schema_metadata, prusa_project_file_metadata, prusa_wall_seam_metadata,
+    prusa_wall_seam_readiness,
 };
 
 const PRUSA_GCODE_OUTPUT_SEMANTIC_READINESS_NOTES: &str = "Source-observed G-code output planning row; semantic summary parser/readiness metadata is available for Phase 55 developers, while public semantic parity evidence and status/docs publication remain Phase 56-owned before broader generated-output behavior is claimed. The broad generated-outputs surface stays in progress; no byte-for-byte G-code parity, printability, printer-runtime, support, seam, arc, GUI, release, sync, or non-Prusa fork behavior is claimed.";
@@ -621,6 +622,166 @@ fn prusa_arc_fitting_readiness_exposes_pre_publication_boundary() {
         "Phase 59 parser/readiness only; Phase 60 owns public executable evidence and status/docs publication."
     );
     assert_eq!(readiness.deferred_surfaces, expected_deferred_surfaces);
+}
+
+#[test]
+fn prusa_wall_seam_metadata_exposes_fixture_scope_expected_summary_and_reserved_status() {
+    // Arrange
+    let metadata = prusa_wall_seam_metadata();
+
+    // Act
+    let source_ref = metadata.source_ref;
+
+    // Assert
+    assert_eq!(metadata.inventory_id, "prusaslicer.wall-seam");
+    assert_eq!(metadata.vendor_id, "prusaslicer");
+    assert_eq!(metadata.flavor_id, FlavorId::PrusaSlicer);
+    assert_eq!(metadata.origin, FeatureOrigin::SharedDownstream);
+    assert_eq!(
+        metadata.parity_dependency,
+        ParitySurface::generated_outputs()
+    );
+    assert_eq!(metadata.checklist_status, ChecklistStatus::FutureCandidate);
+    assert_eq!(source_ref, VendorSourceRef::prusa_slicer_version_2_9_5());
+    assert_eq!(metadata.source_path, "src/libslic3r/GCode/SeamAligned.cpp");
+    assert_eq!(
+        metadata.fixture_corpus_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.wall-seam"
+    );
+    assert_eq!(
+        metadata.fixture_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.wall-seam/wall-seam-observations.gcode"
+    );
+    assert_eq!(
+        metadata.expected_wall_seam_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.wall-seam/expected-wall-seam-summary.tsv"
+    );
+    assert_eq!(
+        metadata.scope_record_path,
+        "packages/prusa-wall-seam-scope/wall-seam-scope.md"
+    );
+    assert_eq!(
+        metadata.reserved_future_status_token,
+        "fork.prusaslicer.wall-seam"
+    );
+}
+
+#[test]
+fn prusa_wall_seam_readiness_exposes_pre_publication_boundary() {
+    // Arrange
+    let expected_source_paths: &[&str] = &[
+        "packages/fork-inventories/prusaslicer.tsv",
+        "src/libslic3r/GCode/SeamAligned.cpp",
+    ];
+    let expected_source_anchors: &[&str] = &[
+        "SeamAligned.cpp#L16",
+        "SeamAligned.cpp#L115-L148",
+        "SeamAligned.cpp#L272-L313",
+        "SeamAligned.cpp#L463-L525",
+    ];
+    let expected_deferred_surfaces = [
+        "byte-for-byte G-code parity",
+        "broad generated-output verification",
+        "full wall-seam algorithm equivalence",
+        "wall-seam geometry equivalence",
+        "seam visibility",
+        "printability",
+        "firmware behavior",
+        "printer-runtime behavior",
+        "GUI behavior",
+        "support generation",
+        "STEP import",
+        "full 3MF import/export",
+        "binary G-code",
+        "thumbnails",
+        "post-processing",
+        "host upload",
+        "network/device behavior",
+        "profile auto-update execution",
+        "fork release builds",
+        "Bambu Studio",
+        "OrcaSlicer",
+        "upstream source imports",
+        "release behavior",
+        "sync automation",
+        "non-Prusa fork behavior",
+    ];
+
+    // Act
+    let readiness: PrusaWallSeamReadiness = prusa_wall_seam_readiness();
+
+    // Assert
+    assert_eq!(readiness.inventory_id, "prusaslicer.wall-seam");
+    assert_eq!(
+        readiness.source_ref,
+        VendorSourceRef::prusa_slicer_version_2_9_5()
+    );
+    assert_eq!(readiness.inventory_source_paths, expected_source_paths);
+    assert_eq!(readiness.source_anchors, expected_source_anchors);
+    assert_eq!(
+        readiness.fixture_corpus_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.wall-seam"
+    );
+    assert_eq!(
+        readiness.fixture_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.wall-seam/wall-seam-observations.gcode"
+    );
+    assert_eq!(
+        readiness.expected_wall_seam_summary_path,
+        "packages/parity-fixtures/forks/prusaslicer/prusaslicer.wall-seam/expected-wall-seam-summary.tsv"
+    );
+    assert_eq!(
+        readiness.scope_record_path,
+        "packages/prusa-wall-seam-scope/wall-seam-scope.md"
+    );
+    assert_eq!(
+        readiness.parser_boundary,
+        "slic3r_flavors::prusa_wall_seam::parse_prusa_wall_seam_summary"
+    );
+    assert_eq!(
+        readiness.planned_public_command,
+        "//packages/parity:prusaslicer_wall_seam_parity"
+    );
+    assert_eq!(readiness.planned_status_token, "fork.prusaslicer.wall-seam");
+    assert_eq!(readiness.generated_outputs_status, "in progress");
+    assert_eq!(
+        readiness.publication_boundary,
+        "Phase 64 parser/readiness only; Phase 65 owns public executable evidence and status/docs publication."
+    );
+    assert_eq!(readiness.deferred_surfaces, expected_deferred_surfaces);
+}
+
+#[test]
+fn prusa_wall_seam_helper_names_do_not_claim_deferred_surfaces() {
+    // Arrange
+    let risky_words = [
+        "byte",
+        "parity",
+        "verified",
+        "printability",
+        "runtime",
+        "support",
+        "gui",
+        "release",
+        "sync",
+        "executable",
+        "arc",
+        "non_prusa",
+    ];
+    let public_helper_names = [
+        "prusa_wall_seam_metadata",
+        "prusa_wall_seam_readiness",
+        "parse_prusa_wall_seam_summary",
+        "prusa_wall_seam_summary_lines",
+    ];
+
+    // Act
+    let maybe_risky_helper = public_helper_names
+        .iter()
+        .find(|helper_name| risky_words.iter().any(|word| helper_name.contains(word)));
+
+    // Assert
+    assert!(maybe_risky_helper.is_none());
 }
 
 #[test]

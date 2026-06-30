@@ -1,4 +1,4 @@
-use slic3r_contracts::VendorSourceRef;
+use slic3r_contracts::{ChecklistStatus, FeatureOrigin, FlavorId, ParitySurface, VendorSourceRef};
 
 pub(crate) const PRUSA_WALL_SEAM_INVENTORY_ID: &str = "prusaslicer.wall-seam";
 pub(crate) const PRUSA_WALL_SEAM_VENDOR_ID: &str = "prusaslicer";
@@ -13,6 +13,43 @@ pub(crate) const PRUSA_WALL_SEAM_EXPECTED_SUMMARY_PATH: &str = "packages/parity-
 pub(crate) const PRUSA_WALL_SEAM_SCOPE_RECORD_PATH: &str =
     "packages/prusa-wall-seam-scope/wall-seam-scope.md";
 pub(crate) const PRUSA_WALL_SEAM_RESERVED_STATUS_TOKEN: &str = "fork.prusaslicer.wall-seam";
+static PRUSA_WALL_SEAM_INVENTORY_SOURCE_PATHS: [&str; 2] = [
+    "packages/fork-inventories/prusaslicer.tsv",
+    PRUSA_WALL_SEAM_SOURCE_PATH,
+];
+static PRUSA_WALL_SEAM_SOURCE_ANCHORS: [&str; 4] = [
+    "SeamAligned.cpp#L16",
+    "SeamAligned.cpp#L115-L148",
+    "SeamAligned.cpp#L272-L313",
+    "SeamAligned.cpp#L463-L525",
+];
+static PRUSA_WALL_SEAM_DEFERRED_SURFACES: [&str; 25] = [
+    "byte-for-byte G-code parity",
+    "broad generated-output verification",
+    "full wall-seam algorithm equivalence",
+    "wall-seam geometry equivalence",
+    "seam visibility",
+    "printability",
+    "firmware behavior",
+    "printer-runtime behavior",
+    "GUI behavior",
+    "support generation",
+    "STEP import",
+    "full 3MF import/export",
+    "binary G-code",
+    "thumbnails",
+    "post-processing",
+    "host upload",
+    "network/device behavior",
+    "profile auto-update execution",
+    "fork release builds",
+    "Bambu Studio",
+    "OrcaSlicer",
+    "upstream source imports",
+    "release behavior",
+    "sync automation",
+    "non-Prusa fork behavior",
+];
 
 const _: [&str; 7] = [
     PRUSA_WALL_SEAM_INVENTORY_ID,
@@ -229,6 +266,41 @@ pub enum PrusaWallSeamValue {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct PrusaWallSeamEvidenceBoundary(&'static str);
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaWallSeamMetadata {
+    pub inventory_id: &'static str,
+    pub vendor_id: &'static str,
+    pub flavor_id: FlavorId,
+    pub origin: FeatureOrigin,
+    pub parity_dependency: ParitySurface,
+    pub checklist_status: ChecklistStatus,
+    pub source_ref: VendorSourceRef,
+    pub source_path: &'static str,
+    pub fixture_corpus_path: &'static str,
+    pub fixture_path: &'static str,
+    pub expected_wall_seam_summary_path: &'static str,
+    pub scope_record_path: &'static str,
+    pub reserved_future_status_token: &'static str,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct PrusaWallSeamReadiness {
+    pub inventory_id: &'static str,
+    pub source_ref: VendorSourceRef,
+    pub inventory_source_paths: &'static [&'static str],
+    pub source_anchors: &'static [&'static str],
+    pub fixture_corpus_path: &'static str,
+    pub fixture_path: &'static str,
+    pub expected_wall_seam_summary_path: &'static str,
+    pub scope_record_path: &'static str,
+    pub parser_boundary: &'static str,
+    pub planned_public_command: &'static str,
+    pub planned_status_token: &'static str,
+    pub generated_outputs_status: &'static str,
+    pub publication_boundary: &'static str,
+    pub deferred_surfaces: &'static [&'static str],
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PrusaWallSeamParseError {
     InvalidHeader {
@@ -306,6 +378,43 @@ struct WallSeamRowKey {
 }
 
 pub type PrusaWallSeamParseResult = Result<PrusaWallSeamSummary, PrusaWallSeamParseError>;
+
+pub const fn prusa_wall_seam_metadata() -> PrusaWallSeamMetadata {
+    PrusaWallSeamMetadata {
+        inventory_id: PRUSA_WALL_SEAM_INVENTORY_ID,
+        vendor_id: PRUSA_WALL_SEAM_VENDOR_ID,
+        flavor_id: FlavorId::PrusaSlicer,
+        origin: FeatureOrigin::SharedDownstream,
+        parity_dependency: ParitySurface::generated_outputs(),
+        checklist_status: ChecklistStatus::FutureCandidate,
+        source_ref: PRUSA_WALL_SEAM_SOURCE_REF,
+        source_path: PRUSA_WALL_SEAM_SOURCE_PATH,
+        fixture_corpus_path: PRUSA_WALL_SEAM_FIXTURE_CORPUS_PATH,
+        fixture_path: PRUSA_WALL_SEAM_FIXTURE_PATH,
+        expected_wall_seam_summary_path: PRUSA_WALL_SEAM_EXPECTED_SUMMARY_PATH,
+        scope_record_path: PRUSA_WALL_SEAM_SCOPE_RECORD_PATH,
+        reserved_future_status_token: PRUSA_WALL_SEAM_RESERVED_STATUS_TOKEN,
+    }
+}
+
+pub const fn prusa_wall_seam_readiness() -> PrusaWallSeamReadiness {
+    PrusaWallSeamReadiness {
+        inventory_id: PRUSA_WALL_SEAM_INVENTORY_ID,
+        source_ref: PRUSA_WALL_SEAM_SOURCE_REF,
+        inventory_source_paths: &PRUSA_WALL_SEAM_INVENTORY_SOURCE_PATHS,
+        source_anchors: &PRUSA_WALL_SEAM_SOURCE_ANCHORS,
+        fixture_corpus_path: PRUSA_WALL_SEAM_FIXTURE_CORPUS_PATH,
+        fixture_path: PRUSA_WALL_SEAM_FIXTURE_PATH,
+        expected_wall_seam_summary_path: PRUSA_WALL_SEAM_EXPECTED_SUMMARY_PATH,
+        scope_record_path: PRUSA_WALL_SEAM_SCOPE_RECORD_PATH,
+        parser_boundary: "slic3r_flavors::prusa_wall_seam::parse_prusa_wall_seam_summary",
+        planned_public_command: "//packages/parity:prusaslicer_wall_seam_parity",
+        planned_status_token: PRUSA_WALL_SEAM_RESERVED_STATUS_TOKEN,
+        generated_outputs_status: "in progress",
+        publication_boundary: "Phase 64 parser/readiness only; Phase 65 owns public executable evidence and status/docs publication.",
+        deferred_surfaces: &PRUSA_WALL_SEAM_DEFERRED_SURFACES,
+    }
+}
 
 pub fn parse_prusa_wall_seam_summary(input: &str) -> PrusaWallSeamParseResult {
     let mut lines = input.lines();

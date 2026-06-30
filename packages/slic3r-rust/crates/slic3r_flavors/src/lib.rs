@@ -49,8 +49,9 @@ pub use prusa_project_file::{
 };
 pub use prusa_wall_seam::{
     PrusaWallSeamCategory, PrusaWallSeamEvidenceBoundary, PrusaWallSeamFacts, PrusaWallSeamField,
-    PrusaWallSeamParseError, PrusaWallSeamParseResult, PrusaWallSeamSummary,
-    PrusaWallSeamSummaryRow, PrusaWallSeamValue, parse_prusa_wall_seam_summary,
+    PrusaWallSeamMetadata, PrusaWallSeamParseError, PrusaWallSeamParseResult,
+    PrusaWallSeamReadiness, PrusaWallSeamSummary, PrusaWallSeamSummaryRow, PrusaWallSeamValue,
+    parse_prusa_wall_seam_summary, prusa_wall_seam_metadata, prusa_wall_seam_readiness,
     prusa_wall_seam_summary_lines,
 };
 pub use registry::{
