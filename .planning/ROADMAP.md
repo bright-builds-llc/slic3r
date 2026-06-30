@@ -189,7 +189,7 @@ publication or side effects.
 
 Plans:
 
-- [ ] 64-01-PLAN.md - Add the pure typed wall-seam summary parser,
+- [x] 64-01-PLAN.md - Add the pure typed wall-seam summary parser,
   developer-facing summary-line helper, and focused Cargo/Bazel parser
   coverage.
 - [ ] 64-02-PLAN.md - Add readiness metadata, registry visibility, aggregate
@@ -262,7 +262,7 @@ Phases execute in numeric order: 62 -> 63 -> 64 -> 65
 |-------|----------------|--------|-----------|
 | 62. Wall-Seam Scope Contract | 3/3 | Complete   | 2026-06-26 |
 | 63. Wall-Seam Fixture Corpus | 2/2 | Complete   | 2026-06-27 |
-| 64. Rust Wall-Seam Evidence Boundary | 0/2 | Pending | - |
+| 64. Rust Wall-Seam Evidence Boundary | 1/2 | In Progress | - |
 | 65. Executable Wall-Seam Evidence | 0/6 | Pending | - |
 
 ## Planning Notes

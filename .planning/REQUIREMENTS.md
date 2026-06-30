@@ -49,7 +49,7 @@ roadmap phase and must be verified before milestone archive.
 
 ### Rust Wall-Seam Boundary
 
-- [ ] **SEAMRUST-01**: Developer can use a pure typed Rust wall-seam summary
+- [x] **SEAMRUST-01**: Developer can use a pure typed Rust wall-seam summary
   boundary that parses caller-supplied checked-in wall-seam summary artifacts
   into domain values without Git, network, filesystem discovery, process,
   generator, printer-runtime, release, or sync side effects.
@@ -57,7 +57,7 @@ roadmap phase and must be verified before milestone archive.
   metadata that traces the wall-seam boundary to the accepted Prusa source
   identity, fixture corpus, expected wall-seam summaries, planned command,
   planned status wording, and deferred generated-output surfaces.
-- [ ] **SEAMRUST-03**: Developer can run Cargo and Bazel coverage that proves
+- [x] **SEAMRUST-03**: Developer can run Cargo and Bazel coverage that proves
   the valid wall-seam fixture rows parse, invalid rows fail closed, optional or
   nullable Rust internals are named clearly, and no public helper names claim
   byte parity, seam geometry equivalence, printability, runtime, support, GUI,
@@ -143,9 +143,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEAMFIX-01 | Phase 63 | Complete |
 | SEAMFIX-02 | Phase 63 | Complete |
 | SEAMFIX-03 | Phase 63 | Complete |
-| SEAMRUST-01 | Phase 64 | Pending |
+| SEAMRUST-01 | Phase 64 | Complete |
 | SEAMRUST-02 | Phase 64 | Pending |
-| SEAMRUST-03 | Phase 64 | Pending |
+| SEAMRUST-03 | Phase 64 | Complete |
 | SEAMEV-01 | Phase 65 | Pending |
 | SEAMEV-02 | Phase 65 | Pending |
 | SEAMEV-03 | Phase 65 | Pending |
