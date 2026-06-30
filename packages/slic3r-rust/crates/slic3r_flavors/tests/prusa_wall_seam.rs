@@ -280,6 +280,43 @@ fn rejects_unsupported_wall_seam_category() {
 }
 
 #[test]
+fn rejects_wall_seam_empty_required_value() {
+    // Arrange
+    let input = replace_wall_seam_cell(0, 4, "");
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::EmptyRequiredValue {
+            line_number: 2,
+            column: "wall_seam_value",
+        })
+    ));
+}
+
+#[test]
+fn rejects_wall_seam_unexpected_category_for_field() {
+    // Arrange
+    let input = replace_wall_seam_cell(0, 3, "fixture identity");
+
+    // Act
+    let result = parse_prusa_wall_seam_summary(&input);
+
+    // Assert
+    assert!(matches!(
+        result,
+        Err(PrusaWallSeamParseError::UnexpectedWallSeamCategory {
+            line_number: 2,
+            wall_seam_field: PrusaWallSeamField::SourceRef,
+            ..
+        })
+    ));
+}
+
+#[test]
 fn rejects_wall_seam_unsupported_claim_text() {
     // Arrange
     let input = replace_wall_seam_cell(
