@@ -86,7 +86,7 @@ behavior deferred.
   namespace, expected wall-seam summaries, provenance, and fixture drift
   guards.
 
-- [ ] **Phase 64: Rust Wall-Seam Evidence Boundary** - Parse checked-in
+- [x] **Phase 64: Rust Wall-Seam Evidence Boundary** - Parse checked-in (completed 2026-06-30)
   wall-seam summaries through a pure typed Rust boundary with static readiness
   metadata.
 
@@ -192,7 +192,7 @@ Plans:
 - [x] 64-01-PLAN.md - Add the pure typed wall-seam summary parser,
   developer-facing summary-line helper, and focused Cargo/Bazel parser
   coverage.
-- [ ] 64-02-PLAN.md - Add readiness metadata, registry visibility, aggregate
+- [x] 64-02-PLAN.md - Add readiness metadata, registry visibility, aggregate
   Rust verification wiring, and public-boundary guards.
 
 ### Phase 65: Executable Wall-Seam Evidence
@@ -262,7 +262,7 @@ Phases execute in numeric order: 62 -> 63 -> 64 -> 65
 |-------|----------------|--------|-----------|
 | 62. Wall-Seam Scope Contract | 3/3 | Complete   | 2026-06-26 |
 | 63. Wall-Seam Fixture Corpus | 2/2 | Complete   | 2026-06-27 |
-| 64. Rust Wall-Seam Evidence Boundary | 1/2 | In Progress | - |
+| 64. Rust Wall-Seam Evidence Boundary | 2/2 | Complete   | 2026-06-30 |
 | 65. Executable Wall-Seam Evidence | 0/6 | Pending | - |
 
 ## Planning Notes

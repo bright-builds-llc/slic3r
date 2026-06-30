@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.16
 milestone_name: milestone
-status: executing
-stopped_at: Completed 64-01-PLAN.md
-last_updated: "2026-06-30T23:28:02.979Z"
+status: verifying
+stopped_at: Completed 64-02-PLAN.md
+last_updated: "2026-06-30T23:46:56.874Z"
 last_activity: 2026-06-30
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 7
-  completed_plans: 6
-  percent: 86
+  completed_plans: 7
+  percent: 100
 ---
 
 # Project State
@@ -29,13 +29,13 @@ depend on.
 
 ## Current Position
 
-Phase: 64 (rust-wall-seam-evidence-boundary) — EXECUTING
+Phase: 64 (rust-wall-seam-evidence-boundary) — VERIFYING
 Plan: 2 of 2
 Milestone: v1.16 PrusaSlicer Wall-Seam G-code Evidence Slice
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-06-30
 
-Progress: [#########-] 86%
+Progress: [##########] 100%
 
 ## Performance Metrics
 
@@ -105,6 +105,7 @@ Progress: [#########-] 86%
 - 63-01 completed in 5 min with 2 tasks and 6 fixture/Bazel files changed.
 - 63-02 completed in 12 min with 2 tasks and 4 implementation files changed.
 - 64-01 completed in 11 min with 2 tasks and 4 implementation files changed.
+- 64-02 completed in 10 min with 2 tasks and 5 implementation files changed.
 
 ## Accumulated Context
 
@@ -134,6 +135,15 @@ Recent decisions affecting v1.16:
 
 - Map SEAMSCOPE-01..03 to Phase 62, SEAMFIX-01..03 to Phase 63,
   SEAMRUST-01..03 to Phase 64, and SEAMEV-01..03 to Phase 65.
+
+- Keep wall-seam public command/status/docs as planned metadata only in Phase
+  64; Phase 65 still owns public executable evidence and publication.
+
+- Add `prusaslicer.wall-seam` as a `FutureCandidate` generated-output registry
+  row without changing existing G-code output or arc-fitting row wording.
+
+- Commit Phase 64 wall-seam readiness and registry changes only after passing
+  the repo-required Rust checks.
 
 Recent decisions affecting v1.15:
 
@@ -316,6 +326,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-30T23:28:02.976Z
-Stopped at: Completed 64-01-PLAN.md
+Last session: 2026-06-30T23:46:56.871Z
+Stopped at: Completed 64-02-PLAN.md
 Resume file: None

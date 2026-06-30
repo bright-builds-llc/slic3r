@@ -53,7 +53,7 @@ roadmap phase and must be verified before milestone archive.
   boundary that parses caller-supplied checked-in wall-seam summary artifacts
   into domain values without Git, network, filesystem discovery, process,
   generator, printer-runtime, release, or sync side effects.
-- [ ] **SEAMRUST-02**: Developer can inspect static readiness or registry
+- [x] **SEAMRUST-02**: Developer can inspect static readiness or registry
   metadata that traces the wall-seam boundary to the accepted Prusa source
   identity, fixture corpus, expected wall-seam summaries, planned command,
   planned status wording, and deferred generated-output surfaces.
@@ -144,7 +144,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SEAMFIX-02 | Phase 63 | Complete |
 | SEAMFIX-03 | Phase 63 | Complete |
 | SEAMRUST-01 | Phase 64 | Complete |
-| SEAMRUST-02 | Phase 64 | Pending |
+| SEAMRUST-02 | Phase 64 | Complete |
 | SEAMRUST-03 | Phase 64 | Complete |
 | SEAMEV-01 | Phase 65 | Pending |
 | SEAMEV-02 | Phase 65 | Pending |
