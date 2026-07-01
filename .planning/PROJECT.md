@@ -64,6 +64,12 @@ summary rows, and provenance, then run
 validate fixture bytes, row order, source identity, docs, status boundaries,
 and mutation-guarded drift classes before Rust parser or public parity work.
 
+v1.16 Phase 64 is complete and verified. Developers can parse the checked-in
+wall-seam summary through the pure `slic3r_flavors::prusa_wall_seam` Rust
+boundary, inspect static readiness and registry metadata, and run aggregate
+Rust verification while public wall-seam parity target, status row, and docs
+publication remain deferred to Phase 65.
+
 v1.15 is archived. It reused the v1.12-v1.14 G-code evidence ladder for the
 `prusaslicer.arc-fitting` feature slice, published the exact narrow
 `fork.prusaslicer.arc-fitting` status row, and avoided promoting broad
